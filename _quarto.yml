@@ -1,0 +1,25 @@
+project:
+  type: book
+
+book:
+  title: "Mathematical Foundations of Political Analysis"
+  author: "Brenton Kenkel"
+  date: last-modified
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - lumen
+      - brand
+      - mfpa.scss
+    title-block-banner: true
+
+  # pdf:
+  #   documentclass: scrreprt
