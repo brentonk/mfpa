@@ -1,0 +1,19 @@
+# Formal Logic {#logic}
+
+::: {#exm-emptyset-subset}
+## Empty set is a subset of all sets
+One way to formulate the definition of a subset (@def-subset) is to say that $A \subseteq B$ means: if $x \in A$, then $x \in B$.
+Keeping this in mind, take any set $A$.
+It is [trivially true]{.underline} that if $x \in \emptyset$, then $x \in A$ --- because, in fact, there is no $x \in \emptyset$.
+Therefore, using our reformulation of the definition of subset, we would say that $\emptyset \subseteq A$ for all sets $A$.
+:::
+
+::: {#exr-union-intersection-equality}
+Prove that $A \cap B = A \cup B$ if and only if $A = B$.
+
+:::: {.callout-note collapse="true"}
+## Answer
+First, to prove the "if" direction, assume $A = B$.
+We know from @prp-intersection-subset-union ... ***KEEP GOING***
+::::
+:::

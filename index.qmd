@@ -1,7 +1,7 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
+These are the course notes for Prof. [Brenton Kenkel](https://bkenkel.com)'s course PSCI 8350 at Vanderbilt University.
+The course covers the bare essential mathematical techniques needed for applied work in statistics and formal theory in political science.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
-
-Math looks like $f(x) = y$ and $$f(x) = y.$$
+This book is written in [Quarto](https://quarto.org/) and published on [GitHub Pages](https://pages.github.com/).
+You can find the Quarto source files [on GitHub](https://github.com/brentonk/mfpa).

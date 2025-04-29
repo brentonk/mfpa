@@ -1,2 +1,6 @@
 /.quarto/
-/_book/
+/*_cache/
+/*_files/
+tikz*.log
+.venvdir*
+*.code-workspace

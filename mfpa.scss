@@ -3,3 +3,66 @@
 /*-- scss:defaults --*/
 
 $font-family-base: 'Fira Sans', sans-serif;
+
+/*-- scss:rules --*/
+
+// Basic formatting
+
+p {
+    line-height: 1.8;
+}
+
+ol li::marker {
+    color: $primary;
+}
+
+ol ol li {
+    list-style-type: lower-alpha;
+}
+
+.theorem {
+    border: 2px solid $info;
+    border-radius: 10px; /* Controls the rounded corners */
+    padding: 10px 10px 0px; /* Adds space inside the box */
+    margin: 30px 5% 15px;
+    background-color: $light; /* Optional: background color */
+}
+.theorem.exercise {
+    border: 1px solid $info;
+    margin: 30px 0% 15px;
+    background-color: $white;
+}
+.theorem.example {
+    border: 1px solid $success;
+    margin: 30px 0% 15px;
+    background-color: $white;
+    .theorem-title {
+        color: $success;
+    }
+    a{
+        color: $success;
+    }
+}
+
+.theorem-title {
+    color: $primary;
+}
+
+.proof {
+    border: 1px solid $gray-200;
+    border-radius: 10px; /* Controls the rounded corners */
+    padding: 10px 10px 0px; /* Adds space inside the box */
+    margin: 10px 5% 20px;
+}
+
+.callout {
+    margin: 20px 5% 20px;
+}
+
+
+// Custom classes
+
+.concept {
+    color: $primary;
+    font-weight: 500;
+}

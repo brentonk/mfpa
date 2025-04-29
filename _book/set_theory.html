@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.6">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Set Theory – Mathematical Foundations of Political Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-6c21014d9765ba549c6ebad95917e4d7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5a7787548222c5332df469e0dae9ae2e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./set_theory.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Set Theory</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title"><span id="set-theory" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Set Theory</span></span></h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Foundations of Political Analysis</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./set_theory.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Set Theory</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-are-sets-and-why-do-we-care" id="toc-what-are-sets-and-why-do-we-care" class="nav-link active" data-scroll-target="#what-are-sets-and-why-do-we-care"><span class="header-section-number">1.1</span> What are sets and why do we care?</a></li>
+  <li><a href="#fundamental-operations-on-sets" id="toc-fundamental-operations-on-sets" class="nav-link" data-scroll-target="#fundamental-operations-on-sets"><span class="header-section-number">1.2</span> Fundamental operations on sets</a>
+  <ul class="collapse">
+  <li><a href="#subsets-and-equality" id="toc-subsets-and-equality" class="nav-link" data-scroll-target="#subsets-and-equality"><span class="header-section-number">1.2.1</span> Subsets and equality</a></li>
+  <li><a href="#the-venn-diagram-operations" id="toc-the-venn-diagram-operations" class="nav-link" data-scroll-target="#the-venn-diagram-operations"><span class="header-section-number">1.2.2</span> The Venn diagram operations</a></li>
+  <li><a href="#complements-and-de-morgans-laws" id="toc-complements-and-de-morgans-laws" class="nav-link" data-scroll-target="#complements-and-de-morgans-laws"><span class="header-section-number">1.2.3</span> Complements and De Morgan’s laws</a></li>
+  </ul></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">1.3</span> Functions</a>
+  <ul class="collapse">
+  <li><a href="#one-to-one-and-onto-functions" id="toc-one-to-one-and-onto-functions" class="nav-link" data-scroll-target="#one-to-one-and-onto-functions"><span class="header-section-number">1.3.1</span> One-to-one and onto functions</a></li>
+  <li><a href="#sec-cardinality" id="toc-sec-cardinality" class="nav-link" data-scroll-target="#sec-cardinality"><span class="header-section-number">1.3.2</span> An optional digression into cardinality and infinities</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="what-are-sets-and-why-do-we-care" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="what-are-sets-and-why-do-we-care"><span class="header-section-number">1.1</span> What are sets and why do we care?</h2>
+<p>Seemingly every book on “higher math” — the kind of math you encounter after the intro calculus sequence in college — starts with a discussion of <span class="concept">set theory</span>. There are some deep mathematical reasons to begin this way, which you can read about on <a href="https://en.wikipedia.org/wiki/Set_theory">Wikipedia</a> or, for the especially high-minded, the <a href="https://plato.stanford.edu/entries/set-theory/">Stanford Encyclopedia of Philosophy</a>. To summarize it very loosely: although most people think of math as being about numbers, most important mathematical statements (including those about numbers!) are ultimately actually rooted in the properties of sets.</p>
+<p>Our reasons for starting with set theory are related, but more prosaic.</p>
+<ol>
+<li><p>Set theory gives us a lot of our mathematical “language”.</p>
+<ol>
+<li><p>Many of the definitions of day-to-day tools in calculus and linear algebra are stated in terms of sets and operations on sets.</p></li>
+<li><p>In political science research, we use mathematical notation to concisely-yet-precisely summarize quantitative concepts. This notation often involves sets and operations on sets, so we need to get familiar if we want to be fluent in the “language” of math.</p></li>
+</ol></li>
+<li><p>One of the things you’ll get from this course is a basic introduction to mathematical proofs. Set theory gives us some nice examples of mathematical statements that are relatively easy to prove, making it a convenient starting point for our study of proofs.</p></li>
+</ol>
+<p>All right, so what is a set? Precisely because sets are so foundational, that turns out to be quite a sticky question to answer rigorously, so we will content ourselves with a non-rigorous definition.</p>
+<div id="def-set" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.1 (Sets and elements)</strong></span> A <span class="concept">set</span> is a collection of objects, which we call the <span class="concept">elements</span> of the set. The notation <span class="math display">\[A = \{1, 2, 4, 8\}\]</span> is equivalent to saying “<span class="math inline">\(A\)</span> is the set whose elements are 1, 2, 4, and 8.”</p>
+</div>
+<p>When we want to say briefly that <span class="math inline">\(a\)</span> is an element of the set <span class="math inline">\(A\)</span>, we write <span class="math inline">\(a \in A\)</span>. It is typical to use capital letters to denote sets and lowercase letters to denote their elements, though sometimes it is convenient or necessary to break this convention.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Sets aren’t just for numbers
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A set may consist of objects besides numbers. It is coherent to say “let <span class="math inline">\(P\)</span> be the set of people who have been US presidents”, so that <span class="math display">\[P = \{\text{George Washington}, \text{John Adams}, \ldots, \text{Donald Trump}\}.\]</span></p>
+</div>
+</div>
+<p>Although sets aren’t just for numbers, there are a few sets of numbers that come up so often that we have special names for them. These are listed in <a href="#tbl-number-sets" class="quarto-xref">Table&nbsp;<span>1.1</span></a>.</p>
+<div id="tbl-number-sets" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[30, 10, 60]">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-number-sets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.1: Notable sets of numbers
+</figcaption>
+<div aria-describedby="tbl-number-sets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 10%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Notation</th>
+<th style="text-align: left;">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Natural numbers</td>
+<td style="text-align: center;"><span class="math inline">\(\mathbb{N}\)</span></td>
+<td style="text-align: left;">The counting numbers: 1, 2, 3, … and so on indefinitely. (Some textbooks treat 0 as a natural number, but usually not.)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Integers</td>
+<td style="text-align: center;"><span class="math inline">\(\mathbb{Z}\)</span></td>
+<td style="text-align: left;">The whole numbers: …, -2, -1, 0, 1, 2, …</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rational numbers</td>
+<td style="text-align: center;"><span class="math inline">\(\mathbb{Q}\)</span></td>
+<td style="text-align: left;">Numbers that can be expressed as a quotient (hence the symbol <span class="math inline">\(\mathbb{Q}\)</span>) of integers, <span class="math inline">\(\frac{a}{b}\)</span>, where <span class="math inline">\(a \in \mathbb{Z}\)</span>, <span class="math inline">\(b \in \mathbb{Z}\)</span>, and <span class="math inline">\(b \neq 0\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Real numbers</td>
+<td style="text-align: center;"><span class="math inline">\(\mathbb{R}\)</span></td>
+<td style="text-align: left;">Every number on the number line, including irrational numbers like <span class="math inline">\(\sqrt{2}\)</span> and <span class="math inline">\(\pi\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Closed interval</td>
+<td style="text-align: center;"><span class="math inline">\([a, b]\)</span></td>
+<td style="text-align: left;">Every real number between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, including <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> themselves.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Open interval</td>
+<td style="text-align: center;"><span class="math inline">\((a, b)\)</span></td>
+<td style="text-align: left;">Every real number between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, <u>not</u> including <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> themselves.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>What if you wanted to define <span class="math inline">\(A\)</span> as the set of natural numbers that are greater than 1000? Well, you could — and often should — simply write, “Let <span class="math inline">\(A\)</span> be the set of natural numbers that are greater than 1000.” Don’t fall into the trap of equating rigor with fancy notation. If ordinary language can clearly communicate what you mean, use it.</p>
+<p>That said, there are times when ordinary language is too cumbersome or imprecise to describe the contents of a set. Maybe there are a lot of conditions on the set you’re defining, or maybe the condition involves a finicky formula that’s hard to put into words. In these cases, it is common to use <span class="concept">set-builder notation</span>, for example <span class="math display">\[A = \{x \in \mathbb{N} \mid x &gt; 1000\}.\]</span> You would read this as “<span class="math inline">\(A\)</span> is the set of natural numbers <span class="math inline">\(x\)</span> such that <span class="math inline">\(x\)</span> is greater than 1000”.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Or what if we wanted to define <span class="math inline">\(B\)</span> as the set of values we obtain by taking a natural number and dividing it in half? We could write this in set-builder notation as <span class="math display">\[B = \{x \in \mathbb{R} \mid x = \frac{n}{2} \: \text{for some $n \in \mathbb{N}$}\}.\]</span> But we’ll often use the following shorthand to write this a bit less cumbersomely: <span class="math display">\[B = \{\frac{n}{2} \mid n \in \mathbb{N}\}.\]</span> Again, none of these, including the verbal description of <span class="math inline">\(B\)</span> at the start of the paragraph, is the “right” way to denote the set. What’s best is whatever gets the point across clearly to your intended audience. Thinking about the audience is key — you might want to write the exact same mathematical object in a different way in your undergraduate lecture notes than in a manuscript you’re submitting to <em>Political Analysis</em>.</p>
+<div id="exr-set-builder" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.1</strong></span> Use set-builder notation to describe the following sets:</p>
+<ol type="1">
+<li><p>Every integer that is a multiple of 7.</p></li>
+<li><p>Every natural number that is odd.</p></li>
+<li><p>Every rational number between 0 and 1, including 0 and 1 themselves.</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><span class="math inline">\(\{7z \mid z \in \mathbb{Z}\}\)</span>. (An integer that is a multiple of 7 is just some other integer multiplied by 7. For example, you can think of <span class="math inline">\(-35\)</span> as <span class="math inline">\(7 \times -5\)</span>.)</p></li>
+<li><p><span class="math inline">\(\{2n - 1 \mid n \in \mathbb{N}\}\)</span>.</p></li>
+<li><p><span class="math inline">\(\{x \in [0, 1] \mid x \in \mathbb{Q}\}\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Approaching exercises
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try the exercises yourself, ideally by writing them on paper or in a tablet, before looking at the answers. You learn the most by trying on your own and then checking. (This is exactly how I still do it when I’m working through unfamiliar technical material!)</p>
+</div>
+</div>
+</section>
+<section id="fundamental-operations-on-sets" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="fundamental-operations-on-sets"><span class="header-section-number">1.2</span> Fundamental operations on sets</h2>
+<section id="subsets-and-equality" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="subsets-and-equality"><span class="header-section-number">1.2.1</span> Subsets and equality</h3>
+<p>When we’re dealing with numbers, we compare them in terms of their values. 40 is greater than 38, which in turn is greater than 10. With sets, we make comparisons in terms of their elements — namely, whether all of the elements of one are contained in another.</p>
+<div id="def-subset" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.2 (Subset)</strong></span> The set <span class="math inline">\(A\)</span> is a <span class="concept">subset</span> of the set <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(A \subseteq B\)</span>, if every element of <span class="math inline">\(A\)</span> is an element of <span class="math inline">\(B\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Inclusion <span class="math inline">\(\in\)</span> versus subset <span class="math inline">\(\subseteq\)</span>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(A \subseteq B\)</span> and <span class="math inline">\(A \in B\)</span> have very different meanings. <span class="math inline">\(A \subseteq B\)</span> means “every element of <span class="math inline">\(A\)</span> is also an element of <span class="math inline">\(B\)</span>”. <span class="math inline">\(A \in B\)</span> means “the set <span class="math inline">\(A\)</span> is, itself, an element of <span class="math inline">\(B\)</span>”.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> When you’re talking about sets, you usually mean the first of these, not the second.</p>
+<p>If you mess up and use the wrong notation, your readers will probably still ultimately figure out what you mean — but it’ll take a bit longer for them than if you’d used the right notation. So it’s in your best interest to use the right notation for much the same reason as it’s in your best interest to use proper spelling and grammar.</p>
+</div>
+</div>
+<p>You probably won’t be surprised to learn that subsets are like nesting dolls: if <span class="math inline">\(A\)</span> is a subset of <span class="math inline">\(B\)</span>, then it is also a subset of any other set that <span class="math inline">\(B\)</span> is a subset of. I’m bringing up this seemingly obvious fact mainly because it’ll give us a nice first exposure to mathematical proofs.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Names of mathematical results
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Throughout these notes, you will see mathematical results labeled <span class="concept">Theorem</span>, <span class="concept">Proposition</span>, <span class="concept">Lemma</span>, and <span class="concept">Corollary</span>. Anything with one of these names is a formal statement that is provably true, and will usually be accompanied by a proof. In other words, none of these types of results is more or less true than the others. The different labels are mostly used to help readers decode the context and importance of each type of result.</p>
+<ul>
+<li><p><span class="concept">Theorem:</span> Reserved for results that are especially big, important, fundamental, general, etc.</p></li>
+<li><p><span class="concept">Proposition:</span> A bread-and-butter result. Useful and important enough to care about on its own, but not earth-shaking enough to be a theorem — like <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a> here!</p></li>
+<li><p><span class="concept">Lemma:</span> A result that we don’t necessarily care about on its own, but is a useful building block toward one or more propositions or theorems.</p></li>
+<li><p><span class="concept">Corollary:</span> A result that follows almost immediately from some earlier lemma(s), proposition(s), or theorem(s). My general heuristic for calling something a corollary is that it can be proved in two sentences or less, and the proof requires invoking an earlier lemma, proposition, or theorem.</p></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading proofs
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I’m deliberately more verbose in the proofs here than in the proofs you’d see in a published paper, or even in most textbooks. The structure of arguments in those venues tends to be the same as the one here, though — they just have a bit less verbiage to hold the reader’s hand.</p>
+<p>In proofs in (other) textbooks and academic articles, you’ll often see phrases like “It is obvious that…” or “It is straightforward to show that…”. Students — and professors! — understandably find these statements frustrating or alienating, because whatever comes next often does not seem obvious or straightforward at all. But really, “It is obvious that…” is shorthand for:</p>
+<blockquote class="blockquote">
+<p>The statement that comes next can be proved using mathematical methods that a reader of this document would typically have extensive practice with.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> There aren’t any new tricks or novel arguments to reach this step, just chugging through calculations. You are welcome to do those calculations yourself to check my work, though I expect you won’t find anything particularly edifying along the way. Because space is limited in this book or journal article, I haven’t included all the gory details myself.</p>
+</blockquote>
+<p>What if the proof you’re reading says something is obvious or straightforward, but you can’t convince yourself it’s true? After getting out your legal pad and trying to work it out yourself, that’s when you should ask for help. I find myself in this situation often, and as of summer 2025 I’ve found that ChatGPT’s <code>o3-mini-high</code> model gives great explanations when I’m stuck on something mathematical. And throughout your careers here, you can always feel free to ask me or the other methods/formal theory faculty when you’re stuck on something!</p>
+<p>Proofs conventionally end with “QED”, <span class="math inline">\(\blacksquare\)</span>, or <span class="math inline">\(\square\)</span>. As of early 2025, the <a href="https://quarto.org">Quarto</a> software I’m using to write these notes doesn’t insert any of these symbols automatically, so you’ll just have to take the bottom of the box that the proof lives in as my “QED” variant.</p>
+</div>
+</div>
+<div id="prp-subset-transitive" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1.1 (Transitivity of subset)</strong></span> If <span class="math inline">\(A \subseteq B\)</span> and <span class="math inline">\(B \subseteq C\)</span>, then <span class="math inline">\(A \subseteq C\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We need to show that every element of <span class="math inline">\(A\)</span> is also an element of <span class="math inline">\(C\)</span>. To do that, we will take an “arbitrary” element of <span class="math inline">\(A\)</span> — a mathematical object that we know nothing about, other than that it is an element of <span class="math inline">\(A\)</span> — and show that it is an element of <span class="math inline">\(C\)</span>. To that end, let <span class="math inline">\(a\)</span> be any element of <span class="math inline">\(A\)</span>. Because <span class="math inline">\(a \in A\)</span> and <span class="math inline">\(A \subseteq B\)</span>, it follows that <span class="math inline">\(a \in B\)</span>. Because <span class="math inline">\(a \in B\)</span> and <span class="math inline">\(B \subseteq C\)</span>, it follows that <span class="math inline">\(a \in C\)</span>. Because the element <span class="math inline">\(a\)</span> was chosen arbitrarily, we have shown that every element of <span class="math inline">\(A\)</span> is an element of <span class="math inline">\(C\)</span>, and therefore <span class="math inline">\(A \subseteq C\)</span>.</p>
+</div>
+<p>Intuitively, two sets are equal if they have the same elements. One of the annoying-but-ultimately-good things about math is that we have to be precise about statements like “they have the same elements”. Does <span class="math inline">\(\{1, 2, 3\}\)</span> equal <span class="math inline">\(\{3, 2, 1\}\)</span>? Does <span class="math inline">\(\{a, b, c\}\)</span> equal <span class="math inline">\(\{a, a, b, b, c, c\}\)</span>? The answer to both of these questions turns out to be “yes” — but why? It comes down to the formal definition of set equality, which we state as each set being a subset of the other.</p>
+<div id="def-set-equality" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.3 (Set equality)</strong></span> The sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <span class="concept">equal</span>, denoted <span class="math inline">\(A = B\)</span>, if <span class="math inline">\(A \subseteq B\)</span> and <span class="math inline">\(B \subseteq A\)</span>.</p>
+</div>
+<p>We can again make an analogy to how we compare numbers. If <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are numbers, then we have <span class="math inline">\(a = b\)</span> precisely when both <span class="math inline">\(a \leq b\)</span> and <span class="math inline">\(b \leq a\)</span>.</p>
+<p>Now let’s return to the question of whether <span class="math inline">\(\{1, 2, 3\} = \{3, 2, 1\}\)</span>. First we show that <span class="math inline">\(\{1, 2, 3\} \subseteq \{3, 2, 1\}\)</span>:</p>
+<ul>
+<li><span class="math inline">\(1 \in \{3, 2, 1\}\)</span> ✅</li>
+<li><span class="math inline">\(2 \in \{3, 2, 1\}\)</span> ✅</li>
+<li><span class="math inline">\(3 \in \{3, 2, 1\}\)</span> ✅</li>
+</ul>
+<p>And then we show that <span class="math inline">\(\{3, 2, 1\} \subseteq \{1, 2, 3\}\)</span>:</p>
+<ul>
+<li><span class="math inline">\(3 \in \{1, 2, 3\}\)</span> ✅</li>
+<li><span class="math inline">\(2 \in \{1, 2, 3\}\)</span> ✅</li>
+<li><span class="math inline">\(1 \in \{1, 2, 3\}\)</span> ✅</li>
+</ul>
+<p>You can generalize the logic here to show that a set is the same no matter what order we write the elements in. I’ll also leave it to you to show that repetition of an element is immaterial to the membership of a set, so that (for example) <span class="math inline">\(\{a, b, c\} = \{a, a, b, b, c, c\}\)</span>.</p>
+<p>Just like equality of numbers, equality of sets is transitive: if one set is equal to another, which in turn is equal to some third set, then the first is equal to the third as well.</p>
+<div id="cor-equality-transitive" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1.1 (Transitivity of set equality)</strong></span> If <span class="math inline">\(A = B\)</span> and <span class="math inline">\(B = C\)</span>, then <span class="math inline">\(A = C\)</span>.</p>
+</div>
+<p>By following the template provided by the proof of <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a>, you should be able to prove this result yourself. If you’re having trouble getting started, one good principle to keep in mind when writing a proof is to take stock of all the “knowns” that might be relevant and have already been defined or proved. For this question, relevant facts would include the definition of set equality (<a href="#def-set-equality" class="quarto-xref">Definition&nbsp;<span>1.3</span></a>) and the transitivity of the subset operation (<a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a>).</p>
+<div id="exr-equality-transitive" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.2</strong></span> Prove <a href="#cor-equality-transitive" class="quarto-xref">Corollary&nbsp;<span>1.1</span></a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We need to show that if <span class="math inline">\(A = B\)</span> and <span class="math inline">\(B = C\)</span>, then <span class="math inline">\(A \subseteq C\)</span> and <span class="math inline">\(C \subseteq A\)</span>. By the definition of set equality, if <span class="math inline">\(A = B\)</span> and <span class="math inline">\(B = C\)</span>, then <span class="math inline">\(A \subseteq B\)</span> and <span class="math inline">\(B \subseteq C\)</span>. <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a> then implies that <span class="math inline">\(A \subseteq C\)</span>.</p>
+<p>Again by the definition of set equality, if <span class="math inline">\(C = B\)</span> and <span class="math inline">\(B = A\)</span>, then <span class="math inline">\(C \subseteq B\)</span> and <span class="math inline">\(B \subseteq A\)</span>. <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a> then implies that <span class="math inline">\(C \subseteq A\)</span>.</p>
+<p>We have shown that if <span class="math inline">\(A = B\)</span> and <span class="math inline">\(B = C\)</span>, then <span class="math inline">\(A \subseteq C\)</span> and <span class="math inline">\(C \subseteq A\)</span>, so by definition <span class="math inline">\(A = C\)</span>.</p>
+<p>(In the second paragraph, I implicitly relied on the commutativity of set equality, i.e., that if <span class="math inline">\(A = B\)</span>, then <span class="math inline">\(B = A\)</span>. That’s another thing you can prove yourself at this point if you’re skeptical!)</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-venn-diagram-operations" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="the-venn-diagram-operations"><span class="header-section-number">1.2.2</span> The Venn diagram operations</h3>
+<p>Like Dr.&nbsp;Frankenstein, we can create new sets from the pieces of old sets! Feel the power!</p>
+<p>OK, maybe it’s not that groundbreaking or cool. But we do want to be able to talk about combinations of sets. Once again, a bit of mathematical notation will help us quickly convey exactly what we mean. If I say “the set of presidents and vice presidents”, do I mean all of the people who have served in <em>either</em> role, or only those who have served in <em>both</em>? We know Richard Nixon and Joe Biden are in it either way, but what about Barack Obama? Mathematically speaking, we need to be sure if we are talking about the <span class="concept">union</span> or the <span class="concept">intersection</span> of the sets of presidents and vice presidents.</p>
+<div id="def-union-intersection" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.4 (Union and intersection)</strong></span> The <span class="concept">union</span> of the sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(A \cup B\)</span>, is the set of elements that are in <span class="math inline">\(A\)</span>, in <span class="math inline">\(B\)</span>, or both: <span class="math display">\[A \cup B = \{x \mid x \in A \text{ or } x \in B\}.\]</span> The <span class="concept">intersection</span> of the sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(A \cap B\)</span>, is the set of elements that are in both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>: <span class="math display">\[A \cap B = \{x \mid x \in A \text{ and } x \in B\}.\]</span></p>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The mathematical “or”
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In mathematical and logical writing, “or” has the same meaning as “and/or” in ordinary writing. For example, when I say “<span class="math inline">\(x \in A\)</span> or <span class="math inline">\(x \in B\)</span>” in the definition of <span class="math inline">\(A \cup B\)</span>, that applies to all of the following situations:</p>
+<ul>
+<li><span class="math inline">\(x \in A\)</span>, <span class="math inline">\(x \notin B\)</span></li>
+<li><span class="math inline">\(x \notin A\)</span>, <span class="math inline">\(x \in B\)</span></li>
+<li><span class="math inline">\(x \in A\)</span>, <span class="math inline">\(x \in B\)</span></li>
+</ul>
+</div>
+</div>
+<div id="fig-venn" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="set_theory_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Union: <span class="math inline">\(A \cup B\)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="set_theory_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Intersection: <span class="math inline">\(A \cap B\)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Union and intersection of sets.
+</figcaption>
+</figure>
+</div>
+<p>For example, let <span class="math inline">\(P\)</span> be the set of presidents, and <span class="math inline">\(Q\)</span> be the set of vice presidents. Because Barack Obama was president but not vice president, he belongs to the union of these sets, but not the intersection: <span class="math display">\[\begin{gather}
+\text{Barack Obama} \in P \cup Q, \\
+\text{Barack Obama} \notin P \cap Q.
+\end{gather}\]</span> Naturally, more people have been president <em>or</em> vice president than have been both president <em>and</em> vice president. In mathematical terms, the intersection <span class="math inline">\(P \cap Q\)</span> is a subset of the union <span class="math inline">\(P \cup Q\)</span>. This turns out to be a general property of sets, not just of American national officeholders.</p>
+<div id="prp-intersection-subset-union" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1.2</strong></span> <span class="math inline">\(A \cap B \subseteq A \subseteq A \cup B\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>There are two claims to prove here.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> The first is that <span class="math inline">\(A \cap B \subseteq A\)</span>. To prove this, take any element <span class="math inline">\(x \in A \cap B\)</span>. By definition of the intersection, it must be the case that <span class="math inline">\(x \in A\)</span>. Therefore, <span class="math inline">\(A \cap B \subseteq A\)</span>.</p>
+<p>The second claim to prove is that <span class="math inline">\(A \subseteq A \cup B\)</span>. To prove this, take any element <span class="math inline">\(x \in A\)</span>. By definition of the union, <span class="math inline">\(x \in A \cup B\)</span>. Therefore, <span class="math inline">\(A \subseteq A \cup B\)</span>.</p>
+</div>
+<p>What if we wanted to talk about the set of people who have been president, but not vice president? We can formulate this using the <span class="concept">set difference</span>.</p>
+<div id="def-set-difference" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.5 (Set difference)</strong></span> The <span class="concept">set difference</span> between sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(A \setminus B\)</span>, is the set of elements that are in <span class="math inline">\(A\)</span> and not in <span class="math inline">\(B\)</span>: <span class="math display">\[A \setminus B = \{a \in A \mid a \notin B\}.\]</span></p>
+</div>
+<div id="fig-set-diff" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-set-diff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="set_theory_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption><span class="math inline">\(A \setminus B\)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="set_theory_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption><span class="math inline">\(B \setminus A\)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-set-diff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: Set differences.
+</figcaption>
+</figure>
+</div>
+<p>Joe Biden was both a vice president and a president. Barack Obama was only president, never a vice president. Aaron Burr was only vice president, never president. Therefore, we have the following set memberships:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Old guy</th>
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \cap Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \cup Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \setminus Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q \setminus P\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Joe Biden</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Barack Obama</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Aaron Burr</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+</tr>
+</tbody>
+</table>
+<div id="exr-exclusive-or" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.3</strong></span> Using the union, intersection, and the set difference, find a way to denote the set of elements that are in exactly one of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, but not both.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\((A \cup B) \setminus (A \cap B)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>No one who has been the president of the United States has also been the prime minister of the United Kingdom. If we were to let <span class="math inline">\(M\)</span> denote the set of people who have been prime minister, then the intersection <span class="math inline">\(P \cap M\)</span> would be a set that contains … nothing? Yes, indeed, a set may contain nothing. We have a special name for the set with nothing in it — the <span class="concept">empty set</span>.</p>
+<div id="def-empty-set" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.6 (Empty set)</strong></span> The <span class="concept">empty set</span> is the set containing no elements, denoted <span class="math inline">\(\emptyset\)</span>.</p>
+</div>
+<p>Using this notation, a concise way to say “no one has been both the US president and the UK prime minister” would be <span class="math inline">\(P \cap M = \emptyset\)</span>. We say two sets are <span class="concept">disjoint</span> when their intersection is empty.</p>
+<div id="exr-emptyset-properties" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.4</strong></span> Prove the following properties of the empty set:</p>
+<ol type="1">
+<li><p><span class="math inline">\(A \cup \emptyset = A\)</span>.</p></li>
+<li><p><span class="math inline">\(A \cap \emptyset = \emptyset\)</span>.</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>We know from <a href="#prp-intersection-subset-union" class="quarto-xref">Proposition&nbsp;<span>1.2</span></a> that <span class="math inline">\(A \subseteq A \cup \emptyset\)</span>, so we only need to prove that <span class="math inline">\(A \cup \emptyset \subseteq A\)</span>. To this end, take any element <span class="math inline">\(x \in A \cup \emptyset\)</span>. By definition of the union, it must be the case that <span class="math inline">\(x \in A\)</span> or that <span class="math inline">\(x \in \emptyset\)</span>. The second of these is impossible, so it must be the case that <span class="math inline">\(x \in A\)</span>. As <span class="math inline">\(x\)</span> was chosen arbitrarily, this proves that <span class="math inline">\(A \cup \emptyset \subseteq A\)</span>. Finally, because <span class="math inline">\(A \subseteq A \cup \emptyset\)</span> and <span class="math inline">\(A \cup \emptyset \subseteq A\)</span>, we have <span class="math inline">\(A \cup \emptyset = A\)</span>.</p></li>
+<li><p>We know from <a href="#prp-intersection-subset-union" class="quarto-xref">Proposition&nbsp;<span>1.2</span></a> that <span class="math inline">\(A \cap \emptyset \subseteq \emptyset\)</span>. If there were an element <span class="math inline">\(x \in A \cap \emptyset\)</span>, then it would follow from the definition of intersection that <span class="math inline">\(x \in \emptyset\)</span>. But that cannot be the case, as <span class="math inline">\(\emptyset\)</span> is the set with no elements. Therefore, there is no element <span class="math inline">\(x\)</span> included in <span class="math inline">\(A \cap \emptyset\)</span>. By definition, then <span class="math inline">\(A \cap \emptyset = \emptyset\)</span>. (Alternatively, see <span class="quarto-unresolved-ref">?exm-emptyset-subset</span> in the next chapter for a more direct argument that <span class="math inline">\(\emptyset \subseteq A \cap \emptyset\)</span>.)</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="complements-and-de-morgans-laws" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="complements-and-de-morgans-laws"><span class="header-section-number">1.2.3</span> Complements and De Morgan’s laws</h3>
+<p>The set difference <span class="math inline">\(A \setminus B\)</span> is the set of everything in <span class="math inline">\(A\)</span> that’s not in <span class="math inline">\(B\)</span>. But what if we simply wanted the set of <em>everything</em> that’s not in <span class="math inline">\(B\)</span>, whether it’s in <span class="math inline">\(A\)</span> or not? Once we can properly define this type of set, we will call it the <span class="concept">complement</span> of <span class="math inline">\(B\)</span>.</p>
+<p>Before we can do that, we need to be clear about what “everything” is. For example, again taking <span class="math inline">\(P\)</span> to be the set of people who have been the US president, it seems clear enough that <span class="math display">\[\text{Aaron Burr} \in \{x \mid x \notin P\}.\]</span> But would we say that the number 3 is also an element of this set? What about the chemical formula H<span class="math inline">\(_2\)</span>O or the human gene CNR1? If nothing else, it doesn’t seem to be very useful to say that these are not people who have been president, true as that may be.</p>
+<p>To have a useful working definition of “everything not in this set”, we are going to assume there’s a set <span class="math inline">\(U\)</span> that contains the <span class="concept">universe</span> of objects we might be interested in. The appropriate choice of universal set depends on the context for what we want to do. Most commonly, if we are talking about numbers that lie along the typical number line, our universal set might be the real line, <span class="math inline">\(\mathbb{R}\)</span>. Or if we are talking about who has and has not held particular political positions, our universal set might be the set of all people who have ever lived.</p>
+<p>Once we have settled on the universe of objects we care about, it’s simple to define the complement of a set.</p>
+<div id="def-complement" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.7 (Complement)</strong></span> The <span class="concept">complement</span> of the set <span class="math inline">\(A\)</span>, denoted <span class="math inline">\(A^c\)</span>, is the set of all elements in the universe that are not in <span class="math inline">\(A\)</span>, i.e., <span class="math inline">\(A^c = U \setminus A\)</span>.</p>
+</div>
+<div id="fig-complement" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-complement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="set_theory_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption><span class="math inline">\(A^c\)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="set_theory_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption><span class="math inline">\(B^c\)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-complement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.3: Set differences.
+</figcaption>
+</figure>
+</div>
+<p>You don’t often see the universal set explicitly specified in mathematical writing, other than textbook set theory treatments like what you’re reading right now. I assume this is because most mathematical writers follow the same conventions I do:</p>
+<ul>
+<li><p>The appropriate definition of a universal set should be clear from the context. For example, if all of the mathematical objects discussed are real numbers and sets of real numbers, then <span class="math inline">\(U = \mathbb{R}\)</span>.</p></li>
+<li><p>If the context is not clear enough for there to be a natural choice of universal set (e.g., you’re talking about sets of radically different types of objects), then use explicit set differences when needed rather than taking complements of sets.</p></li>
+</ul>
+<p>Taking our universe as the set of all people, let’s think about the complement of the union of sets of everyone who’s been a president or vice president, <span class="math inline">\((P \cup Q)^c\)</span>. Anyone who’s been a president or a vice president is an element of <span class="math inline">\(P \cup Q\)</span>. Therefore, if someone is not an element of <span class="math inline">\(P \cup Q\)</span>, that tells us that the person has never been president <em>and</em> has never been vice president. In other words, that person belongs to both <span class="math inline">\(P^c\)</span> and <span class="math inline">\(Q^c\)</span>, and thus also to their intersection <span class="math inline">\(P^c \cap Q^c\)</span>. This is an illustration of a very useful pair of set properties called <span class="concept">De Morgan’s laws</span>.</p>
+<div id="thm-demorgan-sets" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.1 (De Morgan’s laws)</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p><span class="math inline">\((A \cup B)^c = A^c \cap B^c\)</span>.</p></li>
+<li><p><span class="math inline">\((A \cap B)^c = A^c \cup B^c\)</span>.</p></li>
+</ol>
+</div>
+<div id="fig-demorgan-sets" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-demorgan-sets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="set_theory_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption><span class="math inline">\((A \cup B)^c = A^c \cap B^c\)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="set_theory_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption><span class="math inline">\((A \cap B)^c = A^c \cup B^c\)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demorgan-sets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.4: De Morgan’s laws.
+</figcaption>
+</figure>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>I’ll prove the first law, and leave the second to you as <a href="#exr-demorgan-sets" class="quarto-xref">Exercise&nbsp;<span>1.5</span></a>. First we have to prove that <span class="math inline">\((A \cup B)^c \subseteq A^c \cap B^c\)</span>. To this end, take any <span class="math inline">\(x \in (A \cup B)^c\)</span>, so that <span class="math inline">\(x \notin A \cup B\)</span>. By definition of the union, this implies <span class="math inline">\(x \notin A\)</span>, hence <span class="math inline">\(x \in A^c\)</span>. By the same token, <span class="math inline">\(x \notin B\)</span>, hence <span class="math inline">\(x \in B^c\)</span>. Because <span class="math inline">\(x \in A^c\)</span> and <span class="math inline">\(x \in B^c\)</span>, we have <span class="math inline">\(x \in A^c \cap B^c\)</span>. As <span class="math inline">\(x\)</span> was chosen arbitrarily, this shows that <span class="math inline">\((A \cup B)^c \subseteq A^c \cap B^c\)</span>.</p>
+<p>Next, to complete the proof of equality, we have to prove that <span class="math inline">\(A^c \cap B^c \subseteq (A \cup B)^c\)</span>. To this end, take any <span class="math inline">\(x \in A^c \cap B^c\)</span>. By definition of the intersection, <span class="math inline">\(x \in A^c\)</span>, hence <span class="math inline">\(x \notin A\)</span>. By the same token, <span class="math inline">\(x \in B^c\)</span>, hence <span class="math inline">\(x \notin B\)</span>. Because <span class="math inline">\(x \notin A\)</span> and <span class="math inline">\(x \notin B\)</span>, we have <span class="math inline">\(x \notin A \cup B\)</span> and thus <span class="math inline">\(x \in (A \cup B)^c\)</span>. As <span class="math inline">\(x\)</span> was chosen arbitrarily, this shows that <span class="math inline">\(A^c \cap B^c \subseteq (A \cup B)^c\)</span>.</p>
+</div>
+<div id="exr-demorgan-sets" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.5</strong></span> Prove that <span class="math inline">\((A \cap B)^c = A^c \cup B^c\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The steps are the same as in the proof of the first part above, so I’ll be a bit briefer about them.</p>
+<p>Take any <span class="math inline">\(x \in (A \cap B)^c\)</span>. Because <span class="math inline">\(x \notin A \cap B\)</span>, it must be the case that <span class="math inline">\(x \in A^c\)</span> or <span class="math inline">\(x \in B^c\)</span>. If <span class="math inline">\(x \in A^c\)</span>, then <span class="math inline">\(x \in A^c \cup B^c\)</span>. Otherwise, if <span class="math inline">\(x \notin A^c\)</span>, then <span class="math inline">\(x \in B^c\)</span> and thus <span class="math inline">\(x \in A^c \cup B^c\)</span>. Either way, we have <span class="math inline">\(x \in A^c \cup B^c\)</span>. Consequently, <span class="math inline">\((A \cap B)^c \subseteq A^c \cup B^c\)</span>.</p>
+<p>Now take any <span class="math inline">\(x \in A^c \cup B^c\)</span>. It must be the case that <span class="math inline">\(x \in A^c\)</span> or <span class="math inline">\(x \in B^c\)</span>. If <span class="math inline">\(x \in A^c\)</span>, then <span class="math inline">\(x \notin A\)</span>, hence <span class="math inline">\(x \notin A \cap B\)</span>, hence <span class="math inline">\(x \in (A \cap B)^c\)</span>. Otherwise, if <span class="math inline">\(x \notin A^c\)</span>, then <span class="math inline">\(x \in B^c\)</span>, hence <span class="math inline">\(x \notin B\)</span>, hence <span class="math inline">\(x \notin A \cap B\)</span>, hence <span class="math inline">\(x \in (A \cap B)^c\)</span>. Either way, we have <span class="math inline">\(x \in (A \cap B)^c\)</span>. Consequently, <span class="math inline">\(A^c \cup B^c \subseteq (A \cap B)^c\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="functions" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="functions"><span class="header-section-number">1.3</span> Functions</h2>
+<p>Every US president took office at some recognizable point in time. George Washington’s first term began in 1789. Grover Cleveland’s first term began in 1893. Barack Obama’s first term began in 2009. I could go on, but you get the point. For every president, there is exactly one year when they became president for the first time.</p>
+<p>What we’ve done here is associate each president, an element of set <span class="math inline">\(P\)</span> as we’ve been calling it, with a natural number, an element of <span class="math inline">\(\mathbb{N}\)</span>. “The year that a given president took office” is what we call a <span class="concept">function</span>, which we might say “maps” one set into another. The notation <span class="math inline">\(f : A \to B\)</span> is a bit of mathematical shorthand that means “<span class="math inline">\(f\)</span> is a rule that takes each element of <span class="math inline">\(A\)</span> and associates it with an element of <span class="math inline">\(B\)</span>”. For any element <span class="math inline">\(a \in A\)</span>, we write <span class="math inline">\(f(a)\)</span> to stand for the element of <span class="math inline">\(B\)</span> that the function associates <span class="math inline">\(a\)</span> with. When a function maps <span class="math inline">\(A\)</span> into <span class="math inline">\(B\)</span>, we call <span class="math inline">\(A\)</span> the <span class="concept">domain</span> and <span class="math inline">\(B\)</span> the <span class="concept">codomain</span>.</p>
+<p>To continue the example, let <span class="math inline">\(y : P \to \mathbb{N}\)</span> (verbally: “<span class="math inline">\(y\)</span> is a function that maps the set of presidents into the set of natural numbers”) be the function that associates each president with the year they first took office. Then we have <span class="math inline">\(y(\text{George Washington}) = 1789\)</span>, <span class="math inline">\(y(\text{Grover Cleveland}) = 1893\)</span>, and so on. The domain of this function is the set of presidents, <span class="math inline">\(P\)</span>, and the codomain is the set of natural numbers, <span class="math inline">\(\mathbb{N}\)</span>.</p>
+<p>Some associations between sets are not functions. When we’re thinking about the set of presidents, <span class="math inline">\(P\)</span>, you might be tempted to think about a function that associates each president with their vice president. However, no such function exists, for two reasons.</p>
+<ol type="1">
+<li><p>A function associates <em>every</em> element of its domain with an element of the codomain. However, some presidents had no vice president. For example, Andrew Johnson, who assumed the presidency after Abraham Lincoln’s assassination, never had a vice president.</p></li>
+<li><p>A function associates each element of the domain with <em>exactly one</em> element of the codomain. However, some presidents have had multiple vice presidents. For example, both Spiro Agnew and Gerald Ford served as vice president to Richard Nixon.</p></li>
+</ol>
+<p>In mathematical terms, we would call the president-and-their-vice-president(s-if-any) assocation a <a href="https://en.wikipedia.org/wiki/Relation_(mathematics)">relation</a>. Any function is a relation, but many relations are not functions. There are lots of cool things to study about relations, but I cannot say in good faith that you <em>must</em> know these cool things, so that is all I will say about relations.</p>
+<div id="exr-pres-vp-functions" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.6</strong></span> Come up with a function that maps the set of presidents, <span class="math inline">\(P\)</span>, into the set of vice presidents, <span class="math inline">\(Q\)</span>. Convince yourself that it satisfies the key requirement of a function — that every element in <span class="math inline">\(P\)</span> is associated with one, and exactly one, element in <span class="math inline">\(Q\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+One answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I propose the function <span class="math inline">\(f : P \to Q\)</span> defined so that <span class="math inline">\(f(p) = \text{Joe Biden}\)</span> for every president <span class="math inline">\(p \in P\)</span>. This rule associates every president with a vice president, so it is a function.</p>
+<p>This might seem like a dumb example, but it meets the criteria that I set out, making it a valid answer. Math is legalistic in this way: the question asked for a function <span class="math inline">\(f : P \to Q\)</span>, I provided a function <span class="math inline">\(f : P \to Q\)</span>, and therefore I got the answer right. So if you’re here in a political science PhD program because your law school dreams didn’t quite work out, take comfort in knowing that you can still get to be a legalistic jackass when you’re working in the world of math.</p>
+</div>
+</div>
+</div>
+</div>
+<section id="one-to-one-and-onto-functions" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="one-to-one-and-onto-functions"><span class="header-section-number">1.3.1</span> One-to-one and onto functions</h3>
+<p>As you saw in <a href="#exr-pres-vp-functions" class="quarto-xref">Exercise&nbsp;<span>1.6</span></a>, there is nothing in the definition of a function to suggest that every element of the domain must be associated with a <em>different</em> element of the codomain. Some functions do have this additional property, and we call those functions <span class="concept">one-to-one</span>.</p>
+<div id="def-one-to-one" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.8 (One-to-one)</strong></span> A function <span class="math inline">\(f : A \to B\)</span> is <span class="concept">one-to-one</span>, also called <span class="concept">injective</span>, if <span class="math inline">\(f(a) \neq f(a')\)</span> for all distinct elements <span class="math inline">\(a \in A\)</span> and <span class="math inline">\(a' \in A\)</span>.</p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-one-to-one" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-one-to-one-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="set_theory_files/figure-html/fig-one-to-one-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-one-to-one-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.5: A function that is one-to-one, but not onto.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The function <span class="math inline">\(y : P \to \mathbb{N}\)</span> that we discussed earlier, mapping presidents into the year that they first took office, is not one-to-one. William Henry Harrison took office in March 1841, famously gave a lengthy speech in poor weather, caught cold, and died a month later. His vice president, John Tyler, took office in April 1841. In terms of the function we defined, <span class="math display">\[y(\text{William Henry Harrison}) = y(\text{John Tyler}) = 1841.\]</span> Because these are two different presidents with the same function value, <span class="math inline">\(y\)</span> is not one-to-one.</p>
+<p>You also saw in <a href="#exr-pres-vp-functions" class="quarto-xref">Exercise&nbsp;<span>1.6</span></a> that a function need not reach every element of its codomain. In fact, if the domain has fewer elements than the codomain — such as with the sets of presidents <span class="math inline">\(P\)</span> and vice presidents <span class="math inline">\(Q\)</span>, where at the time of writing there have been 45 presidents and 50 vice presidents — it would be impossible for the function to reach every element of the codomain. In the special case where a function does reach every element of the codomain, we turn a preposition into an adjective and say the function is <span class="concept">onto</span>.</p>
+<div id="def-onto" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.9 (Onto)</strong></span> A function <span class="math inline">\(f : A \to B\)</span> is <span class="concept">onto</span>, also called <span class="concept">surjective</span>, if for every element <span class="math inline">\(b \in B\)</span> there is some element <span class="math inline">\(a \in A\)</span> such that <span class="math inline">\(f(a) = b\)</span>.</p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-onto" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-onto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="set_theory_files/figure-html/fig-onto-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-onto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.6: A function that is onto, but not one-to-one.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We have already seen that the function that maps presidents into the first year they took office is not one-to-one. It is not onto either. Consider 1999, the year <em>The Matrix</em> came out and inspired legions of nerds (like me…) to make green-on-black their default color theme for computing. 1999 is a natural number, or <span class="math inline">\(1999 \in \mathbb{N}\)</span> if you want to be formal about it, and yet no president took office for the first time then; Bill Clinton, who had first taken office in 1993, was the president the entire year. We have found a number <span class="math inline">\(n \in \mathbb{N}\)</span> such that <span class="math inline">\(y(p) \neq n\)</span> for all presidents <span class="math inline">\(p \in P\)</span>, meaning <span class="math inline">\(y\)</span> is not onto.</p>
+<p>Functions that are both one-to-one and onto, which we call <span class="concept">bijections</span>, are special. What makes them special is that they can be reversed, or <span class="concept">inverted</span> in the language of mathematics. I like to think of a bijection as creating a “buddy system” between its domain and a codomain. Think about a bijection <span class="math inline">\(f\)</span> that maps elements of (domain) <span class="math inline">\(A\)</span> into (codomain) <span class="math inline">\(B\)</span>, so we’d write <span class="math inline">\(f : A \to B\)</span>. Then for every element <span class="math inline">\(a\)</span> of <span class="math inline">\(A\)</span>, there is <em>exactly one</em> element <span class="math inline">\(b\)</span> of <span class="math inline">\(B\)</span> such that <span class="math inline">\(f(a) = b\)</span>. And for every element <span class="math inline">\(b\)</span> of <span class="math inline">\(B\)</span>, there is <em>exactly one</em> element <span class="math inline">\(a\)</span> of <span class="math inline">\(A\)</span> such that <span class="math inline">\(f(a) = b\)</span>. If the function weren’t one-to-one, then there’d be at least one <span class="math inline">\(a \in A\)</span> with multiple matches in <span class="math inline">\(B\)</span>. If it weren’t onto, then there’d be at least one <span class="math inline">\(b \in B\)</span> with no matches in <span class="math inline">\(A\)</span>.</p>
+<div id="def-bijective" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.10 (Bijection and inverse)</strong></span> A function <span class="math inline">\(f : A \to B\)</span> is a <span class="concept">bijection</span> if it is both one-to-one and onto.</p>
+<p>Every bijective function has an <span class="concept">inverse function</span>, <span class="math inline">\(f^{-1} : B \to A\)</span>. For every pair of elements <span class="math inline">\(a \in A\)</span> and <span class="math inline">\(b \in B\)</span>, we have <span class="math inline">\(f^{-1}(b) = a\)</span> if and only if <span class="math inline">\(f(a) = b\)</span>.</p>
+</div>
+<div id="fig-bijection" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bijection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="set_theory_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>A bijection…</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="set_theory_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>…and its inverse.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bijection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.7: A function that is both one-to-one and onto.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-bijection" class="quarto-xref">Figure&nbsp;<span>1.7</span></a> illustrates the buddy system property of a bijection. Each element of <span class="math inline">\(A\)</span> has exactly one buddy in <span class="math inline">\(B\)</span>, and each element of <span class="math inline">\(B\)</span> has exactly one buddy in <span class="math inline">\(A\)</span>. For finite sets like the ones in the illustration, you can probably convince yourself that they’d have to have the same number of elements in order for this kind of buddy system to be viable. All I’ll say here for infinite sets is that it gets weirder; read the optional <a href="#sec-cardinality" class="quarto-xref"><span>Section 1.3.2</span></a> below if you want to peek into the weirdness.</p>
+<p>We’ll conclude our main discussion of functions with one more proof. If you look at <a href="#fig-bijection" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>, you’ll see that the inverse of <span class="math inline">\(f\)</span> is one-to-one and onto. This is not just an accidental feature of the illustration; it’s a general feature of the inverse function of a bijection. If you’re not convinced, here’s a proof. (And if you are convinced—shouldn’t you have asked for proof instead of just taking my word?)</p>
+<div id="prp-inverse-bijective" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1.3 (The inverse of a bijection is a bijection)</strong></span> If <span class="math inline">\(f\)</span> is a bijection, then its inverse <span class="math inline">\(f^{-1}\)</span> is a bijection.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Assume <span class="math inline">\(f : A \to B\)</span> is a bijection. To prove the proposition, we need to show that <span class="math inline">\(f^{-1} : B \to A\)</span> is both one-to-one and onto.</p>
+<p>To show that <span class="math inline">\(f^{-1}\)</span> is one-to-one, we need to show that <span class="math inline">\(f^{-1}(b) \neq f^{-1}(b')\)</span> for any distinct elements <span class="math inline">\(b \in B\)</span> and <span class="math inline">\(b' \in B\)</span>. To accomplish this, take any pair of distinct <span class="math inline">\(b \in B\)</span> and <span class="math inline">\(b' \in B\)</span>. (By distinct, we mean that <span class="math inline">\(b \neq b'\)</span>.) Because <span class="math inline">\(f\)</span> is onto, there is an <span class="math inline">\(a \in A\)</span> such that <span class="math inline">\(f(a) = b\)</span> and an <span class="math inline">\(a' \in A\)</span> such that <span class="math inline">\(f(a') = b'\)</span>. As <span class="math inline">\(b\)</span> and <span class="math inline">\(b'\)</span> are distinct, we must have <span class="math inline">\(a \neq a'\)</span>; otherwise, we would have <span class="math inline">\(f(a) = f(a')\)</span> and thus <span class="math inline">\(b = b'\)</span>. Meanwhile, by definition of the inverse function, <span class="math inline">\(f^{-1}(b) = a\)</span> and <span class="math inline">\(f^{-1}(b') = a'\)</span>. Putting this together with the fact that <span class="math inline">\(a \neq a'\)</span>, we have <span class="math inline">\(f^{-1}(b) \neq f^{-1}(b')\)</span>. As <span class="math inline">\(b\)</span> and <span class="math inline">\(b'\)</span> were chosen arbitrarily, this proves that <span class="math inline">\(f^{-1}(b) \neq f^{-1}(b')\)</span> for any distinct <span class="math inline">\(b \in B\)</span> and <span class="math inline">\(b' \in B\)</span>, which means <span class="math inline">\(f^{-1}\)</span> is one-to-one.</p>
+<p>To show that <span class="math inline">\(f^{-1}\)</span> is onto, we need to show that for every element <span class="math inline">\(a \in A\)</span>, there is an element <span class="math inline">\(b \in B\)</span> such that <span class="math inline">\(f^{-1}(b) = a\)</span>. To accomplish this, take any element <span class="math inline">\(a \in A\)</span>. There is an element <span class="math inline">\(b \in B\)</span> such that <span class="math inline">\(f(a) = b\)</span>. By definition of the inverse function, <span class="math inline">\(f^{-1}(b) = a\)</span>. As <span class="math inline">\(a\)</span> was chosen arbitrarily, this proves that for every <span class="math inline">\(a \in A\)</span> there is some <span class="math inline">\(b \in B\)</span> such that <span class="math inline">\(f^{-1}(b) = a\)</span>, which means <span class="math inline">\(f^{-1}\)</span> is onto.</p>
+</div>
+</section>
+<section id="sec-cardinality" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="sec-cardinality"><span class="header-section-number">1.3.2</span> An optional digression into cardinality and infinities</h3>
+<p>This section contains material that is not strictly necessary, but which I find edifying and hope you will too.</p>
+<p>The <span class="concept">cardinality</span> of a set, loosely speaking, is the number of elements in the set. We write <span class="math inline">\(|A|\)</span> to denote the cardinality of a set <span class="math inline">\(A\)</span>. For a finite set, this loose definition is exact — the cardinality of a finite set is simply its size. For example, if <span class="math inline">\(A = \{1.1, 2.2, 4.4\}\)</span>, then <span class="math inline">\(|A| = 3\)</span>.</p>
+<p>It gets more complicated once we start dealing with infinite sets. You might think that <span class="math inline">\(|A| = \infty\)</span> for infinite sets. But you would be wrong, because it turns out some infinities are bigger than others. The goal of this section is to show you why.</p>
+<p>First we need to define what it means for two sets to have the same cardinality. With finite sets, this is simple — they have the same number of elements. To extend this to infinite sets, we will rely on bijections. We will say that two sets have the same cardinality if we can set up a buddy system between the two of them.</p>
+<div id="def-equal-cardinality" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.11 (Equal cardinality)</strong></span> The sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have the same cardinality, denoted <span class="math inline">\(|A| = |B|\)</span>, if there is a bijective function that maps <span class="math inline">\(A\)</span> into <span class="math inline">\(B\)</span>.</p>
+</div>
+<p>It is obvious enough that this definition “works” for finite sets. Consider the sets <span class="math inline">\(A = \{\text{Coke}, \text{Pepsi}, \text{Mountain Dew}\}\)</span> and <span class="math inline">\(B = \{10, 17, 27\}\)</span>. We know just from looking at these sets that <span class="math inline">\(|A| = |B| = 3\)</span>. To prove that the formal definition is satisfied, it’s easy enough to produce a bijection between them, such as the function <span class="math inline">\(f : A \to B\)</span> defined by <span class="math display">\[
+\begin{aligned}
+f(\text{Coke}) &amp;= 10, \\
+f(\text{Pepsi}) &amp;= 17, \\
+f(\text{Mountain Dew}) &amp;= 27.
+\end{aligned}
+\]</span></p>
+<p>In a way, it is easier to prove that two sets have equal cardinality than to prove that they don’t. To prove that <span class="math inline">\(|A| = |B|\)</span>, we just need to find one bijection between them. But to prove that <span class="math inline">\(|A| \neq |B|\)</span>, we need to show that <em>every</em> function between them is not a bijection.</p>
+<div id="exr-cardinality-finite" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.7</strong></span> Consider the sets <span class="math display">\[
+\begin{aligned}
+A &amp;= \{\text{Coke}, \text{Pepsi}, \text{Mountain Dew}\}, \\
+B &amp;= \{10, 17\}, \\
+C &amp;= \{10, 17, 27, 42\}.
+\end{aligned}
+\]</span> Using the formal definition of equal cardinality, prove that <span class="math inline">\(|A| \neq |B|\)</span> and <span class="math inline">\(|A| \neq |C|\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To prove the first claim, we must show that there is no bijection mapping <span class="math inline">\(A\)</span> into <span class="math inline">\(B\)</span> — or vice versa (remember from <a href="#prp-inverse-bijective" class="quarto-xref">Proposition&nbsp;<span>1.3</span></a> that if there is a bijection from <span class="math inline">\(A\)</span> into <span class="math inline">\(B\)</span>, then there is also a bijection from <span class="math inline">\(B\)</span> into <span class="math inline">\(A\)</span>). We can easily show that there is no onto function mapping <span class="math inline">\(B\)</span> into <span class="math inline">\(A\)</span>. Consider any function <span class="math inline">\(f : B \to A\)</span> such that <span class="math inline">\(f(b) = \text{Coke}\)</span> for some <span class="math inline">\(b \in B\)</span> and <span class="math inline">\(f(b') = \text{Pepsi}\)</span> for some <span class="math inline">\(b' \in B\)</span>. Then we must have either <span class="math inline">\(b = 10\)</span> and <span class="math inline">\(b' = 17\)</span>, or else <span class="math inline">\(b = 17\)</span> and <span class="math inline">\(b' = 10\)</span>. Either way, there is no <span class="math inline">\(b'' \in B\)</span> such that <span class="math inline">\(f(b'') = \text{Mountain Dew}\)</span>. Therefore, there is no onto function, and thus no bijection, mapping <span class="math inline">\(B\)</span> into <span class="math inline">\(A\)</span>. We conclude that <span class="math inline">\(|A| \neq |B|\)</span>.</p>
+<p>The proof that <span class="math inline">\(|A| \neq |C|\)</span> follows almost the same steps. You just need to show that there is no onto function mapping <span class="math inline">\(A\)</span> into <span class="math inline">\(C\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Our definition of equal cardinality operates totally intuitively with finite sets. It is not so intuitive with infinite sets. Let <span class="math inline">\(\mathbb{N}_E\)</span> stand for the set of even natural numbers, so that <span class="math display">\[\mathbb{N}_E = \{2n \mid n \in \mathbb{N}\} = \{2, 4, 6, \ldots\}.\]</span> It sure looks like <span class="math inline">\(\mathbb{N}_E\)</span> is “smaller” than <span class="math inline">\(\mathbb{N}\)</span>. After all, every even natural number is a natural number, yet not every natural number is an even natural number (for example, 1). In mathematical notation, <span class="math inline">\(\mathbb{N}_E \subseteq \mathbb{N}\)</span> and <span class="math inline">\(\mathbb{N} \nsubseteq \mathbb{N}_E\)</span>. Nonetheless, these two sets turn out to have the same cardinality.</p>
+<div id="exm-even-cardinality" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.1 (Naturals and even naturals have same cardinality)</strong></span> Consider the function <span class="math inline">\(f : \mathbb{N} \to \mathbb{N}_E\)</span> defined by <span class="math inline">\(f(n) = 2n\)</span>. To see that <span class="math inline">\(f\)</span> is one-to-one, observe that if <span class="math inline">\(n \neq n'\)</span>, then <span class="math inline">\(f(n) = 2n \neq 2n' = f(n')\)</span>. To see that <span class="math inline">\(f\)</span> is onto, take any even natural number <span class="math inline">\(e \in \mathbb{N}_E\)</span>. By definition of an even natural number, there exists a natural number <span class="math inline">\(n\)</span> such that <span class="math inline">\(2n = e\)</span>. Therefore, <span class="math inline">\(f(n) = e\)</span>. As <span class="math inline">\(e\)</span> was chosen arbitrarily, this means that for every <span class="math inline">\(e \in \mathbb{N}_E\)</span> there is an <span class="math inline">\(n \in \mathbb{N}\)</span> such that <span class="math inline">\(f(n) = e\)</span>, and thus <span class="math inline">\(f\)</span> is onto. We have shown that <span class="math inline">\(f\)</span> is a bijection, so <span class="math inline">\(|\mathbb{N}| = |\mathbb{N}_E|\)</span>.</p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://klienbottles.wordpress.com/wp-content/uploads/2016/08/hotel1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>This result is one hint at the weirdness of infinite sets. A more vivid way to describe the weirdness is the metaphor of <a href="https://en.wikipedia.org/wiki/Hilbert%27s_paradox_of_the_Grand_Hotel">Hilbert’s Hotel</a>. Imagine a hotel with infinitely many rooms, one for each natural number. A traveler arrives at the hotel, only to find out every room is full. She starts to walk out the door, when the manager tells her, “Don’t worry, we can make room.” He tells the occupant of room 1 to move to room 2, whose occupant goes to room 3, whose occupant goes to room 4, and so on, with the guest of each room <span class="math inline">\(n\)</span> being moved to room <span class="math inline">\(n + 1\)</span>. The new arrival can now move into room 1, even though the hotel was full when she arrived and no one has checked out.</p>
+<p>If you buy that Hilbert’s Hotel can accommodate one additional guest even when it’s full, then you will probably agree that it could take any finite number of new guests. If <span class="math inline">\(m\)</span> guests arrive, have the guest in each room <span class="math inline">\(n\)</span> move to room <span class="math inline">\(n + m\)</span>. What is more surprising is that Hilbert’s Hotel can also accommodate an <em>infinite</em> number of new guests. The logic is an application of <a href="#exm-even-cardinality" class="quarto-xref">Example&nbsp;<span>1.1</span></a>. For each current guest in room <span class="math inline">\(n\)</span>, have them move to room <span class="math inline">\(2n - 1\)</span>. Now all of the even rooms are empty, and we can put the first new guest in our infinite sequence of new arrivals into room 2, the second into room 4, and so on. This seems crazy. It is crazy.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Infinite quantities behave in strange ways, and we will go astray if we try to apply the rules of ordinary numbers to infinities.</p>
+<p>We’ve seen that there are as many natural numbers as there are even natural numbers. This result might lead you to think that all infinite sets have the same cardinality. In fact, that’s not the case. Some infinities are bigger than others. For example, the cardinality of the real numbers is greater than the cardinality of the natural numbers.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>To see why there are more real numbers than natural numbers, we will sketch out <a href="https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument">the diagonal argument</a> from the 19th century mathematician Georg Cantor.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> Remember that two sets have equal cardinality if there is a bijection that maps one into the other. So to prove that the cardinalities of the natural numbers <span class="math inline">\(\mathbb{N}\)</span> and the real numbers <span class="math inline">\(\mathbb{R}\)</span> are different, we will show that no function <span class="math inline">\(f : \mathbb{N} \to (0, 1)\)</span> can be onto, and thus no bijection meeting the definition of equal cardinality may exist.</p>
+<p>Take any function <span class="math inline">\(f : \mathbb{N} \to (0, 1)\)</span>. This function associates each natural number <span class="math inline">\(n = 1, 2, \ldots\)</span> with a real number between 0 and 1 (not inclusive). We want to show that there is a real number <span class="math inline">\(x \in [0, 1]\)</span> outside the range of <span class="math inline">\(f\)</span>, i.e., <span class="math inline">\(f(n) \neq x\)</span> for all <span class="math inline">\(n \in \mathbb{N}\)</span>. To see how we’re going to do this, let’s imagine lining up each <span class="math inline">\(f(n)\)</span> and taking their decimal expansion.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 17%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(n\)</span></th>
+<th><span class="math inline">\(f(n)\)</span></th>
+<th>digit 1</th>
+<th>digit 2</th>
+<th>digit 3</th>
+<th>digit 4</th>
+<th>digit 5</th>
+<th>…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0.04052…</td>
+<td><strong>0</strong></td>
+<td>4</td>
+<td>0</td>
+<td>5</td>
+<td>2</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.65077…</td>
+<td>6</td>
+<td><strong>5</strong></td>
+<td>0</td>
+<td>7</td>
+<td>7</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0.97986…</td>
+<td>9</td>
+<td>7</td>
+<td><strong>9</strong></td>
+<td>8</td>
+<td>6</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0.57433…</td>
+<td>5</td>
+<td>7</td>
+<td>4</td>
+<td><strong>3</strong></td>
+<td>3</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0.09802…</td>
+<td>0</td>
+<td>9</td>
+<td>8</td>
+<td>0</td>
+<td><strong>2</strong></td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>We want to find an <span class="math inline">\(x\)</span> that is not equal to any <span class="math inline">\(f(n)\)</span>. We can construct this by ensuring that the <span class="math inline">\(n\)</span>’th decimal of <span class="math inline">\(x\)</span> differs from the <span class="math inline">\(n\)</span>’th decimal of each <span class="math inline">\(f(n)\)</span>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(n\)</span></th>
+<th><span class="math inline">\(f(n)\)</span></th>
+<th><span class="math inline">\(n\)</span>’th digit of <span class="math inline">\(f(n)\)</span></th>
+<th><span class="math inline">\(n\)</span>’th digit of <span class="math inline">\(x\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0.04052…</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.65077…</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0.97986…</td>
+<td>9</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0.57433…</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0.09802…</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>By constructing <span class="math inline">\(x\)</span> this way, we ensure that there is no <span class="math inline">\(n\)</span> where <span class="math inline">\(f(n)\)</span> equals <span class="math inline">\(x\)</span>, because we know that it differs in at least one decimal place from every single <span class="math inline">\(f(n)\)</span>. This means there is no onto function that maps from the natural numbers into <span class="math inline">\((0, 1)\)</span>, and therefore no onto function that maps from the natural numbers into the real numbers, and therefore these sets have different cardinalities. In other words, there is more than one infinity!</p>
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>I always use the vertical bar <span class="math inline">\(\mid\)</span> when writing in set-builder notation, but sometimes you will see people use the colon <span class="math inline">\(:\)</span> instead. These are just different conventions with no differences in underlying meaning.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>If all the elements of <span class="math inline">\(B\)</span> are sets, we would typically call <span class="math inline">\(B\)</span> a <span class="concept">collection</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>And secondarily because some seemingly obvious things turn out not to be true at all! This is one of the reasons it’s important to prove our mathematical claims.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>For example, in a textbook about calculus, such methods would include arithmetic and algebra. In a paper in the <em>Journal of Economic Theory</em>, they would include calculus, differential equations, real analysis, and topology.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>There is also the third, implicit claim that <span class="math inline">\(A \cap B \subseteq A \cup B\)</span>, but this follows from <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a> once we’ve proved that <span class="math inline">\(A \cap B \subseteq A\)</span> and <span class="math inline">\(A \subseteq A \cup B\)</span>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>We can make it even crazier if we want. Suppose an infinite number of trains arrive, each of which contains an infinite number of guests. Because <a href="https://math.stackexchange.com/q/1293854">the set of all pairs of natural numbers has the same cardinality as the set of natural numbers</a>, it turns out that the ostensibly full hotel can accommodate this infinity-upon-infinity of new guests too.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Is there any set whose cardinality is in between these two? Mathematicians literally, and famously, <a href="https://en.wikipedia.org/wiki/Continuum_hypothesis">cannot decide</a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>It’s a sketch because there are some nagging details that we will ignore. For example, we are ignoring the possibility of two different decimal expansions corresponding to the same number, as is the case with 0.1 and 0.099999<span class="math inline">\(\cdots\)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p xmlns:cc="http://creativecommons.org/ns#" class="cc-footer">
+This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
