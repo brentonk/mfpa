@@ -1,12 +1,25 @@
 # Set Theory {#set-theory}
 
+```{python setup, echo=FALSE}
+# Dictionary that our list of key concepts will live inside
+concepts = {}
+```
+
 ## What are sets and why do we care?
 
 Seemingly every book on "higher math" --- the kind of math you encounter after the intro calculus sequence in college --- starts with a discussion of [set theory]{.concept}.
 There are some deep mathematical reasons to begin this way, which you can read about on [Wikipedia](https://en.wikipedia.org/wiki/Set_theory) or, for the especially high-minded, the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/set-theory/).
 To summarize it very loosely: although most people think of math as being about numbers, most important mathematical statements (including those about numbers!) are ultimately actually rooted in the properties of sets.
 
-Our reasons for starting with set theory are related, but more prosaic.
+```{python, echo=FALSE}
+concepts.update({
+  "Set theory": "The study of sets and their properties.  A key logical foundation for much of the rest of mathematics.",
+  "Set": "Informally, a collection of objects (not necessarily numbers).  A set $S$ with elements $a$, $b$, and $c$ is written $S = \\{a, b, c\\}$.",
+  "Element": "A member of a set.  We write $a \in A$ to mean \"$a$ is an element of the set $A$.\"",
+})
+```
+
+I'm putting set theory before our study of numbers-type math for reasons that are related, but more prosaic.
 
 #.  Set theory gives us a lot of our mathematical "language".
 
@@ -15,8 +28,7 @@ Our reasons for starting with set theory are related, but more prosaic.
     #.  In political science research, we use mathematical notation to concisely-yet-precisely summarize quantitative concepts.
         This notation often involves sets and operations on sets, so we need to get familiar if we want to be fluent in the "language" of math.
 
-#.  One of the things you'll get from this course is a basic introduction to mathematical proofs.
-    Set theory gives us some nice examples of mathematical statements that are relatively easy to prove, making it a convenient starting point for our study of proofs.
+#.  Set theory gives us some nice examples of mathematical statements that are relatively easy to prove, making it a convenient as we get more practice writing proofs.
 
 All right, so what is a set?
 Precisely because sets are so foundational, that turns out to be quite a sticky question to answer rigorously, so we will content ourselves with a non-rigorous definition.
@@ -58,7 +70,17 @@ If ordinary language can clearly communicate what you mean, use it.
 That said, there are times when ordinary language is too cumbersome or imprecise to describe the contents of a set.
 Maybe there are a lot of conditions on the set you're defining, or maybe the condition involves a finicky formula that's hard to put into words.
 In these cases, it is common to use [set-builder notation]{.concept}, for example $$A = \{x \in \mathbb{N} \mid x > 1000\}.$$
-You would read this as "$A$ is the set of natural numbers $x$ such that $x$ is greater than 1000".^[I always use the vertical bar $\mid$ when writing in set-builder notation, but sometimes you will see people use the colon $:$ instead.  These are just different conventions with no differences in underlying meaning.]
+You would read this as "$A$ is the set of natural numbers $x$ such that $x$ is greater than 1000".
+
+::: {.aside}
+I always use the vertical bar $\mid$ when writing in set-builder notation, but sometimes you will see people use the colon $:$ instead.  These are just different conventions with no differences in underlying meaning.
+:::
+
+```{python, echo=FALSE}
+concepts.update({
+  "Set-builder notation": "A way to describe a set without explicitly enumerating all of its elements.  For example, $\\{a \in A \mid a > 3\\}$ means \"The set of all elements of $A$ that are greater than 3.",
+})
+```
 
 Or what if we wanted to define $B$ as the set of values we obtain by taking a natural number and dividing it in half?
 We could write this in set-builder notation as $$B = \{x \in \mathbb{R} \mid x = \frac{n}{2} \: \text{for some $n \in \mathbb{N}$}\}.$$
@@ -89,14 +111,6 @@ Use set-builder notation to describe the following sets:
 ::::
 :::
 
-::: {.callout-tip}
-## Approaching exercises
-
-Try the exercises yourself, ideally by writing them on paper or in a tablet, before looking at the answers.
-You learn the most by trying on your own and then checking.
-(This is exactly how I still do it when I'm working through unfamiliar technical material!)
-:::
-
 
 ## Fundamental operations on sets
 
@@ -111,11 +125,17 @@ With sets, we make comparisons in terms of their elements --- namely, whether al
 The set $A$ is a [subset]{.concept} of the set $B$, denoted $A \subseteq B$, if every element of $A$ is an element of $B$.
 :::
 
+```{python, echo=FALSE}
+concepts.update({
+  "Subset": "When all of the elements of the set $A$ are also elements of the set $B$, we say that $A$ is a subset of $B$, written $A \\subseteq B$.",
+})
+```
+
 ::: {.callout-warning}
 ## Inclusion $\in$ versus subset $\subseteq$
 $A \subseteq B$ and $A \in B$ have very different meanings.
 $A \subseteq B$ means "every element of $A$ is also an element of $B$".
-$A \in B$ means "the set $A$ is, itself, an element of $B$".^[If all the elements of $B$ are sets, we would typically call $B$ a [collection]{.concept}.]
+$A \in B$ means "the set $A$ is, itself, an element of $B$".
 When you're talking about sets, you usually mean the first of these, not the second.
 
 If you mess up and use the wrong notation, your readers will probably still ultimately figure out what you mean --- but it'll take a bit longer for them than if you'd used the right notation.
@@ -123,46 +143,8 @@ So it's in your best interest to use the right notation for much the same reason
 :::
 
 You probably won't be surprised to learn that subsets are like nesting dolls: if $A$ is a subset of $B$, then it is also a subset of any other set that $B$ is a subset of.
-I'm bringing up this seemingly obvious fact mainly because it'll give us a nice first exposure to mathematical proofs.^[And secondarily because some seemingly obvious things turn out not to be true at all!  This is one of the reasons it's important to prove our mathematical claims.]
-
-:::: {.callout-tip}
-## Names of mathematical results
-Throughout these notes, you will see mathematical results labeled [Theorem]{.concept}, [Proposition]{.concept}, [Lemma]{.concept}, and [Corollary]{.concept}.
-Anything with one of these names is a formal statement that is provably true, and will usually be accompanied by a proof.
-In other words, none of these types of results is more or less true than the others.
-The different labels are mostly used to help readers decode the context and importance of each type of result.
-
-- [Theorem:]{.concept} Reserved for results that are especially big, important, fundamental, general, etc.
-
-- [Proposition:]{.concept} A bread-and-butter result.  Useful and important enough to care about on its own, but not earth-shaking enough to be a theorem --- like @prp-subset-transitive here!
-
-- [Lemma:]{.concept} A result that we don't necessarily care about on its own, but is a useful building block toward one or more propositions or theorems.
-
-- [Corollary:]{.concept} A result that follows almost immediately from some earlier lemma(s), proposition(s), or theorem(s).  My general heuristic for calling something a corollary is that it can be proved in two sentences or less, and the proof requires invoking an earlier lemma, proposition, or theorem.
-::::
-
-:::: {.callout-tip}
-## Reading proofs
-I'm deliberately more verbose in the proofs here than in the proofs you'd see in a published paper, or even in most textbooks.
-The structure of arguments in those venues tends to be the same as the one here, though --- they just have a bit less verbiage to hold the reader's hand.
-
-In proofs in (other) textbooks and academic articles, you'll often see phrases like "It is obvious that..." or "It is straightforward to show that...".
-Students --- and professors! --- understandably find these statements frustrating or alienating, because whatever comes next often does not seem obvious or straightforward at all.
-But really, "It is obvious that..." is shorthand for:
-
-> The statement that comes next can be proved using mathematical methods that a reader of this document would typically have extensive practice with.^[For example, in a textbook about calculus, such methods would include arithmetic and algebra.  In a paper in the *Journal of Economic Theory*, they would include calculus, differential equations, real analysis, and topology.]
-> There aren't any new tricks or novel arguments to reach this step, just chugging through calculations.
-> You are welcome to do those calculations yourself to check my work, though I expect you won't find anything particularly edifying along the way.
-> Because space is limited in this book or journal article, I haven't included all the gory details myself.
-
-What if the proof you're reading says something is obvious or straightforward, but you can't convince yourself it's true?
-After getting out your legal pad and trying to work it out yourself, that's when you should ask for help.
-I find myself in this situation often, and as of summer 2025 I've found that ChatGPT's `o3-mini-high` model gives great explanations when I'm stuck on something mathematical.
-And throughout your careers here, you can always feel free to ask me or the other methods/formal theory faculty when you're stuck on something!
-
-Proofs conventionally end with "QED", $\blacksquare$, or $\square$.
-As of early 2025, the [Quarto](https://quarto.org) software I'm using to write these notes doesn't insert any of these symbols automatically, so you'll just have to take the bottom of the box that the proof lives in as my "QED" variant.
-::::
+I'm bringing up this seemingly obvious fact mainly because it'll give us a nice first statement about set theory to prove.
+Not to mention that some seemingly obvious things turn out not to be true at all --- which is one of the reasons it's important to prove our mathematical claims.
 
 ::: {#prp-subset-transitive}
 ## Transitivity of subset
@@ -241,11 +223,7 @@ That's another thing you can prove yourself at this point if you're skeptical!)
 
 ### The Venn diagram operations
 
-Like Dr. Frankenstein, we can create new sets from the pieces of old sets!
-Feel the power!
-
-OK, maybe it's not that groundbreaking or cool.
-But we do want to be able to talk about combinations of sets.
+We want to be able to talk about combinations of sets.
 Once again, a bit of mathematical notation will help us quickly convey exactly what we mean.
 If I say "the set of presidents and vice presidents", do I mean all of the people who have served in *either* role, or only those who have served in *both*?
 We know Richard Nixon and Joe Biden are in it either way, but what about Barack Obama?
@@ -255,16 +233,6 @@ Mathematically speaking, we need to be sure if we are talking about the [union]{
 ## Union and intersection
 The [union]{.concept} of the sets $A$ and $B$, denoted $A \cup B$, is the set of elements that are in $A$, in $B$, or both: $$A \cup B = \{x \mid x \in A \text{ or } x \in B\}.$$
 The [intersection]{.concept} of the sets $A$ and $B$, denoted $A \cap B$, is the set of elements that are in both $A$ and $B$: $$A \cap B = \{x \mid x \in A \text{ and } x \in B\}.$$
-:::
-
-::: {.callout-warning}
-## The mathematical "or"
-In mathematical and logical writing, "or" has the same meaning as "and/or" in ordinary writing.
-For example, when I say "$x \in A$ or $x \in B$" in the definition of $A \cup B$, that applies to all of the following situations:
-
-- $x \in A$, $x \notin B$
-- $x \notin A$, $x \in B$
-- $x \in A$, $x \in B$
 :::
 
 ```{r}
@@ -294,6 +262,19 @@ eo <- list(extra.preamble="\\usepackage{venndiagram}")
 Union and intersection of sets.
 :::
 
+```{python, echo=FALSE}
+concepts.update({
+  "Union": "The union of the sets $A$ and $B$, denoted $A \\cup B$, is the set of all elements that are in at least one of $A$ or $B$.",
+  "Intersection": "The intersection of the sets $A$ and $B$, denoted $A \\cap B$, is the set of all elements that are in both $A$ and $B$.",
+})
+```
+
+::: {.aside}
+Hey, the union operator $\cup$ looks a lot like the logical "or" operator $\lor$, and the intersection operator $\cap$ looks a lot like the logical "and" operator 
+$\land$.
+I wonder if that's a coincidence?
+:::
+
 For example, let $P$ be the set of presidents, and $Q$ be the set of vice presidents.
 Because Barack Obama was president but not vice president, he belongs to the union of these sets, but not the intersection:
 \begin{gather}
@@ -309,7 +290,7 @@ $A \cap B \subseteq A \subseteq A \cup B$.
 :::
 
 ::: {.proof}
-There are two claims to prove here.^[There is also the third, implicit claim that $A \cap B \subseteq A \cup B$, but this follows from @prp-subset-transitive once we've proved that $A \cap B \subseteq A$ and $A \subseteq A \cup B$.]
+There are two claims to prove here.
 The first is that $A \cap B \subseteq A$.
 To prove this, take any element $x \in A \cap B$.
 By definition of the intersection, it must be the case that $x \in A$.
@@ -323,6 +304,12 @@ Therefore, $A \subseteq A \cup B$.
 
 What if we wanted to talk about the set of people who have been president, but not vice president?
 We can formulate this using the [set difference]{.concept}.
+
+```{python, echo=FALSE}
+concepts.update({
+  "Set difference": "The set difference between $A$ and $B$, denoted $A \\setminus B$, is the set of all elements that are in $A$ and are not in $B$.",
+})
+```
 
 ::: {#def-set-difference}
 ## Set difference
@@ -377,8 +364,20 @@ We have a special name for the set with nothing in it --- the [empty set]{.conce
 The [empty set]{.concept} is the set containing no elements, denoted $\emptyset$.
 :::
 
+```{python, echo=FALSE}
+concepts.update({
+  "Empty set": "The set containing no elements, denoted $\\emptyset$.",
+})
+```
+
 Using this notation, a concise way to say "no one has been both the US president and the UK prime minister" would be $P \cap M = \emptyset$.
 We say two sets are [disjoint]{.concept} when their intersection is empty.
+
+```{python, echo=FALSE}
+concepts.update({
+  "Disjoint sets": "Two sets are disjoint if they have no elements in common, or equivalently if their intersection is the empty set.",
+})
+```
 
 ::: {#exr-emptyset-properties}
 Prove the following properties of the empty set:
@@ -401,7 +400,6 @@ Prove the following properties of the empty set:
     But that cannot be the case, as $\emptyset$ is the set with no elements.
     Therefore, there is no element $x$ included in $A \cap \emptyset$.
     By definition, then $A \cap \emptyset = \emptyset$.
-    (Alternatively, see @exm-emptyset-subset in the next chapter for a more direct argument that $\emptyset \subseteq A \cap \emptyset$.)
 ::::
 :::
 
@@ -421,6 +419,13 @@ To have a useful working definition of "everything not in this set", we are goin
 The appropriate choice of universal set depends on the context for what we want to do.
 Most commonly, if we are talking about numbers that lie along the typical number line, our universal set might be the real line, $\mathbb{R}$.
 Or if we are talking about who has and has not held particular political positions, our universal set might be the set of all people who have ever lived.
+
+```{python, echo=FALSE}
+concepts.update({
+  "Universe": "The set of everything that could conceivably be in the sets we're talking about.  The relevant universe is highly dependent on the specific context, and ought to be inferable from context clues if not explicitly stated.",
+  "Complement": "The complement of a set $A$, denoted $A^c$, is the set of all elements in the relevant universe that are not elements of $A$.",
+})
+```
 
 Once we have settled on the universe of objects we care about, it's simple to define the complement of a set.
 
@@ -482,6 +487,11 @@ This is an illustration of a very useful pair of set properties called [De Morga
 De Morgan's laws.
 :::
 
+::: {.aside}
+Hey, these look a lot like the De Morgan's laws for formal logic (@thm-demorgan-logic)!
+I wonder if that's a coincidence?
+:::
+
 ::: {.proof}
 I'll prove the first law, and leave the second to you as @exr-demorgan-sets.
 First we have to prove that $(A \cup B)^c \subseteq A^c \cap B^c$.
@@ -498,6 +508,12 @@ By the same token, $x \in B^c$, hence $x \notin B$.
 Because $x \notin A$ and $x \notin B$, we have $x \notin A \cup B$ and thus $x \in (A \cup B)^c$.
 As $x$ was chosen arbitrarily, this shows that $A^c \cap B^c \subseteq (A \cup B)^c$.
 :::
+
+```{python, echo=FALSE}
+concepts.update({
+  "De Morgan's laws": "Rules for taking the complement of a union or an intersection of sets.  The complement of a union is the intersection of the individual complements, and the complement of an intersection is the union of the individual complements.",
+})
+```
 
 ::: {#exr-demorgan-sets}
 Prove that $(A \cap B)^c = A^c \cup B^c$.
@@ -537,6 +553,14 @@ What we've done here is associate each president, an element of set $P$ as we've
 The notation $f : A \to B$ is a bit of mathematical shorthand that means "$f$ is a rule that takes each element of $A$ and associates it with an element of $B$".
 For any element $a \in A$, we write $f(a)$ to stand for the element of $B$ that the function associates $a$ with.
 When a function maps $A$ into $B$, we call $A$ the [domain]{.concept} and $B$ the [codomain]{.concept}.
+
+```{python, echo=FALSE}
+concepts.update({
+  "Function": "A rule that associates each element in one set (the domain) with a single element in another set (the codomain).  We write $f : A \\to B$ to denote a function $f$ with domain $A$ and codomain $B$.",
+  "Domain": "The set that a function \"acts on\".  If $f$ is a function whose domain is $A$, then $f(a)$ is defined for every element $a \\in A$.",
+  "Codomain": "The set that a function \"maps into\".  If $f$ is a function whose domain is $A$ and whose codomain is $B$, then $f(a)$ is an element of $B$ for every element $a \\in A$.",
+})
+```
 
 To continue the example, let $y : P \to \mathbb{N}$ (verbally: "$y$ is a function that maps the set of presidents into the set of natural numbers") be the function that associates each president with the year they first took office.
 Then we have $y(\text{George Washington}) = 1789$, $y(\text{Grover Cleveland}) = 1893$, and so on.
@@ -710,6 +734,18 @@ Then for every element $a$ of $A$, there is *exactly one* element $b$ of $B$ suc
 And for every element $b$ of $B$, there is *exactly one* element $a$ of $A$ such that $f(a) = b$.
 If the function weren't one-to-one, then there'd be at least one $a \in A$ with multiple matches in $B$.
 If it weren't onto, then there'd be at least one $b \in B$ with no matches in $A$.
+
+```{python, echo=FALSE}
+concepts.update({
+  "One-to-one": "A function is one-to-one if it associates each element of the domain with a distinct element of the codomain: if $a \\neq a'$, then $f(a) \\neq f(a')$.",
+  "Injective": "Another name for [one-to-one]{.concept}.",
+  "Onto": "A function is onto if it maps at least one element of the domain to every element of the codomain: for all $b$ in the codomain, there is a domain element $a$ such that $f(a) = b$.",
+  "Surjective": "Another name for [onto]{.concept}.",
+  "Bijection": "A function that is both one-to-one (injective) and onto (surjective).",
+  "Inverse function": "The reverse of a function, denoted $f^{-1}$, where $f^{-1}(b) = a$ if and only if $f(a) = b$.  Only exists for functions that are bijective (one-to-one and onto).",
+  "Cardinality": "The cardinality of a set $A$, denoted $|A|$, is the number of elements in the set if it is finite.  It gets more complicated if the set is infinite.",
+})
+```
 
 ::: {#def-bijective}
 ## Bijection and inverse
@@ -959,16 +995,25 @@ The logic is an application of @exm-even-cardinality.
 For each current guest in room $n$, have them move to room $2n - 1$.
 Now all of the even rooms are empty, and we can put the first new guest in our infinite sequence of new arrivals into room 2, the second into room 4, and so on.
 This seems crazy.
-It is crazy.^[We can make it even crazier if we want.  Suppose an infinite number of trains arrive, each of which contains an infinite number of guests.  Because [the set of all pairs of natural numbers has the same cardinality as the set of natural numbers](https://math.stackexchange.com/q/1293854), it turns out that the ostensibly full hotel can accommodate this infinity-upon-infinity of new guests too.]
+It is crazy.
 Infinite quantities behave in strange ways, and we will go astray if we try to apply the rules of ordinary numbers to infinities.
+
+::: {.aside}
+We can make it even crazier if we want.  Suppose an infinite number of trains arrive, each of which contains an infinite number of guests.  Because [the set of all pairs of natural numbers has the same cardinality as the set of natural numbers](https://math.stackexchange.com/q/1293854), it turns out that the ostensibly full hotel can accommodate this infinity-upon-infinity of new guests too.
+:::
 
 We've seen that there are as many natural numbers as there are even natural numbers.
 This result might lead you to think that all infinite sets have the same cardinality.
 In fact, that's not the case.
 Some infinities are bigger than others.
-For example, the cardinality of the real numbers is greater than the cardinality of the natural numbers.^[Is there any set whose cardinality is in between these two?  Mathematicians literally, and famously, [cannot decide](https://en.wikipedia.org/wiki/Continuum_hypothesis).]
+For example, the cardinality of the real numbers is greater than the cardinality of the natural numbers.
 
-To see why there are more real numbers than natural numbers, we will sketch out [the diagonal argument](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument) from the 19th century mathematician Georg Cantor.^[It's a sketch because there are some nagging details that we will ignore.  For example, we are ignoring the possibility of two different decimal expansions corresponding to the same number, as is the case with 0.1 and 0.099999$\cdots$.]
+::: {.aside}
+Is there any set whose cardinality is in between these two?  Mathematicians literally, and famously, [cannot decide](https://en.wikipedia.org/wiki/Continuum_hypothesis).
+:::
+
+To see why there are more real numbers than natural numbers, we will sketch out [the diagonal argument](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument) from the 19th century mathematician Georg Cantor.
+(It's a sketch because there are some nagging details that we will ignore.  For example, we are ignoring the possibility of two different decimal expansions corresponding to the same number, as is the case with 0.1 and 0.099999$\cdots$.)
 Remember that two sets have equal cardinality if there is a bijection that maps one into the other.
 So to prove that the cardinalities of the natural numbers $\mathbb{N}$ and the real numbers $\mathbb{R}$ are different, we will show that no function $f : \mathbb{N} \to (0, 1)$ can be onto, and thus no bijection meeting the definition of equal cardinality may exist.
 
@@ -1000,4 +1045,10 @@ We can construct this by ensuring that the $n$'th decimal of $x$ differs from th
 
 By constructing $x$ this way, we ensure that there is no $n$ where $f(n)$ equals $x$, because we know that it differs in at least one decimal place from every single $f(n)$.
 This means there is no onto function that maps from the natural numbers into $(0, 1)$, and therefore no onto function that maps from the natural numbers into the real numbers, and therefore these sets have different cardinalities.
-In other words, there is more than one infinity!
+In other words, there is more than one infinity! 
+
+
+```{python, echo=FALSE, results="asis"}
+from helpers import concept_table
+print(concept_table(concepts))
+```

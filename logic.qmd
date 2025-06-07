@@ -1,19 +1,945 @@
-# Formal Logic {#logic}
+# Formal Logic and Proofs {#logic}
 
-::: {#exm-emptyset-subset}
-## Empty set is a subset of all sets
-One way to formulate the definition of a subset (@def-subset) is to say that $A \subseteq B$ means: if $x \in A$, then $x \in B$.
-Keeping this in mind, take any set $A$.
-It is [trivially true]{.underline} that if $x \in \emptyset$, then $x \in A$ --- because, in fact, there is no $x \in \emptyset$.
-Therefore, using our reformulation of the definition of subset, we would say that $\emptyset \subseteq A$ for all sets $A$.
+When you think about math, you probably think about numbers.
+The majority of the math classes you've taken in your life have been about how to manipulate numbers.
+But don't panic if you're the kind of person who grimaces a bit when you have to calculate a tip by hand --- your success as a political scientist will have nothing to do with your ability to add or multiply numbers in your head.
+That's what we have computers for.
+
+In this course, we will approach math from a different angle.
+Our goal will be to make statements that are [provably true]{.concept}.
+In essence, a statement is provably true if there is a logical defense against any possible objection to the statement.
+Anyone who follows the rules of deductive logic --- the ones we will work through in this first unit of the course --- must agree that the statement is true.
+
+Plenty of things are true in the ordinary sense of the word, yet are not *provably* true in the mathematical sense.
+For example, it is true that Joe Biden won the 2020 presidential election.
+However, the truth of this statement is established through empirical observation, not through logical deduction alone.
+In other words, at least some defenses against objections to this statement rely on findings of fact.
+If you say "I don't think Joe Biden won the 2020 presidential election because I don't think Joe Biden exists", I need to convince you that Joe Biden exists, which isn't a matter of logic alone.
+
+On the other hand, the following statement is provably true: "If (a) only one person can win a presidential election, and (b) Joe Biden won the 2020 presidential election, and (c) Joe Biden is not Donald Trump, then (d) Donald Trump did not win the 2020 presidential election."
+Once you accept the premises (a), (b), and (c), you have no choice but to reach the conclusion (d).
+Whether each premise is true is the kind of empirical question that logic alone cannot answer.
+But logic does tell us that *if* all these premises are true, *then* the conclusion (d) has to follow.
+
+If you came to graduate school to study politics empirically, at this point you might be wondering why you should care about proving statements in the realm of pure logic.
+Here's why I think you should care.
+
+1. We use empirical studies to evaluate theories of political institutions, behavior, and conflict.
+   These theories typically have an if-then structure: if certain premises about the psychology or incentives of the relevant political actors are true, then we should expect to observe certain patterns of choices by those actors.
+   Even if you're not planning to state your theories in the form of mathematical models,
+   [like](https://link.springer.com/content/pdf/10.1023/A:1021226224601.pdf) <!-- bartels running tally -->
+   [many](https://onlinelibrary.wiley.com/doi/10.1111/ajps.12693) <!-- benson/smith -->
+   [of](https://www.journals.uchicago.edu/doi/full/10.1086/729952) <!-- bils/judd/smith JOP -->
+   [us](https://doi.org/10.1017/S000305541900073X) <!-- coe/vaynman apsr -->
+   [here](https://www.jstor.org/stable/pdf/4132683.pdf) <!-- diermeier/keane/merlo AER -->
+   [at](https://doi.org/10.1017/S0003055422000843) <!-- izzo APSR -->
+   [Vanderbilt](https://doi.org/10.1017/S0020818322000303) <!-- kenkel/paine IO -->
+   [have](https://www.jstor.org/stable/pdf/26792643.pdf) <!-- larson WP -->
+   [done](https://journals.sagepub.com/doi/pdf/10.1177/0022002712468724) <!-- ritter JCR -->
+   [in](https://onlinelibrary.wiley.com/doi/10.1111/lsq.12411) <!-- rosenstiel LSQ -->
+   [our](https://journals.sagepub.com/doi/10.1177/0951629819875519) <!-- thrower JTP -->
+   [published](https://www.jstor.org/stable/pdf/27644427.pdf) <!-- volden/wiseman APSR -->
+   [work](https://www.journals.uchicago.edu/doi/full/10.1086/708505), <!-- slough/ting/york JOP -->
+   you'll be better equipped to develop theories and derive hypotheses if you're comfortable with deductive logical reasoning.
+
+2. The statistical techniques you'll use in your empirical work are also justified via provable statements.
+   For example, we try to obtain random samples because on average the measurements you take from a random sample are representative of the population at large.
+   We often use ordinary least squares for regression analysis because, under certain conditions, its standard errors are lower than any other regression estimator.
+   Logic can't tell you if any particular sample was drawn at random or if any given error term is independent and identically distributed across observations.
+   But it can tell you that when these conditions are met, certain statistical techniques "work" in the way you would want if your goal is to draw inferences about a larger population.
+
+## Sentential logic and truth tables
+
+[Sentential logic]{.concept} is a set of rules for working with [sentences]{.concept}.
+In this context, a sentence is a statement that is either true or false (it must be one, and it cannot be both).
+Here are some examples of sentences:
+
+1. "The 'Liberation Day' tariffs caused the stock market to crash."
+
+2. "The 'Liberation Day' tariffs caused the stock market to crash, or the 'Liberation Day' tariffs did not cause the stock market to crash."
+
+3. "The 'Liberation Day' tariffs caused the stock market to crash, and the 'Liberation Day' tariffs did not cause the stock market to crash."
+
+Each of these is a "sentence", logically speaking, in that it is true or false.
+But there are important distinctions among them.
+
+- Formal logic by itself cannot help us figure out whether sentence #1 is true or false.
+  That is a matter for empirical study.
+
+- By contrast, we don't need to consult the real world to know that sentence #2 is true.
+  We can deduce on the basis of logic alone that sentence #2 is true.
+  We call a compound sentence like this, which must be true regardless of the underlying truth values of the sentences from which it is constructed, a [tautology]{.concept}.
+
+- Finally, we also don't need to consult the real world to know that sentence #3 is false.
+  There is no way for it to be the case that the tariffs both did and did not cause the stock market to crash.
+
+In one sense, our goal with formal logic will be to take compound sentences and sort them into these three categories: those that must be true, those that must be false, and those that are indeterminate, whose truth value cannot be deduced by logic alone.
+
+You might think that the sentences that must be true --- the tautologies --- are inherently uninteresting.
+Certainly no one is going to be surprised that either the tariffs caused the stock market to crash or they didn't.
+And yet there are indeed statements that are tautological yet nonobvious on first glance.
+For example, I was surprised to learn in graduate school that [there is no non-dictatorial system for elections with more than two candidates that eliminates incentives for strategic voting](https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem).
+But this statement is indeed a tautology in the formal-logic sense of the word.
+(If you don't think the truth of this statement is nonobvious, just try arguing on the Internet with people who think ranked-choice voting will fix elections!)
+
+### Constructing compound sentences
+
+In this chapter, we will use the letters $P$, $Q$, and $R$ to denote sentences.
+Whenever you see one of these letters, just think: "a thing that can be exactly one of 'true' or 'false'".
+For example, $P$ might be the statement "The 'Liberation Day' tariffs caused the stock market to crash."
+
+We will build compound sentences using three operators.
+The first is the [not]{.concept} operator, denoted by $\neg P$.
+The rules of the "not" operator are simple: $\neg P$ is true whenever $P$ is false, and $\neg P$ is false whenever $P$ is true.
+
+The second basic operator is [and]{.concept}, which connects two sentences, denoted $P \land Q$.
+An "and" statement is true whenever both underlying statements are true, and false otherwise.
+
+The final basic operator is [or]{.concept}, which again connects two sentences, denoted $P \lor Q$.
+An "or" statement is true whenever *at least one* of the underlying statements is true.
+It is only false when both of the underlying statements are false.
+In other words, the logical "or" is an "inclusive or" (allowing for the possibility that both are true), not an "exclusive or".
+
+Above we saw the compound sentence "The 'Liberation Day' tariffs caused the stock market to crash, or the 'Liberation Day' tariffs did not cause the stock market to crash."
+If we take $P$ to be the sentence "The 'Liberation Day' tariffs caused the stock market to crash", then the formal statement of our compound sentence is $P \lor \neg P$.
+We want to show that the compound sentence $P \lor \neg P$ is a tautology; i.e., the compound sentence is true regardless of whether $P$ is true or false.
+
+We will use a [truth table]{.concept} to identify the conditions under which a compound sentence is true.
+To build a truth table for a compound sentence like $P \lor \neg P$, the first thing we do is identify the underlying sentences it is built from.
+In the case of $P \lor \neg P$, there's only one underlying sentence, namely $P$.
+We begin to write the truth table by enumerating all combinations of truth values of the underlying sentences.
+
+| $P$          |
+| ------------ |
+| [true]{.tt}  |
+| [false]{.ff} |
+
+Next, we add columns to build up to the compound sentence that we are trying to evaluate.
+In the example here, we are trying to get from $P$ to $P \lor \neg P$.
+The compound sentence is built from $P$ and $\neg P$.
+So we'll start with $P$, evaluate $\neg P$, and finally evaluate $P \lor \neg P$.
+
+| $P$          | $\neg P$ | $P \lor \neg P$ |
+| ------------ | -------- | --------------- |
+| [true]{.tt}  |          |                 |
+| [false]{.ff} |          |                 |
+
+We then fill the columns by moving across the truth table from left to right.
+We know that $\neg P$ is false whenever $P$ is true, and vice versa, which lets us fill out the second column.
+
+| $P$          | $\neg P$     | $P \lor \neg P$ |
+| ------------ | ------------ | --------------- |
+| [true]{.tt}  | [false]{.ff} |                 |
+| [false]{.ff} | [true]{.tt}  |                 |
+
+Finally, we know that $P \lor \neg P$ is true whenever at least one of $P$ or $\neg P$ is true, which lets us fill out the third column.
+
+| $P$          | $\neg P$     | $P \lor \neg P$ |
+| ------------ | ------------ | --------------- |
+| [true]{.tt}  | [false]{.ff} | [true]{.tt}     |
+| [false]{.ff} | [true]{.tt}  | [true]{.tt}     |
+
+We now see that the compound sentence $P \lor \neg P$ is a tautology, as it is always true, regardless of whether the sentence it is built from is true or false.
+
+::: {.callout-tip}
+## Approaching exercises
+Try the exercises yourself, ideally by writing them on paper or in a tablet, before looking at the answers.
+You learn the most by trying on your own and then checking.
+(This is exactly how I still do it when I'm working through unfamiliar technical material!)
 :::
 
-::: {#exr-union-intersection-equality}
-Prove that $A \cap B = A \cup B$ if and only if $A = B$.
+::: {#exr-not-p-and-not-p}
+Use a truth table to show that $\neg (P \land \neg P)$ is a tautology.
 
 :::: {.callout-note collapse="true"}
 ## Answer
-First, to prove the "if" direction, assume $A = B$.
-We know from @prp-intersection-subset-union ... ***KEEP GOING***
+Start by setting up the table with each combination of possible values of the underlying sentences (in this case, just $P$), then with each sequential step you need to build the final compound sentence.
+
+| $P$          | $\neg P$ | $P \land \neg P$ | $\neg (P \land \neg P)$ |
+| ------------ | -------- | ---------------- | ----------------------- |
+| [true]{.tt}  |          |                  |                         |
+; [false]{.ff} |          |                  |                         |
+
+Then fill each column across, using the information from the left.
+
+| $P$          | $\neg P$     | $P \land \neg P$ | $\neg (P \land \neg P)$ |
+| ------------ | ------------ | ---------------- | ----------------------- |
+| [true]{.tt}  | [false]{.ff} |                  |                         |
+| [false]{.ff} | [true]{.tt}  |                  |                         |
+
+| $P$          | $\neg P$     | $P \land \neg P$ | $\neg (P \land \neg P)$ |
+| ------------ | ------------ | ---------------- | ----------------------- |
+| [true]{.tt}  | [false]{.ff} | [false]{.ff}     |                         |
+| [false]{.ff} | [true]{.tt}  | [false]{.ff}     |                         |
+
+| $P$          | $\neg P$     | $P \land \neg P$ | $\neg (P \land \neg P)$ |
+| ------------ | ------------ | ---------------- | ----------------------- |
+| [true]{.tt}  | [false]{.ff} | [false]{.ff}     | [true]{.tt}             |
+| [false]{.ff} | [true]{.tt}  | [false]{.ff}     | [true]{.tt}             |
+
 ::::
 :::
+
+The more simple sentences that your compound sentence is built from, the more rows the truth table will end up having.
+For example, let's build a truth table for the compound sentence $P \lor \neg (P \land Q)$.
+The truth table will now have four rows, one for each combination of true/false for $P$ and $Q$.
+
+| $P$          | $Q$          |
+| ------------ | ------------ |
+| [true]{.tt}  | [true]{.tt}  |
+| [true]{.tt}  | [false]{.ff} |
+| [false]{.ff} | [true]{.tt}  |
+| [false]{.ff} | [false]{.ff} |
+
+Then we break down the compound sentence and fill out the rest of the truth table the same way as before.
+
+::: {.panel-tabset}
+
+## Column setup
+
+| $P$          | $Q$          | $P \land Q$ | $\neg (P \land Q)$ | $P \lor \neg (P \land Q)$ |
+| ------------ | ------------ | ----------- | ------------------ | ------------------------- |
+| [true]{.tt}  | [true]{.tt}  |             |                    |                           |
+| [true]{.tt}  | [false]{.ff} |             |                    |                           |
+| [false]{.ff} | [true]{.tt}  |             |                    |                           |
+| [false]{.ff} | [false]{.ff} |             |                    |                           |
+
+## Completed table
+| $P$          | $Q$          | $P \land Q$  | $\neg (P \land Q)$ | $P \lor \neg (P \land Q)$ |
+| ------------ | ------------ | ------------ | ------------------ | ------------------------- |
+| [true]{.tt}  | [true]{.tt}  | [true]{.tt}  | [false]{.ff}       | [true]{.tt}               |
+| [true]{.tt}  | [false]{.ff} | [false]{.ff} | [true]{.tt}        | [true]{.tt}               |
+| [false]{.ff} | [true]{.tt}  | [false]{.ff} | [true]{.tt}        | [true]{.tt}               |
+| [false]{.ff} | [false]{.ff} | [false]{.ff} | [true]{.tt}        | [true]{.tt}               |
+
+:::
+
+::: {#exr-two-sentence-table}
+Use a truth table to show that $(P \lor Q) \lor (\neg P \land \neg Q)$ is a tautology.
+
+:::: {.callout-note collapse="true"}
+## Answer
+
+Set up the rows:
+
+| $P$          | $Q$          |
+| ------------ | ------------ |
+| [true]{.tt}  | [true]{.tt}  |
+| [true]{.tt}  | [false]{.ff} |
+| [false]{.ff} | [true]{.tt}  |
+| [false]{.ff} | [false]{.ff} |
+
+Set up the columns:
+
+| $P$          | $Q$          | $P \lor Q$ | $\neg P$ | $\neg Q$ | $\neg P \land \neg Q$ | $(P \lor Q) \lor (\neg P \land \neg Q)$ |
+| ------------ | ------------ | ---------- | -------- | -------- | --------------------- | --------------------------------------- |
+| [true]{.tt}  | [true]{.tt}  |            |          |          |                       |                                         |
+| [true]{.tt}  | [false]{.ff} |            |          |          |                       |                                         |
+| [false]{.ff} | [true]{.tt}  |            |          |          |                       |                                         |
+| [false]{.ff} | [false]{.ff} |            |          |          |                       |                                         |
+
+Fill out the table:
+
+| $P$          | $Q$          | $P \lor Q$   | $\neg P$     | $\neg Q$     | $\neg P \land \neg Q$ | $(P \lor Q) \lor (\neg P \land \neg Q)$ |
+| ------------ | ------------ | ------------ | ------------ | ------------ | --------------------- | --------------------------------------- |
+| [true]{.tt}  | [true]{.tt}  | [true]{.tt}  | [false]{.ff} | [false]{.ff} | [false]{.ff}          | [true]{.tt}                             |
+| [true]{.tt}  | [false]{.ff} | [true]{.tt}  | [false]{.ff} | [true]{.tt}  | [false]{.ff}          | [true]{.tt}                             |
+| [false]{.ff} | [true]{.tt}  | [true]{.tt}  | [true]{.tt}  | [false]{.ff} | [false]{.ff}          | [true]{.tt}                             |
+| [false]{.ff} | [false]{.ff} | [false]{.ff} | [true]{.tt}  | [true]{.tt}  | [true]{.tt}           | [true]{.tt}                             |
+
+::::
+:::
+
+It's reasonably simple to double-check your work in a truth table using R.
+(Or any programming language --- they're all good at this sort of binary logic exercise.)
+In R, to set up the rows of a truth table, you can use `expand.grid()` to enumerate all possible true-false combinations.
+
+```{r truth-table-expand-grid}
+grid <- expand.grid(Q = c(TRUE, FALSE), P = c(TRUE, FALSE))
+print(grid)
+```
+
+::: {.aside}
+I put `Q` first in the R code so that the row order will be the same as in the tables I made by hand above.
+:::
+
+In R, `!` means "not", `&` means "and", and `|` means "or".
+We can use these operators to look at the columns of our truth table.
+
+```{r truth-table-construction}
+P <- grid$P
+Q <- grid$Q
+cbind(P, Q, P | !(P & Q))
+```
+
+You can also use the `all()` function to quickly check whether a statement is a tautology.
+
+```{r all-for-tautology}
+all(P | !(P & Q)) # is a tautology
+all(P & Q) # not a tautology
+```
+
+::: {#exr-truth-table-in-r}
+Using R, confirm that the compound sentence $$[(P \lor Q) \lor (\neg R \lor \neg S)] \lor [(\neg P \land \neg Q) \land (R \land S)]$$ is a tautology.
+
+:::: {.callout-note collapse="true"}
+## Answer
+```{r exr-truth-table-in-r-ans}
+grid <- expand.grid(
+  P = c(TRUE, FALSE),
+  Q = c(TRUE, FALSE),
+  R = c(TRUE, FALSE),
+  S = c(TRUE, FALSE)
+)
+P <- grid$P
+Q <- grid$Q
+R <- grid$R
+S <- grid$S
+
+# Break sentence into two parts to keep track of things easier
+part_1 <- (P | Q) | (!R | !S)
+part_2 <- (!P & !Q) & (R & S)
+
+# Confirm tautology
+all(part_1 | part_2)
+```
+::::
+:::
+
+### "If", "only if", and "if and only if"
+
+If-then statements work a bit differently in formal logic than in ordinary language.
+If I told you, "Scream if you see a bear!" and then you screamed, I would run away, having inferred that you saw a bear.
+However, I didn't tell you "Don't scream if you didn't see a bear."
+So in terms of pure logic, there would be no problem with you screaming even if there weren't a bear --- the only way to contradict the command would be to fail to scream when you actually did see a bear.
+
+In the realm of formal logic and mathematics, we will be totally pedantic about our if-then statements.
+If I say "if $P$, then $Q$", the only way to falsify my statement is to show me that $P$ is true and $Q$ is false.
+If $P$ is false, then the statement is true regardless of the truth of $Q$.
+
+::: {#def-conditional}
+The [conditional]{.concept} statement "$P$ implies $Q$" or "if $P$, then $Q$", written $P \to Q$, is logically equivalent to $\neg P \lor Q$.
+:::
+
+When $P$ is known to be false, we say that the statement $P \to Q$ is [vacuously true]{.concept}.
+Here are some vacuously true statements:
+
+- If 0 = 1, then the moon is made of cheese.
+
+- If 4 is a prime number, then an asteroid will hit Earth on February 30, 2026.
+
+- If there is a finite game with no [Nash equilibrium](https://en.wikipedia.org/wiki/Nash_equilibrium), then Professor Brad Smith is handsome and intelligent.
+
+While it's fun to think about vacuous truths, conditional statements are most useful to us when the premise is true.
+Think about a conditional statement $P \to Q$ that we know to be true.
+As an uncontroversial example, let $P$ be "today is Wednesday" and $Q$ be "tomorrow is Thursday", so that $P \to Q$ means "if today is Wednesday, then tomorrow is Thursday."
+Imagine then we also know that $P$ is true.
+As it happens, at the time I am writing this paragraph, it is indeed Wednesday.
+Given that $P$ implies $Q$, and that $P$ is true, it seems logical for me to deduce that $Q$ is true as well.
+Indeed, this deduction is logical --- the name for this type of inference is [modus ponens]{.concept}.
+
+You don't have to take the validity of modus ponens on faith.
+We can translate the rule into a compound sentence, and then we can prove that it is a tautology.
+In words, the rule is "If $P$ implies $Q$ and $P$ is true, then $Q$ is true."
+Equivalently, we could say "If $(P \to Q) \land P$, then $Q$."
+Finally, we come to the most compact (though not the easiest to parse!) statement in @thm-modus-ponens.
+
+::: {#thm-modus-ponens}
+## Modus ponens
+$[(P \to Q) \land P] \to Q$.
+:::
+
+::: {.proof}
+We will use a truth table to show that the statement is a tautology.
+
+| $P$          | $Q$          | $P \to Q$    | $(P \to Q) \land P$ | $[(P \to Q) \land P] \to Q$ |
+|--------------|--------------|--------------|---------------------|-----------------------------|
+| [true]{.tt}  | [true]{.tt}  | [true]{.tt}  | [true]{.tt}         | [true]{.tt}                 |
+| [true]{.tt}  | [false]{.ff} | [false]{.ff} | [false]{.ff}        | [true]{.tt}                 |
+| [false]{.ff} | [true]{.tt}  | [true]{.tt}  | [false]{.ff}        | [true]{.tt}                 |
+| [false]{.ff} | [false]{.ff} | [true]{.tt}  | [false]{.ff}        | [true]{.tt}                 |
+
+:::
+
+:::: {.callout-tip}
+## Names of mathematical results
+Throughout these notes, you will see mathematical results labeled [Theorem]{.concept}, [Proposition]{.concept}, [Lemma]{.concept}, and [Corollary]{.concept}.
+Anything with one of these names is a formal statement that is provably true, and will usually be accompanied by a proof.
+None of these types of results is more or less true than the others --- the different labels are just to help readers decode the context and importance of each type of result.
+
+- [Theorem:]{.concept} Reserved for results that are especially big, important, fundamental, general, etc. For example, @thm-modus-ponens is a theorem because it is the foundation of logical deduction.
+
+- [Proposition:]{.concept} A bread-and-butter result.  Useful and important enough to care about on its own, but not earth-shaking enough to be a theorem.
+
+- [Lemma:]{.concept} A result that we don't necessarily care about on its own, but is a useful building block toward one or more propositions or theorems.
+
+- [Corollary:]{.concept} A result that follows almost immediately from some earlier lemma(s), proposition(s), or theorem(s).  My general heuristic for calling something a corollary is that it can be proved in two sentences or less, and the proof requires invoking an earlier lemma, proposition, or theorem.
+::::
+
+You can think of $P \to Q$ as a statement of a [sufficient condition]{.concept}: if $P$ is true, then $Q$ must be true, hence $P$ is "sufficient" to ensure that $Q$ holds.
+However, this statement says nothing about whether $P$ is a [necessary condition]{.concept} for $Q$ --- something that must be true in order for $Q$ to be true.
+Think about the statement "If Marie is a member of the House of Representatives, then Marie is a politician."
+Being a member of the House is sufficient to be called a politician, but it is not necessary.
+We would still call Marie a politician if she were the president, a senator, a yet-unelected candidate for the House, or even the state comptroller.
+
+In the same way that the statement $P \to Q$ gives us a sufficient condition for $Q$, it also gives us a necessary condition for $P$.
+Remember that the conditional statement $P \to Q$ turns out to be false when $P$ is true yet $Q$ is false.
+Hence, an alternative way to verbalize $P \to Q$ is "$P$ is true only if $Q$ is true," meaning $Q$ is a necessary --- though perhaps insufficient --- condition for $P$.
+Returning to the example above, we could say "Marie is a member of the House of Representatives only if she is a politician."
+Being a politician doesn't necessarily mean she's a House member, but she certainly cannot be a House member unless she is a politician.
+
+We've just seen that a sufficient condition (if $P$, then $Q$) can be translated into a necessary condition ($P$ only if $Q$).
+This observation allows us to make the following type of logical deduction:
+
+- **Premise 1:** If Marie is a member of the House of Representatives, then Marie is a politician. ($P \to Q$)
+
+- **Premise 2:** Marie is not a politician. ($\neg Q$)
+
+- **Conclusion:** Marie is not a member of the House of Representatives. ($\neg P$)
+
+The line of reasoning here is an example of the deductive rule called [modus tollens]{.concept}.
+If we know that $P$ implies $Q$ and we know that $Q$ is false, we must conclude that $P$ is false as well.
+
+::: {#thm-modus-tollens}
+## Modus tollens
+$[(P \to Q) \land \neg Q] \to \neg P$.
+:::
+
+::: {.proof}
+Try to prove this yourself using a truth table, following the same lines as the proof of @thm-modus-ponens above.
+If you get stuck, check the answer below.
+
+:::: {.callout-note collapse="true"}
+## Answer
+
+| $P$ | $Q$ | $P \to Q$ | $\neg Q$ | $(P \to Q) \land \neg Q$ | $\neg P$ | $[(P \to Q) \land \neg Q] \to \neg P$ |
+|-----|-----|-----------|----------|--------------------------|----------|---------------------------------------|
+| [true]{.tt} | [true]{.tt} | [true]{.tt}       | [false]{.ff}      | [false]{.ff}                      | [false]{.ff}      | [true]{.tt}                                   |
+| [true]{.tt} | [false]{.ff} | [false]{.ff}       | [true]{.tt}      | [false]{.ff}                      | [false]{.ff}      | [true]{.tt}                                   |
+| [false]{.ff} | [true]{.tt} | [true]{.tt}       | [false]{.ff}      | [false]{.ff}                      | [true]{.tt}      | [true]{.tt}                                   |
+| [false]{.ff} | [false]{.ff} | [true]{.tt}       | [true]{.tt}      | [true]{.tt}                      | [true]{.tt}      | [true]{.tt}                                   |
+
+Here's another way to think about this proof, somewhat anticipating our discussion of [proof by contradiction](#sec-proof-by-contradiction) below.
+
+The only way for $[(P \to Q) \land \neg Q] \to \neg P$ to be false would be for $(P \to Q) \land \neg Q$ to be true while $\neg P$ is false (i.e., $P$ is true).
+There are two paths for $P \to Q$ to be true: either it's vacuously true because $P$ is false, or it's true because $P$ is true and so is $Q$.
+
+When we additionally assume $\neg Q$ is true, then $P \to Q$ can only be true vacuously, i.e., because $P$ is false.
+In other words, whenever $P \to Q$ and $\neg Q$ are both true, it must be the case that $P$ is false and thus $\neg P$ is true.
+This means there is no path for $[(P \to Q) \land \neg Q] \to \neg P$ to be falsified, as anytime the premise $(P \to Q) \land \neg Q$ is true, the conclusion $\neg P$ must be true too.
+
+Therefore, the statement of modus tollens is a tautology.
+::::
+:::
+
+The statements $P$ and $Q$ are [logically equivalent]{.concept} when $P \to Q$ and $Q \to P$.
+In this case, the truth values of the two statements are linked: either $P$ and $Q$ are both true, or else $P$ and $Q$ are both false.
+$P$ is a necessary and sufficient condition for $Q$, and $Q$ is a necessary and sufficient condition for $P$.
+In words, we may use "$P$ if and only if $Q$" to describe this state of affairs.
+
+As an example, take the "minimalist conception" of democracy posed by @przeworski2024decides [5]: "A regime is democratic if and only if people are free to choose, including to remove, governments."
+Let $P$ be the statement "The regime is democratic" and $Q$ be the statement "The regime's people are free to choose, including to remove, governments."
+
+- The statement $P \to Q$ means "The regime is democratic *only if* its people are free to choose, including to remove, governments" --- the people's ability to remove the government is a *necessary* condition for democracy.
+
+- The statement $Q \to P$ means "The regime is democratic *if* its people are free to choose, including to remove, governments" --- the people's ability to remove the government is a *sufficient* condition for democracy.
+
+Logical equivalence means $P$ implies $Q$ and vice versa, so we denote it with the [biconditional]{.concept} $P \leftrightarrow Q$.
+The statement $P \leftrightarrow Q$ is [true]{.tt} whenever the truth values of $P$ and $Q$ match, and [false]{.ff} otherwise.
+If you're skeptical, you can use a truth table to confirm that the statement $(P \to Q) \land (Q \to P)$ is true exactly when the truth values of $P$ and $Q$ match.
+
+::: {#exr-equivalence}
+Use a truth table to confirm that the statement $(P \to Q) \land (Q \to P)$ is true exactly when the truth values of $P$ and $Q$ match.
+
+:::: {.callout-note collapse="true"}
+## Answer
+
+| $P$          | $Q$          | $P \to Q$    | $Q \to P$    | $(P \to Q) \land (Q \to P)$ |
+|--------------|--------------|--------------|--------------|-----------------------------|
+| [true]{.tt}  | [true]{.tt}  | [true]{.tt}  | [true]{.tt}  | [true]{.tt}                 |
+| [true]{.tt}  | [false]{.ff} | [false]{.ff} | [true]{.tt}  | [false]{.ff}                |
+| [false]{.ff} | [true]{.tt}  | [true]{.tt}  | [false]{.ff} | [false]{.ff}                |
+| [false]{.ff} | [false]{.ff} | [true]{.tt}  | [true]{.tt}  | [true]{.tt}                 |
+
+::::
+:::
+
+An important logical equivalence, closely related to modus tollens (@thm-modus-tollens), is the [contrapositive]{.concept}: $P \to Q$ is logically equivalent to $\neg Q \to \neg P$.
+The contrapositive is more useful in practice than you might expect.
+When you want to prove that $P \to Q$, sometimes it's easier to start with $\neg Q$ and show that $\neg P$ must hold than to start with $P$ and show that $Q$ must hold.
+Even more radically, as we'll see in @sec-proof-by-contradiction below, when you want to prove that $P$ is true, sometimes it's easiest to start with $\neg P$ and show that you end up with something known to be false.
+
+::: {#exr-contrapositive}
+Use a truth table to confirm that $P \to Q$ is logically equivalent to $\neg Q \to \neg P$.
+
+:::: {.callout-note collapse="true"}
+## Answer
+
+| $P$ | $Q$ | $P \to Q$ | $\neg P$ | $\neg Q$ | $\neg Q \to \neg P$ | $(P \to Q) \leftrightarrow (\neg Q \to \neg P)$ |
+|-----|-----|-----------|----------|----------|---------------------|-------------------------------------------------|
+| [true]{.tt} | [true]{.tt} | [true]{.tt}       | [false]{.ff}      | [false]{.ff}      | [true]{.tt}                 | [true]{.tt}                                             |
+| [true]{.tt} | [false]{.ff} | [false]{.ff}       | [false]{.ff}      | [true]{.tt}      | [false]{.ff}                 | [true]{.tt}                                             |
+| [false]{.ff} | [true]{.tt} | [true]{.tt}       | [true]{.tt}      | [false]{.ff}      | [true]{.tt}                 | [true]{.tt}                                             |
+| [false]{.ff} | [false]{.ff} | [true]{.tt}       | [true]{.tt}      | [true]{.tt}      | [true]{.tt}                 | [true]{.tt}                                             |
+
+::::
+:::
+
+### De Morgan's laws
+
+We have to be careful when using negation in combination with the "and" and "or" operators.
+This is probably easier when we're working in words than when we're working with notation, but we need caution either way.
+For example, let $F$ be the statement "Finland is a democracy" and $R$ be the statement "Russia is a democracy".
+There are three ways for the compound statement $F \land R$ to be false:
+
+1. $F \land \neg R$: Finland is a democracy, but Russia is not.
+
+2. $\neg F \land R$: Finland is not a democracy, but Russia is.
+
+3. $\neg F \land \neg R$: Finland and Russia both are not democracies.
+
+In other words, if $F \land R$ is false, then we know at least one of $F$ or $R$ must be false --- but without other information, we can't say which one.
+In other other words, we can conclude from $\neg (F \land R)$ that $\neg F \lor \neg R$.
+The negation of an "and" statement gives us an "or" statement.
+
+I'm highlighting this because I don't want you to be tempted to treat the formal logic operators like addition and multiplication.
+In the realm of high-school algebra, you might remember that $$-(f + r) = (-f) + (-r).$$
+Yet in the realm of sentential logic, the statement $\neg (F \land R)$ is [not]{.underline} equivalent to $\neg F \land \neg R$.
+
+[De Morgan's laws]{.concept} are a pair of logical equivalences that tell us exactly how to combine negation with "and" and "or."
+Before stating them formally, here's how I think about them informally.
+
+- An "and" statement is strong, since $F \land R$ means that both underlying statements are true.
+  The negation of an "and" statement must then be weak, because $\neg (F \land R)$ only means that at least one of the underlying statements is false.
+
+- An "or" statement is weak, since $F \lor R$ only means that at least one of the underlying statements is true.
+  The negation of an "or" statement must then be strong, because $\neg (F \lor R)$ means that both underlying statements are false.
+
+- Therefore, the negation of an "and" statement must be an "or" statement, and vice versa.
+
+::: {#thm-demorgan-logic}
+## De Morgan's laws
+\begin{align*}
+\neg (P \land Q) &\leftrightarrow (\neg P \lor \neg Q) \\
+\neg (P \lor Q) &\leftrightarrow (\neg P \land \neg Q)
+\end{align*}
+:::
+
+::: {.proof}
+I will prove the first law with a truth table, then leave the second one to you as an exercise.
+
+| $P$          | $Q$          | $P \land Q$  | $\neg (P \land Q)$ | $\neg P$     | $\neg Q$     | $\neg P \lor \neg Q$ | $\neg (P \land Q) \leftrightarrow (\neg P \lor \neg Q)$ |
+|--------------|--------------|--------------|--------------------|--------------|--------------|----------------------|---------------------------------------------------------|
+| [true]{.tt}  | [true]{.tt}  | [true]{.tt}  | [false]{.ff}       | [false]{.ff} | [false]{.ff} | [false]{.ff}         | [true]{.tt}                                             |
+| [true]{.tt}  | [false]{.ff} | [false]{.ff} | [true]{.tt}        | [false]{.ff} | [true]{.tt}  | [true]{.tt}          | [true]{.tt}                                             |
+| [false]{.ff} | [true]{.tt}  | [false]{.ff} | [true]{.tt}        | [true]{.tt}  | [false]{.ff} | [true]{.tt}          | [true]{.tt}                                             |
+| [false]{.ff} | [false]{.ff} | [false]{.ff} | [true]{.tt}        | [true]{.tt}  | [true]{.tt}  | [true]{.tt}          | [true]{.tt}                                             |
+
+:::: {.callout-note collapse="true"}
+## Proof of the second law
+
+| $P$          | $Q$          | $P \lor Q$   | $\neg (P \lor Q)$ | $\neg P$     | $\neg Q$     | $\neg P \land \neg Q$ | $\neg (P \lor Q) \leftrightarrow (\neg P \land \neg Q)$ |
+|--------------|--------------|--------------|-------------------|--------------|--------------|-----------------------|---------------------------------------------------------|
+| [true]{.tt}  | [true]{.tt}  | [true]{.tt}  | [false]{.ff}      | [false]{.ff} | [false]{.ff} | [false]{.ff}          | [true]{.tt}                                             |
+| [true]{.tt}  | [false]{.ff} | [true]{.tt}  | [false]{.ff}      | [false]{.ff} | [true]{.tt}  | [false]{.ff}          | [true]{.tt}                                             |
+| [false]{.ff} | [true]{.tt}  | [true]{.tt}  | [false]{.ff}      | [true]{.tt}  | [false]{.ff} | [false]{.ff}          | [true]{.tt}                                             |
+| [false]{.ff} | [false]{.ff} | [false]{.ff} | [true]{.tt}       | [true]{.tt}  | [true]{.tt}  | [true]{.tt}           | [true]{.tt}                                             |
+
+::::
+:::
+
+## Methods of proof
+
+The vast majority of proofs you'll read --- and write --- will not be in the form of a truth table.
+The number of rows in the truth table grows exponentially with the number of sentences, making it unwieldy to use truth tables to prove complex claims.
+For example, it is hard to imagine using a truth table to prove the [median voter theorem](https://en.wikipedia.org/wiki/Median_voter_theorem) [@black1948rationale], an important but relatively simple result as formal theories of politics go.
+
+::: {.aside}
+"Grows exponentially" is a phrase with a precise meaning that people often use imprecisely.
+Here I mean it in the [literal sense](https://en.wikipedia.org/wiki/Exponential_growth), as a compound statement built from $N$ underlying sentences requires a truth table with $2^N$ rows.
+In words, each additional sentence doubles the number of rows in the truth table.
+:::
+
+A proof is written in ordinary language, just with a bit more attention to precision than you might use in other ordinary writing.
+The goal is to convince the reader of the truth of whatever claim you have made, following the basic rules of logical inference we have established here.
+In essence, you need to show the reader why any objection to your claim will ultimately fail.
+
+Use mathematical notation sparingly in proofs.
+Only use notation when it's necessary for precision or brevity.
+In almost all settings, it is much better to write "Let $n$ be an odd number" than to write "Let $n \in \{2m - 1 \mid m \in \mathbb{N}\}$."
+
+:::: {.callout-tip}
+## Reading proofs
+I'm deliberately more verbose in the proofs here than in the proofs you'd see in a published paper, or even in most textbooks.
+The structure of arguments in those venues tends to be the same as the one here, though --- they just have a bit less verbiage to hold the reader's hand.
+
+In proofs in (other) textbooks and academic articles, you'll often see phrases like "It is obvious that..." or "It is straightforward to show that...".
+Students --- and professors! --- understandably find these statements frustrating or alienating, because whatever comes next often does not seem obvious or straightforward at all.
+But really, "It is obvious that..." is shorthand for:
+
+> The statement that comes next can be proved using mathematical methods that a reader of this document would typically have extensive practice with.
+> (For example, in a textbook about calculus, such methods would include arithmetic and algebra.  In a paper in the *Journal of Economic Theory*, they would include calculus, differential equations, real analysis, and topology.)
+> There aren't any new tricks or novel arguments to reach this step, just chugging through calculations.
+> You are welcome to do those calculations yourself to check my work, though I expect you won't find anything particularly edifying along the way.
+> Because space is limited in this book or journal article, I haven't included all the gory details myself.
+
+What if the proof you're reading says something is obvious or straightforward, but you can't convince yourself it's true?
+After getting out your legal pad and trying to work it out yourself, that's when you should ask for help.
+I find myself in this situation often, and as of summer 2025 I've found that ChatGPT's `o4-mini-high` model gives great explanations when I'm stuck on something mathematical.
+And throughout your careers here, you can always feel free to ask me or the other methods/formal theory faculty when you're stuck on something!
+
+Proofs conventionally end with "QED", $\blacksquare$, or $\square$.
+As of summer 2025, the [Quarto](https://quarto.org) software I'm using to write these notes doesn't insert any of these symbols automatically, so you'll just have to take the bottom of the box that the proof lives in as my "QED" variant.
+::::
+
+### Proving an "if" statement
+
+Let's practice writing a plain language proof of a statement about formal logic.
+The statement I want to prove is called the law of transitivity: if we know that $P \to Q$ and that $Q \to R$, then we can conclude that $P \to R$.
+
+::: {#prp-law-of-transitivity}
+## Law of transitivity
+Logical implication is transitive: $[(P \to Q) \land (Q \to R)] \to (P \to R)$.
+:::
+
+We *could* prove this using a truth table, and in fact the [first Google hit for "transitivity of implication"](https://math.stackexchange.com/questions/280893/how-do-i-prove-the-transitivity-of-a-set-of-implications) does exactly that.
+But I want to walk you through how I'd write an ordinary language proof, step by step.
+I'll put each step in a blockquote, with explanation thereafter.
+
+> Suppose $P \to Q$ and $Q \to R$.
+
+The most common way to kick off a proof of an if-then statement is to state that we will assume the premise (the "if") is true.
+That might seem like a weird thing to do when the premise could very well be false.
+However, remember that in formal logic, the only way to falsify a conditional statement is to show that the conclusion might fail when the premise is true.
+If the premise is false, then the conditional is (vacuously) true.
+So to demonstrate the overall truth of the conditional statement, it's enough for us to show that the conclusion must hold whenever the premise does.
+
+Having assumed the premise, where do we go from here?
+We ultimately need to reach the conclusion that $P \to R$.
+To get there, we're going to use the common trick of breaking the proof into cases.
+We know that either $P$ is true or $P$ is false (i.e., $P \lor \neg P$ is a tautology).
+Let's show that either one of these possibilities leads to the conclusion we want, namely that $P \to R$.
+
+::: {.aside}
+Are you skeptical that this trick is logically valid?
+If so, don't worry --- you'll prove its logical validity yourself on the problem set.
+:::
+
+> There are two cases to consider: when $P$ is true, and when $P$ is false.
+> We will show that $P \to R$ holds in both cases.
+
+As you might already know from trying to read proofs, it's easy for a reader to get lost in the formal logic.
+So the line above is just an explicit signpost, attempting to signal: "We're going to break the proof into mutually exhaustive cases, showing that each case leads to our desired conclusion, and thus the conclusion must hold."
+It's kind of like writing comments in your R code --- not strictly necessary for the program to work, but very helpful for anyone who's trying to follow it.
+
+> First, suppose $P$ is true.
+> Because $P$ and $P \to Q$ are both true, we conclude by modus ponens that $Q$ is true.
+
+We've started the analysis of the first case here.
+You can start to see why the cases trick is useful: having assumed initially that $P \to Q$, and now that $P$ is true as well, we can proceed to $Q$.
+Here we make that line of logic explicit.
+
+There's also a meta-lesson here about knowing your audience when you write a proof.
+I'm setting out this proof as an introduction for students without much background in reading or writing math-style proofs.
+Hence, I'm trying to be detailed and explicit, down to acknowledging that modus ponens is the logical rule I'm using to infer $Q$ from the combination of $P \to Q$ and $P$.
+In a proof for an article I were submitting to a journal, I would not bother to say I was using modus ponens; I would assume my readers were familiar with the basic rules of logical inference.
+That said, when you aren't sure how to proceed, err on the side of giving details rather than skipping steps.
+
+> Then, because $Q$ and $Q \to R$, we conclude (again by modus ponens) that $R$ is true.
+> Because $P$ and $R$ are both true, the statement $P \to R$ is true as well.
+
+Here we keep following the line of logic, using our inference about $Q$ in the last step to support an inference of $R$ in this step.
+We then reach the conclusion we were looking for, namely that when we start with $P$ (in addition to the assumptions of $P \to Q$ and $Q \to R$ that we made at the outset of the proof) we get to $P \to R$.
+
+> Second, suppose $P$ is false.
+> Then it is vacuously true that $P \to R$.
+
+The second case is simpler than the last one.
+(I personally try to arrange my proofs so that the trickier case comes first, under the assumption that readers' attention is ever-waning, but it's really a judgment call.)
+And again we've written it up to try to be friendly to the reader.
+We could have simply written, "Second, $\neg P$ implies $P \to R$," but with just a few more words we make it clear precisely why we're drawing this conclusion.
+
+> Altogether, we have shown that $P \to R$ whether $P$ is true or false.
+> We conclude that $P \to R$.
+
+This is one last little bit of logical signposting, summing up the line of logic that has gotten us to the ultimate conclusion.
+This might be overkill when the proof is so short, but I'm including it by my own logic that it's better to do a bit too much hand-holding than a bit too little.
+
+Putting all of this together to prove @prp-law-of-transitivity:
+
+::: {.proof}
+Suppose $P \to Q$ and $Q \to R$.
+There are two cases to consider: when $P$ is true, and when $P$ is false.
+We will show that $P \to R$ holds in both cases.
+
+First, suppose $P$ is true.
+Because $P$ and $P \to Q$ are both true, we conclude by modus ponens that $Q$ is true.
+Then, because $Q$ and $Q \to R$, we conclude (again by modus ponens) that $R$ is true.
+Because $P$ and $R$ are both true, the statement $P \to R$ is true as well.
+
+Second, suppose $P$ is false.
+Then it is vacuously true that $P \to R$.
+
+Altogether, we have shown that $P \to R$ whether $P$ is true or false.
+We conclude that $P \to R$.
+:::
+
+::: {#exr-prove-modus-tollens}
+Write a plain language proof of the modus tollens rule (@thm-modus-tollens).
+
+:::: {.callout-note collapse="true"}
+## Answer
+Your proof will of course differ from mine, but here's how I approached it.
+
+Suppose that $P \to Q$ is true and that $Q$ is false.
+We know from @exr-contrapositive that $P \to Q$ is logically equivalent to the contrapositive $\neg Q \to \neg P$.
+Then, because we know that $\neg Q$ and $\neg Q \to \neg P$ are both true, we infer by modus ponens that $\neg P$ is true.
+Consequently, we have proved that the conjunction of $P \to Q$ and $\neg Q$ implies $\neg P$.
+::::
+:::
+
+::: {#exr-perfect-square-even}
+Assume $a$ is an integer.
+Write a plain language proof of the claim that if $a^2$ is even, then $a$ is even.
+(An integer $a$ is even if it is divisible by 2: there is some integer $n$ such that $a = 2 \times n$.)
+
+:::: {.callout-note title="Answer" collapse="true"}
+I will prove the contrapositive.
+Assume $a$ is not even, so it is not a factor of 2.
+Then $a^2 = a \times a$ also is not a factor of 2 and is not even.
+We have shown that if $a$ is not even, then $a^2$ is not even; this is equivalent to the claim that if $a^2$ is even, then $a$ is even.
+::::
+:::
+
+### Proving an "if and only if" statement
+
+A claim of logical equivalence ($P \leftrightarrow Q$) is a claim that two implications hold ($P \to Q$ and $Q \to P$).
+So the most straightforward way to prove that $P$ and $Q$ are equivalent is to prove each implication individually.
+
+As an example, let's prove that the "and" operator is associative, meaning that $(P \land Q) \land R$ is logically equivalent to $P \land (Q \land R)$.
+The associative property is convenient because, at a minimum, it lets us kill the parentheses and write $P \land Q \land R$.
+
+::: {.aside}
+But be careful: you can't necessarily change or drop parentheses when you're using different operators.
+To wit, $(P \land Q) \lor R$ is not logically equivalent to $P \land (Q \lor R)$.
+:::
+
+::: {#prp-land-associative}
+## Associativity of "and"
+The "and" operator is associative: $[(P \land Q) \land R] \leftrightarrow [P \land (Q \land R)]$.
+:::
+
+::: {.proof}
+We begin by proving that $(P \land Q) \land R$ implies $P \land (Q \land R)$.
+Suppose it is true that $(P \land Q) \land R$.
+Then it must be the case that $P \land Q$ is true, as is $R$.
+Because $P \land Q$ is true, we infer that $P$ and $Q$ are each true as well.
+Because $Q$ and $R$ are true, $Q \land R$ is true.
+Finally, because $P$ and $Q \land R$ are each true, it is true that $P \land (Q \land R)$.
+
+The proof that $P \land (Q \land R)$ implies $(P \land Q) \land R$ is similar.
+Suppose that $P \land (Q \land R)$ is true.
+We infer that $P$ is true and that $Q \land R$ is true, and from the latter we infer that $Q$ and $R$ are each true.
+The truth of $P$ and $Q$ gives us $P \land Q$, which combined with the truth of $R$ gives us $(P \land Q) \land R$.
+:::
+
+Once again, notice the signposting in the way the proof is written.
+You want to clearly delineate when you're proving one direction versus when you're proving the other.
+This is particularly important for longer proofs, where a reader might get lost about exactly which logical step you're working through at any given point.
+You'll also notice that the second paragraph explicitly states that the method of proof is similar to the first paragraph.
+This lets readers know that there's nothing new going on here, so they can skim or skip if they understood the prior logic (or to read with skepticism if they didn't buy the prior logic!).
+
+Another common way to prove a claim like $P \leftrightarrow Q$ is to prove that $P \to Q$ and that $\neg P \to \neg Q$.
+This is equivalent to the last method of proof, as we know that the contrapositive $\neg P \to \neg Q$ is equivalent to $Q \to P$.
+Despite this equivalence in a formal logical sense, sometimes for purposes of writing the proof in plain English it's easier to approach from this direction.
+
+There's one more way to prove a logical equivalence that's more concise --- but trickier --- than the two methods I mentioned above.
+This third way is what I'll call the [chain of equivalences]{.concept}: to prove that $P \leftrightarrow Q$, prove that there is some third statement $R$ for which $P \leftrightarrow R$ and $R \leftrightarrow Q$.
+Or add more steps in between if you need: prove that $P \leftrightarrow R$, that $R \leftrightarrow S$, that $S \leftrightarrow T$, and finally that $T \leftrightarrow Q$.
+The important thing to keep in mind is that every step along the way must be a full equivalence ("if and only if"), not a mere conditional (just "if" or just "only if").
+Usually I end up taking the long way to prove logical equivalences, but it's a nice treat when I can find a single chain of equivalence that works.
+For an example of a proof that works this way, see @sec-proof-by-induction below.
+
+### Proof by contradiction {#sec-proof-by-contradiction}
+
+Another common proof technique, the [proof by contradiction]{.concept}, is built around a reductio ad absurdum.
+We want to prove that some statement $P$ is true.
+To do so, we show that if $P$ [isn't]{.underline} true, then we end up coming to some absurd conclusion.
+We infer that $P$ must be true.
+
+One of my favorite (silly) proofs by contradiction is the proof that every counting number $n = 1, 2, \ldots$ is interesting.
+
+::: {#prp-interesting-numbers name="not really a proposition"}
+Every natural number $n = 1, 2, \ldots$ is interesting.
+:::
+
+::: {.proof}
+We will prove the claim by contradiction.
+Suppose the claim is false, so there is at least one natural number that is not interesting.
+By the [well-ordering principle](https://en.wikipedia.org/wiki/Well-ordering_principle), this means there is a number $m$ which is the smallest natural number that is not interesting.
+However, it is interesting that $m$ is the smallest natural number that is not interesting.
+We have reached a contradiction, having shown that $m$ is both uninteresting and interesting.
+Therefore, it must be the case that every natural number is interesting.
+:::
+
+A more tedious, but also more famous and important, proof by contradiction is the proof that $\sqrt{2}$ cannot be expressed as a fraction.
+In other words, $\sqrt{2}$ is an irrational number.
+
+::: {#prp-sqrt-two}
+There is no pair of integers $p$ and $q$ for which $\sqrt{2} = \frac{p}{q}$.
+:::
+
+::: {.proof}
+We will prove the claim by contradiction.
+Suppose the claim is false, so there is an integer $p$ and an integer $q \neq 0$ such that $\sqrt{2} = \frac{p}{q}$.
+
+The first thing we are going to do is remove all common factors of 2 from $p$ and $q$.
+In other words, we are going to reduce the fraction $\frac{p}{q}$ until the numerator is odd or the denominator is odd (or both).
+If $p$ or $q$ is odd, then let $a = p$ and let $b = q$.
+Otherwise, if $p$ and $q$ are both even, then divide both by 2.
+Continue this process until at least one of $p$ or $q$ is not divisible by 2, and let $a$ and $b$ be the results.
+Because we always divided the numerator and the denominator by the same factor, we end up with the same fraction: $\frac{a}{b} = \frac{p}{q} = \sqrt{2}$.
+
+Because $\frac{a}{b} = \sqrt{2}$, we have $\frac{a^2}{b^2} = 2$ and thus $a^2 = 2 b^2$.
+Because $b^2$ is an integer, this means $a^2$ is divisible by 2 and thus is an even number, which in turn means $a$ is an even number (see @exr-perfect-square-even).
+Therefore, because we constructed $a$ and $b$ so that one of them at most could be even, $b$ must not be an even number.
+
+Because $a$ is even and thus divisible by 2, it must be the case that $a^2$ is divisible by 4.
+This in turn means that $a^2 / 2$ is divisible by 2.
+But remember that $a^2 = 2 b^2$ and thus $b^2 = a^2 / 2$, so we have that $b^2$ is even.
+This in turn implies that $b$ must be an even number (again see @exr-perfect-square-even).
+
+By assuming that $\sqrt{2}$ is rational, we have come to the contradictory conclusion that there is an integer that is both even and not even.
+Therefore, $\sqrt{2}$ is not rational.
+:::
+
+As we did with modus ponens (@thm-modus-ponens) and modus tollens (@thm-modus-tollens), we can use a truth table to establish the logical validity of proof by contradiction.
+First we need to state the logic behind it in the form of a compound sentence.
+We want to show that $P$ is true.
+To do so, we show that if $P$ is false, then we reach some conclusion that we know not to be true.
+I'm going to represent this with a special sentence $F$, whose truth value is always [false]{.ff}.
+(If you're not comfortable with this, you could replace $F$ with the negation of a tautology, such as $Q \land \neg Q$.)
+The idea behind proof by contradiction is that if $\neg P$ implies $F$, then we conclude $P$ is true.
+Stated formally, the line of logic is $(\neg P \to F) \to P$.
+
+::: {#thm-proof-by-contradiction}
+## Proof by contradiction
+Letting $F$ be a sentence that is always false, $(\neg P \to F) \to P$.
+:::
+
+::: {.proof}
+We can prove the claim using a truth table:
+
+| $P$          | $F$          | $\neg P$     | $\neg P \to F$ | $(\neg P \to F) \to P$ |
+|--------------|--------------|--------------|----------------|------------------------|
+| [true]{.tt}  | [false]{.ff} | [false]{.ff} | [true]{.tt}    | [true]{.tt}            |
+| [false]{.ff} | [false]{.ff} | [true]{.tt}  | [false]{.ff}   | [true]{.tt}            |
+
+Alternatively, here's a plain language proof of the claim.
+Suppose $\neg P \to F$.
+Either this claim is vacuously true, or else $\neg P \land F$.
+Since $\neg P \land F$ cannot possibly be true, as $F$ is false, the claim must be vacuously true.
+Vacuous truth of $\neg P \to F$ means that $\neg (\neg P)$ is true, which is equivalent to $P$ being true.
+Therefore, $\neg P \to F$ implies that $P$ is true.
+:::
+
+### Proof by induction {#sec-proof-by-induction}
+
+Earlier we saw De Morgan's laws (@thm-demorgan-logic), which tell us that the negation of an "and" statement is an "or" statement, and vice versa.
+Intuitively, it seems like it should be true that for any number $n$ of statements, $P_1, \ldots, P_n$, the negation $\neg (P_1 \land \cdots \land P_n)$ is logically equivalent to $\neg P_1 \lor \cdots \lor \neg P_n$.
+De Morgan's laws tell us that this holds in the special case $n = 2$.
+But how can we show that it holds for a conjunction of $n = 3$, or $n = 100$, or $n = 10^{10^{10}}$ statements as well?
+
+To prove that De Morgan's laws extend to a conjunction of any (finite) number of statements, we will write a [proof by induction]{.concept}.
+This is a proof technique designed for the following situation:
+
+1. We are dealing with a claim whose precise statement depends on a number $n$.
+   As shorthand to denote "a claim $Q$ whose precise form depends on a number $n$", we will write $Q(n)$.
+
+   In the De Morgan's law example here, the claim $Q(1)$ is the trivial statement that $\neg P_1 \leftrightarrow \neg P_1$.
+   $Q(2)$ is the De Morgan's law we already proved, $\neg (P_1 \land P_2) \leftrightarrow (\neg P_1 \lor \neg P_2)$.
+   $Q(3)$ is $\neg (P_1 \land P_2 \land P_3) \leftrightarrow (\neg P_1 \lor \neg P_2 \lor \neg P_3)$.
+   And so on.
+
+2. We want to show that $Q(n)$ is true for all numbers $n = 1, 2, 3, \ldots$, and so on infinitely.
+
+   In the De Morgan's law example, we could definitely use a truth table to prove the statement for a reasonably small $n$, like 3 or 4.
+   But even once we get to $n = 10$, we're talking about a truth table with 1,024 rows.
+   That seems like overkill to prove a claim that intuitively seems like it ought to be true.
+
+A proof by induction breaks the seemingly infinite task of proving $Q(n)$ for all $n$ into just two steps.
+First, in the **base step**, we prove that the claim $Q(n)$ is true for $n = 1$.
+In the example here, $Q(1)$ is just the statement that $\neg P_1 \leftrightarrow \neg P_1$, which of course is true.
+That establishes the base step.
+
+Second, in the **induction step**, we prove that for any number $k$, if $Q(k)$ is true, then $Q(k + 1)$ is true.
+In combination, the base step and the induction step establish that every $Q(n)$ must be true.
+The induction step proves that $Q(1) \to Q(2)$, and the base step proves that $Q(1)$ is true.
+Hence, by modus ponens, $Q(2)$ is true.
+The induction step proves that $Q(2) \to Q(3)$, so again by modus ponens, $Q(3)$ is true.
+We can follow this chain of logic up to any $n$ that we want.
+
+The induction step is usually the trickier part of the proof.
+Let's work through the induction step for our claim about De Morgan's law.
+
+::: {.proof}
+We need to show that $Q(k)$ implies $Q(k + 1)$.
+To do that, as in a typical proof of a conditional statement, we will begin by assuming $Q(k)$ is true, i.e., that $$\neg (P_1 \land \cdots \land P_k) \leftrightarrow (\neg P_1 \lor \cdots \lor \neg P_k).$$
+Our goal is to show that $Q(k + 1)$ is true, i.e., that $$\neg (P_1 \land \cdots \land P_k \land P_{k+1}) \leftrightarrow (\neg P_1 \lor \cdots \lor \neg P_k \lor \neg P_{k+1}).$$
+We could separately prove each side of this implication, but we can also use a chain of equivalences.
+
+By the associativity of the "and" operator, we have $$\neg (P_1 \land \cdots \land P_k \land P_{k+1}) \leftrightarrow \neg [(P_1 \land \cdots \land P_k) \land P_{k+1}].$$
+By De Morgan's laws, we have $$\neg [(P_1 \land \cdots \land P_k) \land P_{k+1}] \leftrightarrow [\neg (P_1 \land \cdots \land P_k) \lor \neg P_{k+1}].$$
+By our assumption that $Q(k)$ is true, we have $$[\neg (P_1 \land \cdots \land P_k) \lor \neg P_{k+1}] \leftrightarrow [(\neg P_1 \lor \cdots \lor \neg P_k) \lor \neg P_{k+1}].$$
+Finally, by the associativity of the "or" operator, we have $$[(\neg P_1 \lor \cdots \lor \neg P_k) \lor \neg P_{k+1}] \leftrightarrow (\neg P_1 \lor \cdots \lor \neg P_k \lor \neg P_{k+1}).$$
+Following the chain of equivalences, we have $$\neg (P_1 \land \cdots \land P_k \land P_{k+1}) \leftrightarrow (\neg P_1 \lor \cdots \lor \neg P_k \lor \neg P_{k+1}),$$ establishing the induction step.
+:::
+
+::: {#exr-induction}
+Use a proof by induction to prove that $2^n \geq n + 1$ for every counting number $n = 1, 2, \ldots$.
+
+:::: {.callout-note collapse="true"}
+## Answer
+For the base step, we must show that $2^1 \geq 1 + 1$.
+This holds because $2^1 = 2 = 1 + 1$.
+
+For the induction step, we must show that if $2^k \geq k + 1$, then $2^{k+1} \geq (k + 1) + 1$.
+Suppose $2^k \geq k + 1$.
+By definition, $2^{k+1} = 2 \times 2^k$.
+We have assumed that $2^k \geq k + 1$, which implies that $2 \times 2^k \geq 2 \times (k + 1)$.
+Because $k \geq 0$, we have $2 \times (k + 1) \geq (k + 1) + 1$.
+Putting this all together, we have $$2^{k+1} = 2 \times 2^k \geq 2 \times (k + 1) \geq (k + 1) + 1,$$ proving the induction step.
+::::
+:::
+
+
+```{python, echo=FALSE}
+concepts = {
+    "Provably true": "A statement whose truth can be defended against all challenges, using only rules of logical inference.",
+    "Sentence": "In formal logic, a statement that must be either [true]{.tt} or [false]{.ff}, and cannot be both.",
+    "Sentential logic": "A set of rules for deducing the truth of compound sentences.",
+    "Negation": "An operation on a single sentence that flips the truth value of the sentence, denoted $\\neg P$. $P$ [true]{.tt} means $\\neg P$ is [false]{.ff}, and $P$ [false]{.ff} means $\\neg P$ is [true]{.tt}.",
+    "And": "An operation on two sentences that indicates whether [both]{.underline} are true, denoted $P \\land Q$.",
+    "Or": "An operation on two sentences that indicates whether [at least one]{.underline} is true, denoted $P \\lor Q$.",
+    "Tautology": 'A compound sentence that is always true, regardless of the truth value of the sentences from which it is constructed. For example, $P \\lor \\neg P$ ("$P$ is true, or $P$ is not true") is a tautology.',
+    "Truth table": "An algorithm for determining the truth value of compound sentences. Each row is a unique combination of truth values of the simple sentences from which the compound is formed, and each column is a component of the compound sentence you are trying to evaluate.",
+    "Conditional": "An if-then statement, written in formal logic as $P \\to Q$, treated as the equivalent of $\\neg P \\lor Q$.",
+    "Necessary condition": "$Q$ is a necessary condition for $P$ when $Q$ has to be true whenever $P$ is true. The conditional $P \\to Q$ means that $Q$ is necessary for $P$.",
+    "Sufficient condition": "$P$ is a sufficient condition for $Q$ when $P$ being true guarantees that $Q$ is true. The conditional $P \\to Q$ means that $P$ is sufficient for $Q$.",
+    "Vacuously true": 'A conditional statement $P \\to Q$ that is true because its premise is known to be false, such as "If 0 = 1, then Peter Bils lives in a pineapple under the sea."',
+    "Modus ponens": "The logical rule that if $P$ is true and $P \\to Q$ is true, then we can infer that $Q$ is true.",
+    "Modus tollens": "The logical rule that if $\\neg Q$ is true and $P \\to Q$ is true, then we can infer that $\\neg P$ is true.",
+    "Logical equivalence": "$P$ and $Q$ are logically equivalent when $P \\to Q$ and $Q \\to P$.  Logical equivalence holds when the truth values of the statements match --- both are [true]{.tt} or both are [false]{.ff}.",
+    "Biconditional": "The statement $P \\leftrightarrow Q$, meaning $P$ and $Q$ are logically equivalent.",
+    "Contrapositive": "The translation of the statement $P \\to Q$ into the logically equivalent statement $\\neg Q \\to \\neg P$.",
+    "De Morgan's laws": 'Conceptually, the idea that the negation of an "and" statement is an "or" statement, and vice versa.  Formally, the logical equivalences $\\neg (P \\land Q) \\leftrightarrow \\neg P \\lor \\neg Q$ and $\\neg (P \\lor Q) \\leftrightarrow \\neg P \\land \\neg Q$.',
+    "Proof by contradiction": "A proof where we show that $P$ is true by proving that $\\neg P$ implies something impossible.",
+    "Proof by induction": "A proof technique used when (a) we have a claim that depends on a number $n$ and (b) we want to prove it's true for every $n = 1, 2, 3, \\ldots$.  In the base step, we show that the claim is true for $n = 1$.  In the induction step, we assume the truth of the claim for $n = k$, and we show that this implies the truth of the claim for $n = k + 1$.",
+}
+```
+
+```{python, echo=FALSE, results="asis"}
+from helpers import concept_table
+
+print(concept_table(concepts))
+```

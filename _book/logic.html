@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Formal Logic and Proofs – Mathematical Foundations of Political Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./set_theory.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-7fb14a0eaa8ddc0b0b5fd2c428532b30.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./logic.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Formal Logic and Proofs</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Foundations of Political Analysis</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./logic.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Formal Logic and Proofs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./set_theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Set Theory</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sentential-logic-and-truth-tables" id="toc-sentential-logic-and-truth-tables" class="nav-link active" data-scroll-target="#sentential-logic-and-truth-tables"><span class="header-section-number">1.1</span> Sentential logic and truth tables</a>
+  <ul class="collapse">
+  <li><a href="#constructing-compound-sentences" id="toc-constructing-compound-sentences" class="nav-link" data-scroll-target="#constructing-compound-sentences"><span class="header-section-number">1.1.1</span> Constructing compound sentences</a></li>
+  <li><a href="#if-only-if-and-if-and-only-if" id="toc-if-only-if-and-if-and-only-if" class="nav-link" data-scroll-target="#if-only-if-and-if-and-only-if"><span class="header-section-number">1.1.2</span> “If”, “only if”, and “if and only if”</a></li>
+  <li><a href="#de-morgans-laws" id="toc-de-morgans-laws" class="nav-link" data-scroll-target="#de-morgans-laws"><span class="header-section-number">1.1.3</span> De Morgan’s laws</a></li>
+  </ul></li>
+  <li><a href="#methods-of-proof" id="toc-methods-of-proof" class="nav-link" data-scroll-target="#methods-of-proof"><span class="header-section-number">1.2</span> Methods of proof</a>
+  <ul class="collapse">
+  <li><a href="#proving-an-if-statement" id="toc-proving-an-if-statement" class="nav-link" data-scroll-target="#proving-an-if-statement"><span class="header-section-number">1.2.1</span> Proving an “if” statement</a></li>
+  <li><a href="#proving-an-if-and-only-if-statement" id="toc-proving-an-if-and-only-if-statement" class="nav-link" data-scroll-target="#proving-an-if-and-only-if-statement"><span class="header-section-number">1.2.2</span> Proving an “if and only if” statement</a></li>
+  <li><a href="#sec-proof-by-contradiction" id="toc-sec-proof-by-contradiction" class="nav-link" data-scroll-target="#sec-proof-by-contradiction"><span class="header-section-number">1.2.3</span> Proof by contradiction</a></li>
+  <li><a href="#sec-proof-by-induction" id="toc-sec-proof-by-induction" class="nav-link" data-scroll-target="#sec-proof-by-induction"><span class="header-section-number">1.2.4</span> Proof by induction</a></li>
+  </ul></li>
+  <li><a href="#concept-review" id="toc-concept-review" class="nav-link" data-scroll-target="#concept-review"><span class="header-section-number">1.3</span> Concept review</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="logic" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Formal Logic and Proofs</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>When you think about math, you probably think about numbers. The majority of the math classes you’ve taken in your life have been about how to manipulate numbers. But don’t panic if you’re the kind of person who grimaces a bit when you have to calculate a tip by hand — your success as a political scientist will have nothing to do with your ability to add or multiply numbers in your head. That’s what we have computers for.</p>
+<p>In this course, we will approach math from a different angle. Our goal will be to make statements that are <span class="concept">provably true</span>. In essence, a statement is provably true if there is a logical defense against any possible objection to the statement. Anyone who follows the rules of deductive logic — the ones we will work through in this first unit of the course — must agree that the statement is true.</p>
+<p>Plenty of things are true in the ordinary sense of the word, yet are not <em>provably</em> true in the mathematical sense. For example, it is true that Joe Biden won the 2020 presidential election. However, the truth of this statement is established through empirical observation, not through logical deduction alone. In other words, at least some defenses against objections to this statement rely on findings of fact. If you say “I don’t think Joe Biden won the 2020 presidential election because I don’t think Joe Biden exists”, I need to convince you that Joe Biden exists, which isn’t a matter of logic alone.</p>
+<p>On the other hand, the following statement is provably true: “If (a) only one person can win a presidential election, and (b) Joe Biden won the 2020 presidential election, and (c) Joe Biden is not Donald Trump, then (d) Donald Trump did not win the 2020 presidential election.” Once you accept the premises (a), (b), and (c), you have no choice but to reach the conclusion (d). Whether each premise is true is the kind of empirical question that logic alone cannot answer. But logic does tell us that <em>if</em> all these premises are true, <em>then</em> the conclusion (d) has to follow.</p>
+<p>If you came to graduate school to study politics empirically, at this point you might be wondering why you should care about proving statements in the realm of pure logic. Here’s why I think you should care.</p>
+<ol type="1">
+<li><p>We use empirical studies to evaluate theories of political institutions, behavior, and conflict. These theories typically have an if-then structure: if certain premises about the psychology or incentives of the relevant political actors are true, then we should expect to observe certain patterns of choices by those actors. Even if you’re not planning to state your theories in the form of mathematical models, <a href="https://link.springer.com/content/pdf/10.1023/A:1021226224601.pdf">like</a> <!-- bartels running tally --> <a href="https://onlinelibrary.wiley.com/doi/10.1111/ajps.12693">many</a> <!-- benson/smith --> <a href="https://www.journals.uchicago.edu/doi/full/10.1086/729952">of</a> <!-- bils/judd/smith JOP --> <a href="https://doi.org/10.1017/S000305541900073X">us</a> <!-- coe/vaynman apsr --> <a href="https://www.jstor.org/stable/pdf/4132683.pdf">here</a> <!-- diermeier/keane/merlo AER --> <a href="https://doi.org/10.1017/S0003055422000843">at</a> <!-- izzo APSR --> <a href="https://doi.org/10.1017/S0020818322000303">Vanderbilt</a> <!-- kenkel/paine IO --> <a href="https://www.jstor.org/stable/pdf/26792643.pdf">have</a> <!-- larson WP --> <a href="https://journals.sagepub.com/doi/pdf/10.1177/0022002712468724">done</a> <!-- ritter JCR --> <a href="https://onlinelibrary.wiley.com/doi/10.1111/lsq.12411">in</a> <!-- rosenstiel LSQ --> <a href="https://journals.sagepub.com/doi/10.1177/0951629819875519">our</a> <!-- thrower JTP --> <a href="https://www.jstor.org/stable/pdf/27644427.pdf">published</a> <!-- volden/wiseman APSR --> <a href="https://www.journals.uchicago.edu/doi/full/10.1086/708505">work</a>, <!-- slough/ting/york JOP --> you’ll be better equipped to develop theories and derive hypotheses if you’re comfortable with deductive logical reasoning.</p></li>
+<li><p>The statistical techniques you’ll use in your empirical work are also justified via provable statements. For example, we try to obtain random samples because on average the measurements you take from a random sample are representative of the population at large. We often use ordinary least squares for regression analysis because, under certain conditions, its standard errors are lower than any other regression estimator. Logic can’t tell you if any particular sample was drawn at random or if any given error term is independent and identically distributed across observations. But it can tell you that when these conditions are met, certain statistical techniques “work” in the way you would want if your goal is to draw inferences about a larger population.</p></li>
+</ol>
+<section id="sentential-logic-and-truth-tables" class="level2 page-columns page-full" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sentential-logic-and-truth-tables"><span class="header-section-number">1.1</span> Sentential logic and truth tables</h2>
+<p><span class="concept">Sentential logic</span> is a set of rules for working with <span class="concept">sentences</span>. In this context, a sentence is a statement that is either true or false (it must be one, and it cannot be both). Here are some examples of sentences:</p>
+<ol type="1">
+<li><p>“The ‘Liberation Day’ tariffs caused the stock market to crash.”</p></li>
+<li><p>“The ‘Liberation Day’ tariffs caused the stock market to crash, or the ‘Liberation Day’ tariffs did not cause the stock market to crash.”</p></li>
+<li><p>“The ‘Liberation Day’ tariffs caused the stock market to crash, and the ‘Liberation Day’ tariffs did not cause the stock market to crash.”</p></li>
+</ol>
+<p>Each of these is a “sentence”, logically speaking, in that it is true or false. But there are important distinctions among them.</p>
+<ul>
+<li><p>Formal logic by itself cannot help us figure out whether sentence #1 is true or false. That is a matter for empirical study.</p></li>
+<li><p>By contrast, we don’t need to consult the real world to know that sentence #2 is true. We can deduce on the basis of logic alone that sentence #2 is true. We call a compound sentence like this, which must be true regardless of the underlying truth values of the sentences from which it is constructed, a <span class="concept">tautology</span>.</p></li>
+<li><p>Finally, we also don’t need to consult the real world to know that sentence #3 is false. There is no way for it to be the case that the tariffs both did and did not cause the stock market to crash.</p></li>
+</ul>
+<p>In one sense, our goal with formal logic will be to take compound sentences and sort them into these three categories: those that must be true, those that must be false, and those that are indeterminate, whose truth value cannot be deduced by logic alone.</p>
+<p>You might think that the sentences that must be true — the tautologies — are inherently uninteresting. Certainly no one is going to be surprised that either the tariffs caused the stock market to crash or they didn’t. And yet there are indeed statements that are tautological yet nonobvious on first glance. For example, I was surprised to learn in graduate school that <a href="https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem">there is no non-dictatorial system for elections with more than two candidates that eliminates incentives for strategic voting</a>. But this statement is indeed a tautology in the formal-logic sense of the word. (If you don’t think the truth of this statement is nonobvious, just try arguing on the Internet with people who think ranked-choice voting will fix elections!)</p>
+<section id="constructing-compound-sentences" class="level3 page-columns page-full" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="constructing-compound-sentences"><span class="header-section-number">1.1.1</span> Constructing compound sentences</h3>
+<p>In this chapter, we will use the letters <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, and <span class="math inline">\(R\)</span> to denote sentences. Whenever you see one of these letters, just think: “a thing that can be exactly one of ‘true’ or ‘false’”. For example, <span class="math inline">\(P\)</span> might be the statement “The ‘Liberation Day’ tariffs caused the stock market to crash.”</p>
+<p>We will build compound sentences using three operators. The first is the <span class="concept">not</span> operator, denoted by <span class="math inline">\(\neg P\)</span>. The rules of the “not” operator are simple: <span class="math inline">\(\neg P\)</span> is true whenever <span class="math inline">\(P\)</span> is false, and <span class="math inline">\(\neg P\)</span> is false whenever <span class="math inline">\(P\)</span> is true.</p>
+<p>The second basic operator is <span class="concept">and</span>, which connects two sentences, denoted <span class="math inline">\(P \land Q\)</span>. An “and” statement is true whenever both underlying statements are true, and false otherwise.</p>
+<p>The final basic operator is <span class="concept">or</span>, which again connects two sentences, denoted <span class="math inline">\(P \lor Q\)</span>. An “or” statement is true whenever <em>at least one</em> of the underlying statements is true. It is only false when both of the underlying statements are false. In other words, the logical “or” is an “inclusive or” (allowing for the possibility that both are true), not an “exclusive or”.</p>
+<p>Above we saw the compound sentence “The ‘Liberation Day’ tariffs caused the stock market to crash, or the ‘Liberation Day’ tariffs did not cause the stock market to crash.” If we take <span class="math inline">\(P\)</span> to be the sentence “The ‘Liberation Day’ tariffs caused the stock market to crash”, then the formal statement of our compound sentence is <span class="math inline">\(P \lor \neg P\)</span>. We want to show that the compound sentence <span class="math inline">\(P \lor \neg P\)</span> is a tautology; i.e., the compound sentence is true regardless of whether <span class="math inline">\(P\)</span> is true or false.</p>
+<p>We will use a <span class="concept">truth table</span> to identify the conditions under which a compound sentence is true. To build a truth table for a compound sentence like <span class="math inline">\(P \lor \neg P\)</span>, the first thing we do is identify the underlying sentences it is built from. In the case of <span class="math inline">\(P \lor \neg P\)</span>, there’s only one underlying sentence, namely <span class="math inline">\(P\)</span>. We begin to write the truth table by enumerating all combinations of truth values of the underlying sentences.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+</tr>
+</tbody>
+</table>
+<p>Next, we add columns to build up to the compound sentence that we are trying to evaluate. In the example here, we are trying to get from <span class="math inline">\(P\)</span> to <span class="math inline">\(P \lor \neg P\)</span>. The compound sentence is built from <span class="math inline">\(P\)</span> and <span class="math inline">\(\neg P\)</span>. So we’ll start with <span class="math inline">\(P\)</span>, evaluate <span class="math inline">\(\neg P\)</span>, and finally evaluate <span class="math inline">\(P \lor \neg P\)</span>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(P \lor \neg P\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>We then fill the columns by moving across the truth table from left to right. We know that <span class="math inline">\(\neg P\)</span> is false whenever <span class="math inline">\(P\)</span> is true, and vice versa, which lets us fill out the second column.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(P \lor \neg P\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Finally, we know that <span class="math inline">\(P \lor \neg P\)</span> is true whenever at least one of <span class="math inline">\(P\)</span> or <span class="math inline">\(\neg P\)</span> is true, which lets us fill out the third column.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(P \lor \neg P\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+<p>We now see that the compound sentence <span class="math inline">\(P \lor \neg P\)</span> is a tautology, as it is always true, regardless of whether the sentence it is built from is true or false.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Approaching exercises
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try the exercises yourself, ideally by writing them on paper or in a tablet, before looking at the answers. You learn the most by trying on your own and then checking. (This is exactly how I still do it when I’m working through unfamiliar technical material!)</p>
+</div>
+</div>
+<div id="exr-not-p-and-not-p" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.1</strong></span> Use a truth table to show that <span class="math inline">\(\neg (P \land \neg P)\)</span> is a tautology.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Start by setting up the table with each combination of possible values of the underlying sentences (in this case, just <span class="math inline">\(P\)</span>), then with each sequential step you need to build the final compound sentence.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 13%">
+<col style="width: 27%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(P \land \neg P\)</span></th>
+<th><span class="math inline">\(\neg (P \land \neg P)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>; <span class="ff">false</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Then fill each column across, using the information from the left.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 25%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(P \land \neg P\)</span></th>
+<th><span class="math inline">\(\neg (P \land \neg P)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 25%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(P \land \neg P\)</span></th>
+<th><span class="math inline">\(\neg (P \land \neg P)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 25%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(P \land \neg P\)</span></th>
+<th><span class="math inline">\(\neg (P \land \neg P)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>The more simple sentences that your compound sentence is built from, the more rows the truth table will end up having. For example, let’s build a truth table for the compound sentence <span class="math inline">\(P \lor \neg (P \land Q)\)</span>. The truth table will now have four rows, one for each combination of true/false for <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+</tr>
+</tbody>
+</table>
+<p>Then we break down the compound sentence and fill out the rest of the truth table the same way as before.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Column setup</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Completed table</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 23%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th><span class="math inline">\(P \land Q\)</span></th>
+<th><span class="math inline">\(\neg (P \land Q)\)</span></th>
+<th><span class="math inline">\(P \lor \neg (P \land Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 22%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th><span class="math inline">\(P \land Q\)</span></th>
+<th><span class="math inline">\(\neg (P \land Q)\)</span></th>
+<th><span class="math inline">\(P \lor \neg (P \land Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="exr-two-sentence-table" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.2</strong></span> Use a truth table to show that <span class="math inline">\((P \lor Q) \lor (\neg P \land \neg Q)\)</span> is a tautology.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Set up the rows:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+</tr>
+</tbody>
+</table>
+<p>Set up the columns:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 19%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th><span class="math inline">\(P \lor Q\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(\neg Q\)</span></th>
+<th><span class="math inline">\(\neg P \land \neg Q\)</span></th>
+<th><span class="math inline">\((P \lor Q) \lor (\neg P \land \neg Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Fill out the table:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 17%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th><span class="math inline">\(P \lor Q\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(\neg Q\)</span></th>
+<th><span class="math inline">\(\neg P \land \neg Q\)</span></th>
+<th><span class="math inline">\((P \lor Q) \lor (\neg P \land \neg Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>It’s reasonably simple to double-check your work in a truth table using R. (Or any programming language — they’re all good at this sort of binary logic exercise.) In R, to set up the rows of a truth table, you can use <code>expand.grid()</code> to enumerate all possible true-false combinations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Q =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="at">P =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Q     P
+1  TRUE  TRUE
+2 FALSE  TRUE
+3  TRUE FALSE
+4 FALSE FALSE</code></pre>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>I put <code>Q</code> first in the R code so that the row order will be the same as in the tables I made by hand above.</p>
+</div></div><p>In R, <code>!</code> means “not”, <code>&amp;</code> means “and”, and <code>|</code> means “or”. We can use these operators to look at the columns of our truth table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> grid<span class="sc">$</span>P</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Q <span class="ot">&lt;-</span> grid<span class="sc">$</span>Q</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(P, Q, P <span class="sc">|</span> <span class="sc">!</span>(P <span class="sc">&amp;</span> Q))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         P     Q     
+[1,]  TRUE  TRUE TRUE
+[2,]  TRUE FALSE TRUE
+[3,] FALSE  TRUE TRUE
+[4,] FALSE FALSE TRUE</code></pre>
+</div>
+</div>
+<p>You can also use the <code>all()</code> function to quickly check whether a statement is a tautology.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(P <span class="sc">|</span> <span class="sc">!</span>(P <span class="sc">&amp;</span> Q)) <span class="co"># is a tautology</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(P <span class="sc">&amp;</span> Q) <span class="co"># not a tautology</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<div id="exr-truth-table-in-r" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.3</strong></span> Using R, confirm that the compound sentence <span class="math display">\[[(P \lor Q) \lor (\neg R \lor \neg S)] \lor [(\neg P \land \neg Q) \land (R \land S)]\]</span> is a tautology.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">P =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Q =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">R =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">S =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> grid<span class="sc">$</span>P</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>Q <span class="ot">&lt;-</span> grid<span class="sc">$</span>Q</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> grid<span class="sc">$</span>R</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> grid<span class="sc">$</span>S</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Break sentence into two parts to keep track of things easier</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>part_1 <span class="ot">&lt;-</span> (P <span class="sc">|</span> Q) <span class="sc">|</span> (<span class="sc">!</span>R <span class="sc">|</span> <span class="sc">!</span>S)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>part_2 <span class="ot">&lt;-</span> (<span class="sc">!</span>P <span class="sc">&amp;</span> <span class="sc">!</span>Q) <span class="sc">&amp;</span> (R <span class="sc">&amp;</span> S)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm tautology</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(part_1 <span class="sc">|</span> part_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="if-only-if-and-if-and-only-if" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="if-only-if-and-if-and-only-if"><span class="header-section-number">1.1.2</span> “If”, “only if”, and “if and only if”</h3>
+<p>If-then statements work a bit differently in formal logic than in ordinary language. If I told you, “Scream if you see a bear!” and then you screamed, I would run away, having inferred that you saw a bear. However, I didn’t tell you “Don’t scream if you didn’t see a bear.” So in terms of pure logic, there would be no problem with you screaming even if there weren’t a bear — the only way to contradict the command would be to fail to scream when you actually did see a bear.</p>
+<p>In the realm of formal logic and mathematics, we will be totally pedantic about our if-then statements. If I say “if <span class="math inline">\(P\)</span>, then <span class="math inline">\(Q\)</span>”, the only way to falsify my statement is to show me that <span class="math inline">\(P\)</span> is true and <span class="math inline">\(Q\)</span> is false. If <span class="math inline">\(P\)</span> is false, then the statement is true regardless of the truth of <span class="math inline">\(Q\)</span>.</p>
+<div id="def-conditional" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.1</strong></span> The <span class="concept">conditional</span> statement “<span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>” or “if <span class="math inline">\(P\)</span>, then <span class="math inline">\(Q\)</span>”, written <span class="math inline">\(P \to Q\)</span>, is logically equivalent to <span class="math inline">\(\neg P \lor Q\)</span>.</p>
+</div>
+<p>When <span class="math inline">\(P\)</span> is known to be false, we say that the statement <span class="math inline">\(P \to Q\)</span> is <span class="concept">vacuously true</span>. Here are some vacuously true statements:</p>
+<ul>
+<li><p>If 0 = 1, then the moon is made of cheese.</p></li>
+<li><p>If 4 is a prime number, then an asteroid will hit Earth on February 30, 2026.</p></li>
+<li><p>If there is a finite game with no <a href="https://en.wikipedia.org/wiki/Nash_equilibrium">Nash equilibrium</a>, then Professor Brad Smith is handsome and intelligent.</p></li>
+</ul>
+<p>While it’s fun to think about vacuous truths, conditional statements are most useful to us when the premise is true. Think about a conditional statement <span class="math inline">\(P \to Q\)</span> that we know to be true. As an uncontroversial example, let <span class="math inline">\(P\)</span> be “today is Wednesday” and <span class="math inline">\(Q\)</span> be “tomorrow is Thursday”, so that <span class="math inline">\(P \to Q\)</span> means “if today is Wednesday, then tomorrow is Thursday.” Imagine then we also know that <span class="math inline">\(P\)</span> is true. As it happens, at the time I am writing this paragraph, it is indeed Wednesday. Given that <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>, and that <span class="math inline">\(P\)</span> is true, it seems logical for me to deduce that <span class="math inline">\(Q\)</span> is true as well. Indeed, this deduction is logical — the name for this type of inference is <span class="concept">modus ponens</span>.</p>
+<p>You don’t have to take the validity of modus ponens on faith. We can translate the rule into a compound sentence, and then we can prove that it is a tautology. In words, the rule is “If <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span> and <span class="math inline">\(P\)</span> is true, then <span class="math inline">\(Q\)</span> is true.” Equivalently, we could say “If <span class="math inline">\((P \to Q) \land P\)</span>, then <span class="math inline">\(Q\)</span>.” Finally, we come to the most compact (though not the easiest to parse!) statement in <a href="#thm-modus-ponens" class="quarto-xref">Theorem&nbsp;<span>1.1</span></a>.</p>
+<div id="thm-modus-ponens" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.1 (Modus ponens)</strong></span> <span class="math inline">\([(P \to Q) \land P] \to Q\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We will use a truth table to show that the statement is a tautology.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 22%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th><span class="math inline">\(P \to Q\)</span></th>
+<th><span class="math inline">\((P \to Q) \land P\)</span></th>
+<th><span class="math inline">\([(P \to Q) \land P] \to Q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Names of mathematical results
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Throughout these notes, you will see mathematical results labeled <span class="concept">Theorem</span>, <span class="concept">Proposition</span>, <span class="concept">Lemma</span>, and <span class="concept">Corollary</span>. Anything with one of these names is a formal statement that is provably true, and will usually be accompanied by a proof. None of these types of results is more or less true than the others — the different labels are just to help readers decode the context and importance of each type of result.</p>
+<ul>
+<li><p><span class="concept">Theorem:</span> Reserved for results that are especially big, important, fundamental, general, etc. For example, <a href="#thm-modus-ponens" class="quarto-xref">Theorem&nbsp;<span>1.1</span></a> is a theorem because it is the foundation of logical deduction.</p></li>
+<li><p><span class="concept">Proposition:</span> A bread-and-butter result. Useful and important enough to care about on its own, but not earth-shaking enough to be a theorem.</p></li>
+<li><p><span class="concept">Lemma:</span> A result that we don’t necessarily care about on its own, but is a useful building block toward one or more propositions or theorems.</p></li>
+<li><p><span class="concept">Corollary:</span> A result that follows almost immediately from some earlier lemma(s), proposition(s), or theorem(s). My general heuristic for calling something a corollary is that it can be proved in two sentences or less, and the proof requires invoking an earlier lemma, proposition, or theorem.</p></li>
+</ul>
+</div>
+</div>
+<p>You can think of <span class="math inline">\(P \to Q\)</span> as a statement of a <span class="concept">sufficient condition</span>: if <span class="math inline">\(P\)</span> is true, then <span class="math inline">\(Q\)</span> must be true, hence <span class="math inline">\(P\)</span> is “sufficient” to ensure that <span class="math inline">\(Q\)</span> holds. However, this statement says nothing about whether <span class="math inline">\(P\)</span> is a <span class="concept">necessary condition</span> for <span class="math inline">\(Q\)</span> — something that must be true in order for <span class="math inline">\(Q\)</span> to be true. Think about the statement “If Marie is a member of the House of Representatives, then Marie is a politician.” Being a member of the House is sufficient to be called a politician, but it is not necessary. We would still call Marie a politician if she were the president, a senator, a yet-unelected candidate for the House, or even the state comptroller.</p>
+<p>In the same way that the statement <span class="math inline">\(P \to Q\)</span> gives us a sufficient condition for <span class="math inline">\(Q\)</span>, it also gives us a necessary condition for <span class="math inline">\(P\)</span>. Remember that the conditional statement <span class="math inline">\(P \to Q\)</span> turns out to be false when <span class="math inline">\(P\)</span> is true yet <span class="math inline">\(Q\)</span> is false. Hence, an alternative way to verbalize <span class="math inline">\(P \to Q\)</span> is “<span class="math inline">\(P\)</span> is true only if <span class="math inline">\(Q\)</span> is true,” meaning <span class="math inline">\(Q\)</span> is a necessary — though perhaps insufficient — condition for <span class="math inline">\(P\)</span>. Returning to the example above, we could say “Marie is a member of the House of Representatives only if she is a politician.” Being a politician doesn’t necessarily mean she’s a House member, but she certainly cannot be a House member unless she is a politician.</p>
+<p>We’ve just seen that a sufficient condition (if <span class="math inline">\(P\)</span>, then <span class="math inline">\(Q\)</span>) can be translated into a necessary condition (<span class="math inline">\(P\)</span> only if <span class="math inline">\(Q\)</span>). This observation allows us to make the following type of logical deduction:</p>
+<ul>
+<li><p><strong>Premise 1:</strong> If Marie is a member of the House of Representatives, then Marie is a politician. (<span class="math inline">\(P \to Q\)</span>)</p></li>
+<li><p><strong>Premise 2:</strong> Marie is not a politician. (<span class="math inline">\(\neg Q\)</span>)</p></li>
+<li><p><strong>Conclusion:</strong> Marie is not a member of the House of Representatives. (<span class="math inline">\(\neg P\)</span>)</p></li>
+</ul>
+<p>The line of reasoning here is an example of the deductive rule called <span class="concept">modus tollens</span>. If we know that <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span> and we know that <span class="math inline">\(Q\)</span> is false, we must conclude that <span class="math inline">\(P\)</span> is false as well.</p>
+<div id="thm-modus-tollens" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.2 (Modus tollens)</strong></span> <span class="math inline">\([(P \to Q) \land \neg Q] \to \neg P\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Try to prove this yourself using a truth table, following the same lines as the proof of <a href="#thm-modus-ponens" class="quarto-xref">Theorem&nbsp;<span>1.1</span></a> above. If you get stuck, check the answer below.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 24%">
+<col style="width: 9%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th><span class="math inline">\(P \to Q\)</span></th>
+<th><span class="math inline">\(\neg Q\)</span></th>
+<th><span class="math inline">\((P \to Q) \land \neg Q\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\([(P \to Q) \land \neg Q] \to \neg P\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here’s another way to think about this proof, somewhat anticipating our discussion of <a href="#sec-proof-by-contradiction">proof by contradiction</a> below.</p>
+<p>The only way for <span class="math inline">\([(P \to Q) \land \neg Q] \to \neg P\)</span> to be false would be for <span class="math inline">\((P \to Q) \land \neg Q\)</span> to be true while <span class="math inline">\(\neg P\)</span> is false (i.e., <span class="math inline">\(P\)</span> is true). There are two paths for <span class="math inline">\(P \to Q\)</span> to be true: either it’s vacuously true because <span class="math inline">\(P\)</span> is false, or it’s true because <span class="math inline">\(P\)</span> is true and so is <span class="math inline">\(Q\)</span>.</p>
+<p>When we additionally assume <span class="math inline">\(\neg Q\)</span> is true, then <span class="math inline">\(P \to Q\)</span> can only be true vacuously, i.e., because <span class="math inline">\(P\)</span> is false. In other words, whenever <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(\neg Q\)</span> are both true, it must be the case that <span class="math inline">\(P\)</span> is false and thus <span class="math inline">\(\neg P\)</span> is true. This means there is no path for <span class="math inline">\([(P \to Q) \land \neg Q] \to \neg P\)</span> to be falsified, as anytime the premise <span class="math inline">\((P \to Q) \land \neg Q\)</span> is true, the conclusion <span class="math inline">\(\neg P\)</span> must be true too.</p>
+<p>Therefore, the statement of modus tollens is a tautology.</p>
+</div>
+</div>
+</div>
+</div>
+<p>The statements <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are <span class="concept">logically equivalent</span> when <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to P\)</span>. In this case, the truth values of the two statements are linked: either <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both true, or else <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both false. <span class="math inline">\(P\)</span> is a necessary and sufficient condition for <span class="math inline">\(Q\)</span>, and <span class="math inline">\(Q\)</span> is a necessary and sufficient condition for <span class="math inline">\(P\)</span>. In words, we may use “<span class="math inline">\(P\)</span> if and only if <span class="math inline">\(Q\)</span>” to describe this state of affairs.</p>
+<p>As an example, take the “minimalist conception” of democracy posed by <span class="citation" data-cites="przeworski2024decides">Przeworski (<a href="references.html#ref-przeworski2024decides" role="doc-biblioref">2024, 5</a>)</span>: “A regime is democratic if and only if people are free to choose, including to remove, governments.” Let <span class="math inline">\(P\)</span> be the statement “The regime is democratic” and <span class="math inline">\(Q\)</span> be the statement “The regime’s people are free to choose, including to remove, governments.”</p>
+<ul>
+<li><p>The statement <span class="math inline">\(P \to Q\)</span> means “The regime is democratic <em>only if</em> its people are free to choose, including to remove, governments” — the people’s ability to remove the government is a <em>necessary</em> condition for democracy.</p></li>
+<li><p>The statement <span class="math inline">\(Q \to P\)</span> means “The regime is democratic <em>if</em> its people are free to choose, including to remove, governments” — the people’s ability to remove the government is a <em>sufficient</em> condition for democracy.</p></li>
+</ul>
+<p>Logical equivalence means <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span> and vice versa, so we denote it with the <span class="concept">biconditional</span> <span class="math inline">\(P \leftrightarrow Q\)</span>. The statement <span class="math inline">\(P \leftrightarrow Q\)</span> is <span class="tt">true</span> whenever the truth values of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> match, and <span class="ff">false</span> otherwise. If you’re skeptical, you can use a truth table to confirm that the statement <span class="math inline">\((P \to Q) \land (Q \to P)\)</span> is true exactly when the truth values of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> match.</p>
+<div id="exr-equivalence" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.4</strong></span> Use a truth table to confirm that the statement <span class="math inline">\((P \to Q) \land (Q \to P)\)</span> is true exactly when the truth values of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> match.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th><span class="math inline">\(P \to Q\)</span></th>
+<th><span class="math inline">\(Q \to P\)</span></th>
+<th><span class="math inline">\((P \to Q) \land (Q \to P)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>An important logical equivalence, closely related to modus tollens (<a href="#thm-modus-tollens" class="quarto-xref">Theorem&nbsp;<span>1.2</span></a>), is the <span class="concept">contrapositive</span>: <span class="math inline">\(P \to Q\)</span> is logically equivalent to <span class="math inline">\(\neg Q \to \neg P\)</span>. The contrapositive is more useful in practice than you might expect. When you want to prove that <span class="math inline">\(P \to Q\)</span>, sometimes it’s easier to start with <span class="math inline">\(\neg Q\)</span> and show that <span class="math inline">\(\neg P\)</span> must hold than to start with <span class="math inline">\(P\)</span> and show that <span class="math inline">\(Q\)</span> must hold. Even more radically, as we’ll see in <a href="#sec-proof-by-contradiction" class="quarto-xref"><span>Section 1.2.3</span></a> below, when you want to prove that <span class="math inline">\(P\)</span> is true, sometimes it’s easiest to start with <span class="math inline">\(\neg P\)</span> and show that you end up with something known to be false.</p>
+<div id="exr-contrapositive" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.5</strong></span> Use a truth table to confirm that <span class="math inline">\(P \to Q\)</span> is logically equivalent to <span class="math inline">\(\neg Q \to \neg P\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th><span class="math inline">\(P \to Q\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(\neg Q\)</span></th>
+<th><span class="math inline">\(\neg Q \to \neg P\)</span></th>
+<th><span class="math inline">\((P \to Q) \leftrightarrow (\neg Q \to \neg P)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="de-morgans-laws" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="de-morgans-laws"><span class="header-section-number">1.1.3</span> De Morgan’s laws</h3>
+<p>We have to be careful when using negation in combination with the “and” and “or” operators. This is probably easier when we’re working in words than when we’re working with notation, but we need caution either way. For example, let <span class="math inline">\(F\)</span> be the statement “Finland is a democracy” and <span class="math inline">\(R\)</span> be the statement “Russia is a democracy”. There are three ways for the compound statement <span class="math inline">\(F \land R\)</span> to be false:</p>
+<ol type="1">
+<li><p><span class="math inline">\(F \land \neg R\)</span>: Finland is a democracy, but Russia is not.</p></li>
+<li><p><span class="math inline">\(\neg F \land R\)</span>: Finland is not a democracy, but Russia is.</p></li>
+<li><p><span class="math inline">\(\neg F \land \neg R\)</span>: Finland and Russia both are not democracies.</p></li>
+</ol>
+<p>In other words, if <span class="math inline">\(F \land R\)</span> is false, then we know at least one of <span class="math inline">\(F\)</span> or <span class="math inline">\(R\)</span> must be false — but without other information, we can’t say which one. In other other words, we can conclude from <span class="math inline">\(\neg (F \land R)\)</span> that <span class="math inline">\(\neg F \lor \neg R\)</span>. The negation of an “and” statement gives us an “or” statement.</p>
+<p>I’m highlighting this because I don’t want you to be tempted to treat the formal logic operators like addition and multiplication. In the realm of high-school algebra, you might remember that <span class="math display">\[-(f + r) = (-f) + (-r).\]</span> Yet in the realm of sentential logic, the statement <span class="math inline">\(\neg (F \land R)\)</span> is <u>not</u> equivalent to <span class="math inline">\(\neg F \land \neg R\)</span>.</p>
+<p><span class="concept">De Morgan’s laws</span> are a pair of logical equivalences that tell us exactly how to combine negation with “and” and “or.” Before stating them formally, here’s how I think about them informally.</p>
+<ul>
+<li><p>An “and” statement is strong, since <span class="math inline">\(F \land R\)</span> means that both underlying statements are true. The negation of an “and” statement must then be weak, because <span class="math inline">\(\neg (F \land R)\)</span> only means that at least one of the underlying statements is false.</p></li>
+<li><p>An “or” statement is weak, since <span class="math inline">\(F \lor R\)</span> only means that at least one of the underlying statements is true. The negation of an “or” statement must then be strong, because <span class="math inline">\(\neg (F \lor R)\)</span> means that both underlying statements are false.</p></li>
+<li><p>Therefore, the negation of an “and” statement must be an “or” statement, and vice versa.</p></li>
+</ul>
+<div id="thm-demorgan-logic" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.3 (De Morgan’s laws)</strong></span> <span class="math display">\[\begin{align*}
+\neg (P \land Q) &amp;\leftrightarrow (\neg P \lor \neg Q) \\
+\neg (P \lor Q) &amp;\leftrightarrow (\neg P \land \neg Q)
+\end{align*}\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>I will prove the first law with a truth table, then leave the second one to you as an exercise.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th><span class="math inline">\(P \land Q\)</span></th>
+<th><span class="math inline">\(\neg (P \land Q)\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(\neg Q\)</span></th>
+<th><span class="math inline">\(\neg P \lor \neg Q\)</span></th>
+<th><span class="math inline">\(\neg (P \land Q) \leftrightarrow (\neg P \lor \neg Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof of the second law
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th><span class="math inline">\(P \lor Q\)</span></th>
+<th><span class="math inline">\(\neg (P \lor Q)\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(\neg Q\)</span></th>
+<th><span class="math inline">\(\neg P \land \neg Q\)</span></th>
+<th><span class="math inline">\(\neg (P \lor Q) \leftrightarrow (\neg P \land \neg Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="odd">
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="methods-of-proof" class="level2 page-columns page-full" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="methods-of-proof"><span class="header-section-number">1.2</span> Methods of proof</h2>
+<p>The vast majority of proofs you’ll read — and write — will not be in the form of a truth table. The number of rows in the truth table grows exponentially with the number of sentences, making it unwieldy to use truth tables to prove complex claims. For example, it is hard to imagine using a truth table to prove the <a href="https://en.wikipedia.org/wiki/Median_voter_theorem">median voter theorem</a> <span class="citation" data-cites="black1948rationale">(<a href="references.html#ref-black1948rationale" role="doc-biblioref">Black 1948</a>)</span>, an important but relatively simple result as formal theories of politics go.</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>“Grows exponentially” is a phrase with a precise meaning that people often use imprecisely. Here I mean it in the <a href="https://en.wikipedia.org/wiki/Exponential_growth">literal sense</a>, as a compound statement built from <span class="math inline">\(N\)</span> underlying sentences requires a truth table with <span class="math inline">\(2^N\)</span> rows. In words, each additional sentence doubles the number of rows in the truth table.</p>
+</div></div><p>A proof is written in ordinary language, just with a bit more attention to precision than you might use in other ordinary writing. The goal is to convince the reader of the truth of whatever claim you have made, following the basic rules of logical inference we have established here. In essence, you need to show the reader why any objection to your claim will ultimately fail.</p>
+<p>Use mathematical notation sparingly in proofs. Only use notation when it’s necessary for precision or brevity. In almost all settings, it is much better to write “Let <span class="math inline">\(n\)</span> be an odd number” than to write “Let <span class="math inline">\(n \in \{2m - 1 \mid m \in \mathbb{N}\}\)</span>.”</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading proofs
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I’m deliberately more verbose in the proofs here than in the proofs you’d see in a published paper, or even in most textbooks. The structure of arguments in those venues tends to be the same as the one here, though — they just have a bit less verbiage to hold the reader’s hand.</p>
+<p>In proofs in (other) textbooks and academic articles, you’ll often see phrases like “It is obvious that…” or “It is straightforward to show that…”. Students — and professors! — understandably find these statements frustrating or alienating, because whatever comes next often does not seem obvious or straightforward at all. But really, “It is obvious that…” is shorthand for:</p>
+<blockquote class="blockquote">
+<p>The statement that comes next can be proved using mathematical methods that a reader of this document would typically have extensive practice with. (For example, in a textbook about calculus, such methods would include arithmetic and algebra. In a paper in the <em>Journal of Economic Theory</em>, they would include calculus, differential equations, real analysis, and topology.) There aren’t any new tricks or novel arguments to reach this step, just chugging through calculations. You are welcome to do those calculations yourself to check my work, though I expect you won’t find anything particularly edifying along the way. Because space is limited in this book or journal article, I haven’t included all the gory details myself.</p>
+</blockquote>
+<p>What if the proof you’re reading says something is obvious or straightforward, but you can’t convince yourself it’s true? After getting out your legal pad and trying to work it out yourself, that’s when you should ask for help. I find myself in this situation often, and as of summer 2025 I’ve found that ChatGPT’s <code>o4-mini-high</code> model gives great explanations when I’m stuck on something mathematical. And throughout your careers here, you can always feel free to ask me or the other methods/formal theory faculty when you’re stuck on something!</p>
+<p>Proofs conventionally end with “QED”, <span class="math inline">\(\blacksquare\)</span>, or <span class="math inline">\(\square\)</span>. As of summer 2025, the <a href="https://quarto.org">Quarto</a> software I’m using to write these notes doesn’t insert any of these symbols automatically, so you’ll just have to take the bottom of the box that the proof lives in as my “QED” variant.</p>
+</div>
+</div>
+<section id="proving-an-if-statement" class="level3 page-columns page-full" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="proving-an-if-statement"><span class="header-section-number">1.2.1</span> Proving an “if” statement</h3>
+<p>Let’s practice writing a plain language proof of a statement about formal logic. The statement I want to prove is called the law of transitivity: if we know that <span class="math inline">\(P \to Q\)</span> and that <span class="math inline">\(Q \to R\)</span>, then we can conclude that <span class="math inline">\(P \to R\)</span>.</p>
+<div id="prp-law-of-transitivity" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1.1 (Law of transitivity)</strong></span> Logical implication is transitive: <span class="math inline">\([(P \to Q) \land (Q \to R)] \to (P \to R)\)</span>.</p>
+</div>
+<p>We <em>could</em> prove this using a truth table, and in fact the <a href="https://math.stackexchange.com/questions/280893/how-do-i-prove-the-transitivity-of-a-set-of-implications">first Google hit for “transitivity of implication”</a> does exactly that. But I want to walk you through how I’d write an ordinary language proof, step by step. I’ll put each step in a blockquote, with explanation thereafter.</p>
+<blockquote class="blockquote">
+<p>Suppose <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to R\)</span>.</p>
+</blockquote>
+<p>The most common way to kick off a proof of an if-then statement is to state that we will assume the premise (the “if”) is true. That might seem like a weird thing to do when the premise could very well be false. However, remember that in formal logic, the only way to falsify a conditional statement is to show that the conclusion might fail when the premise is true. If the premise is false, then the conditional is (vacuously) true. So to demonstrate the overall truth of the conditional statement, it’s enough for us to show that the conclusion must hold whenever the premise does.</p>
+<p>Having assumed the premise, where do we go from here? We ultimately need to reach the conclusion that <span class="math inline">\(P \to R\)</span>. To get there, we’re going to use the common trick of breaking the proof into cases. We know that either <span class="math inline">\(P\)</span> is true or <span class="math inline">\(P\)</span> is false (i.e., <span class="math inline">\(P \lor \neg P\)</span> is a tautology). Let’s show that either one of these possibilities leads to the conclusion we want, namely that <span class="math inline">\(P \to R\)</span>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>Are you skeptical that this trick is logically valid? If so, don’t worry — you’ll prove its logical validity yourself on the problem set.</p>
+</div></div><blockquote class="blockquote">
+<p>There are two cases to consider: when <span class="math inline">\(P\)</span> is true, and when <span class="math inline">\(P\)</span> is false. We will show that <span class="math inline">\(P \to R\)</span> holds in both cases.</p>
+</blockquote>
+<p>As you might already know from trying to read proofs, it’s easy for a reader to get lost in the formal logic. So the line above is just an explicit signpost, attempting to signal: “We’re going to break the proof into mutually exhaustive cases, showing that each case leads to our desired conclusion, and thus the conclusion must hold.” It’s kind of like writing comments in your R code — not strictly necessary for the program to work, but very helpful for anyone who’s trying to follow it.</p>
+<blockquote class="blockquote">
+<p>First, suppose <span class="math inline">\(P\)</span> is true. Because <span class="math inline">\(P\)</span> and <span class="math inline">\(P \to Q\)</span> are both true, we conclude by modus ponens that <span class="math inline">\(Q\)</span> is true.</p>
+</blockquote>
+<p>We’ve started the analysis of the first case here. You can start to see why the cases trick is useful: having assumed initially that <span class="math inline">\(P \to Q\)</span>, and now that <span class="math inline">\(P\)</span> is true as well, we can proceed to <span class="math inline">\(Q\)</span>. Here we make that line of logic explicit.</p>
+<p>There’s also a meta-lesson here about knowing your audience when you write a proof. I’m setting out this proof as an introduction for students without much background in reading or writing math-style proofs. Hence, I’m trying to be detailed and explicit, down to acknowledging that modus ponens is the logical rule I’m using to infer <span class="math inline">\(Q\)</span> from the combination of <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(P\)</span>. In a proof for an article I were submitting to a journal, I would not bother to say I was using modus ponens; I would assume my readers were familiar with the basic rules of logical inference. That said, when you aren’t sure how to proceed, err on the side of giving details rather than skipping steps.</p>
+<blockquote class="blockquote">
+<p>Then, because <span class="math inline">\(Q\)</span> and <span class="math inline">\(Q \to R\)</span>, we conclude (again by modus ponens) that <span class="math inline">\(R\)</span> is true. Because <span class="math inline">\(P\)</span> and <span class="math inline">\(R\)</span> are both true, the statement <span class="math inline">\(P \to R\)</span> is true as well.</p>
+</blockquote>
+<p>Here we keep following the line of logic, using our inference about <span class="math inline">\(Q\)</span> in the last step to support an inference of <span class="math inline">\(R\)</span> in this step. We then reach the conclusion we were looking for, namely that when we start with <span class="math inline">\(P\)</span> (in addition to the assumptions of <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to R\)</span> that we made at the outset of the proof) we get to <span class="math inline">\(P \to R\)</span>.</p>
+<blockquote class="blockquote">
+<p>Second, suppose <span class="math inline">\(P\)</span> is false. Then it is vacuously true that <span class="math inline">\(P \to R\)</span>.</p>
+</blockquote>
+<p>The second case is simpler than the last one. (I personally try to arrange my proofs so that the trickier case comes first, under the assumption that readers’ attention is ever-waning, but it’s really a judgment call.) And again we’ve written it up to try to be friendly to the reader. We could have simply written, “Second, <span class="math inline">\(\neg P\)</span> implies <span class="math inline">\(P \to R\)</span>,” but with just a few more words we make it clear precisely why we’re drawing this conclusion.</p>
+<blockquote class="blockquote">
+<p>Altogether, we have shown that <span class="math inline">\(P \to R\)</span> whether <span class="math inline">\(P\)</span> is true or false. We conclude that <span class="math inline">\(P \to R\)</span>.</p>
+</blockquote>
+<p>This is one last little bit of logical signposting, summing up the line of logic that has gotten us to the ultimate conclusion. This might be overkill when the proof is so short, but I’m including it by my own logic that it’s better to do a bit too much hand-holding than a bit too little.</p>
+<p>Putting all of this together to prove <a href="#prp-law-of-transitivity" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a>:</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Suppose <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to R\)</span>. There are two cases to consider: when <span class="math inline">\(P\)</span> is true, and when <span class="math inline">\(P\)</span> is false. We will show that <span class="math inline">\(P \to R\)</span> holds in both cases.</p>
+<p>First, suppose <span class="math inline">\(P\)</span> is true. Because <span class="math inline">\(P\)</span> and <span class="math inline">\(P \to Q\)</span> are both true, we conclude by modus ponens that <span class="math inline">\(Q\)</span> is true. Then, because <span class="math inline">\(Q\)</span> and <span class="math inline">\(Q \to R\)</span>, we conclude (again by modus ponens) that <span class="math inline">\(R\)</span> is true. Because <span class="math inline">\(P\)</span> and <span class="math inline">\(R\)</span> are both true, the statement <span class="math inline">\(P \to R\)</span> is true as well.</p>
+<p>Second, suppose <span class="math inline">\(P\)</span> is false. Then it is vacuously true that <span class="math inline">\(P \to R\)</span>.</p>
+<p>Altogether, we have shown that <span class="math inline">\(P \to R\)</span> whether <span class="math inline">\(P\)</span> is true or false. We conclude that <span class="math inline">\(P \to R\)</span>.</p>
+</div>
+<div id="exr-prove-modus-tollens" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.6</strong></span> Write a plain language proof of the modus tollens rule (<a href="#thm-modus-tollens" class="quarto-xref">Theorem&nbsp;<span>1.2</span></a>).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Your proof will of course differ from mine, but here’s how I approached it.</p>
+<p>Suppose that <span class="math inline">\(P \to Q\)</span> is true and that <span class="math inline">\(Q\)</span> is false. We know from <a href="#exr-contrapositive" class="quarto-xref">Exercise&nbsp;<span>1.5</span></a> that <span class="math inline">\(P \to Q\)</span> is logically equivalent to the contrapositive <span class="math inline">\(\neg Q \to \neg P\)</span>. Then, because we know that <span class="math inline">\(\neg Q\)</span> and <span class="math inline">\(\neg Q \to \neg P\)</span> are both true, we infer by modus ponens that <span class="math inline">\(\neg P\)</span> is true. Consequently, we have proved that the conjunction of <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(\neg Q\)</span> implies <span class="math inline">\(\neg P\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-perfect-square-even" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.7</strong></span> Assume <span class="math inline">\(a\)</span> is an integer. Write a plain language proof of the claim that if <span class="math inline">\(a^2\)</span> is even, then <span class="math inline">\(a\)</span> is even. (An integer <span class="math inline">\(a\)</span> is even if it is divisible by 2: there is some integer <span class="math inline">\(n\)</span> such that <span class="math inline">\(a = 2 \times n\)</span>.)</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I will prove the contrapositive. Assume <span class="math inline">\(a\)</span> is not even, so it is not a factor of 2. Then <span class="math inline">\(a^2 = a \times a\)</span> also is not a factor of 2 and is not even. We have shown that if <span class="math inline">\(a\)</span> is not even, then <span class="math inline">\(a^2\)</span> is not even; this is equivalent to the claim that if <span class="math inline">\(a^2\)</span> is even, then <span class="math inline">\(a\)</span> is even.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="proving-an-if-and-only-if-statement" class="level3 page-columns page-full" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="proving-an-if-and-only-if-statement"><span class="header-section-number">1.2.2</span> Proving an “if and only if” statement</h3>
+<p>A claim of logical equivalence (<span class="math inline">\(P \leftrightarrow Q\)</span>) is a claim that two implications hold (<span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to P\)</span>). So the most straightforward way to prove that <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are equivalent is to prove each implication individually.</p>
+<p>As an example, let’s prove that the “and” operator is associative, meaning that <span class="math inline">\((P \land Q) \land R\)</span> is logically equivalent to <span class="math inline">\(P \land (Q \land R)\)</span>. The associative property is convenient because, at a minimum, it lets us kill the parentheses and write <span class="math inline">\(P \land Q \land R\)</span>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>But be careful: you can’t necessarily change or drop parentheses when you’re using different operators. To wit, <span class="math inline">\((P \land Q) \lor R\)</span> is not logically equivalent to <span class="math inline">\(P \land (Q \lor R)\)</span>.</p>
+</div></div><div id="prp-land-associative" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1.2 (Associativity of “and”)</strong></span> The “and” operator is associative: <span class="math inline">\([(P \land Q) \land R] \leftrightarrow [P \land (Q \land R)]\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We begin by proving that <span class="math inline">\((P \land Q) \land R\)</span> implies <span class="math inline">\(P \land (Q \land R)\)</span>. Suppose it is true that <span class="math inline">\((P \land Q) \land R\)</span>. Then it must be the case that <span class="math inline">\(P \land Q\)</span> is true, as is <span class="math inline">\(R\)</span>. Because <span class="math inline">\(P \land Q\)</span> is true, we infer that <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are each true as well. Because <span class="math inline">\(Q\)</span> and <span class="math inline">\(R\)</span> are true, <span class="math inline">\(Q \land R\)</span> is true. Finally, because <span class="math inline">\(P\)</span> and <span class="math inline">\(Q \land R\)</span> are each true, it is true that <span class="math inline">\(P \land (Q \land R)\)</span>.</p>
+<p>The proof that <span class="math inline">\(P \land (Q \land R)\)</span> implies <span class="math inline">\((P \land Q) \land R\)</span> is similar. Suppose that <span class="math inline">\(P \land (Q \land R)\)</span> is true. We infer that <span class="math inline">\(P\)</span> is true and that <span class="math inline">\(Q \land R\)</span> is true, and from the latter we infer that <span class="math inline">\(Q\)</span> and <span class="math inline">\(R\)</span> are each true. The truth of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> gives us <span class="math inline">\(P \land Q\)</span>, which combined with the truth of <span class="math inline">\(R\)</span> gives us <span class="math inline">\((P \land Q) \land R\)</span>.</p>
+</div>
+<p>Once again, notice the signposting in the way the proof is written. You want to clearly delineate when you’re proving one direction versus when you’re proving the other. This is particularly important for longer proofs, where a reader might get lost about exactly which logical step you’re working through at any given point. You’ll also notice that the second paragraph explicitly states that the method of proof is similar to the first paragraph. This lets readers know that there’s nothing new going on here, so they can skim or skip if they understood the prior logic (or to read with skepticism if they didn’t buy the prior logic!).</p>
+<p>Another common way to prove a claim like <span class="math inline">\(P \leftrightarrow Q\)</span> is to prove that <span class="math inline">\(P \to Q\)</span> and that <span class="math inline">\(\neg P \to \neg Q\)</span>. This is equivalent to the last method of proof, as we know that the contrapositive <span class="math inline">\(\neg P \to \neg Q\)</span> is equivalent to <span class="math inline">\(Q \to P\)</span>. Despite this equivalence in a formal logical sense, sometimes for purposes of writing the proof in plain English it’s easier to approach from this direction.</p>
+<p>There’s one more way to prove a logical equivalence that’s more concise — but trickier — than the two methods I mentioned above. This third way is what I’ll call the <span class="concept">chain of equivalences</span>: to prove that <span class="math inline">\(P \leftrightarrow Q\)</span>, prove that there is some third statement <span class="math inline">\(R\)</span> for which <span class="math inline">\(P \leftrightarrow R\)</span> and <span class="math inline">\(R \leftrightarrow Q\)</span>. Or add more steps in between if you need: prove that <span class="math inline">\(P \leftrightarrow R\)</span>, that <span class="math inline">\(R \leftrightarrow S\)</span>, that <span class="math inline">\(S \leftrightarrow T\)</span>, and finally that <span class="math inline">\(T \leftrightarrow Q\)</span>. The important thing to keep in mind is that every step along the way must be a full equivalence (“if and only if”), not a mere conditional (just “if” or just “only if”). Usually I end up taking the long way to prove logical equivalences, but it’s a nice treat when I can find a single chain of equivalence that works. For an example of a proof that works this way, see <a href="#sec-proof-by-induction" class="quarto-xref"><span>Section 1.2.4</span></a> below.</p>
+</section>
+<section id="sec-proof-by-contradiction" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="sec-proof-by-contradiction"><span class="header-section-number">1.2.3</span> Proof by contradiction</h3>
+<p>Another common proof technique, the <span class="concept">proof by contradiction</span>, is built around a reductio ad absurdum. We want to prove that some statement <span class="math inline">\(P\)</span> is true. To do so, we show that if <span class="math inline">\(P\)</span> <u>isn’t</u> true, then we end up coming to some absurd conclusion. We infer that <span class="math inline">\(P\)</span> must be true.</p>
+<p>One of my favorite (silly) proofs by contradiction is the proof that every counting number <span class="math inline">\(n = 1, 2, \ldots\)</span> is interesting.</p>
+<div id="prp-interesting-numbers" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1.3 (not really a proposition)</strong></span> Every natural number <span class="math inline">\(n = 1, 2, \ldots\)</span> is interesting.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We will prove the claim by contradiction. Suppose the claim is false, so there is at least one natural number that is not interesting. By the <a href="https://en.wikipedia.org/wiki/Well-ordering_principle">well-ordering principle</a>, this means there is a number <span class="math inline">\(m\)</span> which is the smallest natural number that is not interesting. However, it is interesting that <span class="math inline">\(m\)</span> is the smallest natural number that is not interesting. We have reached a contradiction, having shown that <span class="math inline">\(m\)</span> is both uninteresting and interesting. Therefore, it must be the case that every natural number is interesting.</p>
+</div>
+<p>A more tedious, but also more famous and important, proof by contradiction is the proof that <span class="math inline">\(\sqrt{2}\)</span> cannot be expressed as a fraction. In other words, <span class="math inline">\(\sqrt{2}\)</span> is an irrational number.</p>
+<div id="prp-sqrt-two" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1.4</strong></span> There is no pair of integers <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> for which <span class="math inline">\(\sqrt{2} = \frac{p}{q}\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We will prove the claim by contradiction. Suppose the claim is false, so there is an integer <span class="math inline">\(p\)</span> and an integer <span class="math inline">\(q \neq 0\)</span> such that <span class="math inline">\(\sqrt{2} = \frac{p}{q}\)</span>.</p>
+<p>The first thing we are going to do is remove all common factors of 2 from <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>. In other words, we are going to reduce the fraction <span class="math inline">\(\frac{p}{q}\)</span> until the numerator is odd or the denominator is odd (or both). If <span class="math inline">\(p\)</span> or <span class="math inline">\(q\)</span> is odd, then let <span class="math inline">\(a = p\)</span> and let <span class="math inline">\(b = q\)</span>. Otherwise, if <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are both even, then divide both by 2. Continue this process until at least one of <span class="math inline">\(p\)</span> or <span class="math inline">\(q\)</span> is not divisible by 2, and let <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> be the results. Because we always divided the numerator and the denominator by the same factor, we end up with the same fraction: <span class="math inline">\(\frac{a}{b} = \frac{p}{q} = \sqrt{2}\)</span>.</p>
+<p>Because <span class="math inline">\(\frac{a}{b} = \sqrt{2}\)</span>, we have <span class="math inline">\(\frac{a^2}{b^2} = 2\)</span> and thus <span class="math inline">\(a^2 = 2 b^2\)</span>. Because <span class="math inline">\(b^2\)</span> is an integer, this means <span class="math inline">\(a^2\)</span> is divisible by 2 and thus is an even number, which in turn means <span class="math inline">\(a\)</span> is an even number (see <a href="#exr-perfect-square-even" class="quarto-xref">Exercise&nbsp;<span>1.7</span></a>). Therefore, because we constructed <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> so that one of them at most could be even, <span class="math inline">\(b\)</span> must not be an even number.</p>
+<p>Because <span class="math inline">\(a\)</span> is even and thus divisible by 2, it must be the case that <span class="math inline">\(a^2\)</span> is divisible by 4. This in turn means that <span class="math inline">\(a^2 / 2\)</span> is divisible by 2. But remember that <span class="math inline">\(a^2 = 2 b^2\)</span> and thus <span class="math inline">\(b^2 = a^2 / 2\)</span>, so we have that <span class="math inline">\(b^2\)</span> is even. This in turn implies that <span class="math inline">\(b\)</span> must be an even number (again see <a href="#exr-perfect-square-even" class="quarto-xref">Exercise&nbsp;<span>1.7</span></a>).</p>
+<p>By assuming that <span class="math inline">\(\sqrt{2}\)</span> is rational, we have come to the contradictory conclusion that there is an integer that is both even and not even. Therefore, <span class="math inline">\(\sqrt{2}\)</span> is not rational.</p>
+</div>
+<p>As we did with modus ponens (<a href="#thm-modus-ponens" class="quarto-xref">Theorem&nbsp;<span>1.1</span></a>) and modus tollens (<a href="#thm-modus-tollens" class="quarto-xref">Theorem&nbsp;<span>1.2</span></a>), we can use a truth table to establish the logical validity of proof by contradiction. First we need to state the logic behind it in the form of a compound sentence. We want to show that <span class="math inline">\(P\)</span> is true. To do so, we show that if <span class="math inline">\(P\)</span> is false, then we reach some conclusion that we know not to be true. I’m going to represent this with a special sentence <span class="math inline">\(F\)</span>, whose truth value is always <span class="ff">false</span>. (If you’re not comfortable with this, you could replace <span class="math inline">\(F\)</span> with the negation of a tautology, such as <span class="math inline">\(Q \land \neg Q\)</span>.) The idea behind proof by contradiction is that if <span class="math inline">\(\neg P\)</span> implies <span class="math inline">\(F\)</span>, then we conclude <span class="math inline">\(P\)</span> is true. Stated formally, the line of logic is <span class="math inline">\((\neg P \to F) \to P\)</span>.</p>
+<div id="thm-proof-by-contradiction" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.4 (Proof by contradiction)</strong></span> Letting <span class="math inline">\(F\)</span> be a sentence that is always false, <span class="math inline">\((\neg P \to F) \to P\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We can prove the claim using a truth table:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 19%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(F\)</span></th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(\neg P \to F\)</span></th>
+<th><span class="math inline">\((\neg P \to F) \to P\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+<tr class="even">
+<td><span class="ff">false</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+<td><span class="ff">false</span></td>
+<td><span class="tt">true</span></td>
+</tr>
+</tbody>
+</table>
+<p>Alternatively, here’s a plain language proof of the claim. Suppose <span class="math inline">\(\neg P \to F\)</span>. Either this claim is vacuously true, or else <span class="math inline">\(\neg P \land F\)</span>. Since <span class="math inline">\(\neg P \land F\)</span> cannot possibly be true, as <span class="math inline">\(F\)</span> is false, the claim must be vacuously true. Vacuous truth of <span class="math inline">\(\neg P \to F\)</span> means that <span class="math inline">\(\neg (\neg P)\)</span> is true, which is equivalent to <span class="math inline">\(P\)</span> being true. Therefore, <span class="math inline">\(\neg P \to F\)</span> implies that <span class="math inline">\(P\)</span> is true.</p>
+</div>
+</section>
+<section id="sec-proof-by-induction" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="sec-proof-by-induction"><span class="header-section-number">1.2.4</span> Proof by induction</h3>
+<p>Earlier we saw De Morgan’s laws (<a href="#thm-demorgan-logic" class="quarto-xref">Theorem&nbsp;<span>1.3</span></a>), which tell us that the negation of an “and” statement is an “or” statement, and vice versa. Intuitively, it seems like it should be true that for any number <span class="math inline">\(n\)</span> of statements, <span class="math inline">\(P_1, \ldots, P_n\)</span>, the negation <span class="math inline">\(\neg (P_1 \land \cdots \land P_n)\)</span> is logically equivalent to <span class="math inline">\(\neg P_1 \lor \cdots \lor \neg P_n\)</span>. De Morgan’s laws tell us that this holds in the special case <span class="math inline">\(n = 2\)</span>. But how can we show that it holds for a conjunction of <span class="math inline">\(n = 3\)</span>, or <span class="math inline">\(n = 100\)</span>, or <span class="math inline">\(n = 10^{10^{10}}\)</span> statements as well?</p>
+<p>To prove that De Morgan’s laws extend to a conjunction of any (finite) number of statements, we will write a <span class="concept">proof by induction</span>. This is a proof technique designed for the following situation:</p>
+<ol type="1">
+<li><p>We are dealing with a claim whose precise statement depends on a number <span class="math inline">\(n\)</span>. As shorthand to denote “a claim <span class="math inline">\(Q\)</span> whose precise form depends on a number <span class="math inline">\(n\)</span>”, we will write <span class="math inline">\(Q(n)\)</span>.</p>
+<p>In the De Morgan’s law example here, the claim <span class="math inline">\(Q(1)\)</span> is the trivial statement that <span class="math inline">\(\neg P_1 \leftrightarrow \neg P_1\)</span>. <span class="math inline">\(Q(2)\)</span> is the De Morgan’s law we already proved, <span class="math inline">\(\neg (P_1 \land P_2) \leftrightarrow (\neg P_1 \lor \neg P_2)\)</span>. <span class="math inline">\(Q(3)\)</span> is <span class="math inline">\(\neg (P_1 \land P_2 \land P_3) \leftrightarrow (\neg P_1 \lor \neg P_2 \lor \neg P_3)\)</span>. And so on.</p></li>
+<li><p>We want to show that <span class="math inline">\(Q(n)\)</span> is true for all numbers <span class="math inline">\(n = 1, 2, 3, \ldots\)</span>, and so on infinitely.</p>
+<p>In the De Morgan’s law example, we could definitely use a truth table to prove the statement for a reasonably small <span class="math inline">\(n\)</span>, like 3 or 4. But even once we get to <span class="math inline">\(n = 10\)</span>, we’re talking about a truth table with 1,024 rows. That seems like overkill to prove a claim that intuitively seems like it ought to be true.</p></li>
+</ol>
+<p>A proof by induction breaks the seemingly infinite task of proving <span class="math inline">\(Q(n)\)</span> for all <span class="math inline">\(n\)</span> into just two steps. First, in the <strong>base step</strong>, we prove that the claim <span class="math inline">\(Q(n)\)</span> is true for <span class="math inline">\(n = 1\)</span>. In the example here, <span class="math inline">\(Q(1)\)</span> is just the statement that <span class="math inline">\(\neg P_1 \leftrightarrow \neg P_1\)</span>, which of course is true. That establishes the base step.</p>
+<p>Second, in the <strong>induction step</strong>, we prove that for any number <span class="math inline">\(k\)</span>, if <span class="math inline">\(Q(k)\)</span> is true, then <span class="math inline">\(Q(k + 1)\)</span> is true. In combination, the base step and the induction step establish that every <span class="math inline">\(Q(n)\)</span> must be true. The induction step proves that <span class="math inline">\(Q(1) \to Q(2)\)</span>, and the base step proves that <span class="math inline">\(Q(1)\)</span> is true. Hence, by modus ponens, <span class="math inline">\(Q(2)\)</span> is true. The induction step proves that <span class="math inline">\(Q(2) \to Q(3)\)</span>, so again by modus ponens, <span class="math inline">\(Q(3)\)</span> is true. We can follow this chain of logic up to any <span class="math inline">\(n\)</span> that we want.</p>
+<p>The induction step is usually the trickier part of the proof. Let’s work through the induction step for our claim about De Morgan’s law.</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We need to show that <span class="math inline">\(Q(k)\)</span> implies <span class="math inline">\(Q(k + 1)\)</span>. To do that, as in a typical proof of a conditional statement, we will begin by assuming <span class="math inline">\(Q(k)\)</span> is true, i.e., that <span class="math display">\[\neg (P_1 \land \cdots \land P_k) \leftrightarrow (\neg P_1 \lor \cdots \lor \neg P_k).\]</span> Our goal is to show that <span class="math inline">\(Q(k + 1)\)</span> is true, i.e., that <span class="math display">\[\neg (P_1 \land \cdots \land P_k \land P_{k+1}) \leftrightarrow (\neg P_1 \lor \cdots \lor \neg P_k \lor \neg P_{k+1}).\]</span> We could separately prove each side of this implication, but we can also use a chain of equivalences.</p>
+<p>By the associativity of the “and” operator, we have <span class="math display">\[\neg (P_1 \land \cdots \land P_k \land P_{k+1}) \leftrightarrow \neg [(P_1 \land \cdots \land P_k) \land P_{k+1}].\]</span> By De Morgan’s laws, we have <span class="math display">\[\neg [(P_1 \land \cdots \land P_k) \land P_{k+1}] \leftrightarrow [\neg (P_1 \land \cdots \land P_k) \lor \neg P_{k+1}].\]</span> By our assumption that <span class="math inline">\(Q(k)\)</span> is true, we have <span class="math display">\[[\neg (P_1 \land \cdots \land P_k) \lor \neg P_{k+1}] \leftrightarrow [(\neg P_1 \lor \cdots \lor \neg P_k) \lor \neg P_{k+1}].\]</span> Finally, by the associativity of the “or” operator, we have <span class="math display">\[[(\neg P_1 \lor \cdots \lor \neg P_k) \lor \neg P_{k+1}] \leftrightarrow (\neg P_1 \lor \cdots \lor \neg P_k \lor \neg P_{k+1}).\]</span> Following the chain of equivalences, we have <span class="math display">\[\neg (P_1 \land \cdots \land P_k \land P_{k+1}) \leftrightarrow (\neg P_1 \lor \cdots \lor \neg P_k \lor \neg P_{k+1}),\]</span> establishing the induction step.</p>
+</div>
+<div id="exr-induction" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.8</strong></span> Use a proof by induction to prove that <span class="math inline">\(2^n \geq n + 1\)</span> for every counting number <span class="math inline">\(n = 1, 2, \ldots\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For the base step, we must show that <span class="math inline">\(2^1 \geq 1 + 1\)</span>. This holds because <span class="math inline">\(2^1 = 2 = 1 + 1\)</span>.</p>
+<p>For the induction step, we must show that if <span class="math inline">\(2^k \geq k + 1\)</span>, then <span class="math inline">\(2^{k+1} \geq (k + 1) + 1\)</span>. Suppose <span class="math inline">\(2^k \geq k + 1\)</span>. By definition, <span class="math inline">\(2^{k+1} = 2 \times 2^k\)</span>. We have assumed that <span class="math inline">\(2^k \geq k + 1\)</span>, which implies that <span class="math inline">\(2 \times 2^k \geq 2 \times (k + 1)\)</span>. Because <span class="math inline">\(k \geq 0\)</span>, we have <span class="math inline">\(2 \times (k + 1) \geq (k + 1) + 1\)</span>. Putting this all together, we have <span class="math display">\[2^{k+1} = 2 \times 2^k \geq 2 \times (k + 1) \geq (k + 1) + 1,\]</span> proving the induction step.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="concept-review" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="concept-review"><span class="header-section-number">1.3</span> Concept review</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Conceptual order</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Alphabetical order</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<dl>
+<dt><span class="concept">Provably true</span></dt>
+<dd>
+A statement whose truth can be defended against all challenges, using only rules of logical inference.
+</dd>
+<dt><span class="concept">Sentence</span></dt>
+<dd>
+In formal logic, a statement that must be either <span class="tt">true</span> or <span class="ff">false</span>, and cannot be both.
+</dd>
+<dt><span class="concept">Sentential logic</span></dt>
+<dd>
+A set of rules for deducing the truth of compound sentences.
+</dd>
+<dt><span class="concept">Negation</span></dt>
+<dd>
+An operation on a single sentence that flips the truth value of the sentence, denoted <span class="math inline">\(\neg P\)</span>. <span class="math inline">\(P\)</span> <span class="tt">true</span> means <span class="math inline">\(\neg P\)</span> is <span class="ff">false</span>, and <span class="math inline">\(P\)</span> <span class="ff">false</span> means <span class="math inline">\(\neg P\)</span> is <span class="tt">true</span>.
+</dd>
+<dt><span class="concept">And</span></dt>
+<dd>
+An operation on two sentences that indicates whether <u>both</u> are true, denoted <span class="math inline">\(P \land Q\)</span>.
+</dd>
+<dt><span class="concept">Or</span></dt>
+<dd>
+An operation on two sentences that indicates whether <u>at least one</u> is true, denoted <span class="math inline">\(P \lor Q\)</span>.
+</dd>
+<dt><span class="concept">Tautology</span></dt>
+<dd>
+A compound sentence that is always true, regardless of the truth value of the sentences from which it is constructed. For example, <span class="math inline">\(P \lor \neg P\)</span> (“<span class="math inline">\(P\)</span> is true, or <span class="math inline">\(P\)</span> is not true”) is a tautology.
+</dd>
+<dt><span class="concept">Truth table</span></dt>
+<dd>
+An algorithm for determining the truth value of compound sentences. Each row is a unique combination of truth values of the simple sentences from which the compound is formed, and each column is a component of the compound sentence you are trying to evaluate.
+</dd>
+<dt><span class="concept">Conditional</span></dt>
+<dd>
+An if-then statement, written in formal logic as <span class="math inline">\(P \to Q\)</span>, treated as the equivalent of <span class="math inline">\(\neg P \lor Q\)</span>.
+</dd>
+<dt><span class="concept">Necessary condition</span></dt>
+<dd>
+<span class="math inline">\(Q\)</span> is a necessary condition for <span class="math inline">\(P\)</span> when <span class="math inline">\(Q\)</span> has to be true whenever <span class="math inline">\(P\)</span> is true. The conditional <span class="math inline">\(P \to Q\)</span> means that <span class="math inline">\(Q\)</span> is necessary for <span class="math inline">\(P\)</span>.
+</dd>
+<dt><span class="concept">Sufficient condition</span></dt>
+<dd>
+<span class="math inline">\(P\)</span> is a sufficient condition for <span class="math inline">\(Q\)</span> when <span class="math inline">\(P\)</span> being true guarantees that <span class="math inline">\(Q\)</span> is true. The conditional <span class="math inline">\(P \to Q\)</span> means that <span class="math inline">\(P\)</span> is sufficient for <span class="math inline">\(Q\)</span>.
+</dd>
+<dt><span class="concept">Vacuously true</span></dt>
+<dd>
+A conditional statement <span class="math inline">\(P \to Q\)</span> that is true because its premise is known to be false, such as “If 0 = 1, then Peter Bils lives in a pineapple under the sea.”
+</dd>
+<dt><span class="concept">Modus ponens</span></dt>
+<dd>
+The logical rule that if <span class="math inline">\(P\)</span> is true and <span class="math inline">\(P \to Q\)</span> is true, then we can infer that <span class="math inline">\(Q\)</span> is true.
+</dd>
+<dt><span class="concept">Modus tollens</span></dt>
+<dd>
+The logical rule that if <span class="math inline">\(\neg Q\)</span> is true and <span class="math inline">\(P \to Q\)</span> is true, then we can infer that <span class="math inline">\(\neg P\)</span> is true.
+</dd>
+<dt><span class="concept">Logical equivalence</span></dt>
+<dd>
+<span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are logically equivalent when <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to P\)</span>. Logical equivalence holds when the truth values of the statements match — both are <span class="tt">true</span> or both are <span class="ff">false</span>.
+</dd>
+<dt><span class="concept">Biconditional</span></dt>
+<dd>
+The statement <span class="math inline">\(P \leftrightarrow Q\)</span>, meaning <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are logically equivalent.
+</dd>
+<dt><span class="concept">Contrapositive</span></dt>
+<dd>
+The translation of the statement <span class="math inline">\(P \to Q\)</span> into the logically equivalent statement <span class="math inline">\(\neg Q \to \neg P\)</span>.
+</dd>
+<dt><span class="concept">De Morgan’s laws</span></dt>
+<dd>
+Conceptually, the idea that the negation of an “and” statement is an “or” statement, and vice versa. Formally, the logical equivalences <span class="math inline">\(\neg (P \land Q) \leftrightarrow \neg P \lor \neg Q\)</span> and <span class="math inline">\(\neg (P \lor Q) \leftrightarrow \neg P \land \neg Q\)</span>.
+</dd>
+<dt><span class="concept">Proof by contradiction</span></dt>
+<dd>
+A proof where we show that <span class="math inline">\(P\)</span> is true by proving that <span class="math inline">\(\neg P\)</span> implies something impossible.
+</dd>
+<dt><span class="concept">Proof by induction</span></dt>
+<dd>
+A proof technique used when (a) we have a claim that depends on a number <span class="math inline">\(n\)</span> and (b) we want to prove it’s true for every <span class="math inline">\(n = 1, 2, 3, \ldots\)</span>. In the base step, we show that the claim is true for <span class="math inline">\(n = 1\)</span>. In the induction step, we assume the truth of the claim for <span class="math inline">\(n = k\)</span>, and we show that this implies the truth of the claim for <span class="math inline">\(n = k + 1\)</span>.
+</dd>
+</dl>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<dl>
+<dt><span class="concept">And</span></dt>
+<dd>
+An operation on two sentences that indicates whether <u>both</u> are true, denoted <span class="math inline">\(P \land Q\)</span>.
+</dd>
+<dt><span class="concept">Biconditional</span></dt>
+<dd>
+The statement <span class="math inline">\(P \leftrightarrow Q\)</span>, meaning <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are logically equivalent.
+</dd>
+<dt><span class="concept">Conditional</span></dt>
+<dd>
+An if-then statement, written in formal logic as <span class="math inline">\(P \to Q\)</span>, treated as the equivalent of <span class="math inline">\(\neg P \lor Q\)</span>.
+</dd>
+<dt><span class="concept">Contrapositive</span></dt>
+<dd>
+The translation of the statement <span class="math inline">\(P \to Q\)</span> into the logically equivalent statement <span class="math inline">\(\neg Q \to \neg P\)</span>.
+</dd>
+<dt><span class="concept">De Morgan’s laws</span></dt>
+<dd>
+Conceptually, the idea that the negation of an “and” statement is an “or” statement, and vice versa. Formally, the logical equivalences <span class="math inline">\(\neg (P \land Q) \leftrightarrow \neg P \lor \neg Q\)</span> and <span class="math inline">\(\neg (P \lor Q) \leftrightarrow \neg P \land \neg Q\)</span>.
+</dd>
+<dt><span class="concept">Logical equivalence</span></dt>
+<dd>
+<span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are logically equivalent when <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to P\)</span>. Logical equivalence holds when the truth values of the statements match — both are <span class="tt">true</span> or both are <span class="ff">false</span>.
+</dd>
+<dt><span class="concept">Modus ponens</span></dt>
+<dd>
+The logical rule that if <span class="math inline">\(P\)</span> is true and <span class="math inline">\(P \to Q\)</span> is true, then we can infer that <span class="math inline">\(Q\)</span> is true.
+</dd>
+<dt><span class="concept">Modus tollens</span></dt>
+<dd>
+The logical rule that if <span class="math inline">\(\neg Q\)</span> is true and <span class="math inline">\(P \to Q\)</span> is true, then we can infer that <span class="math inline">\(\neg P\)</span> is true.
+</dd>
+<dt><span class="concept">Necessary condition</span></dt>
+<dd>
+<span class="math inline">\(Q\)</span> is a necessary condition for <span class="math inline">\(P\)</span> when <span class="math inline">\(Q\)</span> has to be true whenever <span class="math inline">\(P\)</span> is true. The conditional <span class="math inline">\(P \to Q\)</span> means that <span class="math inline">\(Q\)</span> is necessary for <span class="math inline">\(P\)</span>.
+</dd>
+<dt><span class="concept">Negation</span></dt>
+<dd>
+An operation on a single sentence that flips the truth value of the sentence, denoted <span class="math inline">\(\neg P\)</span>. <span class="math inline">\(P\)</span> <span class="tt">true</span> means <span class="math inline">\(\neg P\)</span> is <span class="ff">false</span>, and <span class="math inline">\(P\)</span> <span class="ff">false</span> means <span class="math inline">\(\neg P\)</span> is <span class="tt">true</span>.
+</dd>
+<dt><span class="concept">Or</span></dt>
+<dd>
+An operation on two sentences that indicates whether <u>at least one</u> is true, denoted <span class="math inline">\(P \lor Q\)</span>.
+</dd>
+<dt><span class="concept">Proof by contradiction</span></dt>
+<dd>
+A proof where we show that <span class="math inline">\(P\)</span> is true by proving that <span class="math inline">\(\neg P\)</span> implies something impossible.
+</dd>
+<dt><span class="concept">Proof by induction</span></dt>
+<dd>
+A proof technique used when (a) we have a claim that depends on a number <span class="math inline">\(n\)</span> and (b) we want to prove it’s true for every <span class="math inline">\(n = 1, 2, 3, \ldots\)</span>. In the base step, we show that the claim is true for <span class="math inline">\(n = 1\)</span>. In the induction step, we assume the truth of the claim for <span class="math inline">\(n = k\)</span>, and we show that this implies the truth of the claim for <span class="math inline">\(n = k + 1\)</span>.
+</dd>
+<dt><span class="concept">Provably true</span></dt>
+<dd>
+A statement whose truth can be defended against all challenges, using only rules of logical inference.
+</dd>
+<dt><span class="concept">Sentence</span></dt>
+<dd>
+In formal logic, a statement that must be either <span class="tt">true</span> or <span class="ff">false</span>, and cannot be both.
+</dd>
+<dt><span class="concept">Sentential logic</span></dt>
+<dd>
+A set of rules for deducing the truth of compound sentences.
+</dd>
+<dt><span class="concept">Sufficient condition</span></dt>
+<dd>
+<span class="math inline">\(P\)</span> is a sufficient condition for <span class="math inline">\(Q\)</span> when <span class="math inline">\(P\)</span> being true guarantees that <span class="math inline">\(Q\)</span> is true. The conditional <span class="math inline">\(P \to Q\)</span> means that <span class="math inline">\(P\)</span> is sufficient for <span class="math inline">\(Q\)</span>.
+</dd>
+<dt><span class="concept">Tautology</span></dt>
+<dd>
+A compound sentence that is always true, regardless of the truth value of the sentences from which it is constructed. For example, <span class="math inline">\(P \lor \neg P\)</span> (“<span class="math inline">\(P\)</span> is true, or <span class="math inline">\(P\)</span> is not true”) is a tautology.
+</dd>
+<dt><span class="concept">Truth table</span></dt>
+<dd>
+An algorithm for determining the truth value of compound sentences. Each row is a unique combination of truth values of the simple sentences from which the compound is formed, and each column is a component of the compound sentence you are trying to evaluate.
+</dd>
+<dt><span class="concept">Vacuously true</span></dt>
+<dd>
+A conditional statement <span class="math inline">\(P \to Q\)</span> that is true because its premise is known to be false, such as “If 0 = 1, then Peter Bils lives in a pineapple under the sea.”
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-black1948rationale" class="csl-entry" role="listitem">
+Black, Duncan. 1948. <span>“On the Rationale of Group Decision-Making.”</span> <em>Journal of Political Economy</em> 56 (1): 23–34.
+</div>
+<div id="ref-przeworski2024decides" class="csl-entry" role="listitem">
+Przeworski, Adam. 2024. <span>“Who Decides What Is Democratic?”</span> <em>Journal of Democracy</em> 35 (3): 5–16.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./set_theory.html" class="pagination-link" aria-label="Set Theory">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Set Theory</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p xmlns:cc="http://creativecommons.org/ns#" class="cc-footer">
+This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -4,3 +4,5 @@
 tikz*.log
 .venvdir*
 *.code-workspace
+__pycache__
+indent.log
