@@ -1,4 +1,4 @@
-# Formal Logic and Proofs {#logic}
+# Formal Logic and Proofs {#sec-logic}
 
 When you think about math, you probably think about numbers.
 The majority of the math classes you've taken in your life have been about how to manipulate numbers.

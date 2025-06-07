@@ -1,4 +1,4 @@
-# Set Theory {#set-theory}
+# Set Theory {#sec-set-theory}
 
 ```{python setup, echo=FALSE}
 # Dictionary that our list of key concepts will live inside
@@ -158,6 +158,30 @@ To that end, let $a$ be any element of $A$.
 Because $a \in A$ and $A \subseteq B$, it follows that $a \in B$.
 Because $a \in B$ and $B \subseteq C$, it follows that $a \in C$.
 Because the element $a$ was chosen arbitrarily, we have shown that every element of $A$ is an element of $C$, and therefore $A \subseteq C$.
+:::
+
+::: {.callout-note title="Proving a \"for all\" claim"}
+The proof of @prp-subset-transitive gets into some formal logic that we didn't explicitly cover in @sec-logic.
+The proof relies on the fact that the proposition can be stated this way:
+
+- **Premise 1:** For all $a \in A$, $a \in B$. (i.e., $A \subseteq B$)
+
+- **Premise 2:** For all $b \in B$, $b \in C$. (i.e., $B \subseteq C$)
+
+- **Conclusion:** For all $a \in A$, $a \in C$. (i.e., $A \subseteq C$)
+
+The method I used in the proof of @prp-subset-transitive is the standard way to prove a "for all" statement.
+Suppose we are trying to prove a statement of the variety "for all $x \in X$, $P(x)$ is true," where $P(x)$ is some sentence about $x$.
+A proof like that typically starts with "Take an arbitrary $x \in X$," meaning we are assuming we know nothing about $x$ besides that it is a member of $X$.
+From there, we use what we know about $X$ to show that $P(x)$ is indeed true.
+
+You need to be very careful with negations of "for all" statements.
+We can falsify the statement "for all $x \in X$, $P(x)$ is true" by finding a single element of $X$ for which $P(x)$ is false.
+Hence, the negation of "for all $x \in X$, $P(x)$ is true" is [not]{.underline} "for all $x \in X$, $P(x)$ is false."
+Instead, the correct negation is "there exists an $x \in X$ for which $P(x)$ is false."
+
+FYI, in case it comes up in other things you read, the symbol $\forall$ means "for all" and the symbol $\exists$ means "there exists."
+I might write these on the whiteboard sometimes to save space, but I almost never use them in academic writing.
 :::
 
 Intuitively, two sets are equal if they have the same elements.

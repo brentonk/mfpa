@@ -191,7 +191,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="set-theory" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Set Theory</span></span></h1>
+<h1 class="title"><span id="sec-set-theory" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Set Theory</span></span></h1>
 </div>
 
 
@@ -358,6 +358,27 @@ Inclusion <span class="math inline">\(\in\)</span> versus subset <span class="ma
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>We need to show that every element of <span class="math inline">\(A\)</span> is also an element of <span class="math inline">\(C\)</span>. To do that, we will take an “arbitrary” element of <span class="math inline">\(A\)</span> — a mathematical object that we know nothing about, other than that it is an element of <span class="math inline">\(A\)</span> — and show that it is an element of <span class="math inline">\(C\)</span>. To that end, let <span class="math inline">\(a\)</span> be any element of <span class="math inline">\(A\)</span>. Because <span class="math inline">\(a \in A\)</span> and <span class="math inline">\(A \subseteq B\)</span>, it follows that <span class="math inline">\(a \in B\)</span>. Because <span class="math inline">\(a \in B\)</span> and <span class="math inline">\(B \subseteq C\)</span>, it follows that <span class="math inline">\(a \in C\)</span>. Because the element <span class="math inline">\(a\)</span> was chosen arbitrarily, we have shown that every element of <span class="math inline">\(A\)</span> is an element of <span class="math inline">\(C\)</span>, and therefore <span class="math inline">\(A \subseteq C\)</span>.</p>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="Proving a &quot;for all&quot; claim">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proving a “for all” claim
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The proof of <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>2.1</span></a> gets into some formal logic that we didn’t explicitly cover in <a href="logic.html" class="quarto-xref"><span>Chapter 1</span></a>. The proof relies on the fact that the proposition can be stated this way:</p>
+<ul>
+<li><p><strong>Premise 1:</strong> For all <span class="math inline">\(a \in A\)</span>, <span class="math inline">\(a \in B\)</span>. (i.e., <span class="math inline">\(A \subseteq B\)</span>)</p></li>
+<li><p><strong>Premise 2:</strong> For all <span class="math inline">\(b \in B\)</span>, <span class="math inline">\(b \in C\)</span>. (i.e., <span class="math inline">\(B \subseteq C\)</span>)</p></li>
+<li><p><strong>Conclusion:</strong> For all <span class="math inline">\(a \in A\)</span>, <span class="math inline">\(a \in C\)</span>. (i.e., <span class="math inline">\(A \subseteq C\)</span>)</p></li>
+</ul>
+<p>The method I used in the proof of <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>2.1</span></a> is the standard way to prove a “for all” statement. Suppose we are trying to prove a statement of the variety “for all <span class="math inline">\(x \in X\)</span>, <span class="math inline">\(P(x)\)</span> is true,” where <span class="math inline">\(P(x)\)</span> is some sentence about <span class="math inline">\(x\)</span>. A proof like that typically starts with “Take an arbitrary <span class="math inline">\(x \in X\)</span>,” meaning we are assuming we know nothing about <span class="math inline">\(x\)</span> besides that it is a member of <span class="math inline">\(X\)</span>. From there, we use what we know about <span class="math inline">\(X\)</span> to show that <span class="math inline">\(P(x)\)</span> is indeed true.</p>
+<p>You need to be very careful with negations of “for all” statements. We can falsify the statement “for all <span class="math inline">\(x \in X\)</span>, <span class="math inline">\(P(x)\)</span> is true” by finding a single element of <span class="math inline">\(X\)</span> for which <span class="math inline">\(P(x)\)</span> is false. Hence, the negation of “for all <span class="math inline">\(x \in X\)</span>, <span class="math inline">\(P(x)\)</span> is true” is <u>not</u> “for all <span class="math inline">\(x \in X\)</span>, <span class="math inline">\(P(x)\)</span> is false.” Instead, the correct negation is “there exists an <span class="math inline">\(x \in X\)</span> for which <span class="math inline">\(P(x)\)</span> is false.”</p>
+<p>FYI, in case it comes up in other things you read, the symbol <span class="math inline">\(\forall\)</span> means “for all” and the symbol <span class="math inline">\(\exists\)</span> means “there exists.” I might write these on the whiteboard sometimes to save space, but I almost never use them in academic writing.</p>
+</div>
+</div>
 <p>Intuitively, two sets are equal if they have the same elements. One of the annoying-but-ultimately-good things about math is that we have to be precise about statements like “they have the same elements”. Does <span class="math inline">\(\{1, 2, 3\}\)</span> equal <span class="math inline">\(\{3, 2, 1\}\)</span>? Does <span class="math inline">\(\{a, b, c\}\)</span> equal <span class="math inline">\(\{a, a, b, b, c, c\}\)</span>? The answer to both of these questions turns out to be “yes” — but why? It comes down to the formal definition of set equality, which we state as each set being a subset of the other.</p>
 <div id="def-set-equality" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2.3 (Set equality)</strong></span> The sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <span class="concept">equal</span>, denoted <span class="math inline">\(A = B\)</span>, if <span class="math inline">\(A \subseteq B\)</span> and <span class="math inline">\(B \subseteq A\)</span>.</p>
@@ -384,7 +405,7 @@ Inclusion <span class="math inline">\(\in\)</span> versus subset <span class="ma
 <div id="exr-equality-transitive" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.2</strong></span> Prove <a href="#cor-equality-transitive" class="quarto-xref">Corollary&nbsp;<span>2.1</span></a>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -393,7 +414,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We need to show that if <span class="math inline">\(A = B\)</span> and <span class="math inline">\(B = C\)</span>, then <span class="math inline">\(A \subseteq C\)</span> and <span class="math inline">\(C \subseteq A\)</span>. By the definition of set equality, if <span class="math inline">\(A = B\)</span> and <span class="math inline">\(B = C\)</span>, then <span class="math inline">\(A \subseteq B\)</span> and <span class="math inline">\(B \subseteq C\)</span>. <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>2.1</span></a> then implies that <span class="math inline">\(A \subseteq C\)</span>.</p>
 <p>Again by the definition of set equality, if <span class="math inline">\(C = B\)</span> and <span class="math inline">\(B = A\)</span>, then <span class="math inline">\(C \subseteq B\)</span> and <span class="math inline">\(B \subseteq A\)</span>. <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>2.1</span></a> then implies that <span class="math inline">\(C \subseteq A\)</span>.</p>
@@ -545,7 +566,7 @@ Figure&nbsp;2.2: Set differences.
 <div id="exr-exclusive-or" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.3</strong></span> Using the union, intersection, and the set difference, find a way to denote the set of elements that are in exactly one of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, but not both.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -554,7 +575,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><span class="math inline">\((A \cup B) \setminus (A \cap B)\)</span>.</p>
 </div>
@@ -573,7 +594,7 @@ Answer
 <li><p><span class="math inline">\(A \cap \emptyset = \emptyset\)</span>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -582,7 +603,7 @@ Answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li><p>We know from <a href="#prp-intersection-subset-union" class="quarto-xref">Proposition&nbsp;<span>2.2</span></a> that <span class="math inline">\(A \subseteq A \cup \emptyset\)</span>, so we only need to prove that <span class="math inline">\(A \cup \emptyset \subseteq A\)</span>. To this end, take any element <span class="math inline">\(x \in A \cup \emptyset\)</span>. By definition of the union, it must be the case that <span class="math inline">\(x \in A\)</span> or that <span class="math inline">\(x \in \emptyset\)</span>. The second of these is impossible, so it must be the case that <span class="math inline">\(x \in A\)</span>. As <span class="math inline">\(x\)</span> was chosen arbitrarily, this proves that <span class="math inline">\(A \cup \emptyset \subseteq A\)</span>. Finally, because <span class="math inline">\(A \subseteq A \cup \emptyset\)</span> and <span class="math inline">\(A \cup \emptyset \subseteq A\)</span>, we have <span class="math inline">\(A \cup \emptyset = A\)</span>.</p></li>
@@ -687,7 +708,7 @@ Figure&nbsp;2.4: De Morgan’s laws.
 <div id="exr-demorgan-sets" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.5</strong></span> Prove that <span class="math inline">\((A \cap B)^c = A^c \cup B^c\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -696,7 +717,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The steps are the same as in the proof of the first part above, so I’ll be a bit briefer about them.</p>
 <p>Take any <span class="math inline">\(x \in (A \cap B)^c\)</span>. Because <span class="math inline">\(x \notin A \cap B\)</span>, it must be the case that <span class="math inline">\(x \in A^c\)</span> or <span class="math inline">\(x \in B^c\)</span>. If <span class="math inline">\(x \in A^c\)</span>, then <span class="math inline">\(x \in A^c \cup B^c\)</span>. Otherwise, if <span class="math inline">\(x \notin A^c\)</span>, then <span class="math inline">\(x \in B^c\)</span> and thus <span class="math inline">\(x \in A^c \cup B^c\)</span>. Either way, we have <span class="math inline">\(x \in A^c \cup B^c\)</span>. Consequently, <span class="math inline">\((A \cap B)^c \subseteq A^c \cup B^c\)</span>.</p>
@@ -721,7 +742,7 @@ Answer
 <div id="exr-pres-vp-functions" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.6</strong></span> Come up with a function that maps the set of presidents, <span class="math inline">\(P\)</span>, into the set of vice presidents, <span class="math inline">\(Q\)</span>. Convince yourself that it satisfies the key requirement of a function — that every element in <span class="math inline">\(P\)</span> is associated with one, and exactly one, element in <span class="math inline">\(Q\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -730,7 +751,7 @@ One answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>I propose the function <span class="math inline">\(f : P \to Q\)</span> defined so that <span class="math inline">\(f(p) = \text{Joe Biden}\)</span> for every president <span class="math inline">\(p \in P\)</span>. This rule associates every president with a vice president, so it is a function.</p>
 <p>This might seem like a dumb example, but it meets the criteria that I set out, making it a valid answer. Math is legalistic in this way: the question asked for a function <span class="math inline">\(f : P \to Q\)</span>, I provided a function <span class="math inline">\(f : P \to Q\)</span>, and therefore I got the answer right. So if you’re here in a political science PhD program because your law school dreams didn’t quite work out, take comfort in knowing that you can still get to be a legalistic jackass when you’re working in the world of math.</p>
@@ -853,7 +874,7 @@ C &amp;= \{10, 17, 27, 42\}.
 \end{aligned}
 \]</span> Using the formal definition of equal cardinality, prove that <span class="math inline">\(|A| \neq |B|\)</span> and <span class="math inline">\(|A| \neq |C|\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -862,7 +883,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>To prove the first claim, we must show that there is no bijection mapping <span class="math inline">\(A\)</span> into <span class="math inline">\(B\)</span> — or vice versa (remember from <a href="#prp-inverse-bijective" class="quarto-xref">Proposition&nbsp;<span>2.3</span></a> that if there is a bijection from <span class="math inline">\(A\)</span> into <span class="math inline">\(B\)</span>, then there is also a bijection from <span class="math inline">\(B\)</span> into <span class="math inline">\(A\)</span>). We can easily show that there is no onto function mapping <span class="math inline">\(B\)</span> into <span class="math inline">\(A\)</span>. Consider any function <span class="math inline">\(f : B \to A\)</span> such that <span class="math inline">\(f(b) = \text{Coke}\)</span> for some <span class="math inline">\(b \in B\)</span> and <span class="math inline">\(f(b') = \text{Pepsi}\)</span> for some <span class="math inline">\(b' \in B\)</span>. Then we must have either <span class="math inline">\(b = 10\)</span> and <span class="math inline">\(b' = 17\)</span>, or else <span class="math inline">\(b = 17\)</span> and <span class="math inline">\(b' = 10\)</span>. Either way, there is no <span class="math inline">\(b'' \in B\)</span> such that <span class="math inline">\(f(b'') = \text{Mountain Dew}\)</span>. Therefore, there is no onto function, and thus no bijection, mapping <span class="math inline">\(B\)</span> into <span class="math inline">\(A\)</span>. We conclude that <span class="math inline">\(|A| \neq |B|\)</span>.</p>
 <p>The proof that <span class="math inline">\(|A| \neq |C|\)</span> follows almost the same steps. You just need to show that there is no onto function mapping <span class="math inline">\(A\)</span> into <span class="math inline">\(C\)</span>.</p>
