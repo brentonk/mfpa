@@ -1,0 +1,173 @@
+# Sequences and Series {#sec-sequences-series}
+
+```{r setup_r, echo=FALSE, message=FALSE}
+library("tidyverse")
+library("cowplot")
+theme_set(theme_cowplot())
+```
+
+```{python setup, echo=FALSE}
+# Set up concept dictionary
+concepts = {}
+```
+
+## Motivating example: Incumbent advantage {#sec-sequences-motivation}
+
+I'm going to propose an extremely (overly!) simple model of incumbent party advantage in legislative elections, ask a very simple question of the model, and show that it leads us into having to do an addition of infinitely many terms.
+
+Here's the model.
+There is a legislative seat that is contested every election cycle.
+In each election, the incumbent party wins with probability $p$ and loses with probability $1 - p$, where $0 < p < 1$.
+These elections are independent in the statistical sense, in that the probability of winning is $p$ in each cycle, regardless of what has happened before.
+The question is: given $p$, how many more terms would we expect the incumbent party to hold the seat, on average?
+
+Our goal here is to calculate the expected value,
+\begin{align}
+\MoveEqLeft{}
+\sum_{T = 0}^\infty T \cdot \Pr(\text{term length} = T) \\
+&= 0 \cdot \Pr(\text{term length} = 0)
++ 1 \cdot \Pr(\text{term length} = 1) \\
+&\quad + 2 \cdot \Pr(\text{term length} = 2)
++ 3 \cdot \Pr(\text{term length} = 3) + \cdots
+\end{align}
+
+::: {.callout-note title="Summation notation"}
+Don't remember what $\sum$ means?
+Don't panic!
+It's the [summation]{.concept} symbol, which we use when we're adding many things together.
+For example, think about summing up the square of every number from 1 to 39.
+We could write that as $$1^2 + 2^2 + \cdots + 38^2 + 39^2.$$
+A shorter way to write that, with the added advantage of leaving absolutely no ambiguity about precisely what we're summing up, would be with the summation symbol: $$\sum_{n=1}^{39} n^2.$$
+More generally, the notation $\sum_{n=k}^K x_n$ stands for the sum $x_k + x_{k+1} + \cdots + x_{K - 1} + x_K$.
+The notation $\sum_{n=k}^\infty x_n$ stands for a sum of infinitely many terms, $x_k + x_{k+1} + x_{k+2} + \cdots$ and so on indefinitely.
+:::
+
+```{python, echo=FALSE}
+concepts.update(
+    {
+        "Summation": "A concise way to denote adding up many terms.  The notation $\\sum_{i=1}^n x_i$ is shorthand for $x_1 + x_2 + \\cdots + x_n$."
+    }
+)
+```
+
+Given any term length $T$, there's a nonzero, though probably quite small, probability that the incumbent party will stay in office at least $T$ terms.
+This means we'll need to add together infinitely many numbers to calculate the expected term length.
+How can we even do that?
+Won't we just end up with infinity at the end?
+
+Let's get more specific about what we need to calculate here.
+
+- The probability that the incumbent party has 0 more terms is the probability of losing the election immediately, namely $1 - p$.
+
+- The probability of exactly one more term is the probability of winning the election this term and then losing the next one, namely $p \times (1 - p)$.
+
+- The probability of exactly two more terms is the probability of winning this election and the next one, then losing the one after that, namely $p \times p \times (1 - p)$.
+
+- The probability of exactly three more terms is the probability of winning the next three elections but losing the one after that, namely $p \times p \times p \times (1 - p)$.
+
+You might be starting to notice that there's a certain structure here.
+The probability that the incumbent party lasts $T$ more terms in office is $$\underbrace{p \times p \times \cdots \times p}_{\text{$T$ times}} \times (1 - p) = p^T (1 - p).$$
+This means the expected value we are trying to calculate is
+$$
+\sum_{T = 0}^\infty T \cdot \Pr(\text{term length} = T)
+= \sum_{T = 0}^\infty T p^T (1 - p).
+$$
+
+::: {.aside}
+You may be wondering why this formula applies to the $T = 0$ case too.
+It applies because $p^0 = 1$ for any nonzero number $p$.
+Therefore, when $T = 0$, we have $p^T (1 - p) = 1 - p$, the probability that the incumbent party loses office immediately.
+:::
+
+```{r, echo=FALSE}
+# Fix value of p and max term length to examine
+p <- 0.75
+term_max <- 40
+```
+
+Let's head to the computer to look at the components of this sum.
+Sadly we can't look at all of the infinitely many components, so let's just go up to $T = `r term_max`$.
+We will look at the case where $p = `r p`$.
+First, for each length up to `r term_max` terms, let's look at the probability that the terms lasts that long.
+
+::: {.aside}
+If you want to see the R code that generates these figures, go to the Quarto source code for these lecture notes [on GitHub](https://github.com/brentonk/mfpa).
+:::
+
+```{r, echo=FALSE}
+# Calculate the probability that the term lasts this long
+term_length <- 0:term_max
+prob <- p^term_length * (1 - p)
+
+# Calculate the individual components of the expected value sum
+ev_component <- term_length * prob
+
+# Calculate the cumulative sum through each term length
+cumsum_ev <- cumsum(ev_component)
+
+# Put the relevant items together in a data frame ("tibble")
+df_incumbency <- tibble(term_length, prob, ev_component, cumsum_ev)
+
+# Plot each term length probability
+df_incumbency |>
+  ggplot(aes(x = term_length, y = prob)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray75") +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = str_glue("Probability of each term length up to {term_max}"),
+    x = "Term length",
+    y = "Probability"
+  )
+```
+
+According to this model, if $p = 0.75$, then the probability that the incumbent party stays in power for 20 or more consecutive terms is negligible.
+But this is only part of the expected value calculation.
+To calculate the expected value, we multiply the probability of each possible term length by the term length itself.
+So let's multiply the probabilities from the last figure by the corresponding term length to see the individual components in the expected value calculation.
+
+```{r, echo=FALSE}
+df_incumbency |>
+  ggplot(aes(x = term_length, y = ev_component)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray75") +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Components of the expected value of term length",
+    x = "Term length",
+    y = "Term length times probability"
+  )
+```
+
+Term lengths of 3 or 4 end up with the highest weights in the expected value calculation, once we weight the probability of each term length by the number of terms it represents.
+Perhaps more importantly for our purposes, even after we multiply the probabilities by term length, we see that the values get very close to 0 around $T = 30$ or so.
+If this weren't the case --- i.e., if there were some nonzero floor on the expected value components --- then the sum we're trying to calculate, $\sum_{T=0}^\infty T p^T (1 - p)$, would necessarily be infinite.
+
+Finally, let's see what we get when we add up the expected value components up to each $T$.
+These finite calculations can't tell us what the *infinite* sum would equal, but we'll see that they give us a pretty good idea.
+
+```{r}
+df_incumbency |>
+  ggplot(aes(x = term_length, y = cumsum_ev)) +
+  geom_hline(yintercept = 3, linetype = "dashed", color = "gray75") +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Sum of e.v. components up to given term length",
+    x = "Term length",
+    y = "Cumulative sum"
+  )
+```
+
+It sure looks like our infinite sum tops out at 3.
+At this point, if I had to guess, I'd guess that the expected term length is 3 when $p = 0.75$.
+How can we say that with certainty instead of just guessing based on the eyeball test?
+Is there a formula that will let us calculate the expected term length for any value of the term-by-term retention probability $p$?
+By the end of this chapter, we'll have a mathematical foundation to answer these questions.
+
+```{python, echo=FALSE, results="asis"}
+from helpers import concept_table
+
+print(concept_table(concepts))
+```
+

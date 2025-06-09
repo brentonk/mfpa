@@ -9,6 +9,7 @@ book:
     - index.qmd
     - logic.qmd
     - set_theory.qmd
+    - sequences_series.qmd
     - references.qmd
   license: "CC BY-NC-SA 4.0"
   sidebar:
