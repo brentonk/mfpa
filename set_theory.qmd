@@ -160,7 +160,7 @@ Because $a \in B$ and $B \subseteq C$, it follows that $a \in C$.
 Because the element $a$ was chosen arbitrarily, we have shown that every element of $A$ is an element of $C$, and therefore $A \subseteq C$.
 :::
 
-::: {.callout-note title="Proving a \"for all\" claim"}
+::: {#nte-proving-for-all .callout-note title="Proving a \"for all\" claim"}
 The proof of @prp-subset-transitive gets into some formal logic that we didn't explicitly cover in @sec-logic.
 The proof relies on the fact that the proposition can be stated this way:
 

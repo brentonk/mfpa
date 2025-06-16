@@ -1,3 +1,7 @@
+---
+echo: false
+---
+
 # Sequences and Series {#sec-sequences-series}
 
 ```{r setup_r, echo=FALSE, message=FALSE}
@@ -164,6 +168,238 @@ At this point, if I had to guess, I'd guess that the expected term length is 3 w
 How can we say that with certainty instead of just guessing based on the eyeball test?
 Is there a formula that will let us calculate the expected term length for any value of the term-by-term retention probability $p$?
 By the end of this chapter, we'll have a mathematical foundation to answer these questions.
+
+
+## Sequences and Limits {#sec-sequences-limits}
+
+A [sequence]{.concept} is an infinite, ordered list of numbers.
+We write $\{x_n\}$ to denote the sequence $x_1, x_2, x_3, \ldots$, with $x_n$ standing for the $n$'th entry in the sequence.
+Unlike with sets, order and repetition matter in a sequence.
+For example, the sequence $0, 1, 0, 1, \ldots$ is distinct from the sequence $1, 0, 1, 0, \ldots$ and the sequence $0, 0, 1, 1, 0, 0, 1, 1, \ldots$.
+
+```{python, echo=FALSE}
+concepts.update(
+    {
+        "Sequence": "An infinite, ordered list of numbers typically denoted $\\{x_n\\}$.",
+    }
+)
+```
+
+::: {.callout-warning title="Sequences vs. sets"}
+Because we use curly brackets to denote both sequences and sets, there are some cases where it can be confusing to distinguish a single-element set from a sequence.
+The main context clue to look for is the presence of an index subscript: for example, $\{3\}$ isn't a sequence because there's no index variable.
+By the same token, it would be cruel and unusual for a mathematical writer to use $\{x_n\}$ to mean "the set whose sole element is $x_n$" rather than "the sequence $x_1, x_2, \ldots$."
+If you ever want to send a very strong signal that something is a sequence, you may use a subscript to explicitly call out the index, using the notation $\{x_n\}_{n=1}^\infty$.
+Or, you know, you can just say "the sequence $\{x_n\}$."
+Words are helpful!
+:::
+
+A sequence is ordered, in that it is sensible to talk about the first or tenth or 1,052,402nd element of a sequence.
+Additionally, any sequence we'll talk about in this course will consist of elements that are all real numbers.
+Putting these two facts together, you can also think of a sequence as a function that maps the set of natural numbers, $\mathbb{N}$, into the set of real numbers, $\mathbb{R}$.
+
+### Definition of a limit {#sec-def-limit}
+
+Think about the sequence $1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \ldots$.
+To denote this formally, let $\{x_n\}$ be the sequence where each $x_n = \frac{1}{n}$.
+The further we go along this sequence, the closer the values get to 0 --- though we never quite get all the way there.
+Indeed, we would say the [limit]{.concept} of the sequence is 0, which we'd denote by writing $\lim_{n \to \infty} x_n = 0$ or, more simply, $\{x_n\} \to 0$.
+
+```{r} 
+tibble(n = 1:40, x_n = 1/n) |>
+  ggplot(aes(x = n, y = x_n)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray75") +
+  labs(
+    title = "{1/n} → 0 as n → ∞",
+    x = "Index: n",
+    y = "Sequence value: 1/n"
+  )
+```
+
+```{python}
+concepts.update({
+  "Limit": "A point that a sequence $\\{x_n\\}$ approaches as $n$ grows larger and larger.  To denote $\\ell$ being the limit of $\\{x_n\\}$, we may write $\\lim_{n \\to \infty} x_n = \\ell$ or $\\{x_n\\} \\to \\ell$.  Some sequences have no limit.  See @def-limit for a fully rigorous mathematical definition of a limit.",
+  "Convergent sequence": "A sequence that has a finite limit.",
+  "Divergent sequence": "A sequence that has no finite limit, either because it has an infinite limit or because it oscillates.",
+})
+```
+
+What we need now is a precise mathematical notion of "getting closer and closer."
+The infinite nature of a sequence makes this tricky.
+We can't follow the sequence and see that it ends at 0, because the sequence has no end!
+To get around this issue, mathematicians use what I think of as a "challenge-response" definition of a limit.
+Here's what I mean by that.
+Suppose I have a sequence $\{x_n\}$ and claim that its limit is a number $\ell$.
+
+1. You **challenge** me by picking a number $\epsilon > 0$.
+   Think of this as you saying "I need you to show me that once we get far enough along the sequence, every value is within $\epsilon$ of your supposed limit."
+
+2. I **respond** to the challenge by identifying an index $N$ after which the sequence values are as close as you demand.
+   In particular, I need to show you that $\ell - \epsilon < x_n < \ell + \epsilon$ for all indices $n \geq N$.
+
+My claimed limit is true if and only if I can conjure up a valid response to any $\epsilon > 0$ that you might pick.
+The formal definition of a limit puts this process in precise mathematical terms.
+
+::: {#def-limit name="Finite limit"}
+The sequence $\{x_n\}$ has a [limit]{.concept} of $\ell \in \mathbb{R}$ if the following condition is satisfied: for any real number $\epsilon > 0$, we can identify an index $N$ such that $|x_n - \ell| < \epsilon$ for all $n \geq N$.
+The sequence is [convergent]{.concept} if and only if $\lim_{n \to \infty} x_n = \ell$ for some finite number $\ell$.
+:::
+
+To make the challenge-response process a bit more concrete, let's apply it to the problem of showing that $\lim_{n \to \infty} 1/n = 0$.
+
+::: {#exm-limit-harmonic-seq}
+We want to prove that $\lim_{n \to \infty} 1/n = 0$.
+To do so, we must show that for any choice of a number $\epsilon > 0$, we can find an index $N$ such that $-\epsilon < 1/n < \epsilon$ for all $n \geq N$.
+
+You can think about this as a "for all" claim: namely, that for all $\epsilon > 0$, there is an index $N$ that meets the requirement above.
+So to prove it, we will follow the method laid out in @nte-proving-for-all in the previous chapter.
+That is, we will take an "arbitrary" $\epsilon > 0$ --- a number $\epsilon$ that we know nothing about, besides that it's greater than 0 --- and prove that we can find an index $N$ that meets the requirement.
+
+*Proof:*
+Take an arbitrary $\epsilon > 0$.
+Because $\epsilon > 0$, the fraction $1/\epsilon$ is finite, though perhaps very large.
+Let $N$ be any integer greater than $1/\epsilon$.
+For any $n \geq N$, we have $$\frac{1}{n} \leq \frac{1}{N} < \frac{1}{1/\epsilon} = \epsilon.$$
+Combined with the fact that $1/n > 0 > -\epsilon$ for all $n$, we have shown that there exists an index $N$ such that $-\epsilon < 1/n < \epsilon$ for all $n \geq N$.
+Because $\epsilon$ was chosen arbitrarily, this completes the proof that $\lim_{n \to \infty} 1/n = 0$.
+:::
+
+::: {.aside}
+It would be reasonable to be skeptical about the (critical!) step in @exm-limit-harmonic-seq where I assert the existence of an integer greater than $1/\epsilon$.
+If you are indeed skeptical in this way, don't worry --- the [Archimedean property](https://en.wikipedia.org/wiki/Archimedean_property) of the real numbers guarantees it.
+(And if you weren't skeptical, perhaps you should have been?)
+:::
+
+Not every sequence is convergent.
+We call a sequence [divergent]{.concept} if it is not convergent.
+One reason that a sequence might be divergent is that the values in the sequence increase (or decrease) without bound.
+For example, the sequence $1, 2, 3, \ldots$ is divergent, as are the sequences $-1, -2, -3, \ldots$ and $1, -1, 2, -2, 3, -3, \ldots$.
+In fact, it turns out that a necessary condition for a sequence to converge is that the sequence be [bounded]{.concept}.
+
+::: {#def-bounded-sequence name="Bounded sequence"}
+We say the sequence $\{x_n\}$ is [bounded]{.concept} if there is a finite number $B$ such that $-B \leq x_n \leq B$ for all indices $n$.
+:::
+
+```{python} 
+concepts.update({
+  "Bounded sequence": "A sequence for which there is a finite number $B$ such that every $|x_n| \\leq B$.  Every convergent sequence is bounded, but not every bounded sequence is convergent.",
+})
+```
+
+::: {#prp-convergent-implies-bounded name="Convergent implies bounded"}
+If $\{x_n\}$ is convergent, then it is bounded.
+:::
+
+We're going to prove @prp-convergent-implies-bounded, but first we need to establish that a convergent sequence has exactly one limit.
+In other words, there can't be two different numbers $\ell$ and $\ell'$ such that $\{x_n\} \to \ell$ and $\{x_n\} \to \ell'$.
+Perhaps the uniqueness of the limit seems obvious, but it's something that we can and should explicitly prove.
+FYI, we kind of already implicitly assumed this property when we used the notation $\lim_{n \to \infty} x_n = \ell$.
+
+::: {#lem-limit-unique name="Uniqueness of limit"}
+A convergent sequence has exactly one limit: if $\{x_n\} \to \ell$ and $\{x_n\} \to \ell'$, then $\ell = \ell'$.
+:::
+
+::: {.proof}
+Before getting into the technicalities, here's the basic logic behind the proof.
+We're going to take a convergent sequence with a limit $\ell$.
+We then want to show that any other number $\ell' \neq \ell$ cannot be a limit of the sequence.
+To do that, we'll show that the requirement of getting closer and closer to $\ell$ is incompatible with getting closer and closer to $\ell'$.
+In particular, if the sequence meets *every* challenge to the claim that $\ell$ is the limit, then we can find *some* challenge to knock down the claim of $\ell'$ as a limit.
+
+Let $\{x_n\}$ be a convergent sequence with limit $\ell$.
+Consider any number $\ell' > \ell$.
+To show that $\ell'$ is not a limit of $\{x_n\}$, we will construct a "challenge" to the claim of $\ell'$ as a limit for which there is no valid response.
+Specifically, we must identify a value $\epsilon > 0$ such that for every index $n$, there is *some* index $m \geq n$ for which $|x_m - \ell'| \geq \epsilon$.
+
+I claim that $\epsilon = (\ell' - \ell) / 2$ (i.e., half the distance between the limit and the alternative we're trying to rule out) constitutes a challenge of the form that we need.
+Because $\{x_n\} \to \ell$, there is an index $N$ such that $$\ell - \epsilon < x_n < \ell + \epsilon$$ for all indices $n \geq N$.
+Now we want to show that for any index $n$, we can find an index $m \geq n$ such that $x_m < \ell' - \epsilon$ or $x_m > \ell' - \epsilon$.
+To this end, take any index $n$, and let $m$ be whichever is greater: the $N$ we identified for the $\epsilon$ challenge to $\ell$ as the limit, or $n$ itself.
+Because $m \geq N$, we have
+\begin{align}
+x_n &< \ell + \epsilon \\
+&= \ell + \frac{\ell' - \ell}{2} \\
+&= \ell' - \frac{\ell' - \ell}{2} \\
+&= \ell' - \epsilon.
+\end{align}
+We have shown that there is no valid response to the $\epsilon$ challenge to $\ell'$ as a limit of $\{x_n\}$.
+Therefore, $x_n \nrightarrow \ell'$.
+
+We have now ruled out any $\ell' > \ell$ as a limit of $\{x_n\}$.
+The steps to rule out any $\ell' < \ell$ are very similar: we consider the challenge with $\epsilon = (\ell - \ell') / 2$ and show that for any $n$ there is an $m \geq n$ for which $x_n > \ell' + \epsilon$, proving that $\{x_n\} \nrightarrow \ell'$.
+You can make these replacements in the previous paragraph yourself to rule out $\ell' < \ell$ as a limit of $\{x_n\}$.
+We conclude that no $\ell' \neq \ell$ may be a limit of $\{x_n\}$.
+(A math textbook or academic paper might say, "The proof for the $\ell' < \ell$ case is analogous" as shorthand for the paragraph I've just written here.)
+:::
+
+::: {.proof}
+Suppose the sequence $\{x_n\}$ is convergent, and let $\ell$ denote its limit.
+***FINISH ME***
+:::
+
+An equivalent statement would be the contrapositive, "If $\{x_n\}$ is not bounded, then it is not convergent."
+That's a useful fact in practice.
+If you observe that a sequence is unbounded, you can stop looking for a finite limit --- it can't have one.
+
+@prp-convergent-implies-bounded is an "if" statement, not an "if and only if."
+Just as every zebra is a mammal but not every mammal is a zebra, every convergent sequence is bounded but not every bounded sequence is convergent.
+The next exercise asks you to think of an example.
+
+::: {#exr-bounded-does-not-imply-convergent name="Bounded does not imply convergent"}
+Come up with an example of a bounded sequence that is not convergent.
+
+:::: {.callout-note title="Answer" collapse="true"}
+There are many examples of convergent sequences that are not bounded, but the simplest one I can think of is $0, 1, 0, 1, \ldots$, i.e., the sequence $\{x_n\}$ where each
+$$
+x_n = \begin{cases}
+0 & \text{if $n$ is odd}, \\
+1 & \text{if $n$ is even}.
+\end{cases}
+$$
+To prove that $\{x_n\}$ is not convergent, I will just rule out every number as a potential limit for it.
+
+- No $\ell \neq 0$ may be the limit of $\{x_n\}$.
+  To see why, take any $\ell \neq 0$.
+  To show that $\ell$ is not the limit, we need to find a "challenge" value $\epsilon$ for which there is no valid response.
+
+  I claim that $\epsilon = |\ell|$ is this type of unmeetable challenge.
+  To show that the challenge cannot be met, we need to show that at any point in the sequence, we can find a value there or further along that is at least $\epsilon$ away from $\ell$.
+  To do this, take any index $n$.
+  Then either $x_n = 0$ or $x_{n+1} = 0$, meaning that either $|x_n - \ell| \geq \epsilon$ or $|x_{n+1} - \ell| \geq \epsilon$.
+  Therefore, $\ell$ cannot be a limit of the sequence.
+
+- No $\ell \neq 1$ may be the limit of $\{x_n\}$ either.
+  The logic here is the same as in the previous step --- just take any $\ell \neq 1$ and show that the challenge with $\epsilon = |\ell - 1|$ cannot succeed.
+
+- The first step leaves $\ell = 0$ as the only possible limit, but the second step rules that out too.
+  Therefore, $\{x_n\}$ has no limit.
+::::
+:::
+
+***BOUNDED AND MONOTONE IMPLIES CONVERGENT.***
+
+::: {#def-limit-infinite name="Infinite limit"}
+For a sequence $\{x_n\}$, we say that $\{x_n\} \to \infty$ if the following condition is satisfied: for any real number $y$, we can identify an index $N$ such that $x_n > y$ for all $n \geq N$.
+Similarly, we say that $\{x_n\} \to -\infty$ if for any real number $y$, we can identify an index $N$ such that $x_n < y$ for all $n \geq N$.
+:::
+
+### Properties of limits {#sec-properties-of-limits}
+
+Don't worry if the formal definition of a limit (@def-limit) seems daunting and cumbersome to use.
+In practice, most of the time that you end up dealing with limits, you won't have to explicitly deal with the challenge-response structure.
+Instead, you can use helpful properties of limits to work up from limits you already know.
+For example, given that $\{1/n\} \to 0$ (as we showed above in @exm-limit-harmonic-seq), it seems intuitive that $\{1/n^2\} \to 0$ as well.
+Can we prove this without explicitly invoking the challenge-response logic?
+
+***SEQUENCE HAS AT MOST ONE LIMIT***
+
+***SUMS, PRODUCTS, CONSTANT MULTIPLES, RATIOS OF LIMITS.***
+
+***CONVERGENT SEQUENCE IS BOUNDED***
+
+***SEQUENCE MAY NOT HAVE A LIMIT***
+
 
 ```{python, echo=FALSE, results="asis"}
 from helpers import concept_table
