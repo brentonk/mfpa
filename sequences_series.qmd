@@ -291,48 +291,6 @@ concepts.update({
 If $\{x_n\}$ is convergent, then it is bounded.
 :::
 
-We're going to prove @prp-convergent-implies-bounded, but first we need to establish that a convergent sequence has exactly one limit.
-In other words, there can't be two different numbers $\ell$ and $\ell'$ such that $\{x_n\} \to \ell$ and $\{x_n\} \to \ell'$.
-Perhaps the uniqueness of the limit seems obvious, but it's something that we can and should explicitly prove.
-FYI, we kind of already implicitly assumed this property when we used the notation $\lim_{n \to \infty} x_n = \ell$.
-
-::: {#lem-limit-unique name="Uniqueness of limit"}
-A convergent sequence has exactly one limit: if $\{x_n\} \to \ell$ and $\{x_n\} \to \ell'$, then $\ell = \ell'$.
-:::
-
-::: {.proof}
-Before getting into the technicalities, here's the basic logic behind the proof.
-We're going to take a convergent sequence with a limit $\ell$.
-We then want to show that any other number $\ell' \neq \ell$ cannot be a limit of the sequence.
-To do that, we'll show that the requirement of getting closer and closer to $\ell$ is incompatible with getting closer and closer to $\ell'$.
-In particular, if the sequence meets *every* challenge to the claim that $\ell$ is the limit, then we can find *some* challenge to knock down the claim of $\ell'$ as a limit.
-
-Let $\{x_n\}$ be a convergent sequence with limit $\ell$.
-Consider any number $\ell' > \ell$.
-To show that $\ell'$ is not a limit of $\{x_n\}$, we will construct a "challenge" to the claim of $\ell'$ as a limit for which there is no valid response.
-Specifically, we must identify a value $\epsilon > 0$ such that for every index $n$, there is *some* index $m \geq n$ for which $|x_m - \ell'| \geq \epsilon$.
-
-I claim that $\epsilon = (\ell' - \ell) / 2$ (i.e., half the distance between the limit and the alternative we're trying to rule out) constitutes a challenge of the form that we need.
-Because $\{x_n\} \to \ell$, there is an index $N$ such that $$\ell - \epsilon < x_n < \ell + \epsilon$$ for all indices $n \geq N$.
-Now we want to show that for any index $n$, we can find an index $m \geq n$ such that $x_m < \ell' - \epsilon$ or $x_m > \ell' - \epsilon$.
-To this end, take any index $n$, and let $m$ be whichever is greater: the $N$ we identified for the $\epsilon$ challenge to $\ell$ as the limit, or $n$ itself.
-Because $m \geq N$, we have
-\begin{align}
-x_n &< \ell + \epsilon \\
-&= \ell + \frac{\ell' - \ell}{2} \\
-&= \ell' - \frac{\ell' - \ell}{2} \\
-&= \ell' - \epsilon.
-\end{align}
-We have shown that there is no valid response to the $\epsilon$ challenge to $\ell'$ as a limit of $\{x_n\}$.
-Therefore, $x_n \nrightarrow \ell'$.
-
-We have now ruled out any $\ell' > \ell$ as a limit of $\{x_n\}$.
-The steps to rule out any $\ell' < \ell$ are very similar: we consider the challenge with $\epsilon = (\ell - \ell') / 2$ and show that for any $n$ there is an $m \geq n$ for which $x_n > \ell' + \epsilon$, proving that $\{x_n\} \nrightarrow \ell'$.
-You can make these replacements in the previous paragraph yourself to rule out $\ell' < \ell$ as a limit of $\{x_n\}$.
-We conclude that no $\ell' \neq \ell$ may be a limit of $\{x_n\}$.
-(A math textbook or academic paper might say, "The proof for the $\ell' < \ell$ case is analogous" as shorthand for the paragraph I've just written here.)
-:::
-
 ::: {.proof}
 Suppose the sequence $\{x_n\}$ is convergent, and let $\ell$ denote its limit.
 ***FINISH ME***
