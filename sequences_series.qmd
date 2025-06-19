@@ -98,7 +98,7 @@ First, for each length up to `r term_max` terms, let's look at the probability t
 If you want to see the R code that generates these figures, go to the Quarto source code for these lecture notes [on GitHub](https://github.com/brentonk/mfpa).
 :::
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, label="fig-term-length-prob"}
 # Calculate the probability that the term lasts this long
 term_length <- 0:term_max
 prob <- p^term_length * (1 - p)
@@ -170,7 +170,303 @@ Is there a formula that will let us calculate the expected term length for any v
 By the end of this chapter, we'll have a mathematical foundation to answer these questions.
 
 
-## Sequences and Limits {#sec-sequences-limits}
+## Logarithms {#sec-logarithms}
+
+### Definition of a logarithm {#sec-definition-logarithm}
+
+Before getting into trickier questions about infinite sums, let's try to answer a simpler question about the underlying probabilities.
+We've already seen that the probability of lasting exactly $T$ consecutive terms is $p^T (1 - p)$.
+What if we wanted to reverse that?
+For example, what if we wanted to find the lowest term length with a 1% or less chance of occurring?
+
+We could solve this problem by "brute force": run the calculation for each successive term length $T$ until we get to the number we're looking for.
+Here's some R code that uses a `repeat` loop --- repeating the same steps over and over, until we explicitly tell the loop to `break` --- to implement the brute force method.
+
+```{r, echo=TRUE} 
+p <- 0.75  # retention probability each term
+q <- 0.01  # probability of term length we're looking for
+
+T <- 1     # starting value for term length
+repeat {
+  # Calculate probability of lasting T terms
+  prob <- p^T * (1 - p)
+
+  # If less than or equal to desired probability, stop repeating
+  if (prob <= q)
+    break
+
+  # Otherwise, add a term and repeat
+  T <- T + 1
+}
+
+# Show the result
+print(T)
+```
+
+The brute force method works, but it's inelegant and scales poorly.
+It would be nice if there were a formula to answer our question.
+Luckily, there is one!
+We just have to use a [logarithm]{.concept}, which is essentially the reverse of an exponent. 
+
+::: {#def-logarithm name="Logarithm"}
+For any positive number $a$ and any positive number $b \neq 1$, we say that $x = \log_b a$ (pronounced "$x$ is the logarithm, base $b$, of $a$") if and only if $b^x = a$.
+:::
+
+```{python} 
+concepts.update({
+  "Logarithm": "The reverse of an exponent.  In particular, for any numbers $a > 0$ and $b > 0$, if $a^x = b$, then we say that $x = \\log_a b$.  In this example, $a$ is called the base of the logarithm.  For example, $\\log_{10} 1000 = 3$ because $10^3 = 1000$.",
+  "Natural logarithm": "A logarithm whose base is Euler's number, $e$, the mathematical constant equal to roughly 2.718.  Whenever you see $\\log$ without an explicit base, you can assume it means a natural logarithm.",
+})
+```
+
+Here are a few examples of logarithms in action.
+
+- Because $2^3 = 2 \times 2 \times 2 = 8$, we have $\log_2 8 = 3$.
+  In words, 3 is the base-2 logarithm of 8.
+
+- Because $10^{-2} = \frac{1}{10^2} = \frac{1}{100} = 0.01$, we have $\log_{10} 0.01 = -2$.
+  In words, -2 is the base-10 logarithm of 0.01.
+
+- Because $64^{1/2} = \sqrt{64} = 8$, we have $\log_{64} 8 = 1/2$.
+  In words, 1/2 is the base-64 logarithm of 8.
+
+Using a logarithm, we can now more elegantly solve our "first consecutive term length whose probability is $q$ or less" problem.
+We are looking for the term length $T$ for which $$p^T (1 - p) \leq q.$$
+Equivalently, after dividing each side of the above equation by $1 - p$, we are looking for the term length $T$ for which $$p^T = \frac{q}{1 - p}.$$
+We can now solve for $T$ by taking the logarithm: $$T = \log_p \left(\frac{q}{1 - p}\right).$$
+
+Let's use this formula to redo the example we solved by brute force earlier.
+Based on what we saw from the brute force solution, we should expect the formula to spit out a number between 11 and 12.
+
+```{r, echo=TRUE}
+log(q / (1 - p), base = p)
+```
+
+### Properties of exponents and logarithms {#sec-exponent-logarithm-properties}
+
+Logarithms comes up surprisingly often in mathematical writing and in statistical programming, even in contexts where we're not solving equations of the form $a^x = b$.
+They're useful because of their helpful properties, some of which we'll now review.
+
+**Logarithm of a product.**
+You might remember that $b^{y + z} = b^y \times b^z$.
+As an example to make this more concrete, think about $2^5$:
+$$
+2^5 = 2^{2 + 3} = \underbrace{2 \times 2}_{2^2} \times \underbrace{2 \times 2 \times 2}_{2^3} = 2^2 \times 2^3.
+$$
+
+This fact about exponents is the basis for an extremely helpful property of logarithms: the logarithm of a product is the sum of the logarithms.
+
+::: {#prp-logarithm-product name="Logarithm of a product"}
+For any positive numbers $y$ and $z$ and any positive number $b \neq 1$, $$\log_b (y \times z) = \log_b y + \log_b z.$$
+:::
+
+::: {.proof}
+By the definition of the logarithm and the property of products of exponents,
+$$
+b^{\log_b y + \log_b z} = b^{\log_b y} \times b^{\log_b z} = y \times z.
+$$
+Therefore, again by the definition of the logarithm, $\log_b (y \times z) = \log_b y + \log_b z$.
+:::
+
+This property of logarithms is highly useful in both statistical computing and in calculus.
+In the statistical context, suppose you need to calculate the probability of some very large number of independent events, resulting in a calculation that looks like $$p_1 \times p_2 \times \cdots \times p_N,$$ where $N$ is some huge number.
+(For one thing, calculations like this are central to [maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation).)
+It turns out that computers are not so good at multiplying a lot of very small numbers together.
+At a certain point, as in the following example, the computer can't distinguish the product from 0.
+
+```{r} 
+set.seed(20250619)
+```
+
+```{r, echo=TRUE}
+# Randomly sample a bunch of numbers each close to 1/100
+size <- 500
+tiny_numbers <- runif(size, min = 0.009, max = 0.011)
+
+# double check there are no zeroes here
+summary(tiny_numbers)
+
+# prod() to multiply all numbers in a vector together
+prod(tiny_numbers)
+
+# not just rounding: R thinks the product is zero!
+prod(tiny_numbers) == 0
+```
+
+Because addition is easier for computers than multiplication, we can get a more accurate answer by converting our multiplication problem into an addition problem.
+Using @prp-logarithm-product, we know that for any positive base $b \neq 1$,
+$$\log_b (p_1 \times p_2 \times \cdots \times p_N) = \log_b p_1 + \log_b p_2 + \cdots + \log_b p_N.$$
+Let's use a base of $b = 10$, since then we can interpret our result in terms of decimal places.
+
+```{r, echo=TRUE}
+# Convert each number to its base-10 log
+logged_numbers <- log(tiny_numbers, base = 10)
+
+# sum() to add all numbers in a vector together
+sum(logged_numbers)
+```
+
+Now we have a much more accurate calculation: the product of the `r size` small numbers we randomly drew is $10^{`r sum(logged_numbers) |> round(3)`}$.
+
+**Logarithm of a power.**
+Again thinking about exponents, you might remember that $(b^y)^z = b^{y \times z}$.
+For example, think about $5^6$: $$5^6 = 5^{3 \times 2} = \underbrace{5 \times 5 \times 5}_{5^3} \times \underbrace{5 \times 5 \times 5}_{5^3} = (5^3)^2.$$
+This property of exponents delivers us another helpful property of logarithms: the log of $y$ to the $z$'th power is $z$ times the log of $y$.
+Or, as I think of it, logarithms turn powers into coefficients.
+
+::: {#prp-logarithm-power name="Logarithm of a power"}
+For any positive number $y$, any number $z$, and any positive base $b \neq 1$, $$\log_b (y^z) = z \log_b y.$$
+:::
+
+::: {.proof}
+By the definition of the logarithm and the property of powers of exponents, $$b^{z \log_b y} = (b^{\log_b y})^z = y^z.$$
+Therefore, again by the definition of the logarithm, $\log_b (y^z) = z \log_b y$.
+:::
+
+**Logarithm of a ratio.**
+We saw in @prp-logarithm-product that logarithms turn multiplication problems into addition problems.
+For similar reasons, they turn division problems into subtraction problems.
+
+::: {#prp-logarithm-ratio name="Logarithm of a ratio"}
+For any positive number $y$, any positive number $z$, and any positive base $b \neq 1$, $$\log_b \left(\frac{y}{z}\right) = \log_b y - \log_b z.$$
+:::
+
+You've already got the tools you need to prove this one yourself, so I'm leaving the proof as an exercise for you.
+
+::: {#exr-logarithm-ratio}
+Prove @prp-logarithm-ratio.
+(Hint: use both of the two previous properties of logarithms, @prp-logarithm-product and @prp-logarithm-power.)
+
+:::: {.callout-note title="Answer" collapse="true"}
+The ratio $\frac{y}{z}$ is equivalent to the product $y \times z^{-1}$.
+Therefore, @prp-logarithm-product implies $$\log_b \left(\frac{y}{z}\right) = \log_b (y \times z^{-1}) = \log_b y + \log_b (z^{-1}).$$
+Furthermore, @prp-logarithm-power gives us $\log_b (z^{-1}) = - \log_b z$.
+We conclude that $$\log_b \left(\frac{y}{z}\right) = \log_b y + \log_b (z^{-1}) = \log_b y - \log_b z.$$
+::::
+:::
+
+**Logarithm of 1.**
+The number 1 is special.
+Perhaps you recall the mathematical rule that $b^0 = 1$ for any positive number $b$.
+It follows immediately that the logarithm of 1 is always 0, regardless of which base we are working with.
+
+::: {#prp-logarithm-one name="Logarithm of 1"}
+For any positive base $b \neq 1$, $$\log_b 1 = 0.$$
+:::
+
+Let's go back to this rule that $b^0 = 1$ for any positive number $b$.
+The mathematical expression $b^0$ is confusing.
+We typically think of $b^x$ as meaning "multiply $b$ together $x$ times."
+How can we multiply $b$ together 0 times?
+What does that even mean?
+
+I'm sure someone out there has a deep explanation of why it makes sense for $b^0$ to equal 1.
+But I'm a mathematical pragmatist.
+What I know is that our rule that $b^{x + y} = b^x \times b^y$ would completely break down if $b^0$ had any value other than 1.
+For example, imagine instead that we had $b^0 = 42$ for some base $b$.
+Well, then, our usual rule about exponents of sums would give us
+$$
+b = b^1 = b^{0 + 1} = b^0 \times b^1 = 42 b.
+$$
+That can't be right!
+The only sensible way forward is to assume $b^0 = 1$.
+I don't lose any sleep over not having some kind of physical or visual intuition why this is the case, because I know that it's the only way to handle powers of 0 that doesn't cause other important things to break.
+
+Sometimes you'll run into things like this in mathematics.
+It's different for everyone.
+Some people get hung up on the "imaginary" number $i = \sqrt{-1}$, which I'm happy to tell you basically never comes up in the work political scientists do.
+Others get hung up on the idea of spaces with more than 3 dimensions, which very much do come up in the work we do.
+Heck, I know people who are skeptical of the idea of negative numbers because they can't visualize them.
+
+Whenever I run into one of these things that I can't directly visualize or comprehend with a physical analogy, I instead try to think about its role in the mathematical system I'm working with.
+I can't "see" why $b^0 = 1$, but I know that it ensures $b^{x + y} = b^x \times b^y$.
+I can't "picture" the imaginary number $i$, but I know that it lets us solve algebraic equations like $x^2 + 4 = 0$.
+I definitely can't "visualize" a linear function through 631-dimensional space, yet while I was writing these notes my computer was estimating a regression model with 631 parameters.
+Don't feel like you have to be able to picture every mathematical rule or object --- it's enough just to understand how it helps you solve a particular problem.
+
+**Base changes and the natural logarithm.**
+Suppose we know that the base-2 logarithm of 16 is 4, i.e., $\log_2 16 = 4$.
+What, if anything, does this tell us about the base-8 logarithm of 16?
+
+It turns out that there's a pretty handy formula to change a logarithm from one base to another.
+To change the base-$b$ logarithm of $y$ to a base-$c$ logarithm, we just rescale it by the base-$b$ logarithm of $c$.
+
+::: {#prp-logarithm-base-change name="Logarithm base changes"}
+For any positive number $y$ and any positive bases $b \neq 1$ and $c \neq 1$, $$\log_c y = \frac{\log_b y}{\log_b c}.$$
+:::
+
+::: {.proof}
+Using the definition of a logarithm twice and the properties of exponents once, we have
+$$
+y = c^{\log_c y} = (b^{\log_b c})^{\log_c y} = b^{(\log_b c) \times (\log_c y)}.
+$$
+Therefore, again by the definition of a logarithm, $$\log_b y = (\log_b c) \times (\log_c y).$$
+We obtain the proposition by dividing both sides by $\log_b c$.
+:::
+
+Now we can calculate the base-8 logarithm of 16.
+Since $2^4 = 16$, we know that $\log_2 16 = 4$.
+And since $2^3 = 8$, we know that $\log_2 8 = 3$.
+Therefore, using @prp-logarithm-base-change, we have $$\log_8 16 = \frac{\log_2 16}{\log_2 8} = \frac{4}{3}.$$
+
+In a sense, the upshot of @prp-logarithm-base-change is that it doesn't matter what base we use --- the value of the logarithm scales up or down with the value of the base, but the shape of the curve is the same regardless, as illustrated in @fig-log-scale.
+So if we're doing something like logging a variable in a linear regression, our results will be substantively the same regardless of which logarithmic base we use.
+Since the choice of base doesn't substantively affect our findings, we should choose whatever base is most convenient for interpretation.
+
+```{r label="fig-log-scale"} 
+expand_grid(
+  x = seq(1, 10, length.out = 501),
+  base = c(2, exp(1), 10)
+) |>
+  mutate(
+    y = log(x, base = base),
+    base = factor(
+      base,
+      levels = c(2, exp(1), 10),
+      labels = c("base 2", "base e", "base 10")
+    )
+  ) |>
+  ggplot(aes(x = x, y = y)) +
+  geom_line(aes(color = base)) +
+  scale_x_continuous(
+    breaks = c(2, 4, 6, 8, 10),
+    minor_breaks = 1:10
+  ) +
+  background_grid() +
+  labs(
+    title = "Logarithms with different bases",
+    subtitle = "Curves are same shape, just different multiples of each other",
+    x = "x",
+    y = "base-b log of x"
+  )
+```
+
+This figure shows three common choices of base for the logarithm.
+You are probably familiar with the numbers 2 and 10.
+You might be less familiar with the number $e$, aka Euler's number, which is equal to roughly 2.718 and comes up repeatedly in high-end math.
+This number is important enough that we call the base-$e$ logarithm the [natural logarithm]{.concept}.
+For now, I'm going to ask you to trust me that $e$ is important --- you'll be able to see the reasoning a bit better once we get to calculus.
+
+In these notes, when I write $\log y$ without an explicit base, I mean the natural logarithm of $y$.
+Similarly, the `log()` function in R takes the natural logarithm if you don't specify a base.
+If you want to take a base-$e$ exponent in R, use the `exp()` function.
+
+::: {.callout-warning title="log versus ln"}
+In other contexts, including high school math (if my early-2000s experience still holds), people use $\ln$ to mean the natural logarithm and $\log$ to mean the base-10 algorithm.
+ChatGPT tells me that engineers are also fond of this usage.
+But in political science, economics, and statistics writing, as well as in the overwhelming majority of math textbooks at the college level and beyond, $\log$ means the natural logarithm.
+:::
+
+@prp-logarithm-base-change tells us why it's mostly harmless to just use the natural logarithm for everything.
+If for some reason you ever need to convert a natural logarithm to a different base, you can just use the formula $$\log_b y = \frac{\log y}{\log b}.$$
+
+
+## Sequences and limits {#sec-sequences-limits}
+
+In terms of our motivating example, we've used the logarithm to find the term length $T$ that corresponds to a particular probability of lasting that long, $p^T (1 - p)$.
+Looking at @fig-term-length-prob, it seems like these probabilities get closer and closer to 0 as $T$ increases, though they never quite hit 0 exactly.
+Is there a way we can say that more precisely?
+For that, we'll need to learn about sequences and their limits.
 
 A [sequence]{.concept} is an infinite, ordered list of numbers.
 We write $\{x_n\}$ to denote the sequence $x_1, x_2, x_3, \ldots$, with $x_n$ standing for the $n$'th entry in the sequence.
@@ -195,7 +491,8 @@ Words are helpful!
 :::
 
 A sequence is ordered, in that it is sensible to talk about the first or tenth or 1,052,402nd element of a sequence.
-Additionally, any sequence we'll talk about in this course will consist of elements that are all real numbers.
+Additionally, any sequence we'll talk about for now will consist of elements that are all real numbers.
+(I'll let you know if and when we're dealing with sequences of other types of mathematical object.)
 Putting these two facts together, you can also think of a sequence as a function that maps the set of natural numbers, $\mathbb{N}$, into the set of real numbers, $\mathbb{R}$.
 
 ### Definition of a limit {#sec-def-limit}
@@ -206,7 +503,7 @@ The further we go along this sequence, the closer the values get to 0 --- though
 Indeed, we would say the [limit]{.concept} of the sequence is 0, which we'd denote by writing $\lim_{n \to \infty} x_n = 0$ or, more simply, $\{x_n\} \to 0$.
 
 ```{r} 
-tibble(n = 1:40, x_n = 1/n) |>
+tibble(n = 1:40, x_n = 1 / n) |>
   ggplot(aes(x = n, y = x_n)) +
   geom_point() +
   geom_hline(yintercept = 0, linetype = "dashed", color = "gray75") +
@@ -218,11 +515,13 @@ tibble(n = 1:40, x_n = 1/n) |>
 ```
 
 ```{python}
-concepts.update({
-  "Limit": "A point that a sequence $\\{x_n\\}$ approaches as $n$ grows larger and larger.  To denote $\\ell$ being the limit of $\\{x_n\\}$, we may write $\\lim_{n \\to \infty} x_n = \\ell$ or $\\{x_n\\} \\to \\ell$.  Some sequences have no limit.  See @def-limit for a fully rigorous mathematical definition of a limit.",
-  "Convergent sequence": "A sequence that has a finite limit.",
-  "Divergent sequence": "A sequence that has no finite limit, either because it has an infinite limit or because it oscillates.",
-})
+concepts.update(
+    {
+        "Limit": "A point that a sequence $\\{x_n\\}$ approaches as $n$ grows larger and larger.  To denote $x$ being the limit of $\\{x_n\\}$, we may write $\\lim_{n \\to \infty} x_n = x$ or $\\{x_n\\} \\to x$.  Some sequences have no limit.  See @def-limit for a fully rigorous mathematical definition of a limit.",
+        "Convergent sequence": "A sequence that has a finite limit.",
+        "Divergent sequence": "A sequence that has no finite limit, either because it has an infinite limit or because it oscillates.",
+    }
+)
 ```
 
 What we need now is a precise mathematical notion of "getting closer and closer."
@@ -230,22 +529,30 @@ The infinite nature of a sequence makes this tricky.
 We can't follow the sequence and see that it ends at 0, because the sequence has no end!
 To get around this issue, mathematicians use what I think of as a "challenge-response" definition of a limit.
 Here's what I mean by that.
-Suppose I have a sequence $\{x_n\}$ and claim that its limit is a number $\ell$.
+Suppose I have a sequence $\{x_n\}$ and claim that its limit is a number $x$.
 
 1. You **challenge** me by picking a number $\epsilon > 0$.
    Think of this as you saying "I need you to show me that once we get far enough along the sequence, every value is within $\epsilon$ of your supposed limit."
 
 2. I **respond** to the challenge by identifying an index $N$ after which the sequence values are as close as you demand.
-   In particular, I need to show you that $\ell - \epsilon < x_n < \ell + \epsilon$ for all indices $n \geq N$.
+   In particular, I need to show you that $x - \epsilon < x_n < x + \epsilon$ for all indices $n \geq N$.
 
 My claimed limit is true if and only if I can conjure up a valid response to any $\epsilon > 0$ that you might pick.
 The formal definition of a limit puts this process in precise mathematical terms.
 
 ::: {#def-limit name="Finite limit"}
-The sequence $\{x_n\}$ has a [limit]{.concept} of $\ell \in \mathbb{R}$ if the following condition is satisfied: for any real number $\epsilon > 0$, we can identify an index $N$ such that $|x_n - \ell| < \epsilon$ for all $n \geq N$.
-The sequence is [convergent]{.concept} if and only if $\lim_{n \to \infty} x_n = \ell$ for some finite number $\ell$.
+The sequence $\{x_n\}$ has a [limit]{.concept} of $x \in \mathbb{R}$ if the following condition is satisfied: for any real number $\epsilon > 0$, we can identify an index $N$ such that $|x_n - x| < \epsilon$ for all $n \geq N$.
+The sequence is [convergent]{.concept} if and only if $\lim_{n \to \infty} x_n = x$ for some finite number $x$.
 :::
 
+A sequence cannot have two distinct limits.
+If the sequence $\{x_n\}$ is getting ever closer to $x$ as $n$ increases, it cannot also be getting ever closer to some other number $x'$.
+We won't go all the way through a proof of this claim, but here's the basics of how it would work.
+Letting $d$ stand for half the distance between the limit $x$ and some other number $x'$, we know from the formal definition of a limit that after a certain point, every $x_n$ lies between $x - d$ and $x + d$.
+This in turn means that every $x_n$ from this point onward is at least $d$ away from $x'$, meaning that $x'$ cannot possibly be the limit of the sequence --- there is no valid response to the challenge where $\epsilon = d$.
+
+It can be tricky to use the formal definition (@def-limit) to prove that some number is indeed the limit of a specified sequence.
+Even if you can "see" that some sequence is getting ever closer to its limit, how can you show that the precise formal definition is satisfied?
 To make the challenge-response process a bit more concrete, let's apply it to the problem of showing that $\lim_{n \to \infty} 1/n = 0$.
 
 ::: {#exm-limit-harmonic-seq}
@@ -258,7 +565,7 @@ That is, we will take an "arbitrary" $\epsilon > 0$ --- a number $\epsilon$ that
 
 *Proof:*
 Take an arbitrary $\epsilon > 0$.
-Because $\epsilon > 0$, the fraction $1/\epsilon$ is finite, though perhaps very large.
+Because $\epsilon > 0$, the fraction $1/\epsilon$ is finite and positive (though perhaps very large).
 Let $N$ be any integer greater than $1/\epsilon$.
 For any $n \geq N$, we have $$\frac{1}{n} \leq \frac{1}{N} < \frac{1}{1/\epsilon} = \epsilon.$$
 Combined with the fact that $1/n > 0 > -\epsilon$ for all $n$, we have shown that there exists an index $N$ such that $-\epsilon < 1/n < \epsilon$ for all $n \geq N$.
@@ -282,9 +589,11 @@ We say the sequence $\{x_n\}$ is [bounded]{.concept} if there is a finite number
 :::
 
 ```{python} 
-concepts.update({
-  "Bounded sequence": "A sequence for which there is a finite number $B$ such that every $|x_n| \\leq B$.  Every convergent sequence is bounded, but not every bounded sequence is convergent.",
-})
+concepts.update(
+    {
+        "Bounded sequence": "A sequence for which there is a finite number $B$ such that every $|x_n| \\leq B$.  Every convergent sequence is bounded, but not every bounded sequence is convergent.",
+    }
+)
 ```
 
 ::: {#prp-convergent-implies-bounded name="Convergent implies bounded"}
@@ -292,8 +601,11 @@ If $\{x_n\}$ is convergent, then it is bounded.
 :::
 
 ::: {.proof}
-Suppose the sequence $\{x_n\}$ is convergent, and let $\ell$ denote its limit.
-***FINISH ME***
+Suppose the sequence $\{x_n\}$ is convergent, and let $x$ denote its limit.
+According to the formal definition of a limit (@def-limit), there is an index $N$ such that $x - 1 < x_n < x + 1$ for all indices $n \geq N$.
+Let $B_{\text{left}}$ be the lowest value in the finite set $\{x_1, \ldots, x_N, x - 1\}$, and let $B_{\text{right}}$ be the greatest value in the finite set $\{x_1, \ldots, x_N, x + 1\}$.
+Then, let $B$ be whichever of $|B_{\text{left}}|$ and $|B_{\text{right}}|$ is greater.
+For every index $n$, we have $$-B \leq B_{\text{left}} \leq x_n \leq B_{\text{right}} \leq B,$$ so $\{x_n\}$ is bounded.
 :::
 
 An equivalent statement would be the contrapositive, "If $\{x_n\}$ is not bounded, then it is not convergent."
@@ -317,46 +629,257 @@ x_n = \begin{cases}
 $$
 To prove that $\{x_n\}$ is not convergent, I will just rule out every number as a potential limit for it.
 
-- No $\ell \neq 0$ may be the limit of $\{x_n\}$.
-  To see why, take any $\ell \neq 0$.
-  To show that $\ell$ is not the limit, we need to find a "challenge" value $\epsilon$ for which there is no valid response.
+- No $x \neq 0$ may be the limit of $\{x_n\}$.
+  To see why, take any $x \neq 0$.
+  To show that $x$ is not the limit, we need to find a "challenge" value $\epsilon$ for which there is no valid response.
 
-  I claim that $\epsilon = |\ell|$ is this type of unmeetable challenge.
-  To show that the challenge cannot be met, we need to show that at any point in the sequence, we can find a value there or further along that is at least $\epsilon$ away from $\ell$.
+  I claim that $\epsilon = |x|$ is this type of unmeetable challenge.
+  To show that the challenge cannot be met, we need to show that at any point in the sequence, we can find a value there or further along that is at least $\epsilon$ away from $x$.
   To do this, take any index $n$.
-  Then either $x_n = 0$ or $x_{n+1} = 0$, meaning that either $|x_n - \ell| \geq \epsilon$ or $|x_{n+1} - \ell| \geq \epsilon$.
-  Therefore, $\ell$ cannot be a limit of the sequence.
+  Then either $x_n = 0$ or $x_{n+1} = 0$, meaning that either $|x_n - x| \geq \epsilon$ or $|x_{n+1} - x| \geq \epsilon$.
+  Therefore, $x$ cannot be a limit of the sequence.
 
-- No $\ell \neq 1$ may be the limit of $\{x_n\}$ either.
-  The logic here is the same as in the previous step --- just take any $\ell \neq 1$ and show that the challenge with $\epsilon = |\ell - 1|$ cannot succeed.
+- No $x \neq 1$ may be the limit of $\{x_n\}$ either.
+  The logic here is the same as in the previous step --- just take any $x \neq 1$ and show that the challenge with $\epsilon = |x - 1|$ cannot succeed.
 
-- The first step leaves $\ell = 0$ as the only possible limit, but the second step rules that out too.
+- The first step leaves $x = 0$ as the only possible limit, but the second step rules that out too.
   Therefore, $\{x_n\}$ has no limit.
 ::::
 :::
 
-***BOUNDED AND MONOTONE IMPLIES CONVERGENT.***
+Any sequence that is bounded and divergent must oscillate (go up and down and up and down and ...) as in my answer to @exr-bounded-does-not-imply-convergent.
+A [monotone]{.concept} sequence, in which the values always increase (every $x_{n+1} \geq x_n$) or always decrease (every $x_{n+1} \leq x_n$), always converges if it is bounded.
+This fact about monotone sequences is important enough in the study of calculus that I will state it as a theorem.
+However, I will skip over proving it, as the proof relies on some real analysis concepts that we don't have the bandwidth to cover in this course.
+
+```{python} 
+concepts.update(
+    {
+        "Monotone sequence": "A sequence whose values always increase (every $x_{n+1} \\geq x_n$) or always decrease (every $x_{n+1} \\leq x_n$).",
+    }
+)
+```
+
+::: {#thm-monotone-convergence name="Monotone Convergence Theorem"}
+If $\{x_n\}$ is bounded and monotone, then it is convergent.
+:::
+
+Let's return to our motivating example about the number of consecutive terms by an incumbent party (@sec-sequences-motivation).
+Remember that we used $p$ to stand for the probability that the incumbent party stays in office each term.
+The probability of lasting exactly $T$ terms is $p^T (1 - p)$.
+The sequence $\{p^T (1 - p)\}_{T=1}^\infty$ is bounded below by 0 and above by $1 - p$.
+Additionally, because $0 \leq p \leq 1$, the sequence is decreasing.
+[MCT tells us that this has a limit, but we don't know what the limit is---that's for below]{.todo}
+
+Although every unbounded sequence is divergent, there are still some distinctions we can draw among them.
+
+- If the values of the sequence are always going higher, then we would say it has a limit of $\infty$.
+  The sequence $\{n\} = 1, 2, 3, \ldots$ is an example.
+
+- If the values of the sequence are always going lower, then we would say it has a limit of $-\infty$.
+  The sequence $\{-n^2\} = -1, -4, -9, \ldots$ is an example.
+
+- An unbounded sequence can still oscillate and have no limit.
+  The sequence $\{(-1)^n n\} = -1, 2, -3, 4, \ldots$ is an example.
+
+Our formal definition of an infinite limit has a challenge-response structure similar to the definition of a finite limit (@def-limit).
+Here the "challenge" is not an $\epsilon$ very close to 0, but instead a $y$ that's very large in magnitude.
+We need to show that if we go far enough along the sequence, the magnitude of the elements $x_n$ is always larger than whatever challenge has been mustered.
 
 ::: {#def-limit-infinite name="Infinite limit"}
-For a sequence $\{x_n\}$, we say that $\{x_n\} \to \infty$ if the following condition is satisfied: for any real number $y$, we can identify an index $N$ such that $x_n > y$ for all $n \geq N$.
-Similarly, we say that $\{x_n\} \to -\infty$ if for any real number $y$, we can identify an index $N$ such that $x_n < y$ for all $n \geq N$.
+For a sequence $\{x_n\}$, we say that $\{x_n\} \to \infty$ if the following condition is satisfied: for any real number $a$, we can identify an index $N$ such that $x_n > a$ for all $n \geq N$.
+Similarly, we say that $\{x_n\} \to -\infty$ if for any real number $a$, we can identify an index $N$ such that $x_n < a$ for all $n \geq N$.
 :::
+
+As an example to apply this definition, think about the sequence of squares, $\{n^2\} = 1, 4, 9, \ldots$.
+To show that this sequence has a limit of $\infty$, consider any "challenge" of $a \geq 0$.
+Given such a challenge, let $N$ be any integer larger than $\sqrt{a}$.
+Then for all elements past this index ($n \geq N$), we have $$x_n \geq x_N = N^2 \geq \sqrt{a}^2 = a.$$
+We have shown that every challenge can be met, and therefore $\lim_{n \to \infty} n^2 = \infty$.
+
+::: {#exr-infinite-limits}
+For each of the following unbounded sequences, use @def-limit-infinite to prove whether the sequence has a limit of $\infty$, a limit of $-\infty$, or no limit.
+
+a. The sequence $\{-\sqrt{n}\} = -1, -\sqrt{2}, -\sqrt{3}, \ldots$.
+
+b. The sequence $1, 0, 3, 0, 5, 0, 7, 0, \ldots$ ($x_n = n$ if $n$ is odd, $x_n = 0$ if $n$ is even).
+
+c. The "three steps forward, one step back" sequence $1, 0, 3, 2, 5, 4, 7, 6, 9, 8, \ldots$ ($x_n = n$ if $n$ is odd, $x_n = n - 2$ if $n$ is even).
+
+:::: {.callout-note title="Answers" collapse="true"}
+a. This sequence has a limit of $-\infty$.
+   To see why, consider any challenge $a$, and let $N$ be any integer greater than $a^2$.
+   For all $n \geq N$, we have $$x_n \leq x_N = -\sqrt{N} \leq -\sqrt{a^2} \leq -|a| \leq a.$$
+   Because every challenge can be met, we conclude that $\lim_{n \to \infty} -\sqrt{n} = -\infty$.
+
+b. This sequence has no limit.
+   To rule out a limit of $\infty$, consider the challenge $a = 1$.
+   For any index $N$, let $n$ be an even number greater than or equal to $N$.
+   Then we have $x_n = 0 < a$.
+   As there is no valid response to the $a = 1$ challenge, we conclude that $\{x_n\}$ cannot have a limit of $\infty$.
+   To rule out a limit of $-\infty$, it is sufficient to observe that the sequence is bounded from below (specifically, every $x_n \geq 0$).
+
+c. Even though this sequence is not monotone, it has a limit of $\infty$.
+   To see why, consider any challenge $a$, and let $N$ be any integer greater than $a + 2$.
+   For all odd indices $n \geq N$, we have $$x_n = n \geq N \geq a + 2 > a.$$
+   For all even indices $n \geq N$, we have $$x_n = n - 2 \geq N - 2 \geq a.$$
+   Therefore, $N$ is a valid response to the challenge of $a$.
+   Because every challenge can be met, we conclude that $\lim_{n \to \infty} x_n = \infty$.
+::::
+:::
+
 
 ### Properties of limits {#sec-properties-of-limits}
 
 Don't worry if the formal definition of a limit (@def-limit) seems daunting and cumbersome to use.
 In practice, most of the time that you end up dealing with limits, you won't have to explicitly deal with the challenge-response structure.
-Instead, you can use helpful properties of limits to work up from limits you already know.
-For example, given that $\{1/n\} \to 0$ (as we showed above in @exm-limit-harmonic-seq), it seems intuitive that $\{1/n^2\} \to 0$ as well.
-Can we prove this without explicitly invoking the challenge-response logic?
+Instead, you can use helpful properties of limits to calculate the limit of a sequence.
 
-***SEQUENCE HAS AT MOST ONE LIMIT***
+[Reword to reduce redunancy with above]{.todo}
+Let's return to our motivating example about the number of consecutive terms by an incumbent party (@sec-sequences-motivation).
+Remember that we used $p$ to stand for the probability that the incumbent party stays in office each term.
+The probability of lasting exactly $T$ terms is $p^T (1 - p)$, which appears to go to 0 as $T$ becomes large, at least in the case of $p = 0.75$ that we plotted in @fig-term-length-prob.
+Can we show that indeed $\lim_{T \to \infty} p^T (1 - p) = 0$, not just for $p = 0.75$ but for any $p$ between 0 and 1?
 
-***SUMS, PRODUCTS, CONSTANT MULTIPLES, RATIOS OF LIMITS.***
+We already know that the sequence of retention probabilities is convergent.
+In particular, the sequence $\{p^T (1 - p)\}_{T=1}^\infty$ is bounded below by 0, bounded above by $1 - p$, and is decreasing.
+Therefore, we know from the Monotone Convergence Theorem (@thm-monotone-convergence) that it has a finite limit.
+We are off to a good start!
+Now we just need to prove that the limit in question is 0.
 
-***CONVERGENT SEQUENCE IS BOUNDED***
+Because the sequence is bounded below by 0 and above by $1 - p$, its limit cannot be less than 0 or greater than $1 - p$.
+After all, the sequence can't get ever closer to some number $x > 1 - p$ if it never goes above $1 - p$.
 
-***SEQUENCE MAY NOT HAVE A LIMIT***
+But we can do even better than just bounding the limit between the bounds on the entire sequence.
+For example, although the first term of the sequence here is $1 - p$, every single subsequent term is no greater than $p (1 - p)$.
+Intuitively, then, the limit cannot be a number greater than $p (1 - p)$.
+This is an illustration of a broader principle: if we chop some finite terms off the start of the sequence, any bounds on the remaining (infinite) number of terms are also bounds on the limit.
+
+::: {#prp-bounds-on-sequence-limit}
+Let $\{x_n\}$ be a convergent sequence, and let $x$ denote its limit.
+If there is an index $N$ such that $x_n \geq a$ for all $n \geq N$, then $x \geq a$ as well.
+Similarly, if there is an index $N$ such that $x_n \leq b$ for all $n \geq N$, then $x \leq b$ as well.
+:::
+
+::: {.proof}
+We will only explicitly prove the first claim, as the proof of the second is essentially a mirror image of the first.
+(To put it another way, you should be able to prove the second claim yourself by following the steps from the proof of the first claim and making minor changes.)
+
+Assume there is an index $N$ and a value $a$ such that $x_n \geq a$ for all $n \geq N$.
+We will show that no $x' < a$ can be the limit of $\{x_n\}$.
+Take an arbitrary $x' < a$, and let $\epsilon$ denote the distance between $x'$ and $a$ (i.e., $\epsilon = a - x'$).
+For all $n \geq N$, we have $$x_n \geq a = x' + \epsilon.$$
+Therefore, there is no valid response to the $\epsilon = a - x'$ challenge, so $\{x_n\} \nrightarrow x'$.
+As $x'$ was chosen arbitrarily, we conclude that no $x' < a$ may be the limit of $\{x_n\}$, and thus $x \geq a$.
+:::
+
+Let's go back to thinking about the sequence of retention probabilities in our running example, $\{p^T (1 - p)\}_{T=1}^\infty$.
+We have already observed that the sequence is bounded below by 0 and above by $1 - p$, so at a minimum @prp-bounds-on-sequence-limit tells us that $$0 \leq \lim_{T \to \infty} p^T (1 - p) \leq 1 - p.$$
+However, we can actually go further and show that the limit must be 0.
+[Keep going]{.todo}
+
+[Change transition.]{.todo}
+Luckily for us, finite limits behave predictably under the ordinary arithmetic operations like addition, subtraction, multiplication, and division.
+These properties help do most of the work for us when we have to take limits.
+
+::: {#prp-limit-properties name="Arithmetic properties of limits"}
+Let $\{x_n\}$ and $\{y_n\}$ be convergent sequences, with limits $x$ and $y$ respectively.
+
+a. For any constant $c$, $\{c x_n\} \to c x$.
+
+b. $\{x_n + y_n\} \to x + y$.
+
+c. $\{x_n y_n\} \to xy$.
+
+d. If $y \neq 0$, $\{x_n / y_n\} \to x/y$.
+:::
+
+::: {.proof}
+The proof is long and tedious, so I have hidden it in collapsible boxes.
+
+:::: {.callout-note title="Part (a): Constant multiple of sequence" collapse="true"}
+We need to prove that for all $\epsilon > 0$, there is an index $N$ such that $|c x_n - c x| < \epsilon$ for all $n \geq N$.
+To this end, take an arbitrary $\epsilon > 0$.
+Because $\{x_n\} \to x$, there is an $N$ such that $|x_n - x| < \epsilon / |c|$ for all $n \geq N$.
+This in turn implies that $$|c x_n - c x| = |c (x_n - x)| = |c| |x_n - x| < |c| \cdot \frac{\epsilon}{|c|} = \epsilon$$ for all $n \geq N$.
+We have shown that there is a valid response to any $\epsilon > 0$ challenge, and thus $\{c x_n\} \to cx$.
+::::
+
+:::: {.callout-note title="Part (b): Sum of sequences" collapse="true"}
+The proof here relies on the [triangle inequality](https://en.wikipedia.org/wiki/Triangle_inequality): for any real numbers $a$ and $b$, $$|a + b| \leq |a| + |b|.$$
+If you're ever having trouble proving something that involves absolute values, the triangle inequality can often help you get a foothold.
+
+We need to prove that for all $\epsilon > 0$, there is an index $N$ such that $|(x_n + y_n) - (x + y)| < \epsilon$ for all $n \geq N$.
+To this end, take an arbitrary $\epsilon > 0$.
+Because $\{x_n\} \to x$, there is an $N_x$ such that $|x_n - x| < \epsilon / 2$ for all $n \geq N_x$.
+Similarly, there is an $N_y$ such that $|y_n - y| < \epsilon / 2$ for all $n \geq N_y$.
+Let $N$ be the greater of $N_x$ and $N_y$.
+Then for all indices $n \geq N$, we have $$|(x_n + y_n) - (x + y)| = |(x_n - x) + (y_n - y)| \leq |x_n - x| + |y_n - y| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.$$
+We have shown that there is a valid response to any $\epsilon > 0$ challenge, and thus $\{x_n + y_n\} \to x + y$.
+::::
+
+:::: {.callout-note title="Part (c): Product of sequences" collapse="true"}
+We need to prove that for all $\epsilon > 0$, there is an index $N$ such that $|x_n y_n - x y| < \epsilon$ for all $n \geq N$.
+To this end, take an arbitrary $\epsilon > 0$.
+Because $\{y_n\} \to y$, there is an $N_1$ such that $y - 1 < y_n < y + 1$ for all $n \geq N_1$.
+Let $Y$ denote the greater of $|y - 1|$ and $|y + 1|$.
+Because $\{x_n\} \to x$, there is an $N_2$ such that $|x_n - x| < \frac{\epsilon}{2 Y}$ for all $n \geq N_2$.
+Finally, because $\{y_n \to y\}$, there is an $N_3$ such that $|y_n - y| < \frac{\epsilon}{2 |x|}$ for all $n \geq N_3$.
+
+Let $N$ denote the greatest value among $N_1$, $N_2$, and $N_3$.
+For any $n \geq N$, we have
+$$
+\begin{aligned}
+|x_n y_n - x y|
+&= |x_n y_n - x y_n + x y_n - x y | \\
+&= |(x_n - x) y_n + x (y_n - y)| \\
+&\leq |(x_n - x) y_n| + |x (y_n - y)| \\
+&= |x_n - x| |y_n| + |x| |y_n - y| \\
+&< \frac{\epsilon}{2 Y} \cdot Y + |x| \cdot \frac{\epsilon}{2 |x|} \\
+&= \epsilon.
+\end{aligned}
+$$
+We have shown that there is a valid response to any $\epsilon > 0$ challenge, and thus $\{x_n y_n\} \to x y$.
+
+*Note 1:* If you are confused by the first inequality here, see the discussion of the triangle inequality in the proof of the previous part.
+
+*Note 2:* If $x = 0$, then we can't cancel the product of $|x|$ with $\frac{\epsilon}{2 |x|}$ as in the last step above.
+However, in that case, the second term of the sum is always 0, so the conclusion that $|x_n y_n - x y| < \epsilon$ for all $n \geq N$ still holds.
+::::
+
+:::: {.callout-note title="Part (d): Ratio of sequences" collapse="true"}
+Assume $y \neq 0$.
+
+We will first prove that $\{1 / y_n\} \to 1 / y$.
+To this end, take an arbitrary $\epsilon > 0$.
+Because $\{y_n\} \to y$ and $y \neq 0$, there is an $N_1$ such that $|y_n - y| < \frac{\epsilon |y|^2}{2}$ for all $n \geq N_1$, and there is an $N_2$ such that $\frac{|y|}{2} < |y_n| < \frac{3 |y|}{2}$ for all $n \geq N_2$.
+Let $N$ denote the greater of $N_1$ and $N_2$.
+For any $n \geq N$, we have
+$$
+\begin{aligned}
+\left|\frac{1}{y_n} - \frac{1}{y}\right|
+&= \left|\frac{y}{y y_n} - \frac{y_n}{y y_n}\right| \\
+&= \left|\frac{y - y_n}{y y_n}\right| \\
+&= \frac{|y - y_n|}{|y| |y_n|} \\
+&< \frac{\epsilon |y|^2 / 2}{|y| |y_n|} \\
+&= \frac{\epsilon |y| / 2}{|y_n|} \\
+&< \frac{\epsilon |y| / 2}{|y| / 2} \\
+&= \epsilon.
+\end{aligned}
+$$
+We have shown that there is a valid response to any $\epsilon > 0$ challenge, so $\{1/y_n\} \to \{1/y\}$.
+
+We can now prove the claim using our result from part (c):
+$$
+\left\{\frac{x_n}{y_n}\right\}
+= \left\{x_n \cdot \frac{1}{y_n}\right\}
+\to x \cdot \frac{1}{y}
+= \frac{x}{y}.
+$$
+::::
+:::
+
+**NOW APPLY THE PROPERTIES IN EXERCISES OR THE LIKE.**
 
 
 ```{python, echo=FALSE, results="asis"}

@@ -82,3 +82,20 @@ code, pre {
     color: $danger;
     font-weight: 400;
 }
+
+// Yellow highlight, text in brackets for note to self
+.todo {
+    background-color: $warning;
+    color: $white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 500;
+
+  &::before {
+    content: "TODO: ";
+    /* optional—you can tweak these to match your styling */
+    font-weight: 700;       /* make the “TODO:” extra bold */
+    display: inline-block;  /* ensures proper spacing */
+    margin-right: 0.5em;    /* give a little room after it */
+  }
+}

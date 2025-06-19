@@ -29,6 +29,7 @@ format:
     title-block-banner: false
     monofont: 'Iosevka Web'
     linestretch: 1.6
+    cap-location: top
 
   # pdf:
   #   documentclass: scrreprt
