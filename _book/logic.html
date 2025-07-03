@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -93,10 +93,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-7fb14a0eaa8ddc0b0b5fd2c428532b30.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2dab5f6ea352cc8b5659b55cd0b3f02f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -207,6 +207,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./set_theory.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Set Theory</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sequences_series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sequences and Series</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -1095,6 +1101,19 @@ Answer
 </div>
 </div>
 <p>The statements <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are <span class="concept">logically equivalent</span> when <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to P\)</span>. In this case, the truth values of the two statements are linked: either <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both true, or else <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both false. <span class="math inline">\(P\)</span> is a necessary and sufficient condition for <span class="math inline">\(Q\)</span>, and <span class="math inline">\(Q\)</span> is a necessary and sufficient condition for <span class="math inline">\(P\)</span>. In words, we may use “<span class="math inline">\(P\)</span> if and only if <span class="math inline">\(Q\)</span>” to describe this state of affairs.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Iff">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Iff
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Writers sometimes use “iff” as a shorthand for “if and only if.” Personally, I use “iff” only if I’m taking notes or writing on the whiteboard, not in journal articles or writing for wider dissemination.</p>
+</div>
+</div>
 <p>As an example, take the “minimalist conception” of democracy posed by <span class="citation" data-cites="przeworski2024decides">Przeworski (<a href="references.html#ref-przeworski2024decides" role="doc-biblioref">2024, 5</a>)</span>: “A regime is democratic if and only if people are free to choose, including to remove, governments.” Let <span class="math inline">\(P\)</span> be the statement “The regime is democratic” and <span class="math inline">\(Q\)</span> be the statement “The regime’s people are free to choose, including to remove, governments.”</p>
 <ul>
 <li><p>The statement <span class="math inline">\(P \to Q\)</span> means “The regime is democratic <em>only if</em> its people are free to choose, including to remove, governments” — the people’s ability to remove the government is a <em>necessary</em> condition for democracy.</p></li>
@@ -1104,7 +1123,7 @@ Answer
 <div id="exr-equivalence" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.4</strong></span> Use a truth table to confirm that the statement <span class="math inline">\((P \to Q) \land (Q \to P)\)</span> is true exactly when the truth values of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> match.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1113,7 +1132,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="caption-top table">
 <colgroup>
@@ -1171,7 +1190,7 @@ Answer
 <div id="exr-contrapositive" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.5</strong></span> Use a truth table to confirm that <span class="math inline">\(P \to Q\)</span> is logically equivalent to <span class="math inline">\(\neg Q \to \neg P\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1180,7 +1199,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="caption-top table">
 <colgroup>
@@ -1338,7 +1357,7 @@ Answer
 </tbody>
 </table>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1347,7 +1366,7 @@ Proof of the second law
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="caption-top table">
 <colgroup>
@@ -1494,26 +1513,6 @@ Reading proofs
 <div id="exr-prove-modus-tollens" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.6</strong></span> Write a plain language proof of the modus tollens rule (<a href="#thm-modus-tollens" class="quarto-xref">Theorem&nbsp;<span>1.2</span></a>).</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Your proof will of course differ from mine, but here’s how I approached it.</p>
-<p>Suppose that <span class="math inline">\(P \to Q\)</span> is true and that <span class="math inline">\(Q\)</span> is false. We know from <a href="#exr-contrapositive" class="quarto-xref">Exercise&nbsp;<span>1.5</span></a> that <span class="math inline">\(P \to Q\)</span> is logically equivalent to the contrapositive <span class="math inline">\(\neg Q \to \neg P\)</span>. Then, because we know that <span class="math inline">\(\neg Q\)</span> and <span class="math inline">\(\neg Q \to \neg P\)</span> are both true, we infer by modus ponens that <span class="math inline">\(\neg P\)</span> is true. Consequently, we have proved that the conjunction of <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(\neg Q\)</span> implies <span class="math inline">\(\neg P\)</span>.</p>
-</div>
-</div>
-</div>
-</div>
-<div id="exr-perfect-square-even" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1.7</strong></span> Assume <span class="math inline">\(a\)</span> is an integer. Write a plain language proof of the claim that if <span class="math inline">\(a^2\)</span> is even, then <span class="math inline">\(a\)</span> is even. (An integer <span class="math inline">\(a\)</span> is even if it is divisible by 2: there is some integer <span class="math inline">\(n\)</span> such that <span class="math inline">\(a = 2 \times n\)</span>.)</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Answer">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1524,6 +1523,26 @@ Answer
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Your proof will of course differ from mine, but here’s how I approached it.</p>
+<p>Suppose that <span class="math inline">\(P \to Q\)</span> is true and that <span class="math inline">\(Q\)</span> is false. We know from <a href="#exr-contrapositive" class="quarto-xref">Exercise&nbsp;<span>1.5</span></a> that <span class="math inline">\(P \to Q\)</span> is logically equivalent to the contrapositive <span class="math inline">\(\neg Q \to \neg P\)</span>. Then, because we know that <span class="math inline">\(\neg Q\)</span> and <span class="math inline">\(\neg Q \to \neg P\)</span> are both true, we infer by modus ponens that <span class="math inline">\(\neg P\)</span> is true. Consequently, we have proved that the conjunction of <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(\neg Q\)</span> implies <span class="math inline">\(\neg P\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-perfect-square-even" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.7</strong></span> Assume <span class="math inline">\(a\)</span> is an integer. Write a plain language proof of the claim that if <span class="math inline">\(a^2\)</span> is even, then <span class="math inline">\(a\)</span> is even. (An integer <span class="math inline">\(a\)</span> is even if it is divisible by 2: there is some integer <span class="math inline">\(n\)</span> such that <span class="math inline">\(a = 2 \times n\)</span>.)</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>I will prove the contrapositive. Assume <span class="math inline">\(a\)</span> is not even, so it is not a factor of 2. Then <span class="math inline">\(a^2 = a \times a\)</span> also is not a factor of 2 and is not even. We have shown that if <span class="math inline">\(a\)</span> is not even, then <span class="math inline">\(a^2\)</span> is not even; this is equivalent to the claim that if <span class="math inline">\(a^2\)</span> is even, then <span class="math inline">\(a\)</span> is even.</p>
 </div>
@@ -1633,7 +1652,7 @@ Answer
 <div id="exr-induction" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.8</strong></span> Use a proof by induction to prove that <span class="math inline">\(2^n \geq n + 1\)</span> for every counting number <span class="math inline">\(n = 1, 2, \ldots\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1642,7 +1661,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For the base step, we must show that <span class="math inline">\(2^1 \geq 1 + 1\)</span>. This holds because <span class="math inline">\(2^1 = 2 = 1 + 1\)</span>.</p>
 <p>For the induction step, we must show that if <span class="math inline">\(2^k \geq k + 1\)</span>, then <span class="math inline">\(2^{k+1} \geq (k + 1) + 1\)</span>. Suppose <span class="math inline">\(2^k \geq k + 1\)</span>. By definition, <span class="math inline">\(2^{k+1} = 2 \times 2^k\)</span>. We have assumed that <span class="math inline">\(2^k \geq k + 1\)</span>, which implies that <span class="math inline">\(2 \times 2^k \geq 2 \times (k + 1)\)</span>. Because <span class="math inline">\(k \geq 0\)</span>, we have <span class="math inline">\(2 \times (k + 1) \geq (k + 1) + 1\)</span>. Putting this all together, we have <span class="math display">\[2^{k+1} = 2 \times 2^k \geq 2 \times (k + 1) \geq (k + 1) + 1,\]</span> proving the induction step.</p>

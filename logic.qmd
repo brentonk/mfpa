@@ -437,6 +437,11 @@ In this case, the truth values of the two statements are linked: either $P$ and 
 $P$ is a necessary and sufficient condition for $Q$, and $Q$ is a necessary and sufficient condition for $P$.
 In words, we may use "$P$ if and only if $Q$" to describe this state of affairs.
 
+::: {.callout-tip title="Iff"}
+Writers sometimes use "iff" as a shorthand for "if and only if."
+Personally, I use "iff" only if I'm taking notes or writing on the whiteboard, not in journal articles or writing for wider dissemination.
+:::
+
 As an example, take the "minimalist conception" of democracy posed by @przeworski2024decides [5]: "A regime is democratic if and only if people are free to choose, including to remove, governments."
 Let $P$ be the statement "The regime is democratic" and $Q$ be the statement "The regime's people are free to choose, including to remove, governments."
 

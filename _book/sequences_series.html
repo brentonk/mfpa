@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Sequences and Series – Mathematical Foundations of Political Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./set_theory.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2dab5f6ea352cc8b5659b55cd0b3f02f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sequences_series.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sequences and Series</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Foundations of Political Analysis</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./logic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Formal Logic and Proofs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./set_theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Set Theory</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sequences_series.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sequences and Series</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-sequences-motivation" id="toc-sec-sequences-motivation" class="nav-link active" data-scroll-target="#sec-sequences-motivation"><span class="header-section-number">3.1</span> Motivating example: Incumbent advantage</a></li>
+  <li><a href="#sec-logarithms" id="toc-sec-logarithms" class="nav-link" data-scroll-target="#sec-logarithms"><span class="header-section-number">3.2</span> Logarithms</a>
+  <ul class="collapse">
+  <li><a href="#sec-definition-logarithm" id="toc-sec-definition-logarithm" class="nav-link" data-scroll-target="#sec-definition-logarithm"><span class="header-section-number">3.2.1</span> Definition of a logarithm</a></li>
+  <li><a href="#sec-exponent-logarithm-properties" id="toc-sec-exponent-logarithm-properties" class="nav-link" data-scroll-target="#sec-exponent-logarithm-properties"><span class="header-section-number">3.2.2</span> Properties of exponents and logarithms</a></li>
+  </ul></li>
+  <li><a href="#sec-sequences-limits" id="toc-sec-sequences-limits" class="nav-link" data-scroll-target="#sec-sequences-limits"><span class="header-section-number">3.3</span> Sequences and limits</a>
+  <ul class="collapse">
+  <li><a href="#sec-def-limit" id="toc-sec-def-limit" class="nav-link" data-scroll-target="#sec-def-limit"><span class="header-section-number">3.3.1</span> Definition of a limit</a></li>
+  <li><a href="#infinite-limits" id="toc-infinite-limits" class="nav-link" data-scroll-target="#infinite-limits"><span class="header-section-number">3.3.2</span> Infinite limits</a></li>
+  <li><a href="#sec-properties-of-limits" id="toc-sec-properties-of-limits" class="nav-link" data-scroll-target="#sec-properties-of-limits"><span class="header-section-number">3.3.3</span> Properties of limits</a></li>
+  </ul></li>
+  <li><a href="#series" id="toc-series" class="nav-link" data-scroll-target="#series"><span class="header-section-number">3.4</span> Series</a>
+  <ul class="collapse">
+  <li><a href="#calculating-the-expected-term-in-office" id="toc-calculating-the-expected-term-in-office" class="nav-link" data-scroll-target="#calculating-the-expected-term-in-office"><span class="header-section-number">3.4.1</span> Calculating the expected term in office</a></li>
+  </ul></li>
+  <li><a href="#concept-review" id="toc-concept-review" class="nav-link" data-scroll-target="#concept-review"><span class="header-section-number">3.5</span> Concept review</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-sequences-series" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sequences and Series</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-sequences-motivation" class="level2 page-columns page-full" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-sequences-motivation"><span class="header-section-number">3.1</span> Motivating example: Incumbent advantage</h2>
+<p>I’m going to propose an extremely (overly!) simple model of incumbent party advantage in legislative elections, ask a very simple question of the model, and show that it leads us into having to do an addition of infinitely many terms.</p>
+<p>Here’s the model. There is a legislative seat that is contested every election cycle. In each election, the incumbent party wins with probability <span class="math inline">\(p\)</span> and loses with probability <span class="math inline">\(1 - p\)</span>, where <span class="math inline">\(0 &lt; p &lt; 1\)</span>. These elections are independent in the statistical sense, in that the probability of winning is <span class="math inline">\(p\)</span> in each cycle, regardless of what has happened before. The question is: given <span class="math inline">\(p\)</span>, how many more terms would we expect the incumbent party to hold the seat, on average?</p>
+<p>Our goal here is to calculate the expected value, <span class="math display">\[\begin{align}
+\MoveEqLeft{}
+\sum_{T = 0}^\infty T \cdot \Pr(\text{term length} = T) \\
+&amp;= 0 \cdot \Pr(\text{term length} = 0)
++ 1 \cdot \Pr(\text{term length} = 1) \\
+&amp;\quad + 2 \cdot \Pr(\text{term length} = 2)
++ 3 \cdot \Pr(\text{term length} = 3) + \cdots
+\end{align}\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Summation notation">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Summation notation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Don’t remember what <span class="math inline">\(\sum\)</span> means? Don’t panic! It’s the <span class="concept">summation</span> symbol, which we use when we’re adding many things together. For example, think about summing up the square of every number from 1 to 39. We could write that as <span class="math display">\[1^2 + 2^2 + \cdots + 38^2 + 39^2.\]</span> A shorter way to write that, with the added advantage of leaving absolutely no ambiguity about precisely what we’re summing up, would be with the summation symbol: <span class="math display">\[\sum_{n=1}^{39} n^2.\]</span> More generally, the notation <span class="math inline">\(\sum_{n=k}^K x_n\)</span> stands for the sum <span class="math inline">\(x_k + x_{k+1} + \cdots + x_{K - 1} + x_K\)</span>. The notation <span class="math inline">\(\sum_{n=k}^\infty x_n\)</span> stands for a sum of infinitely many terms, <span class="math inline">\(x_k + x_{k+1} + x_{k+2} + \cdots\)</span> and so on indefinitely.</p>
+</div>
+</div>
+<p>Given any term length <span class="math inline">\(T\)</span>, there’s a nonzero, though probably quite small, probability that the incumbent party will stay in office at least <span class="math inline">\(T\)</span> terms. This means we’ll need to add together infinitely many numbers to calculate the expected term length. How can we even do that? Won’t we just end up with infinity at the end?</p>
+<p>Let’s get more specific about what we need to calculate here.</p>
+<ul>
+<li><p>The probability that the incumbent party has 0 more terms is the probability of losing the election immediately, namely <span class="math inline">\(1 - p\)</span>.</p></li>
+<li><p>The probability of exactly one more term is the probability of winning the election this term and then losing the next one, namely <span class="math inline">\(p \times (1 - p)\)</span>.</p></li>
+<li><p>The probability of exactly two more terms is the probability of winning this election and the next one, then losing the one after that, namely <span class="math inline">\(p \times p \times (1 - p)\)</span>.</p></li>
+<li><p>The probability of exactly three more terms is the probability of winning the next three elections but losing the one after that, namely <span class="math inline">\(p \times p \times p \times (1 - p)\)</span>.</p></li>
+</ul>
+<p>You might be starting to notice that there’s a certain structure here. The probability that the incumbent party lasts <span class="math inline">\(T\)</span> more terms in office is <span class="math display">\[\underbrace{p \times p \times \cdots \times p}_{\text{$T$ times}} \times (1 - p) = p^T (1 - p).\]</span> This means the expected value we are trying to calculate is <span class="math display">\[
+\sum_{T = 0}^\infty T \cdot \Pr(\text{term length} = T)
+= \sum_{T = 0}^\infty T p^T (1 - p).
+\]</span></p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>You may be wondering why this formula applies to the <span class="math inline">\(T = 0\)</span> case too. It applies because <span class="math inline">\(p^0 = 1\)</span> for any nonzero number <span class="math inline">\(p\)</span>. Therefore, when <span class="math inline">\(T = 0\)</span>, we have <span class="math inline">\(p^T (1 - p) = 1 - p\)</span>, the probability that the incumbent party loses office immediately.</p>
+</div></div><p>Let’s head to the computer to look at the components of this sum. Sadly we can’t look at all of the infinitely many components, so let’s just go up to <span class="math inline">\(T = 40\)</span>. We will look at the case where <span class="math inline">\(p = 0.75\)</span>. First, for each length up to 40 terms, let’s look at the probability that the terms lasts that long.</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>If you want to see the R code that generates these figures, go to the Quarto source code for these lecture notes <a href="https://github.com/brentonk/mfpa">on GitHub</a>.</p>
+</div></div><div class="cell">
+<div class="cell-output-display">
+<div id="fig-term-length-prob" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-term-length-prob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1
+</figcaption>
+<div aria-describedby="fig-term-length-prob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="sequences_series_files/figure-html/fig-term-length-prob-1.png" id="fig-term-length-prob" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>According to this model, if <span class="math inline">\(p = 0.75\)</span>, then the probability that the incumbent party stays in power for 20 or more consecutive terms is negligible. But this is only part of the expected value calculation. To calculate the expected value, we multiply the probability of each possible term length by the term length itself. So let’s multiply the probabilities from the last figure by the corresponding term length to see the individual components in the expected value calculation.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ev-components" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ev-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2
+</figcaption>
+<div aria-describedby="fig-ev-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="sequences_series_files/figure-html/fig-ev-components-1.png" id="fig-ev-components" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>Term lengths of 3 or 4 end up with the highest weights in the expected value calculation, once we weight the probability of each term length by the number of terms it represents. Perhaps more importantly for our purposes, even after we multiply the probabilities by term length, we see that the values get very close to 0 around <span class="math inline">\(T = 30\)</span> or so. If this weren’t the case — i.e., if there were some nonzero floor on the expected value components — then the sum we’re trying to calculate, <span class="math inline">\(\sum_{T=0}^\infty T p^T (1 - p)\)</span>, would necessarily be infinite.</p>
+<p>Finally, let’s see what we get when we add up the expected value components up to each <span class="math inline">\(T\)</span>. These finite calculations can’t tell us what the <em>infinite</em> sum would equal, but we’ll see that they give us a pretty good idea.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-expected-term-length" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-expected-term-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3
+</figcaption>
+<div aria-describedby="fig-expected-term-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="sequences_series_files/figure-html/fig-expected-term-length-1.png" id="fig-expected-term-length" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>It sure looks like our infinite sum tops out at 3. At this point, if I had to guess, I’d guess that the expected term length is 3 when <span class="math inline">\(p = 0.75\)</span>. How can we say that with certainty instead of just guessing based on the eyeball test? Is there a formula that will let us calculate the expected term length for any value of the term-by-term retention probability <span class="math inline">\(p\)</span>? By the end of this chapter, we’ll have a mathematical foundation to answer these questions.</p>
+</section>
+<section id="sec-logarithms" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-logarithms"><span class="header-section-number">3.2</span> Logarithms</h2>
+<section id="sec-definition-logarithm" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="sec-definition-logarithm"><span class="header-section-number">3.2.1</span> Definition of a logarithm</h3>
+<p>Before getting into trickier questions about infinite sums, let’s try to answer a simpler question about the underlying probabilities. We’ve already seen that the probability of lasting exactly <span class="math inline">\(T\)</span> consecutive terms is <span class="math inline">\(p^T (1 - p)\)</span>. What if we wanted to reverse that? For example, what if we wanted to find the lowest term length with a 1% or less chance of occurring?</p>
+<p>We could solve this problem by “brute force”: run the calculation for each successive term length <span class="math inline">\(T\)</span> until we get to the number we’re looking for. Here’s some R code that uses a <code>repeat</code> loop — repeating the same steps over and over, until we explicitly tell the loop to <code>break</code> — to implement the brute force method.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.75</span>  <span class="co"># retention probability each term</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fl">0.01</span>  <span class="co"># probability of term length we're looking for</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="dv">1</span>     <span class="co"># starting value for term length</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate probability of lasting T terms</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> p<span class="sc">^</span>T <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># If less than or equal to desired probability, stop repeating</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (prob <span class="sc">&lt;=</span> q)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Otherwise, add a term and repeat</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  T <span class="ot">&lt;-</span> T <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the result</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+</div>
+<p>The brute force method works, but it’s inelegant and scales poorly. It would be nice if there were a formula to answer our question. Luckily, there is one! We just have to use a <span class="concept">logarithm</span>, which is essentially the reverse of an exponent.</p>
+<div id="def-logarithm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.1 (Logarithm)</strong></span> For any positive number <span class="math inline">\(a\)</span> and any positive number <span class="math inline">\(b \neq 1\)</span>, we say that <span class="math inline">\(x = \log_b a\)</span> (pronounced “<span class="math inline">\(x\)</span> is the logarithm, base <span class="math inline">\(b\)</span>, of <span class="math inline">\(a\)</span>”) if and only if <span class="math inline">\(b^x = a\)</span>.</p>
+</div>
+<p>Here are a few examples of logarithms in action.</p>
+<ul>
+<li><p>Because <span class="math inline">\(2^3 = 2 \times 2 \times 2 = 8\)</span>, we have <span class="math inline">\(\log_2 8 = 3\)</span>. In words, 3 is the base-2 logarithm of 8.</p></li>
+<li><p>Because <span class="math inline">\(10^{-2} = \frac{1}{10^2} = \frac{1}{100} = 0.01\)</span>, we have <span class="math inline">\(\log_{10} 0.01 = -2\)</span>. In words, -2 is the base-10 logarithm of 0.01.</p></li>
+<li><p>Because <span class="math inline">\(64^{1/2} = \sqrt{64} = 8\)</span>, we have <span class="math inline">\(\log_{64} 8 = 1/2\)</span>. In words, 1/2 is the base-64 logarithm of 8.</p></li>
+</ul>
+<p>Using a logarithm, we can now more elegantly solve our “first consecutive term length whose probability is <span class="math inline">\(q\)</span> or less” problem. We are looking for the term length <span class="math inline">\(T\)</span> for which <span class="math display">\[p^T (1 - p) \leq q.\]</span> Equivalently, after dividing each side of the above equation by <span class="math inline">\(1 - p\)</span>, we are looking for the term length <span class="math inline">\(T\)</span> for which <span class="math display">\[p^T = \frac{q}{1 - p}.\]</span> We can now solve for <span class="math inline">\(T\)</span> by taking the logarithm: <span class="math display">\[T = \log_p \left(\frac{q}{1 - p}\right).\]</span></p>
+<p>Let’s use this formula to redo the example we solved by brute force earlier. Based on what we saw from the brute force solution, we should expect the formula to spit out a number between 11 and 12.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(q <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> p), <span class="at">base =</span> p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11.189</code></pre>
+</div>
+</div>
+</section>
+<section id="sec-exponent-logarithm-properties" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="sec-exponent-logarithm-properties"><span class="header-section-number">3.2.2</span> Properties of exponents and logarithms</h3>
+<p>Logarithms comes up surprisingly often in mathematical writing and in statistical programming, even in contexts where we’re not solving equations of the form <span class="math inline">\(a^x = b\)</span>. They’re useful because of their helpful properties, some of which we’ll now review.</p>
+<p><strong>Logarithm of a product.</strong> You might remember that <span class="math inline">\(b^{y + z} = b^y \times b^z\)</span>. As an example to make this more concrete, think about <span class="math inline">\(2^5\)</span>: <span class="math display">\[
+2^5 = 2^{2 + 3} = \underbrace{2 \times 2}_{2^2} \times \underbrace{2 \times 2 \times 2}_{2^3} = 2^2 \times 2^3.
+\]</span></p>
+<p>This fact about exponents is the basis for an extremely helpful property of logarithms: the logarithm of a product is the sum of the logarithms.</p>
+<div id="prp-logarithm-product" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3.1 (Logarithm of a product)</strong></span> For any positive numbers <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span> and any positive number <span class="math inline">\(b \neq 1\)</span>, <span class="math display">\[\log_b (y \times z) = \log_b y + \log_b z.\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By the definition of the logarithm and the property of products of exponents, <span class="math display">\[
+b^{\log_b y + \log_b z} = b^{\log_b y} \times b^{\log_b z} = y \times z.
+\]</span> Therefore, again by the definition of the logarithm, <span class="math inline">\(\log_b (y \times z) = \log_b y + \log_b z\)</span>.</p>
+</div>
+<p>This property of logarithms is highly useful in both statistical computing and in calculus. In the statistical context, suppose you need to calculate the probability of some very large number of independent events, resulting in a calculation that looks like <span class="math display">\[p_1 \times p_2 \times \cdots \times p_N,\]</span> where <span class="math inline">\(N\)</span> is some huge number. (For one thing, calculations like this are central to <a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation">maximum likelihood estimation</a>.) It turns out that computers are not so good at multiplying a lot of very small numbers together. At a certain point, as in the following example, the computer can’t distinguish the product from 0.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly sample a bunch of numbers each close to 1/100</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>size <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tiny_numbers <span class="ot">&lt;-</span> <span class="fu">runif</span>(size, <span class="at">min =</span> <span class="fl">0.009</span>, <span class="at">max =</span> <span class="fl">0.011</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># double check there are no zeroes here</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tiny_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.009001 0.009465 0.009909 0.009940 0.010380 0.010998 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prod() to multiply all numbers in a vector together</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(tiny_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># not just rounding: R thinks the product is zero!</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(tiny_numbers) <span class="sc">==</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Because addition is easier for computers than multiplication, we can get a more accurate answer by converting our multiplication problem into an addition problem. Using <a href="#prp-logarithm-product" class="quarto-xref">Proposition&nbsp;<span>3.1</span></a>, we know that for any positive base <span class="math inline">\(b \neq 1\)</span>, <span class="math display">\[\log_b (p_1 \times p_2 \times \cdots \times p_N) = \log_b p_1 + \log_b p_2 + \cdots + \log_b p_N.\]</span> Let’s use a base of <span class="math inline">\(b = 10\)</span>, since then we can interpret our result in terms of decimal places.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert each number to its base-10 log</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>logged_numbers <span class="ot">&lt;-</span> <span class="fu">log</span>(tiny_numbers, <span class="at">base =</span> <span class="dv">10</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sum() to add all numbers in a vector together</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(logged_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1001.661</code></pre>
+</div>
+</div>
+<p>Now we have a much more accurate calculation: the product of the 500 small numbers we randomly drew is <span class="math inline">\(10^{-1001.661}\)</span>.</p>
+<p><strong>Logarithm of a power.</strong> Again thinking about exponents, you might remember that <span class="math inline">\((b^y)^z = b^{y \times z}\)</span>. For example, think about <span class="math inline">\(5^6\)</span>: <span class="math display">\[5^6 = 5^{3 \times 2} = \underbrace{5 \times 5 \times 5}_{5^3} \times \underbrace{5 \times 5 \times 5}_{5^3} = (5^3)^2.\]</span> This property of exponents delivers us another helpful property of logarithms: the log of <span class="math inline">\(y\)</span> to the <span class="math inline">\(z\)</span>’th power is <span class="math inline">\(z\)</span> times the log of <span class="math inline">\(y\)</span>. Or, as I think of it, logarithms turn powers into coefficients.</p>
+<div id="prp-logarithm-power" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3.2 (Logarithm of a power)</strong></span> For any positive number <span class="math inline">\(y\)</span>, any number <span class="math inline">\(z\)</span>, and any positive base <span class="math inline">\(b \neq 1\)</span>, <span class="math display">\[\log_b (y^z) = z \log_b y.\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By the definition of the logarithm and the property of powers of exponents, <span class="math display">\[b^{z \log_b y} = (b^{\log_b y})^z = y^z.\]</span> Therefore, again by the definition of the logarithm, <span class="math inline">\(\log_b (y^z) = z \log_b y\)</span>.</p>
+</div>
+<p><strong>Logarithm of a ratio.</strong> We saw in <a href="#prp-logarithm-product" class="quarto-xref">Proposition&nbsp;<span>3.1</span></a> that logarithms turn multiplication problems into addition problems. For similar reasons, they turn division problems into subtraction problems.</p>
+<div id="prp-logarithm-ratio" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3.3 (Logarithm of a ratio)</strong></span> For any positive number <span class="math inline">\(y\)</span>, any positive number <span class="math inline">\(z\)</span>, and any positive base <span class="math inline">\(b \neq 1\)</span>, <span class="math display">\[\log_b \left(\frac{y}{z}\right) = \log_b y - \log_b z.\]</span></p>
+</div>
+<p>You’ve already got the tools you need to prove this one yourself, so I’m leaving the proof as an exercise for you.</p>
+<div id="exr-logarithm-ratio" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.1</strong></span> Prove <a href="#prp-logarithm-ratio" class="quarto-xref">Proposition&nbsp;<span>3.3</span></a>. (Hint: use both of the two previous properties of logarithms, <a href="#prp-logarithm-product" class="quarto-xref">Proposition&nbsp;<span>3.1</span></a> and <a href="#prp-logarithm-power" class="quarto-xref">Proposition&nbsp;<span>3.2</span></a>.)</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The ratio <span class="math inline">\(\frac{y}{z}\)</span> is equivalent to the product <span class="math inline">\(y \times z^{-1}\)</span>. Therefore, <a href="#prp-logarithm-product" class="quarto-xref">Proposition&nbsp;<span>3.1</span></a> implies <span class="math display">\[\log_b \left(\frac{y}{z}\right) = \log_b (y \times z^{-1}) = \log_b y + \log_b (z^{-1}).\]</span> Furthermore, <a href="#prp-logarithm-power" class="quarto-xref">Proposition&nbsp;<span>3.2</span></a> gives us <span class="math inline">\(\log_b (z^{-1}) = - \log_b z\)</span>. We conclude that <span class="math display">\[\log_b \left(\frac{y}{z}\right) = \log_b y + \log_b (z^{-1}) = \log_b y - \log_b z.\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Logarithm of 1.</strong> The number 1 is special. Perhaps you recall the mathematical rule that <span class="math inline">\(b^0 = 1\)</span> for any positive number <span class="math inline">\(b\)</span>. It follows immediately that the logarithm of 1 is always 0, regardless of which base we are working with.</p>
+<div id="prp-logarithm-one" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3.4 (Logarithm of 1)</strong></span> For any positive base <span class="math inline">\(b \neq 1\)</span>, <span class="math display">\[\log_b 1 = 0.\]</span></p>
+</div>
+<p>Let’s go back to this rule that <span class="math inline">\(b^0 = 1\)</span> for any positive number <span class="math inline">\(b\)</span>. The mathematical expression <span class="math inline">\(b^0\)</span> is confusing. We typically think of <span class="math inline">\(b^x\)</span> as meaning “multiply <span class="math inline">\(b\)</span> together <span class="math inline">\(x\)</span> times.” How can we multiply <span class="math inline">\(b\)</span> together 0 times? What does that even mean?</p>
+<p>I’m sure someone out there has a deep explanation of why it makes sense for <span class="math inline">\(b^0\)</span> to equal 1. But I’m a mathematical pragmatist. What I know is that our rule that <span class="math inline">\(b^{x + y} = b^x \times b^y\)</span> would completely break down if <span class="math inline">\(b^0\)</span> had any value other than 1. For example, imagine instead that we had <span class="math inline">\(b^0 = 42\)</span> for some base <span class="math inline">\(b\)</span>. Well, then, our usual rule about exponents of sums would give us <span class="math display">\[
+b = b^1 = b^{0 + 1} = b^0 \times b^1 = 42 b.
+\]</span> That can’t be right! The only sensible way forward is to assume <span class="math inline">\(b^0 = 1\)</span>. I don’t lose any sleep over not having some kind of physical or visual intuition why this is the case, because I know that it’s the only way to handle powers of 0 that doesn’t cause other important things to break.</p>
+<p>Sometimes you’ll run into things like this in mathematics. It’s different for everyone. Some people get hung up on the “imaginary” number <span class="math inline">\(i = \sqrt{-1}\)</span>, which I’m happy to tell you basically never comes up in the work political scientists do. Others get hung up on the idea of spaces with more than 3 dimensions, which very much do come up in the work we do. Heck, I know people who are skeptical of the idea of negative numbers because they can’t visualize them.</p>
+<p>Whenever I run into one of these things that I can’t directly visualize or comprehend with a physical analogy, I instead try to think about its role in the mathematical system I’m working with. I can’t “see” why <span class="math inline">\(b^0 = 1\)</span>, but I know that it ensures <span class="math inline">\(b^{x + y} = b^x \times b^y\)</span>. I can’t “picture” the imaginary number <span class="math inline">\(i\)</span>, but I know that it lets us solve algebraic equations like <span class="math inline">\(x^2 + 4 = 0\)</span>. I definitely can’t “visualize” a linear function through 631-dimensional space, yet while I was writing these notes my computer was estimating a regression model with 631 parameters. Don’t feel like you have to be able to picture every mathematical rule or object — it’s enough just to understand how it helps you solve a particular problem.</p>
+<p><strong>Base changes and the natural logarithm.</strong> Suppose we know that the base-2 logarithm of 16 is 4, i.e., <span class="math inline">\(\log_2 16 = 4\)</span>. What, if anything, does this tell us about the base-8 logarithm of 16?</p>
+<p>It turns out that there’s a pretty handy formula to change a logarithm from one base to another. To change the base-<span class="math inline">\(b\)</span> logarithm of <span class="math inline">\(y\)</span> to a base-<span class="math inline">\(c\)</span> logarithm, we just rescale it by the base-<span class="math inline">\(b\)</span> logarithm of <span class="math inline">\(c\)</span>.</p>
+<div id="prp-logarithm-base-change" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3.5 (Logarithm base changes)</strong></span> For any positive number <span class="math inline">\(y\)</span> and any positive bases <span class="math inline">\(b \neq 1\)</span> and <span class="math inline">\(c \neq 1\)</span>, <span class="math display">\[\log_c y = \frac{\log_b y}{\log_b c}.\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Using the definition of a logarithm twice and the properties of exponents once, we have <span class="math display">\[
+y = c^{\log_c y} = (b^{\log_b c})^{\log_c y} = b^{(\log_b c) \times (\log_c y)}.
+\]</span> Therefore, again by the definition of a logarithm, <span class="math display">\[\log_b y = (\log_b c) \times (\log_c y).\]</span> We obtain the proposition by dividing both sides by <span class="math inline">\(\log_b c\)</span>.</p>
+</div>
+<p>Now we can calculate the base-8 logarithm of 16. Since <span class="math inline">\(2^4 = 16\)</span>, we know that <span class="math inline">\(\log_2 16 = 4\)</span>. And since <span class="math inline">\(2^3 = 8\)</span>, we know that <span class="math inline">\(\log_2 8 = 3\)</span>. Therefore, using <a href="#prp-logarithm-base-change" class="quarto-xref">Proposition&nbsp;<span>3.5</span></a>, we have <span class="math display">\[\log_8 16 = \frac{\log_2 16}{\log_2 8} = \frac{4}{3}.\]</span></p>
+<p>In a sense, the upshot of <a href="#prp-logarithm-base-change" class="quarto-xref">Proposition&nbsp;<span>3.5</span></a> is that it doesn’t matter what base we use — the value of the logarithm scales up or down with the value of the base, but the shape of the curve is the same regardless, as illustrated in <a href="#fig-log-scale" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>. So if we’re doing something like logging a variable in a linear regression, our results will be substantively the same regardless of which logarithmic base we use. Since the choice of base doesn’t substantively affect our findings, we should choose whatever base is most convenient for interpretation.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-log-scale" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-log-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4
+</figcaption>
+<div aria-describedby="fig-log-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="sequences_series_files/figure-html/fig-log-scale-1.png" id="fig-log-scale" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>This figure shows three common choices of base for the logarithm. You are probably familiar with the numbers 2 and 10. You might be less familiar with the number <span class="math inline">\(e\)</span>, aka Euler’s number, which is equal to roughly 2.718 and comes up repeatedly in high-end math. This number is important enough that we call the base-<span class="math inline">\(e\)</span> logarithm the <span class="concept">natural logarithm</span>. For now, I’m going to ask you to trust me that <span class="math inline">\(e\)</span> is important — you’ll be able to see the reasoning a bit better once we get to calculus.</p>
+<p>In these notes, when I write <span class="math inline">\(\log y\)</span> without an explicit base, I mean the natural logarithm of <span class="math inline">\(y\)</span>. Similarly, the <code>log()</code> function in R takes the natural logarithm if you don’t specify a base. If you want to take a base-<span class="math inline">\(e\)</span> exponent in R, use the <code>exp()</code> function.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="log versus ln">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+log versus ln
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In other contexts, including high school math (if my early-2000s experience still holds), people use <span class="math inline">\(\ln\)</span> to mean the natural logarithm and <span class="math inline">\(\log\)</span> to mean the base-10 algorithm. ChatGPT tells me that engineers are also fond of this usage. But in political science, economics, and statistics writing, as well as in the overwhelming majority of math textbooks at the college level and beyond, <span class="math inline">\(\log\)</span> means the natural logarithm.</p>
+</div>
+</div>
+<p><a href="#prp-logarithm-base-change" class="quarto-xref">Proposition&nbsp;<span>3.5</span></a> tells us why it’s mostly harmless to just use the natural logarithm for everything. If for some reason you ever need to convert a natural logarithm to a different base, you can just use the formula <span class="math display">\[\log_b y = \frac{\log y}{\log b}.\]</span></p>
+</section>
+</section>
+<section id="sec-sequences-limits" class="level2 page-columns page-full" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-sequences-limits"><span class="header-section-number">3.3</span> Sequences and limits</h2>
+<p>In terms of our motivating example, we’ve used the logarithm to find the term length <span class="math inline">\(T\)</span> that corresponds to a particular probability of lasting that long, <span class="math inline">\(p^T (1 - p)\)</span>. Looking at <a href="#fig-term-length-prob" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>, it seems like these probabilities get closer and closer to 0 as <span class="math inline">\(T\)</span> increases, though they never quite hit 0 exactly. Is there a way we can say that more precisely? For that, we’ll need to learn about sequences and their limits.</p>
+<p>A <span class="concept">sequence</span> is an infinite, ordered list of numbers. We write <span class="math inline">\(\{x_n\}\)</span> to denote the sequence <span class="math inline">\(x_1, x_2, x_3, \ldots\)</span>, with <span class="math inline">\(x_n\)</span> standing for the <span class="math inline">\(n\)</span>’th entry in the sequence. Unlike with sets, order and repetition matter in a sequence. For example, the sequence <span class="math inline">\(0, 1, 0, 1, \ldots\)</span> is distinct from the sequence <span class="math inline">\(1, 0, 1, 0, \ldots\)</span> and the sequence <span class="math inline">\(0, 0, 1, 1, 0, 0, 1, 1, \ldots\)</span>.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Sequences vs. sets">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Sequences vs.&nbsp;sets
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Because we use curly brackets to denote both sequences and sets, there are some cases where it can be confusing to distinguish a single-element set from a sequence. The main context clue to look for is the presence of an index subscript: for example, <span class="math inline">\(\{3\}\)</span> isn’t a sequence because there’s no index variable. By the same token, it would be cruel and unusual for a mathematical writer to use <span class="math inline">\(\{x_n\}\)</span> to mean “the set whose sole element is <span class="math inline">\(x_n\)</span>” rather than “the sequence <span class="math inline">\(x_1, x_2, \ldots\)</span>.” If you ever want to send a very strong signal that something is a sequence, you may use a subscript to explicitly call out the index, using the notation <span class="math inline">\(\{x_n\}_{n=1}^\infty\)</span>. Or, you know, you can just say “the sequence <span class="math inline">\(\{x_n\}\)</span>.” Words are helpful!</p>
+</div>
+</div>
+<p>A sequence is ordered, in that it is sensible to talk about the first or tenth or 1,052,402nd element of a sequence. Additionally, any sequence we’ll talk about for now will consist of elements that are all real numbers. (I’ll let you know if and when we’re dealing with sequences of other types of mathematical object.) Putting these two facts together, you can also think of a sequence as a function that maps the set of natural numbers, <span class="math inline">\(\mathbb{N}\)</span>, into the set of real numbers, <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<section id="sec-def-limit" class="level3 page-columns page-full" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="sec-def-limit"><span class="header-section-number">3.3.1</span> Definition of a limit</h3>
+<p>Think about the sequence <span class="math inline">\(1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \ldots\)</span>. To denote this formally, let <span class="math inline">\(\{x_n\}\)</span> be the sequence where each <span class="math inline">\(x_n = \frac{1}{n}\)</span>. The further we go along this sequence, the closer the values get to 0 — though we never quite get all the way there. Indeed, we would say the <span class="concept">limit</span> of the sequence is 0, which we’d denote by writing <span class="math inline">\(\lim_{n \to \infty} x_n = 0\)</span> or, more simply, <span class="math inline">\(\{x_n\} \to 0\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sequences_series_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What we need now is a precise mathematical notion of “getting closer and closer.” The infinite nature of a sequence makes this tricky. We can’t follow the sequence and see that it ends at 0, because the sequence has no end! To get around this issue, mathematicians use what I think of as a “challenge-response” definition of a limit. Here’s what I mean by that. Suppose I have a sequence <span class="math inline">\(\{x_n\}\)</span> and claim that its limit is a number <span class="math inline">\(x\)</span>.</p>
+<ol type="1">
+<li><p>You <strong>challenge</strong> me by picking a number <span class="math inline">\(\epsilon &gt; 0\)</span>. Think of this as you saying “I need you to show me that once we get far enough along the sequence, every value is within <span class="math inline">\(\epsilon\)</span> of your supposed limit.”</p></li>
+<li><p>I <strong>respond</strong> to the challenge by identifying an index <span class="math inline">\(N\)</span> after which the sequence values are as close as you demand. In particular, I need to show you that <span class="math inline">\(x - \epsilon &lt; x_n &lt; x + \epsilon\)</span> for all indices <span class="math inline">\(n \geq N\)</span>.</p></li>
+</ol>
+<p>My claimed limit is true if and only if I can conjure up a valid response to any <span class="math inline">\(\epsilon &gt; 0\)</span> that you might pick. The formal definition of a limit puts this process in precise mathematical terms.</p>
+<div id="def-limit" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.2 (Finite limit)</strong></span> The sequence <span class="math inline">\(\{x_n\}\)</span> has a <span class="concept">limit</span> of <span class="math inline">\(x \in \mathbb{R}\)</span> if the following condition is satisfied: for any real number <span class="math inline">\(\epsilon &gt; 0\)</span>, we can identify an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(|x_n - x| &lt; \epsilon\)</span> for all <span class="math inline">\(n \geq N\)</span>. The sequence is <span class="concept">convergent</span> if and only if <span class="math inline">\(\lim_{n \to \infty} x_n = x\)</span> for some finite number <span class="math inline">\(x\)</span>.</p>
+</div>
+<p>A sequence cannot have two distinct limits. If the sequence <span class="math inline">\(\{x_n\}\)</span> is getting ever closer to <span class="math inline">\(x\)</span> as <span class="math inline">\(n\)</span> increases, it cannot also be getting ever closer to some other number <span class="math inline">\(x'\)</span>. We won’t go all the way through a proof of this claim, but here’s the basics of how it would work. Letting <span class="math inline">\(d\)</span> stand for half the distance between the limit <span class="math inline">\(x\)</span> and some other number <span class="math inline">\(x'\)</span>, we know from the formal definition of a limit that after a certain point, every <span class="math inline">\(x_n\)</span> lies between <span class="math inline">\(x - d\)</span> and <span class="math inline">\(x + d\)</span>. This in turn means that every <span class="math inline">\(x_n\)</span> from this point onward is at least <span class="math inline">\(d\)</span> away from <span class="math inline">\(x'\)</span>, meaning that <span class="math inline">\(x'\)</span> cannot possibly be the limit of the sequence — there is no valid response to the challenge where <span class="math inline">\(\epsilon = d\)</span>.</p>
+<p>It can be tricky to use the formal definition (<a href="#def-limit" class="quarto-xref">Definition&nbsp;<span>3.2</span></a>) to prove that some number is indeed the limit of a specified sequence. Even if you can “see” that some sequence is getting ever closer to its limit, how can you show that the precise formal definition is satisfied? To make the challenge-response process a bit more concrete, let’s apply it to the problem of showing that <span class="math inline">\(\lim_{n \to \infty} 1/n = 0\)</span>.</p>
+<div id="exm-limit-harmonic-seq" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3.1</strong></span> We want to prove that <span class="math inline">\(\lim_{n \to \infty} 1/n = 0\)</span>. To do so, we must show that for any choice of a number <span class="math inline">\(\epsilon &gt; 0\)</span>, we can find an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(-\epsilon &lt; 1/n &lt; \epsilon\)</span> for all <span class="math inline">\(n \geq N\)</span>.</p>
+<p>You can think about this as a “for all” claim: namely, that for all <span class="math inline">\(\epsilon &gt; 0\)</span>, there is an index <span class="math inline">\(N\)</span> that meets the requirement above. So to prove it, we will follow the method laid out in <a href="set_theory.html#nte-proving-for-all" class="quarto-xref">Note&nbsp;<span>2.1</span></a> in the previous chapter. That is, we will take an “arbitrary” <span class="math inline">\(\epsilon &gt; 0\)</span> — a number <span class="math inline">\(\epsilon\)</span> that we know nothing about, besides that it’s greater than 0 — and prove that we can find an index <span class="math inline">\(N\)</span> that meets the requirement.</p>
+<p><em>Proof:</em> Take an arbitrary <span class="math inline">\(\epsilon &gt; 0\)</span>. Because <span class="math inline">\(\epsilon &gt; 0\)</span>, the fraction <span class="math inline">\(1/\epsilon\)</span> is finite and positive (though perhaps very large). Let <span class="math inline">\(N\)</span> be any integer greater than <span class="math inline">\(1/\epsilon\)</span>. For any <span class="math inline">\(n \geq N\)</span>, we have <span class="math display">\[\frac{1}{n} \leq \frac{1}{N} &lt; \frac{1}{1/\epsilon} = \epsilon.\]</span> Combined with the fact that <span class="math inline">\(1/n &gt; 0 &gt; -\epsilon\)</span> for all <span class="math inline">\(n\)</span>, we have shown that there exists an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(-\epsilon &lt; 1/n &lt; \epsilon\)</span> for all <span class="math inline">\(n \geq N\)</span>. Because <span class="math inline">\(\epsilon\)</span> was chosen arbitrarily, this completes the proof that <span class="math inline">\(\lim_{n \to \infty} 1/n = 0\)</span>.</p>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>It would be reasonable to be skeptical about the (critical!) step in <a href="#exm-limit-harmonic-seq" class="quarto-xref">Example&nbsp;<span>3.1</span></a> where I assert the existence of an integer greater than <span class="math inline">\(1/\epsilon\)</span>. If you are indeed skeptical in this way, don’t worry — the <a href="https://en.wikipedia.org/wiki/Archimedean_property">Archimedean property</a> of the real numbers guarantees it. (And if you weren’t skeptical, perhaps you should have been?)</p>
+</div></div><p>We can use a similar proof to show that the sequence of term length probabilities in our motivating example, <span class="math inline">\(\{p^T (1 - p)\}_{T = 1}^\infty\)</span>, has a limit of 0. To do that, we’ll need to use logarithms.</p>
+<div id="exm-limit-term-length-prob" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3.2</strong></span> We want to prove that <span class="math inline">\(\lim_{T \to \infty} p^T (1 - p) = 0\)</span>. To do so, we must show that for any choice of a number <span class="math inline">\(\epsilon &gt; 0\)</span>, we can find an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(-\epsilon &lt; p^T (1 - p) &lt; \epsilon\)</span> for all <span class="math inline">\(T \geq N\)</span>.</p>
+<p><em>Proof:</em> Take an arbitrary <span class="math inline">\(\epsilon &gt; 0\)</span>. Because <span class="math inline">\(0 &lt; p &lt; 1\)</span>, the value <span class="math inline">\(p^T\)</span> decreases with <span class="math inline">\(T\)</span> as long as <span class="math inline">\(T \geq 1\)</span>. So the tricky part is to show that we can find some term length such that <span class="math inline">\(p^T (1 - p) &lt; \epsilon\)</span>, or equivalently that <span class="math inline">\(p^T &lt; \frac{\epsilon}{1 - p}\)</span>. We know from the definition of the logarithm that <span class="math inline">\(\log_p \frac{\epsilon}{1 - p}\)</span> is the solution to the equation <span class="math inline">\(p^x = \frac{\epsilon}{1 - p}\)</span>. This gives us precisely what we need to meet the formal definition of a limit.</p>
+<p>Let <span class="math inline">\(N\)</span> be any integer greater than <span class="math inline">\(\log_p \left(\frac{\epsilon}{1 - p}\right)\)</span>. For any <span class="math inline">\(T \geq N\)</span>, we have <span class="math display">\[p^T (1 - p) \leq p^N (1 - p) &lt; p^{\log_p \left(\frac{\epsilon}{1 - p}\right)} (1 - p) = \left(\frac{\epsilon}{1 - p}\right) (1 - p) = \epsilon.\]</span> Combined with the fact that <span class="math inline">\(-\epsilon &lt; 0 &lt; p^T (1 - p)\)</span> for all <span class="math inline">\(T\)</span>, we have shown that there exists an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(-\epsilon &lt; p^T (1 - p) &lt; \epsilon\)</span> for all <span class="math inline">\(T \geq N\)</span>. Because <span class="math inline">\(\epsilon\)</span> was chosen arbitrarily, this completes the proof that <span class="math inline">\(\lim_{T \to \infty} p^T (1 - p) = 0\)</span>.</p>
+</div>
+<p>As an exercise to get some practice with the formal definition of a limit, I’ll have you prove a reasonably simple claim. If we have a constant sequence, so that <span class="math inline">\(x_n = c\)</span> for every index <span class="math inline">\(n\)</span>, then the limit of this sequence is <span class="math inline">\(c\)</span>.</p>
+<div id="exr-constant-sequence" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.2 (Limit of a constant sequence)</strong></span> Let <span class="math inline">\(c\)</span> be a constant real number. Prove that if <span class="math inline">\(x_n = c\)</span> for all <span class="math inline">\(n\)</span>, then <span class="math inline">\(\{x_n\} \to c\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We must prove that for every <span class="math inline">\(\epsilon &gt; 0\)</span>, there is an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(c - \epsilon &lt; x_n &lt; c + \epsilon\)</span>. To this end, take an arbitrary <span class="math inline">\(\epsilon &gt; 0\)</span>. For all <span class="math inline">\(n \geq 1\)</span>, we have <span class="math inline">\(x_n = c\)</span> and therefore <span class="math inline">\(c - \epsilon &lt; x_n &lt; c + \epsilon\)</span>. We have thus shown that <span class="math inline">\(N = 1\)</span> is a valid response to any <span class="math inline">\(\epsilon &gt; 0\)</span> challenge, thereby proving that <span class="math inline">\(\{x_n\} \to c\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Not every sequence is convergent. We call a sequence <span class="concept">divergent</span> if it is not convergent. One reason that a sequence might be divergent is that the values in the sequence increase (or decrease) without bound. For example, the sequence <span class="math inline">\(1, 2, 3, \ldots\)</span> is divergent, as are the sequences <span class="math inline">\(-1, -2, -3, \ldots\)</span> and <span class="math inline">\(1, -1, 2, -2, 3, -3, \ldots\)</span>. In fact, it turns out that a necessary condition for a sequence to converge is that the sequence be <span class="concept">bounded</span>.</p>
+<div id="def-bounded-sequence" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.3 (Bounded sequence)</strong></span> We say the sequence <span class="math inline">\(\{x_n\}\)</span> is <span class="concept">bounded</span> if there is a finite number <span class="math inline">\(B\)</span> such that <span class="math inline">\(-B \leq x_n \leq B\)</span> for all indices <span class="math inline">\(n\)</span>.</p>
+</div>
+<div id="prp-convergent-implies-bounded" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3.6 (Convergent implies bounded)</strong></span> If <span class="math inline">\(\{x_n\}\)</span> is convergent, then it is bounded.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Suppose the sequence <span class="math inline">\(\{x_n\}\)</span> is convergent, and let <span class="math inline">\(x\)</span> denote its limit. According to the formal definition of a limit (<a href="#def-limit" class="quarto-xref">Definition&nbsp;<span>3.2</span></a>), there is an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(x - 1 &lt; x_n &lt; x + 1\)</span> for all indices <span class="math inline">\(n \geq N\)</span>. Let <span class="math inline">\(B_{\text{left}}\)</span> be the lowest value in the finite set <span class="math inline">\(\{x_1, \ldots, x_N, x - 1\}\)</span>, and let <span class="math inline">\(B_{\text{right}}\)</span> be the greatest value in the finite set <span class="math inline">\(\{x_1, \ldots, x_N, x + 1\}\)</span>. Then, let <span class="math inline">\(B\)</span> be whichever of <span class="math inline">\(|B_{\text{left}}|\)</span> and <span class="math inline">\(|B_{\text{right}}|\)</span> is greater. For every index <span class="math inline">\(n\)</span>, we have <span class="math display">\[-B \leq B_{\text{left}} \leq x_n \leq B_{\text{right}} \leq B,\]</span> so <span class="math inline">\(\{x_n\}\)</span> is bounded.</p>
+</div>
+<p>An equivalent statement would be the contrapositive, “If <span class="math inline">\(\{x_n\}\)</span> is not bounded, then it is not convergent.” That’s a useful fact in practice. If you observe that a sequence is unbounded, you can stop looking for a finite limit — it can’t have one.</p>
+<p><a href="#prp-convergent-implies-bounded" class="quarto-xref">Proposition&nbsp;<span>3.6</span></a> is an “if” statement, not an “if and only if.” Just as every zebra is a mammal but not every mammal is a zebra, every convergent sequence is bounded but not every bounded sequence is convergent. The next exercise asks you to think of an example.</p>
+<div id="exr-bounded-does-not-imply-convergent" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.3 (Bounded does not imply convergent)</strong></span> Come up with an example of a bounded sequence that is not convergent.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>There are many examples of convergent sequences that are not bounded, but the simplest one I can think of is <span class="math inline">\(0, 1, 0, 1, \ldots\)</span>, i.e., the sequence <span class="math inline">\(\{x_n\}\)</span> where each <span class="math display">\[
+x_n = \begin{cases}
+0 &amp; \text{if $n$ is odd}, \\
+1 &amp; \text{if $n$ is even}.
+\end{cases}
+\]</span> To prove that <span class="math inline">\(\{x_n\}\)</span> is not convergent, I will just rule out every number as a potential limit for it.</p>
+<ul>
+<li><p>No <span class="math inline">\(x \neq 0\)</span> may be the limit of <span class="math inline">\(\{x_n\}\)</span>. To see why, take any <span class="math inline">\(x \neq 0\)</span>. To show that <span class="math inline">\(x\)</span> is not the limit, we need to find a “challenge” value <span class="math inline">\(\epsilon\)</span> for which there is no valid response.</p>
+<p>I claim that <span class="math inline">\(\epsilon = |x|\)</span> is this type of unmeetable challenge. To show that the challenge cannot be met, we need to show that at any point in the sequence, we can find a value there or further along that is at least <span class="math inline">\(\epsilon\)</span> away from <span class="math inline">\(x\)</span>. To do this, take any index <span class="math inline">\(n\)</span>. Then either <span class="math inline">\(x_n = 0\)</span> or <span class="math inline">\(x_{n+1} = 0\)</span>, meaning that either <span class="math inline">\(|x_n - x| \geq \epsilon\)</span> or <span class="math inline">\(|x_{n+1} - x| \geq \epsilon\)</span>. Therefore, <span class="math inline">\(x\)</span> cannot be a limit of the sequence.</p></li>
+<li><p>No <span class="math inline">\(x \neq 1\)</span> may be the limit of <span class="math inline">\(\{x_n\}\)</span> either. The logic here is the same as in the previous step — just take any <span class="math inline">\(x \neq 1\)</span> and show that the challenge with <span class="math inline">\(\epsilon = |x - 1|\)</span> cannot succeed.</p></li>
+<li><p>The first step leaves <span class="math inline">\(x = 0\)</span> as the only possible limit, but the second step rules that out too. Therefore, <span class="math inline">\(\{x_n\}\)</span> has no limit.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>Any sequence that is bounded and divergent must oscillate (go up and down and up and down and …) as in my answer to <a href="#exr-bounded-does-not-imply-convergent" class="quarto-xref">Exercise&nbsp;<span>3.3</span></a>. A <span class="concept">monotone</span> sequence, in which the values always increase (every <span class="math inline">\(x_{n+1} \geq x_n\)</span>) or always decrease (every <span class="math inline">\(x_{n+1} \leq x_n\)</span>), always converges if it is bounded. This fact about monotone sequences is important enough in the study of calculus that I will state it as a theorem. However, I will skip over proving it, as the proof relies on some real analysis concepts that we don’t have the bandwidth to cover in this course.</p>
+<div id="thm-monotone-convergence" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.1 (Monotone Convergence Theorem)</strong></span> If <span class="math inline">\(\{x_n\}\)</span> is bounded and monotone, then it is convergent.</p>
+</div>
+<p>The Monotone Convergence Theorem tells us <u>that</u> particular sequences have a finite limit, but doesn’t say <u>what</u> that limit is. For example, think again about the sequence of the incumbent party serving <span class="math inline">\(T\)</span> more consecutive terms in our running example, <span class="math inline">\(\{p^T (1 - p)\}_{T = 1}^\infty\)</span>. Because <span class="math inline">\(p^T\)</span> decreases with the number of terms <span class="math inline">\(T\)</span>, this sequence is monotone. And because <span class="math inline">\(0 \leq p^T (1 - p) \leq 1 - p\)</span> for all <span class="math inline">\(T\)</span>, it is bounded. We can therefore infer from the Monotone Convergence Theorem that this sequence is convergent, as we indeed saw above in <a href="#exm-limit-term-length-prob" class="quarto-xref">Example&nbsp;<span>3.2</span></a>. However, to go from “this sequence has a limit” to “this sequence’s limit is 0,” we needed more than the Monotone Convergence Theorem alone would give us.</p>
+</section>
+<section id="infinite-limits" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="infinite-limits"><span class="header-section-number">3.3.2</span> Infinite limits</h3>
+<p>To sum up where we are so far, here’s what we know about the relationship between boundedness, monotonicity, and the convergence of a sequence.</p>
+<ul>
+<li><p>Bounded and monotone ⇒ definitely convergent</p></li>
+<li><p>Bounded and not monotone ⇒ maybe convergent, maybe not</p></li>
+<li><p>Unbounded ⇒ definitely divergent</p></li>
+</ul>
+<p>Although every unbounded sequence is divergent, there are still some distinctions we can draw among them.</p>
+<ul>
+<li><p>If the values of the sequence are always going higher, then we would say it has a limit of <span class="math inline">\(\infty\)</span>. The sequence <span class="math inline">\(\{n\} = 1, 2, 3, \ldots\)</span> is an example.</p></li>
+<li><p>If the values of the sequence are always going lower, then we would say it has a limit of <span class="math inline">\(-\infty\)</span>. The sequence <span class="math inline">\(\{-n^2\} = -1, -4, -9, \ldots\)</span> is an example.</p></li>
+<li><p>An unbounded sequence can still oscillate and have no limit. The sequence <span class="math inline">\(\{(-1)^n n\} = -1, 2, -3, 4, \ldots\)</span> is an example.</p></li>
+</ul>
+<p>Our formal definition of an infinite limit has a challenge-response structure similar to the definition of a finite limit (<a href="#def-limit" class="quarto-xref">Definition&nbsp;<span>3.2</span></a>). Here the “challenge” is not an <span class="math inline">\(\epsilon\)</span> very close to 0, but instead a <span class="math inline">\(y\)</span> that’s very large in magnitude. We need to show that if we go far enough along the sequence, the magnitude of the elements <span class="math inline">\(x_n\)</span> is always larger than whatever challenge has been mustered.</p>
+<div id="def-limit-infinite" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.4 (Infinite limit)</strong></span> For a sequence <span class="math inline">\(\{x_n\}\)</span>, we say that <span class="math inline">\(\{x_n\} \to \infty\)</span> if the following condition is satisfied: for any real number <span class="math inline">\(a\)</span>, we can identify an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(x_n &gt; a\)</span> for all <span class="math inline">\(n \geq N\)</span>. Similarly, we say that <span class="math inline">\(\{x_n\} \to -\infty\)</span> if for any real number <span class="math inline">\(a\)</span>, we can identify an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(x_n &lt; a\)</span> for all <span class="math inline">\(n \geq N\)</span>.</p>
+</div>
+<p>As an example to apply this definition, think about the sequence of squares, <span class="math inline">\(\{n^2\} = 1, 4, 9, \ldots\)</span>. To show that this sequence has a limit of <span class="math inline">\(\infty\)</span>, consider any “challenge” of <span class="math inline">\(a \geq 0\)</span>. Given such a challenge, let <span class="math inline">\(N\)</span> be any integer larger than <span class="math inline">\(\sqrt{a}\)</span>. Then for all elements past this index (<span class="math inline">\(n \geq N\)</span>), we have <span class="math display">\[x_n \geq x_N = N^2 \geq \sqrt{a}^2 = a.\]</span> We have shown that every challenge can be met, and therefore <span class="math inline">\(\lim_{n \to \infty} n^2 = \infty\)</span>.</p>
+<div id="exr-infinite-limits" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.4</strong></span> For each of the following unbounded sequences, use <a href="#def-limit-infinite" class="quarto-xref">Definition&nbsp;<span>3.4</span></a> to prove the stated claim about its limit.</p>
+<ol type="a">
+<li><p>The sequence <span class="math inline">\(\{-\sqrt{n}\} = -1, -\sqrt{2}, -\sqrt{3}, \ldots\)</span> has a limit of <span class="math inline">\(-\infty\)</span>.</p></li>
+<li><p>The sequence <span class="math inline">\(1, 0, 3, 0, 5, 0, 7, 0, \ldots\)</span> (<span class="math inline">\(x_n = n\)</span> if <span class="math inline">\(n\)</span> is odd, <span class="math inline">\(x_n = 0\)</span> if <span class="math inline">\(n\)</span> is even) has no limit.</p></li>
+<li><p>The “three steps forward, one step back” sequence <span class="math inline">\(1, 0, 3, 2, 5, 4, 7, 6, 9, 8, \ldots\)</span> (<span class="math inline">\(x_n = n\)</span> if <span class="math inline">\(n\)</span> is odd, <span class="math inline">\(x_n = n - 2\)</span> if <span class="math inline">\(n\)</span> is even) has a limit of <span class="math inline">\(\infty\)</span>.</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Answers">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Consider any challenge <span class="math inline">\(a\)</span>, and let <span class="math inline">\(N\)</span> be any integer greater than <span class="math inline">\(a^2\)</span>. For all <span class="math inline">\(n \geq N\)</span>, we have <span class="math display">\[x_n \leq x_N = -\sqrt{N} \leq -\sqrt{a^2} \leq -|a| \leq a.\]</span> Because every challenge can be met, we conclude that <span class="math inline">\(\lim_{n \to \infty} -\sqrt{n} = -\infty\)</span>.</p></li>
+<li><p>To rule out a limit of <span class="math inline">\(\infty\)</span>, consider the challenge <span class="math inline">\(a = 1\)</span>. For any index <span class="math inline">\(N\)</span>, let <span class="math inline">\(n\)</span> be an even number greater than or equal to <span class="math inline">\(N\)</span>. Then we have <span class="math inline">\(x_n = 0 &lt; a\)</span>. As there is no valid response to the <span class="math inline">\(a = 1\)</span> challenge, we conclude that <span class="math inline">\(\{x_n\}\)</span> cannot have a limit of <span class="math inline">\(\infty\)</span>. To rule out a limit of <span class="math inline">\(-\infty\)</span>, it is sufficient to observe that the sequence is bounded from below (specifically, every <span class="math inline">\(x_n \geq 0\)</span>).</p></li>
+<li><p>Consider any challenge <span class="math inline">\(a\)</span>, and let <span class="math inline">\(N\)</span> be any integer greater than <span class="math inline">\(a + 2\)</span>. For all odd indices <span class="math inline">\(n \geq N\)</span>, we have <span class="math display">\[x_n = n \geq N \geq a + 2 &gt; a.\]</span> For all even indices <span class="math inline">\(n \geq N\)</span>, we have <span class="math display">\[x_n = n - 2 \geq N - 2 \geq a.\]</span> Therefore, <span class="math inline">\(N\)</span> is a valid response to the challenge of <span class="math inline">\(a\)</span>. Because every challenge can be met, we conclude that <span class="math inline">\(\lim_{n \to \infty} x_n = \infty\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-properties-of-limits" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="sec-properties-of-limits"><span class="header-section-number">3.3.3</span> Properties of limits</h3>
+<p>Don’t worry if the formal definition of a limit (<a href="#def-limit" class="quarto-xref">Definition&nbsp;<span>3.2</span></a>) seems daunting and cumbersome to use. In practice, most of the time that you end up dealing with limits, you won’t have to explicitly deal with the challenge-response structure. Instead, you can use helpful properties of limits to calculate the limit of a sequence.</p>
+<p>Say we have three convergent sequences: a “lower” sequence <span class="math inline">\(\{\ell_n\} \to \ell\)</span>, an “upper” sequence <span class="math inline">\(\{u_n\} \to u\)</span>, and a sequence <span class="math inline">\(\{x_n\} \to x\)</span> that always falls in between the other two after a certain point. The limit of the middle sequence must then lie in between the limits of the other two sequences, as illustrated in the graph below.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sequences_series_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When we’re thinking about limits, it doesn’t matter that the first few terms of the middle sequence are actually outside of the bounding sequences. We can slice any finite number of terms off of the front end of a sequence, and it makes no difference to the limiting behavior of that sequence. All we need is that <span class="math inline">\(\ell_n \leq x_n \leq u_n\)</span> for every index <span class="math inline">\(n\)</span> after a certain point, even if this inequality fails to hold for some smaller indices.</p>
+<div id="prp-squeeze-sequence" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3.7</strong></span> Assume that <span class="math inline">\(\{\ell_n\}\)</span> and <span class="math inline">\(\{u_n\}\)</span> are convergent sequences with limits <span class="math inline">\(\ell\)</span> and <span class="math inline">\(u\)</span> respectively. Additionally, assume there is a sequence <span class="math inline">\(\{x_n\}\)</span> and an index <span class="math inline">\(M\)</span> such that <span class="math inline">\(\ell_n \leq x_n \leq u_n\)</span> for all <span class="math inline">\(n \geq M\)</span>.</p>
+<ol type="a">
+<li><p>If <span class="math inline">\(\{x_n\}\)</span> is convergent with limit <span class="math inline">\(x\)</span>, then <span class="math inline">\(\ell \leq x \leq u\)</span>.</p></li>
+<li><p>If <span class="math inline">\(\ell = u\)</span>, then <span class="math inline">\(\{x_n\}\)</span> is guaranteed to be convergent, and it has the same limit. (This claim is sometimes called the “squeeze theorem” for sequences.)</p></li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>To prove claim (a), assume <span class="math inline">\(\{x_n\} \to x\)</span>. We will prove that <span class="math inline">\(x \geq \ell\)</span>; the proof that <span class="math inline">\(x \leq u\)</span> is analogous (i.e., you can prove it yourself by following the same steps as we do here, with minimal substitutions).</p>
+<p>To prove that <span class="math inline">\(x \geq \ell\)</span>, we will use a proof by contradiction. Suppose, for the sake of such a proof, that instead <span class="math inline">\(x &lt; \ell\)</span>. Let <span class="math inline">\(\delta\)</span> denote half the distance between <span class="math inline">\(x\)</span> and <span class="math inline">\(\ell\)</span>, so that <span class="math inline">\(\delta = (\ell - x) / 2\)</span>. Because <span class="math inline">\(\{x_n\} \to x\)</span>, there is an index <span class="math inline">\(N_1\)</span> such that <span class="math inline">\(x - \delta &lt; x_n &lt; x + \delta\)</span> for all <span class="math inline">\(n \geq N_1\)</span>. Additionally, because <span class="math inline">\(\{\ell_n\} \to \ell\)</span>, there is an index <span class="math inline">\(N_2\)</span> such that <span class="math inline">\(\ell - \delta &lt; \ell_n &lt; \ell + \delta\)</span> for all <span class="math inline">\(n \geq N_2\)</span>. But together these imply that <span class="math inline">\(x_n &lt; \ell_n\)</span> for all <span class="math inline">\(n \geq \max\{N_1, N_2\}\)</span>: specifically, for all such <span class="math inline">\(n\)</span>, we have <span class="math display">\[
+\begin{aligned}
+x_n &amp;&lt; x + \delta \\
+&amp;= x + \frac{\ell - x}{2} \\
+&amp;= \frac{x}{2} + \frac{\ell}{2} \\
+&amp;= \ell - \frac{\ell - x}{2} \\
+&amp;= \ell - \delta \\
+&amp;&lt; \ell_n.
+\end{aligned}
+\]</span> This finding contradicts our assumption that <span class="math inline">\(\ell_n \leq x_n\)</span> for all <span class="math inline">\(n \geq M\)</span>. Therefore, we conclude that <span class="math inline">\(x \geq \ell\)</span>.</p>
+<p>To prove claim (b), assume <span class="math inline">\(\ell = u\)</span>. Take an arbitrary <span class="math inline">\(\epsilon &gt; 0\)</span>. Because <span class="math inline">\(\{\ell_n\} \to \ell\)</span>, there is an index <span class="math inline">\(N_1\)</span> such that <span class="math inline">\(\ell - \epsilon &lt; \ell_n &lt; \ell + \epsilon\)</span> for all <span class="math inline">\(n \geq N_1\)</span>. Similarly, there is an index <span class="math inline">\(N_2\)</span> such that <span class="math inline">\(\ell - \epsilon &lt; u_n &lt; \ell + \epsilon\)</span> for all <span class="math inline">\(n \geq N_2\)</span>. Let <span class="math inline">\(N\)</span> be the greatest value among <span class="math inline">\(M\)</span>, <span class="math inline">\(N_1\)</span>, and <span class="math inline">\(N_2\)</span>. For all <span class="math inline">\(n \geq N\)</span>, we have <span class="math display">\[\ell - \epsilon &lt; \ell_n \leq x_n \leq u_n &lt; \ell + \epsilon,\]</span> and thus <span class="math inline">\(\ell - \epsilon &lt; x_n &lt; \ell + \epsilon\)</span>. Because <span class="math inline">\(\epsilon\)</span> was chosen arbitrarily, we conclude that <span class="math inline">\(\{x_n\} \to \ell\)</span>.</p>
+</div>
+<p>The squeeze theorem is particularly helpful because it lets us calculate limits without having to use the ugly formal definition. You’ll apply this yourself in the next exercise.</p>
+<div id="exr-squeeze-sequence" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.5</strong></span> Use <a href="#prp-squeeze-sequence" class="quarto-xref">Proposition&nbsp;<span>3.7</span></a> to show that <span class="math inline">\(\lim_{n \to \infty} \frac{1}{n + 1} = 0\)</span>. (<em>Hint:</em> We’ve already shown that <span class="math inline">\(\lim_{n \to \infty} \frac{1}{n} = 0\)</span>.)</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The constant sequence <span class="math inline">\(0, 0, 0, \ldots\)</span> has a limit of <span class="math inline">\(0\)</span>, as does the sequence <span class="math inline">\(\{\frac{1}{n}\}\)</span>. We have <span class="math inline">\(0 \leq \frac{1}{n + 1} \leq \frac{1}{n}\)</span> for all indices <span class="math inline">\(n\)</span>, so part b of <a href="#prp-squeeze-sequence" class="quarto-xref">Proposition&nbsp;<span>3.7</span></a> implies <span class="math inline">\(\{\frac{1}{n + 1}\} \to 0\)</span> as well.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Also helpfully, when we combine convergent sequences using the ordinary operations of arithmetic — addition, subtraction, multiplication, and division — we can combine their limits in the same way. Perhaps more than anything else, this is the set of properties I use to do the work in calculating limits.</p>
+<div id="prp-limit-properties" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3.8 (Arithmetic properties of limits)</strong></span> Let <span class="math inline">\(\{x_n\}\)</span> and <span class="math inline">\(\{y_n\}\)</span> be convergent sequences, with limits <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> respectively.</p>
+<ol type="a">
+<li><p>For any constant <span class="math inline">\(c\)</span>, <span class="math inline">\(\{c x_n\} \to c x\)</span>.</p></li>
+<li><p><span class="math inline">\(\{x_n + y_n\} \to x + y\)</span>.</p></li>
+<li><p><span class="math inline">\(\{x_n - y_n\} \to x - y\)</span>.</p></li>
+<li><p><span class="math inline">\(\{x_n y_n\} \to xy\)</span>.</p></li>
+<li><p>If <span class="math inline">\(y \neq 0\)</span>, <span class="math inline">\(\{x_n / y_n\} \to x/y\)</span>.</p></li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>The proof is long and tedious, so I have hidden it in collapsible boxes.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Part (a): Constant multiple of sequence">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Part (a): Constant multiple of sequence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We need to prove that for all <span class="math inline">\(\epsilon &gt; 0\)</span>, there is an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(|c x_n - c x| &lt; \epsilon\)</span> for all <span class="math inline">\(n \geq N\)</span>. To this end, take an arbitrary <span class="math inline">\(\epsilon &gt; 0\)</span>. Because <span class="math inline">\(\{x_n\} \to x\)</span>, there is an <span class="math inline">\(N\)</span> such that <span class="math inline">\(|x_n - x| &lt; \epsilon / |c|\)</span> for all <span class="math inline">\(n \geq N\)</span>. This in turn implies that <span class="math display">\[|c x_n - c x| = |c (x_n - x)| = |c| |x_n - x| &lt; |c| \cdot \frac{\epsilon}{|c|} = \epsilon\]</span> for all <span class="math inline">\(n \geq N\)</span>. We have shown that there is a valid response to any <span class="math inline">\(\epsilon &gt; 0\)</span> challenge, and thus <span class="math inline">\(\{c x_n\} \to cx\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Part (b): Sum of sequences">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Part (b): Sum of sequences
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The proof here relies on the <a href="https://en.wikipedia.org/wiki/Triangle_inequality">triangle inequality</a>: for any real numbers <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, <span class="math display">\[|a + b| \leq |a| + |b|.\]</span> If you’re ever having trouble proving something that involves absolute values, the triangle inequality can often help you get a foothold.</p>
+<p>We need to prove that for all <span class="math inline">\(\epsilon &gt; 0\)</span>, there is an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(|(x_n + y_n) - (x + y)| &lt; \epsilon\)</span> for all <span class="math inline">\(n \geq N\)</span>. To this end, take an arbitrary <span class="math inline">\(\epsilon &gt; 0\)</span>. Because <span class="math inline">\(\{x_n\} \to x\)</span>, there is an <span class="math inline">\(N_x\)</span> such that <span class="math inline">\(|x_n - x| &lt; \epsilon / 2\)</span> for all <span class="math inline">\(n \geq N_x\)</span>. Similarly, there is an <span class="math inline">\(N_y\)</span> such that <span class="math inline">\(|y_n - y| &lt; \epsilon / 2\)</span> for all <span class="math inline">\(n \geq N_y\)</span>. Let <span class="math inline">\(N\)</span> be the greater of <span class="math inline">\(N_x\)</span> and <span class="math inline">\(N_y\)</span>. Then for all indices <span class="math inline">\(n \geq N\)</span>, we have <span class="math display">\[|(x_n + y_n) - (x + y)| = |(x_n - x) + (y_n - y)| \leq |x_n - x| + |y_n - y| &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.\]</span> We have shown that there is a valid response to any <span class="math inline">\(\epsilon &gt; 0\)</span> challenge, and thus <span class="math inline">\(\{x_n + y_n\} \to x + y\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Part (c): Difference of sequences">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Part (c): Difference of sequences
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have <span class="math inline">\(x_n - y_n = x_n + (-1) y_n\)</span>, so the claim follows from parts (a) and (b): <span class="math display">\[\lim_{n \to \infty} (x_n - y_n) = \lim_{n \to \infty} [x_n + (-1) y_n]  = \lim_{n \to \infty} x_n + (-1) \lim_{n \to \infty} y_n  = x + (-1) y = x - y.\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Part (d): Product of sequences">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Part (d): Product of sequences
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We need to prove that for all <span class="math inline">\(\epsilon &gt; 0\)</span>, there is an index <span class="math inline">\(N\)</span> such that <span class="math inline">\(|x_n y_n - x y| &lt; \epsilon\)</span> for all <span class="math inline">\(n \geq N\)</span>. To this end, take an arbitrary <span class="math inline">\(\epsilon &gt; 0\)</span>. Because <span class="math inline">\(\{y_n\} \to y\)</span>, there is an <span class="math inline">\(N_1\)</span> such that <span class="math inline">\(y - 1 &lt; y_n &lt; y + 1\)</span> for all <span class="math inline">\(n \geq N_1\)</span>. Let <span class="math inline">\(Y\)</span> denote the greater of <span class="math inline">\(|y - 1|\)</span> and <span class="math inline">\(|y + 1|\)</span>. Because <span class="math inline">\(\{x_n\} \to x\)</span>, there is an <span class="math inline">\(N_2\)</span> such that <span class="math inline">\(|x_n - x| &lt; \frac{\epsilon}{2 Y}\)</span> for all <span class="math inline">\(n \geq N_2\)</span>. Finally, because <span class="math inline">\(\{y_n \to y\}\)</span>, there is an <span class="math inline">\(N_3\)</span> such that <span class="math inline">\(|y_n - y| &lt; \frac{\epsilon}{2 |x|}\)</span> for all <span class="math inline">\(n \geq N_3\)</span>.</p>
+<p>Let <span class="math inline">\(N\)</span> denote the greatest value among <span class="math inline">\(N_1\)</span>, <span class="math inline">\(N_2\)</span>, and <span class="math inline">\(N_3\)</span>. For any <span class="math inline">\(n \geq N\)</span>, we have <span class="math display">\[
+\begin{aligned}
+|x_n y_n - x y|
+&amp;= |x_n y_n - x y_n + x y_n - x y | \\
+&amp;= |(x_n - x) y_n + x (y_n - y)| \\
+&amp;\leq |(x_n - x) y_n| + |x (y_n - y)| \\
+&amp;= |x_n - x| |y_n| + |x| |y_n - y| \\
+&amp;&lt; \frac{\epsilon}{2 Y} \cdot Y + |x| \cdot \frac{\epsilon}{2 |x|} \\
+&amp;= \epsilon.
+\end{aligned}
+\]</span> We have shown that there is a valid response to any <span class="math inline">\(\epsilon &gt; 0\)</span> challenge, and thus <span class="math inline">\(\{x_n y_n\} \to x y\)</span>.</p>
+<p><em>Note 1:</em> If you are confused by the first inequality here, see the discussion of the triangle inequality in the proof of the previous part.</p>
+<p><em>Note 2:</em> If <span class="math inline">\(x = 0\)</span>, then we can’t cancel the product of <span class="math inline">\(|x|\)</span> with <span class="math inline">\(\frac{\epsilon}{2 |x|}\)</span> as in the last step above. However, in that case, the second term of the sum is always 0, so the conclusion that <span class="math inline">\(|x_n y_n - x y| &lt; \epsilon\)</span> for all <span class="math inline">\(n \geq N\)</span> still holds.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Part (e): Ratio of sequences">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Part (e): Ratio of sequences
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Assume <span class="math inline">\(y \neq 0\)</span>.</p>
+<p>We will first prove that <span class="math inline">\(\{1 / y_n\} \to 1 / y\)</span>. To this end, take an arbitrary <span class="math inline">\(\epsilon &gt; 0\)</span>. Because <span class="math inline">\(\{y_n\} \to y\)</span> and <span class="math inline">\(y \neq 0\)</span>, there is an <span class="math inline">\(N_1\)</span> such that <span class="math inline">\(|y_n - y| &lt; \frac{\epsilon |y|^2}{2}\)</span> for all <span class="math inline">\(n \geq N_1\)</span>, and there is an <span class="math inline">\(N_2\)</span> such that <span class="math inline">\(\frac{|y|}{2} &lt; |y_n| &lt; \frac{3 |y|}{2}\)</span> for all <span class="math inline">\(n \geq N_2\)</span>. Let <span class="math inline">\(N\)</span> denote the greater of <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span>. For any <span class="math inline">\(n \geq N\)</span>, we have <span class="math display">\[
+\begin{aligned}
+\left|\frac{1}{y_n} - \frac{1}{y}\right|
+&amp;= \left|\frac{y}{y y_n} - \frac{y_n}{y y_n}\right| \\
+&amp;= \left|\frac{y - y_n}{y y_n}\right| \\
+&amp;= \frac{|y - y_n|}{|y| |y_n|} \\
+&amp;&lt; \frac{\epsilon |y|^2 / 2}{|y| |y_n|} \\
+&amp;= \frac{\epsilon |y| / 2}{|y_n|} \\
+&amp;&lt; \frac{\epsilon |y| / 2}{|y| / 2} \\
+&amp;= \epsilon.
+\end{aligned}
+\]</span> We have shown that there is a valid response to any <span class="math inline">\(\epsilon &gt; 0\)</span> challenge, so <span class="math inline">\(\{1/y_n\} \to \{1/y\}\)</span>.</p>
+<p>We can now prove the claim using our result from part (c): <span class="math display">\[
+\left\{\frac{x_n}{y_n}\right\}
+= \left\{x_n \cdot \frac{1}{y_n}\right\}
+\to x \cdot \frac{1}{y}
+= \frac{x}{y}.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>The next exercise has you apply these properties to characterize a few limits without having to use the formal definition. Of course, you can always verify that the formal definition works too. But when you can use the properties from <a href="#prp-limit-properties" class="quarto-xref">Proposition&nbsp;<span>3.8</span></a>, the proof of your limit typically ends up more concise and easier to read.</p>
+<div id="exr-limit-properties" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.6</strong></span> &nbsp;</p>
+<ol type="a">
+<li><p>Show that <span class="math inline">\(\lim_{n \to \infty} \frac{1}{n^2} = 0\)</span>.</p></li>
+<li><p>Show that <span class="math inline">\(\lim_{n \to \infty} \frac{1000}{n} = 0\)</span>.</p></li>
+<li><p>Show that <span class="math inline">\(\lim_{n \to \infty} \frac{n}{n + 1} = 1\)</span>.</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Answers">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Because <span class="math inline">\(\lim_{n \to \infty} \frac{1}{n} = 0\)</span>, we have <span class="math display">\[\lim_{n \to \infty} \frac{1}{n^2} = \lim_{n \to \infty} \left(\frac{1}{n} \cdot \frac{1}{n}\right) = \left(\lim_{n \to \infty} \frac{1}{n}\right) \cdot \left(\lim_{n \to \infty} \frac{1}{n}\right) = 0 \cdot 0 = 0.\]</span></p></li>
+<li><p>Because <span class="math inline">\(\lim_{n \to \infty} \frac{1}{n} = 0\)</span>, we have <span class="math display">\[\lim_{n \to \infty} \frac{1000}{n} = \lim_{n \to \infty} \left(1000 \cdot \frac{1}{n}\right) = 1000 \cdot \lim_{n \to \infty} \frac{1}{n} = 1000 \cdot 0 = 0.\]</span></p></li>
+<li><p>We showed above in <a href="#exr-constant-sequence" class="quarto-xref">Exercise&nbsp;<span>3.2</span></a> that <span class="math inline">\(\lim_{n \to \infty} 1 = 1\)</span>, and we showed in <a href="#exr-squeeze-sequence" class="quarto-xref">Exercise&nbsp;<span>3.5</span></a> that <span class="math inline">\(\lim_{n \to \infty} \frac{1}{n + 1} = 0\)</span>. Therefore, we have <span class="math display">\[\lim_{n \to \infty} \frac{n}{n + 1} = \lim_{n \to \infty} \left(1 - \frac{1}{n + 1}\right) = \lim_{n \to \infty} 1 - \lim_{n \to \infty} \frac{1}{n + 1} = 1 - 0 = 1.\]</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<p>Now let’s use the squeeze theorem in combination with the other helpful properties of limits to prove an important step for our eventual solution to the motivating example about expected term length. We’ve already seen that the probability of lasting <span class="math inline">\(T\)</span> terms, <span class="math inline">\(p^T (1 - p)\)</span>, tends toward 0 as <span class="math inline">\(T\)</span> increases. But what about when we weight each probability by the term length in question, as we do when calculating an expected value? We saw some suggestive evidence in <a href="#fig-ev-components" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> that <span class="math inline">\(T p^T (1 - p)\)</span> also has a limit of 0 as <span class="math inline">\(T\)</span> becomes larger and larger. How can we prove that?</p>
+<div id="exm-ev-components" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3.3</strong></span> We want to show that <span class="math inline">\(\lim_{T \to \infty} T p^T (1 - p) = 0\)</span> for any <span class="math inline">\(p\)</span> satisfying <span class="math inline">\(0 &lt; p &lt; 1\)</span>. In theory we could do this with the formal definition (<a href="#def-limit" class="quarto-xref">Definition&nbsp;<span>3.2</span></a>), but in practice it’s hard to characterize the <span class="math inline">\(N\)</span> that meets any given <span class="math inline">\(\epsilon\)</span> challenge. So we will go about this a different way.</p>
+<p>The meat of the problem is to prove that <span class="math inline">\(\lim_{T \to \infty} T p^T = 0\)</span>. Once we’ve done that, we can use the constant multiple rule from <a href="#prp-limit-properties" class="quarto-xref">Proposition&nbsp;<span>3.8</span></a> to show that <span class="math inline">\(\lim_{T \to \infty} T p^T (1 - p) = 0\)</span> as well. We know that <span class="math inline">\(0 \leq T p^T\)</span> for all <span class="math inline">\(T\)</span>. So if we can find a sequence <span class="math inline">\(\{x_T\}\)</span> that has a limit of 0, and where <span class="math inline">\(T p^T \leq x_T\)</span> after a certain point, then we can use the squeeze theorem (<a href="#prp-squeeze-sequence" class="quarto-xref">Proposition&nbsp;<span>3.7</span></a>) to conclude that <span class="math inline">\(\{T p^T\} \to 0\)</span>.</p>
+<p>To construct the sequence we need, let <span class="math inline">\(q\)</span> be any number that satisfies <span class="math inline">\(p &lt; q &lt; 1\)</span>. Using the properties from <a href="#prp-limit-properties" class="quarto-xref">Proposition&nbsp;<span>3.8</span></a>, we have <span class="math display">\[
+\lim_{T \to \infty} \left(1 + \frac{1}{T}\right) p
+= \left(1 + \lim_{T \to \infty} \frac{1}{T}\right) p
+= p.
+\]</span> Therefore, there is an index <span class="math inline">\(S\)</span> such that <span class="math inline">\((1 + \frac{1}{T}) p &lt; q\)</span> for all <span class="math inline">\(T \geq S\)</span>.</p>
+<p>To apply the squeeze theorem, we will use the sequence <span class="math inline">\(\{q^{T - S} \cdot S p^S\}_{T=1}^\infty\)</span>. Because <span class="math inline">\(S p^S\)</span> is a constant and <span class="math inline">\(\{q^T\} \to 0\)</span>, we have <span class="math inline">\(\{q^{T - S} \cdot S p^S\} \to 0\)</span> as well. Additionally, I claim that <span class="math inline">\(T p^T \leq q^{T - S} \cdot S p^S\)</span> for all <span class="math inline">\(T \geq S\)</span>. I will prove this via induction (<a href="logic.html#sec-proof-by-induction" class="quarto-xref"><span>Section 1.2.4</span></a>).</p>
+<ol type="1">
+<li><p>For the base step, I must prove that the claim is true for <span class="math inline">\(T = S\)</span>. This holds trivially: <span class="math display">\[S p^S = 1 \cdot S p^S = q^0 \cdot S p^S = q^{S - S} \cdot S p^S.\]</span></p></li>
+<li><p>For the induction step, I must show that if the claim is true for some <span class="math inline">\(T \geq S\)</span>, then it is also true for <span class="math inline">\(T + 1\)</span>. So assume that <span class="math inline">\(T p^T \leq q^{T - S} \cdot S p^S\)</span>. Then we have <span class="math display">\[
+\begin{aligned}
+(T + 1) p^{T + 1}
+&amp;= T \left(1 + \frac{1}{T}\right) p^{T + 1} \\
+&amp;= T \cdot \underbrace{\left(1 + \frac{1}{T}\right) p}_{\mathclap{\text{$&lt; q$ because $T \geq S$}}} \cdot p^T \\
+&amp;&lt; q \cdot T p^T \\
+&amp;\leq q \cdot q^{T-S} \cdot S p^S \\
+&amp;= q^{(T + 1) - S} \cdot S p^S.
+\end{aligned}
+\]</span></p></li>
+</ol>
+<p>Altogether, we have that <span class="math display">\[0 \leq T p^T \leq q^{T - S} \cdot S p^S\]</span> for all <span class="math inline">\(T \geq S\)</span>. Because the outer terms each go to 0 as <span class="math inline">\(T \to \infty\)</span>, we conclude from the squeeze theorem that <span class="math inline">\(\{T p^T\} \to 0\)</span> as well. It then follows from the constant multiple rule that <span class="math inline">\(\{T p^T (1 - p)\} \to 0\)</span> as well.</p>
+</div>
+</section>
+</section>
+<section id="series" class="level2 page-columns page-full" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="series"><span class="header-section-number">3.4</span> Series</h2>
+<p>We almost have everything we need to answer our original question: if the incumbent party retains power each term with probability <span class="math inline">\(p\)</span>, what is the expected number of terms it will remain in office? We have already seen that the answer to this question will involve the infinite sum <span class="math display">\[\sum_{T=0}^\infty T \cdot \Pr(\text{term length} = T) = \sum_{T=0}^\infty T p^T (1 - p).\]</span> But how do we calculate an infinite sum, or <span class="concept">series</span>, like this one?</p>
+<p>The key to solving the problem is to think of an infinite sum as the limit of finite sums. It may be daunting to think about adding infinitely many numbers together, but it is much easier to think about adding up a finite (if perhaps very large) quantity of them. In particular, we will work with the sequence of <span class="concept">partial sums</span>, each of which is the sum of the first <span class="math inline">\(n\)</span> terms of the series. If this sequence has a limit, then we identify that limit with the value of the series.</p>
+<div id="def-series" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.5 (Series as a limit of partial sums)</strong></span> A <span class="concept">series</span> is an infinite sum of terms, written like <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span>. The <span class="math inline">\(n\)</span>’th <span class="concept">partial sum</span> is the sum of the first <span class="math inline">\(n\)</span> terms in the series, <span class="math inline">\(\sum_{k=1}^n a_k\)</span>. If the sequence of partial sums, <span class="math inline">\(\{\sum_{k=1}^n a_k\}_{n=1}^\infty\)</span>, has a limit (finite or infinite), we say that <span class="math display">\[\sum_{k=1}^\infty a_k = \lim_{n \to \infty} \sum_{k=1}^n a_k.\]</span> If the limit exists and is finite, we call the series <span class="concept">convergent</span>.</p>
+</div>
+<p>Possibly the most famous example of a convergent series is the <span class="concept">geometric series</span>, a sum of powers of a fraction between 0 and 1. For any number <span class="math inline">\(q\)</span> between 0 and 1, we have <span class="math display">\[1 + q + q^2 + \cdots = \sum_{k=0}^\infty q^k = \frac{1}{1 - q}.\]</span> This calculation comes up in our motivating example here, where we multiply the retention probability <span class="math inline">\(p\)</span> with itself repeatedly to calculate the probability of lasting <span class="math inline">\(T\)</span> terms. Let’s work through the logic that shows that the series actually comes out to <span class="math inline">\(\frac{1}{1 - q}\)</span>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>You might notice that the geometric series is a bit different than what we wrote in <a href="#def-series" class="quarto-xref">Definition&nbsp;<span>3.5</span></a>, as we start the sum at the index <span class="math inline">\(k = 0\)</span> instead of <span class="math inline">\(k = 1\)</span>. We could make the definition fit exactly by instead writing the series as <span class="math inline">\(\sum_{k=1}^\infty q^{k-1}\)</span>. I find it easier to just start counting at 0, though.</p>
+</div></div><div id="exm-geometric-series" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3.4 (Geometric series)</strong></span> Let <span class="math inline">\(q\)</span> be a number such that <span class="math inline">\(0 &lt; q &lt; 1\)</span>. We want to show that <span class="math display">\[\sum_{k=0}^\infty q^k = \frac{1}{1 - q}.\]</span> By the definition of a series, this entails showing that the sequence of partial sums, <span class="math inline">\(\{\sum_{k=0}^n q^k\}\)</span>, is convergent with a limit of <span class="math inline">\(\frac{1}{1 - q}\)</span>.</p>
+<p>The key to the proof is that we can write each partial sum as a reasonably simple mathematical expression. To start off, we can show that <span class="math inline">\((1 - q) \sum_{k=0}^n q^k = 1 - q^{n+1}\)</span>: <span class="math display">\[
+\begin{aligned}
+(1 - q) \sum_{k=0}^n q^k
+&amp;= \sum_{k=0}^n q^k - q \sum_{k=0}^n q^k \\
+&amp;= \sum_{k=0}^n q^k - \sum_{k=0}^n (q \cdot q^k) \\
+&amp;= \underbrace{\sum_{k=0}^n q^k}_{1 + q + q^2 + \cdots + q^n} - \underbrace{\sum_{k=0}^n q^{k+1}}_{q + q^2 + \cdots + q^n + q^{n+1}} \\
+&amp;= 1 - q^{n+1}.
+\end{aligned}
+\]</span> Dividing both sides by <span class="math inline">\(1 - q\)</span>, we get the following expression for the partial sum: <span class="math display">\[\sum_{k=0}^n q^n = \frac{1 - q^{n+1}}{1 - q}.\]</span></p>
+<p>From here, we can calculate the value of the series using the properties of limits that we established in <a href="#prp-limit-properties" class="quarto-xref">Proposition&nbsp;<span>3.8</span></a>. We already showed in <a href="#exm-limit-term-length-prob" class="quarto-xref">Example&nbsp;<span>3.2</span></a> that <span class="math inline">\(\lim_{n \to \infty} q^n = 0\)</span> when <span class="math inline">\(0 &lt; q &lt; 1\)</span>. Using this fact along with the properties of limits, we have <span class="math display">\[
+\begin{aligned}
+\sum_{k=0}^\infty q^k
+&amp;= \lim_{n \to \infty} \sum_{k=0}^n q^k \\
+&amp;= \lim_{n \to \infty} \frac{1 - q^{n + 1}}{1 - q} \\
+&amp;= \frac{1}{1 - q} \lim_{n \to \infty} \left[1 - q^{n + 1}\right] \\
+&amp;= \frac{1}{1 - q} \left[1 - \lim_{n \to \infty} q^{n + 1}\right] \\
+&amp;= \frac{1}{1 - q} \left[1 - q \cdot \underbrace{\lim_{n \to \infty} q^n}_{=0}\right] \\
+&amp;= \frac{1}{1 - q}.
+\end{aligned}
+\]</span></p>
+</div>
+<p>The geometric series also comes up in calculations involving “discounting,” an important concept in theories of decisions involving very long time horizons. As an example, what would you be willing to pay now for a lifetime-and-beyond annuity, which pays out $1,000 per year to you or your estate? In theory this promises an infinite amount of money, but that money gets less valuable every year with inflation. Suppose there is a constant inflation rate of <span class="math inline">\(i\)</span> (e.g., 3% inflation means <span class="math inline">\(i = 0.03\)</span>), so that $1,000 today is worth only $<span class="math inline">\(\frac{1{,}000}{1 + i}\)</span> tomorrow. Then the total value of the annuity in today’s dollars can be calculated with a geometric series: <span class="math display">\[
+\begin{aligned}
+\text{value}
+&amp;= \sum_{k=0}^\infty 1000 \left(\frac{1}{1 + i}\right)^k \\
+&amp;= \frac{1000}{1 - \frac{1}{1 + i}} \\
+&amp;= \frac{1000}{\frac{i}{1 + i}} \\
+&amp;= 1000 \left(1 + \frac{1}{i}\right).
+\end{aligned}
+\]</span> At a 3% inflation rate (<span class="math inline">\(i = 0.03\)</span>), the present value of our indefinite payment stream comes out to about $34,333. At 50% inflation (<span class="math inline">\(i = 0.5\)</span>), it’s only worth $3,000.</p>
+<section id="calculating-the-expected-term-in-office" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="calculating-the-expected-term-in-office"><span class="header-section-number">3.4.1</span> Calculating the expected term in office</h3>
+<p>The series in our motivating example is closely related to the geometric series, but a little bit different. Each term in the series does involve the probability of staying in office that long, namely <span class="math inline">\(p^T (1 - p)\)</span>. If all we needed to do was sum up the probabilities, we could indeed use the geometric series: <span class="math display">\[
+\sum_{T=0}^\infty p^T (1 - p) = (1 - p) \sum_{T=0}^\infty p^T = (1 - p) \cdot \frac{1}{1 - p} = 1.
+\]</span> This calculation does nicely confirm that we have a valid probability distribution (the probabilities of the respective events sum to 1), but it doesn’t give us the expected value we’re looking for. That calculation involves a weighted sum, where each probability is weighted by the term length in question: <span class="math display">\[\sum_{T=0}^\infty T p^T (1 - p).\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Algebra ahead">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Algebra ahead
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To solve our motivating example, we need a bit more old-school high-school-math-style equation manipulation than we’ve used in a lot of the notes up to this point. Real problems in statistics and formal theory are often like this — there are a couple of key mathematical insights at the heart of the result, but also a lot of moving terms around to get to the point where a reader can see or apply the insight in question.</p>
+<p>As the density of equations increases here, I want to remind you to <strong>read actively</strong>. If you just scan through the equations on the page, your eyes will glaze over and you won’t retain much. You should read <strong>with paper and pen</strong> (or tablet and stylus) at hand, confirming that you can reconstruct each step on your own.</p>
+<p>In fact, part of the reason there are so many equations is to facilitate your active reading — I’m skipping as few steps as possible in the chugging-through-algebra portions, to minimize the chance that you’ll get lost when working through it yourself.</p>
+</div>
+</div>
+<p>To calculate this infinite sum, we will need to work with the sequence of partial sums. Remember that each partial sum is the addition up to the <span class="math inline">\(n\)</span>’th term, so in this case it would be <span class="math display">\[\sum_{T=0}^n T p^T (1 - p).\]</span> This is still pretty daunting to think about, if you start thinking about <span class="math inline">\(n\)</span> on the order of a hundred or a billion or a googolplex. When faced with a daunting problem like this, I like to start by considering a simple-but-nontrivial case. For example, let’s look at the 3rd partial sum: <span class="math display">\[
+\sum_{T=0}^3 T p^T (1 - p) = [0 p^0 + 1 p^1 + 2 p^2 + 3 p^3] (1 - p).
+\]</span> The first thing I notice here is that the <span class="math inline">\(T = 0\)</span> case can be dropped, as it’s just always getting multiplied by 0. So we can simplify this sum a bit: <span class="math display">\[
+\sum_{T=0}^3 T p^T (1 - p) = \sum_{T=1}^3 T p^T (1 - p) = [1 p^1 + 2 p^2 + 3 p^3] (1 - p).
+\]</span> Next, I want to think about what we already know and how we can put it to use here. When working through the geometric series in <a href="#exm-geometric-series" class="quarto-xref">Example&nbsp;<span>3.4</span></a>, we derived a helpful expression for the <span class="math inline">\(n\)</span>’th partial sum: <span class="math display">\[\sum_{T=0}^n p^T = \frac{1 - p^{n+1}}{1 - p}.\]</span> Can we put that fact to use here? Let’s play around with our example for the 3rd partial sum of our expected value series, trying to move things around until we end up only with partial sums of the geometric series. <span class="math display">\[
+\begin{aligned}
+1 p^1 + 2 p^2 + 3 p^3
+&amp;= [p^1 + p^2 + p^3] + [p^2 + p^3] + p^3.
+\end{aligned}
+\]</span> These are almost like partial sums of the geometric series, except each of them is missing some terms at the front.</p>
+<ul>
+<li><span class="math inline">\(p^1 + p^2 + p^3\)</span> is missing <span class="math inline">\(p^0\)</span>.</li>
+<li><span class="math inline">\(p^2 + p^3\)</span> is missing <span class="math inline">\(p^0\)</span> and <span class="math inline">\(p^1\)</span>.</li>
+<li><span class="math inline">\(p^3\)</span> is missing <span class="math inline">\(p^0\)</span>, <span class="math inline">\(p^1\)</span>, and <span class="math inline">\(p^2\)</span>.</li>
+</ul>
+<p>Using <span class="math inline">\(G_n\)</span> to denote the <span class="math inline">\(n\)</span>’th partial sum of the geometric series (i.e., <span class="math inline">\(G_n = \sum_{T=0}^n p^T\)</span>), we have <span class="math display">\[
+\begin{aligned}
+1 p^1 + 2 p^2 + 3 p^3
+&amp;= [p^1 + p^2 + p^3] + [p^2 + p^3] + p^3 \\
+&amp;= [G_3 - p^0] + [G_3 - p^0 - p^1] + [G_3 - p^0 - p^1 - p^2] \\
+&amp;= [G_3 - G_0] + [G_3 - G_1] + [G_3 - G_2].
+\end{aligned}
+\]</span> From here, we’ll use our helpful expression for the <span class="math inline">\(n\)</span>’th partial sum of the geometric series, then keep simplifying until we hopefully end up with something manageable. <span class="math display">\[
+\begin{aligned}
+1 p^1 + 2 p^2 + 3 p^3
+&amp;= [G_3 - G_0] + [G_3 - G_1] + [G_3 - G_2] \\
+&amp;= \left[\frac{1 - p^4}{1 - p} - \frac{1 - p^1}{1 - p}\right] + \left[\frac{1 - p^4}{1 - p} - \frac{1 - p^2}{1 - p}\right] + \left[\frac{1 - p^4}{1 - p} - \frac{1 - p^3}{1 - p}\right] \\
+&amp;= \frac{p^1 - p^4}{1 - p} + \frac{p^2 - p^4}{1 - p} + \frac{p^3 - p^4}{1 - p} \\
+&amp;= \frac{p}{1 - p} [p^0 + p^1 + p^2 - 3 p^3] \\
+&amp;= \frac{p}{1 - p} [G_2 - 3 p^3] \\
+&amp;= \frac{p}{1 - p} \left[\frac{1 - p^3}{1 - p} - 3 p^3\right] \\
+&amp;= \frac{p}{1 - p} \left[\frac{1 - p^3}{1 - p} - \frac{3 p^3 (1 - p)}{1 - p}\right] \\
+&amp;= \frac{p}{1 - p} \cdot \frac{1 - p^3 - 3 p^3 + 3 p^4}{1 - p} \\
+&amp;= \frac{p - 4 p^3 + 3 p^4}{(1 - p)^2}.
+\end{aligned}
+\]</span> And therefore, going back to the entire partial sum we were trying to calculate: <span class="math display">\[
+\sum_{T=0}^3 T p^T (1 - p) = [1 p^1 + 2 p^2 + 3 p^3] (1 - p) = \frac{p - 4 p^4 + 3 p^5}{1 - p}.
+\]</span></p>
+<p>Because <span class="math inline">\(p\)</span> is a fraction between 0 and 1, the numbers <span class="math inline">\(p^4\)</span> and <span class="math inline">\(p^5\)</span> will be fairly small, much smaller than <span class="math inline">\(p\)</span> itself. If we just use the (very rough!) approximations <span class="math inline">\(p^4 \approx 0\)</span> and <span class="math inline">\(p^5 \approx 0\)</span>, we end up with a partial sum approximately equal to <span class="math inline">\(\frac{p}{1 - p}\)</span>. In fact, going back to the <span class="math inline">\(p = 0.75\)</span> example we plotted in <a href="#fig-expected-term-length" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>, we saw there that the expected term length appeared to be about 3, which also happens to be equal to 0.75/0.25. I’m starting to suspect that our expected value series adds up to <span class="math inline">\(\frac{p}{1 - p}\)</span>.</p>
+<div id="exr-partial-sums" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.7</strong></span> I calculated the partial sum for the <span class="math inline">\(n = 3\)</span> case above. Repeat my method and/or use my result to calculate the partial sums for <span class="math inline">\(n = 2\)</span> and <span class="math inline">\(n = 4\)</span>. What patterns do you notice in the partial sums?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For the <span class="math inline">\(n = 2\)</span> case, I think it’s easiest to just calculate the sum explicitly: <span class="math display">\[
+\begin{aligned}
+\sum_{T=0}^2 T p^T (1 - p)
+&amp;= (0 p^0 + 1 p^1 + 2 p^2) (1 - p) \\
+&amp;= (p + 2 p^2) (1 - p).
+\end{aligned}
+\]</span> To make this look a bit more like our result for the <span class="math inline">\(n = 3\)</span> case, we can multiply by <span class="math inline">\(\frac{1 - p}{1 - p}\)</span>: <span class="math display">\[
+\begin{aligned}
+\sum_{T=0}^2 T p^T (1 - p)
+&amp;= (p + 2 p^2) (1 - p) \\
+&amp;= \frac{(p + 2 p^2) (1 - p)^2}{1 - p} \\
+&amp;= \frac{(p + 2 p^2) (1 - 2 p + p^2)}{1 - p} \\
+&amp;= \frac{p + 2 p^2 - 2 p^2 - 4 p^3 + p^3 + 2 p^4}{1 - p} \\
+&amp;= \frac{p - 3 p^3 + 2 p^4}{1 - p}.
+\end{aligned}
+\]</span></p>
+<p>For the <span class="math inline">\(n = 4\)</span> case, I’ll start with our result from the <span class="math inline">\(n = 3\)</span> case and then add the fourth term: <span class="math display">\[
+\begin{aligned}
+\sum_{T=0}^4 T p^T (1 - p)
+&amp;= \left[\sum_{T=0}^3 T p^T (1 - p)\right] + 4 p^4 (1 - p) \\
+&amp;= \frac{p - 4 p^4 + 3 p^5}{1 - p} + (4 p^4 - 4 p^5) \\
+&amp;= \frac{p - 4 p^4 + 3 p^5}{1 - p} + \frac{(4 p^4 - 4 p^5) (1 - p)}{1 - p} \\
+&amp;= \frac{p - 4 p^4 + 3 p^5}{1 - p} + \frac{4 p^4 - 4 p^5 - 4 p^5 + 4 p^6}{1 - p} \\
+&amp;= \frac{(p - 4 p^4 + 3 p^5) + (4 p^4 - 8 p^5 + 4 p^6)}{1 - p} \\
+&amp;= \frac{p - 5 p^5 + 4 p^6}{1 - p}.
+\end{aligned}
+\]</span></p>
+<p>Now to look for patterns, let’s line up the three partial sums that we’ve explicitly calculated so far: <span class="math display">\[
+\begin{aligned}
+\sum_{T=0}^2 T p^T (1 - p) &amp;= \frac{p - 3 p^3 + 2 p^4}{1 - p}; \\
+\sum_{T=0}^3 T p^T (1 - p) &amp;= \frac{p - 4 p^4 + 3 p^5}{1 - p}; \\
+\sum_{T=0}^4 T p^T (1 - p) &amp;= \frac{p - 5 p^5 + 4 p^6}{1 - p}.
+\end{aligned}
+\]</span> Each of these has the same structure: <span class="math display">\[
+\sum_{T=0}^n T p^T (1 - p) = \frac{p - (n + 1) p^{n + 1} + n p^{n + 2}}{1 - p}.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>After working through <a href="#exr-partial-sums" class="quarto-xref">Exercise&nbsp;<span>3.7</span></a>, you’ll see an apparent pattern in the first few partial sums, with each being equal to <span id="eq-ev-partial-sum"><span class="math display">\[\frac{p - (n + 1) p^{n+1} + n p^{n + 2}}{1 - p}. \tag{3.1}\]</span></span> A pattern is, of course, not a proof — but it’s a strong hint at what we should be looking for. So let’s try and prove that every partial sum indeed takes this form, and then let’s take its limit as <span class="math inline">\(n \to \infty\)</span> to calculate our expected value series.</p>
+<p>There are a couple of ways to prove that every partial sum works out to have the form in <a href="#eq-ev-partial-sum" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>. One way, following what we did for the <span class="math inline">\(n = 3\)</span> case above, would be to rewrite the <span class="math inline">\(n\)</span>’th partial sum of the expected value series in terms of the geometric series partial sums whose value we already know. Another way, following the lines of my answer for the <span class="math inline">\(n = 4\)</span> case in <a href="#exr-partial-sums" class="quarto-xref">Exercise&nbsp;<span>3.7</span></a>, would be to use a proof by induction (see <a href="logic.html#sec-proof-by-induction" class="quarto-xref"><span>Section 1.2.4</span></a>). For your fullest edification possible, I’ll present both methods.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Geometric series</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Induction</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Again I’ll use <span class="math inline">\(G_n\)</span> to denote the <span class="math inline">\(n\)</span>’th partial sum of the geometric series, meaning that <span class="math display">\[G_n = \sum_{k=0}^n p^k = \frac{1 - p^{n + 1}}{1 - p}.\]</span> We saw in the <span class="math inline">\(n = 3\)</span> case that <span class="math display">\[1 p^1 + 2 p^2 + 3 p^3 = [G_3 - G_0] + [G_3 - G_1] + [G_3 - G_2].\]</span> Generalizing this, we have <span class="math display">\[
+\begin{aligned}
+\sum_{T=0}^n T p^T
+&amp;= 0 p^0 + 1 p^1 + \cdots + (n - 1) p^{n - 1} + n p^n \\
+&amp;= [n - n] p^0 + [n - (n - 1)] p^1 + \cdots + [n - 1] p^{n - 1} + [n - 0] p^n \\
+&amp;= n [p^0 + p^1 + \cdots + p^{n - 1} + p^n] - [p^0] - [p^0 + p^1] - \cdots - [p^0 + p^1 + \cdots + p^{n-1}] \\
+&amp;= n G_n - \sum_{k=0}^{n-1} G_k \\
+&amp;= n G_n - \sum_{k=0}^{n-1} \frac{1 - p^{k+1}}{1 - p} \\
+&amp;= n G_n - \frac{n - \sum_{k=0}^{n-1} p^{k+1}}{1 - p} \\
+&amp;= n G_n - \frac{n - \sum_{k=1}^n p^k}{1 - p} \\
+&amp;= n G_n - \frac{n - [G_n - p^0]}{1 - p} \\
+&amp;= n G_n - \frac{n + 1 - G_n}{1 - p}
+\end{aligned}
+\]</span> and therefore <span class="math display">\[
+\begin{aligned}
+\sum_{T=0}^n T p^T (1 - p)
+&amp;= (1 - p) \sum_{T=0}^n T p^T \\
+&amp;= (1 - p) \left[n G_n - \frac{n + 1 - G_n}{1 - p}\right] \\
+&amp;= (1 - p) n G_n - (n + 1 - G_n) \\
+&amp;= [1 + (1 - p) n] G_n - (n + 1) \\
+&amp;= \frac{[1 + (1 - p) n] (1 - p^{n+1})}{1 - p} - (n + 1) \\
+&amp;= \frac{1 - p^{n + 1} + (1 - p) n - (1 - p) n p^{n+1}}{1 - p} - (n + 1) \\
+&amp;= \frac{1 - p^{n + 1} + (1 - p) n - (1 - p) n p^{n+1} - (1 - p)(n + 1)}{1 - p} \\
+&amp;= \frac{1 - p^{n + 1} - (1 - p) - (1 - p) n p^{n+1}}{1 - p} \\
+&amp;= \frac{p - p^{n + 1} - (1 - p) n p^{n+1}}{1 - p} \\
+&amp;= \frac{p - p^{n + 1} - (n p^{n+1} - n p^{n+2})}{1 - p} \\
+&amp;= \frac{p - (n + 1) p^{n+1} + n p^{n+2}}{1 - p}.
+\end{aligned}
+\]</span></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Remember that a proof by induction consists of two steps:</p>
+<ol type="1">
+<li><p>Base step: Show that the claim holds for the lowest case (here, <span class="math inline">\(n = 0\)</span>).</p></li>
+<li><p>Induction step: Show that if the claim holds for <span class="math inline">\(n = k\)</span>, then it holds for <span class="math inline">\(n = k + 1\)</span> as well.</p></li>
+</ol>
+<p>For the base step here, we need to confirm that <span class="math display">\[\sum_{T=0}^0 T p^T (1 - p) = \frac{p - (0 + 1) p^{0 + 1} + 0 p^{0 + 2}}{1 - p}.\]</span> We know that the left-hand side here equals 0, so we just need to confirm that the right-hand side does as well: <span class="math display">\[
+\begin{aligned}
+\frac{p - (0 + 1) p^{0 + 1} + 0 p^{0 + 2}}{1 - p}
+&amp;= \frac{p - 1 p^1 + 0 p^2}{1 - p} \\
+&amp;= \frac{p - p}{1 - p} \\
+&amp;= 0.
+\end{aligned}
+\]</span> This concludes the base step.</p>
+<p>For the induction step, assume that <span class="math display">\[\sum_{T=0}^k T p^T (1 - p) = \frac{p - (k + 1) p^{k+1} + k p^{k+2}}{1 - p}.\]</span> We need to show that this implies that <span class="math display">\[\sum_{T=0}^{k+1} T p^T (1 - p) = \frac{p - (k + 2) p^{k + 2} + (k + 1) p^{k+3}}{1 - p}.\]</span> We have <span class="math display">\[
+\begin{aligned}
+\sum_{T=0}^{k+1} T p^T (1 - p)
+&amp;= \left[\sum_{T=0}^k T p^T (1 - p)\right] + (k + 1) p^{k + 1} (1 - p) \\
+&amp;= \frac{p - (k + 1) p^{k+1} + k p^{k+2}}{1 - p} + (k + 1) (p^{k + 1} - p^{k + 2}) \\
+&amp;= \frac{p - (k + 1) p^{k+1} + k p^{k+2}}{1 - p} + \frac{(k + 1) (p^{k + 1} - p^{k + 2}) (1 - p)}{1 - p} \\
+&amp;= \frac{p - (k + 1) p^{k+1} + k p^{k+2}}{1 - p} + \frac{(k + 1) (p^{k + 1} - 2 p^{k+2} + p^{k+3})}{1 - p} \\
+&amp;= \frac{p + k p^{k+2} - 2 (k+1) p^{k+2} + (k + 1) p^{k+3}}{1 - p} \\
+&amp;= \frac{p + (k - 2k - 2) p^{k+2} + (k+1) p^{k+3}}{1 - p} \\
+&amp;= \frac{p - (k + 2) p^{k+2} + (k + 1) p^{k+3}}{1 - p},
+\end{aligned}
+\]</span> which concludes the induction step.</p>
+</div>
+</div>
+</div>
+<p>Finally, we are ready to obtain the result we have been working toward — the expected number of consecutive terms in office, as a function of the retention probability <span class="math inline">\(p\)</span>. We begin with restating the series as the limit of partial sums: <span class="math display">\[
+\sum_{T=0}^\infty T p^T (1 - p) = \lim_{n \to \infty} \sum_{T=0}^n T p^T (1 - p).
+\]</span> We then substitute the expression we found for the <span class="math inline">\(n\)</span>’th partial sum, namely <a href="#eq-ev-partial-sum" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>. <span class="math display">\[
+\begin{aligned}
+\lim_{n \to \infty} \sum_{T=0}^n T p^T (1 - p)
+&amp;= \lim_{n \to \infty} \frac{p - (n + 1) p^{n+1} + n p^{n+2}}{1 - p}.
+\end{aligned}
+\]</span> We break down this limit using the properties from <a href="#prp-limit-properties" class="quarto-xref">Proposition&nbsp;<span>3.8</span></a>: <span class="math display">\[
+\begin{aligned}
+\lim_{n \to \infty} \frac{p - (n + 1) p^{n + 1} + n p^{n + 2}}{1 - p}
+&amp;= \lim_{n \to \infty} \frac{p - n p^{n + 1} - p^{n + 1} + n p^{n + 2}}{1 - p} \\
+&amp;= \frac{\lim_{n \to \infty} [p - n p^{n + 1} - p^{n + 1} + n p^{n + 2}]}{1 - p} \\
+&amp;= \frac{p - \lim_{n \to \infty} n p^{n + 1} - \lim_{n \to \infty} p^{n + 1} + \lim_{n \to \infty} n p^{n + 2}}{1 - p} \\
+&amp;= \frac{p - p \cdot \lim_{n \to \infty} n p^{n} - p \cdot \lim_{n \to \infty} p^{n} + p^2 \cdot \lim_{n \to \infty} n p^{n}}{1 - p}.
+\end{aligned}
+\]</span> Finally — finally! — we use the fact that <span class="math inline">\(\{p^n\} \to 0\)</span> (see <a href="#exm-limit-term-length-prob" class="quarto-xref">Example&nbsp;<span>3.2</span></a>) and <span class="math inline">\(\{n p^n\} \to 0\)</span> (see <a href="#exm-ev-components" class="quarto-xref">Example&nbsp;<span>3.3</span></a>): <span class="math display">\[
+\begin{aligned}
+\frac{p - p \cdot \lim_{n \to \infty} n p^{n} - p \cdot \lim_{n \to \infty} p^{n} + p^2 \cdot \lim_{n \to \infty} n p^{n}}{1 - p}
+&amp;= \frac{p - p \cdot 0 - p \cdot 0 + p^2 \cdot 0}{1 - p} \\
+&amp;= \frac{p}{1 - p}.
+\end{aligned}
+\]</span> We conclude that <span class="math display">\[\sum_{T=0}^\infty T p^T (1 - p) = \frac{p}{1 - p}.\]</span></p>
+<p>Now we can just use this formula to calculate expected term length as a function of the retention probability, <span class="math inline">\(p\)</span>. You’ll notice in the graph below that the formula gives us an expected term length of 3 when <span class="math inline">\(p = 0.75\)</span>, just as we suspected from <a href="#fig-expected-term-length" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sequences_series_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="concept-review" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="concept-review"><span class="header-section-number">3.5</span> Concept review</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Conceptual order</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Alphabetical order</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<dl>
+<dt><span class="concept">Summation</span></dt>
+<dd>
+A concise way to denote adding up many terms. The notation <span class="math inline">\(\sum_{i=1}^n x_i\)</span> is shorthand for <span class="math inline">\(x_1 + x_2 + \cdots + x_n\)</span>.
+</dd>
+<dt><span class="concept">Logarithm</span></dt>
+<dd>
+The reverse of an exponent. In particular, for any numbers <span class="math inline">\(a &gt; 0\)</span> and <span class="math inline">\(b &gt; 0\)</span>, if <span class="math inline">\(a^x = b\)</span>, then we say that <span class="math inline">\(x = \log_a b\)</span>. In this example, <span class="math inline">\(a\)</span> is called the base of the logarithm. For example, <span class="math inline">\(\log_{10} 1000 = 3\)</span> because <span class="math inline">\(10^3 = 1000\)</span>.
+</dd>
+<dt><span class="concept">Natural logarithm</span></dt>
+<dd>
+A logarithm whose base is Euler’s number, <span class="math inline">\(e\)</span>, the mathematical constant equal to roughly 2.718. Whenever you see <span class="math inline">\(\log\)</span> without an explicit base, you can assume it means a natural logarithm.
+</dd>
+<dt><span class="concept">Sequence</span></dt>
+<dd>
+An infinite, ordered list of numbers typically denoted <span class="math inline">\(\{x_n\}\)</span>.
+</dd>
+<dt><span class="concept">Limit</span></dt>
+<dd>
+A point that a sequence <span class="math inline">\(\{x_n\}\)</span> approaches as <span class="math inline">\(n\)</span> grows larger and larger. To denote <span class="math inline">\(x\)</span> being the limit of <span class="math inline">\(\{x_n\}\)</span>, we may write <span class="math inline">\(\lim_{n \to \infty} x_n = x\)</span> or <span class="math inline">\(\{x_n\} \to x\)</span>. Some sequences have no limit. See <a href="#def-limit" class="quarto-xref">Definition&nbsp;<span>3.2</span></a> for a fully rigorous mathematical definition of a limit.
+</dd>
+<dt><span class="concept">Convergent sequence</span></dt>
+<dd>
+A sequence that has a finite limit.
+</dd>
+<dt><span class="concept">Divergent sequence</span></dt>
+<dd>
+A sequence that has no finite limit, either because it has an infinite limit or because it oscillates.
+</dd>
+<dt><span class="concept">Bounded sequence</span></dt>
+<dd>
+A sequence for which there is a finite number <span class="math inline">\(B\)</span> such that every <span class="math inline">\(|x_n| \leq B\)</span>. Every convergent sequence is bounded, but not every bounded sequence is convergent.
+</dd>
+<dt><span class="concept">Monotone sequence</span></dt>
+<dd>
+A sequence whose values always increase (every <span class="math inline">\(x_{n+1} \geq x_n\)</span>) or always decrease (every <span class="math inline">\(x_{n+1} \leq x_n\)</span>).
+</dd>
+<dt><span class="concept">Series</span></dt>
+<dd>
+A summation of infinitely many terms, written <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span>. Its value is the limit of the sequence of partial sums, <span class="math inline">\(\lim_{n \to \infty} \sum_{k=1}^n a_k\)</span>, provided that this limit exists.
+</dd>
+<dt><span class="concept">Partial sum</span></dt>
+<dd>
+The sum of all terms in a series up to a specified, finite index.
+</dd>
+<dt><span class="concept">Convergent series</span></dt>
+<dd>
+A series whose value exists and is finite.
+</dd>
+<dt><span class="concept">Geometric series</span></dt>
+<dd>
+A series of the form <span class="math inline">\(\sum_{k=0}^\infty q^k = 1 + q + q^2 + \cdots\)</span>, where <span class="math inline">\(0 &lt; q &lt; 1\)</span>. A geometric series is convergent, with a value of <span class="math inline">\(\frac{1}{1 - q}\)</span>.
+</dd>
+</dl>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<dl>
+<dt><span class="concept">Bounded sequence</span></dt>
+<dd>
+A sequence for which there is a finite number <span class="math inline">\(B\)</span> such that every <span class="math inline">\(|x_n| \leq B\)</span>. Every convergent sequence is bounded, but not every bounded sequence is convergent.
+</dd>
+<dt><span class="concept">Convergent sequence</span></dt>
+<dd>
+A sequence that has a finite limit.
+</dd>
+<dt><span class="concept">Convergent series</span></dt>
+<dd>
+A series whose value exists and is finite.
+</dd>
+<dt><span class="concept">Divergent sequence</span></dt>
+<dd>
+A sequence that has no finite limit, either because it has an infinite limit or because it oscillates.
+</dd>
+<dt><span class="concept">Geometric series</span></dt>
+<dd>
+A series of the form <span class="math inline">\(\sum_{k=0}^\infty q^k = 1 + q + q^2 + \cdots\)</span>, where <span class="math inline">\(0 &lt; q &lt; 1\)</span>. A geometric series is convergent, with a value of <span class="math inline">\(\frac{1}{1 - q}\)</span>.
+</dd>
+<dt><span class="concept">Limit</span></dt>
+<dd>
+A point that a sequence <span class="math inline">\(\{x_n\}\)</span> approaches as <span class="math inline">\(n\)</span> grows larger and larger. To denote <span class="math inline">\(x\)</span> being the limit of <span class="math inline">\(\{x_n\}\)</span>, we may write <span class="math inline">\(\lim_{n \to \infty} x_n = x\)</span> or <span class="math inline">\(\{x_n\} \to x\)</span>. Some sequences have no limit. See <a href="#def-limit" class="quarto-xref">Definition&nbsp;<span>3.2</span></a> for a fully rigorous mathematical definition of a limit.
+</dd>
+<dt><span class="concept">Logarithm</span></dt>
+<dd>
+The reverse of an exponent. In particular, for any numbers <span class="math inline">\(a &gt; 0\)</span> and <span class="math inline">\(b &gt; 0\)</span>, if <span class="math inline">\(a^x = b\)</span>, then we say that <span class="math inline">\(x = \log_a b\)</span>. In this example, <span class="math inline">\(a\)</span> is called the base of the logarithm. For example, <span class="math inline">\(\log_{10} 1000 = 3\)</span> because <span class="math inline">\(10^3 = 1000\)</span>.
+</dd>
+<dt><span class="concept">Monotone sequence</span></dt>
+<dd>
+A sequence whose values always increase (every <span class="math inline">\(x_{n+1} \geq x_n\)</span>) or always decrease (every <span class="math inline">\(x_{n+1} \leq x_n\)</span>).
+</dd>
+<dt><span class="concept">Natural logarithm</span></dt>
+<dd>
+A logarithm whose base is Euler’s number, <span class="math inline">\(e\)</span>, the mathematical constant equal to roughly 2.718. Whenever you see <span class="math inline">\(\log\)</span> without an explicit base, you can assume it means a natural logarithm.
+</dd>
+<dt><span class="concept">Partial sum</span></dt>
+<dd>
+The sum of all terms in a series up to a specified, finite index.
+</dd>
+<dt><span class="concept">Sequence</span></dt>
+<dd>
+An infinite, ordered list of numbers typically denoted <span class="math inline">\(\{x_n\}\)</span>.
+</dd>
+<dt><span class="concept">Series</span></dt>
+<dd>
+A summation of infinitely many terms, written <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span>. Its value is the limit of the sequence of partial sums, <span class="math inline">\(\lim_{n \to \infty} \sum_{k=1}^n a_k\)</span>, provided that this limit exists.
+</dd>
+<dt><span class="concept">Summation</span></dt>
+<dd>
+A concise way to denote adding up many terms. The notation <span class="math inline">\(\sum_{i=1}^n x_i\)</span> is shorthand for <span class="math inline">\(x_1 + x_2 + \cdots + x_n\)</span>.
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./set_theory.html" class="pagination-link" aria-label="Set Theory">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Set Theory</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p xmlns:cc="http://creativecommons.org/ns#" class="cc-footer">
+This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a>
+</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

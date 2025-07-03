@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./sequences_series.html" rel="next">
 <link href="./logic.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-7fb14a0eaa8ddc0b0b5fd2c428532b30.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2dab5f6ea352cc8b5659b55cd0b3f02f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -152,6 +152,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./set_theory.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Set Theory</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sequences_series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sequences and Series</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -358,13 +364,13 @@ Inclusion <span class="math inline">\(\in\)</span> versus subset <span class="ma
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>We need to show that every element of <span class="math inline">\(A\)</span> is also an element of <span class="math inline">\(C\)</span>. To do that, we will take an “arbitrary” element of <span class="math inline">\(A\)</span> — a mathematical object that we know nothing about, other than that it is an element of <span class="math inline">\(A\)</span> — and show that it is an element of <span class="math inline">\(C\)</span>. To that end, let <span class="math inline">\(a\)</span> be any element of <span class="math inline">\(A\)</span>. Because <span class="math inline">\(a \in A\)</span> and <span class="math inline">\(A \subseteq B\)</span>, it follows that <span class="math inline">\(a \in B\)</span>. Because <span class="math inline">\(a \in B\)</span> and <span class="math inline">\(B \subseteq C\)</span>, it follows that <span class="math inline">\(a \in C\)</span>. Because the element <span class="math inline">\(a\)</span> was chosen arbitrarily, we have shown that every element of <span class="math inline">\(A\)</span> is an element of <span class="math inline">\(C\)</span>, and therefore <span class="math inline">\(A \subseteq C\)</span>.</p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Proving a &quot;for all&quot; claim">
+<div id="nte-proving-for-all" class="callout callout-style-default callout-note callout-titled" title="Proving a &quot;for all&quot; claim">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Proving a “for all” claim
+Note&nbsp;2.1: Proving a “for all” claim
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -433,14 +439,17 @@ Answer
 </div>
 <div id="fig-venn" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Union and intersection of sets.
+</figcaption>
 <div aria-describedby="fig-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="set_theory_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <figcaption>Union: <span class="math inline">\(A \cup B\)</span></figcaption>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -449,17 +458,14 @@ Answer
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="set_theory_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <figcaption>Intersection: <span class="math inline">\(A \cap B\)</span></figcaption>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.1: Union and intersection of sets.
-</figcaption>
 </figure>
 </div>
 
@@ -482,14 +488,17 @@ Figure&nbsp;2.1: Union and intersection of sets.
 </div>
 <div id="fig-set-diff" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-set-diff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: Set differences.
+</figcaption>
 <div aria-describedby="fig-set-diff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="set_theory_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 <figcaption><span class="math inline">\(A \setminus B\)</span></figcaption>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -498,17 +507,14 @@ Figure&nbsp;2.1: Union and intersection of sets.
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="set_theory_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 <figcaption><span class="math inline">\(B \setminus A\)</span></figcaption>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-set-diff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.2: Set differences.
-</figcaption>
 </figure>
 </div>
 <p>Joe Biden was both a vice president and a president. Barack Obama was only president, never a vice president. Aaron Burr was only vice president, never president. Therefore, we have the following set memberships:</p>
@@ -625,14 +631,17 @@ Answers
 </div>
 <div id="fig-complement" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-complement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: Set differences.
+</figcaption>
 <div aria-describedby="fig-complement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="set_theory_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 <figcaption><span class="math inline">\(A^c\)</span></figcaption>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -641,17 +650,14 @@ Answers
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="set_theory_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 <figcaption><span class="math inline">\(B^c\)</span></figcaption>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-complement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.3: Set differences.
-</figcaption>
 </figure>
 </div>
 <p>You don’t often see the universal set explicitly specified in mathematical writing, other than textbook set theory treatments like what you’re reading right now. I assume this is because most mathematical writers follow the same conventions I do:</p>
@@ -669,14 +675,17 @@ Figure&nbsp;2.3: Set differences.
 </div>
 <div id="fig-demorgan-sets" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-demorgan-sets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: De Morgan’s laws.
+</figcaption>
 <div aria-describedby="fig-demorgan-sets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="set_theory_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 <figcaption><span class="math inline">\((A \cup B)^c = A^c \cap B^c\)</span></figcaption>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -685,17 +694,14 @@ Figure&nbsp;2.3: Set differences.
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="set_theory_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 <figcaption><span class="math inline">\((A \cap B)^c = A^c \cup B^c\)</span></figcaption>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demorgan-sets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.4: De Morgan’s laws.
-</figcaption>
 </figure>
 </div>
 
@@ -769,12 +775,12 @@ One answer
 <div class="cell-output-display">
 <div id="fig-one-to-one" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-one-to-one-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.5: A function that is one-to-one, but not onto.
+</figcaption>
 <div aria-describedby="fig-one-to-one-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="set_theory_files/figure-html/fig-one-to-one-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-one-to-one-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.5: A function that is one-to-one, but not onto.
-</figcaption>
 </figure>
 </div>
 </div>
@@ -788,12 +794,12 @@ Figure&nbsp;2.5: A function that is one-to-one, but not onto.
 <div class="cell-output-display">
 <div id="fig-onto" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-onto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.6: A function that is onto, but not one-to-one.
+</figcaption>
 <div aria-describedby="fig-onto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="set_theory_files/figure-html/fig-onto-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-onto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.6: A function that is onto, but not one-to-one.
-</figcaption>
 </figure>
 </div>
 </div>
@@ -806,14 +812,17 @@ Figure&nbsp;2.6: A function that is onto, but not one-to-one.
 </div>
 <div id="fig-bijection" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-bijection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.7: A function that is both one-to-one and onto.
+</figcaption>
 <div aria-describedby="fig-bijection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="set_theory_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <figcaption>A bijection…</figcaption>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -824,17 +833,14 @@ Figure&nbsp;2.6: A function that is onto, but not one-to-one.
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="set_theory_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <figcaption>…and its inverse.</figcaption>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bijection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.7: A function that is both one-to-one and onto.
-</figcaption>
 </figure>
 </div>
 <p><a href="#fig-bijection" class="quarto-xref">Figure&nbsp;<span>2.7</span></a> illustrates the buddy system property of a bijection. Each element of <span class="math inline">\(A\)</span> has exactly one buddy in <span class="math inline">\(B\)</span>, and each element of <span class="math inline">\(B\)</span> has exactly one buddy in <span class="math inline">\(A\)</span>. For finite sets like the ones in the illustration, you can probably convince yourself that they’d have to have the same number of elements in order for this kind of buddy system to be viable. All I’ll say here for infinite sets is that it gets weirder; read the optional <a href="#sec-cardinality" class="quarto-xref"><span>Section 2.3.2</span></a> below if you want to peek into the weirdness.</p>
@@ -1659,8 +1665,8 @@ The set of everything that could conceivably be in the sets we’re talking abou
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sequences_series.html" class="pagination-link" aria-label="Sequences and Series">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sequences and Series</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

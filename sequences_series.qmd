@@ -130,7 +130,7 @@ But this is only part of the expected value calculation.
 To calculate the expected value, we multiply the probability of each possible term length by the term length itself.
 So let's multiply the probabilities from the last figure by the corresponding term length to see the individual components in the expected value calculation.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, label="fig-ev-components"}
 df_incumbency |>
   ggplot(aes(x = term_length, y = ev_component)) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "gray75") +
@@ -150,7 +150,7 @@ If this weren't the case --- i.e., if there were some nonzero floor on the expec
 Finally, let's see what we get when we add up the expected value components up to each $T$.
 These finite calculations can't tell us what the *infinite* sum would equal, but we'll see that they give us a pretty good idea.
 
-```{r}
+```{r, label="fig-expected-term-length"}
 df_incumbency |>
   ggplot(aes(x = term_length, y = cumsum_ev)) +
   geom_hline(yintercept = 3, linetype = "dashed", color = "gray75") +
@@ -578,6 +578,41 @@ If you are indeed skeptical in this way, don't worry --- the [Archimedean proper
 (And if you weren't skeptical, perhaps you should have been?)
 :::
 
+We can use a similar proof to show that the sequence of term length probabilities in our motivating example, $\{p^T (1 - p)\}_{T = 1}^\infty$, has a limit of 0.
+To do that, we'll need to use logarithms.
+
+::: {#exm-limit-term-length-prob}
+We want to prove that $\lim_{T \to \infty} p^T (1 - p) = 0$.
+To do so, we must show that for any choice of a number $\epsilon > 0$, we can find an index $N$ such that $-\epsilon < p^T (1 - p) < \epsilon$ for all $T \geq N$.
+
+*Proof:*
+Take an arbitrary $\epsilon > 0$.
+Because $0 < p < 1$, the value $p^T$ decreases with $T$ as long as $T \geq 1$.
+So the tricky part is to show that we can find some term length such that $p^T (1 - p) < \epsilon$, or equivalently that $p^T < \frac{\epsilon}{1 - p}$.
+We know from the definition of the logarithm that $\log_p \frac{\epsilon}{1 - p}$ is the solution to the equation $p^x = \frac{\epsilon}{1 - p}$.
+This gives us precisely what we need to meet the formal definition of a limit.
+
+Let $N$ be any integer greater than $\log_p \left(\frac{\epsilon}{1 - p}\right)$.
+For any $T \geq N$, we have $$p^T (1 - p) \leq p^N (1 - p) < p^{\log_p \left(\frac{\epsilon}{1 - p}\right)} (1 - p) = \left(\frac{\epsilon}{1 - p}\right) (1 - p) = \epsilon.$$
+Combined with the fact that $-\epsilon < 0 < p^T (1 - p)$ for all $T$, we have shown that there exists an index $N$ such that $-\epsilon < p^T (1 - p) < \epsilon$ for all $T \geq N$.
+Because $\epsilon$ was chosen arbitrarily, this completes the proof that $\lim_{T \to \infty} p^T (1 - p) = 0$.
+:::
+
+As an exercise to get some practice with the formal definition of a limit, I'll have you prove a reasonably simple claim.
+If we have a constant sequence, so that $x_n = c$ for every index $n$, then the limit of this sequence is $c$.
+
+::: {#exr-constant-sequence name="Limit of a constant sequence"}
+Let $c$ be a constant real number.
+Prove that if $x_n = c$ for all $n$, then $\{x_n\} \to c$.
+
+:::: {.callout-note title="Answer" collapse="true"}
+We must prove that for every $\epsilon > 0$, there is an index $N$ such that $c - \epsilon < x_n < c + \epsilon$.
+To this end, take an arbitrary $\epsilon > 0$.
+For all $n \geq 1$, we have $x_n = c$ and therefore $c - \epsilon < x_n < c + \epsilon$.
+We have thus shown that $N = 1$ is a valid response to any $\epsilon > 0$ challenge, thereby proving that $\{x_n\} \to c$.
+::::
+:::
+
 Not every sequence is convergent.
 We call a sequence [divergent]{.concept} if it is not convergent.
 One reason that a sequence might be divergent is that the values in the sequence increase (or decrease) without bound.
@@ -664,12 +699,22 @@ concepts.update(
 If $\{x_n\}$ is bounded and monotone, then it is convergent.
 :::
 
-Let's return to our motivating example about the number of consecutive terms by an incumbent party (@sec-sequences-motivation).
-Remember that we used $p$ to stand for the probability that the incumbent party stays in office each term.
-The probability of lasting exactly $T$ terms is $p^T (1 - p)$.
-The sequence $\{p^T (1 - p)\}_{T=1}^\infty$ is bounded below by 0 and above by $1 - p$.
-Additionally, because $0 \leq p \leq 1$, the sequence is decreasing.
-[MCT tells us that this has a limit, but we don't know what the limit is---that's for below]{.todo}
+The Monotone Convergence Theorem tells us [that]{.underline} particular sequences have a finite limit, but doesn't say [what]{.underline} that limit is.
+For example, think again about the sequence of the incumbent party serving $T$ more consecutive terms in our running example, $\{p^T (1 - p)\}_{T = 1}^\infty$.
+Because $p^T$ decreases with the number of terms $T$, this sequence is monotone.
+And because $0 \leq p^T (1 - p) \leq 1 - p$ for all $T$, it is bounded.
+We can therefore infer from the Monotone Convergence Theorem that this sequence is convergent, as we indeed saw above in @exm-limit-term-length-prob.
+However, to go from "this sequence has a limit" to "this sequence's limit is 0," we needed more than the Monotone Convergence Theorem alone would give us.
+
+### Infinite limits
+
+To sum up where we are so far, here's what we know about the relationship between boundedness, monotonicity, and the convergence of a sequence.
+
+- Bounded and monotone ⇒ definitely convergent
+
+- Bounded and not monotone ⇒ maybe convergent, maybe not
+
+- Unbounded ⇒ definitely divergent
 
 Although every unbounded sequence is divergent, there are still some distinctions we can draw among them.
 
@@ -698,29 +743,26 @@ Then for all elements past this index ($n \geq N$), we have $$x_n \geq x_N = N^2
 We have shown that every challenge can be met, and therefore $\lim_{n \to \infty} n^2 = \infty$.
 
 ::: {#exr-infinite-limits}
-For each of the following unbounded sequences, use @def-limit-infinite to prove whether the sequence has a limit of $\infty$, a limit of $-\infty$, or no limit.
+For each of the following unbounded sequences, use @def-limit-infinite to prove the stated claim about its limit.
 
-a. The sequence $\{-\sqrt{n}\} = -1, -\sqrt{2}, -\sqrt{3}, \ldots$.
+a. The sequence $\{-\sqrt{n}\} = -1, -\sqrt{2}, -\sqrt{3}, \ldots$ has a limit of $-\infty$.
 
-b. The sequence $1, 0, 3, 0, 5, 0, 7, 0, \ldots$ ($x_n = n$ if $n$ is odd, $x_n = 0$ if $n$ is even).
+b. The sequence $1, 0, 3, 0, 5, 0, 7, 0, \ldots$ ($x_n = n$ if $n$ is odd, $x_n = 0$ if $n$ is even) has no limit.
 
-c. The "three steps forward, one step back" sequence $1, 0, 3, 2, 5, 4, 7, 6, 9, 8, \ldots$ ($x_n = n$ if $n$ is odd, $x_n = n - 2$ if $n$ is even).
+c. The "three steps forward, one step back" sequence $1, 0, 3, 2, 5, 4, 7, 6, 9, 8, \ldots$ ($x_n = n$ if $n$ is odd, $x_n = n - 2$ if $n$ is even) has a limit of $\infty$.
 
 :::: {.callout-note title="Answers" collapse="true"}
-a. This sequence has a limit of $-\infty$.
-   To see why, consider any challenge $a$, and let $N$ be any integer greater than $a^2$.
+a. Consider any challenge $a$, and let $N$ be any integer greater than $a^2$.
    For all $n \geq N$, we have $$x_n \leq x_N = -\sqrt{N} \leq -\sqrt{a^2} \leq -|a| \leq a.$$
    Because every challenge can be met, we conclude that $\lim_{n \to \infty} -\sqrt{n} = -\infty$.
 
-b. This sequence has no limit.
-   To rule out a limit of $\infty$, consider the challenge $a = 1$.
+b. To rule out a limit of $\infty$, consider the challenge $a = 1$.
    For any index $N$, let $n$ be an even number greater than or equal to $N$.
    Then we have $x_n = 0 < a$.
    As there is no valid response to the $a = 1$ challenge, we conclude that $\{x_n\}$ cannot have a limit of $\infty$.
    To rule out a limit of $-\infty$, it is sufficient to observe that the sequence is bounded from below (specifically, every $x_n \geq 0$).
 
-c. Even though this sequence is not monotone, it has a limit of $\infty$.
-   To see why, consider any challenge $a$, and let $N$ be any integer greater than $a + 2$.
+c. Consider any challenge $a$, and let $N$ be any integer greater than $a + 2$.
    For all odd indices $n \geq N$, we have $$x_n = n \geq N \geq a + 2 > a.$$
    For all even indices $n \geq N$, we have $$x_n = n - 2 \geq N - 2 \geq a.$$
    Therefore, $N$ is a valid response to the challenge of $a$.
@@ -735,52 +777,93 @@ Don't worry if the formal definition of a limit (@def-limit) seems daunting and 
 In practice, most of the time that you end up dealing with limits, you won't have to explicitly deal with the challenge-response structure.
 Instead, you can use helpful properties of limits to calculate the limit of a sequence.
 
-[Reword to reduce redunancy with above]{.todo}
-Let's return to our motivating example about the number of consecutive terms by an incumbent party (@sec-sequences-motivation).
-Remember that we used $p$ to stand for the probability that the incumbent party stays in office each term.
-The probability of lasting exactly $T$ terms is $p^T (1 - p)$, which appears to go to 0 as $T$ becomes large, at least in the case of $p = 0.75$ that we plotted in @fig-term-length-prob.
-Can we show that indeed $\lim_{T \to \infty} p^T (1 - p) = 0$, not just for $p = 0.75$ but for any $p$ between 0 and 1?
+Say we have three convergent sequences: a "lower" sequence $\{\ell_n\} \to \ell$, an "upper" sequence $\{u_n\} \to u$, and a sequence $\{x_n\} \to x$ that always falls in between the other two after a certain point.
+The limit of the middle sequence must then lie in between the limits of the other two sequences, as illustrated in the graph below.
 
-We already know that the sequence of retention probabilities is convergent.
-In particular, the sequence $\{p^T (1 - p)\}_{T=1}^\infty$ is bounded below by 0, bounded above by $1 - p$, and is decreasing.
-Therefore, we know from the Monotone Convergence Theorem (@thm-monotone-convergence) that it has a finite limit.
-We are off to a good start!
-Now we just need to prove that the limit in question is 0.
+```{r} 
+tibble(
+  n = 1:40,
+  l = 1 - (1/(n + 1)),
+  u = 1 + (1/(n + 1))^1.5,
+  x = case_when(
+    n < 10 ~ 1.5,
+    n > 20 ~ 0.5 * l + 0.5 * u,
+    TRUE ~ ((20 - n) / 10) * 1.5 + ((n - 10) / 10) * (0.5 * l + 0.5 * u)
+  )
+) |>
+  pivot_longer(cols = -n) |>
+  mutate(sequence = factor(name, levels = c("u", "x", "l"), labels = c("upper", "middle", "lower"))) |>
+  ggplot(aes(x = n, y = value)) +
+  geom_line(aes(color = sequence), linewidth = 0.25) +
+  geom_point(aes(color = sequence, shape = sequence)) +
+  labs(
+    title = "A sequence that eventually lies between two others",
+    x = "Index: n", 
+    y = "Sequence value"
+  )
+```
 
-Because the sequence is bounded below by 0 and above by $1 - p$, its limit cannot be less than 0 or greater than $1 - p$.
-After all, the sequence can't get ever closer to some number $x > 1 - p$ if it never goes above $1 - p$.
+When we're thinking about limits, it doesn't matter that the first few terms of the middle sequence are actually outside of the bounding sequences.
+We can slice any finite number of terms off of the front end of a sequence, and it makes no difference to the limiting behavior of that sequence.
+All we need is that $\ell_n \leq x_n \leq u_n$ for every index $n$ after a certain point, even if this inequality fails to hold for some smaller indices.
 
-But we can do even better than just bounding the limit between the bounds on the entire sequence.
-For example, although the first term of the sequence here is $1 - p$, every single subsequent term is no greater than $p (1 - p)$.
-Intuitively, then, the limit cannot be a number greater than $p (1 - p)$.
-This is an illustration of a broader principle: if we chop some finite terms off the start of the sequence, any bounds on the remaining (infinite) number of terms are also bounds on the limit.
+::: {#prp-squeeze-sequence}
+Assume that $\{\ell_n\}$ and $\{u_n\}$ are convergent sequences with limits $\ell$ and $u$ respectively.
+Additionally, assume there is a sequence $\{x_n\}$ and an index $M$ such that $\ell_n \leq x_n \leq u_n$ for all $n \geq M$.
 
-::: {#prp-bounds-on-sequence-limit}
-Let $\{x_n\}$ be a convergent sequence, and let $x$ denote its limit.
-If there is an index $N$ such that $x_n \geq a$ for all $n \geq N$, then $x \geq a$ as well.
-Similarly, if there is an index $N$ such that $x_n \leq b$ for all $n \geq N$, then $x \leq b$ as well.
+a. If $\{x_n\}$ is convergent with limit $x$, then $\ell \leq x \leq u$.
+
+b. If $\ell = u$, then $\{x_n\}$ is guaranteed to be convergent, and it has the same limit.
+   (This claim is sometimes called the "squeeze theorem" for sequences.)
 :::
 
 ::: {.proof}
-We will only explicitly prove the first claim, as the proof of the second is essentially a mirror image of the first.
-(To put it another way, you should be able to prove the second claim yourself by following the steps from the proof of the first claim and making minor changes.)
+To prove claim (a), assume $\{x_n\} \to x$.
+We will prove that $x \geq \ell$; the proof that $x \leq u$ is analogous (i.e., you can prove it yourself by following the same steps as we do here, with minimal substitutions).
 
-Assume there is an index $N$ and a value $a$ such that $x_n \geq a$ for all $n \geq N$.
-We will show that no $x' < a$ can be the limit of $\{x_n\}$.
-Take an arbitrary $x' < a$, and let $\epsilon$ denote the distance between $x'$ and $a$ (i.e., $\epsilon = a - x'$).
-For all $n \geq N$, we have $$x_n \geq a = x' + \epsilon.$$
-Therefore, there is no valid response to the $\epsilon = a - x'$ challenge, so $\{x_n\} \nrightarrow x'$.
-As $x'$ was chosen arbitrarily, we conclude that no $x' < a$ may be the limit of $\{x_n\}$, and thus $x \geq a$.
+To prove that $x \geq \ell$, we will use a proof by contradiction.
+Suppose, for the sake of such a proof, that instead $x < \ell$.
+Let $\delta$ denote half the distance between $x$ and $\ell$, so that $\delta = (\ell - x) / 2$.
+Because $\{x_n\} \to x$, there is an index $N_1$ such that $x - \delta < x_n < x + \delta$ for all $n \geq N_1$.
+Additionally, because $\{\ell_n\} \to \ell$, there is an index $N_2$ such that $\ell - \delta < \ell_n < \ell + \delta$ for all $n \geq N_2$.
+But together these imply that $x_n < \ell_n$ for all $n \geq \max\{N_1, N_2\}$: specifically, for all such $n$, we have
+$$
+\begin{aligned}
+x_n &< x + \delta \\
+&= x + \frac{\ell - x}{2} \\
+&= \frac{x}{2} + \frac{\ell}{2} \\
+&= \ell - \frac{\ell - x}{2} \\
+&= \ell - \delta \\
+&< \ell_n.
+\end{aligned}
+$$
+This finding contradicts our assumption that $\ell_n \leq x_n$ for all $n \geq M$.
+Therefore, we conclude that $x \geq \ell$.
+
+To prove claim (b), assume $\ell = u$.
+Take an arbitrary $\epsilon > 0$.
+Because $\{\ell_n\} \to \ell$, there is an index $N_1$ such that $\ell - \epsilon < \ell_n < \ell + \epsilon$ for all $n \geq N_1$.
+Similarly, there is an index $N_2$ such that $\ell - \epsilon < u_n < \ell + \epsilon$ for all $n \geq N_2$.
+Let $N$ be the greatest value among $M$, $N_1$, and $N_2$.
+For all $n \geq N$, we have $$\ell - \epsilon < \ell_n \leq x_n \leq u_n < \ell + \epsilon,$$ and thus $\ell - \epsilon < x_n < \ell + \epsilon$.
+Because $\epsilon$ was chosen arbitrarily, we conclude that $\{x_n\} \to \ell$.
 :::
 
-Let's go back to thinking about the sequence of retention probabilities in our running example, $\{p^T (1 - p)\}_{T=1}^\infty$.
-We have already observed that the sequence is bounded below by 0 and above by $1 - p$, so at a minimum @prp-bounds-on-sequence-limit tells us that $$0 \leq \lim_{T \to \infty} p^T (1 - p) \leq 1 - p.$$
-However, we can actually go further and show that the limit must be 0.
-[Keep going]{.todo}
+The squeeze theorem is particularly helpful because it lets us calculate limits without having to use the ugly formal definition.
+You'll apply this yourself in the next exercise.
 
-[Change transition.]{.todo}
-Luckily for us, finite limits behave predictably under the ordinary arithmetic operations like addition, subtraction, multiplication, and division.
-These properties help do most of the work for us when we have to take limits.
+::: {#exr-squeeze-sequence}
+Use @prp-squeeze-sequence to show that $\lim_{n \to \infty} \frac{1}{n + 1} = 0$.
+(*Hint:* We've already shown that $\lim_{n \to \infty} \frac{1}{n} = 0$.)
+
+:::: {.callout-note title="Answer" collapse = "true"}
+The constant sequence $0, 0, 0, \ldots$ has a limit of $0$, as does the sequence $\{\frac{1}{n}\}$.
+We have $0 \leq \frac{1}{n + 1} \leq \frac{1}{n}$ for all indices $n$, so part b of @prp-squeeze-sequence implies $\{\frac{1}{n + 1}\} \to 0$ as well.
+::::
+:::
+
+Also helpfully, when we combine convergent sequences using the ordinary operations of arithmetic --- addition, subtraction, multiplication, and division --- we can combine their limits in the same way.
+Perhaps more than anything else, this is the set of properties I use to do the work in calculating limits.
 
 ::: {#prp-limit-properties name="Arithmetic properties of limits"}
 Let $\{x_n\}$ and $\{y_n\}$ be convergent sequences, with limits $x$ and $y$ respectively.
@@ -789,9 +872,11 @@ a. For any constant $c$, $\{c x_n\} \to c x$.
 
 b. $\{x_n + y_n\} \to x + y$.
 
-c. $\{x_n y_n\} \to xy$.
+c. $\{x_n - y_n\} \to x - y$.
 
-d. If $y \neq 0$, $\{x_n / y_n\} \to x/y$.
+d. $\{x_n y_n\} \to xy$.
+
+e. If $y \neq 0$, $\{x_n / y_n\} \to x/y$.
 :::
 
 ::: {.proof}
@@ -818,7 +903,12 @@ Then for all indices $n \geq N$, we have $$|(x_n + y_n) - (x + y)| = |(x_n - x) 
 We have shown that there is a valid response to any $\epsilon > 0$ challenge, and thus $\{x_n + y_n\} \to x + y$.
 ::::
 
-:::: {.callout-note title="Part (c): Product of sequences" collapse="true"}
+:::: {.callout-note title="Part (c): Difference of sequences" collapse="true"}
+We have $x_n - y_n = x_n + (-1) y_n$, so the claim follows from parts (a) and (b):
+$$\lim_{n \to \infty} (x_n - y_n) = \lim_{n \to \infty} [x_n + (-1) y_n]  = \lim_{n \to \infty} x_n + (-1) \lim_{n \to \infty} y_n  = x + (-1) y = x - y.$$
+::::
+
+:::: {.callout-note title="Part (d): Product of sequences" collapse="true"}
 We need to prove that for all $\epsilon > 0$, there is an index $N$ such that $|x_n y_n - x y| < \epsilon$ for all $n \geq N$.
 To this end, take an arbitrary $\epsilon > 0$.
 Because $\{y_n\} \to y$, there is an $N_1$ such that $y - 1 < y_n < y + 1$ for all $n \geq N_1$.
@@ -847,7 +937,7 @@ We have shown that there is a valid response to any $\epsilon > 0$ challenge, an
 However, in that case, the second term of the sum is always 0, so the conclusion that $|x_n y_n - x y| < \epsilon$ for all $n \geq N$ still holds.
 ::::
 
-:::: {.callout-note title="Part (d): Ratio of sequences" collapse="true"}
+:::: {.callout-note title="Part (e): Ratio of sequences" collapse="true"}
 Assume $y \neq 0$.
 
 We will first prove that $\{1 / y_n\} \to 1 / y$.
@@ -879,7 +969,447 @@ $$
 ::::
 :::
 
-**NOW APPLY THE PROPERTIES IN EXERCISES OR THE LIKE.**
+The next exercise has you apply these properties to characterize a few limits without having to use the formal definition.
+Of course, you can always verify that the formal definition works too.
+But when you can use the properties from @prp-limit-properties, the proof of your limit typically ends up more concise and easier to read.
+
+::: {#exr-limit-properties}
+a. Show that $\lim_{n \to \infty} \frac{1}{n^2} = 0$.
+
+b. Show that $\lim_{n \to \infty} \frac{1000}{n} = 0$.
+
+c. Show that $\lim_{n \to \infty} \frac{n}{n + 1} = 1$.
+
+:::: {.callout-note title="Answers" collapse="true"}
+a. Because $\lim_{n \to \infty} \frac{1}{n} = 0$, we have $$\lim_{n \to \infty} \frac{1}{n^2} = \lim_{n \to \infty} \left(\frac{1}{n} \cdot \frac{1}{n}\right) = \left(\lim_{n \to \infty} \frac{1}{n}\right) \cdot \left(\lim_{n \to \infty} \frac{1}{n}\right) = 0 \cdot 0 = 0.$$
+
+b. Because $\lim_{n \to \infty} \frac{1}{n} = 0$, we have $$\lim_{n \to \infty} \frac{1000}{n} = \lim_{n \to \infty} \left(1000 \cdot \frac{1}{n}\right) = 1000 \cdot \lim_{n \to \infty} \frac{1}{n} = 1000 \cdot 0 = 0.$$
+
+c. We showed above in @exr-constant-sequence that $\lim_{n \to \infty} 1 = 1$, and we showed in @exr-squeeze-sequence that $\lim_{n \to \infty} \frac{1}{n + 1} = 0$.
+   Therefore, we have $$\lim_{n \to \infty} \frac{n}{n + 1} = \lim_{n \to \infty} \left(1 - \frac{1}{n + 1}\right) = \lim_{n \to \infty} 1 - \lim_{n \to \infty} \frac{1}{n + 1} = 1 - 0 = 1.$$
+::::
+:::
+
+Now let's use the squeeze theorem in combination with the other helpful properties of limits to prove an important step for our eventual solution to the motivating example about expected term length.
+We've already seen that the probability of lasting $T$ terms, $p^T (1 - p)$, tends toward 0 as $T$ increases.
+But what about when we weight each probability by the term length in question, as we do when calculating an expected value?
+We saw some suggestive evidence in @fig-ev-components that $T p^T (1 - p)$ also has a limit of 0 as $T$ becomes larger and larger.
+How can we prove that?
+
+::: {#exm-ev-components}
+We want to show that $\lim_{T \to \infty} T p^T (1 - p) = 0$ for any $p$ satisfying $0 < p < 1$.
+In theory we could do this with the formal definition (@def-limit), but in practice it's hard to characterize the $N$ that meets any given $\epsilon$ challenge.
+So we will go about this a different way.
+
+The meat of the problem is to prove that $\lim_{T \to \infty} T p^T = 0$.
+Once we've done that, we can use the constant multiple rule from @prp-limit-properties to show that $\lim_{T \to \infty} T p^T (1 - p) = 0$ as well.
+We know that $0 \leq T p^T$ for all $T$.
+So if we can find a sequence $\{x_T\}$ that has a limit of 0, and where $T p^T \leq x_T$ after a certain point, then we can use the squeeze theorem (@prp-squeeze-sequence) to conclude that $\{T p^T\} \to 0$.
+
+To construct the sequence we need, let $q$ be any number that satisfies $p < q < 1$.
+Using the properties from @prp-limit-properties, we have
+$$
+\lim_{T \to \infty} \left(1 + \frac{1}{T}\right) p
+= \left(1 + \lim_{T \to \infty} \frac{1}{T}\right) p
+= p.
+$$
+Therefore, there is an index $S$ such that $(1 + \frac{1}{T}) p < q$ for all $T \geq S$.
+
+To apply the squeeze theorem, we will use the sequence $\{q^{T - S} \cdot S p^S\}_{T=1}^\infty$.
+Because $S p^S$ is a constant and $\{q^T\} \to 0$, we have $\{q^{T - S} \cdot S p^S\} \to 0$ as well.
+Additionally, I claim that $T p^T \leq q^{T - S} \cdot S p^S$ for all $T \geq S$.
+I will prove this via induction (@sec-proof-by-induction).
+
+1. For the base step, I must prove that the claim is true for $T = S$.
+   This holds trivially: $$S p^S = 1 \cdot S p^S = q^0 \cdot S p^S = q^{S - S} \cdot S p^S.$$
+
+2. For the induction step, I must show that if the claim is true for some $T \geq S$, then it is also true for $T + 1$.
+   So assume that $T p^T \leq q^{T - S} \cdot S p^S$.
+   Then we have
+   $$
+   \begin{aligned}
+   (T + 1) p^{T + 1}
+   &= T \left(1 + \frac{1}{T}\right) p^{T + 1} \\
+   &= T \cdot \underbrace{\left(1 + \frac{1}{T}\right) p}_{\mathclap{\text{$< q$ because $T \geq S$}}} \cdot p^T \\
+   &< q \cdot T p^T \\
+   &\leq q \cdot q^{T-S} \cdot S p^S \\
+   &= q^{(T + 1) - S} \cdot S p^S.
+   \end{aligned}
+   $$
+
+Altogether, we have that $$0 \leq T p^T \leq q^{T - S} \cdot S p^S$$ for all $T \geq S$.
+Because the outer terms each go to 0 as $T \to \infty$, we conclude from the squeeze theorem that $\{T p^T\} \to 0$ as well.
+It then follows from the constant multiple rule that $\{T p^T (1 - p)\} \to 0$ as well.
+:::
+
+
+## Series
+
+We almost have everything we need to answer our original question: if the incumbent party retains power each term with probability $p$, what is the expected number of terms it will remain in office?
+We have already seen that the answer to this question will involve the infinite sum $$\sum_{T=0}^\infty T \cdot \Pr(\text{term length} = T) = \sum_{T=0}^\infty T p^T (1 - p).$$
+But how do we calculate an infinite sum, or [series]{.concept}, like this one?
+
+The key to solving the problem is to think of an infinite sum as the limit of finite sums.
+It may be daunting to think about adding infinitely many numbers together, but it is much easier to think about adding up a finite (if perhaps very large) quantity of them.
+In particular, we will work with the sequence of [partial sums]{.concept}, each of which is the sum of the first $n$ terms of the series.
+If this sequence has a limit, then we identify that limit with the value of the series.
+
+::: {#def-series name="Series as a limit of partial sums"}
+A [series]{.concept} is an infinite sum of terms, written like $\sum_{k=1}^\infty a_k$.
+The $n$'th [partial sum]{.concept} is the sum of the first $n$ terms in the series, $\sum_{k=1}^n a_k$.
+If the sequence of partial sums, $\{\sum_{k=1}^n a_k\}_{n=1}^\infty$, has a limit (finite or infinite), we say that $$\sum_{k=1}^\infty a_k = \lim_{n \to \infty} \sum_{k=1}^n a_k.$$
+If the limit exists and is finite, we call the series [convergent]{.concept}.
+:::
+
+```{python} 
+concepts.update({
+  "Series": "A summation of infinitely many terms, written $\\sum_{k=1}^\\infty a_k$.  Its value is the limit of the sequence of partial sums, $\\lim_{n \\to \\infty} \\sum_{k=1}^n a_k$, provided that this limit exists.",
+  "Partial sum": "The sum of all terms in a series up to a specified, finite index.",
+  "Convergent series": "A series whose value exists and is finite.",
+})
+```
+
+Possibly the most famous example of a convergent series is the [geometric series]{.concept}, a sum of powers of a fraction between 0 and 1.
+For any number $q$ between 0 and 1, we have $$1 + q + q^2 + \cdots = \sum_{k=0}^\infty q^k = \frac{1}{1 - q}.$$
+This calculation comes up in our motivating example here, where we multiply the retention probability $p$ with itself repeatedly to calculate the probability of lasting $T$ terms.
+Let's work through the logic that shows that the series actually comes out to $\frac{1}{1 - q}$.
+
+::: {.aside}
+You might notice that the geometric series is a bit different than what we wrote in @def-series, as we start the sum at the index $k = 0$ instead of $k = 1$.
+We could make the definition fit exactly by instead writing the series as $\sum_{k=1}^\infty q^{k-1}$.
+I find it easier to just start counting at 0, though.
+:::
+
+::: {#exm-geometric-series name="Geometric series"}
+Let $q$ be a number such that $0 < q < 1$.
+We want to show that $$\sum_{k=0}^\infty q^k = \frac{1}{1 - q}.$$
+By the definition of a series, this entails showing that the sequence of partial sums, $\{\sum_{k=0}^n q^k\}$, is convergent with a limit of $\frac{1}{1 - q}$.
+
+The key to the proof is that we can write each partial sum as a reasonably simple mathematical expression.
+To start off, we can show that $(1 - q) \sum_{k=0}^n q^k = 1 - q^{n+1}$:
+$$
+\begin{aligned}
+(1 - q) \sum_{k=0}^n q^k
+&= \sum_{k=0}^n q^k - q \sum_{k=0}^n q^k \\
+&= \sum_{k=0}^n q^k - \sum_{k=0}^n (q \cdot q^k) \\
+&= \underbrace{\sum_{k=0}^n q^k}_{1 + q + q^2 + \cdots + q^n} - \underbrace{\sum_{k=0}^n q^{k+1}}_{q + q^2 + \cdots + q^n + q^{n+1}} \\
+&= 1 - q^{n+1}.
+\end{aligned}
+$$
+Dividing both sides by $1 - q$, we get the following expression for the partial sum: $$\sum_{k=0}^n q^n = \frac{1 - q^{n+1}}{1 - q}.$$
+
+From here, we can calculate the value of the series using the properties of limits that we established in @prp-limit-properties.
+We already showed in @exm-limit-term-length-prob that $\lim_{n \to \infty} q^n = 0$ when $0 < q < 1$.
+Using this fact along with the properties of limits, we have
+$$
+\begin{aligned}
+\sum_{k=0}^\infty q^k
+&= \lim_{n \to \infty} \sum_{k=0}^n q^k \\
+&= \lim_{n \to \infty} \frac{1 - q^{n + 1}}{1 - q} \\
+&= \frac{1}{1 - q} \lim_{n \to \infty} \left[1 - q^{n + 1}\right] \\
+&= \frac{1}{1 - q} \left[1 - \lim_{n \to \infty} q^{n + 1}\right] \\
+&= \frac{1}{1 - q} \left[1 - q \cdot \underbrace{\lim_{n \to \infty} q^n}_{=0}\right] \\
+&= \frac{1}{1 - q}.
+\end{aligned}
+$$
+:::
+
+The geometric series also comes up in calculations involving "discounting," an important concept in theories of decisions involving very long time horizons.
+As an example, what would you be willing to pay now for a lifetime-and-beyond annuity, which pays out \$1,000 per year to you or your estate?
+In theory this promises an infinite amount of money, but that money gets less valuable every year with inflation.
+Suppose there is a constant inflation rate of $i$ (e.g., 3% inflation means $i = 0.03$), so that \$1,000 today is worth only \$$\frac{1{,}000}{1 + i}$ tomorrow.
+Then the total value of the annuity in today's dollars can be calculated with a geometric series:
+$$
+\begin{aligned}
+\text{value}
+&= \sum_{k=0}^\infty 1000 \left(\frac{1}{1 + i}\right)^k \\
+&= \frac{1000}{1 - \frac{1}{1 + i}} \\
+&= \frac{1000}{\frac{i}{1 + i}} \\
+&= 1000 \left(1 + \frac{1}{i}\right).
+\end{aligned}
+$$
+At a 3% inflation rate ($i = 0.03$), the present value of our indefinite payment stream comes out to about \$34,333.
+At 50% inflation ($i = 0.5$), it's only worth \$3,000.
+
+```{python} 
+concepts.update({
+  "Geometric series": "A series of the form $\\sum_{k=0}^\\infty q^k = 1 + q + q^2 + \\cdots$, where $0 < q < 1$.  A geometric series is convergent, with a value of $\\frac{1}{1 - q}$.",
+})
+```
+
+### Calculating the expected term in office
+
+The series in our motivating example is closely related to the geometric series, but a little bit different.
+Each term in the series does involve the probability of staying in office that long, namely $p^T (1 - p)$.
+If all we needed to do was sum up the probabilities, we could indeed use the geometric series:
+$$
+\sum_{T=0}^\infty p^T (1 - p) = (1 - p) \sum_{T=0}^\infty p^T = (1 - p) \cdot \frac{1}{1 - p} = 1.
+$$
+This calculation does nicely confirm that we have a valid probability distribution (the probabilities of the respective events sum to 1), but it doesn't give us the expected value we're looking for.
+That calculation involves a weighted sum, where each probability is weighted by the term length in question: $$\sum_{T=0}^\infty T p^T (1 - p).$$
+
+::: {.callout-warning title="Algebra ahead"}
+To solve our motivating example, we need a bit more old-school high-school-math-style equation manipulation than we've used in a lot of the notes up to this point.
+Real problems in statistics and formal theory are often like this --- there are a couple of key mathematical insights at the heart of the result, but also a lot of moving terms around to get to the point where a reader can see or apply the insight in question.
+
+As the density of equations increases here, I want to remind you to **read actively**.
+If you just scan through the equations on the page, your eyes will glaze over and you won't retain much.
+You should read **with paper and pen** (or tablet and stylus) at hand, confirming that you can reconstruct each step on your own.
+
+In fact, part of the reason there are so many equations is to facilitate your active reading --- I'm skipping as few steps as possible in the chugging-through-algebra portions, to minimize the chance that you'll get lost when working through it yourself.
+:::
+
+To calculate this infinite sum, we will need to work with the sequence of partial sums.
+Remember that each partial sum is the addition up to the $n$'th term, so in this case it would be $$\sum_{T=0}^n T p^T (1 - p).$$
+This is still pretty daunting to think about, if you start thinking about $n$ on the order of a hundred or a billion or a googolplex.
+When faced with a daunting problem like this, I like to start by considering a simple-but-nontrivial case.
+For example, let's look at the 3rd partial sum:
+$$
+\sum_{T=0}^3 T p^T (1 - p) = [0 p^0 + 1 p^1 + 2 p^2 + 3 p^3] (1 - p).
+$$
+The first thing I notice here is that the $T = 0$ case can be dropped, as it's just always getting multiplied by 0.
+So we can simplify this sum a bit:
+$$
+\sum_{T=0}^3 T p^T (1 - p) = \sum_{T=1}^3 T p^T (1 - p) = [1 p^1 + 2 p^2 + 3 p^3] (1 - p).
+$$
+Next, I want to think about what we already know and how we can put it to use here.
+When working through the geometric series in @exm-geometric-series, we derived a helpful expression for the $n$'th partial sum: $$\sum_{T=0}^n p^T = \frac{1 - p^{n+1}}{1 - p}.$$
+Can we put that fact to use here?
+Let's play around with our example for the 3rd partial sum of our expected value series, trying to move things around until we end up only with partial sums of the geometric series.
+$$
+\begin{aligned}
+1 p^1 + 2 p^2 + 3 p^3
+&= [p^1 + p^2 + p^3] + [p^2 + p^3] + p^3.
+\end{aligned}
+$$
+These are almost like partial sums of the geometric series, except each of them is missing some terms at the front.
+
+- $p^1 + p^2 + p^3$ is missing $p^0$.
+- $p^2 + p^3$ is missing $p^0$ and $p^1$.
+- $p^3$ is missing $p^0$, $p^1$, and $p^2$.
+
+Using $G_n$ to denote the $n$'th partial sum of the geometric series (i.e., $G_n = \sum_{T=0}^n p^T$), we have
+$$
+\begin{aligned}
+1 p^1 + 2 p^2 + 3 p^3
+&= [p^1 + p^2 + p^3] + [p^2 + p^3] + p^3 \\
+&= [G_3 - p^0] + [G_3 - p^0 - p^1] + [G_3 - p^0 - p^1 - p^2] \\
+&= [G_3 - G_0] + [G_3 - G_1] + [G_3 - G_2].
+\end{aligned}
+$$
+From here, we'll use our helpful expression for the $n$'th partial sum of the geometric series, then keep simplifying until we hopefully end up with something manageable.
+$$
+\begin{aligned}
+1 p^1 + 2 p^2 + 3 p^3
+&= [G_3 - G_0] + [G_3 - G_1] + [G_3 - G_2] \\
+&= \left[\frac{1 - p^4}{1 - p} - \frac{1 - p^1}{1 - p}\right] + \left[\frac{1 - p^4}{1 - p} - \frac{1 - p^2}{1 - p}\right] + \left[\frac{1 - p^4}{1 - p} - \frac{1 - p^3}{1 - p}\right] \\
+&= \frac{p^1 - p^4}{1 - p} + \frac{p^2 - p^4}{1 - p} + \frac{p^3 - p^4}{1 - p} \\
+&= \frac{p}{1 - p} [p^0 + p^1 + p^2 - 3 p^3] \\
+&= \frac{p}{1 - p} [G_2 - 3 p^3] \\
+&= \frac{p}{1 - p} \left[\frac{1 - p^3}{1 - p} - 3 p^3\right] \\
+&= \frac{p}{1 - p} \left[\frac{1 - p^3}{1 - p} - \frac{3 p^3 (1 - p)}{1 - p}\right] \\
+&= \frac{p}{1 - p} \cdot \frac{1 - p^3 - 3 p^3 + 3 p^4}{1 - p} \\
+&= \frac{p - 4 p^3 + 3 p^4}{(1 - p)^2}.
+\end{aligned}
+$$
+And therefore, going back to the entire partial sum we were trying to calculate:
+$$
+\sum_{T=0}^3 T p^T (1 - p) = [1 p^1 + 2 p^2 + 3 p^3] (1 - p) = \frac{p - 4 p^4 + 3 p^5}{1 - p}.
+$$
+
+Because $p$ is a fraction between 0 and 1, the numbers $p^4$ and $p^5$ will be fairly small, much smaller than $p$ itself.
+If we just use the (very rough!) approximations $p^4 \approx 0$ and $p^5 \approx 0$, we end up with a partial sum approximately equal to $\frac{p}{1 - p}$.
+In fact, going back to the $p = 0.75$ example we plotted in @fig-expected-term-length, we saw there that the expected term length appeared to be about 3, which also happens to be equal to 0.75/0.25.
+I'm starting to suspect that our expected value series adds up to $\frac{p}{1 - p}$.
+
+::: {#exr-partial-sums}
+I calculated the partial sum for the $n = 3$ case above.
+Repeat my method and/or use my result to calculate the partial sums for $n = 2$ and $n = 4$.
+What patterns do you notice in the partial sums?
+
+:::: {.callout-note title="Answer" collapse="true"}
+For the $n = 2$ case, I think it's easiest to just calculate the sum explicitly:
+$$
+\begin{aligned}
+\sum_{T=0}^2 T p^T (1 - p)
+&= (0 p^0 + 1 p^1 + 2 p^2) (1 - p) \\
+&= (p + 2 p^2) (1 - p).
+\end{aligned}
+$$
+To make this look a bit more like our result for the $n = 3$ case, we can multiply by $\frac{1 - p}{1 - p}$:
+$$
+\begin{aligned}
+\sum_{T=0}^2 T p^T (1 - p)
+&= (p + 2 p^2) (1 - p) \\
+&= \frac{(p + 2 p^2) (1 - p)^2}{1 - p} \\
+&= \frac{(p + 2 p^2) (1 - 2 p + p^2)}{1 - p} \\
+&= \frac{p + 2 p^2 - 2 p^2 - 4 p^3 + p^3 + 2 p^4}{1 - p} \\
+&= \frac{p - 3 p^3 + 2 p^4}{1 - p}.
+\end{aligned}
+$$
+
+For the $n = 4$ case, I'll start with our result from the $n = 3$ case and then add the fourth term:
+$$
+\begin{aligned}
+\sum_{T=0}^4 T p^T (1 - p)
+&= \left[\sum_{T=0}^3 T p^T (1 - p)\right] + 4 p^4 (1 - p) \\
+&= \frac{p - 4 p^4 + 3 p^5}{1 - p} + (4 p^4 - 4 p^5) \\
+&= \frac{p - 4 p^4 + 3 p^5}{1 - p} + \frac{(4 p^4 - 4 p^5) (1 - p)}{1 - p} \\
+&= \frac{p - 4 p^4 + 3 p^5}{1 - p} + \frac{4 p^4 - 4 p^5 - 4 p^5 + 4 p^6}{1 - p} \\
+&= \frac{(p - 4 p^4 + 3 p^5) + (4 p^4 - 8 p^5 + 4 p^6)}{1 - p} \\
+&= \frac{p - 5 p^5 + 4 p^6}{1 - p}.
+\end{aligned}
+$$
+
+Now to look for patterns, let's line up the three partial sums that we've explicitly calculated so far:
+$$
+\begin{aligned}
+\sum_{T=0}^2 T p^T (1 - p) &= \frac{p - 3 p^3 + 2 p^4}{1 - p}; \\
+\sum_{T=0}^3 T p^T (1 - p) &= \frac{p - 4 p^4 + 3 p^5}{1 - p}; \\
+\sum_{T=0}^4 T p^T (1 - p) &= \frac{p - 5 p^5 + 4 p^6}{1 - p}.
+\end{aligned}
+$$
+Each of these has the same structure:
+$$
+\sum_{T=0}^n T p^T (1 - p) = \frac{p - (n + 1) p^{n + 1} + n p^{n + 2}}{1 - p}.
+$$
+::::
+:::
+
+After working through @exr-partial-sums, you'll see an apparent pattern in the first few partial sums, with each being equal to $$\frac{p - (n + 1) p^{n+1} + n p^{n + 2}}{1 - p}.$$ {#eq-ev-partial-sum}
+A pattern is, of course, not a proof --- but it's a strong hint at what we should be looking for.
+So let's try and prove that every partial sum indeed takes this form, and then let's take its limit as $n \to \infty$ to calculate our expected value series.
+
+There are a couple of ways to prove that every partial sum works out to have the form in @eq-ev-partial-sum.
+One way, following what we did for the $n = 3$ case above, would be to rewrite the $n$'th partial sum of the expected value series in terms of the geometric series partial sums whose value we already know.
+Another way, following the lines of my answer for the $n = 4$ case in @exr-partial-sums, would be to use a proof by induction (see @sec-proof-by-induction).
+For your fullest edification possible, I'll present both methods.
+
+::: {.panel-tabset}
+
+## Geometric series
+
+Again I'll use $G_n$ to denote the $n$'th partial sum of the geometric series, meaning that $$G_n = \sum_{k=0}^n p^k = \frac{1 - p^{n + 1}}{1 - p}.$$
+We saw in the $n = 3$ case that $$1 p^1 + 2 p^2 + 3 p^3 = [G_3 - G_0] + [G_3 - G_1] + [G_3 - G_2].$$
+Generalizing this, we have
+$$
+\begin{aligned}
+\sum_{T=0}^n T p^T
+&= 0 p^0 + 1 p^1 + \cdots + (n - 1) p^{n - 1} + n p^n \\
+&= [n - n] p^0 + [n - (n - 1)] p^1 + \cdots + [n - 1] p^{n - 1} + [n - 0] p^n \\
+&= n [p^0 + p^1 + \cdots + p^{n - 1} + p^n] - [p^0] - [p^0 + p^1] - \cdots - [p^0 + p^1 + \cdots + p^{n-1}] \\
+&= n G_n - \sum_{k=0}^{n-1} G_k \\
+&= n G_n - \sum_{k=0}^{n-1} \frac{1 - p^{k+1}}{1 - p} \\
+&= n G_n - \frac{n - \sum_{k=0}^{n-1} p^{k+1}}{1 - p} \\
+&= n G_n - \frac{n - \sum_{k=1}^n p^k}{1 - p} \\
+&= n G_n - \frac{n - [G_n - p^0]}{1 - p} \\
+&= n G_n - \frac{n + 1 - G_n}{1 - p}
+\end{aligned}
+$$
+and therefore
+$$
+\begin{aligned}
+\sum_{T=0}^n T p^T (1 - p)
+&= (1 - p) \sum_{T=0}^n T p^T \\
+&= (1 - p) \left[n G_n - \frac{n + 1 - G_n}{1 - p}\right] \\
+&= (1 - p) n G_n - (n + 1 - G_n) \\
+&= [1 + (1 - p) n] G_n - (n + 1) \\
+&= \frac{[1 + (1 - p) n] (1 - p^{n+1})}{1 - p} - (n + 1) \\
+&= \frac{1 - p^{n + 1} + (1 - p) n - (1 - p) n p^{n+1}}{1 - p} - (n + 1) \\
+&= \frac{1 - p^{n + 1} + (1 - p) n - (1 - p) n p^{n+1} - (1 - p)(n + 1)}{1 - p} \\
+&= \frac{1 - p^{n + 1} - (1 - p) - (1 - p) n p^{n+1}}{1 - p} \\
+&= \frac{p - p^{n + 1} - (1 - p) n p^{n+1}}{1 - p} \\
+&= \frac{p - p^{n + 1} - (n p^{n+1} - n p^{n+2})}{1 - p} \\
+&= \frac{p - (n + 1) p^{n+1} + n p^{n+2}}{1 - p}.
+\end{aligned}
+$$
+
+## Induction
+
+Remember that a proof by induction consists of two steps:
+
+1. Base step: Show that the claim holds for the lowest case (here, $n = 0$).
+
+2. Induction step: Show that if the claim holds for $n = k$, then it holds for $n = k + 1$ as well.
+
+For the base step here, we need to confirm that $$\sum_{T=0}^0 T p^T (1 - p) = \frac{p - (0 + 1) p^{0 + 1} + 0 p^{0 + 2}}{1 - p}.$$
+We know that the left-hand side here equals 0, so we just need to confirm that the right-hand side does as well:
+$$
+\begin{aligned}
+\frac{p - (0 + 1) p^{0 + 1} + 0 p^{0 + 2}}{1 - p}
+&= \frac{p - 1 p^1 + 0 p^2}{1 - p} \\
+&= \frac{p - p}{1 - p} \\
+&= 0.
+\end{aligned}
+$$
+This concludes the base step.
+
+For the induction step, assume that $$\sum_{T=0}^k T p^T (1 - p) = \frac{p - (k + 1) p^{k+1} + k p^{k+2}}{1 - p}.$$
+We need to show that this implies that $$\sum_{T=0}^{k+1} T p^T (1 - p) = \frac{p - (k + 2) p^{k + 2} + (k + 1) p^{k+3}}{1 - p}.$$
+We have
+$$
+\begin{aligned}
+\sum_{T=0}^{k+1} T p^T (1 - p)
+&= \left[\sum_{T=0}^k T p^T (1 - p)\right] + (k + 1) p^{k + 1} (1 - p) \\
+&= \frac{p - (k + 1) p^{k+1} + k p^{k+2}}{1 - p} + (k + 1) (p^{k + 1} - p^{k + 2}) \\
+&= \frac{p - (k + 1) p^{k+1} + k p^{k+2}}{1 - p} + \frac{(k + 1) (p^{k + 1} - p^{k + 2}) (1 - p)}{1 - p} \\
+&= \frac{p - (k + 1) p^{k+1} + k p^{k+2}}{1 - p} + \frac{(k + 1) (p^{k + 1} - 2 p^{k+2} + p^{k+3})}{1 - p} \\
+&= \frac{p + k p^{k+2} - 2 (k+1) p^{k+2} + (k + 1) p^{k+3}}{1 - p} \\
+&= \frac{p + (k - 2k - 2) p^{k+2} + (k+1) p^{k+3}}{1 - p} \\
+&= \frac{p - (k + 2) p^{k+2} + (k + 1) p^{k+3}}{1 - p},
+\end{aligned}
+$$
+which concludes the induction step.
+
+:::
+
+Finally, we are ready to obtain the result we have been working toward --- the expected number of consecutive terms in office, as a function of the retention probability $p$.
+We begin with restating the series as the limit of partial sums:
+$$
+\sum_{T=0}^\infty T p^T (1 - p) = \lim_{n \to \infty} \sum_{T=0}^n T p^T (1 - p).
+$$
+We then substitute the expression we found for the $n$'th partial sum, namely @eq-ev-partial-sum.
+$$
+\begin{aligned}
+\lim_{n \to \infty} \sum_{T=0}^n T p^T (1 - p)
+&= \lim_{n \to \infty} \frac{p - (n + 1) p^{n+1} + n p^{n+2}}{1 - p}.
+\end{aligned}
+$$
+We break down this limit using the properties from @prp-limit-properties:
+$$
+\begin{aligned}
+\lim_{n \to \infty} \frac{p - (n + 1) p^{n + 1} + n p^{n + 2}}{1 - p}
+&= \lim_{n \to \infty} \frac{p - n p^{n + 1} - p^{n + 1} + n p^{n + 2}}{1 - p} \\
+&= \frac{\lim_{n \to \infty} [p - n p^{n + 1} - p^{n + 1} + n p^{n + 2}]}{1 - p} \\
+&= \frac{p - \lim_{n \to \infty} n p^{n + 1} - \lim_{n \to \infty} p^{n + 1} + \lim_{n \to \infty} n p^{n + 2}}{1 - p} \\
+&= \frac{p - p \cdot \lim_{n \to \infty} n p^{n} - p \cdot \lim_{n \to \infty} p^{n} + p^2 \cdot \lim_{n \to \infty} n p^{n}}{1 - p}.
+\end{aligned}
+$$
+Finally --- finally! --- we use the fact that $\{p^n\} \to 0$ (see @exm-limit-term-length-prob) and $\{n p^n\} \to 0$ (see @exm-ev-components):
+$$
+\begin{aligned}
+\frac{p - p \cdot \lim_{n \to \infty} n p^{n} - p \cdot \lim_{n \to \infty} p^{n} + p^2 \cdot \lim_{n \to \infty} n p^{n}}{1 - p}
+&= \frac{p - p \cdot 0 - p \cdot 0 + p^2 \cdot 0}{1 - p} \\
+&= \frac{p}{1 - p}.
+\end{aligned}
+$$
+We conclude that $$\sum_{T=0}^\infty T p^T (1 - p) = \frac{p}{1 - p}.$$
+
+Now we can just use this formula to calculate expected term length as a function of the retention probability, $p$.
+You'll notice in the graph below that the formula gives us an expected term length of 3 when $p = 0.75$, just as we suspected from @fig-expected-term-length.
+
+```{r} 
+tibble(p = seq(0, 0.9, length.out = 100), y = p / (1 - p)) |>
+  ggplot(aes(x = p, y = y)) +
+  geom_line() +
+  scale_y_continuous(breaks = c(0, 3, 6, 9)) +
+  labs(
+    title = "Expected term length = p / (1 - p)",
+    x = "Retention probability: p",
+    y = "Expected consecutive terms"
+  ) +
+  background_grid()
+```
 
 
 ```{python, echo=FALSE, results="asis"}
