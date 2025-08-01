@@ -1,0 +1,163 @@
+---
+echo: false
+---
+
+# Derivatives {#sec-derivatives}
+
+```{r setup_derivs} 
+#| message: false
+library("tidyverse")
+library("cowplot")
+library("dataverse")
+library("ggrepel")
+theme_set(theme_cowplot())
+```
+
+```{r get_pres_data} 
+#| message: false
+#| cache: true
+df_pres_county <- get_dataframe_by_name(
+  filename = "countypres_2000-2024.tab",
+  dataset = "10.7910/DVN/VOQCHQ",
+  server = "dataverse.harvard.edu",
+  version = "15.0"
+)
+```
+
+```{python}
+# Set up concept dictionary
+concepts = {}
+```
+
+## Motivation: How do we calculate the regression slope?
+
+Let's play a political guessing game.
+Suppose I told you that way back in the year 2000, the two-party vote share for George W. Bush in a particular county was 65%.
+Based on this information alone, what would you guess was Donald Trump's two-party vote share there in 2024?
+
+At this point in your political science careers, you might (or might not --- it's ok!) know that a political scientist would often use a linear regression to answer this question.
+This entails the following process:
+
+1. Model the relationship between Bush's 2000 vote share and Trump's 2024 vote share as a linear equation: $$\text{Trump2024} \approx \underbrace{\alpha}_{\mathclap{\text{intercept}}} \quad+\quad \underbrace{\beta}_{\mathclap{\text{slope}}} \cdot \text{Bush2000}.$$
+
+2. Estimate the values of the intercept $\alpha$ and the slope $\beta$ that produce the line that most closely fits the data.
+
+3. To come up with the best guess for Trump's 2024 share in a county where Bush got 65% in 2000, plug into the formula: $$\text{Trump2024 estimate} = \hat{\alpha} + \hat{\beta} \cdot 0.65,$$ where $\hat{\alpha}$ and $\hat{\beta}$ are the slope and intercept estimated in step 2.
+
+If we put together the actual data and run a linear regression, we end up with the equation $$\text{Trump2024} \approx 0.17 + 0.86 \cdot \text{Bush2000}.$$
+So for our hypothetical county that went 65% for Bush in 2000, we'd guess it went about 73% for Trump in 2024 (via the calculation $0.17 + 0.86 \cdot 0.65$).
+
+```{r} 
+#| message: false
+#| warning: false
+df_pres_county <- df_pres_county |>
+  filter(party %in% c("DEMOCRAT", "REPUBLICAN")) |>
+  select(year, state = state_po, county = county_name, party, votes = candidatevotes) |>
+  # Some counties have separate entries due to apparent FIPS issues?
+  group_by(year, state, county, party) |>
+  summarize(votes = sum(votes)) |>
+  mutate(share = votes / sum(votes)) |>
+  ungroup() |>
+  filter(party == "REPUBLICAN") |>
+  mutate(year = str_c("r_share_", year)) |>
+  select(-party, -votes) |>
+  pivot_wider(names_from = "year", values_from = "share") |>
+  mutate(label = str_c(str_to_title(county), ", ", state)) |>
+  filter(!is.na(r_share_2000), !is.na(r_share_2024))
+```
+
+```{r}
+#| cache: true
+#| warning: false
+#| label: fig-pres-county-scatter
+df_pres_county |>
+  ggplot(aes(x = r_share_2000, y = r_share_2024)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_vline(xintercept = 0.65, linewidth = 0.5, color = "red", linetype = "dotted") +
+  geom_hline(yintercept = 0.1728 + 0.8605 * 0.65, linewidth = 0.5, color = "red", linetype = "dotted") +
+  geom_text_repel(aes(label = label)) +
+  labs(
+    title = "County-level presidential election returns",
+    x = "George W. Bush two-party share, 2000",
+    y = "Donald Trump two-party share, 2024"
+  )
+```
+
+I'll leave it to the stat sequence to explain when and why linear regression is a statistically sound approach to this problem.
+We're going to focus on a narrower issue: precisely how we calculate the slope of the regression line, $\hat{\beta}$.
+If you open up *Mostly Harmless Econometrics* to page 35, you'll see the "regression anatomy" formula for the slope of a linear regression of dependent variable $Y_i$ on independent variable $X_i$: $$\hat{\beta} = \frac{\text{Cov}[Y_i, X_i]}{V[X_i]} = \frac{\sum_{i=1}^N (X_i - \bar{X}) (Y_i - \bar{Y})}{\sum_{i=1}^N (X_i - \bar{X})^2}.$$
+This is indeed the formula that gives us the slope pictured in @fig-pres-county-scatter.
+
+```{r} 
+#| echo: true
+cov_yx <- cov(df_pres_county$r_share_2024, df_pres_county$r_share_2000)
+var_x <- var(df_pres_county$r_share_2000)
+cov_yx / var_x
+```
+
+But why does this formula "work"?
+How did statisticians come up with it?
+In what sense, and why, does this particular line fit the data better than any other?
+To answer these questions, we will need the tools of [differential calculus]{.concept}.
+
+```{python}
+concepts.update({
+  "Differential calculus": "Mathematical methods to characterize the rate of change in a function.",
+})
+```
+
+### Formalizing the problem
+
+For each observation $i = 1, \ldots, N$, we observe an independent variable $X_i$ and a dependent variable $Y_i$, both real numbers.
+Given a slope $\beta$, our regression prediction for each observation is $$\hat{Y}_i = \bar{Y} + \beta \cdot (X_i - \bar{X}),$$ where $\bar{Y}$ is the sample mean of $Y_1, \ldots, Y_N$ and $\bar{X}$ is the sample mean of $X_1, \ldots, X_N$.
+The residual for the $i$'th observation is the difference between reality and prediction, $$e_i = Y_i - \hat{Y}_i = Y_i - \bar{Y} - \beta \cdot (X_i - \bar{X}).$$
+
+::: {.aside}
+Instead of solving for the intercept as well as the slope, I've set up the problem so that the regression line will pass through $(\bar{X}, \bar{Y})$.
+Once we get to multivariable calculus, we'll see why it was ok for me to do this.
+:::
+
+Substantively, we want our regression line to be as close as possible to the data.
+Mathematically, that means we want the residuals to be small in magnitude.
+Our specific criterion for the quality of a slope estimate $\beta$ will be the sum of squared residuals when we generate predictions via the slope $\beta$, $$e_1^2 + \cdots + e_N^2 = \sum_{i=1}^N e_i^2 = \sum_{i=1}^N [Y_i - \bar{Y} - \beta (X_i - \bar{X})]^2.$$
+Given any slope $\beta$, we can use the formula above to calculate the sum of squared residuals if we drew our regression line according to that slope.
+In this sense, the formula sets up a function (see @sec-functions) that maps each possible slope into the associated sum of squared residuals.
+Let $f(\beta)$ denote this function: $$f(\beta) = \sum_{i=1}^N [Y_i - \bar{Y} - \beta (X_i - \bar{X})]^2.$$
+
+Finding the best slope is an [optimization problem]{.concept}.
+We are looking for the $\beta$ that leads to the lowest sum of squared errors, $f(\beta)$.
+Formally, we are looking for a $\hat{\beta}$ that solves $$f(\hat{\beta}) \leq f(\beta) \qquad \text{for all possible values of $\beta$}.$$
+Because there are infinite possible values of $\beta$, we cannot solve this problem simply by guessing and checking.
+We can --- and will --- use guess-and-check to get close, but we will need calculus to obtain an exact solution.
+
+```{python}
+concepts.update({
+  "Optimization problem": "The mathematical problem of trying to find the minimal or maximal value of a function.",
+})
+```
+
+### Approximating the solution
+
+Imagine we didn't know the formula for the regression slope, and we had to figure out what slope best fits the Bush 2000--Trump 2024 regression equation.
+We could start by taking a few plausible slopes, calculating the sum of squared residuals for each one, and seeing which one gives us the smallest errors overall.
+For example, let's look at each possible slope from 0.0 to 1.0, in intervals of 0.1.
+
+## Limits of functions
+
+### Continuity
+
+## Differentiation
+
+### Derivatives of common functions
+
+### Second derivatives and beyond
+
+## Optimization
+
+
+```{python, results="asis"}
+from helpers import concept_table
+
+print(concept_table(concepts))
+```

@@ -563,7 +563,7 @@ Consequently, $A^c \cup B^c \subseteq (A \cap B)^c$.
 :::
 
 
-## Functions
+## Functions {#sec-functions}
 
 Every US president took office at some recognizable point in time.
 George Washington's first term began in 1789.
