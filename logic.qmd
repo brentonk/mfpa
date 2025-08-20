@@ -99,10 +99,6 @@ We don't have time to go through the proof here, but the result is famous enough
 For example, Andy Eggers has [a proof intended to be accessible to non-specialists](https://andy.egge.rs/papers/Eggers_GibbardSatterthwaite.pdf).
 :::
 
-For example, I was surprised to learn in graduate school that [there is no non-dictatorial system for elections with more than two candidates that eliminates incentives for strategic voting](https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem).
-But this statement is indeed a tautology in the formal-logic sense of the word.
-(If you don't think the truth of this statement is nonobvious, just try arguing on the Internet with people who think ranked-choice voting will fix elections!)
-
 ### Constructing compound sentences
 
 In this chapter, we will use the letters $P$, $Q$, and $R$ to denote sentences.
