@@ -5,3 +5,5 @@ The course covers the bare essential mathematical techniques needed for applied 
 
 This book is written in [Quarto](https://quarto.org/) and published on [GitHub Pages](https://pages.github.com/).
 You can find the Quarto source files [on GitHub](https://github.com/brentonk/mfpa).
+
+**Acknowledgments:** Special thanks to Vanderbilt PhD students Addison Emig and Kennedy Harrison for their careful read of the first few chapters, and their many helpful suggestions on how to make the notes more accessible to first-year students.

@@ -35,7 +35,7 @@ Our goal here is to calculate the expected value,
 + 3 \cdot \Pr(\text{term length} = 3) + \cdots
 \end{align}
 
-::: {.callout-note title="Summation notation"}
+::: {#nte-summation .callout-note title="Summation notation"}
 Don't remember what $\sum$ means?
 Don't panic!
 It's the [summation]{.concept} symbol, which we use when we're adding many things together.

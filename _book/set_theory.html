@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2dab5f6ea352cc8b5659b55cd0b3f02f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6a1232d96cac1088957bdf5a55b95c03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -183,7 +183,7 @@ window.Quarto = {
   <li><a href="#the-venn-diagram-operations" id="toc-the-venn-diagram-operations" class="nav-link" data-scroll-target="#the-venn-diagram-operations"><span class="header-section-number">2.2.2</span> The Venn diagram operations</a></li>
   <li><a href="#complements-and-de-morgans-laws" id="toc-complements-and-de-morgans-laws" class="nav-link" data-scroll-target="#complements-and-de-morgans-laws"><span class="header-section-number">2.2.3</span> Complements and De Morgan’s laws</a></li>
   </ul></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">2.3</span> Functions</a>
+  <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="header-section-number">2.3</span> Functions</a>
   <ul class="collapse">
   <li><a href="#one-to-one-and-onto-functions" id="toc-one-to-one-and-onto-functions" class="nav-link" data-scroll-target="#one-to-one-and-onto-functions"><span class="header-section-number">2.3.1</span> One-to-one and onto functions</a></li>
   <li><a href="#sec-cardinality" id="toc-sec-cardinality" class="nav-link" data-scroll-target="#sec-cardinality"><span class="header-section-number">2.3.2</span> An optional digression into cardinality and infinities</a></li>
@@ -734,8 +734,8 @@ Answer
 </div>
 </section>
 </section>
-<section id="functions" class="level2 page-columns page-full" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="functions"><span class="header-section-number">2.3</span> Functions</h2>
+<section id="sec-functions" class="level2 page-columns page-full" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-functions"><span class="header-section-number">2.3</span> Functions</h2>
 <p>Every US president took office at some recognizable point in time. George Washington’s first term began in 1789. Grover Cleveland’s first term began in 1893. Barack Obama’s first term began in 2009. I could go on, but you get the point. For every president, there is exactly one year when they became president for the first time.</p>
 <p>What we’ve done here is associate each president, an element of set <span class="math inline">\(P\)</span> as we’ve been calling it, with a natural number, an element of <span class="math inline">\(\mathbb{N}\)</span>. “The year that a given president took office” is what we call a <span class="concept">function</span>, which we might say “maps” one set into another. The notation <span class="math inline">\(f : A \to B\)</span> is a bit of mathematical shorthand that means “<span class="math inline">\(f\)</span> is a rule that takes each element of <span class="math inline">\(A\)</span> and associates it with an element of <span class="math inline">\(B\)</span>”. For any element <span class="math inline">\(a \in A\)</span>, we write <span class="math inline">\(f(a)\)</span> to stand for the element of <span class="math inline">\(B\)</span> that the function associates <span class="math inline">\(a\)</span> with. When a function maps <span class="math inline">\(A\)</span> into <span class="math inline">\(B\)</span>, we call <span class="math inline">\(A\)</span> the <span class="concept">domain</span> and <span class="math inline">\(B\)</span> the <span class="concept">codomain</span>.</p>
 <p>To continue the example, let <span class="math inline">\(y : P \to \mathbb{N}\)</span> (verbally: “<span class="math inline">\(y\)</span> is a function that maps the set of presidents into the set of natural numbers”) be the function that associates each president with the year they first took office. Then we have <span class="math inline">\(y(\text{George Washington}) = 1789\)</span>, <span class="math inline">\(y(\text{Grover Cleveland}) = 1893\)</span>, and so on. The domain of this function is the set of presidents, <span class="math inline">\(P\)</span>, and the codomain is the set of natural numbers, <span class="math inline">\(\mathbb{N}\)</span>.</p>

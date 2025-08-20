@@ -96,7 +96,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2dab5f6ea352cc8b5659b55cd0b3f02f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6a1232d96cac1088957bdf5a55b95c03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -235,12 +235,13 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#constructing-compound-sentences" id="toc-constructing-compound-sentences" class="nav-link" data-scroll-target="#constructing-compound-sentences"><span class="header-section-number">1.1.1</span> Constructing compound sentences</a></li>
   <li><a href="#if-only-if-and-if-and-only-if" id="toc-if-only-if-and-if-and-only-if" class="nav-link" data-scroll-target="#if-only-if-and-if-and-only-if"><span class="header-section-number">1.1.2</span> “If”, “only if”, and “if and only if”</a></li>
-  <li><a href="#de-morgans-laws" id="toc-de-morgans-laws" class="nav-link" data-scroll-target="#de-morgans-laws"><span class="header-section-number">1.1.3</span> De Morgan’s laws</a></li>
+  <li><a href="#summary-of-logical-operators" id="toc-summary-of-logical-operators" class="nav-link" data-scroll-target="#summary-of-logical-operators"><span class="header-section-number">1.1.3</span> Summary of logical operators</a></li>
+  <li><a href="#de-morgans-laws" id="toc-de-morgans-laws" class="nav-link" data-scroll-target="#de-morgans-laws"><span class="header-section-number">1.1.4</span> De Morgan’s laws</a></li>
   </ul></li>
   <li><a href="#methods-of-proof" id="toc-methods-of-proof" class="nav-link" data-scroll-target="#methods-of-proof"><span class="header-section-number">1.2</span> Methods of proof</a>
   <ul class="collapse">
   <li><a href="#proving-an-if-statement" id="toc-proving-an-if-statement" class="nav-link" data-scroll-target="#proving-an-if-statement"><span class="header-section-number">1.2.1</span> Proving an “if” statement</a></li>
-  <li><a href="#proving-an-if-and-only-if-statement" id="toc-proving-an-if-and-only-if-statement" class="nav-link" data-scroll-target="#proving-an-if-and-only-if-statement"><span class="header-section-number">1.2.2</span> Proving an “if and only if” statement</a></li>
+  <li><a href="#sec-prove-equivalence" id="toc-sec-prove-equivalence" class="nav-link" data-scroll-target="#sec-prove-equivalence"><span class="header-section-number">1.2.2</span> Proving an “if and only if” statement</a></li>
   <li><a href="#sec-proof-by-contradiction" id="toc-sec-proof-by-contradiction" class="nav-link" data-scroll-target="#sec-proof-by-contradiction"><span class="header-section-number">1.2.3</span> Proof by contradiction</a></li>
   <li><a href="#sec-proof-by-induction" id="toc-sec-proof-by-induction" class="nav-link" data-scroll-target="#sec-proof-by-induction"><span class="header-section-number">1.2.4</span> Proof by induction</a></li>
   </ul></li>
@@ -294,11 +295,44 @@ window.Quarto = {
 <li><p>Finally, we also don’t need to consult the real world to know that sentence #3 is false. There is no way for it to be the case that the tariffs both did and did not cause the stock market to crash.</p></li>
 </ul>
 <p>In one sense, our goal with formal logic will be to take compound sentences and sort them into these three categories: those that must be true, those that must be false, and those that are indeterminate, whose truth value cannot be deduced by logic alone.</p>
-<p>You might think that the sentences that must be true — the tautologies — are inherently uninteresting. Certainly no one is going to be surprised that either the tariffs caused the stock market to crash or they didn’t. And yet there are indeed statements that are tautological yet nonobvious on first glance. For example, I was surprised to learn in graduate school that <a href="https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem">there is no non-dictatorial system for elections with more than two candidates that eliminates incentives for strategic voting</a>. But this statement is indeed a tautology in the formal-logic sense of the word. (If you don’t think the truth of this statement is nonobvious, just try arguing on the Internet with people who think ranked-choice voting will fix elections!)</p>
+<p>You might think that the sentences that must be true — the tautologies — are inherently uninteresting. Certainly no one is going to be surprised that either the tariffs caused the stock market to crash or they didn’t. And yet there are indeed statements that are tautological yet nonobvious on first glance.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="A nonobvious tautology: The Gibbard-Satterthwaite Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A nonobvious tautology: The Gibbard-Satterthwaite Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Strategic voting is the phenomenon where people vote for candidates who are not their personal favorite because they think their favorite does not have a realistic shot of winning. For example, in the American politics context, libertarian voters often vote for the Republican even in races where there is a Libertarian Party candidate, as they think their vote might help the Republican beat the Democrat, but would have no realistic chance of getting the Libertarian across the finish line.</p>
+<p>Many people dislike the current electoral system and would prefer one where voters do not fear the downside of expressing their preferences sincerely. Recently activists have taken up the cause of <a href="https://en.wikipedia.org/wiki/Ranked_voting">ranked-choice voting</a>, where instead of voting for a single candidate, voters make a rank ordering of some or all of the candidates.</p>
+<p>Despite the best hopes of these activists, there is no voting system that is guaranteed to eliminate the incentives for strategic voting. I do not merely mean that such a system has not been found yet. It cannot exist, as proven by the <a href="https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem">Gibbard-Satterthwaite Theorem</a>. If we define a voting system as a rule that takes people’s reports of their preferences over candidates as inputs and produces a winner as an output, the following statement is a logical tautology:</p>
+<blockquote class="blockquote">
+<p>If a voting system allows for more than two candidates and is not “dictatorial” (i.e., there is not one voter whose top choice is guaranteed to be the winner), then there are circumstances where at least one voter can attain a better outcome for herself by misrepresenting her sincere preference.</p>
+</blockquote>
+<p>This statement is not obviously true at first glance. And yet it is a logical tautology that is provably true. We don’t have time to go through the proof here, but the result is famous enough that there are many different proofs available. For example, Andy Eggers has <a href="https://andy.egge.rs/papers/Eggers_GibbardSatterthwaite.pdf">a proof intended to be accessible to non-specialists</a>.</p>
+</div>
+</div>
+<p>For example, I was surprised to learn in graduate school that <a href="https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem">there is no non-dictatorial system for elections with more than two candidates that eliminates incentives for strategic voting</a>. But this statement is indeed a tautology in the formal-logic sense of the word. (If you don’t think the truth of this statement is nonobvious, just try arguing on the Internet with people who think ranked-choice voting will fix elections!)</p>
 <section id="constructing-compound-sentences" class="level3 page-columns page-full" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="constructing-compound-sentences"><span class="header-section-number">1.1.1</span> Constructing compound sentences</h3>
 <p>In this chapter, we will use the letters <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, and <span class="math inline">\(R\)</span> to denote sentences. Whenever you see one of these letters, just think: “a thing that can be exactly one of ‘true’ or ‘false’”. For example, <span class="math inline">\(P\)</span> might be the statement “The ‘Liberation Day’ tariffs caused the stock market to crash.”</p>
 <p>We will build compound sentences using three operators. The first is the <span class="concept">not</span> operator, denoted by <span class="math inline">\(\neg P\)</span>. The rules of the “not” operator are simple: <span class="math inline">\(\neg P\)</span> is true whenever <span class="math inline">\(P\)</span> is false, and <span class="math inline">\(\neg P\)</span> is false whenever <span class="math inline">\(P\)</span> is true.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Keeping the notation straight">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Keeping the notation straight
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you get lost, <a href="#tbl-logical-operators" class="quarto-xref">Table&nbsp;<span>1.1</span></a> below contains a summary of all the logical operators.</p>
+</div>
+</div>
 <p>The second basic operator is <span class="concept">and</span>, which connects two sentences, denoted <span class="math inline">\(P \land Q\)</span>. An “and” statement is true whenever both underlying statements are true, and false otherwise.</p>
 <p>The final basic operator is <span class="concept">or</span>, which again connects two sentences, denoted <span class="math inline">\(P \lor Q\)</span>. An “or” statement is true whenever <em>at least one</em> of the underlying statements is true. It is only false when both of the underlying statements are false. In other words, the logical “or” is an “inclusive or” (allowing for the possibility that both are true), not an “exclusive or”.</p>
 <p>Above we saw the compound sentence “The ‘Liberation Day’ tariffs caused the stock market to crash, or the ‘Liberation Day’ tariffs did not cause the stock market to crash.” If we take <span class="math inline">\(P\)</span> to be the sentence “The ‘Liberation Day’ tariffs caused the stock market to crash”, then the formal statement of our compound sentence is <span class="math inline">\(P \lor \neg P\)</span>. We want to show that the compound sentence <span class="math inline">\(P \lor \neg P\)</span> is a tautology; i.e., the compound sentence is true regardless of whether <span class="math inline">\(P\)</span> is true or false.</p>
@@ -401,7 +435,7 @@ Approaching exercises
 <div id="exr-not-p-and-not-p" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.1</strong></span> Use a truth table to show that <span class="math inline">\(\neg (P \land \neg P)\)</span> is a tautology.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -410,7 +444,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Start by setting up the table with each combination of possible values of the underlying sentences (in this case, just <span class="math inline">\(P\)</span>), then with each sequential step you need to build the final compound sentence.</p>
 <table class="caption-top table">
@@ -536,6 +570,20 @@ Answer
 </table>
 </div>
 </div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Parentheses, brackets, and so on">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Parentheses, brackets, and so on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As compound sentences become more complex, we use parentheses and brackets to keep things straight. For example, consider the compound sentence “<span class="math inline">\(P\)</span> is true, or <span class="math inline">\(P\)</span> is false and <span class="math inline">\(Q\)</span> is true.” We would write this as <span class="math inline">\(P \lor (\neg P \land Q)\)</span>. That lets us distinguish it from the otherwise similar sentence “<span class="math inline">\(P\)</span> is true or <span class="math inline">\(P\)</span> is false, and <span class="math inline">\(Q\)</span> is true,” written as <span class="math inline">\((P \lor \neg P) \land Q\)</span>.</p>
+<p>Square brackets have the same meaning as parentheses — I just try to alternate between parentheses and brackets to make it easier to keep everything straight. For example, I would write the negation of the sentence <span class="math inline">\((P \land Q) \lor (R \land S)\)</span> as <span class="math display">\[\neg [(P \land Q) \lor (R \land S)].\]</span></p>
 </div>
 </div>
 <p>The more simple sentences that your compound sentence is built from, the more rows the truth table will end up having. For example, let’s build a truth table for the compound sentence <span class="math inline">\(P \lor \neg (P \land Q)\)</span>. The truth table will now have four rows, one for each combination of true/false for <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>.</p>
@@ -674,7 +722,7 @@ Answer
 <div id="exr-two-sentence-table" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.2</strong></span> Use a truth table to show that <span class="math inline">\((P \lor Q) \lor (\neg P \land \neg Q)\)</span> is a tautology.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -683,7 +731,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Set up the rows:</p>
 <table class="caption-top table">
@@ -880,7 +928,7 @@ Answer
 <div id="exr-truth-table-in-r" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.3</strong></span> Using R, confirm that the compound sentence <span class="math display">\[[(P \lor Q) \lor (\neg R \lor \neg S)] \lor [(\neg P \land \neg Q) \land (R \land S)]\]</span> is a tautology.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -889,7 +937,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
@@ -925,13 +973,13 @@ Answer
 <div id="def-conditional" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.1</strong></span> The <span class="concept">conditional</span> statement “<span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>” or “if <span class="math inline">\(P\)</span>, then <span class="math inline">\(Q\)</span>”, written <span class="math inline">\(P \to Q\)</span>, is logically equivalent to <span class="math inline">\(\neg P \lor Q\)</span>.</p>
 </div>
-<p>When <span class="math inline">\(P\)</span> is known to be false, we say that the statement <span class="math inline">\(P \to Q\)</span> is <span class="concept">vacuously true</span>. Here are some vacuously true statements:</p>
+<p>Even though it is what the rules of logic dictate, it may feel strange to say that <span class="math inline">\(P \to Q\)</span> is true simply because <span class="math inline">\(P\)</span> is false. We have special terminology to capture this strangeness: when <span class="math inline">\(P\)</span> is known to be false, we say that the statement <span class="math inline">\(P \to Q\)</span> is <span class="concept">vacuously true</span>. Here are some vacuously true statements:</p>
 <ul>
 <li><p>If 0 = 1, then the moon is made of cheese.</p></li>
 <li><p>If 4 is a prime number, then an asteroid will hit Earth on February 30, 2026.</p></li>
 <li><p>If there is a finite game with no <a href="https://en.wikipedia.org/wiki/Nash_equilibrium">Nash equilibrium</a>, then Professor Brad Smith is handsome and intelligent.</p></li>
 </ul>
-<p>While it’s fun to think about vacuous truths, conditional statements are most useful to us when the premise is true. Think about a conditional statement <span class="math inline">\(P \to Q\)</span> that we know to be true. As an uncontroversial example, let <span class="math inline">\(P\)</span> be “today is Wednesday” and <span class="math inline">\(Q\)</span> be “tomorrow is Thursday”, so that <span class="math inline">\(P \to Q\)</span> means “if today is Wednesday, then tomorrow is Thursday.” Imagine then we also know that <span class="math inline">\(P\)</span> is true. As it happens, at the time I am writing this paragraph, it is indeed Wednesday. Given that <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>, and that <span class="math inline">\(P\)</span> is true, it seems logical for me to deduce that <span class="math inline">\(Q\)</span> is true as well. Indeed, this deduction is logical — the name for this type of inference is <span class="concept">modus ponens</span>.</p>
+<p>While it’s fun to enumerate vacuous truths, conditional statements are most useful to us when the premise is true. Think about a conditional statement <span class="math inline">\(P \to Q\)</span> that we know to be true. As an uncontroversial example, let <span class="math inline">\(P\)</span> be “today is Wednesday” and <span class="math inline">\(Q\)</span> be “tomorrow is Thursday”, so that <span class="math inline">\(P \to Q\)</span> means “if today is Wednesday, then tomorrow is Thursday.” Imagine then we also know that <span class="math inline">\(P\)</span> is true. As it happens, at the time I am writing this paragraph, it is indeed Wednesday. Given that <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>, and that <span class="math inline">\(P\)</span> is true, it seems logical for me to deduce that <span class="math inline">\(Q\)</span> is true as well. Indeed, this deduction is logical — the name for this type of inference is <span class="concept">modus ponens</span>.</p>
 <p>You don’t have to take the validity of modus ponens on faith. We can translate the rule into a compound sentence, and then we can prove that it is a tautology. In words, the rule is “If <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span> and <span class="math inline">\(P\)</span> is true, then <span class="math inline">\(Q\)</span> is true.” Equivalently, we could say “If <span class="math inline">\((P \to Q) \land P\)</span>, then <span class="math inline">\(Q\)</span>.” Finally, we come to the most compact (though not the easiest to parse!) statement in <a href="#thm-modus-ponens" class="quarto-xref">Theorem&nbsp;<span>1.1</span></a>.</p>
 <div id="thm-modus-ponens" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.1 (Modus ponens)</strong></span> <span class="math inline">\([(P \to Q) \land P] \to Q\)</span>.</p>
@@ -1021,7 +1069,7 @@ Names of mathematical results
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Try to prove this yourself using a truth table, following the same lines as the proof of <a href="#thm-modus-ponens" class="quarto-xref">Theorem&nbsp;<span>1.1</span></a> above. If you get stuck, check the answer below.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1030,7 +1078,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="caption-top table">
 <colgroup>
@@ -1123,7 +1171,7 @@ Iff
 <div id="exr-equivalence" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.4</strong></span> Use a truth table to confirm that the statement <span class="math inline">\((P \to Q) \land (Q \to P)\)</span> is true exactly when the truth values of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> match.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1132,7 +1180,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="caption-top table">
 <colgroup>
@@ -1190,7 +1238,7 @@ Answer
 <div id="exr-contrapositive" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.5</strong></span> Use a truth table to confirm that <span class="math inline">\(P \to Q\)</span> is logically equivalent to <span class="math inline">\(\neg Q \to \neg P\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1199,7 +1247,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="caption-top table">
 <colgroup>
@@ -1266,8 +1314,61 @@ Answer
 </div>
 </div>
 </section>
-<section id="de-morgans-laws" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="de-morgans-laws"><span class="header-section-number">1.1.3</span> De Morgan’s laws</h3>
+<section id="summary-of-logical-operators" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="summary-of-logical-operators"><span class="header-section-number">1.1.3</span> Summary of logical operators</h3>
+<div id="tbl-logical-operators" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-logical-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.1: Logical operators for working with sentences
+</figcaption>
+<div aria-describedby="tbl-logical-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Notation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Negation</td>
+<td><span class="math inline">\(\neg P\)</span></td>
+<td>True when <span class="math inline">\(P\)</span> is false<br>False when <span class="math inline">\(P\)</span> is true</td>
+</tr>
+<tr class="even">
+<td>Or</td>
+<td><span class="math inline">\(P \lor Q\)</span></td>
+<td>True when <span class="math inline">\(P\)</span> is true, <span class="math inline">\(Q\)</span> is true, or both are true<br>False when <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both false</td>
+</tr>
+<tr class="odd">
+<td>And</td>
+<td><span class="math inline">\(P \land Q\)</span></td>
+<td>True when <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both true<br>False when <span class="math inline">\(P\)</span> is false, <span class="math inline">\(Q\)</span> is false, or both are false</td>
+</tr>
+<tr class="even">
+<td>Implication</td>
+<td><span class="math inline">\(P \to Q\)</span></td>
+<td>Logically equivalent to <span class="math inline">\(\neg P \lor Q\)</span><br>True when <span class="math inline">\(P\)</span> is false, or when <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both true<br>False when <span class="math inline">\(P\)</span> is true and <span class="math inline">\(Q\)</span> is false</td>
+</tr>
+<tr class="odd">
+<td>Equivalence</td>
+<td><span class="math inline">\(P \leftrightarrow Q\)</span></td>
+<td>Logically equivalent to <span class="math inline">\((P \to Q) \land (Q \to P)\)</span><br>True when <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both true, or <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both false<br>False when <span class="math inline">\(P\)</span> is true yet <span class="math inline">\(Q\)</span> is false, or vice versa</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="de-morgans-laws" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="de-morgans-laws"><span class="header-section-number">1.1.4</span> De Morgan’s laws</h3>
 <p>We have to be careful when using negation in combination with the “and” and “or” operators. This is probably easier when we’re working in words than when we’re working with notation, but we need caution either way. For example, let <span class="math inline">\(F\)</span> be the statement “Finland is a democracy” and <span class="math inline">\(R\)</span> be the statement “Russia is a democracy”. There are three ways for the compound statement <span class="math inline">\(F \land R\)</span> to be false:</p>
 <ol type="1">
 <li><p><span class="math inline">\(F \land \neg R\)</span>: Finland is a democracy, but Russia is not.</p></li>
@@ -1357,7 +1458,7 @@ Answer
 </tbody>
 </table>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1366,7 +1467,7 @@ Proof of the second law
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="caption-top table">
 <colgroup>
@@ -1448,7 +1549,10 @@ Proof of the second law
 <p>“Grows exponentially” is a phrase with a precise meaning that people often use imprecisely. Here I mean it in the <a href="https://en.wikipedia.org/wiki/Exponential_growth">literal sense</a>, as a compound statement built from <span class="math inline">\(N\)</span> underlying sentences requires a truth table with <span class="math inline">\(2^N\)</span> rows. In words, each additional sentence doubles the number of rows in the truth table.</p>
 </div></div><p>A proof is written in ordinary language, just with a bit more attention to precision than you might use in other ordinary writing. The goal is to convince the reader of the truth of whatever claim you have made, following the basic rules of logical inference we have established here. In essence, you need to show the reader why any objection to your claim will ultimately fail.</p>
 <p>Use mathematical notation sparingly in proofs. Only use notation when it’s necessary for precision or brevity. In almost all settings, it is much better to write “Let <span class="math inline">\(n\)</span> be an odd number” than to write “Let <span class="math inline">\(n \in \{2m - 1 \mid m \in \mathbb{N}\}\)</span>.”</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>The notation here will be explained in full in <a href="set_theory.html" class="quarto-xref"><span>Chapter 2</span></a>. <span class="math inline">\(\mathbb{N}\)</span> is the set of natural numbers: 1, 2, 3, and so on infinitely. <span class="math inline">\(\{2m - 1 \mid m \in \mathbb{N}\}\)</span> is the set of numbers formed by taking each natural number <span class="math inline">\(m\)</span>, multiplying it by 2, and subtracting 1. This turns out to be the set of odd numbers (<span class="math inline">\(2 \cdot 1 - 1 = 1\)</span>, <span class="math inline">\(2 \cdot 2 - 1 = 3\)</span>, <span class="math inline">\(2 \cdot 3 - 1 = 5\)</span>, and so on infinitely). <span class="math inline">\(n \in \{2m - 1 \mid m \in \mathbb{N}\}\)</span> means that <span class="math inline">\(n\)</span> is an element of this set, i.e., <span class="math inline">\(n\)</span> is an odd number.</p>
+</div></div><div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1513,7 +1617,7 @@ Reading proofs
 <div id="exr-prove-modus-tollens" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.6</strong></span> Write a plain language proof of the modus tollens rule (<a href="#thm-modus-tollens" class="quarto-xref">Theorem&nbsp;<span>1.2</span></a>).</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1522,7 +1626,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Your proof will of course differ from mine, but here’s how I approached it.</p>
 <p>Suppose that <span class="math inline">\(P \to Q\)</span> is true and that <span class="math inline">\(Q\)</span> is false. We know from <a href="#exr-contrapositive" class="quarto-xref">Exercise&nbsp;<span>1.5</span></a> that <span class="math inline">\(P \to Q\)</span> is logically equivalent to the contrapositive <span class="math inline">\(\neg Q \to \neg P\)</span>. Then, because we know that <span class="math inline">\(\neg Q\)</span> and <span class="math inline">\(\neg Q \to \neg P\)</span> are both true, we infer by modus ponens that <span class="math inline">\(\neg P\)</span> is true. Consequently, we have proved that the conjunction of <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(\neg Q\)</span> implies <span class="math inline">\(\neg P\)</span>.</p>
@@ -1533,7 +1637,7 @@ Answer
 <div id="exr-perfect-square-even" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.7</strong></span> Assume <span class="math inline">\(a\)</span> is an integer. Write a plain language proof of the claim that if <span class="math inline">\(a^2\)</span> is even, then <span class="math inline">\(a\)</span> is even. (An integer <span class="math inline">\(a\)</span> is even if it is divisible by 2: there is some integer <span class="math inline">\(n\)</span> such that <span class="math inline">\(a = 2 \times n\)</span>.)</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1542,7 +1646,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>I will prove the contrapositive. Assume <span class="math inline">\(a\)</span> is not even, so it is not a factor of 2. Then <span class="math inline">\(a^2 = a \times a\)</span> also is not a factor of 2 and is not even. We have shown that if <span class="math inline">\(a\)</span> is not even, then <span class="math inline">\(a^2\)</span> is not even; this is equivalent to the claim that if <span class="math inline">\(a^2\)</span> is even, then <span class="math inline">\(a\)</span> is even.</p>
 </div>
@@ -1550,8 +1654,8 @@ Answer
 </div>
 </div>
 </section>
-<section id="proving-an-if-and-only-if-statement" class="level3 page-columns page-full" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="proving-an-if-and-only-if-statement"><span class="header-section-number">1.2.2</span> Proving an “if and only if” statement</h3>
+<section id="sec-prove-equivalence" class="level3 page-columns page-full" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="sec-prove-equivalence"><span class="header-section-number">1.2.2</span> Proving an “if and only if” statement</h3>
 <p>A claim of logical equivalence (<span class="math inline">\(P \leftrightarrow Q\)</span>) is a claim that two implications hold (<span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to P\)</span>). So the most straightforward way to prove that <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are equivalent is to prove each implication individually.</p>
 <p>As an example, let’s prove that the “and” operator is associative, meaning that <span class="math inline">\((P \land Q) \land R\)</span> is logically equivalent to <span class="math inline">\(P \land (Q \land R)\)</span>. The associative property is convenient because, at a minimum, it lets us kill the parentheses and write <span class="math inline">\(P \land Q \land R\)</span>.</p>
 
@@ -1565,7 +1669,7 @@ Answer
 <p>The proof that <span class="math inline">\(P \land (Q \land R)\)</span> implies <span class="math inline">\((P \land Q) \land R\)</span> is similar. Suppose that <span class="math inline">\(P \land (Q \land R)\)</span> is true. We infer that <span class="math inline">\(P\)</span> is true and that <span class="math inline">\(Q \land R\)</span> is true, and from the latter we infer that <span class="math inline">\(Q\)</span> and <span class="math inline">\(R\)</span> are each true. The truth of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> gives us <span class="math inline">\(P \land Q\)</span>, which combined with the truth of <span class="math inline">\(R\)</span> gives us <span class="math inline">\((P \land Q) \land R\)</span>.</p>
 </div>
 <p>Once again, notice the signposting in the way the proof is written. You want to clearly delineate when you’re proving one direction versus when you’re proving the other. This is particularly important for longer proofs, where a reader might get lost about exactly which logical step you’re working through at any given point. You’ll also notice that the second paragraph explicitly states that the method of proof is similar to the first paragraph. This lets readers know that there’s nothing new going on here, so they can skim or skip if they understood the prior logic (or to read with skepticism if they didn’t buy the prior logic!).</p>
-<p>Another common way to prove a claim like <span class="math inline">\(P \leftrightarrow Q\)</span> is to prove that <span class="math inline">\(P \to Q\)</span> and that <span class="math inline">\(\neg P \to \neg Q\)</span>. This is equivalent to the last method of proof, as we know that the contrapositive <span class="math inline">\(\neg P \to \neg Q\)</span> is equivalent to <span class="math inline">\(Q \to P\)</span>. Despite this equivalence in a formal logical sense, sometimes for purposes of writing the proof in plain English it’s easier to approach from this direction.</p>
+<p>Another common way to prove a claim like <span class="math inline">\(P \leftrightarrow Q\)</span> is to prove that <span class="math inline">\(P \to Q\)</span> and that <span class="math inline">\(\neg P \to \neg Q\)</span>. This is equivalent to the last method of proof, as we know that the contrapositive <span class="math inline">\(\neg P \to \neg Q\)</span> is equivalent to <span class="math inline">\(Q \to P\)</span> (see <a href="#exr-contrapositive" class="quarto-xref">Exercise&nbsp;<span>1.5</span></a>). Despite this equivalence in a formal logical sense, sometimes for purposes of writing the proof in plain English it’s easier to approach from this direction.</p>
 <p>There’s one more way to prove a logical equivalence that’s more concise — but trickier — than the two methods I mentioned above. This third way is what I’ll call the <span class="concept">chain of equivalences</span>: to prove that <span class="math inline">\(P \leftrightarrow Q\)</span>, prove that there is some third statement <span class="math inline">\(R\)</span> for which <span class="math inline">\(P \leftrightarrow R\)</span> and <span class="math inline">\(R \leftrightarrow Q\)</span>. Or add more steps in between if you need: prove that <span class="math inline">\(P \leftrightarrow R\)</span>, that <span class="math inline">\(R \leftrightarrow S\)</span>, that <span class="math inline">\(S \leftrightarrow T\)</span>, and finally that <span class="math inline">\(T \leftrightarrow Q\)</span>. The important thing to keep in mind is that every step along the way must be a full equivalence (“if and only if”), not a mere conditional (just “if” or just “only if”). Usually I end up taking the long way to prove logical equivalences, but it’s a nice treat when I can find a single chain of equivalence that works. For an example of a proof that works this way, see <a href="#sec-proof-by-induction" class="quarto-xref"><span>Section 1.2.4</span></a> below.</p>
 </section>
 <section id="sec-proof-by-contradiction" class="level3" data-number="1.2.3">
@@ -1634,11 +1738,12 @@ Answer
 </section>
 <section id="sec-proof-by-induction" class="level3" data-number="1.2.4">
 <h3 data-number="1.2.4" class="anchored" data-anchor-id="sec-proof-by-induction"><span class="header-section-number">1.2.4</span> Proof by induction</h3>
-<p>Earlier we saw De Morgan’s laws (<a href="#thm-demorgan-logic" class="quarto-xref">Theorem&nbsp;<span>1.3</span></a>), which tell us that the negation of an “and” statement is an “or” statement, and vice versa. Intuitively, it seems like it should be true that for any number <span class="math inline">\(n\)</span> of statements, <span class="math inline">\(P_1, \ldots, P_n\)</span>, the negation <span class="math inline">\(\neg (P_1 \land \cdots \land P_n)\)</span> is logically equivalent to <span class="math inline">\(\neg P_1 \lor \cdots \lor \neg P_n\)</span>. De Morgan’s laws tell us that this holds in the special case <span class="math inline">\(n = 2\)</span>. But how can we show that it holds for a conjunction of <span class="math inline">\(n = 3\)</span>, or <span class="math inline">\(n = 100\)</span>, or <span class="math inline">\(n = 10^{10^{10}}\)</span> statements as well?</p>
+<p>Earlier we saw De Morgan’s laws (<a href="#thm-demorgan-logic" class="quarto-xref">Theorem&nbsp;<span>1.3</span></a>), which tell us that <span class="math inline">\(\neg (P_1 \land P_2)\)</span> is logically equivalent to <span class="math inline">\(\neg P_1 \lor \neg P_2\)</span>. Can we extend this law to more than two statements?</p>
+<p>We could use a truth table to show that <span class="math inline">\(\neg (P_1 \land P_2 \land P_3)\)</span> is logically equivalent to <span class="math inline">\(\neg P_1 \lor \neg P_2 \lor \neg P_3\)</span>. And if we were patient enough to go through 16 rows, we could do the same thing for four statements. After confirming that the statement is true for two, three, or four statements, it might seem safe to treat it as if it were true for any number of statements: namely, that <span class="math display">\[\neg [P_1 \land P_2 \land \cdots P_N]\]</span> is logically equivalent to <span class="math display">\[\neg P_1 \lor \neg P_2 \lor \cdots \neg P_N,\]</span> no matter how big <span class="math inline">\(N\)</span> is. Is there a way to prove this without dealing with unmanageably huge truth tables, or do we have to settle for being pretty sure?</p>
 <p>To prove that De Morgan’s laws extend to a conjunction of any (finite) number of statements, we will write a <span class="concept">proof by induction</span>. This is a proof technique designed for the following situation:</p>
 <ol type="1">
 <li><p>We are dealing with a claim whose precise statement depends on a number <span class="math inline">\(n\)</span>. As shorthand to denote “a claim <span class="math inline">\(Q\)</span> whose precise form depends on a number <span class="math inline">\(n\)</span>”, we will write <span class="math inline">\(Q(n)\)</span>.</p>
-<p>In the De Morgan’s law example here, the claim <span class="math inline">\(Q(1)\)</span> is the trivial statement that <span class="math inline">\(\neg P_1 \leftrightarrow \neg P_1\)</span>. <span class="math inline">\(Q(2)\)</span> is the De Morgan’s law we already proved, <span class="math inline">\(\neg (P_1 \land P_2) \leftrightarrow (\neg P_1 \lor \neg P_2)\)</span>. <span class="math inline">\(Q(3)\)</span> is <span class="math inline">\(\neg (P_1 \land P_2 \land P_3) \leftrightarrow (\neg P_1 \lor \neg P_2 \lor \neg P_3)\)</span>. And so on.</p></li>
+<p>In the De Morgan’s law example here, the claim <span class="math inline">\(Q(1)\)</span> is the trivial statement that <span class="math display">\[\neg P_1 \leftrightarrow \neg P_1.\]</span> <span class="math inline">\(Q(2)\)</span> is the De Morgan’s law we already proved, <span class="math display">\[\neg (P_1 \land P_2) \leftrightarrow (\neg P_1 \lor \neg P_2).\]</span> <span class="math inline">\(Q(3)\)</span> is <span class="math display">\[\neg (P_1 \land P_2 \land P_3) \leftrightarrow (\neg P_1 \lor \neg P_2 \lor \neg P_3).\]</span> And so on.</p></li>
 <li><p>We want to show that <span class="math inline">\(Q(n)\)</span> is true for all numbers <span class="math inline">\(n = 1, 2, 3, \ldots\)</span>, and so on infinitely.</p>
 <p>In the De Morgan’s law example, we could definitely use a truth table to prove the statement for a reasonably small <span class="math inline">\(n\)</span>, like 3 or 4. But even once we get to <span class="math inline">\(n = 10\)</span>, we’re talking about a truth table with 1,024 rows. That seems like overkill to prove a claim that intuitively seems like it ought to be true.</p></li>
 </ol>
@@ -1652,7 +1757,7 @@ Answer
 <div id="exr-induction" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.8</strong></span> Use a proof by induction to prove that <span class="math inline">\(2^n \geq n + 1\)</span> for every counting number <span class="math inline">\(n = 1, 2, \ldots\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1661,7 +1766,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For the base step, we must show that <span class="math inline">\(2^1 \geq 1 + 1\)</span>. This holds because <span class="math inline">\(2^1 = 2 = 1 + 1\)</span>.</p>
 <p>For the induction step, we must show that if <span class="math inline">\(2^k \geq k + 1\)</span>, then <span class="math inline">\(2^{k+1} \geq (k + 1) + 1\)</span>. Suppose <span class="math inline">\(2^k \geq k + 1\)</span>. By definition, <span class="math inline">\(2^{k+1} = 2 \times 2^k\)</span>. We have assumed that <span class="math inline">\(2^k \geq k + 1\)</span>, which implies that <span class="math inline">\(2 \times 2^k \geq 2 \times (k + 1)\)</span>. Because <span class="math inline">\(k \geq 0\)</span>, we have <span class="math inline">\(2 \times (k + 1) \geq (k + 1) + 1\)</span>. Putting this all together, we have <span class="math display">\[2^{k+1} = 2 \times 2^k \geq 2 \times (k + 1) \geq (k + 1) + 1,\]</span> proving the induction step.</p>

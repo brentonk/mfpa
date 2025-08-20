@@ -78,6 +78,27 @@ In one sense, our goal with formal logic will be to take compound sentences and 
 You might think that the sentences that must be true --- the tautologies --- are inherently uninteresting.
 Certainly no one is going to be surprised that either the tariffs caused the stock market to crash or they didn't.
 And yet there are indeed statements that are tautological yet nonobvious on first glance.
+
+::: {.callout-note title="A nonobvious tautology: The Gibbard-Satterthwaite Theorem"}
+Strategic voting is the phenomenon where people vote for candidates who are not their personal favorite because they think their favorite does not have a realistic shot of winning.
+For example, in the American politics context, libertarian voters often vote for the Republican even in races where there is a Libertarian Party candidate, as they think their vote might help the Republican beat the Democrat, but would have no realistic chance of getting the Libertarian across the finish line.
+
+Many people dislike the current electoral system and would prefer one where voters do not fear the downside of expressing their preferences sincerely.
+Recently activists have taken up the cause of [ranked-choice voting](https://en.wikipedia.org/wiki/Ranked_voting), where instead of voting for a single candidate, voters make a rank ordering of some or all of the candidates.
+
+Despite the best hopes of these activists, there is no voting system that is guaranteed to eliminate the incentives for strategic voting.
+I do not merely mean that such a system has not been found yet.
+It cannot exist, as proven by the [Gibbard-Satterthwaite Theorem](https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem).
+If we define a voting system as a rule that takes people's reports of their preferences over candidates as inputs and produces a winner as an output, the following statement is a logical tautology:
+
+> If a voting system allows for more than two candidates and is not "dictatorial" (i.e., there is not one voter whose top choice is guaranteed to be the winner), then there are circumstances where at least one voter can attain a better outcome for herself by misrepresenting her sincere preference.
+
+This statement is not obviously true at first glance.
+And yet it is a logical tautology that is provably true.
+We don't have time to go through the proof here, but the result is famous enough that there are many different proofs available.
+For example, Andy Eggers has [a proof intended to be accessible to non-specialists](https://andy.egge.rs/papers/Eggers_GibbardSatterthwaite.pdf).
+:::
+
 For example, I was surprised to learn in graduate school that [there is no non-dictatorial system for elections with more than two candidates that eliminates incentives for strategic voting](https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem).
 But this statement is indeed a tautology in the formal-logic sense of the word.
 (If you don't think the truth of this statement is nonobvious, just try arguing on the Internet with people who think ranked-choice voting will fix elections!)
@@ -91,6 +112,10 @@ For example, $P$ might be the statement "The 'Liberation Day' tariffs caused the
 We will build compound sentences using three operators.
 The first is the [not]{.concept} operator, denoted by $\neg P$.
 The rules of the "not" operator are simple: $\neg P$ is true whenever $P$ is false, and $\neg P$ is false whenever $P$ is true.
+
+::: {.callout-tip title="Keeping the notation straight"}
+If you get lost, @tbl-logical-operators below contains a summary of all the logical operators.
+:::
 
 The second basic operator is [and]{.concept}, which connects two sentences, denoted $P \land Q$.
 An "and" statement is true whenever both underlying statements are true, and false otherwise.
@@ -178,6 +203,16 @@ Then fill each column across, using the information from the left.
 | [false]{.ff} | [true]{.tt}  | [false]{.ff}     | [true]{.tt}             |
 
 ::::
+:::
+
+::: {.callout-tip title="Parentheses, brackets, and so on"}
+As compound sentences become more complex, we use parentheses and brackets to keep things straight.
+For example, consider the compound sentence "$P$ is true, or $P$ is false and $Q$ is true."
+We would write this as $P \lor (\neg P \land Q)$.
+That lets us distinguish it from the otherwise similar sentence "$P$ is true or $P$ is false, and $Q$ is true," written as $(P \lor \neg P) \land Q$.
+
+Square brackets have the same meaning as parentheses --- I just try to alternate between parentheses and brackets to make it easier to keep everything straight.
+For example, I would write the negation of the sentence $(P \land Q) \lor (R \land S)$ as $$\neg [(P \land Q) \lor (R \land S)].$$
 :::
 
 The more simple sentences that your compound sentence is built from, the more rows the truth table will end up having.
@@ -321,7 +356,8 @@ If $P$ is false, then the statement is true regardless of the truth of $Q$.
 The [conditional]{.concept} statement "$P$ implies $Q$" or "if $P$, then $Q$", written $P \to Q$, is logically equivalent to $\neg P \lor Q$.
 :::
 
-When $P$ is known to be false, we say that the statement $P \to Q$ is [vacuously true]{.concept}.
+Even though it is what the rules of logic dictate, it may feel strange to say that $P \to Q$ is true simply because $P$ is false.
+We have special terminology to capture this strangeness: when $P$ is known to be false, we say that the statement $P \to Q$ is [vacuously true]{.concept}.
 Here are some vacuously true statements:
 
 - If 0 = 1, then the moon is made of cheese.
@@ -330,7 +366,7 @@ Here are some vacuously true statements:
 
 - If there is a finite game with no [Nash equilibrium](https://en.wikipedia.org/wiki/Nash_equilibrium), then Professor Brad Smith is handsome and intelligent.
 
-While it's fun to think about vacuous truths, conditional statements are most useful to us when the premise is true.
+While it's fun to enumerate vacuous truths, conditional statements are most useful to us when the premise is true.
 Think about a conditional statement $P \to Q$ that we know to be true.
 As an uncontroversial example, let $P$ be "today is Wednesday" and $Q$ be "tomorrow is Thursday", so that $P \to Q$ means "if today is Wednesday, then tomorrow is Thursday."
 Imagine then we also know that $P$ is true.
@@ -490,6 +526,18 @@ Use a truth table to confirm that $P \to Q$ is logically equivalent to $\neg Q \
 ::::
 :::
 
+### Summary of logical operators
+
+| Name        | Notation              | Meaning                                                                                                                                                                              |
+|-------------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Negation    | $\neg P$              | True when $P$ is false<br>False when $P$ is true                                                                                                                                     |
+| Or          | $P \lor Q$            | True when $P$ is true, $Q$ is true, or both are true<br>False when $P$ and $Q$ are both false                                                                                        |
+| And         | $P \land Q$           | True when $P$ and $Q$ are both true<br>False when $P$ is false, $Q$ is false, or both are false                                                                                      |
+| Implication | $P \to Q$             | Logically equivalent to $\neg P \lor Q$<br>True when $P$ is false, or when $P$ and $Q$ are both true<br>False when $P$ is true and $Q$ is false                                     |
+| Equivalence | $P \leftrightarrow Q$ | Logically equivalent to $(P \to Q) \land (Q \to P)$<br>True when $P$ and $Q$ are both true, or $P$ and $Q$ are both false<br>False when $P$ is true yet $Q$ is false, or vice versa |
+
+: Logical operators for working with sentences {#tbl-logical-operators}
+
 ### De Morgan's laws
 
 We have to be careful when using negation in combination with the "and" and "or" operators.
@@ -572,6 +620,14 @@ In essence, you need to show the reader why any objection to your claim will ult
 Use mathematical notation sparingly in proofs.
 Only use notation when it's necessary for precision or brevity.
 In almost all settings, it is much better to write "Let $n$ be an odd number" than to write "Let $n \in \{2m - 1 \mid m \in \mathbb{N}\}$."
+
+::: {.aside}
+The notation here will be explained in full in @sec-set-theory.
+$\mathbb{N}$ is the set of natural numbers: 1, 2, 3, and so on infinitely.
+$\{2m - 1 \mid m \in \mathbb{N}\}$ is the set of numbers formed by taking each natural number $m$, multiplying it by 2, and subtracting 1.
+This turns out to be the set of odd numbers ($2 \cdot 1 - 1 = 1$, $2 \cdot 2 - 1 = 3$, $2 \cdot 3 - 1 = 5$, and so on infinitely).
+$n \in \{2m - 1 \mid m \in \mathbb{N}\}$ means that $n$ is an element of this set, i.e., $n$ is an odd number.
+:::
 
 :::: {.callout-tip}
 ## Reading proofs
@@ -716,7 +772,7 @@ We have shown that if $a$ is not even, then $a^2$ is not even; this is equivalen
 ::::
 :::
 
-### Proving an "if and only if" statement
+### Proving an "if and only if" statement {#sec-prove-equivalence}
 
 A claim of logical equivalence ($P \leftrightarrow Q$) is a claim that two implications hold ($P \to Q$ and $Q \to P$).
 So the most straightforward way to prove that $P$ and $Q$ are equivalent is to prove each implication individually.
@@ -755,7 +811,7 @@ You'll also notice that the second paragraph explicitly states that the method o
 This lets readers know that there's nothing new going on here, so they can skim or skip if they understood the prior logic (or to read with skepticism if they didn't buy the prior logic!).
 
 Another common way to prove a claim like $P \leftrightarrow Q$ is to prove that $P \to Q$ and that $\neg P \to \neg Q$.
-This is equivalent to the last method of proof, as we know that the contrapositive $\neg P \to \neg Q$ is equivalent to $Q \to P$.
+This is equivalent to the last method of proof, as we know that the contrapositive $\neg P \to \neg Q$ is equivalent to $Q \to P$ (see @exr-contrapositive).
 Despite this equivalence in a formal logical sense, sometimes for purposes of writing the proof in plain English it's easier to approach from this direction.
 
 There's one more way to prove a logical equivalence that's more concise --- but trickier --- than the two methods I mentioned above.
@@ -850,10 +906,13 @@ Therefore, $\neg P \to F$ implies that $P$ is true.
 
 ### Proof by induction {#sec-proof-by-induction}
 
-Earlier we saw De Morgan's laws (@thm-demorgan-logic), which tell us that the negation of an "and" statement is an "or" statement, and vice versa.
-Intuitively, it seems like it should be true that for any number $n$ of statements, $P_1, \ldots, P_n$, the negation $\neg (P_1 \land \cdots \land P_n)$ is logically equivalent to $\neg P_1 \lor \cdots \lor \neg P_n$.
-De Morgan's laws tell us that this holds in the special case $n = 2$.
-But how can we show that it holds for a conjunction of $n = 3$, or $n = 100$, or $n = 10^{10^{10}}$ statements as well?
+Earlier we saw De Morgan's laws (@thm-demorgan-logic), which tell us that $\neg (P_1 \land P_2)$ is logically equivalent to $\neg P_1 \lor \neg P_2$.
+Can we extend this law to more than two statements?
+
+We could use a truth table to show that $\neg (P_1 \land P_2 \land P_3)$ is logically equivalent to $\neg P_1 \lor \neg P_2 \lor \neg P_3$.
+And if we were patient enough to go through 16 rows, we could do the same thing for four statements.
+After confirming that the statement is true for two, three, or four statements, it might seem safe to treat it as if it were true for any number of statements: namely, that $$\neg [P_1 \land P_2 \land \cdots P_N]$$ is logically equivalent to $$\neg P_1 \lor \neg P_2 \lor \cdots \neg P_N,$$ no matter how big $N$ is.
+Is there a way to prove this without dealing with unmanageably huge truth tables, or do we have to settle for being pretty sure?
 
 To prove that De Morgan's laws extend to a conjunction of any (finite) number of statements, we will write a [proof by induction]{.concept}.
 This is a proof technique designed for the following situation:
@@ -861,9 +920,9 @@ This is a proof technique designed for the following situation:
 1. We are dealing with a claim whose precise statement depends on a number $n$.
    As shorthand to denote "a claim $Q$ whose precise form depends on a number $n$", we will write $Q(n)$.
 
-   In the De Morgan's law example here, the claim $Q(1)$ is the trivial statement that $\neg P_1 \leftrightarrow \neg P_1$.
-   $Q(2)$ is the De Morgan's law we already proved, $\neg (P_1 \land P_2) \leftrightarrow (\neg P_1 \lor \neg P_2)$.
-   $Q(3)$ is $\neg (P_1 \land P_2 \land P_3) \leftrightarrow (\neg P_1 \lor \neg P_2 \lor \neg P_3)$.
+   In the De Morgan's law example here, the claim $Q(1)$ is the trivial statement that $$\neg P_1 \leftrightarrow \neg P_1.$$
+   $Q(2)$ is the De Morgan's law we already proved, $$\neg (P_1 \land P_2) \leftrightarrow (\neg P_1 \lor \neg P_2).$$
+   $Q(3)$ is $$\neg (P_1 \land P_2 \land P_3) \leftrightarrow (\neg P_1 \lor \neg P_2 \lor \neg P_3).$$
    And so on.
 
 2. We want to show that $Q(n)$ is true for all numbers $n = 1, 2, 3, \ldots$, and so on infinitely.
