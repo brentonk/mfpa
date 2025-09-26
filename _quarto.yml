@@ -10,6 +10,7 @@ book:
     - logic.qmd
     - set_theory.qmd
     - sequences_series.qmd
+    - derivatives.qmd
     - references.qmd
   license: "CC BY-NC-SA 4.0"
   sidebar:
