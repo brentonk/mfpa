@@ -6,3 +6,5 @@ tikz*.log
 *.code-workspace
 __pycache__
 indent.log
+
+**/*.quarto_ipynb

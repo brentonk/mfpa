@@ -12,6 +12,7 @@ library("dataverse")
 library("gganimate")
 library("ggrepel")
 library("gifski")
+library("patchwork")
 theme_set(theme_cowplot())
 ```
 
@@ -31,7 +32,7 @@ df_pres_county <- get_dataframe_by_name(
 concepts = {}
 ```
 
-## Motivation: A statistical guessing game
+## Motivation: A statistical guessing game {#sec-statistical-lottery}
 
 ```{r} 
 #| message: false
@@ -709,7 +710,7 @@ Consequently, $\lim_{h \to 0} f(c + h) = y$.
 ::::
 :::
 
-### Continuity
+### Continuity {#sec-continuity}
 
 You might notice a pattern in @fig-function-limit-ex and @fig-step-function.
 At the points in the domain where the value of the function is not equal to its left- or right-hand limit, the graph of the function appears to "jump."
@@ -1045,7 +1046,7 @@ concepts.update({
 })
 ```
 
-::: {.callout-tip title="Alternative notation for derivatives"}
+::: {#tip-fractional-notation-deriv .callout-tip title="Alternative notation for derivatives"}
 You will sometimes see the derivative written in the fractional form, $$\frac{d f(x)}{d x}.$$
 I don't love this notation because it makes it hard to denote "the derivative of $f$ at the specific point $x = c$."
 You're stuck with either the ambiguous-seeming $$\frac{d f(c)}{d x},$$ or with the clunky-seeming $$\left. \frac{d f(x)}{d x} \right|_{x = c}.$$
@@ -1305,27 +1306,829 @@ Because the derivative of any linear function is its slope, we have $f'(x) = 0.$
 ::::
 :::
 
-<!--
+### Properties of derivatives {#sec-properties-of-derivatives}
 
-### Properties of derivatives
+Using a few rules in combination with the derivatives of common functions from above, we can calculate the derivatives of most functions we run into in practice without explicitly taking limits of the rise-over-run ratio.
 
-::: {#exr-deriv-polynomial}
-[use properties to prove derivative of polynomial]{.todo}
+If we take a function and multiply it by a constant, the derivative of the resulting function is the same multiple of the original derivative.
+This is the [constant multiple rule]{.concept}.
+
+```{python}
+concepts.update({
+  "Constant multiple rule": "If $g(x) = c f(x),$ where $c$ is a constant real number, then $g'(x) = c f'(x).$",
+})
+```
+
+::: {#prp-deriv-constant-multiple name="Constant multiple rule"}
+Let $f : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}.$
+Define the function $g : X \to \mathbb{R}$ by $g(x) = c f(x),$ where $c$ is a constant real number.
+For all $x \in X,$ $$g'(x) = c f'(x).$$
 :::
 
-::: {#exr-deriv-logarithm-exponent}
-[use properties to prove derivative of non-natural logarithm and exponent]{.todo}
+::: {.proof}
+For any $x \in X,$ we have
+$$
+\begin{aligned}
+\lim_{h \to 0} \frac{g(x + h) - g(x)}{h}
+&= \lim_{h \to 0} \frac{c f(x + h) - c f(x)}{h} \\
+&= c \lim_{h \to 0} \frac{f (x + h) - f(x)}{h} \\
+&= c f'(x).
+\end{aligned}
+$$
 :::
 
-### Second derivatives and beyond
+For example, we can use the constant multiple rule to find the derivative of [any]{.underline} logarithmic function, not just the natural logarithm.
+Let $f(x) = \log_b(x),$ where $b > 0$ and $b \neq 1.$
+Using the base change formula from @prp-logarithm-base-change, we know that $$f(x) = \log_b(x) = \frac{\log(x)}{\log(b)} = \frac{1}{\log(b)} \cdot \log(x).$$
+In other words, the logarithm with base $b$ is just a constant multiple of the natural logarithm.
+Using this fact, we can find the derivative: $$f'(x) = \frac{1}{\log(b)} \cdot \frac{d \log(x)}{d x} = \frac{1}{\log(b)} \cdot \frac{1}{x} = \frac{1}{x \log(b)}.$$
 
-## Applications of derivatives
+Another convenient property is that the derivative of the sum is equal to the sum of the derivatives.
+You'll end up using the [sum rule]{.concept} so often that you stop thinking about it.
 
-### Optimization
+::: {#prp-deriv-sum name="Sum rule"}
+Let $f : X \to \mathbb{R}$ and $g : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}.$
+Define the function $h : X \to \mathbb{R}$ by $h(x) = f(x) + g(x).$
+For all $x \in X,$ $$h'(x) = f'(x) + g'(x).$$
+:::
 
-### L'Hopital's rule
+::: {.proof}
+For any $x \in X,$ we have
+$$
+\begin{aligned}
+\lim_{t \to 0} \frac{h(x + t) - h(x)}{t}
+&= \lim_{t \to 0} \frac{[f(x + t) + g(x + t)] - [f(x) + g(x)]}{t} \\
+&= \lim_{t \to 0} \left[\frac{f(x + t) - f(x)}{t} + \frac{g(x + t) - g(x)}{t}\right] \\
+&= \lim_{t \to 0} \frac{f(x + t) - f(x)}{t} + \lim_{t \to 0} \frac{g(x + t) - g(x)}{t} \\
+&= f'(x) + g'(x).
+\end{aligned}
+$$
+:::
 
--->
+```{python}
+concepts.update({
+  "Sum rule": "If $h(x) = f(x) + g(x),$ then $h'(x) = f'(x) + g'(x).$",
+})
+```
+
+Here are a few exercises to illustrate the usefulness of the constant multiple rule and the sum rule.
+
+::: {#exr-deriv-linear-combination name="Derivative of a linear combination of functions"}
+Let $f : X \to \mathbb{R}$ and $g : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}.$
+Let $\alpha \in \mathbb{R}$ and $\beta \in \mathbb{R}$ be constants.
+Define the function $h : X \to \mathbb{R}$ by $h(x) = \alpha f(x) + \beta g(x).$
+Use the constant rule and the sum rule to show that $$h'(x) = \alpha f'(x) + \beta g'(x).$$
+
+:::: {.callout-note title="Answer" collapse="true"}
+This is one of those cases where it's convenient to use the fractional notation for a derivative (see @tip-fractional-notation-deriv).
+We have
+$$
+\begin{aligned}
+\frac{d h(x)}{d x}
+&= \frac{d}{dx} \left[\alpha f(x) + \beta g(x)\right] \\
+&= \frac{d}{dx} \left[\alpha f(x)\right] + \frac{d}{dx} \left[\beta g(x)\right] \\
+&= \alpha \frac{d f(x)}{d x} + \beta \frac{d g(x)}{d x},
+\end{aligned}
+$$
+where the first equality uses our definition of $h(x),$ the second uses the sum rule, and the third uses the constant multiple rule twice.
+::::
+:::
+
+::: {#exr-deriv-finite-sum name="Derivative of a finite sum of functions"}
+Let $N$ be a natural number.
+For each natural number $n \leq N,$ let $f_n : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}.$
+Define the function $g : X \to \mathbb{R}$ by $$g(x) = \sum_{n=1}^N f_n(x).$$
+Use the sum rule in a proof by induction (see @sec-proof-by-induction) to prove that $$g'(x) = \sum_{n=1}^N f_n'(x).$$
+
+:::: {.callout-note title="Answer" collapse="true"}
+Our goal is to prove the claim for all natural numbers $N.$
+For the base step, we must show that it is true for $N = 1.$
+The claim is trivial in this case, as we have $g(x) = f_1(x)$ and therefore $$g'(x) = f_1'(x) = \sum_{n=1}^1 f_n'(x).$$
+
+For the induction step, we assume that the claim is true for $N = k,$ so that $$\frac{d}{dx} \left[\sum_{n=1}^k f_n(x)\right] = \sum_{n=1}^k f_n'(x),$$ then show that the claim must be true for $N = k + 1$ as well.
+Define $$g(x) = \sum_{n=1}^{k+1} f_n(x).$$
+By definition, we have $$g(x) = f_{k+1}(x) + \sum_{n=1}^k f_n(x).$$
+Using the sum rule, we have $$g'(x) = f_{k+1}'(x) + \frac{d}{dx} \left[\sum_{n=1}^k f_n(x)\right].$$
+Using our assumption that the claim is true for $N = k,$ we then have
+$$
+\begin{aligned}
+g'(x) = f_{k+1}'(x) + \sum_{n=1}^k f_n'(x) = \sum_{n=1}^{k+1} f_n'(x),
+\end{aligned}
+$$
+which concludes the induction step by establishing that the claim is true for $N = k + 1$ as well.
+::::
+:::
+
+::: {#exr-deriv-polynomial name="Derivative of a polynomial"}
+Let $f : X \to \mathbb{R}$ be a polynomial, so that
+$$
+\begin{aligned}
+f(x) = c_0 + c_1 x + \cdots + c_k x^k = \sum_{n=0}^k c_n x^n
+\end{aligned}
+$$
+for some natural number $k$ and real-valued coefficients $c_0, \ldots, c_k.$
+Use the constant multiple rule, the derivative of a power function, and the result of @exr-deriv-finite-sum to prove that $$f'(x) = c_1 + 2 c_2 x + \cdots + k c_k x^{k=1} = \sum_{n=0}^k n c_n x^{n-1}.$$
+
+:::: {.callout-note title="Answer" collapse="true"}
+Using @exr-deriv-finite-sum, we have
+$$
+\begin{aligned}
+f'(x) = \sum_{n=0}^k \frac{d}{dx} \left[c_n x^{n}\right].
+\end{aligned}
+$$
+Using the constant multiple rule, we then have
+$$
+\begin{aligned}
+f'(x) = \sum_{n=0}^k c_n \frac{d}{dx} \left[x^{n}\right].
+\end{aligned}
+$$
+Finally, using the derivative of a power function, we have
+$$
+\begin{aligned}
+f'(x) = \sum_{n=0}^k c_n \left[n x^{n-1}\right],
+\end{aligned}
+$$
+proving the claim.
+::::
+:::
+
+Unfortunately for us, derivatives of products don't work quite as intuitively as derivatives of sums.
+In general, it is [not true]{.underline} that the derivative of $f(x) g(x)$ equals $f'(x) g'(x).$
+As an illustration, think about the quadratic function $h(x) = x^2 = x \cdot x,$ which decreases up to $x = 0$ and then increases thereafter.
+If it were true that the derivative of the product equals the product of the derivatives, then we would have $h(x) = 1 \cdot 1 = 1$ (because $h(x) = x \cdot x$ and the derivative of the identity function is 1), falsely implying that the quadratic function is actually linear.
+
+All that said, we still have a convenient formula to calculate the derivative of a product --- it's just not as convenient as the derivative of a sum.
+The [product rule]{.concept} to take the derivative of $f(x) g(x)$ essentially breaks the problem into two parts.
+First we treat $f(x)$ as if it were a constant and take the derivative of $g(x),$ then we do the reverse, and finally we add the two results together.
+
+::: {#prp-product-rule name="Product rule"}
+Let $f : X \to \mathbb{R}$ and $g : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}.$
+Define the function $h : X \to \mathbb{R}$ by $h(x) = f(x) \cdot g(x).$
+For all $x \in X,$
+$$
+\begin{aligned}
+h'(x) = f(x) g'(x) + f'(x) g(x).
+\end{aligned}
+$$
+:::
+
+::: {.proof}
+Take any $x \in X.$
+Differentiability of $f$ implies continuity of $f$ (per @thm-differentiable-implies-continuous) and thus $\lim_{t \to 0} f(x + t) = f(x).$
+Consequently,
+$$
+\begin{aligned}
+\MoveEqLeft
+\lim_{t \to 0} \frac{h(x + t) - h(x)}{t} \\
+&= \lim_{t \to 0} \frac{f(x + t) g(x + t) - f(x) g(x)}{t} \\
+&= \lim_{t \to 0} \frac{f(x + t) g(x + t) - f(x + t) g(x) + f(x + t) g(x) - f(x) g(x)}{t} \\
+&= \lim_{t \to 0} \frac{f(x + t) [g(x + t) - g(x)]}{t} + \lim_{t \to 0} \frac{[f(x + t) - f(x)] g(x)}{t} \\
+&= \left[\lim_{t \to 0} f(x + t)\right] \cdot \left[\lim_{t \to 0} \frac{g(x + t) - g(x)}{t}\right] + \left[\lim_{t \to 0} \frac{f(x + t) - f(x)}{t}\right] \cdot g(x) \\
+&= f(x) g'(x) + f'(x) g(x),
+\end{aligned}
+$$
+as claimed.
+:::
+
+```{python}
+concepts.update({
+  "Product rule": "If $h(x) = f(x) g(x),$ then $h'(x) = f(x) g'(x) + f'(x) g(x).$",
+})
+```
+
+Going back to our example of the quadratic function $h(x) = x^2,$ proper use of the product rule confirms that $h'(x) = 2x.$
+Let $f(x) = g(x) = x,$ so that $f'(x) = g'(x) = 1$ and $h(x) = f(x) \cdot g(x).$
+The product rule then gives us
+$$
+\begin{aligned}
+h'(x) &= f(x) g'(x) + f'(x) g(x) \\
+&= x \cdot 1 + 1 \cdot x \\
+&= 2x.
+\end{aligned}
+$$
+
+Now let's get some more practice with the product rule through some exercises.
+
+::: {#exr-product-rule-applications name="Product rule applications"}
+Find the derivatives of the following functions.
+
+1. $f(x) = (2x + 1) (x - 3).$
+
+2. $f(x) = x e^x.$
+
+3. $f(x) = e^{2x}.$
+
+4. $f(x) = e^x \cdot \log(x) \cdot x^3.$
+
+:::: {.callout-note title="Answers" collapse="true"}
+1. You could solve this one by observing that $f(x) = 2x^2 - 5x - 3,$ then applying the formula for the derivative of a polynomial (see @exr-deriv-polynomial) to yield $f'(x) = 4 x - 5.$
+   We get to the same place if we instead use the product rule:
+   $$
+   \begin{aligned}
+   f'(x) &= (2x + 1) \cdot 1 + 2 \cdot (x - 3) \\
+   &= 2x + 1 + 2x - 6 \\
+   &= 4x - 5.
+   \end{aligned}
+   $$
+
+2. Let $g(x) = x$ so that $g'(x) = 1,$ and let $h(x) = e^x$ so that $h'(x) = e^x.$
+   We have
+   $$
+   \begin{aligned}
+   f'(x) &= g(x) h'(x) + g'(x) h(x) \\
+   &= x \cdot e^x + 1 \cdot e^x \\
+   &= (x + 1) e^x.
+   \end{aligned}
+   $$
+
+3. Let $g(x) = h(x) = e^x$ so that $g'(x) = h'(x) = e^x.$
+   We have
+   $$
+   \begin{aligned}
+   f'(x) &= g(x) h'(x) + g'(x) h(x) \\
+   &= e^x \cdot e^x + e^x \cdot e^x \\
+   &= e^{2x} + e^{2x} \\
+   &= 2 e^{2x}.
+   \end{aligned}
+   $$
+
+4. This one makes us use the product rule twice.
+   We have
+   $$
+   \begin{aligned}
+   f'(x)
+   &= \frac{d}{dx} \left[e^x \cdot \log(x) \cdot x^3\right] \\
+   &= e^x \cdot \left[\frac{d}{dx} \left(\log(x) \cdot x^3\right)\right] + \left[\frac{d}{dx} e^x\right] \cdot \left[\log(x) \cdot x^3\right] \\
+   &= e^x \cdot \left[\log(x) \cdot \left(\frac{d}{dx} x^3\right) + \left(\frac{d}{dx} \log(x)\right) \cdot x^3\right] + \left[\frac{d}{dx} e^x\right] \cdot \left[\log(x) \cdot x^3\right] \\
+   &= e^x \cdot \left[\log(x) \cdot (3 x^2) + \left(\frac{1}{x}\right) \cdot x^3\right] + \left[e^x \cdot \log(x) \cdot x^3\right] \\
+   &= 3 e^x \cdot \log(x) \cdot x^2 + e^x \cdot x^2 + e^x \cdot \log(x) \cdot x^3.
+   \end{aligned}
+   $$
+   This example is an illustration of a generalization of the product rule: $$\frac{d}{dx} [f(x) \cdot g(x) \cdot h(x)] = f(x) g(x) h'(x) + f(x) g'(x) h(x) + f'(x) g(x) h(x).$$
+   I'll leave it to you to prove that general claim.
+::::
+:::
+
+::: {#exr-deriv-of-square name="Derivative of the square of a function"}
+Let $f : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}.$
+Define the function $g : X \to \mathbb{R}$ by $g(x) = f(x)^2.$
+Using the product rule, prove that $$g'(x) = 2 f'(x) f(x).$$
+
+:::: {.callout-note title="Answer" collapse="true"}
+We have $g(x) = f(x) \cdot f(x),$ so the product rule implies $$g'(x) = f(x) f'(x) + f'(x) f(x) = 2 f'(x) f(x).$$
+::::
+:::
+
+The [quotient rule]{.concept} for functions in the form $\frac{f(x)}{g(x)}$ is unfortunately a bit trickier to remember.
+If you have to Google this one every time you use it, don't worry --- you're not alone.
+
+::: {#prp-quotient-rule name="Quotient rule"}
+Let $f : X \to \mathbb{R}$ and $g : X \to \mathbb{R} \setminus \{0\}$ be differentiable, where $X \subseteq \mathbb{R}.$
+Define the function $h : X \to \mathbb{R}$ by $h(x) = \frac{f(x)}{g(x)}.$
+For all $x \in X,$ $$h'(x) = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.$$
+
+:::: {.callout-tip title="Codomain of the denominator function" collapse="true"}
+You might notice that the codomain of $g$ is specified to be the set $\mathbb{R} \setminus \{0\},$ meaning that $g(x)$ may in principle be any number other than 0.
+This is just to ensure that $\frac{f(x)}{g(x)}$ is well-defined, avoiding any kind of problems with dividing by 0.
+::::
+:::
+
+```{python}
+concepts.update({
+  "Quotient rule": "If $h(x) = f(x) / g(x),$ then $$h'(x) = \\frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.$$",
+})
+```
+
+I'm not going to prove the quotient rule here --- you'll do that yourself in @exr-quotient-rule below, once you've got one more handy rule for differentiation in hand.
+
+Before then, let's work through some practice with the quotient rule.
+If you use it enough, maybe you'll actually start to remember it?
+
+::: {.aside}
+This was certainly the case for me writing my job market paper [@kenkel2023social], which made such extensive use of the quotient rule that I finally stopped having to Google it after a year or so working on the paper.
+:::
+
+::: {#exr-csf-derivative name="Contest success function"}
+A common tool in formal models of conflict is the contest success function, $$f(x) = \frac{\alpha x}{\alpha x + y}.$$
+You can think of $x$ here as the amount of resources that I'm devoting toward the conflict, $y > 0$ as the amount of resources that my enemy has devoted, and $\alpha > 0$ as the "force multiplier" on my effort (how much bang for the buck I'm getting).
+The output of the function represents my probability of winning the conflict, as a function of the amount of resources I devote.
+
+1. Use the quotient rule to derive $f'(x).$
+
+2. The derivative $f'(x)$ represents approximately how much my chance of victory increases with each unit of resources I expend.
+   Imagine that I don't want to put in a unit of resources that gets me less than a 1% increase in the chance of victory.
+   Then what's the largest value of $x$ that I'd be willing to choose?
+   (The answer will depend on the values of $\alpha$ and $y.$)
+
+:::: {.callout-note title="Answer" collapse="true"}
+Think of $f(x) = g(x) / h(x)$ where $g(x) = \alpha x$ and $h(x) = \alpha x + y.$
+Then, using the quotient rule, we have
+$$
+\begin{aligned}
+f'(x)
+&= \frac{g'(x) h(x) - g(x) h'(x)}{h(x)^2} \\
+&= \frac{\alpha (\alpha x + y) - (\alpha x) \alpha}{(\alpha x + y)^2} \\
+&= \frac{\alpha y}{(\alpha x + y)^2}.
+\end{aligned}
+$$
+
+The second question essentially asks us to find the value of $x$ that solves $f'(x) = 0.01:$
+$$
+\begin{aligned}
+f'(x) = 0.01
+&\quad\Leftrightarrow\quad \frac{\alpha y}{(\alpha x + y)^2} = 0.01 \\
+&\quad\Leftrightarrow\quad (\alpha x + y)^2 = 100 \alpha y \\
+&\quad\Leftrightarrow\quad \alpha x + y = 10 \sqrt{\alpha y} \\
+&\quad\Leftrightarrow\quad x = \frac{10 \sqrt{\alpha y} - y}{\alpha}.
+\end{aligned}
+$$
+::::
+:::
+
+::: {#exr-conditional-prob-deriv name="Derivative of a conditional probability"}
+Let $X$ be a random variable that has a binomial distribution with $n = 2$ and probability parameter $p,$ so that we have
+$$
+\begin{aligned}
+\Pr(X = 0) &= (1 - p)^2, \\
+\Pr(X = 1) &= 2 p (1 - p), \\
+\Pr(X = 2) &= p^2.
+\end{aligned}
+$$
+The conditional probability $\Pr(X = 2 \mid X \geq 1)$ is equal to
+$$
+\begin{aligned}
+\Pr(X = 2 \mid X \geq 1)
+= \frac{\Pr(X = 2)}{\Pr(X = 1) + \Pr(X = 2)}
+= \frac{p^2}{2 p (1 - p) + p^2}.
+\end{aligned}
+$$
+Taking this conditional probability to be a function of the parameter $p,$ find its derivative and show that the derivative is positive for all $p \in (0, 1].$
+
+:::: {.callout-note title="Answer" collapse="true"}
+Defining the function $$f(p) = \frac{p^2}{2p (1 - p) + p^2} = \frac{p^2}{2p - p^2},$$ we have
+$$
+\begin{aligned}
+f'(p)
+&= \frac{2p (2p - p^2) - p^2 (2 - 2p)}{(2p - p^2)^2} \\
+&= \frac{4 p^2 - 2 p^3 - 2 p^2 + 2 p^3}{(2p - p^2)^2} \\
+&= \frac{p^2}{(2p - p^2)^2}.
+\end{aligned}
+$$
+We have $p^2 > 0$ and $(2p - p^2)^2 > 0$ for all $p \neq 0,$ and therefore $f'(p) > 0$ for all $p \in (0, 1].$
+::::
+:::
+
+What do we do when we run into a function that isn't obviously a sum or product or quotient of some other function whose derivative we know how to take?
+For example, think about the function $$h(x) = e^{-(x - \mu)^2},$$ a close cousin of the probability density function of the normal distribution with mean $\mu$ and variance 1.
+We know that the derivative of $e^x$ is $e^x$.
+And by observing that $$-(x - \mu)^2 = -[x^2 - 2 x \mu + \mu^2] = 2 x \mu - x^2 - \mu^2,$$ we know that its derivative is $2 (\mu - x).$
+Is there a way we can put these together to figure out the derivative of $h(x)?$
+
+The [chain rule]{.concept} helps us deal with situations like this one.
+Specifically, suppose we have a function of the form $$h(x) = f(g(x)),$$ where $f$ and $g$ are each differentiable.
+Going back to our example, if we define $f(x) = e^x$ and $g(x) = -(x - \mu)^2,$ then we have
+$$
+\begin{aligned}
+h(x)
+= e^{-(x - \mu)^2}
+= e^{g(x)}
+= f(g(x)).
+\end{aligned}
+$$
+In other words, $h$ is the composition of $f$ and $g$ (see the list of function types in @sec-continuity).
+
+::: {#prp-chain-rule name="Chain rule"}
+Let $f : Y \to \mathbb{R}$ and $g : X \to Y$ be differentiable, where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}.$
+Define the composition $h$ by $h(x) = f(g(x)).$
+For all $x \in X,$ $$h'(x) = f'(g(x)) \cdot g'(x).$$
+:::
+
+```{python}
+concepts.update({
+  "Chain rule": "If $h(x) = f(g(x)),$ then $h'(x) = f'(g(x)) \\cdot g'(x).$",
+})
+```
+
+Using the chain rule with our example of $h(x) = e^{-(x - \mu)^2},$ we can calculate the derivative:
+$$
+\begin{aligned}
+h'(x)
+&= f'(g(x)) \cdot g'(x) \\
+&= f'(-(x - \mu)^2) \cdot g'(x) \\
+&= e^{-(x - \mu)^2} \cdot 2 (\mu - x) \\
+&= 2 (\mu - x) e^{-(x - \mu)^2}.
+\end{aligned}
+$$
+If we look at the graph of this function, we see that it increases on $(-\infty, \mu)$ and decreases on $(\mu, \infty)$.
+
+```{r}
+mu <- 2
+tibble(
+  x = seq(mu - 3, mu + 3, length.out = 501),
+  y = exp(-1 * (x - mu)^2)
+) |>
+  ggplot(aes(x = x, y = y)) +
+  geom_line() +
+  scale_x_continuous(
+    breaks = seq(mu - 3, mu + 3),
+    labels = c("µ - 3", "µ - 2", "µ - 1", "µ", "µ + 1", "µ + 2", "µ + 3")
+  ) +
+  labs(
+    title = "A function shaped like a bell curve",
+    x = "",
+    y = ""
+  ) +
+  background_grid("x")
+```
+
+Our expression for the derivative provides further confirmation that the function increases up to $x = \mu$ and decreases thereafter.
+The key thing to observe is that $e^z > 0$ for all real numbers $z.$
+Therefore, if $x < \mu,$ then we have $$h'(x) = 2 \underbrace{(\mu - x)}_{> 0} \underbrace{e^{-(x - \mu)^2}}_{> 0} > 0.$$
+In instead $x > \mu,$ then we have $$h'(x) = 2 \underbrace{(\mu - x)}_{< 0} \underbrace{e^{-(x - \mu)^2}}_{> 0} < 0.$$
+
+Let's return to our motivating example of the statistical lottery (see @sec-statistical-lottery).
+Remember that the expected winnings for guessing $g \in [0, 100]$ is given by the function
+$$
+\begin{aligned}
+W(g) = \frac{1}{N} \sum_{i=1}^N \left[10000 - (x_i - g)^2\right].
+\end{aligned}
+$$
+We finally have everything we need to calculate the derivative of this function.
+First, using the constant multiple rule,
+$$
+\begin{aligned}
+W'(g) = \frac{1}{N} \cdot \frac{d}{dg} \left\{\sum_{i=1}^N \left[10000 - (x_i - g)^2\right]\right\}.
+\end{aligned}
+$$
+Then, using our extension of the sum rule to any finite sum (see @exr-deriv-finite-sum),
+$$
+\begin{aligned}
+W'(g) = \frac{1}{N} \sum_{i=1}^N \frac{d}{dg} \left[10000 - (x_i - g)^2\right].
+\end{aligned}
+$$
+Again applying the sum rule and the constant multiple rule,
+$$
+\begin{aligned}
+W'(g)
+&= \frac{1}{N} \sum_{i=1}^N \left\{\underbrace{\frac{d}{dg} [10000]}_{=0} - \frac{d}{dg} \left[(x_i - g)^2\right]\right\} \\
+&= \frac{-1}{N} \sum_{i=1}^N \frac{d}{dg} \left[(x_i - g)^2\right].
+\end{aligned}
+$$
+At this point we can apply the chain rule to each individual component of the sum, letting $a(g) = g^2$ be the "outer" function (with derivative $a'(g) = 2g$) and $b_i(g) = x_i - g$ be the "inner" function (with derivative $b_i'(g) = -1$):
+$$
+\begin{aligned}
+W'(g)
+&= \frac{-1}{N} \sum_{i=1}^N \frac{d}{dg} [a(b(g))] \\
+&= \frac{-1}{N} \sum_{i=1}^N a'(b(g)) \cdot b'(g) \\
+&= \frac{-1}{N} \sum_{i=1}^N [2 (x_i - g)] \cdot (-1) \\
+&= \frac{2}{N} \sum_{i=1}^N [x_i - g] \\
+&= \frac{2}{N} \left[\sum_{i=1}^N x_i - N g\right].
+\end{aligned}
+$$
+
+We are finally --- finally! --- ready to show, beyond a shadow of a mathematical doubt, that the winnings-maximizing guess in the statistical lottery game is $g = \bar{x},$ the average of the values displayed on the lottery balls.
+Remember that the sample mean $\bar{x}$ is defined as $\bar{x} = \frac{1}{N} \sum_{i=1}^N x_i.$
+Therefore, we have
+$$
+\begin{aligned}
+W'(g)
+&= \frac{2}{N} \left[\sum_{i=1}^N x_i - N g\right] \\
+&= 2 \left[\frac{1}{N} \sum_{i=1}^N x_i - g\right] \\
+&= 2 (\bar{x} - g).
+\end{aligned}
+$$
+Here's how we can use this expression to infer that our best guess is $g = \bar{x}$:
+
+- Consider any guess below the sample mean, $g < \bar{x}.$
+  For any such guess, we have $W'(g) > 0.$
+  This means expected winnings are increasing at $g$ --- i.e., you could expect to win more by guessing slightly more than $g.$
+
+- Consider any guess above the sample mean, $g > \bar{x}.$
+  Now we are in the opposite situation, with $W'(g) < 0.$
+  This means expected winnings are decreasing at $g$ --- i.e., you could expect to win more by guessing slightly less than $g.$
+
+- Because the function increases up to $g = \bar{x}$ and decreases thereafter, we conclude that the optimal guess is $g = \bar{x}.$
+
+You might also have noticed that $W'(\bar{x}) = 0.$
+You might suspect that an even simpler proof of the claim would be to observe that this is the only guess for which the derivative of the expected winnings function is 0.
+That's almost true, but we need to do a bit more to get there --- as we will in @sec-optimization below.
+
+Before we move on, let's do some exercises to get more practice with the chain rule.
+
+::: {#exr-deriv-exponent name="Derivative of an exponential function"}
+Let $b$ be a positive constant, and define the function $f(x) = b^x.$
+Using the chain rule, show that $f'(x) = b^x \cdot \log(b).$
+
+*Hint:* Start out by using the fact that $b = e^{\log(b)}.$
+
+:::: {.callout-note title="Answer" collapse="true"}
+We have $$f(x) = b^x = (e^{\log(b)})^x = e^{\log(b) \cdot x}.$$
+Define the "inner" function $h(x) = \log(b) \cdot x$ (with derivative $h'(x) = \log(b)$) and the "outer" function $g(x) = e^x$ (with derivative $g'(x) = e^x$), so that we have $$f(x) = e^{\log(b) \cdot x} = e^{h(x)} = g(h(x)).$$
+Then, using the chain rule, we have
+$$
+\begin{aligned}
+f'(x)
+&= g'(h(x)) \cdot h'(x) \\
+&= g'(\log(b) \cdot x) \cdot h'(x) \\
+&= e^{\log(b) \cdot x} \cdot \log(b) \\
+&= b^x \cdot \log(b).
+\end{aligned}
+$$
+::::
+:::
+
+::: {#exr-deriv-exponential-cdf name="Derivative of the exponential CDF"}
+For all $x \geq 0,$ the cumulative distribution function of the [exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution) with rate parameter $\lambda > 0$ is $$F(x) = 1 - e^{-\lambda x}.$$
+Characterize the probability density function of this distribution by finding the derivative of the cumulative distribution function.
+
+:::: {.callout-note title="Answer" collapse="true"}
+Let's first just look at $e^{-\lambda x}.$
+We can think of this as a composition of the "outer" function $g(x) = e^x$ (with derivative $g'(x) = e^x$) and the "inner" function $h(x) = -\lambda x$ (with derivative $h'(x) = -\lambda$).
+Therefore, its derivative is $$g'(h(x)) \cdot h'(x) = g'(-\lambda x) \cdot h'(x) = e^{-\lambda x} \cdot -\lambda.$$
+
+Returning to the full expression for the CDF and applying the sum rule, we have
+$$
+\begin{aligned}
+F'(x)
+&= \frac{d}{dx} \left[1 - e^{-\lambda x}\right] \\
+&= \left[\frac{d}{dx} (1) - \frac{d}{dx} \left(e^{-\lambda x}\right) \right] \\
+&= \left[0 - e^{-\lambda x} \cdot -\lambda\right] \\
+&= \lambda e^{-\lambda x}.
+\end{aligned}
+$$
+::::
+:::
+
+::: {#exr-deriv-logistic-cdf name="Derivative of the logistic CDF"}
+For all $x \in \mathbb{R},$ the cumulative distribution function of the [logistic distribution](https://en.wikipedia.org/wiki/Logistic_distribution) is $$F(x) = \frac{1}{1 + e^{-x}}.$$
+Characterize the probability density function of this distribution by finding the derivative of the cumulative distribution function.
+
+:::: {.callout-note title="Answer" collapse="true"}
+We have $F(x) = (1 + e^{-x})^{-1}.$
+By repeatedly applying the chain rule, we have
+$$
+\begin{aligned}
+F'(x)
+&= (-1) (1 + e^{-x})^{-2} \cdot \frac{d}{dx} [1 + e^{-x}] \\
+&= -(1 + e^{-x})^{-2} \cdot \frac{d}{dx} e^{-x} \\
+&= -(1 + e^{-x})^{-2} \cdot e^{-x} \cdot \frac{d}{dx} [-x] \\
+&= -(1 + e^{-x})^{-2} \cdot e^{-x} \cdot -1 \\
+&= \frac{e^{-x}}{(1 + e^{-x})^2}.
+\end{aligned}
+$$
+::::
+:::
+
+::: {#exr-deriv-log-f name="Derivative of the logarithm of a function"}
+Let $f$ be a differentiable function that maps from $X \subseteq \mathbb{R}$ into the strictly positive reals, $(0, \infty).$
+Define the function $g(x) = \log [f(x)].$
+Prove that $$g'(x) = \frac{f'(x)}{f(x)}.$$
+
+:::: {.callout-note title="Answer" collapse="true"}
+$g$ is the composition of the natural logarithm and $f$.
+Therefore, by the chain rule,
+$$
+\begin{aligned}
+g'(x)
+&= \log' [f(x)] \cdot f'(x) \\
+&= \frac{1}{f(x)} \cdot f'(x) \\
+&= \frac{f'(x)}{f(x)}.
+\end{aligned}
+$$
+::::
+:::
+
+::: {#exr-quotient-rule name="Proving the quotient rule"}
+Use the product rule and the chain rule to prove the quotient rule.
+
+*Hint:* Start with the fact that $\frac{f(x)}{g(x)} = f(x) \cdot g(x)^{-1}.$
+
+:::: {.callout-note title="Answer" collapse="true"}
+Define $h(x) = \frac{f(x)}{g(x)} = f(x) \cdot g(x)^{-1}.$
+By the product rule,
+$$
+\begin{aligned}
+h'(x)
+&= f(x) \cdot \frac{d}{dx} \left[g(x)^{-1}\right] + f'(x) \cdot g(x)^{-1}.
+\end{aligned}
+$$
+Using the chain rule, we have
+$$
+\begin{aligned}
+\frac{d}{dx} \left[g(x)^{-1}\right]
+&= (-1) g(x)^{-2} \cdot g'(x) \\
+&= \frac{-g'(x)}{g(x)^2}.
+\end{aligned}
+$$
+Substituting this into the product rule calculation from before, we have
+$$
+\begin{aligned}
+h'(x)
+&= f(x) \cdot \frac{d}{dx} \left[g(x)^{-1}\right] + f'(x) \cdot g(x)^{-1} \\
+&= f(x) \cdot \frac{-g'(x)}{g(x)^2} + f'(x) \cdot \frac{1}{g(x)} \\
+&= \frac{- f(x) g'(x)}{g(x)^2} + \frac{f'(x)}{g(x)} \\
+&= \frac{- f(x) g'(x)}{g(x)^2} + \frac{f'(x) g(x)}{g(x)^2} \\
+&= \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.
+\end{aligned}
+$$
+::::
+:::
+
+### Second derivatives
+
+In economics, inflation is a measure of the rate of increase in the price level.
+When prices are going up, inflation is positive.
+The quicker the prices are going up, the higher the measure of inflation is.
+In the rare event that prices are going down, we'd say we have "deflation," in which case the standard measures of inflation would be negative.
+Mathematically, you can think about the price level as a function of time, and then think of inflation as the derivative of this function.
+
+Politicians will sometimes brag that inflation is decreasing.
+But they usually don't mean that the price level is actually going down: that would mean we're having deflation, which usually occurs only in the context of Great Depression-type economic cataclysms.
+Instead, a decrease in inflation typically means that prices are increasing, but not as quickly as they were earlier.
+In other words, the rate of increase is itself decreasing.
+But now we're thinking about the rate of change in a rate of change ... or the derivative of a derivative, also known as the [second derivative]{.concept}.
+
+::: {#def-second-derivative name="Second derivative"}
+Let $f : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}$.
+For any domain point $c \in X$, the [second derivative]{.concept} of $f$ at $c$ is
+$$
+\begin{aligned}
+f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c},
+\end{aligned}
+$$
+provided that this limit exists.
+When it does, we say that $f$ is [twice differentiable at the point]{.concept} $c$.
+
+If $f$ is twice differentiable at every point in its domain, we simply say that it is [twice differentiable]{.concept}.
+:::
+
+```{python}
+concepts.update({
+  "Second derivative": "The second derivative of a differentiable function $f(x)$, denoted $f''(x),$ is the derivative of the function's derivative: $$f''(c) = \\lim_{x \\to c} \\frac{f'(x) - f'(c)}{x - c}.$$",
+  "Twice differentiability": "A function $f : X \\to \\mathbb{R}$ is twice differentiable at a point in its domain, $c \\in X,$ if the second derivative $f''(c)$ exists.  We call $f$ a twice differentiable function if it is twice differentiable at every point in its domain.",
+})
+```
+
+Sometimes in formal theory papers, you'll see a function described just in terms of its first and second derivatives.
+For instance, I might write, "Let $f : [0, 1] \to [0, 1]$ be twice differentiable, with $f' > 0$ and $f'' < 0.$
+Here's a little cheat sheet to interpret statements like that one.
+
+| Case | First derivative      | Second derivative      | Interpretation                                                                               |
+|------|-----------------------|------------------------|----------------------------------------------------------------------------------------------|
+| 1    | Positive: $f'(x) > 0$ | Positive: $f''(x) > 0$ | The function is increasing ever more steeply as we move to the right on the x axis           |
+| 2    | Positive: $f'(x) > 0$ | Negative: $f''(x) < 0$ | The function is increasing, but the rate of increase is slowing down as we move to the right |
+| 3    | Negative: $f'(x) < 0$ | Positive: $f''(x) > 0$ | The function is decreasing, but the rate of decrease is slowing down as we move to the right |
+| 4    | Negative: $f'(x) < 0$ | Negative: $f''(x) < 0$ | The function is decreasing ever more steeply as we move to the right on the x axis           |
+
+```{r}
+df_convex_concave <-
+  expand_grid(x = seq(0, 1, length.out = 501), case = 1:4) |>
+  mutate(
+    y = case_match(
+      case,
+      1 ~ x^4,
+      2 ~ 1 - (1 - x)^4,
+      3 ~ (1 - x)^4,
+      4 ~ 1 - x^4
+    ),
+    case = case_match(
+      case,
+      1 ~ "(1) Increasing (f' > 0), convex (f'' > 0)",
+      2 ~ "(2) Increasing (f' > 0), concave (f'' < 0)",
+      3 ~ "(3) Decreasing (f' < 0), convex (f'' > 0)",
+      4 ~ "(4) Decreasing (f' < 0), concave (f'' < 0)"
+    )
+  )
+eval_lo <- 0.2
+eval_hi <- 0.8
+fig_convex_concave <- df_convex_concave |>
+  ggplot(aes(x = x, y = y)) +
+  geom_line() +
+  # geom_point(
+  #   data = df_convex_concave |> filter(x %in% c(eval_lo, eval_hi)),
+  #   color = "blue"
+  # ) +
+  # geom_segment(
+  #   aes(x = x1, xend = x2, y = y1, yend = y2),
+  #   data = df_convex_concave |> filter(x %in% c(eval_lo, eval_hi)) |> group_by(case) |> summarize(x1 = min(x), x2 = max(x), y1 = y[which.min(x)], y2 = y[which.max(x)]),
+  #   color = "blue",
+  #   linetype = "dashed",
+  #   linewidth = 0.25
+  # ) +
+  facet_wrap(~ case) +
+  panel_border()
+fig_convex_concave
+```
+
+If a function has a non-negative second derivative, $f''(x) \geq 0,$ we call it [convex]{.concept}.
+Additionally, if the second derivative is strictly positive, $f''(x) > 0,$ we call the function [strictly convex]{.concept}.
+A classic example of a strictly convex function is exponential growth.
+For example, let $f(t)$ be the number of mice you will have at time $t$ if you start with one boy mouse and one girl mouse at $t = 0$.
+If the number of mice doubles with each unit of time, then you'll have
+$$
+\begin{aligned}
+f(0) &= 2, \\
+f(1) &= 4, \\
+f(2) &= 8, \\
+f(3) &= 16, \\
+f(4) &= 32, \\
+\vdots
+\end{aligned}
+$$
+So not only is the function increasing, but it's increasing more quickly as time goes on.
+Because the rate of increase is itself increasing, the function is strictly convex.
+
+On the other hand, we call a function [concave]{.concept} if $f''(x) \leq 0,$ and additionally [strictly concave]{.concept} if $f''(x) < 0.$
+Concave functions often arise in economic contexts.
+In particular, we often think that concave functions are a good way to model the amount of "utility" (happiness, loosely speaking) that a person derives from consuming a quantity of a good.
+For instance, let $t$ be the number of tacos I've eaten and let $u(t)$ be how happy I am as a function of the number of tacos I've eaten.
+There's a big happiness boost going from 0 tacos (starving) to 1 taco (still hungry but not starving).
+There's a smaller happiness boost going from 1 taco to 2 tacos (barely full).
+The boost keeps decreasing from there, and once I'm full I would actively prefer to not eat any additional tacos.
+Altogether, then, $u(t)$ is strictly concave --- each additional taco raises my happiness by a lower and lower amount.
+
+```{python}
+concepts.update({
+  "Convex function": "A twice differentiable function is convex if $f''(x) \\geq 0,$ and additionally is strictly convex if $f''(x) > 0.$",
+  "Concave function": "A twice differentiable function is concave if $f''(x) \\leq 0,$ and additionally is strictly concave if $f''(x) < 0.$",
+})
+```
+
+A linear function is both convex and concave.
+However, it is neither strictly convex nor strictly concave.
+All that is a long way of saying that the second derivative of a linear function is always zero.
+That's true because the derivative of a linear function is its slope, a constant, so the derivative of the derivative is zero.
+
+::: {#exr-concave-convex name="Concave and convex functions"}
+Using the second derivative, characterize the conditions under which each of the following functions is convex or concave:
+
+1. A quadratic function of the form $f(x) = a x^2 + b x + c.$
+
+2. An exponential function of the form $f(x) = b^x,$ where $b > 0.$
+
+3. A logarithmic function of the form $f(x) = \log_b x,$ where $b > 0$ and $b \neq 1.$
+
+:::: {.callout-note title="Answer" collapse="true"}
+1. We have $f'(x) = 2 a x + b$ and thus $f''(x) = 2a.$
+   So the function is concave if $a \leq 0$ and convex if $a \geq 0.$
+
+2. We have $f'(x) = b^x \cdot \log(b)$ and thus $f''(x) = b^x \cdot (\log(b))^2.$
+   If $b = 1,$ then we have $\log(b) = 0$ and the function is linear (both concave and convex).
+   Otherwise, we have $\log(b) \neq 0,$ hence $(\log(b))^2 > 0,$ hence $b^x \cdot (\log(b))^2 > 0,$ so the function is strictly convex.
+
+3. We have $f'(x) = \frac{1}{x \log(b)} = \frac{1}{\log(b)} \cdot x^{-1}$ and thus $$f''(x) = \frac{1}{\log(b)} \cdot \left[-1 \cdot x^{-2}\right] = \frac{-1}{x^2 \log(b)}.$$
+   The sign of the second derivative is the same as that of $\log(b)$, so the function is convex if $b \in (0, 1)$ and is concave if $b \in (1, \infty).$
+::::
+:::
+
+::: {#exr-normal-pdf-concave name="Concave portion of the normal PDF"}
+A function can be concave on part of its domain and convex on other parts.
+For example, take the probability density function of the standard normal distribution, $f(x) = \frac{1}{\sqrt{2 \pi}} e^{-x^2 / 2}.$
+
+```{r}
+tibble(x = seq(-3.5, 3.5, length.out = 501), y = dnorm(x)) |>
+  ggplot(aes(x = x, y = y)) +
+  geom_rect(aes(xmin = -1, xmax = 1, ymin = -Inf, ymax = Inf), fill = "gray90") +
+  geom_line() +
+  annotate("text", x = -2.25, y = 0.435, label = "convex", size = 5) +
+  annotate("text", x = 0, y = 0.435, label = "concave", size = 5) +
+  annotate("text", x = 2.25, y = 0.435, label = "convex", size = 5) +
+  scale_x_continuous(breaks = seq(-3, 3)) +
+  scale_y_continuous(limits = c(0, 0.45)) +
+  labs(x = "x", y = "f(x)", title = "Standard normal PDF")
+```
+
+You can see from the graph that the standard normal PDF is concave on $[-1, 1]$, while it is convex on the rest of its domain.
+Use its second derivative to prove this.
+
+:::: {.callout-note title="Answer" collapse="true"}
+Using the constant multiple rule and the chain rule, we have
+$$
+\begin{aligned}
+f'(x)
+&= \frac{d}{dx} \left[\frac{1}{\sqrt{2 \pi}} e^{-x^2 / 2}\right] \\
+&= \frac{1}{\sqrt{2 \pi}} \frac{d}{dx} \left[e^{-x^2/2}\right] \\
+&= \frac{1}{\sqrt{2 \pi}} \left[e^{-x^2 / 2} \cdot \frac{-2x}{2}\right] \\
+&= \frac{-1}{\sqrt{2 \pi}} \cdot x e^{-x^2/2}.
+\end{aligned}
+$$
+We can then use the constant multiple rule and the product rule to find the second derivative:
+$$
+\begin{aligned}
+f''(x)
+&= \frac{d}{dx} \left[\frac{-1}{\sqrt{2 \pi}} \cdot x e^{-x^2/2}\right] \\
+&= \frac{-1}{\sqrt{2 \pi}} \frac{d}{dx} \left[x e^{-x^2/2}\right] \\
+&= \frac{-1}{\sqrt{2 \pi}} \left[x \cdot \frac{d}{dx} \left(e^{-x^2/2}\right) + 1 \cdot e^{-x^2/2}\right] \\
+&= \frac{-1}{\sqrt{2 \pi}} \left[x \cdot \left(-x e^{-x^2/2}\right) + e^{-x^2/2}\right] \\
+&= \frac{-1}{\sqrt{2 \pi}} \left[e^{-x^2 / 2} - x^2 e^{-x^2/2}\right] \\
+&= \frac{1}{\sqrt{2 \pi}} (x^2 - 1) e^{-x^2/2}.
+\end{aligned}
+$$
+Because $\frac{1}{\sqrt{2 \pi}} > 0$ and $e^{-x^2/2} > 0$ for all $x,$ the sign of the second derivative will always be the same as that of $x^2 - 1.$
+Consequently, the second derivative is weakly negative --- and thus the function is concave --- if and only if $-1 \leq x \leq 1.$
+::::
+:::
+
 
 
 ```{python, results="asis"}

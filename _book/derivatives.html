@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./optimization.html" rel="next">
 <link href="./sequences_series.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -188,6 +188,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Optimization</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -202,15 +208,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#motivation-a-statistical-guessing-game" id="toc-motivation-a-statistical-guessing-game" class="nav-link active" data-scroll-target="#motivation-a-statistical-guessing-game"><span class="header-section-number">4.1</span> Motivation: A statistical guessing game</a></li>
+  <li><a href="#sec-statistical-lottery" id="toc-sec-statistical-lottery" class="nav-link active" data-scroll-target="#sec-statistical-lottery"><span class="header-section-number">4.1</span> Motivation: A statistical guessing game</a></li>
   <li><a href="#limits-of-functions" id="toc-limits-of-functions" class="nav-link" data-scroll-target="#limits-of-functions"><span class="header-section-number">4.2</span> Limits of functions</a>
   <ul class="collapse">
   <li><a href="#defining-the-limit-of-a-function" id="toc-defining-the-limit-of-a-function" class="nav-link" data-scroll-target="#defining-the-limit-of-a-function"><span class="header-section-number">4.2.1</span> Defining the limit of a function</a></li>
-  <li><a href="#continuity" id="toc-continuity" class="nav-link" data-scroll-target="#continuity"><span class="header-section-number">4.2.2</span> Continuity</a></li>
+  <li><a href="#sec-continuity" id="toc-sec-continuity" class="nav-link" data-scroll-target="#sec-continuity"><span class="header-section-number">4.2.2</span> Continuity</a></li>
   </ul></li>
   <li><a href="#differentiation" id="toc-differentiation" class="nav-link" data-scroll-target="#differentiation"><span class="header-section-number">4.3</span> Differentiation</a>
   <ul class="collapse">
   <li><a href="#derivatives-of-common-functions" id="toc-derivatives-of-common-functions" class="nav-link" data-scroll-target="#derivatives-of-common-functions"><span class="header-section-number">4.3.1</span> Derivatives of common functions</a></li>
+  <li><a href="#sec-properties-of-derivatives" id="toc-sec-properties-of-derivatives" class="nav-link" data-scroll-target="#sec-properties-of-derivatives"><span class="header-section-number">4.3.2</span> Properties of derivatives</a></li>
+  <li><a href="#second-derivatives" id="toc-second-derivatives" class="nav-link" data-scroll-target="#second-derivatives"><span class="header-section-number">4.3.3</span> Second derivatives</a></li>
   </ul></li>
   <li><a href="#concept-review" id="toc-concept-review" class="nav-link" data-scroll-target="#concept-review"><span class="header-section-number">4.4</span> Concept review</a></li>
   </ul>
@@ -238,8 +246,8 @@ window.Quarto = {
 </header>
 
 
-<section id="motivation-a-statistical-guessing-game" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="motivation-a-statistical-guessing-game"><span class="header-section-number">4.1</span> Motivation: A statistical guessing game</h2>
+<section id="sec-statistical-lottery" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-statistical-lottery"><span class="header-section-number">4.1</span> Motivation: A statistical guessing game</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="lottery.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
@@ -720,8 +728,8 @@ Answer
 </div>
 </div>
 </section>
-<section id="continuity" class="level3 page-columns page-full" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="continuity"><span class="header-section-number">4.2.2</span> Continuity</h3>
+<section id="sec-continuity" class="level3 page-columns page-full" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="sec-continuity"><span class="header-section-number">4.2.2</span> Continuity</h3>
 <p>You might notice a pattern in <a href="#fig-function-limit-ex" class="quarto-xref">Figure&nbsp;<span>4.6</span></a> and <a href="#fig-step-function" class="quarto-xref">Figure&nbsp;<span>4.7</span></a>. At the points in the domain where the value of the function is not equal to its left- or right-hand limit, the graph of the function appears to “jump.” In mathematical terms, we’d say these jumps are points of discontinuity. By contrast, in the parts of the domain where there are no such jumps, the function is <span class="concept">continuous</span>.</p>
 <div id="def-continuity-point" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 4.3 (Continuity at a point)</strong></span> We say that a function <span class="math inline">\(f : X \to Y\)</span> is <span class="concept">continuous at the point</span> <span class="math inline">\(c \in X\)</span> if its limit exists at that point and is equal to the value of the function: <span class="math display">\[\lim_{x \to c} f(x) = f(c).\]</span></p>
@@ -939,13 +947,13 @@ Figure&nbsp;4.11
 <p><span class="theorem-title"><strong>Definition 4.5 (Derivative of a function)</strong></span> Consider the function <span class="math inline">\(f : X \to \mathbb{R}\)</span>, where <span class="math inline">\(X \subseteq \mathbb{R}\)</span>, and the point <span class="math inline">\(c \in X\)</span>. The <span class="concept">derivative</span> of <span class="math inline">\(f\)</span> at <span class="math inline">\(c\)</span>, denoted <span class="math inline">\(f'(c)\)</span>, is defined by the limit <span class="math display">\[f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c},\]</span> provided that this limit exists. When this limit exists, we say that <span class="math inline">\(f\)</span> is <span class="concept">differentiable at the point</span> <span class="math inline">\(c\)</span>.</p>
 <p>If <span class="math inline">\(f\)</span> is differentiable at every point in its domain, we simply say that it is <span class="concept">differentiable</span>.</p>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Alternative notation for derivatives">
+<div id="tip-fractional-notation-deriv" class="callout callout-style-default callout-tip callout-titled" title="Alternative notation for derivatives">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Alternative notation for derivatives
+Tip&nbsp;4.1: Alternative notation for derivatives
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1172,27 +1180,711 @@ Answer
 </div>
 </div>
 </div>
-<!--
+</section>
+<section id="sec-properties-of-derivatives" class="level3 page-columns page-full" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="sec-properties-of-derivatives"><span class="header-section-number">4.3.2</span> Properties of derivatives</h3>
+<p>Using a few rules in combination with the derivatives of common functions from above, we can calculate the derivatives of most functions we run into in practice without explicitly taking limits of the rise-over-run ratio.</p>
+<p>If we take a function and multiply it by a constant, the derivative of the resulting function is the same multiple of the original derivative. This is the <span class="concept">constant multiple rule</span>.</p>
+<div id="prp-deriv-constant-multiple" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4.5 (Constant multiple rule)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(g : X \to \mathbb{R}\)</span> by <span class="math inline">\(g(x) = c f(x),\)</span> where <span class="math inline">\(c\)</span> is a constant real number. For all <span class="math inline">\(x \in X,\)</span> <span class="math display">\[g'(x) = c f'(x).\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For any <span class="math inline">\(x \in X,\)</span> we have <span class="math display">\[
+\begin{aligned}
+\lim_{h \to 0} \frac{g(x + h) - g(x)}{h}
+&amp;= \lim_{h \to 0} \frac{c f(x + h) - c f(x)}{h} \\
+&amp;= c \lim_{h \to 0} \frac{f (x + h) - f(x)}{h} \\
+&amp;= c f'(x).
+\end{aligned}
+\]</span></p>
+</div>
+<p>For example, we can use the constant multiple rule to find the derivative of <u>any</u> logarithmic function, not just the natural logarithm. Let <span class="math inline">\(f(x) = \log_b(x),\)</span> where <span class="math inline">\(b &gt; 0\)</span> and <span class="math inline">\(b \neq 1.\)</span> Using the base change formula from <a href="sequences_series.html#prp-logarithm-base-change" class="quarto-xref">Proposition&nbsp;<span>3.5</span></a>, we know that <span class="math display">\[f(x) = \log_b(x) = \frac{\log(x)}{\log(b)} = \frac{1}{\log(b)} \cdot \log(x).\]</span> In other words, the logarithm with base <span class="math inline">\(b\)</span> is just a constant multiple of the natural logarithm. Using this fact, we can find the derivative: <span class="math display">\[f'(x) = \frac{1}{\log(b)} \cdot \frac{d \log(x)}{d x} = \frac{1}{\log(b)} \cdot \frac{1}{x} = \frac{1}{x \log(b)}.\]</span></p>
+<p>Another convenient property is that the derivative of the sum is equal to the sum of the derivatives. You’ll end up using the <span class="concept">sum rule</span> so often that you stop thinking about it.</p>
+<div id="prp-deriv-sum" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4.6 (Sum rule)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> and <span class="math inline">\(g : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(h : X \to \mathbb{R}\)</span> by <span class="math inline">\(h(x) = f(x) + g(x).\)</span> For all <span class="math inline">\(x \in X,\)</span> <span class="math display">\[h'(x) = f'(x) + g'(x).\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For any <span class="math inline">\(x \in X,\)</span> we have <span class="math display">\[
+\begin{aligned}
+\lim_{t \to 0} \frac{h(x + t) - h(x)}{t}
+&amp;= \lim_{t \to 0} \frac{[f(x + t) + g(x + t)] - [f(x) + g(x)]}{t} \\
+&amp;= \lim_{t \to 0} \left[\frac{f(x + t) - f(x)}{t} + \frac{g(x + t) - g(x)}{t}\right] \\
+&amp;= \lim_{t \to 0} \frac{f(x + t) - f(x)}{t} + \lim_{t \to 0} \frac{g(x + t) - g(x)}{t} \\
+&amp;= f'(x) + g'(x).
+\end{aligned}
+\]</span></p>
+</div>
+<p>Here are a few exercises to illustrate the usefulness of the constant multiple rule and the sum rule.</p>
+<div id="exr-deriv-linear-combination" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.13 (Derivative of a linear combination of functions)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> and <span class="math inline">\(g : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Let <span class="math inline">\(\alpha \in \mathbb{R}\)</span> and <span class="math inline">\(\beta \in \mathbb{R}\)</span> be constants. Define the function <span class="math inline">\(h : X \to \mathbb{R}\)</span> by <span class="math inline">\(h(x) = \alpha f(x) + \beta g(x).\)</span> Use the constant rule and the sum rule to show that <span class="math display">\[h'(x) = \alpha f'(x) + \beta g'(x).\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is one of those cases where it’s convenient to use the fractional notation for a derivative (see <a href="#tip-fractional-notation-deriv" class="quarto-xref">Tip&nbsp;<span>4.1</span></a>). We have <span class="math display">\[
+\begin{aligned}
+\frac{d h(x)}{d x}
+&amp;= \frac{d}{dx} \left[\alpha f(x) + \beta g(x)\right] \\
+&amp;= \frac{d}{dx} \left[\alpha f(x)\right] + \frac{d}{dx} \left[\beta g(x)\right] \\
+&amp;= \alpha \frac{d f(x)}{d x} + \beta \frac{d g(x)}{d x},
+\end{aligned}
+\]</span> where the first equality uses our definition of <span class="math inline">\(h(x),\)</span> the second uses the sum rule, and the third uses the constant multiple rule twice.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-deriv-finite-sum" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.14 (Derivative of a finite sum of functions)</strong></span> Let <span class="math inline">\(N\)</span> be a natural number. For each natural number <span class="math inline">\(n \leq N,\)</span> let <span class="math inline">\(f_n : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(g : X \to \mathbb{R}\)</span> by <span class="math display">\[g(x) = \sum_{n=1}^N f_n(x).\]</span> Use the sum rule in a proof by induction (see <a href="logic.html#sec-proof-by-induction" class="quarto-xref"><span>Section 1.2.4</span></a>) to prove that <span class="math display">\[g'(x) = \sum_{n=1}^N f_n'(x).\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Our goal is to prove the claim for all natural numbers <span class="math inline">\(N.\)</span> For the base step, we must show that it is true for <span class="math inline">\(N = 1.\)</span> The claim is trivial in this case, as we have <span class="math inline">\(g(x) = f_1(x)\)</span> and therefore <span class="math display">\[g'(x) = f_1'(x) = \sum_{n=1}^1 f_n'(x).\]</span></p>
+<p>For the induction step, we assume that the claim is true for <span class="math inline">\(N = k,\)</span> so that <span class="math display">\[\frac{d}{dx} \left[\sum_{n=1}^k f_n(x)\right] = \sum_{n=1}^k f_n'(x),\]</span> then show that the claim must be true for <span class="math inline">\(N = k + 1\)</span> as well. Define <span class="math display">\[g(x) = \sum_{n=1}^{k+1} f_n(x).\]</span> By definition, we have <span class="math display">\[g(x) = f_{k+1}(x) + \sum_{n=1}^k f_n(x).\]</span> Using the sum rule, we have <span class="math display">\[g'(x) = f_{k+1}'(x) + \frac{d}{dx} \left[\sum_{n=1}^k f_n(x)\right].\]</span> Using our assumption that the claim is true for <span class="math inline">\(N = k,\)</span> we then have <span class="math display">\[
+\begin{aligned}
+g'(x) = f_{k+1}'(x) + \sum_{n=1}^k f_n'(x) = \sum_{n=1}^{k+1} f_n'(x),
+\end{aligned}
+\]</span> which concludes the induction step by establishing that the claim is true for <span class="math inline">\(N = k + 1\)</span> as well.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-deriv-polynomial" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.15 (Derivative of a polynomial)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> be a polynomial, so that <span class="math display">\[
+\begin{aligned}
+f(x) = c_0 + c_1 x + \cdots + c_k x^k = \sum_{n=0}^k c_n x^n
+\end{aligned}
+\]</span> for some natural number <span class="math inline">\(k\)</span> and real-valued coefficients <span class="math inline">\(c_0, \ldots, c_k.\)</span> Use the constant multiple rule, the derivative of a power function, and the result of <a href="#exr-deriv-finite-sum" class="quarto-xref">Exercise&nbsp;<span>4.14</span></a> to prove that <span class="math display">\[f'(x) = c_1 + 2 c_2 x + \cdots + k c_k x^{k=1} = \sum_{n=0}^k n c_n x^{n-1}.\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Using <a href="#exr-deriv-finite-sum" class="quarto-xref">Exercise&nbsp;<span>4.14</span></a>, we have <span class="math display">\[
+\begin{aligned}
+f'(x) = \sum_{n=0}^k \frac{d}{dx} \left[c_n x^{n}\right].
+\end{aligned}
+\]</span> Using the constant multiple rule, we then have <span class="math display">\[
+\begin{aligned}
+f'(x) = \sum_{n=0}^k c_n \frac{d}{dx} \left[x^{n}\right].
+\end{aligned}
+\]</span> Finally, using the derivative of a power function, we have <span class="math display">\[
+\begin{aligned}
+f'(x) = \sum_{n=0}^k c_n \left[n x^{n-1}\right],
+\end{aligned}
+\]</span> proving the claim.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Unfortunately for us, derivatives of products don’t work quite as intuitively as derivatives of sums. In general, it is <u>not true</u> that the derivative of <span class="math inline">\(f(x) g(x)\)</span> equals <span class="math inline">\(f'(x) g'(x).\)</span> As an illustration, think about the quadratic function <span class="math inline">\(h(x) = x^2 = x \cdot x,\)</span> which decreases up to <span class="math inline">\(x = 0\)</span> and then increases thereafter. If it were true that the derivative of the product equals the product of the derivatives, then we would have <span class="math inline">\(h(x) = 1 \cdot 1 = 1\)</span> (because <span class="math inline">\(h(x) = x \cdot x\)</span> and the derivative of the identity function is 1), falsely implying that the quadratic function is actually linear.</p>
+<p>All that said, we still have a convenient formula to calculate the derivative of a product — it’s just not as convenient as the derivative of a sum. The <span class="concept">product rule</span> to take the derivative of <span class="math inline">\(f(x) g(x)\)</span> essentially breaks the problem into two parts. First we treat <span class="math inline">\(f(x)\)</span> as if it were a constant and take the derivative of <span class="math inline">\(g(x),\)</span> then we do the reverse, and finally we add the two results together.</p>
+<div id="prp-product-rule" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4.7 (Product rule)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> and <span class="math inline">\(g : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(h : X \to \mathbb{R}\)</span> by <span class="math inline">\(h(x) = f(x) \cdot g(x).\)</span> For all <span class="math inline">\(x \in X,\)</span> <span class="math display">\[
+\begin{aligned}
+h'(x) = f(x) g'(x) + f'(x) g(x).
+\end{aligned}
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Take any <span class="math inline">\(x \in X.\)</span> Differentiability of <span class="math inline">\(f\)</span> implies continuity of <span class="math inline">\(f\)</span> (per <a href="#thm-differentiable-implies-continuous" class="quarto-xref">Theorem&nbsp;<span>4.1</span></a>) and thus <span class="math inline">\(\lim_{t \to 0} f(x + t) = f(x).\)</span> Consequently, <span class="math display">\[
+\begin{aligned}
+\MoveEqLeft
+\lim_{t \to 0} \frac{h(x + t) - h(x)}{t} \\
+&amp;= \lim_{t \to 0} \frac{f(x + t) g(x + t) - f(x) g(x)}{t} \\
+&amp;= \lim_{t \to 0} \frac{f(x + t) g(x + t) - f(x + t) g(x) + f(x + t) g(x) - f(x) g(x)}{t} \\
+&amp;= \lim_{t \to 0} \frac{f(x + t) [g(x + t) - g(x)]}{t} + \lim_{t \to 0} \frac{[f(x + t) - f(x)] g(x)}{t} \\
+&amp;= \left[\lim_{t \to 0} f(x + t)\right] \cdot \left[\lim_{t \to 0} \frac{g(x + t) - g(x)}{t}\right] + \left[\lim_{t \to 0} \frac{f(x + t) - f(x)}{t}\right] \cdot g(x) \\
+&amp;= f(x) g'(x) + f'(x) g(x),
+\end{aligned}
+\]</span> as claimed.</p>
+</div>
+<p>Going back to our example of the quadratic function <span class="math inline">\(h(x) = x^2,\)</span> proper use of the product rule confirms that <span class="math inline">\(h'(x) = 2x.\)</span> Let <span class="math inline">\(f(x) = g(x) = x,\)</span> so that <span class="math inline">\(f'(x) = g'(x) = 1\)</span> and <span class="math inline">\(h(x) = f(x) \cdot g(x).\)</span> The product rule then gives us <span class="math display">\[
+\begin{aligned}
+h'(x) &amp;= f(x) g'(x) + f'(x) g(x) \\
+&amp;= x \cdot 1 + 1 \cdot x \\
+&amp;= 2x.
+\end{aligned}
+\]</span></p>
+<p>Now let’s get some more practice with the product rule through some exercises.</p>
+<div id="exr-product-rule-applications" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.16 (Product rule applications)</strong></span> Find the derivatives of the following functions.</p>
+<ol type="1">
+<li><p><span class="math inline">\(f(x) = (2x + 1) (x - 3).\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = x e^x.\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = e^{2x}.\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = e^x \cdot \log(x) \cdot x^3.\)</span></p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Answers">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>You could solve this one by observing that <span class="math inline">\(f(x) = 2x^2 - 5x - 3,\)</span> then applying the formula for the derivative of a polynomial (see <a href="#exr-deriv-polynomial" class="quarto-xref">Exercise&nbsp;<span>4.15</span></a>) to yield <span class="math inline">\(f'(x) = 4 x - 5.\)</span> We get to the same place if we instead use the product rule: <span class="math display">\[
+\begin{aligned}
+f'(x) &amp;= (2x + 1) \cdot 1 + 2 \cdot (x - 3) \\
+&amp;= 2x + 1 + 2x - 6 \\
+&amp;= 4x - 5.
+\end{aligned}
+\]</span></p></li>
+<li><p>Let <span class="math inline">\(g(x) = x\)</span> so that <span class="math inline">\(g'(x) = 1,\)</span> and let <span class="math inline">\(h(x) = e^x\)</span> so that <span class="math inline">\(h'(x) = e^x.\)</span> We have <span class="math display">\[
+\begin{aligned}
+f'(x) &amp;= g(x) h'(x) + g'(x) h(x) \\
+&amp;= x \cdot e^x + 1 \cdot e^x \\
+&amp;= (x + 1) e^x.
+\end{aligned}
+\]</span></p></li>
+<li><p>Let <span class="math inline">\(g(x) = h(x) = e^x\)</span> so that <span class="math inline">\(g'(x) = h'(x) = e^x.\)</span> We have <span class="math display">\[
+\begin{aligned}
+f'(x) &amp;= g(x) h'(x) + g'(x) h(x) \\
+&amp;= e^x \cdot e^x + e^x \cdot e^x \\
+&amp;= e^{2x} + e^{2x} \\
+&amp;= 2 e^{2x}.
+\end{aligned}
+\]</span></p></li>
+<li><p>This one makes us use the product rule twice. We have <span class="math display">\[
+\begin{aligned}
+f'(x)
+&amp;= \frac{d}{dx} \left[e^x \cdot \log(x) \cdot x^3\right] \\
+&amp;= e^x \cdot \left[\frac{d}{dx} \left(\log(x) \cdot x^3\right)\right] + \left[\frac{d}{dx} e^x\right] \cdot \left[\log(x) \cdot x^3\right] \\
+&amp;= e^x \cdot \left[\log(x) \cdot \left(\frac{d}{dx} x^3\right) + \left(\frac{d}{dx} \log(x)\right) \cdot x^3\right] + \left[\frac{d}{dx} e^x\right] \cdot \left[\log(x) \cdot x^3\right] \\
+&amp;= e^x \cdot \left[\log(x) \cdot (3 x^2) + \left(\frac{1}{x}\right) \cdot x^3\right] + \left[e^x \cdot \log(x) \cdot x^3\right] \\
+&amp;= 3 e^x \cdot \log(x) \cdot x^2 + e^x \cdot x^2 + e^x \cdot \log(x) \cdot x^3.
+\end{aligned}
+\]</span> This example is an illustration of a generalization of the product rule: <span class="math display">\[\frac{d}{dx} [f(x) \cdot g(x) \cdot h(x)] = f(x) g(x) h'(x) + f(x) g'(x) h(x) + f'(x) g(x) h(x).\]</span> I’ll leave it to you to prove that general claim.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-deriv-of-square" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.17 (Derivative of the square of a function)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(g : X \to \mathbb{R}\)</span> by <span class="math inline">\(g(x) = f(x)^2.\)</span> Using the product rule, prove that <span class="math display">\[g'(x) = 2 f'(x) f(x).\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have <span class="math inline">\(g(x) = f(x) \cdot f(x),\)</span> so the product rule implies <span class="math display">\[g'(x) = f(x) f'(x) + f'(x) f(x) = 2 f'(x) f(x).\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>The <span class="concept">quotient rule</span> for functions in the form <span class="math inline">\(\frac{f(x)}{g(x)}\)</span> is unfortunately a bit trickier to remember. If you have to Google this one every time you use it, don’t worry — you’re not alone.</p>
+<div id="prp-quotient-rule" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4.8 (Quotient rule)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> and <span class="math inline">\(g : X \to \mathbb{R} \setminus \{0\}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(h : X \to \mathbb{R}\)</span> by <span class="math inline">\(h(x) = \frac{f(x)}{g(x)}.\)</span> For all <span class="math inline">\(x \in X,\)</span> <span class="math display">\[h'(x) = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Codomain of the denominator function">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Codomain of the denominator function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You might notice that the codomain of <span class="math inline">\(g\)</span> is specified to be the set <span class="math inline">\(\mathbb{R} \setminus \{0\},\)</span> meaning that <span class="math inline">\(g(x)\)</span> may in principle be any number other than 0. This is just to ensure that <span class="math inline">\(\frac{f(x)}{g(x)}\)</span> is well-defined, avoiding any kind of problems with dividing by 0.</p>
+</div>
+</div>
+</div>
+</div>
+<p>I’m not going to prove the quotient rule here — you’ll do that yourself in <a href="#exr-quotient-rule" class="quarto-xref">Exercise&nbsp;<span>4.24</span></a> below, once you’ve got one more handy rule for differentiation in hand.</p>
+<p>Before then, let’s work through some practice with the quotient rule. If you use it enough, maybe you’ll actually start to remember it?</p>
 
-### Properties of derivatives
-
-::: {#exr-deriv-polynomial}
-[use properties to prove derivative of polynomial]{.todo}
-:::
-
-::: {#exr-deriv-logarithm-exponent}
-[use properties to prove derivative of non-natural logarithm and exponent]{.todo}
-:::
-
-### Second derivatives and beyond
-
-## Applications of derivatives
-
-### Optimization
-
-### L'Hopital's rule
-
--->
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>This was certainly the case for me writing my job market paper <span class="citation" data-cites="kenkel2023social">(<a href="references.html#ref-kenkel2023social" role="doc-biblioref">Kenkel 2023</a>)</span>, which made such extensive use of the quotient rule that I finally stopped having to Google it after a year or so working on the paper.</p>
+</div></div><div id="exr-csf-derivative" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.18 (Contest success function)</strong></span> A common tool in formal models of conflict is the contest success function, <span class="math display">\[f(x) = \frac{\alpha x}{\alpha x + y}.\]</span> You can think of <span class="math inline">\(x\)</span> here as the amount of resources that I’m devoting toward the conflict, <span class="math inline">\(y &gt; 0\)</span> as the amount of resources that my enemy has devoted, and <span class="math inline">\(\alpha &gt; 0\)</span> as the “force multiplier” on my effort (how much bang for the buck I’m getting). The output of the function represents my probability of winning the conflict, as a function of the amount of resources I devote.</p>
+<ol type="1">
+<li><p>Use the quotient rule to derive <span class="math inline">\(f'(x).\)</span></p></li>
+<li><p>The derivative <span class="math inline">\(f'(x)\)</span> represents approximately how much my chance of victory increases with each unit of resources I expend. Imagine that I don’t want to put in a unit of resources that gets me less than a 1% increase in the chance of victory. Then what’s the largest value of <span class="math inline">\(x\)</span> that I’d be willing to choose? (The answer will depend on the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(y.\)</span>)</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Think of <span class="math inline">\(f(x) = g(x) / h(x)\)</span> where <span class="math inline">\(g(x) = \alpha x\)</span> and <span class="math inline">\(h(x) = \alpha x + y.\)</span> Then, using the quotient rule, we have <span class="math display">\[
+\begin{aligned}
+f'(x)
+&amp;= \frac{g'(x) h(x) - g(x) h'(x)}{h(x)^2} \\
+&amp;= \frac{\alpha (\alpha x + y) - (\alpha x) \alpha}{(\alpha x + y)^2} \\
+&amp;= \frac{\alpha y}{(\alpha x + y)^2}.
+\end{aligned}
+\]</span></p>
+<p>The second question essentially asks us to find the value of <span class="math inline">\(x\)</span> that solves <span class="math inline">\(f'(x) = 0.01:\)</span> <span class="math display">\[
+\begin{aligned}
+f'(x) = 0.01
+&amp;\quad\Leftrightarrow\quad \frac{\alpha y}{(\alpha x + y)^2} = 0.01 \\
+&amp;\quad\Leftrightarrow\quad (\alpha x + y)^2 = 100 \alpha y \\
+&amp;\quad\Leftrightarrow\quad \alpha x + y = 10 \sqrt{\alpha y} \\
+&amp;\quad\Leftrightarrow\quad x = \frac{10 \sqrt{\alpha y} - y}{\alpha}.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-conditional-prob-deriv" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.19 (Derivative of a conditional probability)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable that has a binomial distribution with <span class="math inline">\(n = 2\)</span> and probability parameter <span class="math inline">\(p,\)</span> so that we have <span class="math display">\[
+\begin{aligned}
+\Pr(X = 0) &amp;= (1 - p)^2, \\
+\Pr(X = 1) &amp;= 2 p (1 - p), \\
+\Pr(X = 2) &amp;= p^2.
+\end{aligned}
+\]</span> The conditional probability <span class="math inline">\(\Pr(X = 2 \mid X \geq 1)\)</span> is equal to <span class="math display">\[
+\begin{aligned}
+\Pr(X = 2 \mid X \geq 1)
+= \frac{\Pr(X = 2)}{\Pr(X = 1) + \Pr(X = 2)}
+= \frac{p^2}{2 p (1 - p) + p^2}.
+\end{aligned}
+\]</span> Taking this conditional probability to be a function of the parameter <span class="math inline">\(p,\)</span> find its derivative and show that the derivative is positive for all <span class="math inline">\(p \in (0, 1].\)</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Defining the function <span class="math display">\[f(p) = \frac{p^2}{2p (1 - p) + p^2} = \frac{p^2}{2p - p^2},\]</span> we have <span class="math display">\[
+\begin{aligned}
+f'(p)
+&amp;= \frac{2p (2p - p^2) - p^2 (2 - 2p)}{(2p - p^2)^2} \\
+&amp;= \frac{4 p^2 - 2 p^3 - 2 p^2 + 2 p^3}{(2p - p^2)^2} \\
+&amp;= \frac{p^2}{(2p - p^2)^2}.
+\end{aligned}
+\]</span> We have <span class="math inline">\(p^2 &gt; 0\)</span> and <span class="math inline">\((2p - p^2)^2 &gt; 0\)</span> for all <span class="math inline">\(p \neq 0,\)</span> and therefore <span class="math inline">\(f'(p) &gt; 0\)</span> for all <span class="math inline">\(p \in (0, 1].\)</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>What do we do when we run into a function that isn’t obviously a sum or product or quotient of some other function whose derivative we know how to take? For example, think about the function <span class="math display">\[h(x) = e^{-(x - \mu)^2},\]</span> a close cousin of the probability density function of the normal distribution with mean <span class="math inline">\(\mu\)</span> and variance 1. We know that the derivative of <span class="math inline">\(e^x\)</span> is <span class="math inline">\(e^x\)</span>. And by observing that <span class="math display">\[-(x - \mu)^2 = -[x^2 - 2 x \mu + \mu^2] = 2 x \mu - x^2 - \mu^2,\]</span> we know that its derivative is <span class="math inline">\(2 (\mu - x).\)</span> Is there a way we can put these together to figure out the derivative of <span class="math inline">\(h(x)?\)</span></p>
+<p>The <span class="concept">chain rule</span> helps us deal with situations like this one. Specifically, suppose we have a function of the form <span class="math display">\[h(x) = f(g(x)),\]</span> where <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are each differentiable. Going back to our example, if we define <span class="math inline">\(f(x) = e^x\)</span> and <span class="math inline">\(g(x) = -(x - \mu)^2,\)</span> then we have <span class="math display">\[
+\begin{aligned}
+h(x)
+= e^{-(x - \mu)^2}
+= e^{g(x)}
+= f(g(x)).
+\end{aligned}
+\]</span> In other words, <span class="math inline">\(h\)</span> is the composition of <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> (see the list of function types in <a href="#sec-continuity" class="quarto-xref"><span>Section 4.2.2</span></a>).</p>
+<div id="prp-chain-rule" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4.9 (Chain rule)</strong></span> Let <span class="math inline">\(f : Y \to \mathbb{R}\)</span> and <span class="math inline">\(g : X \to Y\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}\)</span> and <span class="math inline">\(Y \subseteq \mathbb{R}.\)</span> Define the composition <span class="math inline">\(h\)</span> by <span class="math inline">\(h(x) = f(g(x)).\)</span> For all <span class="math inline">\(x \in X,\)</span> <span class="math display">\[h'(x) = f'(g(x)) \cdot g'(x).\]</span></p>
+</div>
+<p>Using the chain rule with our example of <span class="math inline">\(h(x) = e^{-(x - \mu)^2},\)</span> we can calculate the derivative: <span class="math display">\[
+\begin{aligned}
+h'(x)
+&amp;= f'(g(x)) \cdot g'(x) \\
+&amp;= f'(-(x - \mu)^2) \cdot g'(x) \\
+&amp;= e^{-(x - \mu)^2} \cdot 2 (\mu - x) \\
+&amp;= 2 (\mu - x) e^{-(x - \mu)^2}.
+\end{aligned}
+\]</span> If we look at the graph of this function, we see that it increases on <span class="math inline">\((-\infty, \mu)\)</span> and decreases on <span class="math inline">\((\mu, \infty)\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="derivatives_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Our expression for the derivative provides further confirmation that the function increases up to <span class="math inline">\(x = \mu\)</span> and decreases thereafter. The key thing to observe is that <span class="math inline">\(e^z &gt; 0\)</span> for all real numbers <span class="math inline">\(z.\)</span> Therefore, if <span class="math inline">\(x &lt; \mu,\)</span> then we have <span class="math display">\[h'(x) = 2 \underbrace{(\mu - x)}_{&gt; 0} \underbrace{e^{-(x - \mu)^2}}_{&gt; 0} &gt; 0.\]</span> In instead <span class="math inline">\(x &gt; \mu,\)</span> then we have <span class="math display">\[h'(x) = 2 \underbrace{(\mu - x)}_{&lt; 0} \underbrace{e^{-(x - \mu)^2}}_{&gt; 0} &lt; 0.\]</span></p>
+<p>Let’s return to our motivating example of the statistical lottery (see <a href="#sec-statistical-lottery" class="quarto-xref"><span>Section 4.1</span></a>). Remember that the expected winnings for guessing <span class="math inline">\(g \in [0, 100]\)</span> is given by the function <span class="math display">\[
+\begin{aligned}
+W(g) = \frac{1}{N} \sum_{i=1}^N \left[10000 - (x_i - g)^2\right].
+\end{aligned}
+\]</span> We finally have everything we need to calculate the derivative of this function. First, using the constant multiple rule, <span class="math display">\[
+\begin{aligned}
+W'(g) = \frac{1}{N} \cdot \frac{d}{dg} \left\{\sum_{i=1}^N \left[10000 - (x_i - g)^2\right]\right\}.
+\end{aligned}
+\]</span> Then, using our extension of the sum rule to any finite sum (see <a href="#exr-deriv-finite-sum" class="quarto-xref">Exercise&nbsp;<span>4.14</span></a>), <span class="math display">\[
+\begin{aligned}
+W'(g) = \frac{1}{N} \sum_{i=1}^N \frac{d}{dg} \left[10000 - (x_i - g)^2\right].
+\end{aligned}
+\]</span> Again applying the sum rule and the constant multiple rule, <span class="math display">\[
+\begin{aligned}
+W'(g)
+&amp;= \frac{1}{N} \sum_{i=1}^N \left\{\underbrace{\frac{d}{dg} [10000]}_{=0} - \frac{d}{dg} \left[(x_i - g)^2\right]\right\} \\
+&amp;= \frac{-1}{N} \sum_{i=1}^N \frac{d}{dg} \left[(x_i - g)^2\right].
+\end{aligned}
+\]</span> At this point we can apply the chain rule to each individual component of the sum, letting <span class="math inline">\(a(g) = g^2\)</span> be the “outer” function (with derivative <span class="math inline">\(a'(g) = 2g\)</span>) and <span class="math inline">\(b_i(g) = x_i - g\)</span> be the “inner” function (with derivative <span class="math inline">\(b_i'(g) = -1\)</span>): <span class="math display">\[
+\begin{aligned}
+W'(g)
+&amp;= \frac{-1}{N} \sum_{i=1}^N \frac{d}{dg} [a(b(g))] \\
+&amp;= \frac{-1}{N} \sum_{i=1}^N a'(b(g)) \cdot b'(g) \\
+&amp;= \frac{-1}{N} \sum_{i=1}^N [2 (x_i - g)] \cdot (-1) \\
+&amp;= \frac{2}{N} \sum_{i=1}^N [x_i - g] \\
+&amp;= \frac{2}{N} \left[\sum_{i=1}^N x_i - N g\right].
+\end{aligned}
+\]</span></p>
+<p>We are finally — finally! — ready to show, beyond a shadow of a mathematical doubt, that the winnings-maximizing guess in the statistical lottery game is <span class="math inline">\(g = \bar{x},\)</span> the average of the values displayed on the lottery balls. Remember that the sample mean <span class="math inline">\(\bar{x}\)</span> is defined as <span class="math inline">\(\bar{x} = \frac{1}{N} \sum_{i=1}^N x_i.\)</span> Therefore, we have <span class="math display">\[
+\begin{aligned}
+W'(g)
+&amp;= \frac{2}{N} \left[\sum_{i=1}^N x_i - N g\right] \\
+&amp;= 2 \left[\frac{1}{N} \sum_{i=1}^N x_i - g\right] \\
+&amp;= 2 (\bar{x} - g).
+\end{aligned}
+\]</span> Here’s how we can use this expression to infer that our best guess is <span class="math inline">\(g = \bar{x}\)</span>:</p>
+<ul>
+<li><p>Consider any guess below the sample mean, <span class="math inline">\(g &lt; \bar{x}.\)</span> For any such guess, we have <span class="math inline">\(W'(g) &gt; 0.\)</span> This means expected winnings are increasing at <span class="math inline">\(g\)</span> — i.e., you could expect to win more by guessing slightly more than <span class="math inline">\(g.\)</span></p></li>
+<li><p>Consider any guess above the sample mean, <span class="math inline">\(g &gt; \bar{x}.\)</span> Now we are in the opposite situation, with <span class="math inline">\(W'(g) &lt; 0.\)</span> This means expected winnings are decreasing at <span class="math inline">\(g\)</span> — i.e., you could expect to win more by guessing slightly less than <span class="math inline">\(g.\)</span></p></li>
+<li><p>Because the function increases up to <span class="math inline">\(g = \bar{x}\)</span> and decreases thereafter, we conclude that the optimal guess is <span class="math inline">\(g = \bar{x}.\)</span></p></li>
+</ul>
+<p>You might also have noticed that <span class="math inline">\(W'(\bar{x}) = 0.\)</span> You might suspect that an even simpler proof of the claim would be to observe that this is the only guess for which the derivative of the expected winnings function is 0. That’s almost true, but we need to do a bit more to get there — as we will in <a href="optimization.html" class="quarto-xref"><span>Chapter 5</span></a> below.</p>
+<p>Before we move on, let’s do some exercises to get more practice with the chain rule.</p>
+<div id="exr-deriv-exponent" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.20 (Derivative of an exponential function)</strong></span> Let <span class="math inline">\(b\)</span> be a positive constant, and define the function <span class="math inline">\(f(x) = b^x.\)</span> Using the chain rule, show that <span class="math inline">\(f'(x) = b^x \cdot \log(b).\)</span></p>
+<p><em>Hint:</em> Start out by using the fact that <span class="math inline">\(b = e^{\log(b)}.\)</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have <span class="math display">\[f(x) = b^x = (e^{\log(b)})^x = e^{\log(b) \cdot x}.\]</span> Define the “inner” function <span class="math inline">\(h(x) = \log(b) \cdot x\)</span> (with derivative <span class="math inline">\(h'(x) = \log(b)\)</span>) and the “outer” function <span class="math inline">\(g(x) = e^x\)</span> (with derivative <span class="math inline">\(g'(x) = e^x\)</span>), so that we have <span class="math display">\[f(x) = e^{\log(b) \cdot x} = e^{h(x)} = g(h(x)).\]</span> Then, using the chain rule, we have <span class="math display">\[
+\begin{aligned}
+f'(x)
+&amp;= g'(h(x)) \cdot h'(x) \\
+&amp;= g'(\log(b) \cdot x) \cdot h'(x) \\
+&amp;= e^{\log(b) \cdot x} \cdot \log(b) \\
+&amp;= b^x \cdot \log(b).
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-deriv-exponential-cdf" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.21 (Derivative of the exponential CDF)</strong></span> For all <span class="math inline">\(x \geq 0,\)</span> the cumulative distribution function of the <a href="https://en.wikipedia.org/wiki/Exponential_distribution">exponential distribution</a> with rate parameter <span class="math inline">\(\lambda &gt; 0\)</span> is <span class="math display">\[F(x) = 1 - e^{-\lambda x}.\]</span> Characterize the probability density function of this distribution by finding the derivative of the cumulative distribution function.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let’s first just look at <span class="math inline">\(e^{-\lambda x}.\)</span> We can think of this as a composition of the “outer” function <span class="math inline">\(g(x) = e^x\)</span> (with derivative <span class="math inline">\(g'(x) = e^x\)</span>) and the “inner” function <span class="math inline">\(h(x) = -\lambda x\)</span> (with derivative <span class="math inline">\(h'(x) = -\lambda\)</span>). Therefore, its derivative is <span class="math display">\[g'(h(x)) \cdot h'(x) = g'(-\lambda x) \cdot h'(x) = e^{-\lambda x} \cdot -\lambda.\]</span></p>
+<p>Returning to the full expression for the CDF and applying the sum rule, we have <span class="math display">\[
+\begin{aligned}
+F'(x)
+&amp;= \frac{d}{dx} \left[1 - e^{-\lambda x}\right] \\
+&amp;= \left[\frac{d}{dx} (1) - \frac{d}{dx} \left(e^{-\lambda x}\right) \right] \\
+&amp;= \left[0 - e^{-\lambda x} \cdot -\lambda\right] \\
+&amp;= \lambda e^{-\lambda x}.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-deriv-logistic-cdf" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.22 (Derivative of the logistic CDF)</strong></span> For all <span class="math inline">\(x \in \mathbb{R},\)</span> the cumulative distribution function of the <a href="https://en.wikipedia.org/wiki/Logistic_distribution">logistic distribution</a> is <span class="math display">\[F(x) = \frac{1}{1 + e^{-x}}.\]</span> Characterize the probability density function of this distribution by finding the derivative of the cumulative distribution function.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have <span class="math inline">\(F(x) = (1 + e^{-x})^{-1}.\)</span> By repeatedly applying the chain rule, we have <span class="math display">\[
+\begin{aligned}
+F'(x)
+&amp;= (-1) (1 + e^{-x})^{-2} \cdot \frac{d}{dx} [1 + e^{-x}] \\
+&amp;= -(1 + e^{-x})^{-2} \cdot \frac{d}{dx} e^{-x} \\
+&amp;= -(1 + e^{-x})^{-2} \cdot e^{-x} \cdot \frac{d}{dx} [-x] \\
+&amp;= -(1 + e^{-x})^{-2} \cdot e^{-x} \cdot -1 \\
+&amp;= \frac{e^{-x}}{(1 + e^{-x})^2}.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-deriv-log-f" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.23 (Derivative of the logarithm of a function)</strong></span> Let <span class="math inline">\(f\)</span> be a differentiable function that maps from <span class="math inline">\(X \subseteq \mathbb{R}\)</span> into the strictly positive reals, <span class="math inline">\((0, \infty).\)</span> Define the function <span class="math inline">\(g(x) = \log [f(x)].\)</span> Prove that <span class="math display">\[g'(x) = \frac{f'(x)}{f(x)}.\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(g\)</span> is the composition of the natural logarithm and <span class="math inline">\(f\)</span>. Therefore, by the chain rule, <span class="math display">\[
+\begin{aligned}
+g'(x)
+&amp;= \log' [f(x)] \cdot f'(x) \\
+&amp;= \frac{1}{f(x)} \cdot f'(x) \\
+&amp;= \frac{f'(x)}{f(x)}.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-quotient-rule" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.24 (Proving the quotient rule)</strong></span> Use the product rule and the chain rule to prove the quotient rule.</p>
+<p><em>Hint:</em> Start with the fact that <span class="math inline">\(\frac{f(x)}{g(x)} = f(x) \cdot g(x)^{-1}.\)</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Define <span class="math inline">\(h(x) = \frac{f(x)}{g(x)} = f(x) \cdot g(x)^{-1}.\)</span> By the product rule, <span class="math display">\[
+\begin{aligned}
+h'(x)
+&amp;= f(x) \cdot \frac{d}{dx} \left[g(x)^{-1}\right] + f'(x) \cdot g(x)^{-1}.
+\end{aligned}
+\]</span> Using the chain rule, we have <span class="math display">\[
+\begin{aligned}
+\frac{d}{dx} \left[g(x)^{-1}\right]
+&amp;= (-1) g(x)^{-2} \cdot g'(x) \\
+&amp;= \frac{-g'(x)}{g(x)^2}.
+\end{aligned}
+\]</span> Substituting this into the product rule calculation from before, we have <span class="math display">\[
+\begin{aligned}
+h'(x)
+&amp;= f(x) \cdot \frac{d}{dx} \left[g(x)^{-1}\right] + f'(x) \cdot g(x)^{-1} \\
+&amp;= f(x) \cdot \frac{-g'(x)}{g(x)^2} + f'(x) \cdot \frac{1}{g(x)} \\
+&amp;= \frac{- f(x) g'(x)}{g(x)^2} + \frac{f'(x)}{g(x)} \\
+&amp;= \frac{- f(x) g'(x)}{g(x)^2} + \frac{f'(x) g(x)}{g(x)^2} \\
+&amp;= \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="second-derivatives" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="second-derivatives"><span class="header-section-number">4.3.3</span> Second derivatives</h3>
+<p>In economics, inflation is a measure of the rate of increase in the price level. When prices are going up, inflation is positive. The quicker the prices are going up, the higher the measure of inflation is. In the rare event that prices are going down, we’d say we have “deflation,” in which case the standard measures of inflation would be negative. Mathematically, you can think about the price level as a function of time, and then think of inflation as the derivative of this function.</p>
+<p>Politicians will sometimes brag that inflation is decreasing. But they usually don’t mean that the price level is actually going down: that would mean we’re having deflation, which usually occurs only in the context of Great Depression-type economic cataclysms. Instead, a decrease in inflation typically means that prices are increasing, but not as quickly as they were earlier. In other words, the rate of increase is itself decreasing. But now we’re thinking about the rate of change in a rate of change … or the derivative of a derivative, also known as the <span class="concept">second derivative</span>.</p>
+<div id="def-second-derivative" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.6 (Second derivative)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}\)</span>. For any domain point <span class="math inline">\(c \in X\)</span>, the <span class="concept">second derivative</span> of <span class="math inline">\(f\)</span> at <span class="math inline">\(c\)</span> is <span class="math display">\[
+\begin{aligned}
+f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c},
+\end{aligned}
+\]</span> provided that this limit exists. When it does, we say that <span class="math inline">\(f\)</span> is <span class="concept">twice differentiable at the point</span> <span class="math inline">\(c\)</span>.</p>
+<p>If <span class="math inline">\(f\)</span> is twice differentiable at every point in its domain, we simply say that it is <span class="concept">twice differentiable</span>.</p>
+</div>
+<p>Sometimes in formal theory papers, you’ll see a function described just in terms of its first and second derivatives. For instance, I might write, “Let <span class="math inline">\(f : [0, 1] \to [0, 1]\)</span> be twice differentiable, with <span class="math inline">\(f' &gt; 0\)</span> and <span class="math inline">\(f'' &lt; 0.\)</span> Here’s a little cheat sheet to interpret statements like that one.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Case</th>
+<th>First derivative</th>
+<th>Second derivative</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Positive: <span class="math inline">\(f'(x) &gt; 0\)</span></td>
+<td>Positive: <span class="math inline">\(f''(x) &gt; 0\)</span></td>
+<td>The function is increasing ever more steeply as we move to the right on the x axis</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Positive: <span class="math inline">\(f'(x) &gt; 0\)</span></td>
+<td>Negative: <span class="math inline">\(f''(x) &lt; 0\)</span></td>
+<td>The function is increasing, but the rate of increase is slowing down as we move to the right</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Negative: <span class="math inline">\(f'(x) &lt; 0\)</span></td>
+<td>Positive: <span class="math inline">\(f''(x) &gt; 0\)</span></td>
+<td>The function is decreasing, but the rate of decrease is slowing down as we move to the right</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Negative: <span class="math inline">\(f'(x) &lt; 0\)</span></td>
+<td>Negative: <span class="math inline">\(f''(x) &lt; 0\)</span></td>
+<td>The function is decreasing ever more steeply as we move to the right on the x axis</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="derivatives_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If a function has a non-negative second derivative, <span class="math inline">\(f''(x) \geq 0,\)</span> we call it <span class="concept">convex</span>. Additionally, if the second derivative is strictly positive, <span class="math inline">\(f''(x) &gt; 0,\)</span> we call the function <span class="concept">strictly convex</span>. A classic example of a strictly convex function is exponential growth. For example, let <span class="math inline">\(f(t)\)</span> be the number of mice you will have at time <span class="math inline">\(t\)</span> if you start with one boy mouse and one girl mouse at <span class="math inline">\(t = 0\)</span>. If the number of mice doubles with each unit of time, then you’ll have <span class="math display">\[
+\begin{aligned}
+f(0) &amp;= 2, \\
+f(1) &amp;= 4, \\
+f(2) &amp;= 8, \\
+f(3) &amp;= 16, \\
+f(4) &amp;= 32, \\
+\vdots
+\end{aligned}
+\]</span> So not only is the function increasing, but it’s increasing more quickly as time goes on. Because the rate of increase is itself increasing, the function is strictly convex.</p>
+<p>On the other hand, we call a function <span class="concept">concave</span> if <span class="math inline">\(f''(x) \leq 0,\)</span> and additionally <span class="concept">strictly concave</span> if <span class="math inline">\(f''(x) &lt; 0.\)</span> Concave functions often arise in economic contexts. In particular, we often think that concave functions are a good way to model the amount of “utility” (happiness, loosely speaking) that a person derives from consuming a quantity of a good. For instance, let <span class="math inline">\(t\)</span> be the number of tacos I’ve eaten and let <span class="math inline">\(u(t)\)</span> be how happy I am as a function of the number of tacos I’ve eaten. There’s a big happiness boost going from 0 tacos (starving) to 1 taco (still hungry but not starving). There’s a smaller happiness boost going from 1 taco to 2 tacos (barely full). The boost keeps decreasing from there, and once I’m full I would actively prefer to not eat any additional tacos. Altogether, then, <span class="math inline">\(u(t)\)</span> is strictly concave — each additional taco raises my happiness by a lower and lower amount.</p>
+<p>A linear function is both convex and concave. However, it is neither strictly convex nor strictly concave. All that is a long way of saying that the second derivative of a linear function is always zero. That’s true because the derivative of a linear function is its slope, a constant, so the derivative of the derivative is zero.</p>
+<div id="exr-concave-convex" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.25 (Concave and convex functions)</strong></span> Using the second derivative, characterize the conditions under which each of the following functions is convex or concave:</p>
+<ol type="1">
+<li><p>A quadratic function of the form <span class="math inline">\(f(x) = a x^2 + b x + c.\)</span></p></li>
+<li><p>An exponential function of the form <span class="math inline">\(f(x) = b^x,\)</span> where <span class="math inline">\(b &gt; 0.\)</span></p></li>
+<li><p>A logarithmic function of the form <span class="math inline">\(f(x) = \log_b x,\)</span> where <span class="math inline">\(b &gt; 0\)</span> and <span class="math inline">\(b \neq 1.\)</span></p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>We have <span class="math inline">\(f'(x) = 2 a x + b\)</span> and thus <span class="math inline">\(f''(x) = 2a.\)</span> So the function is concave if <span class="math inline">\(a \leq 0\)</span> and convex if <span class="math inline">\(a \geq 0.\)</span></p></li>
+<li><p>We have <span class="math inline">\(f'(x) = b^x \cdot \log(b)\)</span> and thus <span class="math inline">\(f''(x) = b^x \cdot (\log(b))^2.\)</span> If <span class="math inline">\(b = 1,\)</span> then we have <span class="math inline">\(\log(b) = 0\)</span> and the function is linear (both concave and convex). Otherwise, we have <span class="math inline">\(\log(b) \neq 0,\)</span> hence <span class="math inline">\((\log(b))^2 &gt; 0,\)</span> hence <span class="math inline">\(b^x \cdot (\log(b))^2 &gt; 0,\)</span> so the function is strictly convex.</p></li>
+<li><p>We have <span class="math inline">\(f'(x) = \frac{1}{x \log(b)} = \frac{1}{\log(b)} \cdot x^{-1}\)</span> and thus <span class="math display">\[f''(x) = \frac{1}{\log(b)} \cdot \left[-1 \cdot x^{-2}\right] = \frac{-1}{x^2 \log(b)}.\]</span> The sign of the second derivative is the same as that of <span class="math inline">\(\log(b)\)</span>, so the function is convex if <span class="math inline">\(b \in (0, 1)\)</span> and is concave if <span class="math inline">\(b \in (1, \infty).\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-normal-pdf-concave" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.26 (Concave portion of the normal PDF)</strong></span> A function can be concave on part of its domain and convex on other parts. For example, take the probability density function of the standard normal distribution, <span class="math inline">\(f(x) = \frac{1}{\sqrt{2 \pi}} e^{-x^2 / 2}.\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="derivatives_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can see from the graph that the standard normal PDF is concave on <span class="math inline">\([-1, 1]\)</span>, while it is convex on the rest of its domain. Use its second derivative to prove this.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Using the constant multiple rule and the chain rule, we have <span class="math display">\[
+\begin{aligned}
+f'(x)
+&amp;= \frac{d}{dx} \left[\frac{1}{\sqrt{2 \pi}} e^{-x^2 / 2}\right] \\
+&amp;= \frac{1}{\sqrt{2 \pi}} \frac{d}{dx} \left[e^{-x^2/2}\right] \\
+&amp;= \frac{1}{\sqrt{2 \pi}} \left[e^{-x^2 / 2} \cdot \frac{-2x}{2}\right] \\
+&amp;= \frac{-1}{\sqrt{2 \pi}} \cdot x e^{-x^2/2}.
+\end{aligned}
+\]</span> We can then use the constant multiple rule and the product rule to find the second derivative: <span class="math display">\[
+\begin{aligned}
+f''(x)
+&amp;= \frac{d}{dx} \left[\frac{-1}{\sqrt{2 \pi}} \cdot x e^{-x^2/2}\right] \\
+&amp;= \frac{-1}{\sqrt{2 \pi}} \frac{d}{dx} \left[x e^{-x^2/2}\right] \\
+&amp;= \frac{-1}{\sqrt{2 \pi}} \left[x \cdot \frac{d}{dx} \left(e^{-x^2/2}\right) + 1 \cdot e^{-x^2/2}\right] \\
+&amp;= \frac{-1}{\sqrt{2 \pi}} \left[x \cdot \left(-x e^{-x^2/2}\right) + e^{-x^2/2}\right] \\
+&amp;= \frac{-1}{\sqrt{2 \pi}} \left[e^{-x^2 / 2} - x^2 e^{-x^2/2}\right] \\
+&amp;= \frac{1}{\sqrt{2 \pi}} (x^2 - 1) e^{-x^2/2}.
+\end{aligned}
+\]</span> Because <span class="math inline">\(\frac{1}{\sqrt{2 \pi}} &gt; 0\)</span> and <span class="math inline">\(e^{-x^2/2} &gt; 0\)</span> for all <span class="math inline">\(x,\)</span> the sign of the second derivative will always be the same as that of <span class="math inline">\(x^2 - 1.\)</span> Consequently, the second derivative is weakly negative — and thus the function is concave — if and only if <span class="math inline">\(-1 \leq x \leq 1.\)</span></p>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="concept-review" class="level2" data-number="4.4">
@@ -1238,17 +1930,69 @@ The derivative of <span class="math inline">\(f\)</span> at the point <span clas
 <dd>
 A function <span class="math inline">\(f : X \to \mathbb{R}\)</span> is differentiable at a point in its domain, <span class="math inline">\(c \in X\)</span>, if the derivative <span class="math inline">\(f'(c)\)</span> exists. We call <span class="math inline">\(f\)</span> a differentiable function if it is differentiable at every point in its domain.
 </dd>
+<dt><span class="concept">Constant multiple rule</span></dt>
+<dd>
+If <span class="math inline">\(g(x) = c f(x),\)</span> where <span class="math inline">\(c\)</span> is a constant real number, then <span class="math inline">\(g'(x) = c f'(x).\)</span>
+</dd>
+<dt><span class="concept">Sum rule</span></dt>
+<dd>
+If <span class="math inline">\(h(x) = f(x) + g(x),\)</span> then <span class="math inline">\(h'(x) = f'(x) + g'(x).\)</span>
+</dd>
+<dt><span class="concept">Product rule</span></dt>
+<dd>
+If <span class="math inline">\(h(x) = f(x) g(x),\)</span> then <span class="math inline">\(h'(x) = f(x) g'(x) + f'(x) g(x).\)</span>
+</dd>
+<dt><span class="concept">Quotient rule</span></dt>
+<dd>
+If <span class="math inline">\(h(x) = f(x) / g(x),\)</span> then <span class="math display">\[h'(x) = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.\]</span>
+</dd>
+<dt><span class="concept">Chain rule</span></dt>
+<dd>
+If <span class="math inline">\(h(x) = f(g(x)),\)</span> then <span class="math inline">\(h'(x) = f'(g(x)) \cdot g'(x).\)</span>
+</dd>
+<dt><span class="concept">Second derivative</span></dt>
+<dd>
+The second derivative of a differentiable function <span class="math inline">\(f(x)\)</span>, denoted <span class="math inline">\(f''(x),\)</span> is the derivative of the function’s derivative: <span class="math display">\[f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c}.\]</span>
+</dd>
+<dt><span class="concept">Twice differentiability</span></dt>
+<dd>
+A function <span class="math inline">\(f : X \to \mathbb{R}\)</span> is twice differentiable at a point in its domain, <span class="math inline">\(c \in X,\)</span> if the second derivative <span class="math inline">\(f''(c)\)</span> exists. We call <span class="math inline">\(f\)</span> a twice differentiable function if it is twice differentiable at every point in its domain.
+</dd>
+<dt><span class="concept">Convex function</span></dt>
+<dd>
+A twice differentiable function is convex if <span class="math inline">\(f''(x) \geq 0,\)</span> and additionally is strictly convex if <span class="math inline">\(f''(x) &gt; 0.\)</span>
+</dd>
+<dt><span class="concept">Concave function</span></dt>
+<dd>
+A twice differentiable function is concave if <span class="math inline">\(f''(x) \leq 0,\)</span> and additionally is strictly concave if <span class="math inline">\(f''(x) &lt; 0.\)</span>
+</dd>
 </dl>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <dl>
+<dt><span class="concept">Chain rule</span></dt>
+<dd>
+If <span class="math inline">\(h(x) = f(g(x)),\)</span> then <span class="math inline">\(h'(x) = f'(g(x)) \cdot g'(x).\)</span>
+</dd>
 <dt><span class="concept">Composition</span></dt>
 <dd>
 Consider two functions <span class="math inline">\(h : X \to Y\)</span> and <span class="math inline">\(g : Y \to Z\)</span>. The composition of <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> is the function <span class="math inline">\(f : X \to Z\)</span> defined by <span class="math inline">\(f(x) = g(h(x))\)</span>.
 </dd>
+<dt><span class="concept">Concave function</span></dt>
+<dd>
+A twice differentiable function is concave if <span class="math inline">\(f''(x) \leq 0,\)</span> and additionally is strictly concave if <span class="math inline">\(f''(x) &lt; 0.\)</span>
+</dd>
+<dt><span class="concept">Constant multiple rule</span></dt>
+<dd>
+If <span class="math inline">\(g(x) = c f(x),\)</span> where <span class="math inline">\(c\)</span> is a constant real number, then <span class="math inline">\(g'(x) = c f'(x).\)</span>
+</dd>
 <dt><span class="concept">Continuity</span></dt>
 <dd>
 A function <span class="math inline">\(f : X \to Y\)</span> is continuous at a point in its domain, <span class="math inline">\(c \in X\)</span>, if its limit at that point exists and equals the value of the function: <span class="math inline">\(\lim_{x \to c} f(x) = f(c)\)</span>. We call <span class="math inline">\(f\)</span> a continuous function if it is continuous at every point in its domain.
+</dd>
+<dt><span class="concept">Convex function</span></dt>
+<dd>
+A twice differentiable function is convex if <span class="math inline">\(f''(x) \geq 0,\)</span> and additionally is strictly convex if <span class="math inline">\(f''(x) &gt; 0.\)</span>
 </dd>
 <dt><span class="concept">Derivative</span></dt>
 <dd>
@@ -1274,9 +2018,29 @@ The limit of <span class="math inline">\(f(x)\)</span> as <span class="math inli
 <dd>
 A polynomial is a function of the form <span class="math display">\[f(x) = c_0 + c_1 x + c_2 x^2 + \cdots + c_k x^k,\]</span> where <span class="math inline">\(k\)</span> is a natural number and each coefficient <span class="math inline">\(c_0, \ldots, c_k\)</span> is a real number.
 </dd>
+<dt><span class="concept">Product rule</span></dt>
+<dd>
+If <span class="math inline">\(h(x) = f(x) g(x),\)</span> then <span class="math inline">\(h'(x) = f(x) g'(x) + f'(x) g(x).\)</span>
+</dd>
+<dt><span class="concept">Quotient rule</span></dt>
+<dd>
+If <span class="math inline">\(h(x) = f(x) / g(x),\)</span> then <span class="math display">\[h'(x) = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.\]</span>
+</dd>
+<dt><span class="concept">Second derivative</span></dt>
+<dd>
+The second derivative of a differentiable function <span class="math inline">\(f(x)\)</span>, denoted <span class="math inline">\(f''(x),\)</span> is the derivative of the function’s derivative: <span class="math display">\[f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c}.\]</span>
+</dd>
 <dt><span class="concept">Slope</span></dt>
 <dd>
 For a linear function, <span class="math inline">\(f(x) = \alpha + \beta x\)</span>, the slope is the coefficient <span class="math inline">\(\beta\)</span>. It can be calculated using the rise-over-run formula: for any distinct points <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> in the domain of <span class="math inline">\(f\)</span>, <span class="math display">\[\beta = \frac{f(x_1) - f(x_2)}{x_1 - x_2}.\]</span>
+</dd>
+<dt><span class="concept">Sum rule</span></dt>
+<dd>
+If <span class="math inline">\(h(x) = f(x) + g(x),\)</span> then <span class="math inline">\(h'(x) = f'(x) + g'(x).\)</span>
+</dd>
+<dt><span class="concept">Twice differentiability</span></dt>
+<dd>
+A function <span class="math inline">\(f : X \to \mathbb{R}\)</span> is twice differentiable at a point in its domain, <span class="math inline">\(c \in X,\)</span> if the second derivative <span class="math inline">\(f''(c)\)</span> exists. We call <span class="math inline">\(f\)</span> a twice differentiable function if it is twice differentiable at every point in its domain.
 </dd>
 </dl>
 </div>
@@ -1285,6 +2049,9 @@ For a linear function, <span class="math inline">\(f(x) = \alpha + \beta x\)</sp
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-kenkel2023social" class="csl-entry" role="listitem">
+Kenkel, Brenton. 2023. <span>“Social Conflict and the Predatory State.”</span> <em>Quarterly Journal of Political Science</em> 18 (4): 437–68. <a href="https://doi.org/10.1561/100.00020116">https://doi.org/10.1561/100.00020116</a>.
+</div>
 <div id="ref-rudin1976principles" class="csl-entry" role="listitem">
 Rudin, Walter. 1976. <em>Principles of Mathematical Analysis</em>. 3rd ed. McGraw-Hill.
 </div>
@@ -1698,8 +2465,8 @@ Rudin, Walter. 1976. <em>Principles of Mathematical Analysis</em>. 3rd ed. McGra
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./optimization.html" class="pagination-link" aria-label="Optimization">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Optimization</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

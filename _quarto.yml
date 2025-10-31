@@ -11,6 +11,7 @@ book:
     - set_theory.qmd
     - sequences_series.qmd
     - derivatives.qmd
+    - optimization.qmd
     - references.qmd
   license: "CC BY-NC-SA 4.0"
   sidebar:
