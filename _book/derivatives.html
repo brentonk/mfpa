@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>4&nbsp; Derivatives – Mathematical Foundations of Political Analysis</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -24,7 +27,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -58,10 +60,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6a1232d96cac1088957bdf5a55b95c03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-727843457bad2570bec5680c786b2135.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -91,7 +93,7 @@ div.csl-indent {
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -104,7 +106,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -386,12 +388,12 @@ f(x) = \begin{cases}
 <div id="def-limit-function" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 4.1 (Limit of a function)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{R}\)</span> be an open interval, and consider the function <span class="math inline">\(f: X \to \mathbb{R}\)</span>. For a point <span class="math inline">\(c \in X\)</span>, we say that the <span class="concept">limit of the function</span> as <span class="math inline">\(x\)</span> approaches <span class="math inline">\(c\)</span> equals <span class="math inline">\(y\)</span>, denoted <span class="math inline">\(\lim_{x \to c} f(x) = y\)</span>, if the following condition holds: for any value of <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists a value <span class="math inline">\(\delta &gt; 0\)</span> such that <span class="math inline">\(|f(x) - y| &lt; \epsilon\)</span> for all <span class="math inline">\(x\)</span> satisfying <span class="math inline">\(0 &lt; |x - c| &lt; \delta\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Optional technical note: Extension to general domains">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Optional technical note: Extension to general domains
+<span class="screen-reader-only">Note</span>Optional technical note: Extension to general domains
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -435,12 +437,12 @@ f(x) = \begin{cases}
 <div id="exr-limit-linear" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.1 (Limit of a linear function)</strong></span> Let <span class="math inline">\(c\)</span>, <span class="math inline">\(\alpha\)</span>, and <span class="math inline">\(\beta\)</span> be real numbers. Let <span class="math inline">\(f : \mathbb{R} \to \mathbb{R}\)</span> be a function such that <span class="math inline">\(f(x) = \alpha + \beta x\)</span> for all <span class="math inline">\(x \neq c\)</span>. Prove that <span class="math inline">\(\lim_{x \to c} f(x) = \alpha + \beta c\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -502,12 +504,12 @@ Figure&nbsp;4.7
 <p>For a point <span class="math inline">\(c \in X\)</span>, we say that the limit of <span class="math inline">\(f(x)\)</span> as <span class="math inline">\(x\)</span> approaches <span class="math inline">\(c\)</span> <span class="concept">from the left</span> equals <span class="math inline">\(y\)</span>, denoted <span class="math inline">\(\lim_{x \to c^-} f(x) = y\)</span>, if the following condition holds: for any value of <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists a value <span class="math inline">\(\delta &gt; 0\)</span> such that <span class="math inline">\(|f(x) - y| &lt; \epsilon\)</span> for all <span class="math inline">\(x \in (c - \delta, c)\)</span>.</p>
 <p>Similarly, we say that the limit of <span class="math inline">\(f(x)\)</span> as <span class="math inline">\(x\)</span> approaches <span class="math inline">\(c\)</span> <span class="concept">from the right</span> equals <span class="math inline">\(y\)</span>, denoted <span class="math inline">\(\lim_{x \to c^+} f(x) = y\)</span>, if the following condition holds: for any value of <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists a value <span class="math inline">\(\delta &gt; 0\)</span> such that <span class="math inline">\(|f(x) - y| &lt; \epsilon\)</span> for all <span class="math inline">\(x \in (c, c + \delta)\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Optional technical note: Extension to general domains">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Optional technical note: Extension to general domains
+<span class="screen-reader-only">Note</span>Optional technical note: Extension to general domains
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -528,12 +530,12 @@ Optional technical note: Extension to general domains
 <p><span class="theorem-title"><strong>Exercise 4.2</strong></span> For the step function illustrated in <a href="#fig-step-function" class="quarto-xref">Figure&nbsp;<span>4.7</span></a>, use <a href="#def-handed-limit" class="quarto-xref">Definition&nbsp;<span>4.2</span></a> to prove that <span class="math inline">\(\lim_{x \to 0^-} f(x) = 0\)</span> and that <span class="math inline">\(\lim_{x \to 0^+} f(x) = 1\)</span>.</p>
 <p><em>(If you’re not seeing how to work through this one, check the answer to the left-hand limit first, then use that answer as a template to prove the right-hand limit.)</em></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer: left-hand">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer: left-hand
+<span class="screen-reader-only">Note</span>Answer: left-hand
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -544,12 +546,12 @@ Answer: left-hand
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer: right-hand">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer: right-hand
+<span class="screen-reader-only">Note</span>Answer: right-hand
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -593,12 +595,12 @@ Answer: right-hand
 <div id="exr-sum-of-function-limits" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.3</strong></span> Let <span class="math inline">\(X\)</span> be a set of real numbers, and for each <span class="math inline">\(i = 1, \ldots, N\)</span>, let <span class="math inline">\(f_i : X \to \mathbb{R}\)</span> be a function. Suppose there is a point <span class="math inline">\(c \in X\)</span> such that <span class="math inline">\(\lim_{x \to c} f_i(x)\)</span> exists for all <span class="math inline">\(i = 1, \ldots, N\)</span>. Use a proof by induction (see <a href="logic.html#sec-proof-by-induction" class="quarto-xref"><span>Section 1.2.4</span></a>) to prove that <span class="math display">\[\lim_{x \to c} \left[\sum_{i=1}^N f_i(x)\right] = \sum_{i=1}^N \lim_{x \to c} f_i(x).\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -621,12 +623,12 @@ Answer
 <div id="exr-lottery-limit" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.4</strong></span> Consider the function that maps the lottery guess into expected winnings in our motivating example, <span class="math display">\[W(g) = \frac{1}{N} \sum_{i=1}^N [10000 - (x_i - g)^2].\]</span> Using <a href="#prp-function-limit-properties" class="quarto-xref">Proposition&nbsp;<span>4.2</span></a> and the claims proved in <a href="#exr-limit-linear" class="quarto-xref">Exercise&nbsp;<span>4.1</span></a> and <a href="#exr-sum-of-function-limits" class="quarto-xref">Exercise&nbsp;<span>4.3</span></a>, prove that <span class="math display">\[\lim_{h \to 0} W(g + h) = W(g).\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -666,12 +668,12 @@ Answer
 <div id="exr-limit-ratio" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.5</strong></span> Find the value of <span class="math display">\[\lim_{x \to -1} \frac{x^2 - 1}{x + 1},\]</span> or explain why it does not exist.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -682,7 +684,7 @@ Answer
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="derivatives_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="derivatives_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -710,12 +712,12 @@ Answer
 <div id="exr-function-limit-equivalence-only-if" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.6</strong></span> Prove the “only if” direction of <a href="#prp-function-limit-equivalence" class="quarto-xref">Proposition&nbsp;<span>4.3</span></a>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -804,12 +806,12 @@ Any function of the form <span class="math inline">\(f(x) = g(h(x))\)</span>, ca
 <div id="exr-lottery-continuity" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.7</strong></span> Consider the function that maps the lottery guess into expected winnings in our motivating example, <span class="math inline">\(W : [0, 100] \to [0, 10000]\)</span>, defined by <span class="math display">\[W(g) = \frac{1}{N} \sum_{i=1}^N [10000 - (x_i - g)^2].\]</span> Prove that this function is continuous <em>without</em> explicitly taking its limits (i.e., without invoking what you found in <a href="#exr-lottery-limit" class="quarto-xref">Exercise&nbsp;<span>4.4</span></a>).</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -820,12 +822,12 @@ Answer
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer that uses @exr-lottery-limit">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer that uses <a href="#exr-lottery-limit" class="quarto-xref">Exercise&nbsp;<span>4.4</span></a>
+<span class="screen-reader-only">Note</span>Answer that uses <a href="#exr-lottery-limit" class="quarto-xref">Exercise&nbsp;<span>4.4</span></a>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -863,18 +865,18 @@ Figure&nbsp;4.9: Two linear functions — one steeper, one flatter.
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="derivatives_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%"></p>
+<p><img src="derivatives_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -987,12 +989,12 @@ g'(c)
 </div></div><div id="exr-deriv-h" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.9</strong></span> Take the other function plotted in <a href="#fig-nonlinear-function-comparison" class="quarto-xref">Figure&nbsp;<span>4.10</span></a>, <span class="math display">\[h(x) = 4 - \frac{(x - 5)^2}{5}.\]</span> Show that <span class="math display">\[h'(x) = - \frac{2}{5} (x - 5) = 2 - \frac{2 x}{5}.\]</span> Confirm that <span class="math inline">\(h'(x)\)</span> decreases as <span class="math inline">\(x\)</span> increases, then find the point in the domain at which <span class="math inline">\(g\)</span> becomes steeper than <span class="math inline">\(h\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1024,12 +1026,12 @@ h'(y) - h'(x) = \left[2 - \frac{2y}{5}\right] - \left[2 - \frac{2x}{5}\right] = 
 <p><span class="theorem-title"><strong>Exercise 4.10</strong></span> Let <span class="math inline">\(f : \mathbb{R} \to \mathbb{R}\)</span> be a quadratic function, meaning there exist real numbers <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(c\)</span> such that <span class="math display">\[f(x) = a x^2 + b x + c.\]</span> Show that <span class="math inline">\(f'(x) = 2 a x + b.\)</span></p>
 <p><em>Hint:</em> The calculations will be very similar to the ones from <a href="#exr-deriv-h" class="quarto-xref">Exercise&nbsp;<span>4.9</span></a>, as the function <span class="math inline">\(h(x)\)</span> there is itself a quadratic function.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1077,7 +1079,7 @@ g'(c)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1118,7 +1120,7 @@ f'(d)
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="derivatives_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="derivatives_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1135,7 +1137,7 @@ f'(d)
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="derivatives_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="derivatives_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1164,12 +1166,12 @@ The function <span class="math inline">\(f(x) = \log x\)</span> has a derivative
 <div id="exr-deriv-constant" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.12 (Derivative of a constant function)</strong></span> A constant function is a function of the form <span class="math inline">\(f(x) = y,\)</span> where <span class="math inline">\(y\)</span> is a constant real number. Without taking an explicit limit, prove that <span class="math inline">\(f'(x) = 0\)</span> for all <span class="math inline">\(x.\)</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1218,12 +1220,12 @@ Answer
 <div id="exr-deriv-linear-combination" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.13 (Derivative of a linear combination of functions)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> and <span class="math inline">\(g : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Let <span class="math inline">\(\alpha \in \mathbb{R}\)</span> and <span class="math inline">\(\beta \in \mathbb{R}\)</span> be constants. Define the function <span class="math inline">\(h : X \to \mathbb{R}\)</span> by <span class="math inline">\(h(x) = \alpha f(x) + \beta g(x).\)</span> Use the constant rule and the sum rule to show that <span class="math display">\[h'(x) = \alpha f'(x) + \beta g'(x).\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1244,12 +1246,12 @@ Answer
 <div id="exr-deriv-finite-sum" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.14 (Derivative of a finite sum of functions)</strong></span> Let <span class="math inline">\(N\)</span> be a natural number. For each natural number <span class="math inline">\(n \leq N,\)</span> let <span class="math inline">\(f_n : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(g : X \to \mathbb{R}\)</span> by <span class="math display">\[g(x) = \sum_{n=1}^N f_n(x).\]</span> Use the sum rule in a proof by induction (see <a href="logic.html#sec-proof-by-induction" class="quarto-xref"><span>Section 1.2.4</span></a>) to prove that <span class="math display">\[g'(x) = \sum_{n=1}^N f_n'(x).\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1272,12 +1274,12 @@ f(x) = c_0 + c_1 x + \cdots + c_k x^k = \sum_{n=0}^k c_n x^n
 \end{aligned}
 \]</span> for some natural number <span class="math inline">\(k\)</span> and real-valued coefficients <span class="math inline">\(c_0, \ldots, c_k.\)</span> Use the constant multiple rule, the derivative of a power function, and the result of <a href="#exr-deriv-finite-sum" class="quarto-xref">Exercise&nbsp;<span>4.14</span></a> to prove that <span class="math display">\[f'(x) = c_1 + 2 c_2 x + \cdots + k c_k x^{k=1} = \sum_{n=0}^k n c_n x^{n-1}.\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1339,12 +1341,12 @@ h'(x) &amp;= f(x) g'(x) + f'(x) g(x) \\
 <li><p><span class="math inline">\(f(x) = e^x \cdot \log(x) \cdot x^3.\)</span></p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answers
+<span class="screen-reader-only">Note</span>Answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1391,12 +1393,12 @@ f'(x)
 <div id="exr-deriv-of-square" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.17 (Derivative of the square of a function)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(g : X \to \mathbb{R}\)</span> by <span class="math inline">\(g(x) = f(x)^2.\)</span> Using the product rule, prove that <span class="math display">\[g'(x) = 2 f'(x) f(x).\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1411,12 +1413,12 @@ Answer
 <div id="prp-quotient-rule" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4.8 (Quotient rule)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> and <span class="math inline">\(g : X \to \mathbb{R} \setminus \{0\}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(h : X \to \mathbb{R}\)</span> by <span class="math inline">\(h(x) = \frac{f(x)}{g(x)}.\)</span> For all <span class="math inline">\(x \in X,\)</span> <span class="math display">\[h'(x) = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.\]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Codomain of the denominator function">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Codomain of the denominator function
+<span class="screen-reader-only">Tip</span>Codomain of the denominator function
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1439,12 +1441,12 @@ Codomain of the denominator function
 <li><p>The derivative <span class="math inline">\(f'(x)\)</span> represents approximately how much my chance of victory increases with each unit of resources I expend. Imagine that I don’t want to put in a unit of resources that gets me less than a 1% increase in the chance of victory. Then what’s the largest value of <span class="math inline">\(x\)</span> that I’d be willing to choose? (The answer will depend on the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(y.\)</span>)</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1486,12 +1488,12 @@ f'(x) = 0.01
 \end{aligned}
 \]</span> Taking this conditional probability to be a function of the parameter <span class="math inline">\(p,\)</span> find its derivative and show that the derivative is positive for all <span class="math inline">\(p \in (0, 1].\)</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1534,7 +1536,7 @@ h'(x)
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="derivatives_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="derivatives_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1587,12 +1589,12 @@ W'(g)
 <p><span class="theorem-title"><strong>Exercise 4.20 (Derivative of an exponential function)</strong></span> Let <span class="math inline">\(b\)</span> be a positive constant, and define the function <span class="math inline">\(f(x) = b^x.\)</span> Using the chain rule, show that <span class="math inline">\(f'(x) = b^x \cdot \log(b).\)</span></p>
 <p><em>Hint:</em> Start out by using the fact that <span class="math inline">\(b = e^{\log(b)}.\)</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1614,12 +1616,12 @@ f'(x)
 <div id="exr-deriv-exponential-cdf" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.21 (Derivative of the exponential CDF)</strong></span> For all <span class="math inline">\(x \geq 0,\)</span> the cumulative distribution function of the <a href="https://en.wikipedia.org/wiki/Exponential_distribution">exponential distribution</a> with rate parameter <span class="math inline">\(\lambda &gt; 0\)</span> is <span class="math display">\[F(x) = 1 - e^{-\lambda x}.\]</span> Characterize the probability density function of this distribution by finding the derivative of the cumulative distribution function.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1642,12 +1644,12 @@ F'(x)
 <div id="exr-deriv-logistic-cdf" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.22 (Derivative of the logistic CDF)</strong></span> For all <span class="math inline">\(x \in \mathbb{R},\)</span> the cumulative distribution function of the <a href="https://en.wikipedia.org/wiki/Logistic_distribution">logistic distribution</a> is <span class="math display">\[F(x) = \frac{1}{1 + e^{-x}}.\]</span> Characterize the probability density function of this distribution by finding the derivative of the cumulative distribution function.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1670,12 +1672,12 @@ F'(x)
 <div id="exr-deriv-log-f" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.23 (Derivative of the logarithm of a function)</strong></span> Let <span class="math inline">\(f\)</span> be a differentiable function that maps from <span class="math inline">\(X \subseteq \mathbb{R}\)</span> into the strictly positive reals, <span class="math inline">\((0, \infty).\)</span> Define the function <span class="math inline">\(g(x) = \log [f(x)].\)</span> Prove that <span class="math display">\[g'(x) = \frac{f'(x)}{f(x)}.\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1697,12 +1699,12 @@ g'(x)
 <p><span class="theorem-title"><strong>Exercise 4.24 (Proving the quotient rule)</strong></span> Use the product rule and the chain rule to prove the quotient rule.</p>
 <p><em>Hint:</em> Start with the fact that <span class="math inline">\(\frac{f(x)}{g(x)} = f(x) \cdot g(x)^{-1}.\)</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1793,7 +1795,7 @@ f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c},
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="derivatives_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="derivatives_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1818,12 +1820,12 @@ f(4) &amp;= 32, \\
 <li><p>A logarithmic function of the form <span class="math inline">\(f(x) = \log_b x,\)</span> where <span class="math inline">\(b &gt; 0\)</span> and <span class="math inline">\(b \neq 1.\)</span></p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1844,19 +1846,19 @@ Answer
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="derivatives_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="derivatives_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>You can see from the graph that the standard normal PDF is concave on <span class="math inline">\([-1, 1]\)</span>, while it is convex on the rest of its domain. Use its second derivative to prove this.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1890,7 +1892,7 @@ f''(x)
 <section id="concept-review" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="concept-review"><span class="header-section-number">4.4</span> Concept review</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Conceptual order</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Alphabetical order</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Conceptual order</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Alphabetical order</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <dl>
@@ -2048,7 +2050,7 @@ A function <span class="math inline">\(f : X \to \mathbb{R}\)</span> is twice di
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-kenkel2023social" class="csl-entry" role="listitem">
 Kenkel, Brenton. 2023. <span>“Social Conflict and the Predatory State.”</span> <em>Quarterly Journal of Political Science</em> 18 (4): 437–68. <a href="https://doi.org/10.1561/100.00020116">https://doi.org/10.1561/100.00020116</a>.
 </div>
@@ -2110,13 +2112,14 @@ Rudin, Walter. 1976. <em>Principles of Mathematical Analysis</em>. 3rd ed. McGra
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

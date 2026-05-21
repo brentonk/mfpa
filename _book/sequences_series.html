@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>3&nbsp; Sequences and Series – Mathematical Foundations of Political Analysis</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -73,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6a1232d96cac1088957bdf5a55b95c03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-727843457bad2570bec5680c786b2135.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -119,7 +122,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -363,7 +366,7 @@ Figure&nbsp;3.3
 <p>Before getting into trickier questions about infinite sums, let’s try to answer a simpler question about the underlying probabilities. We’ve already seen that the probability of lasting exactly <span class="math inline">\(T\)</span> consecutive terms is <span class="math inline">\(p^T (1 - p)\)</span>. What if we wanted to reverse that? For example, what if we wanted to find the lowest term length with a 1% or less chance of occurring?</p>
 <p>We could solve this problem by “brute force”: run the calculation for each successive term length <span class="math inline">\(T\)</span> until we get to the number we’re looking for. Here’s some R code that uses a <code>repeat</code> loop — repeating the same steps over and over, until we explicitly tell the loop to <code>break</code> — to implement the brute force method.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.75</span>  <span class="co"># retention probability each term</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.75</span>  <span class="co"># retention probability each term</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fl">0.01</span>  <span class="co"># probability of term length we're looking for</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="dv">1</span>     <span class="co"># starting value for term length</span></span>
@@ -380,7 +383,7 @@ Figure&nbsp;3.3
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the result</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12</code></pre>
 </div>
@@ -398,7 +401,7 @@ Figure&nbsp;3.3
 <p>Using a logarithm, we can now more elegantly solve our “first consecutive term length whose probability is <span class="math inline">\(q\)</span> or less” problem. We are looking for the term length <span class="math inline">\(T\)</span> for which <span class="math display">\[p^T (1 - p) \leq q.\]</span> Equivalently, after dividing each side of the above equation by <span class="math inline">\(1 - p\)</span>, we are looking for the term length <span class="math inline">\(T\)</span> for which <span class="math display">\[p^T = \frac{q}{1 - p}.\]</span> We can now solve for <span class="math inline">\(T\)</span> by taking the logarithm: <span class="math display">\[T = \log_p \left(\frac{q}{1 - p}\right).\]</span></p>
 <p>Let’s use this formula to redo the example we solved by brute force earlier. Based on what we saw from the brute force solution, we should expect the formula to spit out a number between 11 and 12.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(q <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> p), <span class="at">base =</span> p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(q <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> p), <span class="at">base =</span> p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.189</code></pre>
 </div>
@@ -421,34 +424,34 @@ b^{\log_b y + \log_b z} = b^{\log_b y} \times b^{\log_b z} = y \times z.
 </div>
 <p>This property of logarithms is highly useful in both statistical computing and in calculus. In the statistical context, suppose you need to calculate the probability of some very large number of independent events, resulting in a calculation that looks like <span class="math display">\[p_1 \times p_2 \times \cdots \times p_N,\]</span> where <span class="math inline">\(N\)</span> is some huge number. (For one thing, calculations like this are central to <a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation">maximum likelihood estimation</a>.) It turns out that computers are not so good at multiplying a lot of very small numbers together. At a certain point, as in the following example, the computer can’t distinguish the product from 0.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly sample a bunch of numbers each close to 1/100</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly sample a bunch of numbers each close to 1/100</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>size <span class="ot">&lt;-</span> <span class="dv">500</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tiny_numbers <span class="ot">&lt;-</span> <span class="fu">runif</span>(size, <span class="at">min =</span> <span class="fl">0.009</span>, <span class="at">max =</span> <span class="fl">0.011</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># double check there are no zeroes here</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tiny_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tiny_numbers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 0.009001 0.009465 0.009909 0.009940 0.010380 0.010998 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prod() to multiply all numbers in a vector together</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(tiny_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prod() to multiply all numbers in a vector together</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(tiny_numbers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># not just rounding: R thinks the product is zero!</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(tiny_numbers) <span class="sc">==</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># not just rounding: R thinks the product is zero!</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(tiny_numbers) <span class="sc">==</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>Because addition is easier for computers than multiplication, we can get a more accurate answer by converting our multiplication problem into an addition problem. Using <a href="#prp-logarithm-product" class="quarto-xref">Proposition&nbsp;<span>3.1</span></a>, we know that for any positive base <span class="math inline">\(b \neq 1\)</span>, <span class="math display">\[\log_b (p_1 \times p_2 \times \cdots \times p_N) = \log_b p_1 + \log_b p_2 + \cdots + \log_b p_N.\]</span> Let’s use a base of <span class="math inline">\(b = 10\)</span>, since then we can interpret our result in terms of decimal places.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert each number to its base-10 log</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert each number to its base-10 log</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>logged_numbers <span class="ot">&lt;-</span> <span class="fu">log</span>(tiny_numbers, <span class="at">base =</span> <span class="dv">10</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sum() to add all numbers in a vector together</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(logged_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(logged_numbers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1001.661</code></pre>
 </div>
@@ -469,12 +472,12 @@ b^{\log_b y + \log_b z} = b^{\log_b y} \times b^{\log_b z} = y \times z.
 <div id="exr-logarithm-ratio" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.1</strong></span> Prove <a href="#prp-logarithm-ratio" class="quarto-xref">Proposition&nbsp;<span>3.3</span></a>. (Hint: use both of the two previous properties of logarithms, <a href="#prp-logarithm-product" class="quarto-xref">Proposition&nbsp;<span>3.1</span></a> and <a href="#prp-logarithm-power" class="quarto-xref">Proposition&nbsp;<span>3.2</span></a>.)</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -529,7 +532,7 @@ Figure&nbsp;3.4
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-log versus ln
+<span class="screen-reader-only">Warning</span>log versus ln
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -549,7 +552,7 @@ log versus ln
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Sequences vs.&nbsp;sets
+<span class="screen-reader-only">Warning</span>Sequences vs.&nbsp;sets
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -564,7 +567,7 @@ Sequences vs.&nbsp;sets
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="sequences_series_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="sequences_series_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -598,12 +601,12 @@ Sequences vs.&nbsp;sets
 <div id="exr-constant-sequence" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.2 (Limit of a constant sequence)</strong></span> Let <span class="math inline">\(c\)</span> be a constant real number. Prove that if <span class="math inline">\(x_n = c\)</span> for all <span class="math inline">\(n\)</span>, then <span class="math inline">\(\{x_n\} \to c\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -629,12 +632,12 @@ Answer
 <div id="exr-bounded-does-not-imply-convergent" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.3 (Bounded does not imply convergent)</strong></span> Come up with an example of a bounded sequence that is not convergent.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -689,12 +692,12 @@ x_n = \begin{cases}
 <li><p>The “three steps forward, one step back” sequence <span class="math inline">\(1, 0, 3, 2, 5, 4, 7, 6, 9, 8, \ldots\)</span> (<span class="math inline">\(x_n = n\)</span> if <span class="math inline">\(n\)</span> is odd, <span class="math inline">\(x_n = n - 2\)</span> if <span class="math inline">\(n\)</span> is even) has a limit of <span class="math inline">\(\infty\)</span>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answers
+<span class="screen-reader-only">Note</span>Answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -718,7 +721,7 @@ Answers
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="sequences_series_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="sequences_series_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -749,12 +752,12 @@ x_n &amp;&lt; x + \delta \\
 <div id="exr-squeeze-sequence" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.5</strong></span> Use <a href="#prp-squeeze-sequence" class="quarto-xref">Proposition&nbsp;<span>3.7</span></a> to show that <span class="math inline">\(\lim_{n \to \infty} \frac{1}{n + 1} = 0\)</span>. (<em>Hint:</em> We’ve already shown that <span class="math inline">\(\lim_{n \to \infty} \frac{1}{n} = 0\)</span>.)</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -779,12 +782,12 @@ Answer
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>The proof is long and tedious, so I have hidden it in collapsible boxes.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Part (a): Constant multiple of sequence">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Part (a): Constant multiple of sequence
+<span class="screen-reader-only">Note</span>Part (a): Constant multiple of sequence
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -795,12 +798,12 @@ Part (a): Constant multiple of sequence
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Part (b): Sum of sequences">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Part (b): Sum of sequences
+<span class="screen-reader-only">Note</span>Part (b): Sum of sequences
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -812,12 +815,12 @@ Part (b): Sum of sequences
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Part (c): Difference of sequences">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Part (c): Difference of sequences
+<span class="screen-reader-only">Note</span>Part (c): Difference of sequences
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -828,12 +831,12 @@ Part (c): Difference of sequences
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Part (d): Product of sequences">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Part (d): Product of sequences
+<span class="screen-reader-only">Note</span>Part (d): Product of sequences
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -857,12 +860,12 @@ Part (d): Product of sequences
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Part (e): Ratio of sequences">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Part (e): Ratio of sequences
+<span class="screen-reader-only">Note</span>Part (e): Ratio of sequences
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -900,12 +903,12 @@ Part (e): Ratio of sequences
 <li><p>Show that <span class="math inline">\(\lim_{n \to \infty} \frac{n}{n + 1} = 1\)</span>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answers
+<span class="screen-reader-only">Note</span>Answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1001,7 +1004,7 @@ Answers
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Algebra ahead
+<span class="screen-reader-only">Warning</span>Algebra ahead
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1052,12 +1055,12 @@ Algebra ahead
 <div id="exr-partial-sums" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.7</strong></span> I calculated the partial sum for the <span class="math inline">\(n = 3\)</span> case above. Repeat my method and/or use my result to calculate the partial sums for <span class="math inline">\(n = 2\)</span> and <span class="math inline">\(n = 4\)</span>. What patterns do you notice in the partial sums?</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1106,7 +1109,7 @@ Answer
 <p>After working through <a href="#exr-partial-sums" class="quarto-xref">Exercise&nbsp;<span>3.7</span></a>, you’ll see an apparent pattern in the first few partial sums, with each being equal to <span id="eq-ev-partial-sum"><span class="math display">\[\frac{p - (n + 1) p^{n+1} + n p^{n + 2}}{1 - p}. \tag{3.1}\]</span></span> A pattern is, of course, not a proof — but it’s a strong hint at what we should be looking for. So let’s try and prove that every partial sum indeed takes this form, and then let’s take its limit as <span class="math inline">\(n \to \infty\)</span> to calculate our expected value series.</p>
 <p>There are a couple of ways to prove that every partial sum works out to have the form in <a href="#eq-ev-partial-sum" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>. One way, following what we did for the <span class="math inline">\(n = 3\)</span> case above, would be to rewrite the <span class="math inline">\(n\)</span>’th partial sum of the expected value series in terms of the geometric series partial sums whose value we already know. Another way, following the lines of my answer for the <span class="math inline">\(n = 4\)</span> case in <a href="#exr-partial-sums" class="quarto-xref">Exercise&nbsp;<span>3.7</span></a>, would be to use a proof by induction (see <a href="logic.html#sec-proof-by-induction" class="quarto-xref"><span>Section 1.2.4</span></a>). For your fullest edification possible, I’ll present both methods.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Geometric series</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Induction</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Geometric series</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Induction</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>Again I’ll use <span class="math inline">\(G_n\)</span> to denote the <span class="math inline">\(n\)</span>’th partial sum of the geometric series, meaning that <span class="math display">\[G_n = \sum_{k=0}^n p^k = \frac{1 - p^{n + 1}}{1 - p}.\]</span> We saw in the <span class="math inline">\(n = 3\)</span> case that <span class="math display">\[1 p^1 + 2 p^2 + 3 p^3 = [G_3 - G_0] + [G_3 - G_1] + [G_3 - G_2].\]</span> Generalizing this, we have <span class="math display">\[
@@ -1195,7 +1198,7 @@ Answer
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="sequences_series_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="sequences_series_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1205,7 +1208,7 @@ Answer
 <section id="concept-review" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="concept-review"><span class="header-section-number">3.5</span> Concept review</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Conceptual order</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Alphabetical order</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Conceptual order</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Alphabetical order</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <dl>
@@ -1377,13 +1380,14 @@ A concise way to denote adding up many terms. The notation <span class="math inl
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

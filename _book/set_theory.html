@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>2&nbsp; Set Theory – Mathematical Foundations of Political Analysis</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -38,10 +41,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6a1232d96cac1088957bdf5a55b95c03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-727843457bad2570bec5680c786b2135.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -84,7 +87,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -249,7 +252,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Sets aren’t just for numbers
+<span class="screen-reader-only">Tip</span>Sets aren’t just for numbers
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -326,12 +329,12 @@ Table&nbsp;2.1: Notable sets of numbers
 <li><p>Every rational number between 0 and 1, including 0 and 1 themselves.</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answers
+<span class="screen-reader-only">Note</span>Answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -361,7 +364,7 @@ Answers
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Inclusion <span class="math inline">\(\in\)</span> versus subset <span class="math inline">\(\subseteq\)</span>
+<span class="screen-reader-only">Warning</span>Inclusion <span class="math inline">\(\in\)</span> versus subset <span class="math inline">\(\subseteq\)</span>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -423,12 +426,12 @@ Note&nbsp;2.1: Proving a “for all” claim
 <div id="exr-equality-transitive" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.2</strong></span> Prove <a href="#cor-equality-transitive" class="quarto-xref">Corollary&nbsp;<span>2.1</span></a>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -461,7 +464,7 @@ Figure&nbsp;2.1: Union and intersection of sets.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <figcaption>Union: <span class="math inline">\(A \cup B\)</span></figcaption>
-<p><img src="set_theory_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -471,7 +474,7 @@ Figure&nbsp;2.1: Union and intersection of sets.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <figcaption>Intersection: <span class="math inline">\(A \cap B\)</span></figcaption>
-<p><img src="set_theory_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -510,7 +513,7 @@ Figure&nbsp;2.2: Set differences.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <figcaption><span class="math inline">\(A \setminus B\)</span></figcaption>
-<p><img src="set_theory_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -520,7 +523,7 @@ Figure&nbsp;2.2: Set differences.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <figcaption><span class="math inline">\(B \setminus A\)</span></figcaption>
-<p><img src="set_theory_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -584,12 +587,12 @@ Figure&nbsp;2.2: Set differences.
 <div id="exr-exclusive-or" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.3</strong></span> Using the union, intersection, and the set difference, find a way to denote the set of elements that are in exactly one of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, but not both.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -612,12 +615,12 @@ Answer
 <li><p><span class="math inline">\(A \cap \emptyset = \emptyset\)</span>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answers
+<span class="screen-reader-only">Note</span>Answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -653,7 +656,7 @@ Figure&nbsp;2.3: Set differences.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <figcaption><span class="math inline">\(A^c\)</span></figcaption>
-<p><img src="set_theory_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -663,7 +666,7 @@ Figure&nbsp;2.3: Set differences.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <figcaption><span class="math inline">\(B^c\)</span></figcaption>
-<p><img src="set_theory_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -697,7 +700,7 @@ Figure&nbsp;2.4: De Morgan’s laws.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <figcaption><span class="math inline">\((A \cup B)^c = A^c \cap B^c\)</span></figcaption>
-<p><img src="set_theory_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -707,7 +710,7 @@ Figure&nbsp;2.4: De Morgan’s laws.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <figcaption><span class="math inline">\((A \cap B)^c = A^c \cup B^c\)</span></figcaption>
-<p><img src="set_theory_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -726,12 +729,12 @@ Figure&nbsp;2.4: De Morgan’s laws.
 <div id="exr-demorgan-sets" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.5</strong></span> Prove that <span class="math inline">\((A \cap B)^c = A^c \cup B^c\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -760,12 +763,12 @@ Answer
 <div id="exr-pres-vp-functions" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.6</strong></span> Come up with a function that maps the set of presidents, <span class="math inline">\(P\)</span>, into the set of vice presidents, <span class="math inline">\(Q\)</span>. Convince yourself that it satisfies the key requirement of a function — that every element in <span class="math inline">\(P\)</span> is associated with one, and exactly one, element in <span class="math inline">\(Q\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-One answer
+<span class="screen-reader-only">Note</span>One answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -834,7 +837,7 @@ Figure&nbsp;2.7: A function that is both one-to-one and onto.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <figcaption>A bijection…</figcaption>
-<p><img src="set_theory_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -846,7 +849,7 @@ Figure&nbsp;2.7: A function that is both one-to-one and onto.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <figcaption>…and its inverse.</figcaption>
-<p><img src="set_theory_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="set_theory_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -892,12 +895,12 @@ C &amp;= \{10, 17, 27, 42\}.
 \end{aligned}
 \]</span> Using the formal definition of equal cardinality, prove that <span class="math inline">\(|A| \neq |B|\)</span> and <span class="math inline">\(|A| \neq |C|\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Note</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1070,7 +1073,7 @@ Answer
 <section id="concept-review" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="concept-review"><span class="header-section-number">2.4</span> Concept review</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Conceptual order</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Alphabetical order</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Conceptual order</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Alphabetical order</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <dl>
@@ -1088,7 +1091,7 @@ A member of a set. We write <span class="math inline">\(a \in A\)</span> to mean
 </dd>
 <dt><span class="concept">Set-builder notation</span></dt>
 <dd>
-A way to describe a set without explicitly enumerating all of its elements. For example, <span class="math inline">\(\{a \in A \mid a &gt; 3\}\)</span> means “The set of all elements of <span class="math inline">\(A\)</span> that are greater than 3.
+A way to describe a set without explicitly enumerating all of its elements. For example, <span class="math inline">\(\{a \in A \mid a &gt; 3\}\)</span> means “The set of all elements of <span class="math inline">\(A\)</span> that are greater than 3.”
 </dd>
 <dt><span class="concept">Subset</span></dt>
 <dd>
@@ -1244,7 +1247,7 @@ The study of sets and their properties. A key logical foundation for much of the
 </dd>
 <dt><span class="concept">Set-builder notation</span></dt>
 <dd>
-A way to describe a set without explicitly enumerating all of its elements. For example, <span class="math inline">\(\{a \in A \mid a &gt; 3\}\)</span> means “The set of all elements of <span class="math inline">\(A\)</span> that are greater than 3.
+A way to describe a set without explicitly enumerating all of its elements. For example, <span class="math inline">\(\{a \in A \mid a &gt; 3\}\)</span> means “The set of all elements of <span class="math inline">\(A\)</span> that are greater than 3.”
 </dd>
 <dt><span class="concept">Subset</span></dt>
 <dd>
@@ -1322,13 +1325,14 @@ The set of everything that could conceivably be in the sets we’re talking abou
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

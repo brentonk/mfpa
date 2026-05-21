@@ -1,6 +1,10 @@
 project:
   type: book
 
+filters:
+  - at: pre-ast
+    path: _filters/concepts.lua
+
 book:
   title: "Mathematical Foundations of Political Analysis"
   author: "Brenton Kenkel"

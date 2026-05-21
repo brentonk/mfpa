@@ -27,11 +27,6 @@ df_pres_county <- get_dataframe_by_name(
 )
 ```
 
-```{python}
-# Set up concept dictionary
-concepts = {}
-```
-
 ## Motivation: A statistical guessing game {#sec-statistical-lottery}
 
 ```{r} 
@@ -204,13 +199,7 @@ If so, could we have figured that out without plugging all these possible guesse
 Would this same trick work if the lottery balls were labeled differently, or is it just a coincidence that the average is the best guess here?
 
 We can answer these questions, but we'll need some new mathematical tools to do so.
-These tools are known as [differential calculus]{.concept}.
-
-```{python}
-concepts.update({
-  "Differential calculus": "Mathematical techniques for studying the \"rate of change\" of a function --- how quickly or slowly the function is increasing or decreasing at a particular point in its domain.",
-})
-```
+These tools are known as [differential calculus]{.concept definition='Mathematical techniques for studying the "rate of change" of a function --- how quickly or slowly the function is increasing or decreasing at a particular point in its domain.'}.
 
 
 ## Limits of functions
@@ -270,14 +259,8 @@ $$
 
 If we get really close to $x = 0$ on the domain but not quite there, the value of the function gets really close to 1.
 This is true no matter how close we get, as long as we don't go all the way to $x = 0$ itself.
-In this sense, we would say the [limit of the function]{.concept} as $x$ approaches 0 is equal to 1.
+In this sense, we would say the [limit of the function]{.concept entry="Limit of a function" definition="The limit of $f(x)$ as $x$ approaches $c$, denoted $\lim_{x \to c} f(x)$, is the value that $f(x)$ gets closer and closer to as $x$ gets closer and closer to $c$ without reaching it.  The formal definition is that $\lim_{x \to c} f(x) = y$ if, for all $\epsilon > 0$, there is a value $\delta > 0$ such that $|f(x) - y| < \epsilon$ for all $x \in (c - \delta, c) \cup (c, c + \delta)$.  A function may not have a limit at a particular point."} as $x$ approaches 0 is equal to 1.
 In mathematical notation, we would write $$\lim_{x \to 0} f(x) = 1.$$
-
-```{python}
-concepts.update({
-  "Limit of a function": "The limit of $f(x)$ as $x$ approaches $c$, denoted $\\lim_{x \\to c} f(x)$, is the value that $f(x)$ gets closer and closer to as $x$ gets closer and closer to $c$ without reaching it.  The formal definition is that $\\lim_{x \\to c} f(x) = y$ if, for all $\\epsilon > 0$, there is a value $\\delta > 0$ such that $|f(x) - y| < \\epsilon$ for all $x \\in (c - \\delta, c) \\cup (c, c + \\delta)$.  A function may not have a limit at a particular point.",
-})
-```
 
 The problem with this kind of limiting statement is that we end up in an infinite regress.
 However close to $x = 0$ we look, we can always look a little bit closer --- so how do we ever get close enough to say for certain what the limit is?
@@ -456,13 +439,7 @@ Specifically, we have to show that there is [at least one]{.underline} $\epsilon
 The key problem in @fig-step-function is that the behavior of the function as we approach $x = 0$ is different when we are approach from the left (values below $x = 0$) than when we approach from the right (values above $x = 0$).
 By the same token, though, it seems sensible to say that the limit of the function is 0 as we approach $x = 0$ from the left, and that the limit is 1 as we approach from the right.
 Indeed, it is sensible.
-We would say that the function's [left-hand limit]{.concept} at $x = 0$ is 0 and that its [right-hand limit]{.concept} at $x = 0$ is 1.
-
-```{python}
-concepts.update({
-  "Left- and right-handed limits": "The left-handed limit is the value that $f(x)$ gets closer and closer to as $x$ gets closer and closer to $c$ without meeting or exceeding it.  The right-handed limit is the same thing, from the opposite direction.",
-})
-```
+We would say that the function's [left-hand limit]{.concept entry="Left- and right-handed limits" definition="The left-handed limit is the value that $f(x)$ gets closer and closer to as $x$ gets closer and closer to $c$ without meeting or exceeding it.  The right-handed limit is the same thing, from the opposite direction."} at $x = 0$ is 0 and that its [right-hand limit]{.concept} at $x = 0$ is 1.
 
 ::: {#def-handed-limit name="Left- and right-hand limits"}
 Let $X \subseteq \mathbb{R}$ be an open interval, and consider the function $f : X \to \mathbb{R}$.
@@ -715,13 +692,7 @@ Consequently, $\lim_{h \to 0} f(c + h) = y$.
 You might notice a pattern in @fig-function-limit-ex and @fig-step-function.
 At the points in the domain where the value of the function is not equal to its left- or right-hand limit, the graph of the function appears to "jump."
 In mathematical terms, we'd say these jumps are points of discontinuity.
-By contrast, in the parts of the domain where there are no such jumps, the function is [continuous]{.concept}.
-
-```{python}
-concepts.update({
-  "Continuity": "A function $f : X \\to Y$ is continuous at a point in its domain, $c \\in X$, if its limit at that point exists and equals the value of the function: $\\lim_{x \\to c} f(x) = f(c)$.  We call $f$ a continuous function if it is continuous at every point in its domain.",
-})
-```
+By contrast, in the parts of the domain where there are no such jumps, the function is [continuous]{.concept entry="Continuity" definition="A function $f : X \to Y$ is continuous at a point in its domain, $c \in X$, if its limit at that point exists and equals the value of the function: $\lim_{x \to c} f(x) = f(c)$.  We call $f$ a continuous function if it is continuous at every point in its domain."}.
 
 ::: {#def-continuity-point name="Continuity at a point"}
 We say that a function $f : X \to Y$ is [continuous at the point]{.concept} $c \in X$ if its limit exists at that point and is equal to the value of the function: $$\lim_{x \to c} f(x) = f(c).$$
@@ -799,7 +770,7 @@ Linear functions
 : Any function of the form $f(x) = a + b x$, where $a$ and $b$ are real numbers, is continuous.
 
 Polynomials
-: Any function of the form $$\begin{aligned}f(x) &= c_0 + c_1 x + c_2 x^2 + \cdots c_k x^k \\ &= \sum_{n=0}^k c_n x^n,\end{aligned}$$ where $k$ is a natural number and each $c_n$ is a real number, is called a [polynomial]{.concept} and is continuous.
+: Any function of the form $$\begin{aligned}f(x) &= c_0 + c_1 x + c_2 x^2 + \cdots c_k x^k \\ &= \sum_{n=0}^k c_n x^n,\end{aligned}$$ where $k$ is a natural number and each $c_n$ is a real number, is called a [polynomial]{.concept definition="A polynomial is a function of the form $$f(x) = c_0 + c_1 x + c_2 x^2 + \cdots + c_k x^k,$$ where $k$ is a natural number and each coefficient $c_0, \ldots, c_k$ is a real number."} and is continuous.
 
 Exponential functions
 : Any function of the form $f(x) = a^x$, where $a > 0$, is continuous.
@@ -817,14 +788,7 @@ Division by a continuous function
 : Any function of the form $f(x) = 1 / g(x)$, where $g$ is continuous and $g(x) \neq 0$ for all $x \in X$, is continuous.
 
 Compositions of continuous functions
-: Any function of the form $f(x) = g(h(x))$, called the [composition]{.concept} of $g$ and $h$, is continuous if $g$ and $h$ are continuous.
-
-```{python}
-concepts.update({
-  "Polynomial": "A polynomial is a function of the form $$f(x) = c_0 + c_1 x + c_2 x^2 + \\cdots + c_k x^k,$$ where $k$ is a natural number and each coefficient $c_0, \\ldots, c_k$ is a real number.",
-  "Composition": "Consider two functions $h : X \\to Y$ and $g : Y \\to Z$.  The composition of $g$ and $h$ is the function $f : X \\to Z$ defined by $f(x) = g(h(x))$.",
-})
-```
+: Any function of the form $f(x) = g(h(x))$, called the [composition]{.concept definition="Consider two functions $h : X \to Y$ and $g : Y \to Z$.  The composition of $g$ and $h$ is the function $f : X \to Z$ defined by $f(x) = g(h(x))$."} of $g$ and $h$, is continuous if $g$ and $h$ are continuous.
 
 ::: {#exr-lottery-continuity}
 Consider the function that maps the lottery guess into expected winnings in our motivating example, $W : [0, 100] \to [0, 10000]$, defined by $$W(g) = \frac{1}{N} \sum_{i=1}^N [10000 - (x_i - g)^2].$$
@@ -868,15 +832,9 @@ tibble(x = seq(0, 5), y1 = 2 + 0.25 * x, y2 = x) |>
 ```
 
 Between the two linear functions depicted in @fig-linear-function-slopes, $g(x)$ is steeper and $h(x)$ is flatter.
-Specifically, the [slope]{.concept} of $g(x)$ is greater in magnitude than that of $h(x)$.
+Specifically, the [slope]{.concept definition="For a linear function, $f(x) = \alpha + \beta x$, the slope is the coefficient $\beta$.  It can be calculated using the rise-over-run formula: for any distinct points $x_1$ and $x_2$ in the domain of $f$, $$\beta = \frac{f(x_1) - f(x_2)}{x_1 - x_2}.$$"} of $g(x)$ is greater in magnitude than that of $h(x)$.
 You can calculate the slope of a linear function using the "rise over run" formula.
 Given any two distinct points along the domain, $x_1$ and $x_2$, we calculate the slope by dividing the difference in function values (the "rise") by the difference in domain values (the "run"): $$\text{slope} = \frac{f(x_1) - f(x_2)}{x_1 - x_2}.$$ {#eq-rise-over-run}
-
-```{python}
-concepts.update({
-  "Slope": "For a linear function, $f(x) = \\alpha + \\beta x$, the slope is the coefficient $\\beta$.  It can be calculated using the rise-over-run formula: for any distinct points $x_1$ and $x_2$ in the domain of $f$, $$\\beta = \\frac{f(x_1) - f(x_2)}{x_1 - x_2}.$$",
-})
-```
 
 For example, for the functions we've plotted in @fig-linear-function-slopes, let's compare the function values at $x_1 = 4$ to those at $x_2 = 0$.
 For the steeper function $g$, we have $g(x_1) = g(4) = 4$ and $g(x_2) = g(0) = 0$.
@@ -1033,18 +991,11 @@ We will formally define the derivative of a function as the limit of the rise-ov
 
 ::: {#def-derivative name="Derivative of a function"}
 Consider the function $f : X \to \mathbb{R}$, where $X \subseteq \mathbb{R}$, and the point $c \in X$.
-The [derivative]{.concept} of $f$ at $c$, denoted $f'(c)$, is defined by the limit $$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c},$$ provided that this limit exists.
-When this limit exists, we say that $f$ is [differentiable at the point]{.concept} $c$.
+The [derivative]{.concept definition="The derivative of $f$ at the point $c$, denoted $f'(c)$, is a measure of how steeply the function is increasing or decreasing at that point.  The formal definition of the derivative is that $$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c} = \lim_{h \to 0} \frac{f(c + h) - f(c)}{h},$$ provided that this limit exists."} of $f$ at $c$, denoted $f'(c)$, is defined by the limit $$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c},$$ provided that this limit exists.
+When this limit exists, we say that $f$ is [differentiable at the point]{.concept entry="Differentiability" definition="A function $f : X \to \mathbb{R}$ is differentiable at a point in its domain, $c \in X$, if the derivative $f'(c)$ exists.  We call $f$ a differentiable function if it is differentiable at every point in its domain."} $c$.
 
 If $f$ is differentiable at every point in its domain, we simply say that it is [differentiable]{.concept}.
 :::
-
-```{python}
-concepts.update({
-  "Derivative": "The derivative of $f$ at the point $c$, denoted $f'(c)$, is a measure of how steeply the function is increasing or decreasing at that point.  The formal definition of the derivative is that $$f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} = \\lim_{h \\to 0} \\frac{f(c + h) - f(c)}{h},$$ provided that this limit exists.",
-  "Differentiability": "A function $f : X \\to \\mathbb{R}$ is differentiable at a point in its domain, $c \\in X$, if the derivative $f'(c)$ exists.  We call $f$ a differentiable function if it is differentiable at every point in its domain.",
-})
-```
 
 ::: {#tip-fractional-notation-deriv .callout-tip title="Alternative notation for derivatives"}
 You will sometimes see the derivative written in the fractional form, $$\frac{d f(x)}{d x}.$$
@@ -1311,13 +1262,7 @@ Because the derivative of any linear function is its slope, we have $f'(x) = 0.$
 Using a few rules in combination with the derivatives of common functions from above, we can calculate the derivatives of most functions we run into in practice without explicitly taking limits of the rise-over-run ratio.
 
 If we take a function and multiply it by a constant, the derivative of the resulting function is the same multiple of the original derivative.
-This is the [constant multiple rule]{.concept}.
-
-```{python}
-concepts.update({
-  "Constant multiple rule": "If $g(x) = c f(x),$ where $c$ is a constant real number, then $g'(x) = c f'(x).$",
-})
-```
+This is the [constant multiple rule]{.concept definition="If $g(x) = c f(x),$ where $c$ is a constant real number, then $g'(x) = c f'(x).$"}.
 
 ::: {#prp-deriv-constant-multiple name="Constant multiple rule"}
 Let $f : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}.$
@@ -1344,7 +1289,7 @@ In other words, the logarithm with base $b$ is just a constant multiple of the n
 Using this fact, we can find the derivative: $$f'(x) = \frac{1}{\log(b)} \cdot \frac{d \log(x)}{d x} = \frac{1}{\log(b)} \cdot \frac{1}{x} = \frac{1}{x \log(b)}.$$
 
 Another convenient property is that the derivative of the sum is equal to the sum of the derivatives.
-You'll end up using the [sum rule]{.concept} so often that you stop thinking about it.
+You'll end up using the [sum rule]{.concept definition="If $h(x) = f(x) + g(x),$ then $h'(x) = f'(x) + g'(x).$"} so often that you stop thinking about it.
 
 ::: {#prp-deriv-sum name="Sum rule"}
 Let $f : X \to \mathbb{R}$ and $g : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}.$
@@ -1364,12 +1309,6 @@ $$
 \end{aligned}
 $$
 :::
-
-```{python}
-concepts.update({
-  "Sum rule": "If $h(x) = f(x) + g(x),$ then $h'(x) = f'(x) + g'(x).$",
-})
-```
 
 Here are a few exercises to illustrate the usefulness of the constant multiple rule and the sum rule.
 
@@ -1458,7 +1397,7 @@ As an illustration, think about the quadratic function $h(x) = x^2 = x \cdot x,$
 If it were true that the derivative of the product equals the product of the derivatives, then we would have $h(x) = 1 \cdot 1 = 1$ (because $h(x) = x \cdot x$ and the derivative of the identity function is 1), falsely implying that the quadratic function is actually linear.
 
 All that said, we still have a convenient formula to calculate the derivative of a product --- it's just not as convenient as the derivative of a sum.
-The [product rule]{.concept} to take the derivative of $f(x) g(x)$ essentially breaks the problem into two parts.
+The [product rule]{.concept definition="If $h(x) = f(x) g(x),$ then $h'(x) = f(x) g'(x) + f'(x) g(x).$"} to take the derivative of $f(x) g(x)$ essentially breaks the problem into two parts.
 First we treat $f(x)$ as if it were a constant and take the derivative of $g(x),$ then we do the reverse, and finally we add the two results together.
 
 ::: {#prp-product-rule name="Product rule"}
@@ -1489,12 +1428,6 @@ $$
 $$
 as claimed.
 :::
-
-```{python}
-concepts.update({
-  "Product rule": "If $h(x) = f(x) g(x),$ then $h'(x) = f(x) g'(x) + f'(x) g(x).$",
-})
-```
 
 Going back to our example of the quadratic function $h(x) = x^2,$ proper use of the product rule confirms that $h'(x) = 2x.$
 Let $f(x) = g(x) = x,$ so that $f'(x) = g'(x) = 1$ and $h(x) = f(x) \cdot g(x).$
@@ -1579,7 +1512,7 @@ We have $g(x) = f(x) \cdot f(x),$ so the product rule implies $$g'(x) = f(x) f'(
 ::::
 :::
 
-The [quotient rule]{.concept} for functions in the form $\frac{f(x)}{g(x)}$ is unfortunately a bit trickier to remember.
+The [quotient rule]{.concept definition="If $h(x) = f(x) / g(x),$ then $$h'(x) = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.$$"} for functions in the form $\frac{f(x)}{g(x)}$ is unfortunately a bit trickier to remember.
 If you have to Google this one every time you use it, don't worry --- you're not alone.
 
 ::: {#prp-quotient-rule name="Quotient rule"}
@@ -1592,12 +1525,6 @@ You might notice that the codomain of $g$ is specified to be the set $\mathbb{R}
 This is just to ensure that $\frac{f(x)}{g(x)}$ is well-defined, avoiding any kind of problems with dividing by 0.
 ::::
 :::
-
-```{python}
-concepts.update({
-  "Quotient rule": "If $h(x) = f(x) / g(x),$ then $$h'(x) = \\frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.$$",
-})
-```
 
 I'm not going to prove the quotient rule here --- you'll do that yourself in @exr-quotient-rule below, once you've got one more handy rule for differentiation in hand.
 
@@ -1684,7 +1611,7 @@ We know that the derivative of $e^x$ is $e^x$.
 And by observing that $$-(x - \mu)^2 = -[x^2 - 2 x \mu + \mu^2] = 2 x \mu - x^2 - \mu^2,$$ we know that its derivative is $2 (\mu - x).$
 Is there a way we can put these together to figure out the derivative of $h(x)?$
 
-The [chain rule]{.concept} helps us deal with situations like this one.
+The [chain rule]{.concept definition="If $h(x) = f(g(x)),$ then $h'(x) = f'(g(x)) \cdot g'(x).$"} helps us deal with situations like this one.
 Specifically, suppose we have a function of the form $$h(x) = f(g(x)),$$ where $f$ and $g$ are each differentiable.
 Going back to our example, if we define $f(x) = e^x$ and $g(x) = -(x - \mu)^2,$ then we have
 $$
@@ -1702,12 +1629,6 @@ Let $f : Y \to \mathbb{R}$ and $g : X \to Y$ be differentiable, where $X \subset
 Define the composition $h$ by $h(x) = f(g(x)).$
 For all $x \in X,$ $$h'(x) = f'(g(x)) \cdot g'(x).$$
 :::
-
-```{python}
-concepts.update({
-  "Chain rule": "If $h(x) = f(g(x)),$ then $h'(x) = f'(g(x)) \\cdot g'(x).$",
-})
-```
 
 Using the chain rule with our example of $h(x) = e^{-(x - \mu)^2},$ we can calculate the derivative:
 $$
@@ -1946,7 +1867,7 @@ Politicians will sometimes brag that inflation is decreasing.
 But they usually don't mean that the price level is actually going down: that would mean we're having deflation, which usually occurs only in the context of Great Depression-type economic cataclysms.
 Instead, a decrease in inflation typically means that prices are increasing, but not as quickly as they were earlier.
 In other words, the rate of increase is itself decreasing.
-But now we're thinking about the rate of change in a rate of change ... or the derivative of a derivative, also known as the [second derivative]{.concept}.
+But now we're thinking about the rate of change in a rate of change ... or the derivative of a derivative, also known as the [second derivative]{.concept definition="The second derivative of a differentiable function $f(x)$, denoted $f''(x),$ is the derivative of the function's derivative: $$f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c}.$$"}.
 
 ::: {#def-second-derivative name="Second derivative"}
 Let $f : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}$.
@@ -1957,17 +1878,10 @@ f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c},
 \end{aligned}
 $$
 provided that this limit exists.
-When it does, we say that $f$ is [twice differentiable at the point]{.concept} $c$.
+When it does, we say that $f$ is [twice differentiable at the point]{.concept entry="Twice differentiability" definition="A function $f : X \to \mathbb{R}$ is twice differentiable at a point in its domain, $c \in X,$ if the second derivative $f''(c)$ exists.  We call $f$ a twice differentiable function if it is twice differentiable at every point in its domain."} $c$.
 
 If $f$ is twice differentiable at every point in its domain, we simply say that it is [twice differentiable]{.concept}.
 :::
-
-```{python}
-concepts.update({
-  "Second derivative": "The second derivative of a differentiable function $f(x)$, denoted $f''(x),$ is the derivative of the function's derivative: $$f''(c) = \\lim_{x \\to c} \\frac{f'(x) - f'(c)}{x - c}.$$",
-  "Twice differentiability": "A function $f : X \\to \\mathbb{R}$ is twice differentiable at a point in its domain, $c \\in X,$ if the second derivative $f''(c)$ exists.  We call $f$ a twice differentiable function if it is twice differentiable at every point in its domain.",
-})
-```
 
 Sometimes in formal theory papers, you'll see a function described just in terms of its first and second derivatives.
 For instance, I might write, "Let $f : [0, 1] \to [0, 1]$ be twice differentiable, with $f' > 0$ and $f'' < 0.$
@@ -2020,7 +1934,7 @@ fig_convex_concave <- df_convex_concave |>
 fig_convex_concave
 ```
 
-If a function has a non-negative second derivative, $f''(x) \geq 0,$ we call it [convex]{.concept}.
+If a function has a non-negative second derivative, $f''(x) \geq 0,$ we call it [convex]{.concept entry="Convex function" definition="A twice differentiable function is convex if $f''(x) \geq 0,$ and additionally is strictly convex if $f''(x) > 0.$"}.
 Additionally, if the second derivative is strictly positive, $f''(x) > 0,$ we call the function [strictly convex]{.concept}.
 A classic example of a strictly convex function is exponential growth.
 For example, let $f(t)$ be the number of mice you will have at time $t$ if you start with one boy mouse and one girl mouse at $t = 0$.
@@ -2038,7 +1952,7 @@ $$
 So not only is the function increasing, but it's increasing more quickly as time goes on.
 Because the rate of increase is itself increasing, the function is strictly convex.
 
-On the other hand, we call a function [concave]{.concept} if $f''(x) \leq 0,$ and additionally [strictly concave]{.concept} if $f''(x) < 0.$
+On the other hand, we call a function [concave]{.concept entry="Concave function" definition="A twice differentiable function is concave if $f''(x) \leq 0,$ and additionally is strictly concave if $f''(x) < 0.$"} if $f''(x) \leq 0,$ and additionally [strictly concave]{.concept} if $f''(x) < 0.$
 Concave functions often arise in economic contexts.
 In particular, we often think that concave functions are a good way to model the amount of "utility" (happiness, loosely speaking) that a person derives from consuming a quantity of a good.
 For instance, let $t$ be the number of tacos I've eaten and let $u(t)$ be how happy I am as a function of the number of tacos I've eaten.
@@ -2046,13 +1960,6 @@ There's a big happiness boost going from 0 tacos (starving) to 1 taco (still hun
 There's a smaller happiness boost going from 1 taco to 2 tacos (barely full).
 The boost keeps decreasing from there, and once I'm full I would actively prefer to not eat any additional tacos.
 Altogether, then, $u(t)$ is strictly concave --- each additional taco raises my happiness by a lower and lower amount.
-
-```{python}
-concepts.update({
-  "Convex function": "A twice differentiable function is convex if $f''(x) \\geq 0,$ and additionally is strictly convex if $f''(x) > 0.$",
-  "Concave function": "A twice differentiable function is concave if $f''(x) \\leq 0,$ and additionally is strictly concave if $f''(x) < 0.$",
-})
-```
 
 A linear function is both convex and concave.
 However, it is neither strictly convex nor strictly concave.
@@ -2131,8 +2038,5 @@ Consequently, the second derivative is weakly negative --- and thus the function
 
 
 
-```{python, results="asis"}
-from helpers import concept_table
-
-print(concept_table(concepts))
-```
+::: {#concept-review}
+:::

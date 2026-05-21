@@ -1,23 +1,10 @@
 # Set Theory {#sec-set-theory}
 
-```{python setup, echo=FALSE}
-# Dictionary that our list of key concepts will live inside
-concepts = {}
-```
-
 ## What are sets and why do we care?
 
-Seemingly every book on "higher math" --- the kind of math you encounter after the intro calculus sequence in college --- starts with a discussion of [set theory]{.concept}.
+Seemingly every book on "higher math" --- the kind of math you encounter after the intro calculus sequence in college --- starts with a discussion of [set theory]{.concept definition="The study of sets and their properties.  A key logical foundation for much of the rest of mathematics."}.
 There are some deep mathematical reasons to begin this way, which you can read about on [Wikipedia](https://en.wikipedia.org/wiki/Set_theory) or, for the especially high-minded, the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/set-theory/).
 To summarize it very loosely: although most people think of math as being about numbers, most important mathematical statements (including those about numbers!) are ultimately actually rooted in the properties of sets.
-
-```{python, echo=FALSE}
-concepts.update({
-  "Set theory": "The study of sets and their properties.  A key logical foundation for much of the rest of mathematics.",
-  "Set": "Informally, a collection of objects (not necessarily numbers).  A set $S$ with elements $a$, $b$, and $c$ is written $S = \\{a, b, c\\}$.",
-  "Element": "A member of a set.  We write $a \in A$ to mean \"$a$ is an element of the set $A$.\"",
-})
-```
 
 I'm putting set theory before our study of numbers-type math for reasons that are related, but more prosaic.
 
@@ -35,7 +22,7 @@ Precisely because sets are so foundational, that turns out to be quite a sticky 
 
 ::: {#def-set}
 ## Sets and elements
-A [set]{.concept} is a collection of objects, which we call the [elements]{.concept} of the set.
+A [set]{.concept definition="Informally, a collection of objects (not necessarily numbers).  A set $S$ with elements $a$, $b$, and $c$ is written $S = \\{a, b, c\\}$."} is a collection of objects, which we call the [elements]{.concept entry="Element" definition='A member of a set.  We write $a \in A$ to mean "$a$ is an element of the set $A$."'} of the set.
 The notation $$A = \{1, 2, 4, 8\}$$ is equivalent to saying "$A$ is the set whose elements are 1, 2, 4, and 8."
 :::
 
@@ -69,18 +56,12 @@ If ordinary language can clearly communicate what you mean, use it.
 
 That said, there are times when ordinary language is too cumbersome or imprecise to describe the contents of a set.
 Maybe there are a lot of conditions on the set you're defining, or maybe the condition involves a finicky formula that's hard to put into words.
-In these cases, it is common to use [set-builder notation]{.concept}, for example $$A = \{x \in \mathbb{N} \mid x > 1000\}.$$
+In these cases, it is common to use [set-builder notation]{.concept definition='A way to describe a set without explicitly enumerating all of its elements.  For example, $\\{a \in A \mid a > 3\\}$ means "The set of all elements of $A$ that are greater than 3."'}, for example $$A = \{x \in \mathbb{N} \mid x > 1000\}.$$
 You would read this as "$A$ is the set of natural numbers $x$ such that $x$ is greater than 1000".
 
 ::: {.aside}
 I always use the vertical bar $\mid$ when writing in set-builder notation, but sometimes you will see people use the colon $:$ instead.  These are just different conventions with no differences in underlying meaning.
 :::
-
-```{python, echo=FALSE}
-concepts.update({
-  "Set-builder notation": "A way to describe a set without explicitly enumerating all of its elements.  For example, $\\{a \in A \mid a > 3\\}$ means \"The set of all elements of $A$ that are greater than 3.",
-})
-```
 
 Or what if we wanted to define $B$ as the set of values we obtain by taking a natural number and dividing it in half?
 We could write this in set-builder notation as $$B = \{x \in \mathbb{R} \mid x = \frac{n}{2} \: \text{for some $n \in \mathbb{N}$}\}.$$
@@ -122,14 +103,8 @@ With sets, we make comparisons in terms of their elements --- namely, whether al
 
 ::: {#def-subset}
 ## Subset
-The set $A$ is a [subset]{.concept} of the set $B$, denoted $A \subseteq B$, if every element of $A$ is an element of $B$.
+The set $A$ is a [subset]{.concept definition="When all of the elements of the set $A$ are also elements of the set $B$, we say that $A$ is a subset of $B$, written $A \subseteq B$."} of the set $B$, denoted $A \subseteq B$, if every element of $A$ is an element of $B$.
 :::
-
-```{python, echo=FALSE}
-concepts.update({
-  "Subset": "When all of the elements of the set $A$ are also elements of the set $B$, we say that $A$ is a subset of $B$, written $A \\subseteq B$.",
-})
-```
 
 ::: {.callout-warning}
 ## Inclusion $\in$ versus subset $\subseteq$
@@ -255,8 +230,8 @@ Mathematically speaking, we need to be sure if we are talking about the [union]{
 
 ::: {#def-union-intersection}
 ## Union and intersection
-The [union]{.concept} of the sets $A$ and $B$, denoted $A \cup B$, is the set of elements that are in $A$, in $B$, or both: $$A \cup B = \{x \mid x \in A \text{ or } x \in B\}.$$
-The [intersection]{.concept} of the sets $A$ and $B$, denoted $A \cap B$, is the set of elements that are in both $A$ and $B$: $$A \cap B = \{x \mid x \in A \text{ and } x \in B\}.$$
+The [union]{.concept definition="The union of the sets $A$ and $B$, denoted $A \cup B$, is the set of all elements that are in at least one of $A$ or $B$."} of the sets $A$ and $B$, denoted $A \cup B$, is the set of elements that are in $A$, in $B$, or both: $$A \cup B = \{x \mid x \in A \text{ or } x \in B\}.$$
+The [intersection]{.concept definition="The intersection of the sets $A$ and $B$, denoted $A \cap B$, is the set of all elements that are in both $A$ and $B$."} of the sets $A$ and $B$, denoted $A \cap B$, is the set of elements that are in both $A$ and $B$: $$A \cap B = \{x \mid x \in A \text{ and } x \in B\}.$$
 :::
 
 ```{r}
@@ -285,13 +260,6 @@ eo <- list(extra.preamble="\\usepackage{venndiagram}")
 
 Union and intersection of sets.
 :::
-
-```{python, echo=FALSE}
-concepts.update({
-  "Union": "The union of the sets $A$ and $B$, denoted $A \\cup B$, is the set of all elements that are in at least one of $A$ or $B$.",
-  "Intersection": "The intersection of the sets $A$ and $B$, denoted $A \\cap B$, is the set of all elements that are in both $A$ and $B$.",
-})
-```
 
 ::: {.aside}
 Hey, the union operator $\cup$ looks a lot like the logical "or" operator $\lor$, and the intersection operator $\cap$ looks a lot like the logical "and" operator 
@@ -329,15 +297,9 @@ Therefore, $A \subseteq A \cup B$.
 What if we wanted to talk about the set of people who have been president, but not vice president?
 We can formulate this using the [set difference]{.concept}.
 
-```{python, echo=FALSE}
-concepts.update({
-  "Set difference": "The set difference between $A$ and $B$, denoted $A \\setminus B$, is the set of all elements that are in $A$ and are not in $B$.",
-})
-```
-
 ::: {#def-set-difference}
 ## Set difference
-The [set difference]{.concept} between sets $A$ and $B$, denoted $A \setminus B$, is the set of elements that are in $A$ and not in $B$: $$A \setminus B = \{a \in A \mid a \notin B\}.$$
+The [set difference]{.concept definition="The set difference between $A$ and $B$, denoted $A \setminus B$, is the set of all elements that are in $A$ and are not in $B$."} between sets $A$ and $B$, denoted $A \setminus B$, is the set of elements that are in $A$ and not in $B$: $$A \setminus B = \{a \in A \mid a \notin B\}.$$
 :::
 
 ::: {#fig-set-diff layout-ncol=2}
@@ -385,23 +347,11 @@ We have a special name for the set with nothing in it --- the [empty set]{.conce
 
 ::: {#def-empty-set}
 ## Empty set
-The [empty set]{.concept} is the set containing no elements, denoted $\emptyset$.
+The [empty set]{.concept definition="The set containing no elements, denoted $\emptyset$."} is the set containing no elements, denoted $\emptyset$.
 :::
 
-```{python, echo=FALSE}
-concepts.update({
-  "Empty set": "The set containing no elements, denoted $\\emptyset$.",
-})
-```
-
 Using this notation, a concise way to say "no one has been both the US president and the UK prime minister" would be $P \cap M = \emptyset$.
-We say two sets are [disjoint]{.concept} when their intersection is empty.
-
-```{python, echo=FALSE}
-concepts.update({
-  "Disjoint sets": "Two sets are disjoint if they have no elements in common, or equivalently if their intersection is the empty set.",
-})
-```
+We say two sets are [disjoint]{.concept entry="Disjoint sets" definition="Two sets are disjoint if they have no elements in common, or equivalently if their intersection is the empty set."} when their intersection is empty.
 
 ::: {#exr-emptyset-properties}
 Prove the following properties of the empty set:
@@ -439,23 +389,16 @@ But would we say that the number 3 is also an element of this set?
 What about the chemical formula H$_2$O or the human gene CNR1?
 If nothing else, it doesn't seem to be very useful to say that these are not people who have been president, true as that may be.
 
-To have a useful working definition of "everything not in this set", we are going to assume there's a set $U$ that contains the [universe]{.concept} of objects we might be interested in.
+To have a useful working definition of "everything not in this set", we are going to assume there's a set $U$ that contains the [universe]{.concept definition="The set of everything that could conceivably be in the sets we're talking about.  The relevant universe is highly dependent on the specific context, and ought to be inferable from context clues if not explicitly stated."} of objects we might be interested in.
 The appropriate choice of universal set depends on the context for what we want to do.
 Most commonly, if we are talking about numbers that lie along the typical number line, our universal set might be the real line, $\mathbb{R}$.
 Or if we are talking about who has and has not held particular political positions, our universal set might be the set of all people who have ever lived.
-
-```{python, echo=FALSE}
-concepts.update({
-  "Universe": "The set of everything that could conceivably be in the sets we're talking about.  The relevant universe is highly dependent on the specific context, and ought to be inferable from context clues if not explicitly stated.",
-  "Complement": "The complement of a set $A$, denoted $A^c$, is the set of all elements in the relevant universe that are not elements of $A$.",
-})
-```
 
 Once we have settled on the universe of objects we care about, it's simple to define the complement of a set.
 
 ::: {#def-complement}
 ## Complement
-The [complement]{.concept} of the set $A$, denoted $A^c$, is the set of all elements in the universe that are not in $A$, i.e., $A^c = U \setminus A$.
+The [complement]{.concept definition="The complement of a set $A$, denoted $A^c$, is the set of all elements in the relevant universe that are not elements of $A$."} of the set $A$, denoted $A^c$, is the set of all elements in the universe that are not in $A$, i.e., $A^c = U \setminus A$.
 :::
 
 ::: {#fig-complement layout-ncol=2}
@@ -486,7 +429,7 @@ Taking our universe as the set of all people, let's think about the complement o
 Anyone who's been a president or a vice president is an element of $P \cup Q$.
 Therefore, if someone is not an element of $P \cup Q$, that tells us that the person has never been president *and* has never been vice president.
 In other words, that person belongs to both $P^c$ and $Q^c$, and thus also to their intersection $P^c \cap Q^c$.
-This is an illustration of a very useful pair of set properties called [De Morgan's laws]{.concept}.
+This is an illustration of a very useful pair of set properties called [De Morgan's laws]{.concept definition="Rules for taking the complement of a union or an intersection of sets.  The complement of a union is the intersection of the individual complements, and the complement of an intersection is the union of the individual complements."}.
 
 ::: {#thm-demorgan-sets}
 ## De Morgan's laws
@@ -533,12 +476,6 @@ Because $x \notin A$ and $x \notin B$, we have $x \notin A \cup B$ and thus $x \
 As $x$ was chosen arbitrarily, this shows that $A^c \cap B^c \subseteq (A \cup B)^c$.
 :::
 
-```{python, echo=FALSE}
-concepts.update({
-  "De Morgan's laws": "Rules for taking the complement of a union or an intersection of sets.  The complement of a union is the intersection of the individual complements, and the complement of an intersection is the union of the individual complements.",
-})
-```
-
 ::: {#exr-demorgan-sets}
 Prove that $(A \cap B)^c = A^c \cup B^c$.
 
@@ -573,18 +510,10 @@ I could go on, but you get the point.
 For every president, there is exactly one year when they became president for the first time.
 
 What we've done here is associate each president, an element of set $P$ as we've been calling it, with a natural number, an element of $\mathbb{N}$.
-"The year that a given president took office" is what we call a [function]{.concept}, which we might say "maps" one set into another.
+"The year that a given president took office" is what we call a [function]{.concept definition="A rule that associates each element in one set (the domain) with a single element in another set (the codomain).  We write $f : A \to B$ to denote a function $f$ with domain $A$ and codomain $B$."}, which we might say "maps" one set into another.
 The notation $f : A \to B$ is a bit of mathematical shorthand that means "$f$ is a rule that takes each element of $A$ and associates it with an element of $B$".
 For any element $a \in A$, we write $f(a)$ to stand for the element of $B$ that the function associates $a$ with.
-When a function maps $A$ into $B$, we call $A$ the [domain]{.concept} and $B$ the [codomain]{.concept}.
-
-```{python, echo=FALSE}
-concepts.update({
-  "Function": "A rule that associates each element in one set (the domain) with a single element in another set (the codomain).  We write $f : A \\to B$ to denote a function $f$ with domain $A$ and codomain $B$.",
-  "Domain": "The set that a function \"acts on\".  If $f$ is a function whose domain is $A$, then $f(a)$ is defined for every element $a \\in A$.",
-  "Codomain": "The set that a function \"maps into\".  If $f$ is a function whose domain is $A$ and whose codomain is $B$, then $f(a)$ is an element of $B$ for every element $a \\in A$.",
-})
-```
+When a function maps $A$ into $B$, we call $A$ the [domain]{.concept definition='The set that a function "acts on".  If $f$ is a function whose domain is $A$, then $f(a)$ is defined for every element $a \in A$.'} and $B$ the [codomain]{.concept definition='The set that a function "maps into".  If $f$ is a function whose domain is $A$ and whose codomain is $B$, then $f(a)$ is an element of $B$ for every element $a \in A$.'}.
 
 To continue the example, let $y : P \to \mathbb{N}$ (verbally: "$y$ is a function that maps the set of presidents into the set of natural numbers") be the function that associates each president with the year they first took office.
 Then we have $y(\text{George Washington}) = 1789$, $y(\text{Grover Cleveland}) = 1893$, and so on.
@@ -628,7 +557,7 @@ Some functions do have this additional property, and we call those functions [on
 
 ::: {#def-one-to-one}
 ## One-to-one
-A function $f : A \to B$ is [one-to-one]{.concept}, also called [injective]{.concept}, if $f(a) \neq f(a')$ for all distinct elements $a \in A$ and $a' \in A$.
+A function $f : A \to B$ is [one-to-one]{.concept definition="A function is one-to-one if it associates each element of the domain with a distinct element of the codomain: if $a \neq a'$, then $f(a) \neq f(a')$."}, also called [injective]{.concept definition="Another name for [one-to-one]{.concept}."}, if $f(a) \neq f(a')$ for all distinct elements $a \in A$ and $a' \in A$.
 :::
 
 ```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="80%", fig.align="center", echo=FALSE, fig.cap="A function that is one-to-one, but not onto.", label="fig-one-to-one"}
@@ -693,7 +622,7 @@ In the special case where a function does reach every element of the codomain, w
 
 ::: {#def-onto}
 ## Onto
-A function $f : A \to B$ is [onto]{.concept}, also called [surjective]{.concept}, if for every element $b \in B$ there is some element $a \in A$ such that $f(a) = b$.
+A function $f : A \to B$ is [onto]{.concept definition="A function is onto if it maps at least one element of the domain to every element of the codomain: for all $b$ in the codomain, there is a domain element $a$ such that $f(a) = b$."}, also called [surjective]{.concept definition="Another name for [onto]{.concept}."}, if for every element $b \in B$ there is some element $a \in A$ such that $f(a) = b$.
 :::
 
 ```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="80%", fig.align="center", echo=FALSE, fig.cap="A function that is onto, but not one-to-one.", label="fig-onto"}
@@ -759,23 +688,11 @@ And for every element $b$ of $B$, there is *exactly one* element $a$ of $A$ such
 If the function weren't one-to-one, then there'd be at least one $a \in A$ with multiple matches in $B$.
 If it weren't onto, then there'd be at least one $b \in B$ with no matches in $A$.
 
-```{python, echo=FALSE}
-concepts.update({
-  "One-to-one": "A function is one-to-one if it associates each element of the domain with a distinct element of the codomain: if $a \\neq a'$, then $f(a) \\neq f(a')$.",
-  "Injective": "Another name for [one-to-one]{.concept}.",
-  "Onto": "A function is onto if it maps at least one element of the domain to every element of the codomain: for all $b$ in the codomain, there is a domain element $a$ such that $f(a) = b$.",
-  "Surjective": "Another name for [onto]{.concept}.",
-  "Bijection": "A function that is both one-to-one (injective) and onto (surjective).",
-  "Inverse function": "The reverse of a function, denoted $f^{-1}$, where $f^{-1}(b) = a$ if and only if $f(a) = b$.  Only exists for functions that are bijective (one-to-one and onto).",
-  "Cardinality": "The cardinality of a set $A$, denoted $|A|$, is the number of elements in the set if it is finite.  It gets more complicated if the set is infinite.",
-})
-```
-
 ::: {#def-bijective}
 ## Bijection and inverse
-A function $f : A \to B$ is a [bijection]{.concept} if it is both one-to-one and onto.
+A function $f : A \to B$ is a [bijection]{.concept definition="A function that is both one-to-one (injective) and onto (surjective)."} if it is both one-to-one and onto.
 
-Every bijective function has an [inverse function]{.concept}, $f^{-1} : B \to A$.
+Every bijective function has an [inverse function]{.concept definition="The reverse of a function, denoted $f^{-1}$, where $f^{-1}(b) = a$ if and only if $f(a) = b$.  Only exists for functions that are bijective (one-to-one and onto)."}, $f^{-1} : B \to A$.
 For every pair of elements $a \in A$ and $b \in B$, we have $f^{-1}(b) = a$ if and only if $f(a) = b$.
 :::
 
@@ -921,7 +838,7 @@ As $a$ was chosen arbitrarily, this proves that for every $a \in A$ there is som
 
 This section contains material that is not strictly necessary, but which I find edifying and hope you will too.
 
-The [cardinality]{.concept} of a set, loosely speaking, is the number of elements in the set.
+The [cardinality]{.concept definition="The cardinality of a set $A$, denoted $|A|$, is the number of elements in the set if it is finite.  It gets more complicated if the set is infinite."} of a set, loosely speaking, is the number of elements in the set.
 We write $|A|$ to denote the cardinality of a set $A$.
 For a finite set, this loose definition is exact --- the cardinality of a finite set is simply its size.
 For example, if $A = \{1.1, 2.2, 4.4\}$, then $|A| = 3$.
@@ -1072,7 +989,5 @@ This means there is no onto function that maps from the natural numbers into $(0
 In other words, there is more than one infinity! 
 
 
-```{python, echo=FALSE, results="asis"}
-from helpers import concept_table
-print(concept_table(concepts))
-```
+::: {#concept-review}
+:::

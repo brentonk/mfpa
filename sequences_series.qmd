@@ -10,11 +10,6 @@ library("cowplot")
 theme_set(theme_cowplot())
 ```
 
-```{python setup, echo=FALSE}
-# Set up concept dictionary
-concepts = {}
-```
-
 ## Motivating example: Incumbent advantage {#sec-sequences-motivation}
 
 I'm going to propose an extremely (overly!) simple model of incumbent party advantage in legislative elections, ask a very simple question of the model, and show that it leads us into having to do an addition of infinitely many terms.
@@ -38,21 +33,13 @@ Our goal here is to calculate the expected value,
 ::: {#nte-summation .callout-note title="Summation notation"}
 Don't remember what $\sum$ means?
 Don't panic!
-It's the [summation]{.concept} symbol, which we use when we're adding many things together.
+It's the [summation]{.concept definition="A concise way to denote adding up many terms.  The notation $\sum_{i=1}^n x_i$ is shorthand for $x_1 + x_2 + \cdots + x_n$."} symbol, which we use when we're adding many things together.
 For example, think about summing up the square of every number from 1 to 39.
 We could write that as $$1^2 + 2^2 + \cdots + 38^2 + 39^2.$$
 A shorter way to write that, with the added advantage of leaving absolutely no ambiguity about precisely what we're summing up, would be with the summation symbol: $$\sum_{n=1}^{39} n^2.$$
 More generally, the notation $\sum_{n=k}^K x_n$ stands for the sum $x_k + x_{k+1} + \cdots + x_{K - 1} + x_K$.
 The notation $\sum_{n=k}^\infty x_n$ stands for a sum of infinitely many terms, $x_k + x_{k+1} + x_{k+2} + \cdots$ and so on indefinitely.
 :::
-
-```{python, echo=FALSE}
-concepts.update(
-    {
-        "Summation": "A concise way to denote adding up many terms.  The notation $\\sum_{i=1}^n x_i$ is shorthand for $x_1 + x_2 + \\cdots + x_n$."
-    }
-)
-```
 
 Given any term length $T$, there's a nonzero, though probably quite small, probability that the incumbent party will stay in office at least $T$ terms.
 This means we'll need to add together infinitely many numbers to calculate the expected term length.
@@ -206,18 +193,11 @@ print(T)
 The brute force method works, but it's inelegant and scales poorly.
 It would be nice if there were a formula to answer our question.
 Luckily, there is one!
-We just have to use a [logarithm]{.concept}, which is essentially the reverse of an exponent. 
+We just have to use a [logarithm]{.concept definition="The reverse of an exponent.  In particular, for any numbers $a > 0$ and $b > 0$, if $a^x = b$, then we say that $x = \log_a b$.  In this example, $a$ is called the base of the logarithm.  For example, $\log_{10} 1000 = 3$ because $10^3 = 1000$."}, which is essentially the reverse of an exponent.
 
 ::: {#def-logarithm name="Logarithm"}
 For any positive number $a$ and any positive number $b \neq 1$, we say that $x = \log_b a$ (pronounced "$x$ is the logarithm, base $b$, of $a$") if and only if $b^x = a$.
 :::
-
-```{python} 
-concepts.update({
-  "Logarithm": "The reverse of an exponent.  In particular, for any numbers $a > 0$ and $b > 0$, if $a^x = b$, then we say that $x = \\log_a b$.  In this example, $a$ is called the base of the logarithm.  For example, $\\log_{10} 1000 = 3$ because $10^3 = 1000$.",
-  "Natural logarithm": "A logarithm whose base is Euler's number, $e$, the mathematical constant equal to roughly 2.718.  Whenever you see $\\log$ without an explicit base, you can assume it means a natural logarithm.",
-})
-```
 
 Here are a few examples of logarithms in action.
 
@@ -444,7 +424,7 @@ expand_grid(
 This figure shows three common choices of base for the logarithm.
 You are probably familiar with the numbers 2 and 10.
 You might be less familiar with the number $e$, aka Euler's number, which is equal to roughly 2.718 and comes up repeatedly in high-end math.
-This number is important enough that we call the base-$e$ logarithm the [natural logarithm]{.concept}.
+This number is important enough that we call the base-$e$ logarithm the [natural logarithm]{.concept definition="A logarithm whose base is Euler's number, $e$, the mathematical constant equal to roughly 2.718.  Whenever you see $\log$ without an explicit base, you can assume it means a natural logarithm."}.
 For now, I'm going to ask you to trust me that $e$ is important --- you'll be able to see the reasoning a bit better once we get to calculus.
 
 In these notes, when I write $\log y$ without an explicit base, I mean the natural logarithm of $y$.
@@ -468,18 +448,10 @@ Looking at @fig-term-length-prob, it seems like these probabilities get closer a
 Is there a way we can say that more precisely?
 For that, we'll need to learn about sequences and their limits.
 
-A [sequence]{.concept} is an infinite, ordered list of numbers.
+A [sequence]{.concept definition="An infinite, ordered list of numbers typically denoted $\\{x_n\\}$."} is an infinite, ordered list of numbers.
 We write $\{x_n\}$ to denote the sequence $x_1, x_2, x_3, \ldots$, with $x_n$ standing for the $n$'th entry in the sequence.
 Unlike with sets, order and repetition matter in a sequence.
 For example, the sequence $0, 1, 0, 1, \ldots$ is distinct from the sequence $1, 0, 1, 0, \ldots$ and the sequence $0, 0, 1, 1, 0, 0, 1, 1, \ldots$.
-
-```{python, echo=FALSE}
-concepts.update(
-    {
-        "Sequence": "An infinite, ordered list of numbers typically denoted $\\{x_n\\}$.",
-    }
-)
-```
 
 ::: {.callout-warning title="Sequences vs. sets"}
 Because we use curly brackets to denote both sequences and sets, there are some cases where it can be confusing to distinguish a single-element set from a sequence.
@@ -500,7 +472,7 @@ Putting these two facts together, you can also think of a sequence as a function
 Think about the sequence $1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \ldots$.
 To denote this formally, let $\{x_n\}$ be the sequence where each $x_n = \frac{1}{n}$.
 The further we go along this sequence, the closer the values get to 0 --- though we never quite get all the way there.
-Indeed, we would say the [limit]{.concept} of the sequence is 0, which we'd denote by writing $\lim_{n \to \infty} x_n = 0$ or, more simply, $\{x_n\} \to 0$.
+Indeed, we would say the [limit]{.concept definition="A point that a sequence $\\{x_n\\}$ approaches as $n$ grows larger and larger.  To denote $x$ being the limit of $\\{x_n\\}$, we may write $\lim_{n \to \infty} x_n = x$ or $\\{x_n\\} \to x$.  Some sequences have no limit.  See @def-limit for a fully rigorous mathematical definition of a limit."} of the sequence is 0, which we'd denote by writing $\lim_{n \to \infty} x_n = 0$ or, more simply, $\{x_n\} \to 0$.
 
 ```{r} 
 tibble(n = 1:40, x_n = 1 / n) |>
@@ -512,16 +484,6 @@ tibble(n = 1:40, x_n = 1 / n) |>
     x = "Index: n",
     y = "Sequence value: 1/n"
   )
-```
-
-```{python}
-concepts.update(
-    {
-        "Limit": "A point that a sequence $\\{x_n\\}$ approaches as $n$ grows larger and larger.  To denote $x$ being the limit of $\\{x_n\\}$, we may write $\\lim_{n \\to \infty} x_n = x$ or $\\{x_n\\} \\to x$.  Some sequences have no limit.  See @def-limit for a fully rigorous mathematical definition of a limit.",
-        "Convergent sequence": "A sequence that has a finite limit.",
-        "Divergent sequence": "A sequence that has no finite limit, either because it has an infinite limit or because it oscillates.",
-    }
-)
 ```
 
 What we need now is a precise mathematical notion of "getting closer and closer."
@@ -542,7 +504,7 @@ The formal definition of a limit puts this process in precise mathematical terms
 
 ::: {#def-limit name="Finite limit"}
 The sequence $\{x_n\}$ has a [limit]{.concept} of $x \in \mathbb{R}$ if the following condition is satisfied: for any real number $\epsilon > 0$, we can identify an index $N$ such that $|x_n - x| < \epsilon$ for all $n \geq N$.
-The sequence is [convergent]{.concept} if and only if $\lim_{n \to \infty} x_n = x$ for some finite number $x$.
+The sequence is [convergent]{.concept entry="Convergent sequence" definition="A sequence that has a finite limit."} if and only if $\lim_{n \to \infty} x_n = x$ for some finite number $x$.
 :::
 
 A sequence cannot have two distinct limits.
@@ -614,22 +576,14 @@ We have thus shown that $N = 1$ is a valid response to any $\epsilon > 0$ challe
 :::
 
 Not every sequence is convergent.
-We call a sequence [divergent]{.concept} if it is not convergent.
+We call a sequence [divergent]{.concept entry="Divergent sequence" definition="A sequence that has no finite limit, either because it has an infinite limit or because it oscillates."} if it is not convergent.
 One reason that a sequence might be divergent is that the values in the sequence increase (or decrease) without bound.
 For example, the sequence $1, 2, 3, \ldots$ is divergent, as are the sequences $-1, -2, -3, \ldots$ and $1, -1, 2, -2, 3, -3, \ldots$.
-In fact, it turns out that a necessary condition for a sequence to converge is that the sequence be [bounded]{.concept}.
+In fact, it turns out that a necessary condition for a sequence to converge is that the sequence be [bounded]{.concept entry="Bounded sequence" definition="A sequence for which there is a finite number $B$ such that every $|x_n| \leq B$.  Every convergent sequence is bounded, but not every bounded sequence is convergent."}.
 
 ::: {#def-bounded-sequence name="Bounded sequence"}
 We say the sequence $\{x_n\}$ is [bounded]{.concept} if there is a finite number $B$ such that $-B \leq x_n \leq B$ for all indices $n$.
 :::
-
-```{python} 
-concepts.update(
-    {
-        "Bounded sequence": "A sequence for which there is a finite number $B$ such that every $|x_n| \\leq B$.  Every convergent sequence is bounded, but not every bounded sequence is convergent.",
-    }
-)
-```
 
 ::: {#prp-convergent-implies-bounded name="Convergent implies bounded"}
 If $\{x_n\}$ is convergent, then it is bounded.
@@ -683,17 +637,9 @@ To prove that $\{x_n\}$ is not convergent, I will just rule out every number as 
 :::
 
 Any sequence that is bounded and divergent must oscillate (go up and down and up and down and ...) as in my answer to @exr-bounded-does-not-imply-convergent.
-A [monotone]{.concept} sequence, in which the values always increase (every $x_{n+1} \geq x_n$) or always decrease (every $x_{n+1} \leq x_n$), always converges if it is bounded.
+A [monotone]{.concept entry="Monotone sequence" definition="A sequence whose values always increase (every $x_{n+1} \geq x_n$) or always decrease (every $x_{n+1} \leq x_n$)."} sequence, in which the values always increase (every $x_{n+1} \geq x_n$) or always decrease (every $x_{n+1} \leq x_n$), always converges if it is bounded.
 This fact about monotone sequences is important enough in the study of calculus that I will state it as a theorem.
 However, I will skip over proving it, as the proof relies on some real analysis concepts that we don't have the bandwidth to cover in this course.
-
-```{python} 
-concepts.update(
-    {
-        "Monotone sequence": "A sequence whose values always increase (every $x_{n+1} \\geq x_n$) or always decrease (every $x_{n+1} \\leq x_n$).",
-    }
-)
-```
 
 ::: {#thm-monotone-convergence name="Monotone Convergence Theorem"}
 If $\{x_n\}$ is bounded and monotone, then it is convergent.
@@ -1047,29 +993,21 @@ It then follows from the constant multiple rule that $\{T p^T (1 - p)\} \to 0$ a
 
 We almost have everything we need to answer our original question: if the incumbent party retains power each term with probability $p$, what is the expected number of terms it will remain in office?
 We have already seen that the answer to this question will involve the infinite sum $$\sum_{T=0}^\infty T \cdot \Pr(\text{term length} = T) = \sum_{T=0}^\infty T p^T (1 - p).$$
-But how do we calculate an infinite sum, or [series]{.concept}, like this one?
+But how do we calculate an infinite sum, or [series]{.concept definition="A summation of infinitely many terms, written $\sum_{k=1}^\infty a_k$.  Its value is the limit of the sequence of partial sums, $\lim_{n \to \infty} \sum_{k=1}^n a_k$, provided that this limit exists."}, like this one?
 
 The key to solving the problem is to think of an infinite sum as the limit of finite sums.
 It may be daunting to think about adding infinitely many numbers together, but it is much easier to think about adding up a finite (if perhaps very large) quantity of them.
-In particular, we will work with the sequence of [partial sums]{.concept}, each of which is the sum of the first $n$ terms of the series.
+In particular, we will work with the sequence of [partial sums]{.concept entry="Partial sum" definition="The sum of all terms in a series up to a specified, finite index."}, each of which is the sum of the first $n$ terms of the series.
 If this sequence has a limit, then we identify that limit with the value of the series.
 
 ::: {#def-series name="Series as a limit of partial sums"}
 A [series]{.concept} is an infinite sum of terms, written like $\sum_{k=1}^\infty a_k$.
 The $n$'th [partial sum]{.concept} is the sum of the first $n$ terms in the series, $\sum_{k=1}^n a_k$.
 If the sequence of partial sums, $\{\sum_{k=1}^n a_k\}_{n=1}^\infty$, has a limit (finite or infinite), we say that $$\sum_{k=1}^\infty a_k = \lim_{n \to \infty} \sum_{k=1}^n a_k.$$
-If the limit exists and is finite, we call the series [convergent]{.concept}.
+If the limit exists and is finite, we call the series [convergent]{.concept entry="Convergent series" definition="A series whose value exists and is finite."}.
 :::
 
-```{python} 
-concepts.update({
-  "Series": "A summation of infinitely many terms, written $\\sum_{k=1}^\\infty a_k$.  Its value is the limit of the sequence of partial sums, $\\lim_{n \\to \\infty} \\sum_{k=1}^n a_k$, provided that this limit exists.",
-  "Partial sum": "The sum of all terms in a series up to a specified, finite index.",
-  "Convergent series": "A series whose value exists and is finite.",
-})
-```
-
-Possibly the most famous example of a convergent series is the [geometric series]{.concept}, a sum of powers of a fraction between 0 and 1.
+Possibly the most famous example of a convergent series is the [geometric series]{.concept definition="A series of the form $\sum_{k=0}^\infty q^k = 1 + q + q^2 + \cdots$, where $0 < q < 1$.  A geometric series is convergent, with a value of $\frac{1}{1 - q}$."}, a sum of powers of a fraction between 0 and 1.
 For any number $q$ between 0 and 1, we have $$1 + q + q^2 + \cdots = \sum_{k=0}^\infty q^k = \frac{1}{1 - q}.$$
 This calculation comes up in our motivating example here, where we multiply the retention probability $p$ with itself repeatedly to calculate the probability of lasting $T$ terms.
 Let's work through the logic that shows that the series actually comes out to $\frac{1}{1 - q}$.
@@ -1130,12 +1068,6 @@ $$
 $$
 At a 3% inflation rate ($i = 0.03$), the present value of our indefinite payment stream comes out to about \$34,333.
 At 50% inflation ($i = 0.5$), it's only worth \$3,000.
-
-```{python} 
-concepts.update({
-  "Geometric series": "A series of the form $\\sum_{k=0}^\\infty q^k = 1 + q + q^2 + \\cdots$, where $0 < q < 1$.  A geometric series is convergent, with a value of $\\frac{1}{1 - q}$.",
-})
-```
 
 ### Calculating the expected term in office
 
@@ -1412,9 +1344,6 @@ tibble(p = seq(0, 0.9, length.out = 100), y = p / (1 - p)) |>
 ```
 
 
-```{python, echo=FALSE, results="asis"}
-from helpers import concept_table
-
-print(concept_table(concepts))
-```
+::: {#concept-review}
+:::
 

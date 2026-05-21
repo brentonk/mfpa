@@ -22,9 +22,9 @@ quarto render logic.qmd  # render one chapter
 
 Only chapters listed under `book.chapters` in `_quarto.yml` are part of the rendered book. `linear_algebra.qmd`, `summary.qmd`, and `intro.qmd` are unlisted stubs/placeholders — adding content to them does nothing until they're added to `_quarto.yml`.
 
-## R + Python in the same chapter
+## R chunks
 
-Most chapters mix both engines. R chunks (`{r}`) handle plotting (ggplot2 + cowplot, with `theme_cowplot()` set as default), tikz diagrams, and data fetching from Dataverse. Python chunks (`{python}`) maintain the concept glossary. They don't share variable state — the only thing that crosses engines is the rendered output.
+Chapters use R via `{r}` chunks for plotting (ggplot2 + cowplot, with `theme_cowplot()` set as default), tikz diagrams, and data fetching from Dataverse. There is no Python engine — the project is R-only.
 
 Standard R chunk setup at the top of a chapter:
 
@@ -36,32 +36,42 @@ Heavy chunks (Dataverse downloads, gganimate, tikz figures) carry `#| cache: tru
 
 ## Concept glossary pattern
 
-Every chapter builds a glossary inline. Setup at the top:
+The glossary is built by a Lua filter (`_filters/concepts.lua`, registered in `_quarto.yml` with `at: pre-ast` so its output flows through Quarto's tabset transformer). Authors colocate the definition with the first prose mention of a term:
 
-```python
-concepts = {}
+```
+We can formulate this using the [set difference]{.concept definition="The set difference between $A$ and $B$, denoted $A \setminus B$, is the set of all elements that are in $A$ and are not in $B$."}.
 ```
 
-Then, as terms are introduced in prose, add them in a nearby chunk:
+Subsequent mentions in the same chapter use the bare class, which renders as a styled span without adding another glossary entry:
 
-```python
-concepts.update({
-  "Term name": "Definition with $\\LaTeX$ allowed.",
-})
+```
+The [set difference]{.concept} between two sets...
 ```
 
-In prose, mark the first occurrence of the term with `[term name]{.concept}` (custom span class, styled blue+bold in `mfpa.scss`).
+The filter collects every `.concept` span that has a `definition` attribute, keyed by the span content. The glossary entry defaults to the span text with the first letter uppercased — so `[union]{.concept ...}` becomes "Union" in the glossary. Use an explicit `entry="..."` to override when the prose form doesn't match the canonical key (plurals, hyphenation, alternate forms):
 
-At the very end of the chapter, render the dual-sorted glossary:
-
-````
-```{python, echo=FALSE, results="asis"}
-from helpers import concept_table
-print(concept_table(concepts))
 ```
-````
+[bijections]{.concept entry="Bijection" definition="..."}
+[disjoint]{.concept entry="Disjoint sets" definition="..."}
+[logically equivalent]{.concept entry="Logical equivalence" definition="..."}
+```
 
-`concept_table` (in `helpers.py`) emits a `.panel-tabset` with "Conceptual order" (insertion order) and "Alphabetical order" tabs.
+Where the glossary should appear — typically at the end of the chapter — drop an empty marker div. The filter replaces it with a `## Concept review` section containing a `.panel-tabset` with "Conceptual order" (insertion order, i.e., the order definitions appear in prose) and "Alphabetical order" tabs:
+
+```
+::: {#concept-review}
+:::
+```
+
+A `.concept` span with no `definition=` and no prior matching entry just passes through styled — no warning, no glossary entry. This is by design: many prose terms (`[Theorem]`, `[continuous]`, etc.) are styled for emphasis without being formal glossary entries.
+
+For synonym/cross-reference entries, embed a nested `.concept` span inside the definition:
+
+```
+[injective]{.concept definition="Another name for [one-to-one]{.concept}."}
+```
+
+The inner span has no `definition`, so it doesn't create a duplicate glossary entry — it just renders as a styled cross-reference inside the glossary card.
 
 ## Custom span classes
 
