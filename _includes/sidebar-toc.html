@@ -1,0 +1,62 @@
+<!-- Fold the page's table of contents into the left sidebar, nested under the
+     active chapter, and remove the right-hand margin TOC (hidden via CSS in
+     mfpa.scss). A small IntersectionObserver restores the active-section
+     highlight that Quarto's scrollspy can no longer provide once the nodes are
+     moved out of #quarto-margin-sidebar. -->
+<script>
+(function () {
+  function foldToc() {
+    var toc = document.querySelector('#quarto-margin-sidebar #TOC > ul')
+           || document.querySelector('#TOC > ul');
+    if (!toc || toc.dataset.mfpaFolded) return;
+
+    var activeLink = document.querySelector('#quarto-sidebar .sidebar-link.active');
+    if (!activeLink) return;
+    var li = activeLink.closest('li.sidebar-item');
+    if (!li) return;
+
+    // Bootstrap hides nested `.collapse` lists; show the full section tree.
+    toc.querySelectorAll('ul.collapse').forEach(function (u) {
+      u.classList.remove('collapse');
+    });
+
+    // Move the generated list under the active chapter.
+    toc.classList.add('mfpa-subnav');
+    toc.dataset.mfpaFolded = '1';
+    li.appendChild(toc);
+
+    // Map each link to its target section for scroll tracking.
+    var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+    var byId = {};
+    var targets = [];
+    links.forEach(function (a) {
+      var id = decodeURIComponent(a.getAttribute('href').slice(1));
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (el) { byId[id] = a; targets.push(el); }
+    });
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+
+    var visible = new Set();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible.add(e.target);
+        else visible.delete(e.target);
+      });
+      var current = targets.find(function (t) { return visible.has(t); });
+      if (current && byId[current.id]) {
+        links.forEach(function (a) { a.classList.remove('active'); });
+        byId[current.id].classList.add('active');
+      }
+    }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+    targets.forEach(function (t) { io.observe(t); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', foldToc);
+  } else {
+    foldToc();
+  }
+})();
+</script>

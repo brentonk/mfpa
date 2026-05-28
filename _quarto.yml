@@ -28,14 +28,19 @@ bibliography: references.bib
 
 format:
   html:
+    # Light-only for now. mfpa-dark.scss is kept on disk for a later dark pass.
     theme:
       - cosmo
-      # - brand
       - mfpa.scss
     title-block-banner: false
     monofont: 'Iosevka Web'
     linestretch: 1.6
     cap-location: top
+    # Custom after-body scripts: fold the right-hand TOC into the left sidebar,
+    # and wire up the concept-definition tooltips.
+    include-after-body:
+      - _includes/sidebar-toc.html
+      - _includes/concept-tooltip.html
 
   # pdf:
   #   documentclass: scrreprt

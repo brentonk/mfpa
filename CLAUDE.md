@@ -73,10 +73,12 @@ For synonym/cross-reference entries, embed a nested `.concept` span inside the d
 
 The inner span has no `definition`, so it doesn't create a duplicate glossary entry — it just renders as a styled cross-reference inside the glossary card.
 
+**Hover/tap tooltips.** Beyond the glossary, the filter attaches each concept's definition to *every* mention as a tooltip. Spans whose key has a definition get a `.has-tip` class, `tabindex="0"`, and a nested `<span class="concept-tip">` holding the definition parsed as Markdown inlines (so its math typesets — don't stuff definitions into plain attributes, where `$…$` would show literally). Reveal is CSS-driven in `mfpa.scss` (hover / keyboard focus / a `.tip-open` class); `_includes/concept-tooltip.html` adds tap-to-toggle on touch and clamps the popover to the viewport. A bare later mention resolves its definition by its normalized text, or by an explicit `entry=` when the prose form differs from the canonical key.
+
 ## Custom span classes
 
 Defined in `mfpa.scss`:
-- `[term]{.concept}` — blue, bold; used for first introduction of vocabulary
+- `[term]{.concept}` — teal, bold, dotted underline; first introduction of vocabulary. Mentions of a term that has a `definition=` anywhere in the chapter also get a hover/tap tooltip (`.has-tip`; see the glossary section)
 - `[true]{.tt}` / `[false]{.ff}` — green / red; used heavily in `logic.qmd` truth tables (no other chapter uses them)
 - `[note]{.todo}` — yellow highlight that auto-prefixes "TODO:"; use as inline markers for self-notes
 
@@ -112,6 +114,19 @@ eo <- list(extra.preamble="\\usepackage{venndiagram}")
 
 Subsequent tikz chunks pass `engine="tikz", engine.opts=eo, cache=TRUE`. A working LaTeX install with `venndiagram.sty` is required for these to render.
 
-## Styling
+## Styling & design
 
-`mfpa.scss` extends the `cosmo` Bootswatch theme (set in `_quarto.yml`). Iosevka Web is loaded for monospace. Theorem/proof/exercise blocks get rounded borders in primary color; examples use success-green. If a block isn't styled the way you expect, check `mfpa.scss` for a class selector before adjusting markup.
+`mfpa.scss` extends the `cosmo` Bootswatch theme (set in `_quarto.yml`) into an editorial light theme. The design language lives in the `scss:defaults` block:
+
+- **Type**: Source Serif 4 body + Archivo headings/sidebar/chrome; Iosevka Web monospace.
+- **Palette**: deep teal `#0F6E6E` primary on near-white warm paper `#FCFBF8`; `$success` green / `$danger` red drive example boxes and the `.tt`/`.ff` truth values.
+
+Conventions that aren't obvious from the markup:
+
+- **Light theme only.** `_quarto.yml` sets `theme: [cosmo, mfpa.scss]` — a single light theme, no dark variant. `mfpa-dark.scss` sits on disk as groundwork for a later dark pass but is **not wired in**; don't re-add a `dark:` theme block until that palette is finished.
+- **"CHAPTER N" eyebrow** is pure CSS: it restyles Quarto's `.chapter-number` span inside `#title-block-header h1.title` into an eyebrow (a `::before` adds the "Chapter " prefix). The rule is scoped to the title block — don't restyle `.chapter-number` / `.chapter-title` globally, since the sidebar and breadcrumb reuse the same spans. Unnumbered front matter (Preface, References) has no `.chapter-number` and just shows the bare title.
+- **Folded TOC.** `_includes/sidebar-toc.html` (wired via `include-after-body`) relocates the right-hand page TOC into the left sidebar under the active chapter, with a small `IntersectionObserver` for active-section highlighting; the right margin sidebar (`#quarto-margin-sidebar`) is hidden in CSS. Keep `toc: true` so the list is still generated for relocation.
+- **Single centred column + inline asides.** On wide screens (≥992px) `mfpa.scss` overrides the docked `.page-columns` grid to collapse the right margin and dead-centre the reading column (~40rem on chapters, matching the design mockup in `_design_previews/`). As a result, margin notes — `.column-margin` / `.margin-aside`, i.e. `::: {.aside}` content — are pulled **inline** into the text flow (Quarto's own narrow-screen mechanism) and styled as teal-ruled notes rather than margin floats.
+- **Boxes.** theorem/definition/proposition/corollary render as teal boxes, examples green, exercises a teal outline, proofs a subtle box; `.theorem-title` / `.proof-title` are forced onto their own line. Note callouts are retinted teal.
+
+If a block isn't styled the way you expect, check `mfpa.scss` for a class selector before adjusting markup.

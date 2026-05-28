@@ -1,0 +1,60 @@
+<!-- Concept tooltips: tap-to-toggle on touch devices, keyboard activation, and
+     keeping the popover inside the viewport. Hover / focus reveal is handled by
+     CSS in mfpa.scss; the .has-tip class + .concept-tip child come from the
+     concepts.lua filter. -->
+<script>
+(function () {
+  function init() {
+    var concepts = document.querySelectorAll('.concept.has-tip');
+    if (!concepts.length) return;
+
+    function closeAll(except) {
+      document.querySelectorAll('.concept.tip-open').forEach(function (c) {
+        if (c !== except) c.classList.remove('tip-open');
+      });
+    }
+
+    // Nudge a tip left if it would spill off the right edge of the viewport.
+    function place(c) {
+      var tip = c.querySelector(':scope > .concept-tip');
+      if (!tip) return;
+      tip.style.left = '0px';
+      var r = tip.getBoundingClientRect();
+      var pad = 12;
+      var over = r.right - (window.innerWidth - pad);
+      if (over > 0) {
+        var shift = Math.min(over, r.left - pad);
+        if (shift > 0) tip.style.left = (-shift) + 'px';
+      }
+    }
+
+    function toggle(c) {
+      var willOpen = !c.classList.contains('tip-open');
+      closeAll(c);
+      c.classList.toggle('tip-open', willOpen);
+      if (willOpen) place(c);
+    }
+
+    concepts.forEach(function (c) {
+      c.addEventListener('mouseenter', function () { place(c); });
+      c.addEventListener('focus', function () { place(c); });
+      c.addEventListener('click', function (e) { toggle(c); e.stopPropagation(); });
+      c.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(c); }
+        else if (e.key === 'Escape') { c.classList.remove('tip-open'); }
+      });
+    });
+
+    document.addEventListener('click', function () { closeAll(null); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeAll(null);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>

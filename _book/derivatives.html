@@ -63,7 +63,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-78985d013970e3cf536b3903524d7eb0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a0cc2413b2f7294c594a395d37e979b3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -341,7 +341,7 @@ Figure&nbsp;4.5
 </div>
 <p>If we’re really dedicated to squeezing every cent of expected value from this lottery, it looks like we’re better off guessing 67.4 than with an even 67. Come to think of it, going back to <a href="#fig-trump-pct" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>, wasn’t 67.4 the average value of Trump’s vote percentage across all the counties in our lottery drum?</p>
 <p>Is the answer to our problem simply to guess the average of all the labels in the lottery drum? If so, could we have figured that out without plugging all these possible guesses into the formula? Would this same trick work if the lottery balls were labeled differently, or is it just a coincidence that the average is the best guess here?</p>
-<p>We can answer these questions, but we’ll need some new mathematical tools to do so. These tools are known as <span class="concept">differential calculus</span>.</p>
+<p>We can answer these questions, but we’ll need some new mathematical tools to do so. These tools are known as <span class="concept has-tip" tabindex="0">differential calculus<span class="concept-tip" role="tooltip">Mathematical techniques for studying the “rate of change” of a function — how quickly or slowly the function is increasing or decreasing at a particular point in its domain.</span></span>.</p>
 </section>
 <section id="limits-of-functions" class="level2 page-columns page-full" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="limits-of-functions"><span class="header-section-number">4.2</span> Limits of functions</h2>
@@ -376,7 +376,7 @@ f(x) = \begin{cases}
 1.5 &amp; \text{if $x = 0$}.
 \end{cases}
 \]</span></p>
-<p>If we get really close to <span class="math inline">\(x = 0\)</span> on the domain but not quite there, the value of the function gets really close to 1. This is true no matter how close we get, as long as we don’t go all the way to <span class="math inline">\(x = 0\)</span> itself. In this sense, we would say the <span class="concept">limit of the function</span> as <span class="math inline">\(x\)</span> approaches 0 is equal to 1. In mathematical notation, we would write <span class="math display">\[\lim_{x \to 0} f(x) = 1.\]</span></p>
+<p>If we get really close to <span class="math inline">\(x = 0\)</span> on the domain but not quite there, the value of the function gets really close to 1. This is true no matter how close we get, as long as we don’t go all the way to <span class="math inline">\(x = 0\)</span> itself. In this sense, we would say the <span class="concept has-tip" tabindex="0">limit of the function<span class="concept-tip" role="tooltip">The limit of <span class="math inline">\(f(x)\)</span> as <span class="math inline">\(x\)</span> approaches <span class="math inline">\(c\)</span>, denoted <span class="math inline">\(\lim_{x \to c} f(x)\)</span>, is the value that <span class="math inline">\(f(x)\)</span> gets closer and closer to as <span class="math inline">\(x\)</span> gets closer and closer to <span class="math inline">\(c\)</span> without reaching it. The formal definition is that <span class="math inline">\(\lim_{x \to c} f(x) = y\)</span> if, for all <span class="math inline">\(\epsilon &gt; 0\)</span>, there is a value <span class="math inline">\(\delta &gt; 0\)</span> such that <span class="math inline">\(|f(x) - y| &lt; \epsilon\)</span> for all <span class="math inline">\(x \in (c - \delta, c) \cup (c, c + \delta)\)</span>. A function may not have a limit at a particular point.</span></span> as <span class="math inline">\(x\)</span> approaches 0 is equal to 1. In mathematical notation, we would write <span class="math display">\[\lim_{x \to 0} f(x) = 1.\]</span></p>
 <p>The problem with this kind of limiting statement is that we end up in an infinite regress. However close to <span class="math inline">\(x = 0\)</span> we look, we can always look a little bit closer — so how do we ever get close enough to say for certain what the limit is? Back in our formal definition of a limit for a sequence (<a href="sequences_series.html#def-limit" class="quarto-xref">Definition&nbsp;<span>3.2</span></a>), we used a “challenge-response” structure to escape the infinite regress. We will use a similar challenge-response method to define the limit of a function. Suppose I have a function <span class="math inline">\(f\)</span>, and I want to claim that <span class="math inline">\(\lim_{x \to c} f(x) = y\)</span>, i.e., the limit of the function as <span class="math inline">\(x\)</span> approaches the point <span class="math inline">\(c\)</span> in its domain is equal to <span class="math inline">\(y\)</span>.</p>
 <ol type="1">
 <li><p>You <strong>challenge</strong> me by picking a <span class="math inline">\(\epsilon &gt; 0\)</span>.</p>
@@ -498,7 +498,7 @@ Figure&nbsp;4.7
 <li><p>To conclude that there is no limit at <span class="math inline">\(x = 0\)</span>, it will now suffice to show that 0 cannot be the limit either.</p>
 <p>I claim that there is no valid answer to the <span class="math inline">\(\epsilon = 1/2\)</span> challenge to the claim that <span class="math inline">\(\lim_{x \to 0} f(x) = 0.\)</span> To this end, take an arbitrary <span class="math inline">\(\delta &gt; 0\)</span>, and consider <span class="math inline">\(x = \delta/2\)</span>. We have <span class="math inline">\(0 &lt; |0 - \delta/2| = \delta/2 &lt; \delta\)</span> as required, and yet <span class="math inline">\(|f(x) - 0| = |1 - 0| = 1 &gt; 1/2\)</span>. Therefore, the challenge cannot be answered, and thus <span class="math inline">\(0\)</span> cannot be the limit of <span class="math inline">\(f(x)\)</span> as <span class="math inline">\(x\)</span> approaches 0.</p></li>
 </ul>
-<p>The key problem in <a href="#fig-step-function" class="quarto-xref">Figure&nbsp;<span>4.7</span></a> is that the behavior of the function as we approach <span class="math inline">\(x = 0\)</span> is different when we are approach from the left (values below <span class="math inline">\(x = 0\)</span>) than when we approach from the right (values above <span class="math inline">\(x = 0\)</span>). By the same token, though, it seems sensible to say that the limit of the function is 0 as we approach <span class="math inline">\(x = 0\)</span> from the left, and that the limit is 1 as we approach from the right. Indeed, it is sensible. We would say that the function’s <span class="concept">left-hand limit</span> at <span class="math inline">\(x = 0\)</span> is 0 and that its <span class="concept">right-hand limit</span> at <span class="math inline">\(x = 0\)</span> is 1.</p>
+<p>The key problem in <a href="#fig-step-function" class="quarto-xref">Figure&nbsp;<span>4.7</span></a> is that the behavior of the function as we approach <span class="math inline">\(x = 0\)</span> is different when we are approach from the left (values below <span class="math inline">\(x = 0\)</span>) than when we approach from the right (values above <span class="math inline">\(x = 0\)</span>). By the same token, though, it seems sensible to say that the limit of the function is 0 as we approach <span class="math inline">\(x = 0\)</span> from the left, and that the limit is 1 as we approach from the right. Indeed, it is sensible. We would say that the function’s <span class="concept has-tip" tabindex="0">left-hand limit<span class="concept-tip" role="tooltip">The left-handed limit is the value that <span class="math inline">\(f(x)\)</span> gets closer and closer to as <span class="math inline">\(x\)</span> gets closer and closer to <span class="math inline">\(c\)</span> without meeting or exceeding it. The right-handed limit is the same thing, from the opposite direction.</span></span> at <span class="math inline">\(x = 0\)</span> is 0 and that its <span class="concept">right-hand limit</span> at <span class="math inline">\(x = 0\)</span> is 1.</p>
 <div id="def-handed-limit" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 4.2 (Left- and right-hand limits)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{R}\)</span> be an open interval, and consider the function <span class="math inline">\(f : X \to \mathbb{R}\)</span>.</p>
 <p>For a point <span class="math inline">\(c \in X\)</span>, we say that the limit of <span class="math inline">\(f(x)\)</span> as <span class="math inline">\(x\)</span> approaches <span class="math inline">\(c\)</span> <span class="concept">from the left</span> equals <span class="math inline">\(y\)</span>, denoted <span class="math inline">\(\lim_{x \to c^-} f(x) = y\)</span>, if the following condition holds: for any value of <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists a value <span class="math inline">\(\delta &gt; 0\)</span> such that <span class="math inline">\(|f(x) - y| &lt; \epsilon\)</span> for all <span class="math inline">\(x \in (c - \delta, c)\)</span>.</p>
@@ -732,7 +732,7 @@ Figure&nbsp;4.7
 </section>
 <section id="sec-continuity" class="level3 page-columns page-full" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="sec-continuity"><span class="header-section-number">4.2.2</span> Continuity</h3>
-<p>You might notice a pattern in <a href="#fig-function-limit-ex" class="quarto-xref">Figure&nbsp;<span>4.6</span></a> and <a href="#fig-step-function" class="quarto-xref">Figure&nbsp;<span>4.7</span></a>. At the points in the domain where the value of the function is not equal to its left- or right-hand limit, the graph of the function appears to “jump.” In mathematical terms, we’d say these jumps are points of discontinuity. By contrast, in the parts of the domain where there are no such jumps, the function is <span class="concept">continuous</span>.</p>
+<p>You might notice a pattern in <a href="#fig-function-limit-ex" class="quarto-xref">Figure&nbsp;<span>4.6</span></a> and <a href="#fig-step-function" class="quarto-xref">Figure&nbsp;<span>4.7</span></a>. At the points in the domain where the value of the function is not equal to its left- or right-hand limit, the graph of the function appears to “jump.” In mathematical terms, we’d say these jumps are points of discontinuity. By contrast, in the parts of the domain where there are no such jumps, the function is <span class="concept has-tip" tabindex="0">continuous<span class="concept-tip" role="tooltip">A function <span class="math inline">\(f : X \to Y\)</span> is continuous at a point in its domain, <span class="math inline">\(c \in X\)</span>, if its limit at that point exists and equals the value of the function: <span class="math inline">\(\lim_{x \to c} f(x) = f(c)\)</span>. We call <span class="math inline">\(f\)</span> a continuous function if it is continuous at every point in its domain.</span></span>.</p>
 <div id="def-continuity-point" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 4.3 (Continuity at a point)</strong></span> We say that a function <span class="math inline">\(f : X \to Y\)</span> is <span class="concept">continuous at the point</span> <span class="math inline">\(c \in X\)</span> if its limit exists at that point and is equal to the value of the function: <span class="math display">\[\lim_{x \to c} f(x) = f(c).\]</span></p>
 </div>
@@ -776,7 +776,7 @@ Any function of the form <span class="math inline">\(f(x) = a + b x\)</span>, wh
 </dd>
 <dt>Polynomials</dt>
 <dd>
-Any function of the form <span class="math display">\[\begin{aligned}f(x) &amp;= c_0 + c_1 x + c_2 x^2 + \cdots c_k x^k \\ &amp;= \sum_{n=0}^k c_n x^n,\end{aligned}\]</span> where <span class="math inline">\(k\)</span> is a natural number and each <span class="math inline">\(c_n\)</span> is a real number, is called a <span class="concept">polynomial</span> and is continuous.
+Any function of the form <span class="math display">\[\begin{aligned}f(x) &amp;= c_0 + c_1 x + c_2 x^2 + \cdots c_k x^k \\ &amp;= \sum_{n=0}^k c_n x^n,\end{aligned}\]</span> where <span class="math inline">\(k\)</span> is a natural number and each <span class="math inline">\(c_n\)</span> is a real number, is called a <span class="concept has-tip" tabindex="0">polynomial<span class="concept-tip" role="tooltip">A polynomial is a function of the form <span class="math display">\[f(x) = c_0 + c_1 x + c_2 x^2 + \cdots + c_k x^k,\]</span> where <span class="math inline">\(k\)</span> is a natural number and each coefficient <span class="math inline">\(c_0, \ldots, c_k\)</span> is a real number.</span></span> and is continuous.
 </dd>
 <dt>Exponential functions</dt>
 <dd>
@@ -800,7 +800,7 @@ Any function of the form <span class="math inline">\(f(x) = 1 / g(x)\)</span>, w
 </dd>
 <dt>Compositions of continuous functions</dt>
 <dd>
-Any function of the form <span class="math inline">\(f(x) = g(h(x))\)</span>, called the <span class="concept">composition</span> of <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span>, is continuous if <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> are continuous.
+Any function of the form <span class="math inline">\(f(x) = g(h(x))\)</span>, called the <span class="concept has-tip" tabindex="0">composition<span class="concept-tip" role="tooltip">Consider two functions <span class="math inline">\(h : X \to Y\)</span> and <span class="math inline">\(g : Y \to Z\)</span>. The composition of <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> is the function <span class="math inline">\(f : X \to Z\)</span> defined by <span class="math inline">\(f(x) = g(h(x))\)</span>.</span></span> of <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span>, is continuous if <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> are continuous.
 </dd>
 </dl>
 <div id="exr-lottery-continuity" class="theorem exercise">
@@ -857,7 +857,7 @@ Figure&nbsp;4.9: Two linear functions — one steeper, one flatter.
 </div>
 </div>
 </div>
-<p>Between the two linear functions depicted in <a href="#fig-linear-function-slopes" class="quarto-xref">Figure&nbsp;<span>4.9</span></a>, <span class="math inline">\(g(x)\)</span> is steeper and <span class="math inline">\(h(x)\)</span> is flatter. Specifically, the <span class="concept">slope</span> of <span class="math inline">\(g(x)\)</span> is greater in magnitude than that of <span class="math inline">\(h(x)\)</span>. You can calculate the slope of a linear function using the “rise over run” formula. Given any two distinct points along the domain, <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, we calculate the slope by dividing the difference in function values (the “rise”) by the difference in domain values (the “run”): <span id="eq-rise-over-run"><span class="math display">\[\text{slope} = \frac{f(x_1) - f(x_2)}{x_1 - x_2}. \tag{4.1}\]</span></span></p>
+<p>Between the two linear functions depicted in <a href="#fig-linear-function-slopes" class="quarto-xref">Figure&nbsp;<span>4.9</span></a>, <span class="math inline">\(g(x)\)</span> is steeper and <span class="math inline">\(h(x)\)</span> is flatter. Specifically, the <span class="concept has-tip" tabindex="0">slope<span class="concept-tip" role="tooltip">For a linear function, <span class="math inline">\(f(x) = \alpha + \beta x\)</span>, the slope is the coefficient <span class="math inline">\(\beta\)</span>. It can be calculated using the rise-over-run formula: for any distinct points <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> in the domain of <span class="math inline">\(f\)</span>, <span class="math display">\[\beta = \frac{f(x_1) - f(x_2)}{x_1 - x_2}.\]</span></span></span> of <span class="math inline">\(g(x)\)</span> is greater in magnitude than that of <span class="math inline">\(h(x)\)</span>. You can calculate the slope of a linear function using the “rise over run” formula. Given any two distinct points along the domain, <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, we calculate the slope by dividing the difference in function values (the “rise”) by the difference in domain values (the “run”): <span id="eq-rise-over-run"><span class="math display">\[\text{slope} = \frac{f(x_1) - f(x_2)}{x_1 - x_2}. \tag{4.1}\]</span></span></p>
 <p>For example, for the functions we’ve plotted in <a href="#fig-linear-function-slopes" class="quarto-xref">Figure&nbsp;<span>4.9</span></a>, let’s compare the function values at <span class="math inline">\(x_1 = 4\)</span> to those at <span class="math inline">\(x_2 = 0\)</span>. For the steeper function <span class="math inline">\(g\)</span>, we have <span class="math inline">\(g(x_1) = g(4) = 4\)</span> and <span class="math inline">\(g(x_2) = g(0) = 0\)</span>. Therefore, the slope of <span class="math inline">\(g\)</span> is 1: <span class="math display">\[\text{slope of $g$} = \frac{g(x_1) - g(x_2)}{x_1 - x_2} = \frac{g(4) - g(0)}{4} = \frac{4 - 0}{4 - 0} = 1.\]</span> By contrast, the slope of the flatter function <span class="math inline">\(h\)</span> is just 1/4: <span class="math display">\[\text{slope of $h$} = \frac{h(x_1) - h(x_2)}{x_1 - x_2} = \frac{h(4) - h(0)}{4 - 0} = \frac{3 - 2}{4} = \frac{1}{4}.\]</span></p>
 <div id="exr-linear-slopes" class="theorem exercise" title="Slopes of linear functions">
 <p><span class="theorem-title"><strong>Exercise 4.8</strong></span> Calculate the slope of each function depicted in the figure below. What are the similarities and differences with the slopes of the functions depicted in <a href="#fig-linear-function-slopes" class="quarto-xref">Figure&nbsp;<span>4.9</span></a>?</p>
@@ -946,7 +946,7 @@ Figure&nbsp;4.11
 <p><span class="math inline">\(\frac{x + c}{2}\)</span> is the midpoint between <span class="math inline">\(x\)</span> and <span class="math inline">\(c\)</span>, which will always be closer to <span class="math inline">\(c\)</span> than <span class="math inline">\(x\)</span> itself is.</p>
 </div></div><p>The only way to escape the we-could-have-gotten-even-closer complaint is to <strong>take the limit</strong>. We will formally define the derivative of a function as the limit of the rise-over-run calculation (<a href="#eq-rise-over-run" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>) as we choose approximation points <span class="math inline">\(x\)</span> ever closer and closer to <span class="math inline">\(c\)</span>, the point at which we want to calculate the steepness of the function.</p>
 <div id="def-derivative" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4.5 (Derivative of a function)</strong></span> Consider the function <span class="math inline">\(f : X \to \mathbb{R}\)</span>, where <span class="math inline">\(X \subseteq \mathbb{R}\)</span>, and the point <span class="math inline">\(c \in X\)</span>. The <span class="concept">derivative</span> of <span class="math inline">\(f\)</span> at <span class="math inline">\(c\)</span>, denoted <span class="math inline">\(f'(c)\)</span>, is defined by the limit <span class="math display">\[f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c},\]</span> provided that this limit exists. When this limit exists, we say that <span class="math inline">\(f\)</span> is <span class="concept">differentiable at the point</span> <span class="math inline">\(c\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 4.5 (Derivative of a function)</strong></span> Consider the function <span class="math inline">\(f : X \to \mathbb{R}\)</span>, where <span class="math inline">\(X \subseteq \mathbb{R}\)</span>, and the point <span class="math inline">\(c \in X\)</span>. The <span class="concept has-tip" tabindex="0">derivative<span class="concept-tip" role="tooltip">The derivative of <span class="math inline">\(f\)</span> at the point <span class="math inline">\(c\)</span>, denoted <span class="math inline">\(f'(c)\)</span>, is a measure of how steeply the function is increasing or decreasing at that point. The formal definition of the derivative is that <span class="math display">\[f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c} = \lim_{h \to 0} \frac{f(c + h) - f(c)}{h},\]</span> provided that this limit exists.</span></span> of <span class="math inline">\(f\)</span> at <span class="math inline">\(c\)</span>, denoted <span class="math inline">\(f'(c)\)</span>, is defined by the limit <span class="math display">\[f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c},\]</span> provided that this limit exists. When this limit exists, we say that <span class="math inline">\(f\)</span> is <span class="concept has-tip" tabindex="0">differentiable at the point<span class="concept-tip" role="tooltip">A function <span class="math inline">\(f : X \to \mathbb{R}\)</span> is differentiable at a point in its domain, <span class="math inline">\(c \in X\)</span>, if the derivative <span class="math inline">\(f'(c)\)</span> exists. We call <span class="math inline">\(f\)</span> a differentiable function if it is differentiable at every point in its domain.</span></span> <span class="math inline">\(c\)</span>.</p>
 <p>If <span class="math inline">\(f\)</span> is differentiable at every point in its domain, we simply say that it is <span class="concept">differentiable</span>.</p>
 </div>
 <div id="tip-fractional-notation-deriv" class="callout callout-style-default callout-tip callout-titled" title="Alternative notation for derivatives">
@@ -1186,7 +1186,7 @@ The function <span class="math inline">\(f(x) = \log x\)</span> has a derivative
 <section id="sec-properties-of-derivatives" class="level3 page-columns page-full" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="sec-properties-of-derivatives"><span class="header-section-number">4.3.2</span> Properties of derivatives</h3>
 <p>Using a few rules in combination with the derivatives of common functions from above, we can calculate the derivatives of most functions we run into in practice without explicitly taking limits of the rise-over-run ratio.</p>
-<p>If we take a function and multiply it by a constant, the derivative of the resulting function is the same multiple of the original derivative. This is the <span class="concept">constant multiple rule</span>.</p>
+<p>If we take a function and multiply it by a constant, the derivative of the resulting function is the same multiple of the original derivative. This is the <span class="concept has-tip" tabindex="0">constant multiple rule<span class="concept-tip" role="tooltip">If <span class="math inline">\(g(x) = c f(x),\)</span> where <span class="math inline">\(c\)</span> is a constant real number, then <span class="math inline">\(g'(x) = c f'(x).\)</span></span></span>.</p>
 <div id="prp-deriv-constant-multiple" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4.5 (Constant multiple rule)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(g : X \to \mathbb{R}\)</span> by <span class="math inline">\(g(x) = c f(x),\)</span> where <span class="math inline">\(c\)</span> is a constant real number. For all <span class="math inline">\(x \in X,\)</span> <span class="math display">\[g'(x) = c f'(x).\]</span></p>
 </div>
@@ -1201,7 +1201,7 @@ The function <span class="math inline">\(f(x) = \log x\)</span> has a derivative
 \]</span></p>
 </div>
 <p>For example, we can use the constant multiple rule to find the derivative of <u>any</u> logarithmic function, not just the natural logarithm. Let <span class="math inline">\(f(x) = \log_b(x),\)</span> where <span class="math inline">\(b &gt; 0\)</span> and <span class="math inline">\(b \neq 1.\)</span> Using the base change formula from <a href="sequences_series.html#prp-logarithm-base-change" class="quarto-xref">Proposition&nbsp;<span>3.5</span></a>, we know that <span class="math display">\[f(x) = \log_b(x) = \frac{\log(x)}{\log(b)} = \frac{1}{\log(b)} \cdot \log(x).\]</span> In other words, the logarithm with base <span class="math inline">\(b\)</span> is just a constant multiple of the natural logarithm. Using this fact, we can find the derivative: <span class="math display">\[f'(x) = \frac{1}{\log(b)} \cdot \frac{d \log(x)}{d x} = \frac{1}{\log(b)} \cdot \frac{1}{x} = \frac{1}{x \log(b)}.\]</span></p>
-<p>Another convenient property is that the derivative of the sum is equal to the sum of the derivatives. You’ll end up using the <span class="concept">sum rule</span> so often that you stop thinking about it.</p>
+<p>Another convenient property is that the derivative of the sum is equal to the sum of the derivatives. You’ll end up using the <span class="concept has-tip" tabindex="0">sum rule<span class="concept-tip" role="tooltip">If <span class="math inline">\(h(x) = f(x) + g(x),\)</span> then <span class="math inline">\(h'(x) = f'(x) + g'(x).\)</span></span></span> so often that you stop thinking about it.</p>
 <div id="prp-deriv-sum" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4.6 (Sum rule)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> and <span class="math inline">\(g : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(h : X \to \mathbb{R}\)</span> by <span class="math inline">\(h(x) = f(x) + g(x).\)</span> For all <span class="math inline">\(x \in X,\)</span> <span class="math display">\[h'(x) = f'(x) + g'(x).\]</span></p>
 </div>
@@ -1303,7 +1303,7 @@ f'(x) = \sum_{n=0}^k c_n \left[n x^{n-1}\right],
 </div>
 </div>
 <p>Unfortunately for us, derivatives of products don’t work quite as intuitively as derivatives of sums. In general, it is <u>not true</u> that the derivative of <span class="math inline">\(f(x) g(x)\)</span> equals <span class="math inline">\(f'(x) g'(x).\)</span> As an illustration, think about the quadratic function <span class="math inline">\(h(x) = x^2 = x \cdot x,\)</span> which decreases up to <span class="math inline">\(x = 0\)</span> and then increases thereafter. If it were true that the derivative of the product equals the product of the derivatives, then we would have <span class="math inline">\(h(x) = 1 \cdot 1 = 1\)</span> (because <span class="math inline">\(h(x) = x \cdot x\)</span> and the derivative of the identity function is 1), falsely implying that the quadratic function is actually linear.</p>
-<p>All that said, we still have a convenient formula to calculate the derivative of a product — it’s just not as convenient as the derivative of a sum. The <span class="concept">product rule</span> to take the derivative of <span class="math inline">\(f(x) g(x)\)</span> essentially breaks the problem into two parts. First we treat <span class="math inline">\(f(x)\)</span> as if it were a constant and take the derivative of <span class="math inline">\(g(x),\)</span> then we do the reverse, and finally we add the two results together.</p>
+<p>All that said, we still have a convenient formula to calculate the derivative of a product — it’s just not as convenient as the derivative of a sum. The <span class="concept has-tip" tabindex="0">product rule<span class="concept-tip" role="tooltip">If <span class="math inline">\(h(x) = f(x) g(x),\)</span> then <span class="math inline">\(h'(x) = f(x) g'(x) + f'(x) g(x).\)</span></span></span> to take the derivative of <span class="math inline">\(f(x) g(x)\)</span> essentially breaks the problem into two parts. First we treat <span class="math inline">\(f(x)\)</span> as if it were a constant and take the derivative of <span class="math inline">\(g(x),\)</span> then we do the reverse, and finally we add the two results together.</p>
 <div id="prp-product-rule" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4.7 (Product rule)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> and <span class="math inline">\(g : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(h : X \to \mathbb{R}\)</span> by <span class="math inline">\(h(x) = f(x) \cdot g(x).\)</span> For all <span class="math inline">\(x \in X,\)</span> <span class="math display">\[
 \begin{aligned}
@@ -1409,7 +1409,7 @@ f'(x)
 </div>
 </div>
 </div>
-<p>The <span class="concept">quotient rule</span> for functions in the form <span class="math inline">\(\frac{f(x)}{g(x)}\)</span> is unfortunately a bit trickier to remember. If you have to Google this one every time you use it, don’t worry — you’re not alone.</p>
+<p>The <span class="concept has-tip" tabindex="0">quotient rule<span class="concept-tip" role="tooltip">If <span class="math inline">\(h(x) = f(x) / g(x),\)</span> then <span class="math display">\[h'(x) = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.\]</span></span></span> for functions in the form <span class="math inline">\(\frac{f(x)}{g(x)}\)</span> is unfortunately a bit trickier to remember. If you have to Google this one every time you use it, don’t worry — you’re not alone.</p>
 <div id="prp-quotient-rule" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4.8 (Quotient rule)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> and <span class="math inline">\(g : X \to \mathbb{R} \setminus \{0\}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}.\)</span> Define the function <span class="math inline">\(h : X \to \mathbb{R}\)</span> by <span class="math inline">\(h(x) = \frac{f(x)}{g(x)}.\)</span> For all <span class="math inline">\(x \in X,\)</span> <span class="math display">\[h'(x) = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.\]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Codomain of the denominator function">
@@ -1512,7 +1512,7 @@ f'(p)
 </div>
 </div>
 <p>What do we do when we run into a function that isn’t obviously a sum or product or quotient of some other function whose derivative we know how to take? For example, think about the function <span class="math display">\[h(x) = e^{-(x - \mu)^2},\]</span> a close cousin of the probability density function of the normal distribution with mean <span class="math inline">\(\mu\)</span> and variance 1. We know that the derivative of <span class="math inline">\(e^x\)</span> is <span class="math inline">\(e^x\)</span>. And by observing that <span class="math display">\[-(x - \mu)^2 = -[x^2 - 2 x \mu + \mu^2] = 2 x \mu - x^2 - \mu^2,\]</span> we know that its derivative is <span class="math inline">\(2 (\mu - x).\)</span> Is there a way we can put these together to figure out the derivative of <span class="math inline">\(h(x)?\)</span></p>
-<p>The <span class="concept">chain rule</span> helps us deal with situations like this one. Specifically, suppose we have a function of the form <span class="math display">\[h(x) = f(g(x)),\]</span> where <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are each differentiable. Going back to our example, if we define <span class="math inline">\(f(x) = e^x\)</span> and <span class="math inline">\(g(x) = -(x - \mu)^2,\)</span> then we have <span class="math display">\[
+<p>The <span class="concept has-tip" tabindex="0">chain rule<span class="concept-tip" role="tooltip">If <span class="math inline">\(h(x) = f(g(x)),\)</span> then <span class="math inline">\(h'(x) = f'(g(x)) \cdot g'(x).\)</span></span></span> helps us deal with situations like this one. Specifically, suppose we have a function of the form <span class="math display">\[h(x) = f(g(x)),\]</span> where <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are each differentiable. Going back to our example, if we define <span class="math inline">\(f(x) = e^x\)</span> and <span class="math inline">\(g(x) = -(x - \mu)^2,\)</span> then we have <span class="math display">\[
 \begin{aligned}
 h(x)
 = e^{-(x - \mu)^2}
@@ -1739,13 +1739,13 @@ h'(x)
 <section id="second-derivatives" class="level3" data-number="4.3.3">
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="second-derivatives"><span class="header-section-number">4.3.3</span> Second derivatives</h3>
 <p>In economics, inflation is a measure of the rate of increase in the price level. When prices are going up, inflation is positive. The quicker the prices are going up, the higher the measure of inflation is. In the rare event that prices are going down, we’d say we have “deflation,” in which case the standard measures of inflation would be negative. Mathematically, you can think about the price level as a function of time, and then think of inflation as the derivative of this function.</p>
-<p>Politicians will sometimes brag that inflation is decreasing. But they usually don’t mean that the price level is actually going down: that would mean we’re having deflation, which usually occurs only in the context of Great Depression-type economic cataclysms. Instead, a decrease in inflation typically means that prices are increasing, but not as quickly as they were earlier. In other words, the rate of increase is itself decreasing. But now we’re thinking about the rate of change in a rate of change … or the derivative of a derivative, also known as the <span class="concept">second derivative</span>.</p>
+<p>Politicians will sometimes brag that inflation is decreasing. But they usually don’t mean that the price level is actually going down: that would mean we’re having deflation, which usually occurs only in the context of Great Depression-type economic cataclysms. Instead, a decrease in inflation typically means that prices are increasing, but not as quickly as they were earlier. In other words, the rate of increase is itself decreasing. But now we’re thinking about the rate of change in a rate of change … or the derivative of a derivative, also known as the <span class="concept has-tip" tabindex="0">second derivative<span class="concept-tip" role="tooltip">The second derivative of a differentiable function <span class="math inline">\(f(x)\)</span>, denoted <span class="math inline">\(f''(x),\)</span> is the derivative of the function’s derivative: <span class="math display">\[f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c}.\]</span></span></span>.</p>
 <div id="def-second-derivative" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4.6 (Second derivative)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}\)</span>. For any domain point <span class="math inline">\(c \in X\)</span>, the <span class="concept">second derivative</span> of <span class="math inline">\(f\)</span> at <span class="math inline">\(c\)</span> is <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 4.6 (Second derivative)</strong></span> Let <span class="math inline">\(f : X \to \mathbb{R}\)</span> be differentiable, where <span class="math inline">\(X \subseteq \mathbb{R}\)</span>. For any domain point <span class="math inline">\(c \in X\)</span>, the <span class="concept has-tip" tabindex="0">second derivative<span class="concept-tip" role="tooltip">The second derivative of a differentiable function <span class="math inline">\(f(x)\)</span>, denoted <span class="math inline">\(f''(x),\)</span> is the derivative of the function’s derivative: <span class="math display">\[f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c}.\]</span></span></span> of <span class="math inline">\(f\)</span> at <span class="math inline">\(c\)</span> is <span class="math display">\[
 \begin{aligned}
 f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c},
 \end{aligned}
-\]</span> provided that this limit exists. When it does, we say that <span class="math inline">\(f\)</span> is <span class="concept">twice differentiable at the point</span> <span class="math inline">\(c\)</span>.</p>
+\]</span> provided that this limit exists. When it does, we say that <span class="math inline">\(f\)</span> is <span class="concept has-tip" tabindex="0">twice differentiable at the point<span class="concept-tip" role="tooltip">A function <span class="math inline">\(f : X \to \mathbb{R}\)</span> is twice differentiable at a point in its domain, <span class="math inline">\(c \in X,\)</span> if the second derivative <span class="math inline">\(f''(c)\)</span> exists. We call <span class="math inline">\(f\)</span> a twice differentiable function if it is twice differentiable at every point in its domain.</span></span> <span class="math inline">\(c\)</span>.</p>
 <p>If <span class="math inline">\(f\)</span> is twice differentiable at every point in its domain, we simply say that it is <span class="concept">twice differentiable</span>.</p>
 </div>
 <p>Sometimes in formal theory papers, you’ll see a function described just in terms of its first and second derivatives. For instance, I might write, “Let <span class="math inline">\(f : [0, 1] \to [0, 1]\)</span> be twice differentiable, with <span class="math inline">\(f' &gt; 0\)</span> and <span class="math inline">\(f'' &lt; 0.\)</span> Here’s a little cheat sheet to interpret statements like that one.</p>
@@ -1807,7 +1807,7 @@ Caused by warning:
 </div>
 </div>
 </div>
-<p>If a function has a non-negative second derivative, <span class="math inline">\(f''(x) \geq 0,\)</span> we call it <span class="concept">convex</span>. Additionally, if the second derivative is strictly positive, <span class="math inline">\(f''(x) &gt; 0,\)</span> we call the function <span class="concept">strictly convex</span>. A classic example of a strictly convex function is exponential growth. For example, let <span class="math inline">\(f(t)\)</span> be the number of mice you will have at time <span class="math inline">\(t\)</span> if you start with one boy mouse and one girl mouse at <span class="math inline">\(t = 0\)</span>. If the number of mice doubles with each unit of time, then you’ll have <span class="math display">\[
+<p>If a function has a non-negative second derivative, <span class="math inline">\(f''(x) \geq 0,\)</span> we call it <span class="concept has-tip" tabindex="0">convex<span class="concept-tip" role="tooltip">A twice differentiable function is convex if <span class="math inline">\(f''(x) \geq 0,\)</span> and additionally is strictly convex if <span class="math inline">\(f''(x) &gt; 0.\)</span></span></span>. Additionally, if the second derivative is strictly positive, <span class="math inline">\(f''(x) &gt; 0,\)</span> we call the function <span class="concept">strictly convex</span>. A classic example of a strictly convex function is exponential growth. For example, let <span class="math inline">\(f(t)\)</span> be the number of mice you will have at time <span class="math inline">\(t\)</span> if you start with one boy mouse and one girl mouse at <span class="math inline">\(t = 0\)</span>. If the number of mice doubles with each unit of time, then you’ll have <span class="math display">\[
 \begin{aligned}
 f(0) &amp;= 2, \\
 f(1) &amp;= 4, \\
@@ -1817,7 +1817,7 @@ f(4) &amp;= 32, \\
 \vdots
 \end{aligned}
 \]</span> So not only is the function increasing, but it’s increasing more quickly as time goes on. Because the rate of increase is itself increasing, the function is strictly convex.</p>
-<p>On the other hand, we call a function <span class="concept">concave</span> if <span class="math inline">\(f''(x) \leq 0,\)</span> and additionally <span class="concept">strictly concave</span> if <span class="math inline">\(f''(x) &lt; 0.\)</span> Concave functions often arise in economic contexts. In particular, we often think that concave functions are a good way to model the amount of “utility” (happiness, loosely speaking) that a person derives from consuming a quantity of a good. For instance, let <span class="math inline">\(t\)</span> be the number of tacos I’ve eaten and let <span class="math inline">\(u(t)\)</span> be how happy I am as a function of the number of tacos I’ve eaten. There’s a big happiness boost going from 0 tacos (starving) to 1 taco (still hungry but not starving). There’s a smaller happiness boost going from 1 taco to 2 tacos (barely full). The boost keeps decreasing from there, and once I’m full I would actively prefer to not eat any additional tacos. Altogether, then, <span class="math inline">\(u(t)\)</span> is strictly concave — each additional taco raises my happiness by a lower and lower amount.</p>
+<p>On the other hand, we call a function <span class="concept has-tip" tabindex="0">concave<span class="concept-tip" role="tooltip">A twice differentiable function is concave if <span class="math inline">\(f''(x) \leq 0,\)</span> and additionally is strictly concave if <span class="math inline">\(f''(x) &lt; 0.\)</span></span></span> if <span class="math inline">\(f''(x) \leq 0,\)</span> and additionally <span class="concept">strictly concave</span> if <span class="math inline">\(f''(x) &lt; 0.\)</span> Concave functions often arise in economic contexts. In particular, we often think that concave functions are a good way to model the amount of “utility” (happiness, loosely speaking) that a person derives from consuming a quantity of a good. For instance, let <span class="math inline">\(t\)</span> be the number of tacos I’ve eaten and let <span class="math inline">\(u(t)\)</span> be how happy I am as a function of the number of tacos I’ve eaten. There’s a big happiness boost going from 0 tacos (starving) to 1 taco (still hungry but not starving). There’s a smaller happiness boost going from 1 taco to 2 tacos (barely full). The boost keeps decreasing from there, and once I’m full I would actively prefer to not eat any additional tacos. Altogether, then, <span class="math inline">\(u(t)\)</span> is strictly concave — each additional taco raises my happiness by a lower and lower amount.</p>
 <p>A linear function is both convex and concave. However, it is neither strictly convex nor strictly concave. All that is a long way of saying that the second derivative of a linear function is always zero. That’s true because the derivative of a linear function is its slope, a constant, so the derivative of the derivative is zero.</p>
 <div id="exr-concave-convex" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.25 (Concave and convex functions)</strong></span> Using the second derivative, characterize the conditions under which each of the following functions is convex or concave:</p>
@@ -2068,6 +2068,128 @@ Rudin, Walter. 1976. <em>Principles of Mathematical Analysis</em>. 3rd ed. McGra
 </section>
 
 </main> <!-- /main -->
+<!-- Fold the page's table of contents into the left sidebar, nested under the
+     active chapter, and remove the right-hand margin TOC (hidden via CSS in
+     mfpa.scss). A small IntersectionObserver restores the active-section
+     highlight that Quarto's scrollspy can no longer provide once the nodes are
+     moved out of #quarto-margin-sidebar. -->
+<script>
+(function () {
+  function foldToc() {
+    var toc = document.querySelector('#quarto-margin-sidebar #TOC > ul')
+           || document.querySelector('#TOC > ul');
+    if (!toc || toc.dataset.mfpaFolded) return;
+
+    var activeLink = document.querySelector('#quarto-sidebar .sidebar-link.active');
+    if (!activeLink) return;
+    var li = activeLink.closest('li.sidebar-item');
+    if (!li) return;
+
+    // Bootstrap hides nested `.collapse` lists; show the full section tree.
+    toc.querySelectorAll('ul.collapse').forEach(function (u) {
+      u.classList.remove('collapse');
+    });
+
+    // Move the generated list under the active chapter.
+    toc.classList.add('mfpa-subnav');
+    toc.dataset.mfpaFolded = '1';
+    li.appendChild(toc);
+
+    // Map each link to its target section for scroll tracking.
+    var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+    var byId = {};
+    var targets = [];
+    links.forEach(function (a) {
+      var id = decodeURIComponent(a.getAttribute('href').slice(1));
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (el) { byId[id] = a; targets.push(el); }
+    });
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+
+    var visible = new Set();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible.add(e.target);
+        else visible.delete(e.target);
+      });
+      var current = targets.find(function (t) { return visible.has(t); });
+      if (current && byId[current.id]) {
+        links.forEach(function (a) { a.classList.remove('active'); });
+        byId[current.id].classList.add('active');
+      }
+    }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+    targets.forEach(function (t) { io.observe(t); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', foldToc);
+  } else {
+    foldToc();
+  }
+})();
+</script>
+<!-- Concept tooltips: tap-to-toggle on touch devices, keyboard activation, and
+     keeping the popover inside the viewport. Hover / focus reveal is handled by
+     CSS in mfpa.scss; the .has-tip class + .concept-tip child come from the
+     concepts.lua filter. -->
+<script>
+(function () {
+  function init() {
+    var concepts = document.querySelectorAll('.concept.has-tip');
+    if (!concepts.length) return;
+
+    function closeAll(except) {
+      document.querySelectorAll('.concept.tip-open').forEach(function (c) {
+        if (c !== except) c.classList.remove('tip-open');
+      });
+    }
+
+    // Nudge a tip left if it would spill off the right edge of the viewport.
+    function place(c) {
+      var tip = c.querySelector(':scope > .concept-tip');
+      if (!tip) return;
+      tip.style.left = '0px';
+      var r = tip.getBoundingClientRect();
+      var pad = 12;
+      var over = r.right - (window.innerWidth - pad);
+      if (over > 0) {
+        var shift = Math.min(over, r.left - pad);
+        if (shift > 0) tip.style.left = (-shift) + 'px';
+      }
+    }
+
+    function toggle(c) {
+      var willOpen = !c.classList.contains('tip-open');
+      closeAll(c);
+      c.classList.toggle('tip-open', willOpen);
+      if (willOpen) place(c);
+    }
+
+    concepts.forEach(function (c) {
+      c.addEventListener('mouseenter', function () { place(c); });
+      c.addEventListener('focus', function () { place(c); });
+      c.addEventListener('click', function (e) { toggle(c); e.stopPropagation(); });
+      c.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(c); }
+        else if (e.key === 'Escape') { c.classList.remove('tip-open'); }
+      });
+    });
+
+    document.addEventListener('click', function () { closeAll(null); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeAll(null);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

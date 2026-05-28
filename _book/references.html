@@ -62,7 +62,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-78985d013970e3cf536b3903524d7eb0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a0cc2413b2f7294c594a395d37e979b3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -224,6 +224,128 @@ ed. McGraw-Hill.
 
 
 </main> <!-- /main -->
+<!-- Fold the page's table of contents into the left sidebar, nested under the
+     active chapter, and remove the right-hand margin TOC (hidden via CSS in
+     mfpa.scss). A small IntersectionObserver restores the active-section
+     highlight that Quarto's scrollspy can no longer provide once the nodes are
+     moved out of #quarto-margin-sidebar. -->
+<script>
+(function () {
+  function foldToc() {
+    var toc = document.querySelector('#quarto-margin-sidebar #TOC > ul')
+           || document.querySelector('#TOC > ul');
+    if (!toc || toc.dataset.mfpaFolded) return;
+
+    var activeLink = document.querySelector('#quarto-sidebar .sidebar-link.active');
+    if (!activeLink) return;
+    var li = activeLink.closest('li.sidebar-item');
+    if (!li) return;
+
+    // Bootstrap hides nested `.collapse` lists; show the full section tree.
+    toc.querySelectorAll('ul.collapse').forEach(function (u) {
+      u.classList.remove('collapse');
+    });
+
+    // Move the generated list under the active chapter.
+    toc.classList.add('mfpa-subnav');
+    toc.dataset.mfpaFolded = '1';
+    li.appendChild(toc);
+
+    // Map each link to its target section for scroll tracking.
+    var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+    var byId = {};
+    var targets = [];
+    links.forEach(function (a) {
+      var id = decodeURIComponent(a.getAttribute('href').slice(1));
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (el) { byId[id] = a; targets.push(el); }
+    });
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+
+    var visible = new Set();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible.add(e.target);
+        else visible.delete(e.target);
+      });
+      var current = targets.find(function (t) { return visible.has(t); });
+      if (current && byId[current.id]) {
+        links.forEach(function (a) { a.classList.remove('active'); });
+        byId[current.id].classList.add('active');
+      }
+    }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+    targets.forEach(function (t) { io.observe(t); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', foldToc);
+  } else {
+    foldToc();
+  }
+})();
+</script>
+<!-- Concept tooltips: tap-to-toggle on touch devices, keyboard activation, and
+     keeping the popover inside the viewport. Hover / focus reveal is handled by
+     CSS in mfpa.scss; the .has-tip class + .concept-tip child come from the
+     concepts.lua filter. -->
+<script>
+(function () {
+  function init() {
+    var concepts = document.querySelectorAll('.concept.has-tip');
+    if (!concepts.length) return;
+
+    function closeAll(except) {
+      document.querySelectorAll('.concept.tip-open').forEach(function (c) {
+        if (c !== except) c.classList.remove('tip-open');
+      });
+    }
+
+    // Nudge a tip left if it would spill off the right edge of the viewport.
+    function place(c) {
+      var tip = c.querySelector(':scope > .concept-tip');
+      if (!tip) return;
+      tip.style.left = '0px';
+      var r = tip.getBoundingClientRect();
+      var pad = 12;
+      var over = r.right - (window.innerWidth - pad);
+      if (over > 0) {
+        var shift = Math.min(over, r.left - pad);
+        if (shift > 0) tip.style.left = (-shift) + 'px';
+      }
+    }
+
+    function toggle(c) {
+      var willOpen = !c.classList.contains('tip-open');
+      closeAll(c);
+      c.classList.toggle('tip-open', willOpen);
+      if (willOpen) place(c);
+    }
+
+    concepts.forEach(function (c) {
+      c.addEventListener('mouseenter', function () { place(c); });
+      c.addEventListener('focus', function () { place(c); });
+      c.addEventListener('click', function (e) { toggle(c); e.stopPropagation(); });
+      c.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(c); }
+        else if (e.key === 'Escape') { c.classList.remove('tip-open'); }
+      });
+    });
+
+    document.addEventListener('click', function () { closeAll(null); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeAll(null);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

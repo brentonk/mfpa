@@ -7,6 +7,7 @@
 
 local concepts = {}
 local seen = {}
+local def_by_key = {}
 
 local function normalize(s)
   return s:lower()
@@ -18,26 +19,52 @@ function Span(el)
   end
 
   local def = el.attributes["definition"]
-  if def == nil then
-    return nil
-  end
-
   local entry = el.attributes["entry"]
-  if entry == nil or entry == "" then
-    entry = pandoc.utils.stringify(el.content)
-    -- Glossary entries conventionally start with an uppercase letter, so cap
-    -- the first character. Use `entry=` explicitly to override (e.g., "iPhone").
-    entry = entry:sub(1, 1):upper() .. entry:sub(2)
+  local key
+
+  if def ~= nil then
+    -- First mention: record the glossary entry.
+    if entry == nil or entry == "" then
+      entry = pandoc.utils.stringify(el.content)
+      -- Glossary entries conventionally start with an uppercase letter, so cap
+      -- the first character. Use `entry=` explicitly to override (e.g., "iPhone").
+      entry = entry:sub(1, 1):upper() .. entry:sub(2)
+    end
+    key = normalize(entry)
+    if not seen[key] then
+      seen[key] = true
+      table.insert(concepts, { entry = entry, definition = def })
+    end
+    def_by_key[key] = def
+    el.attributes["definition"] = nil
+    el.attributes["entry"] = nil
+  else
+    -- Later mention: resolve the definition by explicit entry= if given,
+    -- otherwise by the span's own (normalized) text.
+    if entry ~= nil and entry ~= "" then
+      key = normalize(entry)
+      el.attributes["entry"] = nil
+    else
+      key = normalize(pandoc.utils.stringify(el.content))
+    end
   end
 
-  local key = normalize(entry)
-  if not seen[key] then
-    seen[key] = true
-    table.insert(concepts, { entry = entry, definition = def })
+  -- Attach a hover/tap tooltip carrying the definition. The definition is
+  -- parsed as Markdown inlines (not stuffed into an attribute) so its math
+  -- typesets normally; CSS/JS reveal it. Only concepts with a known
+  -- definition become interactive (.has-tip).
+  local d = def_by_key[key]
+  if d ~= nil then
+    local blocks = pandoc.read(d, "markdown").blocks
+    local tip_inlines = (blocks[1] and blocks[1].content) or pandoc.Inlines({})
+    local tip = pandoc.Span(tip_inlines, pandoc.Attr("", { "concept-tip" }, { role = "tooltip" }))
+    el.content:insert(tip)
+    if not el.classes:includes("has-tip") then
+      el.classes:insert("has-tip")
+    end
+    el.attributes["tabindex"] = "0"
   end
 
-  el.attributes["definition"] = nil
-  el.attributes["entry"] = nil
   return el
 end
 

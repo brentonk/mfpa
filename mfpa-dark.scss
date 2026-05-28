@@ -1,0 +1,27 @@
+/*-- scss:defaults --*/
+
+// Dark palette — warm charcoal ground + brightened teal accent.
+// Shared component rules in mfpa.scss derive panel fills from these via rgba(),
+// so theorem/example/proof boxes adapt automatically.
+
+$body-bg: #1B1916;          // warm charcoal
+$body-color: #E7E1D6;       // warm light ink
+$primary: #4FB3AC;          // brightened teal (contrast on dark)
+$link-color: #6BC5BE;
+$success: #6FC07F;          // example green / "true"
+$danger: #E58A82;           // "false" red
+
+// Surfaces Bootstrap/Quarto use for borders, sidebar, tables, code
+$light: #262320;
+$gray-200: #322E29;
+$border-color: rgba($body-color, 0.16);
+$code-color: #E1B98C;
+$code-bg: rgba($body-color, 0.07);
+
+/*-- scss:rules --*/
+
+// Code blocks read on the dark ground
+div.sourceCode,
+pre.sourceCode {
+  background-color: #211E1A;
+}

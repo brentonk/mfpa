@@ -98,7 +98,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-78985d013970e3cf536b3903524d7eb0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a0cc2413b2f7294c594a395d37e979b3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -286,7 +286,7 @@ window.Quarto = {
 
 
 <p>When you think about math, you probably think about numbers. The majority of the math classes you’ve taken in your life have been about how to manipulate numbers. But don’t panic if you’re the kind of person who grimaces a bit when you have to calculate a tip by hand — your success as a political scientist will have nothing to do with your ability to add or multiply numbers in your head. That’s what we have computers for.</p>
-<p>In this course, we will approach math from a different angle. Our goal will be to make statements that are <span class="concept">provably true</span>. In essence, a statement is provably true if there is a logical defense against any possible objection to the statement. Anyone who follows the rules of deductive logic — the ones we will work through in this first unit of the course — must agree that the statement is true.</p>
+<p>In this course, we will approach math from a different angle. Our goal will be to make statements that are <span class="concept has-tip" tabindex="0">provably true<span class="concept-tip" role="tooltip">A statement whose truth can be defended against all challenges, using only rules of logical inference.</span></span>. In essence, a statement is provably true if there is a logical defense against any possible objection to the statement. Anyone who follows the rules of deductive logic — the ones we will work through in this first unit of the course — must agree that the statement is true.</p>
 <p>Plenty of things are true in the ordinary sense of the word, yet are not <em>provably</em> true in the mathematical sense. For example, it is true that Joe Biden won the 2020 presidential election. However, the truth of this statement is established through empirical observation, not through logical deduction alone. In other words, at least some defenses against objections to this statement rely on findings of fact. If you say “I don’t think Joe Biden won the 2020 presidential election because I don’t think Joe Biden exists”, I need to convince you that Joe Biden exists, which isn’t a matter of logic alone.</p>
 <p>On the other hand, the following statement is provably true: “If (a) only one person can win a presidential election, and (b) Joe Biden won the 2020 presidential election, and (c) Joe Biden is not Donald Trump, then (d) Donald Trump did not win the 2020 presidential election.” Once you accept the premises (a), (b), and (c), you have no choice but to reach the conclusion (d). Whether each premise is true is the kind of empirical question that logic alone cannot answer. But logic does tell us that <em>if</em> all these premises are true, <em>then</em> the conclusion (d) has to follow.</p>
 <p>If you came to graduate school to study politics empirically, at this point you might be wondering why you should care about proving statements in the realm of pure logic. Here’s why I think you should care.</p>
@@ -296,7 +296,7 @@ window.Quarto = {
 </ol>
 <section id="sentential-logic-and-truth-tables" class="level2 page-columns page-full" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="sentential-logic-and-truth-tables"><span class="header-section-number">1.1</span> Sentential logic and truth tables</h2>
-<p><span class="concept">Sentential logic</span> is a set of rules for working with <span class="concept">sentences</span>. In this context, a sentence is a statement that is either true or false (it must be one, and it cannot be both). Here are some examples of sentences:</p>
+<p><span class="concept has-tip" tabindex="0">Sentential logic<span class="concept-tip" role="tooltip">A set of rules for deducing the truth of compound sentences.</span></span> is a set of rules for working with <span class="concept has-tip" tabindex="0">sentences<span class="concept-tip" role="tooltip">In formal logic, a statement that must be either <span class="tt">true</span> or <span class="ff">false</span>, and cannot be both.</span></span>. In this context, a sentence is a statement that is either true or false (it must be one, and it cannot be both). Here are some examples of sentences:</p>
 <ol type="1">
 <li><p>“The ‘Liberation Day’ tariffs caused the stock market to crash.”</p></li>
 <li><p>“The ‘Liberation Day’ tariffs caused the stock market to crash, or the ‘Liberation Day’ tariffs did not cause the stock market to crash.”</p></li>
@@ -305,7 +305,7 @@ window.Quarto = {
 <p>Each of these is a “sentence”, logically speaking, in that it is true or false. But there are important distinctions among them.</p>
 <ul>
 <li><p>Formal logic by itself cannot help us figure out whether sentence #1 is true or false. That is a matter for empirical study.</p></li>
-<li><p>By contrast, we don’t need to consult the real world to know that sentence #2 is true. We can deduce on the basis of logic alone that sentence #2 is true. We call a compound sentence like this, which must be true regardless of the underlying truth values of the sentences from which it is constructed, a <span class="concept">tautology</span>.</p></li>
+<li><p>By contrast, we don’t need to consult the real world to know that sentence #2 is true. We can deduce on the basis of logic alone that sentence #2 is true. We call a compound sentence like this, which must be true regardless of the underlying truth values of the sentences from which it is constructed, a <span class="concept has-tip" tabindex="0">tautology<span class="concept-tip" role="tooltip">A compound sentence that is always true, regardless of the truth value of the sentences from which it is constructed. For example, <span class="math inline">\(P \lor \neg P\)</span> (“<span class="math inline">\(P\)</span> is true, or <span class="math inline">\(P\)</span> is not true”) is a tautology.</span></span>.</p></li>
 <li><p>Finally, we also don’t need to consult the real world to know that sentence #3 is false. There is no way for it to be the case that the tariffs both did and did not cause the stock market to crash.</p></li>
 </ul>
 <p>In one sense, our goal with formal logic will be to take compound sentences and sort them into these three categories: those that must be true, those that must be false, and those that are indeterminate, whose truth value cannot be deduced by logic alone.</p>
@@ -332,7 +332,7 @@ window.Quarto = {
 <section id="constructing-compound-sentences" class="level3 page-columns page-full" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="constructing-compound-sentences"><span class="header-section-number">1.1.1</span> Constructing compound sentences</h3>
 <p>In this chapter, we will use the letters <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, and <span class="math inline">\(R\)</span> to denote sentences. Whenever you see one of these letters, just think: “a thing that can be exactly one of ‘true’ or ‘false’”. For example, <span class="math inline">\(P\)</span> might be the statement “The ‘Liberation Day’ tariffs caused the stock market to crash.”</p>
-<p>We will build compound sentences using three operators. The first is the <span class="concept">not</span> operator, denoted by <span class="math inline">\(\neg P\)</span>. The rules of the “not” operator are simple: <span class="math inline">\(\neg P\)</span> is true whenever <span class="math inline">\(P\)</span> is false, and <span class="math inline">\(\neg P\)</span> is false whenever <span class="math inline">\(P\)</span> is true.</p>
+<p>We will build compound sentences using three operators. The first is the <span class="concept has-tip" tabindex="0">not<span class="concept-tip" role="tooltip">An operation on a single sentence that flips the truth value of the sentence, denoted <span class="math inline">\(\neg P\)</span>. <span class="math inline">\(P\)</span> <span class="tt">true</span> means <span class="math inline">\(\neg P\)</span> is <span class="ff">false</span>, and <span class="math inline">\(P\)</span> <span class="ff">false</span> means <span class="math inline">\(\neg P\)</span> is <span class="tt">true</span>.</span></span> operator, denoted by <span class="math inline">\(\neg P\)</span>. The rules of the “not” operator are simple: <span class="math inline">\(\neg P\)</span> is true whenever <span class="math inline">\(P\)</span> is false, and <span class="math inline">\(\neg P\)</span> is false whenever <span class="math inline">\(P\)</span> is true.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Keeping the notation straight">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -346,10 +346,10 @@ window.Quarto = {
 <p>If you get lost, <a href="#tbl-logical-operators" class="quarto-xref">Table&nbsp;<span>1.1</span></a> below contains a summary of all the logical operators.</p>
 </div>
 </div>
-<p>The second basic operator is <span class="concept">and</span>, which connects two sentences, denoted <span class="math inline">\(P \land Q\)</span>. An “and” statement is true whenever both underlying statements are true, and false otherwise.</p>
-<p>The final basic operator is <span class="concept">or</span>, which again connects two sentences, denoted <span class="math inline">\(P \lor Q\)</span>. An “or” statement is true whenever <em>at least one</em> of the underlying statements is true. It is only false when both of the underlying statements are false. In other words, the logical “or” is an “inclusive or” (allowing for the possibility that both are true), not an “exclusive or”.</p>
+<p>The second basic operator is <span class="concept has-tip" tabindex="0">and<span class="concept-tip" role="tooltip">An operation on two sentences that indicates whether <u>both</u> are true, denoted <span class="math inline">\(P \land Q\)</span>.</span></span>, which connects two sentences, denoted <span class="math inline">\(P \land Q\)</span>. An “and” statement is true whenever both underlying statements are true, and false otherwise.</p>
+<p>The final basic operator is <span class="concept has-tip" tabindex="0">or<span class="concept-tip" role="tooltip">An operation on two sentences that indicates whether <u>at least one</u> is true, denoted <span class="math inline">\(P \lor Q\)</span>.</span></span>, which again connects two sentences, denoted <span class="math inline">\(P \lor Q\)</span>. An “or” statement is true whenever <em>at least one</em> of the underlying statements is true. It is only false when both of the underlying statements are false. In other words, the logical “or” is an “inclusive or” (allowing for the possibility that both are true), not an “exclusive or”.</p>
 <p>Above we saw the compound sentence “The ‘Liberation Day’ tariffs caused the stock market to crash, or the ‘Liberation Day’ tariffs did not cause the stock market to crash.” If we take <span class="math inline">\(P\)</span> to be the sentence “The ‘Liberation Day’ tariffs caused the stock market to crash”, then the formal statement of our compound sentence is <span class="math inline">\(P \lor \neg P\)</span>. We want to show that the compound sentence <span class="math inline">\(P \lor \neg P\)</span> is a tautology; i.e., the compound sentence is true regardless of whether <span class="math inline">\(P\)</span> is true or false.</p>
-<p>We will use a <span class="concept">truth table</span> to identify the conditions under which a compound sentence is true. To build a truth table for a compound sentence like <span class="math inline">\(P \lor \neg P\)</span>, the first thing we do is identify the underlying sentences it is built from. In the case of <span class="math inline">\(P \lor \neg P\)</span>, there’s only one underlying sentence, namely <span class="math inline">\(P\)</span>. We begin to write the truth table by enumerating all combinations of truth values of the underlying sentences.</p>
+<p>We will use a <span class="concept has-tip" tabindex="0">truth table<span class="concept-tip" role="tooltip">An algorithm for determining the truth value of compound sentences. Each row is a unique combination of truth values of the simple sentences from which the compound is formed, and each column is a component of the compound sentence you are trying to evaluate.</span></span> to identify the conditions under which a compound sentence is true. To build a truth table for a compound sentence like <span class="math inline">\(P \lor \neg P\)</span>, the first thing we do is identify the underlying sentences it is built from. In the case of <span class="math inline">\(P \lor \neg P\)</span>, there’s only one underlying sentence, namely <span class="math inline">\(P\)</span>. We begin to write the truth table by enumerating all combinations of truth values of the underlying sentences.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -984,15 +984,15 @@ window.Quarto = {
 <p>If-then statements work a bit differently in formal logic than in ordinary language. If I told you, “Scream if you see a bear!” and then you screamed, I would run away, having inferred that you saw a bear. However, I didn’t tell you “Don’t scream if you didn’t see a bear.” So in terms of pure logic, there would be no problem with you screaming even if there weren’t a bear — the only way to contradict the command would be to fail to scream when you actually did see a bear.</p>
 <p>In the realm of formal logic and mathematics, we will be totally pedantic about our if-then statements. If I say “if <span class="math inline">\(P\)</span>, then <span class="math inline">\(Q\)</span>”, the only way to falsify my statement is to show me that <span class="math inline">\(P\)</span> is true and <span class="math inline">\(Q\)</span> is false. If <span class="math inline">\(P\)</span> is false, then the statement is true regardless of the truth of <span class="math inline">\(Q\)</span>.</p>
 <div id="def-conditional" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.1</strong></span> The <span class="concept">conditional</span> statement “<span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>” or “if <span class="math inline">\(P\)</span>, then <span class="math inline">\(Q\)</span>”, written <span class="math inline">\(P \to Q\)</span>, is logically equivalent to <span class="math inline">\(\neg P \lor Q\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 1.1</strong></span> The <span class="concept has-tip" tabindex="0">conditional<span class="concept-tip" role="tooltip">An if-then statement, written in formal logic as <span class="math inline">\(P \to Q\)</span>, treated as the equivalent of <span class="math inline">\(\neg P \lor Q\)</span>.</span></span> statement “<span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>” or “if <span class="math inline">\(P\)</span>, then <span class="math inline">\(Q\)</span>”, written <span class="math inline">\(P \to Q\)</span>, is logically equivalent to <span class="math inline">\(\neg P \lor Q\)</span>.</p>
 </div>
-<p>Even though it is what the rules of logic dictate, it may feel strange to say that <span class="math inline">\(P \to Q\)</span> is true simply because <span class="math inline">\(P\)</span> is false. We have special terminology to capture this strangeness: when <span class="math inline">\(P\)</span> is known to be false, we say that the statement <span class="math inline">\(P \to Q\)</span> is <span class="concept">vacuously true</span>. Here are some vacuously true statements:</p>
+<p>Even though it is what the rules of logic dictate, it may feel strange to say that <span class="math inline">\(P \to Q\)</span> is true simply because <span class="math inline">\(P\)</span> is false. We have special terminology to capture this strangeness: when <span class="math inline">\(P\)</span> is known to be false, we say that the statement <span class="math inline">\(P \to Q\)</span> is <span class="concept has-tip" tabindex="0">vacuously true<span class="concept-tip" role="tooltip">A conditional statement <span class="math inline">\(P \to Q\)</span> that is true because its premise is known to be false, such as “If 0 = 1, then Peter Bils lives in a pineapple under the sea.”</span></span>. Here are some vacuously true statements:</p>
 <ul>
 <li><p>If 0 = 1, then the moon is made of cheese.</p></li>
 <li><p>If 4 is a prime number, then an asteroid will hit Earth on February 30, 2026.</p></li>
 <li><p>If there is a finite game with no <a href="https://en.wikipedia.org/wiki/Nash_equilibrium">Nash equilibrium</a>, then Professor Brad Smith is handsome and intelligent.</p></li>
 </ul>
-<p>While it’s fun to enumerate vacuous truths, conditional statements are most useful to us when the premise is true. Think about a conditional statement <span class="math inline">\(P \to Q\)</span> that we know to be true. As an uncontroversial example, let <span class="math inline">\(P\)</span> be “today is Wednesday” and <span class="math inline">\(Q\)</span> be “tomorrow is Thursday”, so that <span class="math inline">\(P \to Q\)</span> means “if today is Wednesday, then tomorrow is Thursday.” Imagine then we also know that <span class="math inline">\(P\)</span> is true. As it happens, at the time I am writing this paragraph, it is indeed Wednesday. Given that <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>, and that <span class="math inline">\(P\)</span> is true, it seems logical for me to deduce that <span class="math inline">\(Q\)</span> is true as well. Indeed, this deduction is logical — the name for this type of inference is <span class="concept">modus ponens</span>.</p>
+<p>While it’s fun to enumerate vacuous truths, conditional statements are most useful to us when the premise is true. Think about a conditional statement <span class="math inline">\(P \to Q\)</span> that we know to be true. As an uncontroversial example, let <span class="math inline">\(P\)</span> be “today is Wednesday” and <span class="math inline">\(Q\)</span> be “tomorrow is Thursday”, so that <span class="math inline">\(P \to Q\)</span> means “if today is Wednesday, then tomorrow is Thursday.” Imagine then we also know that <span class="math inline">\(P\)</span> is true. As it happens, at the time I am writing this paragraph, it is indeed Wednesday. Given that <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>, and that <span class="math inline">\(P\)</span> is true, it seems logical for me to deduce that <span class="math inline">\(Q\)</span> is true as well. Indeed, this deduction is logical — the name for this type of inference is <span class="concept has-tip" tabindex="0">modus ponens<span class="concept-tip" role="tooltip">The logical rule that if <span class="math inline">\(P\)</span> is true and <span class="math inline">\(P \to Q\)</span> is true, then we can infer that <span class="math inline">\(Q\)</span> is true.</span></span>.</p>
 <p>You don’t have to take the validity of modus ponens on faith. We can translate the rule into a compound sentence, and then we can prove that it is a tautology. In words, the rule is “If <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span> and <span class="math inline">\(P\)</span> is true, then <span class="math inline">\(Q\)</span> is true.” Equivalently, we could say “If <span class="math inline">\((P \to Q) \land P\)</span>, then <span class="math inline">\(Q\)</span>.” Finally, we come to the most compact (though not the easiest to parse!) statement in <a href="#thm-modus-ponens" class="quarto-xref">Theorem&nbsp;<span>1.1</span></a>.</p>
 <div id="thm-modus-ponens" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.1 (Modus ponens)</strong></span> <span class="math inline">\([(P \to Q) \land P] \to Q\)</span>.</p>
@@ -1067,7 +1067,7 @@ window.Quarto = {
 </ul>
 </div>
 </div>
-<p>You can think of <span class="math inline">\(P \to Q\)</span> as a statement of a <span class="concept">sufficient condition</span>: if <span class="math inline">\(P\)</span> is true, then <span class="math inline">\(Q\)</span> must be true, hence <span class="math inline">\(P\)</span> is “sufficient” to ensure that <span class="math inline">\(Q\)</span> holds. However, this statement says nothing about whether <span class="math inline">\(P\)</span> is a <span class="concept">necessary condition</span> for <span class="math inline">\(Q\)</span> — something that must be true in order for <span class="math inline">\(Q\)</span> to be true. Think about the statement “If Marie is a member of the House of Representatives, then Marie is a politician.” Being a member of the House is sufficient to be called a politician, but it is not necessary. We would still call Marie a politician if she were the president, a senator, a yet-unelected candidate for the House, or even the state comptroller.</p>
+<p>You can think of <span class="math inline">\(P \to Q\)</span> as a statement of a <span class="concept has-tip" tabindex="0">sufficient condition<span class="concept-tip" role="tooltip"><span class="math inline">\(P\)</span> is a sufficient condition for <span class="math inline">\(Q\)</span> when <span class="math inline">\(P\)</span> being true guarantees that <span class="math inline">\(Q\)</span> is true. The conditional <span class="math inline">\(P \to Q\)</span> means that <span class="math inline">\(P\)</span> is sufficient for <span class="math inline">\(Q\)</span>.</span></span>: if <span class="math inline">\(P\)</span> is true, then <span class="math inline">\(Q\)</span> must be true, hence <span class="math inline">\(P\)</span> is “sufficient” to ensure that <span class="math inline">\(Q\)</span> holds. However, this statement says nothing about whether <span class="math inline">\(P\)</span> is a <span class="concept has-tip" tabindex="0">necessary condition<span class="concept-tip" role="tooltip"><span class="math inline">\(Q\)</span> is a necessary condition for <span class="math inline">\(P\)</span> when <span class="math inline">\(Q\)</span> has to be true whenever <span class="math inline">\(P\)</span> is true. The conditional <span class="math inline">\(P \to Q\)</span> means that <span class="math inline">\(Q\)</span> is necessary for <span class="math inline">\(P\)</span>.</span></span> for <span class="math inline">\(Q\)</span> — something that must be true in order for <span class="math inline">\(Q\)</span> to be true. Think about the statement “If Marie is a member of the House of Representatives, then Marie is a politician.” Being a member of the House is sufficient to be called a politician, but it is not necessary. We would still call Marie a politician if she were the president, a senator, a yet-unelected candidate for the House, or even the state comptroller.</p>
 <p>In the same way that the statement <span class="math inline">\(P \to Q\)</span> gives us a sufficient condition for <span class="math inline">\(Q\)</span>, it also gives us a necessary condition for <span class="math inline">\(P\)</span>. Remember that the conditional statement <span class="math inline">\(P \to Q\)</span> turns out to be false when <span class="math inline">\(P\)</span> is true yet <span class="math inline">\(Q\)</span> is false. Hence, an alternative way to verbalize <span class="math inline">\(P \to Q\)</span> is “<span class="math inline">\(P\)</span> is true only if <span class="math inline">\(Q\)</span> is true,” meaning <span class="math inline">\(Q\)</span> is a necessary — though perhaps insufficient — condition for <span class="math inline">\(P\)</span>. Returning to the example above, we could say “Marie is a member of the House of Representatives only if she is a politician.” Being a politician doesn’t necessarily mean she’s a House member, but she certainly cannot be a House member unless she is a politician.</p>
 <p>We’ve just seen that a sufficient condition (if <span class="math inline">\(P\)</span>, then <span class="math inline">\(Q\)</span>) can be translated into a necessary condition (<span class="math inline">\(P\)</span> only if <span class="math inline">\(Q\)</span>). This observation allows us to make the following type of logical deduction:</p>
 <ul>
@@ -1075,7 +1075,7 @@ window.Quarto = {
 <li><p><strong>Premise 2:</strong> Marie is not a politician. (<span class="math inline">\(\neg Q\)</span>)</p></li>
 <li><p><strong>Conclusion:</strong> Marie is not a member of the House of Representatives. (<span class="math inline">\(\neg P\)</span>)</p></li>
 </ul>
-<p>The line of reasoning here is an example of the deductive rule called <span class="concept">modus tollens</span>. If we know that <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span> and we know that <span class="math inline">\(Q\)</span> is false, we must conclude that <span class="math inline">\(P\)</span> is false as well.</p>
+<p>The line of reasoning here is an example of the deductive rule called <span class="concept has-tip" tabindex="0">modus tollens<span class="concept-tip" role="tooltip">The logical rule that if <span class="math inline">\(\neg Q\)</span> is true and <span class="math inline">\(P \to Q\)</span> is true, then we can infer that <span class="math inline">\(\neg P\)</span> is true.</span></span>. If we know that <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span> and we know that <span class="math inline">\(Q\)</span> is false, we must conclude that <span class="math inline">\(P\)</span> is false as well.</p>
 <div id="thm-modus-tollens" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.2 (Modus tollens)</strong></span> <span class="math inline">\([(P \to Q) \land \neg Q] \to \neg P\)</span>.</p>
 </div>
@@ -1161,7 +1161,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The statements <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are <span class="concept">logically equivalent</span> when <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to P\)</span>. In this case, the truth values of the two statements are linked: either <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both true, or else <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both false. <span class="math inline">\(P\)</span> is a necessary and sufficient condition for <span class="math inline">\(Q\)</span>, and <span class="math inline">\(Q\)</span> is a necessary and sufficient condition for <span class="math inline">\(P\)</span>. In words, we may use “<span class="math inline">\(P\)</span> if and only if <span class="math inline">\(Q\)</span>” to describe this state of affairs.</p>
+<p>The statements <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are <span class="concept has-tip" tabindex="0">logically equivalent<span class="concept-tip" role="tooltip"><span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are logically equivalent when <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to P\)</span>. Logical equivalence holds when the truth values of the statements match — both are <span class="tt">true</span> or both are <span class="ff">false</span>.</span></span> when <span class="math inline">\(P \to Q\)</span> and <span class="math inline">\(Q \to P\)</span>. In this case, the truth values of the two statements are linked: either <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both true, or else <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both false. <span class="math inline">\(P\)</span> is a necessary and sufficient condition for <span class="math inline">\(Q\)</span>, and <span class="math inline">\(Q\)</span> is a necessary and sufficient condition for <span class="math inline">\(P\)</span>. In words, we may use “<span class="math inline">\(P\)</span> if and only if <span class="math inline">\(Q\)</span>” to describe this state of affairs.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Iff">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1180,7 +1180,7 @@ window.Quarto = {
 <li><p>The statement <span class="math inline">\(P \to Q\)</span> means “The regime is democratic <em>only if</em> its people are free to choose, including to remove, governments” — the people’s ability to remove the government is a <em>necessary</em> condition for democracy.</p></li>
 <li><p>The statement <span class="math inline">\(Q \to P\)</span> means “The regime is democratic <em>if</em> its people are free to choose, including to remove, governments” — the people’s ability to remove the government is a <em>sufficient</em> condition for democracy.</p></li>
 </ul>
-<p>Logical equivalence means <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span> and vice versa, so we denote it with the <span class="concept">biconditional</span> <span class="math inline">\(P \leftrightarrow Q\)</span>. The statement <span class="math inline">\(P \leftrightarrow Q\)</span> is <span class="tt">true</span> whenever the truth values of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> match, and <span class="ff">false</span> otherwise. If you’re skeptical, you can use a truth table to confirm that the statement <span class="math inline">\((P \to Q) \land (Q \to P)\)</span> is true exactly when the truth values of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> match.</p>
+<p>Logical equivalence means <span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span> and vice versa, so we denote it with the <span class="concept has-tip" tabindex="0">biconditional<span class="concept-tip" role="tooltip">The statement <span class="math inline">\(P \leftrightarrow Q\)</span>, meaning <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are logically equivalent.</span></span> <span class="math inline">\(P \leftrightarrow Q\)</span>. The statement <span class="math inline">\(P \leftrightarrow Q\)</span> is <span class="tt">true</span> whenever the truth values of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> match, and <span class="ff">false</span> otherwise. If you’re skeptical, you can use a truth table to confirm that the statement <span class="math inline">\((P \to Q) \land (Q \to P)\)</span> is true exactly when the truth values of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> match.</p>
 <div id="exr-equivalence" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.4</strong></span> Use a truth table to confirm that the statement <span class="math inline">\((P \to Q) \land (Q \to P)\)</span> is true exactly when the truth values of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> match.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1247,7 +1247,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>An important logical equivalence, closely related to modus tollens (<a href="#thm-modus-tollens" class="quarto-xref">Theorem&nbsp;<span>1.2</span></a>), is the <span class="concept">contrapositive</span>: <span class="math inline">\(P \to Q\)</span> is logically equivalent to <span class="math inline">\(\neg Q \to \neg P\)</span>. The contrapositive is more useful in practice than you might expect. When you want to prove that <span class="math inline">\(P \to Q\)</span>, sometimes it’s easier to start with <span class="math inline">\(\neg Q\)</span> and show that <span class="math inline">\(\neg P\)</span> must hold than to start with <span class="math inline">\(P\)</span> and show that <span class="math inline">\(Q\)</span> must hold. Even more radically, as we’ll see in <a href="#sec-proof-by-contradiction" class="quarto-xref"><span>Section 1.2.3</span></a> below, when you want to prove that <span class="math inline">\(P\)</span> is true, sometimes it’s easiest to start with <span class="math inline">\(\neg P\)</span> and show that you end up with something known to be false.</p>
+<p>An important logical equivalence, closely related to modus tollens (<a href="#thm-modus-tollens" class="quarto-xref">Theorem&nbsp;<span>1.2</span></a>), is the <span class="concept has-tip" tabindex="0">contrapositive<span class="concept-tip" role="tooltip">The translation of the statement <span class="math inline">\(P \to Q\)</span> into the logically equivalent statement <span class="math inline">\(\neg Q \to \neg P\)</span>.</span></span>: <span class="math inline">\(P \to Q\)</span> is logically equivalent to <span class="math inline">\(\neg Q \to \neg P\)</span>. The contrapositive is more useful in practice than you might expect. When you want to prove that <span class="math inline">\(P \to Q\)</span>, sometimes it’s easier to start with <span class="math inline">\(\neg Q\)</span> and show that <span class="math inline">\(\neg P\)</span> must hold than to start with <span class="math inline">\(P\)</span> and show that <span class="math inline">\(Q\)</span> must hold. Even more radically, as we’ll see in <a href="#sec-proof-by-contradiction" class="quarto-xref"><span>Section 1.2.3</span></a> below, when you want to prove that <span class="math inline">\(P\)</span> is true, sometimes it’s easiest to start with <span class="math inline">\(\neg P\)</span> and show that you end up with something known to be false.</p>
 <div id="exr-contrapositive" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.5</strong></span> Use a truth table to confirm that <span class="math inline">\(P \to Q\)</span> is logically equivalent to <span class="math inline">\(\neg Q \to \neg P\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1390,7 +1390,7 @@ Table&nbsp;1.1: Logical operators for working with sentences
 </ol>
 <p>In other words, if <span class="math inline">\(F \land R\)</span> is false, then we know at least one of <span class="math inline">\(F\)</span> or <span class="math inline">\(R\)</span> must be false — but without other information, we can’t say which one. In other other words, we can conclude from <span class="math inline">\(\neg (F \land R)\)</span> that <span class="math inline">\(\neg F \lor \neg R\)</span>. The negation of an “and” statement gives us an “or” statement.</p>
 <p>I’m highlighting this because I don’t want you to be tempted to treat the formal logic operators like addition and multiplication. In the realm of high-school algebra, you might remember that <span class="math display">\[-(f + r) = (-f) + (-r).\]</span> Yet in the realm of sentential logic, the statement <span class="math inline">\(\neg (F \land R)\)</span> is <u>not</u> equivalent to <span class="math inline">\(\neg F \land \neg R\)</span>.</p>
-<p><span class="concept">De Morgan’s laws</span> are a pair of logical equivalences that tell us exactly how to combine negation with “and” and “or.” Before stating them formally, here’s how I think about them informally.</p>
+<p><span class="concept has-tip" tabindex="0">De Morgan’s laws<span class="concept-tip" role="tooltip">Conceptually, the idea that the negation of an “and” statement is an “or” statement, and vice versa. Formally, the logical equivalences <span class="math inline">\(\neg (P \land Q) \leftrightarrow \neg P \lor \neg Q\)</span> and <span class="math inline">\(\neg (P \lor Q) \leftrightarrow \neg P \land \neg Q\)</span>.</span></span> are a pair of logical equivalences that tell us exactly how to combine negation with “and” and “or.” Before stating them formally, here’s how I think about them informally.</p>
 <ul>
 <li><p>An “and” statement is strong, since <span class="math inline">\(F \land R\)</span> means that both underlying statements are true. The negation of an “and” statement must then be weak, because <span class="math inline">\(\neg (F \land R)\)</span> only means that at least one of the underlying statements is false.</p></li>
 <li><p>An “or” statement is weak, since <span class="math inline">\(F \lor R\)</span> only means that at least one of the underlying statements is true. The negation of an “or” statement must then be strong, because <span class="math inline">\(\neg (F \lor R)\)</span> means that both underlying statements are false.</p></li>
@@ -1687,7 +1687,7 @@ Table&nbsp;1.1: Logical operators for working with sentences
 </section>
 <section id="sec-proof-by-contradiction" class="level3" data-number="1.2.3">
 <h3 data-number="1.2.3" class="anchored" data-anchor-id="sec-proof-by-contradiction"><span class="header-section-number">1.2.3</span> Proof by contradiction</h3>
-<p>Another common proof technique, the <span class="concept">proof by contradiction</span>, is built around a reductio ad absurdum. We want to prove that some statement <span class="math inline">\(P\)</span> is true. To do so, we show that if <span class="math inline">\(P\)</span> <u>isn’t</u> true, then we end up coming to some absurd conclusion. We infer that <span class="math inline">\(P\)</span> must be true.</p>
+<p>Another common proof technique, the <span class="concept has-tip" tabindex="0">proof by contradiction<span class="concept-tip" role="tooltip">A proof where we show that <span class="math inline">\(P\)</span> is true by proving that <span class="math inline">\(\neg P\)</span> implies something impossible.</span></span>, is built around a reductio ad absurdum. We want to prove that some statement <span class="math inline">\(P\)</span> is true. To do so, we show that if <span class="math inline">\(P\)</span> <u>isn’t</u> true, then we end up coming to some absurd conclusion. We infer that <span class="math inline">\(P\)</span> must be true.</p>
 <p>One of my favorite (silly) proofs by contradiction is the proof that every counting number <span class="math inline">\(n = 1, 2, \ldots\)</span> is interesting.</p>
 <div id="prp-interesting-numbers" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 1.3 (not really a proposition)</strong></span> Every natural number <span class="math inline">\(n = 1, 2, \ldots\)</span> is interesting.</p>
@@ -1753,7 +1753,7 @@ Table&nbsp;1.1: Logical operators for working with sentences
 <h3 data-number="1.2.4" class="anchored" data-anchor-id="sec-proof-by-induction"><span class="header-section-number">1.2.4</span> Proof by induction</h3>
 <p>Earlier we saw De Morgan’s laws (<a href="#thm-demorgan-logic" class="quarto-xref">Theorem&nbsp;<span>1.3</span></a>), which tell us that <span class="math inline">\(\neg (P_1 \land P_2)\)</span> is logically equivalent to <span class="math inline">\(\neg P_1 \lor \neg P_2\)</span>. Can we extend this law to more than two statements?</p>
 <p>We could use a truth table to show that <span class="math inline">\(\neg (P_1 \land P_2 \land P_3)\)</span> is logically equivalent to <span class="math inline">\(\neg P_1 \lor \neg P_2 \lor \neg P_3\)</span>. And if we were patient enough to go through 16 rows, we could do the same thing for four statements. After confirming that the statement is true for two, three, or four statements, it might seem safe to treat it as if it were true for any number of statements: namely, that <span class="math display">\[\neg [P_1 \land P_2 \land \cdots P_N]\]</span> is logically equivalent to <span class="math display">\[\neg P_1 \lor \neg P_2 \lor \cdots \neg P_N,\]</span> no matter how big <span class="math inline">\(N\)</span> is. Is there a way to prove this without dealing with unmanageably huge truth tables, or do we have to settle for being pretty sure?</p>
-<p>To prove that De Morgan’s laws extend to a conjunction of any (finite) number of statements, we will write a <span class="concept">proof by induction</span>. This is a proof technique designed for the following situation:</p>
+<p>To prove that De Morgan’s laws extend to a conjunction of any (finite) number of statements, we will write a <span class="concept has-tip" tabindex="0">proof by induction<span class="concept-tip" role="tooltip">A proof technique used when (a) we have a claim that depends on a number <span class="math inline">\(n\)</span> and (b) we want to prove it’s true for every <span class="math inline">\(n = 1, 2, 3, \ldots\)</span>. In the base step, we show that the claim is true for <span class="math inline">\(n = 1\)</span>. In the induction step, we assume the truth of the claim for <span class="math inline">\(n = k\)</span>, and we show that this implies the truth of the claim for <span class="math inline">\(n = k + 1\)</span>.</span></span>. This is a proof technique designed for the following situation:</p>
 <ol type="1">
 <li><p>We are dealing with a claim whose precise statement depends on a number <span class="math inline">\(n\)</span>. As shorthand to denote “a claim <span class="math inline">\(Q\)</span> whose precise form depends on a number <span class="math inline">\(n\)</span>”, we will write <span class="math inline">\(Q(n)\)</span>.</p>
 <p>In the De Morgan’s law example here, the claim <span class="math inline">\(Q(1)\)</span> is the trivial statement that <span class="math display">\[\neg P_1 \leftrightarrow \neg P_1.\]</span> <span class="math inline">\(Q(2)\)</span> is the De Morgan’s law we already proved, <span class="math display">\[\neg (P_1 \land P_2) \leftrightarrow (\neg P_1 \lor \neg P_2).\]</span> <span class="math inline">\(Q(3)\)</span> is <span class="math display">\[\neg (P_1 \land P_2 \land P_3) \leftrightarrow (\neg P_1 \lor \neg P_2 \lor \neg P_3).\]</span> And so on.</p></li>
@@ -1977,6 +1977,128 @@ Przeworski, Adam. 2024. <span>“Who Decides What Is Democratic?”</span> <em>J
 </section>
 
 </main> <!-- /main -->
+<!-- Fold the page's table of contents into the left sidebar, nested under the
+     active chapter, and remove the right-hand margin TOC (hidden via CSS in
+     mfpa.scss). A small IntersectionObserver restores the active-section
+     highlight that Quarto's scrollspy can no longer provide once the nodes are
+     moved out of #quarto-margin-sidebar. -->
+<script>
+(function () {
+  function foldToc() {
+    var toc = document.querySelector('#quarto-margin-sidebar #TOC > ul')
+           || document.querySelector('#TOC > ul');
+    if (!toc || toc.dataset.mfpaFolded) return;
+
+    var activeLink = document.querySelector('#quarto-sidebar .sidebar-link.active');
+    if (!activeLink) return;
+    var li = activeLink.closest('li.sidebar-item');
+    if (!li) return;
+
+    // Bootstrap hides nested `.collapse` lists; show the full section tree.
+    toc.querySelectorAll('ul.collapse').forEach(function (u) {
+      u.classList.remove('collapse');
+    });
+
+    // Move the generated list under the active chapter.
+    toc.classList.add('mfpa-subnav');
+    toc.dataset.mfpaFolded = '1';
+    li.appendChild(toc);
+
+    // Map each link to its target section for scroll tracking.
+    var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+    var byId = {};
+    var targets = [];
+    links.forEach(function (a) {
+      var id = decodeURIComponent(a.getAttribute('href').slice(1));
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (el) { byId[id] = a; targets.push(el); }
+    });
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+
+    var visible = new Set();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible.add(e.target);
+        else visible.delete(e.target);
+      });
+      var current = targets.find(function (t) { return visible.has(t); });
+      if (current && byId[current.id]) {
+        links.forEach(function (a) { a.classList.remove('active'); });
+        byId[current.id].classList.add('active');
+      }
+    }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+    targets.forEach(function (t) { io.observe(t); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', foldToc);
+  } else {
+    foldToc();
+  }
+})();
+</script>
+<!-- Concept tooltips: tap-to-toggle on touch devices, keyboard activation, and
+     keeping the popover inside the viewport. Hover / focus reveal is handled by
+     CSS in mfpa.scss; the .has-tip class + .concept-tip child come from the
+     concepts.lua filter. -->
+<script>
+(function () {
+  function init() {
+    var concepts = document.querySelectorAll('.concept.has-tip');
+    if (!concepts.length) return;
+
+    function closeAll(except) {
+      document.querySelectorAll('.concept.tip-open').forEach(function (c) {
+        if (c !== except) c.classList.remove('tip-open');
+      });
+    }
+
+    // Nudge a tip left if it would spill off the right edge of the viewport.
+    function place(c) {
+      var tip = c.querySelector(':scope > .concept-tip');
+      if (!tip) return;
+      tip.style.left = '0px';
+      var r = tip.getBoundingClientRect();
+      var pad = 12;
+      var over = r.right - (window.innerWidth - pad);
+      if (over > 0) {
+        var shift = Math.min(over, r.left - pad);
+        if (shift > 0) tip.style.left = (-shift) + 'px';
+      }
+    }
+
+    function toggle(c) {
+      var willOpen = !c.classList.contains('tip-open');
+      closeAll(c);
+      c.classList.toggle('tip-open', willOpen);
+      if (willOpen) place(c);
+    }
+
+    concepts.forEach(function (c) {
+      c.addEventListener('mouseenter', function () { place(c); });
+      c.addEventListener('focus', function () { place(c); });
+      c.addEventListener('click', function (e) { toggle(c); e.stopPropagation(); });
+      c.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(c); }
+        else if (e.key === 'Escape') { c.classList.remove('tip-open'); }
+      });
+    });
+
+    document.addEventListener('click', function () { closeAll(null); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeAll(null);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

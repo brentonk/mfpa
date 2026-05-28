@@ -1,89 +1,469 @@
 @import url('https://iosevka-webfonts.github.io/iosevka/Iosevka.css');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap');
 
 /*-- scss:defaults --*/
+
+// Typography — Source Serif 4 reading body + Archivo grotesque headings/chrome.
+$font-family-sans-serif: "Source Serif 4", Georgia, "Times New Roman", serif !default;
+$headings-font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif !default;
+$headings-font-weight: 700 !default;
+$headings-line-height: 1.15 !default;
+
+// Reading scale & measure — cosmo's 11pt root is too small for serif body text,
+// and its default column is too wide. Bump the base and narrow the line length.
+$font-size-root: 18px !default;
+$grid-body-width: 720px !default;
+
+// Palette (light) — near-white warm paper + deep teal accent.
+// !default lets mfpa-dark.scss override these in a future dark bundle (Quarto
+// layers scss:defaults in reverse, so the shared file must yield via !default).
+$primary: #0F6E6E !default;
+$body-bg: #FCFBF8 !default;
+$body-color: #1E1B16 !default;
+$link-color: $primary !default;
+$success: #2E7D46 !default;   // example green / "true"
+$danger: #B3261E !default;    // "false" red
+
+// Editorial neutrals (mirrors _design_previews/common.css). Kept near-white so
+// panels read as faint warm grey rather than beige.
+$mfpa-muted: #6B645A !default;
+$mfpa-rule: #E6DFD2 !default;
+$mfpa-accent-ink: #0A5050 !default;
+$mfpa-accent-soft: #E7F0EE !default;
+$mfpa-paper: #FFFFFF !default;
+$mfpa-panel: #F5F2EA !default;
 
 
 /*-- scss:rules --*/
 
-// Basic formatting
+// cosmo compiles a literal :root{font-size:11pt} that overrides --bs-root-font-size,
+// so set the rem base directly here (my rules land last in the bundle).
+:root { font-size: 18px !important; }
 
-ol li::marker {
-    color: $primary;
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
-ol ol li {
-    list-style-type: lower-alpha;
+// ---------------------------------------------------------------------------
+// Title block + "CHAPTER N" eyebrow
+// The chapter title renders as
+//   h1.title > .quarto-section-identifier > .chapter-number + (&nbsp;) + .chapter-title
+// Scope tightly to the title block: the sidebar and breadcrumb reuse these same
+// span classes and must NOT pick up the eyebrow treatment.
+// ---------------------------------------------------------------------------
+#title-block-header {
+    margin-bottom: 0.5rem;
+
+    h1.title {
+        font-size: 2.5rem;
+        line-height: 1.12;
+        letter-spacing: -0.018em;
+        font-weight: $headings-font-weight;
+        margin: 0 0 1.2rem;
+    }
+
+    // Collapse the literal &nbsp; sitting between the two spans.
+    h1.title .quarto-section-identifier { font-size: 0; }
+
+    h1.title .chapter-number {
+        display: block;
+        font-family: $headings-font-family;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 0.74rem;
+        font-weight: 600;
+        color: $primary;
+        margin-bottom: 0.5rem;
+        &::before { content: "Chapter "; }
+    }
+
+    h1.title .chapter-title {
+        font-size: 2.5rem;       // restore (identifier collapsed to 0)
+        letter-spacing: -0.018em;
+    }
 }
+
+// ---------------------------------------------------------------------------
+// Heading scale & rhythm — deliberate Archivo sizing so headings balance the
+// serif body instead of towering over it. h2 carries a hairline section rule.
+// ---------------------------------------------------------------------------
+h1, .h1 {
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+}
+h2, .h2 {
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+    font-size: 1.55rem;
+    line-height: 1.18;
+    letter-spacing: -0.013em;
+    margin-top: 2.6rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid $mfpa-rule;
+}
+h3, .h3 {
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+    font-size: 1.18rem;
+    line-height: 1.25;
+    letter-spacing: -0.006em;
+    margin-top: 1.8rem;
+}
+.header-section-number {
+    color: rgba($body-color, 0.4);
+    font-weight: 600;
+    margin-right: 0.15em;
+}
+
+// ---------------------------------------------------------------------------
+// Body text, links, lists
+// ---------------------------------------------------------------------------
+p { margin: 0 0 1.1rem; }
+.lead { font-size: 1.12rem; color: #3A352D; }
+
+// Underline only prose links (paragraphs/lists/quotes); leave chrome links
+// (sidebar, folded TOC, footer, headings) clean.
+a { color: $primary; text-decoration: none; }
+#quarto-document-content {
+    p a, li a, blockquote a, dd a {
+        border-bottom: 1px solid rgba($primary, 0.35);
+        &:hover { color: $mfpa-accent-ink; border-bottom-color: $primary; }
+    }
+}
+
+ol li::marker, ul li::marker { color: $primary; }
+ol ol li { list-style-type: lower-alpha; }
+
+// ---------------------------------------------------------------------------
+// Left sidebar (chapter navigation) — editorial Archivo, airy rhythm.
+// The light/dark toggle is gone (single light theme) so .sidebar-tools-main
+// renders empty and takes no space.
+// ---------------------------------------------------------------------------
+#quarto-sidebar {
+    border-right: 1px solid $mfpa-rule;
+    background-color: $body-bg;
+
+    .sidebar-title,
+    .sidebar-title a {
+        font-family: $headings-font-family;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        font-size: 1rem;
+        line-height: 1.3;
+        color: $body-color;
+        border: 0;
+    }
+    .sidebar-title a:hover { color: $primary; }
+
+    .sidebar-item-text,
+    .sidebar-link {
+        font-family: $headings-font-family;
+        font-size: 0.92rem;
+        font-weight: 500;
+        color: $mfpa-muted;
+    }
+    .sidebar-link:hover { color: $primary; }
+    .sidebar-link.active { color: $primary; font-weight: 600; }
+
+    .sidebar-item-container { padding: 0.05rem 0; }
+}
+
+// ---------------------------------------------------------------------------
+// Folded page TOC — injected under the active chapter by
+// _includes/sidebar-toc.html, classed .mfpa-subnav.
+// ---------------------------------------------------------------------------
+.mfpa-subnav {
+    list-style: none;
+    margin: 0.25rem 0 0.6rem;
+    padding: 0 0 0 0.9rem;
+    border-left: 1px solid $mfpa-rule;
+    font-family: $headings-font-family;
+
+    ul { list-style: none; margin: 0; padding-left: 0.8rem; }
+    li { margin: 0; }
+
+    a {
+        display: block;
+        font-size: 0.8rem;
+        line-height: 1.3;
+        padding: 0.22rem 0;
+        color: $mfpa-muted;
+        text-decoration: none;
+        border: 0;
+
+        &:hover { color: $primary; }
+        &.active { color: $primary; font-weight: 600; }
+
+        .header-section-number {
+            color: inherit;
+            opacity: 0.65;
+            font-weight: 500;
+            margin-right: 0.25em;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Layout — single centred reading column.
+// The right-margin TOC is folded into the sidebar and margin notes are pulled
+// inline (below), so there is no right margin to reserve. Quarto's docked grid
+// otherwise parks a big `5fr` flex only on the RIGHT, hugging the sidebar; we
+// reproduce its templates but collapse the right margin and flank the content
+// with equal `minmax(1.5em, 1fr)` gutters so the column dead-centres. The
+// sidebar column (screen-start → body-start) is left untouched.
+// ---------------------------------------------------------------------------
+#quarto-margin-sidebar { display: none !important; }
+
+@media (min-width: 992px) {
+    // Chapters (slimcontent) — reading measure ≈ 40rem, matching the mockup.
+    body.docked.slimcontent .page-columns {
+        grid-template-columns:
+            [screen-start] 1.5em
+            [screen-start-inset page-start] minmax(50px, 100px)
+            [page-start-inset] 50px
+            [body-start-outset] 50px
+            [body-start] minmax(1.5em, 1fr)
+            [body-content-start] minmax(0, 40rem)
+            [body-content-end] minmax(1.5em, 1fr)
+            [body-end body-end-outset page-end-inset page-end] 0px
+            [screen-end-inset] 1.5em
+            [screen-end];
+    }
+    // Front/back matter (Preface, References) — a touch wider for the cover.
+    body.docked .page-columns {
+        grid-template-columns:
+            [screen-start] 1.5em
+            [screen-start-inset page-start] minmax(50px, 100px)
+            [page-start-inset] 50px
+            [body-start-outset] 50px
+            [body-start] minmax(1.5em, 1fr)
+            [body-content-start] minmax(0, calc(920px - 3em))
+            [body-content-end] minmax(1.5em, 1fr)
+            [body-end body-end-outset page-end-inset page-end] 0px
+            [screen-end-inset] 1.5em
+            [screen-end];
+    }
+}
+
+// Pull margin notes inline (mirrors Quarto's own narrow-screen behaviour: move
+// them into the body column AND restore their natural flow height), then set
+// them apart as a teal-ruled note instead of a margin float.
+.margin-caption,
+div.aside,
+aside:not(.footnotes):not(.sidebar),
+.column-margin {
+    grid-column: body-content-start / body-content-end !important;
+}
+.no-row-height { height: initial !important; overflow: initial !important; }
+
+.margin-aside {
+    margin: 1.3rem 0;
+    padding: 0.1rem 0 0.1rem 1.1rem;
+    border-left: 3px solid $primary;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: $mfpa-muted;
+
+    p:last-child { margin-bottom: 0; }
+}
+
+// ---------------------------------------------------------------------------
+// Theorem family (definition / proposition / corollary / example / exercise).
+// Quarto opens the first <p> with an inline <span class="theorem-title">; making
+// it (and .proof-title) display:block puts the label on its own line.
+// ---------------------------------------------------------------------------
+.theorem-title,
+.proof-title {
+    display: block;
+    font-family: $headings-font-family;
+    margin-bottom: 0.4rem;
+}
+.theorem-title strong { font-weight: 700; }
 
 .theorem {
     border: 2px solid $primary;
-    border-radius: 10px; /* Controls the rounded corners */
-    padding: 10px 10px 0px; /* Adds space inside the box */
-    margin: 30px 5% 15px;
-    background-color: $light; /* Optional: background color */
-    .theorem-title {
-      color: $primary;
-    }
-}
-.theorem.exercise {
-    border: 1px solid $primary;
-    margin: 30px 0% 15px;
-    background-color: $white;
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem 0.1rem;
+    margin: 1.8rem 0;
+    background-color: $mfpa-panel;
+
+    .theorem-title { color: $primary; }
 }
 .theorem.example {
     border: 1px solid $success;
-    margin: 30px 0% 15px;
-    background-color: $white;
-    .theorem-title {
-        color: $success;
-    }
-    a{
-        color: $success;
-    }
+    background-color: $mfpa-paper;
+    .theorem-title { color: $success; }
+    a { color: $success; }
+}
+.theorem.exercise {
+    border: 1px solid $primary;
+    background-color: transparent;
 }
 
 .proof {
-    border: 1px solid $gray-200;
-    border-radius: 10px; /* Controls the rounded corners */
-    padding: 10px 10px 0px; /* Adds space inside the box */
-    margin: 10px 5% 20px;
+    border: 1px solid rgba($body-color, 0.15);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem 0.4rem;
+    margin: 1.4rem 0 1.8rem;
+    background-color: $mfpa-paper;
+
+    .proof-title {
+        color: $mfpa-muted;
+        font-weight: 600;
+        em { font-style: italic; }
+    }
+
+    // QED box (filled, like LaTeX \blacksquare). Most proofs end in a
+    // paragraph — float the box flush-right on the last line. Proofs that end
+    // in a block (e.g. a truth table) get it on its own right-aligned line.
+    > p:last-child::after {
+        content: "";
+        display: inline-block;
+        width: 0.62em;
+        height: 0.62em;
+        margin-left: 0.5em;
+        margin-top: 0.35em;
+        background-color: $mfpa-muted;
+        float: right;
+    }
+    &:has(> :last-child:not(p))::after {
+        content: "";
+        display: block;
+        width: 0.62em;
+        height: 0.62em;
+        margin: 0.1rem 0 0.4rem auto;
+        background-color: $mfpa-muted;
+    }
 }
 
+// Callouts (collapsible "Answer" / technical notes) — light refinement so they
+// harmonize with the teal palette without a full redesign.
 .callout {
-    margin: 20px 0% 20px;
+    margin: 1.4rem 0;
+    border-radius: 8px;
+}
+.callout .callout-title-container {
+    font-family: $headings-font-family;
+    font-weight: 600;
+}
+.callout.callout-note { border-left-color: $primary; }
+
+// ---------------------------------------------------------------------------
+// Tables — Archivo head with a strong baseline rule; hairline row separators.
+// (Truth tables in logic.qmd colour cells via .tt / .ff, preserved below.)
+// ---------------------------------------------------------------------------
+#quarto-document-content {
+    table {
+        border-collapse: collapse;
+        margin: 1.4rem 0 1.8rem;
+    }
+    thead th {
+        font-family: $headings-font-family;
+        border-bottom: 2px solid $body-color;
+    }
+    th, td { border-bottom: 1px solid $mfpa-rule; }
 }
 
-table {
-    margin-bottom: 25px !important;
+// ---------------------------------------------------------------------------
+// Blockquote
+// ---------------------------------------------------------------------------
+blockquote, .blockquote {
+    margin: 1.6rem 0;
+    padding: 0.2rem 0 0.2rem 1.2rem;
+    border-left: 3px solid $primary;
+    color: #3A352D;
+    font-style: italic;
+    font-size: 1rem;
 }
 
-code, pre {
-    font-variant-ligatures: none;
+// ---------------------------------------------------------------------------
+// Code — light blocks on subtle warm paper (Iosevka mono); keep Quarto's light
+// syntax tokens. Inline code gets a teal-soft chip.
+// ---------------------------------------------------------------------------
+code, pre { font-variant-ligatures: none; }
+
+div.sourceCode {
+    background-color: $mfpa-paper;
+    border: 1px solid $mfpa-rule;
+    border-radius: 8px;
+}
+div.sourceCode pre.sourceCode {
+    background-color: transparent;
+    border: 0;
+}
+pre {
+    border-radius: 8px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+}
+:not(pre) > code {
+    background-color: $mfpa-accent-soft;
+    color: $mfpa-accent-ink;
+    padding: 0.08em 0.34em;
+    border-radius: 4px;
+    font-size: 0.9em;
 }
 
-.MathJax {
-  font-size: 100% !important;
-}
+// MathJax: keep equations at native body size.
+.MathJax,
+mjx-container { font-size: 100% !important; }
 
-
-// Custom classes
-
+// ---------------------------------------------------------------------------
+// Custom inline classes
+// ---------------------------------------------------------------------------
 .concept {
     color: $primary;
     font-weight: 600;
+    text-decoration: underline dotted rgba($primary, 0.5);
+    text-underline-offset: 0.18em;
 }
 
-.tt {
-    color: $success;
-    font-weight: 500;
+// Concept tooltip — concepts that carry a definition (.has-tip, set by the
+// concepts.lua filter) reveal it on hover, keyboard focus, or tap (the tap
+// toggle is wired in _includes/concept-tooltip.html).
+.concept.has-tip {
+    position: relative;
+    cursor: help;
 }
-
-.ff {
-    color: $danger;
+.concept-tip {
+    position: absolute;
+    z-index: 60;
+    left: 0;
+    top: calc(100% + 0.45em);
+    width: max-content;
+    max-width: 22rem;
+    padding: 0.55rem 0.8rem;
+    background-color: $mfpa-paper;
+    color: $body-color;
+    font-family: $font-family-sans-serif;
     font-weight: 400;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: left;
+    text-decoration: none;
+    letter-spacing: normal;
+    border: 1px solid $mfpa-rule;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba($body-color, 0.16);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.12s ease, visibility 0.12s ease;
+    pointer-events: none;
+}
+.concept.has-tip:hover > .concept-tip,
+.concept.has-tip:focus-visible > .concept-tip,
+.concept.has-tip:focus-within > .concept-tip,
+.concept.has-tip.tip-open > .concept-tip {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
 }
 
-// Yellow highlight, text in brackets for note to self
+.tt { color: $success; font-weight: 600; }
+.ff { color: $danger; font-weight: 500; }
+
+// Yellow highlight, text in brackets, for a note-to-self.
 .todo {
     background-color: $warning;
     color: $white;
@@ -91,11 +471,10 @@ code, pre {
     border-radius: 5px;
     font-weight: 500;
 
-  &::before {
-    content: "TODO: ";
-    /* optional—you can tweak these to match your styling */
-    font-weight: 700;       /* make the “TODO:” extra bold */
-    display: inline-block;  /* ensures proper spacing */
-    margin-right: 0.5em;    /* give a little room after it */
-  }
+    &::before {
+        content: "TODO: ";
+        font-weight: 700;
+        display: inline-block;
+        margin-right: 0.5em;
+    }
 }
