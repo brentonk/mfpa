@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ce901faa1ba084482d46c6ee45d6adad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-030575a932d71853b7da0daa632cfc21.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -210,9 +210,9 @@ window.Quarto = {
   <li><a href="#sec-why-sets" id="toc-sec-why-sets" class="nav-link" data-scroll-target="#sec-why-sets"><span class="header-section-number">1.1.1</span> Why start here?</a></li>
   <li><a href="#sec-set-basics" id="toc-sec-set-basics" class="nav-link" data-scroll-target="#sec-set-basics"><span class="header-section-number">1.1.2</span> Basics of sets</a></li>
   </ul></li>
-  <li><a href="#fundamental-operations-on-sets" id="toc-fundamental-operations-on-sets" class="nav-link" data-scroll-target="#fundamental-operations-on-sets"><span class="header-section-number">1.2</span> Fundamental operations on sets</a>
+  <li><a href="#sec-set-operations" id="toc-sec-set-operations" class="nav-link" data-scroll-target="#sec-set-operations"><span class="header-section-number">1.2</span> Working with sets</a>
   <ul class="collapse">
-  <li><a href="#subsets-and-equality" id="toc-subsets-and-equality" class="nav-link" data-scroll-target="#subsets-and-equality"><span class="header-section-number">1.2.1</span> Subsets and equality</a></li>
+  <li><a href="#sec-subsets" id="toc-sec-subsets" class="nav-link" data-scroll-target="#sec-subsets"><span class="header-section-number">1.2.1</span> Subsets and equality</a></li>
   <li><a href="#the-venn-diagram-operations" id="toc-the-venn-diagram-operations" class="nav-link" data-scroll-target="#the-venn-diagram-operations"><span class="header-section-number">1.2.2</span> The Venn diagram operations</a></li>
   <li><a href="#complements-and-de-morgans-laws" id="toc-complements-and-de-morgans-laws" class="nav-link" data-scroll-target="#complements-and-de-morgans-laws"><span class="header-section-number">1.2.3</span> Complements and De Morgan’s laws</a></li>
   </ul></li>
@@ -327,19 +327,10 @@ Table&nbsp;1.1: Notable sets of numbers
 <p>That said, there are times when ordinary language is too cumbersome or imprecise to describe the contents of a set. Maybe there are a lot of conditions on the set you’re defining, or maybe the condition involves a finicky formula that’s hard to put into words. In these cases, it is common to use <span class="concept has-tip" tabindex="0">set-builder notation<span class="concept-tip" role="tooltip">A way to describe a set without explicitly enumerating all of its elements. For example, <span class="math inline">\{a \in A \mid a &gt; 3\}</span> means “The set of all elements of <span class="math inline">A</span> that are greater than 3.”</span></span>, for example <span class="math display">A = \{x \in \mathbb{N} \mid x &gt; 1000\}.</span> You would read this as “<span class="math inline">A</span> is the set of natural numbers <span class="math inline">x</span> such that <span class="math inline">x</span> is greater than 1000”.</p>
 <p>Or what if we wanted to define <span class="math inline">B</span> as the set of values we obtain by taking a natural number and dividing it in half? We could write this in set-builder notation as <span class="math display">B = \{x \in \mathbb{R} \mid x = \frac{n}{2} \: \text{for some $n \in \mathbb{N}$}\}.</span> But we’ll often use the following shorthand to write this a bit less cumbersomely: <span class="math display">B = \{\frac{n}{2} \mid n \in \mathbb{N}\}.</span> Again, none of these, including the verbal description of <span class="math inline">B</span> at the start of the paragraph, is the “right” way to denote the set. What’s best is whatever gets the point across clearly to your intended audience. Thinking about the audience is key — you might want to write the exact same mathematical object in a different way in your undergraduate lecture notes than in a manuscript you’re submitting to <em>Political Analysis</em>.</p>
 <p>I use the vertical bar, <span class="math inline">|</span>, to mean “such that” in set-builder notation. In other texts, you might see the colon, <span class="math inline">:</span>, used instead. These are just different conventions, not different meanings. For example, <span class="math inline">\{x \in \mathbb{R} : x &gt; 10.7\}</span> and <span class="math inline">\{x \in \mathbb{R} \mid x &gt; 10.7\}</span> are both precisely the same set: the set of real numbers that are greater than 10.7.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Doing the exercises is part of reading the notes">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Doing the exercises is part of reading the notes
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="remark">
+<span class="remark-title">Doing the exercises is part of reading the notes</span>
 <p>The exercises are here for a reason. I expect that you are working through them in the course of reading the notes. The best way to learn math is to <em>do</em> math — the exercises are designed to guide you through that process.</p>
 <p>The answers to the exercises are collapsed by default for a reason too. You should attempt each exercise yourself before looking at the answers. Struggling is an important part of learning. So is thinking you got the right answer, only to find out you missed something.</p>
-</div>
 </div>
 <div id="exr-set-builder" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.1</strong></span> Use set-builder notation to describe the following sets:</p>
@@ -360,27 +351,19 @@ Table&nbsp;1.1: Notable sets of numbers
 </div>
 </section>
 </section>
-<section id="fundamental-operations-on-sets" class="level2 page-columns page-full" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="fundamental-operations-on-sets"><span class="header-section-number">1.2</span> Fundamental operations on sets</h2>
-<section id="subsets-and-equality" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="subsets-and-equality"><span class="header-section-number">1.2.1</span> Subsets and equality</h3>
-<p>When we’re dealing with numbers, we compare them in terms of their values. 40 is greater than 38, which in turn is greater than 10. With sets, we make comparisons in terms of their elements — namely, whether all of the elements of one are contained in another.</p>
+<section id="sec-set-operations" class="level2 page-columns page-full" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="sec-set-operations"><span class="header-section-number">1.2</span> Working with sets</h2>
+<section id="sec-subsets" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="sec-subsets"><span class="header-section-number">1.2.1</span> Subsets and equality</h3>
+<p>Every US senator is a politician. To make that a mathematical statement, let’s translate it into a statement about sets. Let <span class="math inline">S</span> be the set of all US senators, and let <span class="math inline">P</span> be the set of all politicians. When we say that every senator is a politician, we are saying that every element of <span class="math inline">S</span> is an element of <span class="math inline">P</span>. More compactly, we say that <span class="math inline">S</span> is a <span class="concept has-tip" tabindex="0">subset<span class="concept-tip" role="tooltip">When all of the elements of the set <span class="math inline">A</span> are also elements of the set <span class="math inline">B</span>, we say that <span class="math inline">A</span> is a subset of <span class="math inline">B</span>, written <span class="math inline">A \subseteq B</span>.</span></span> of <span class="math inline">P.</span></p>
 <div id="def-subset" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.2 (Subset)</strong></span> The set <span class="math inline">A</span> is a <span class="concept has-tip" tabindex="0">subset<span class="concept-tip" role="tooltip">When all of the elements of the set <span class="math inline">A</span> are also elements of the set <span class="math inline">B</span>, we say that <span class="math inline">A</span> is a subset of <span class="math inline">B</span>, written <span class="math inline">A \subseteq B</span>.</span></span> of the set <span class="math inline">B</span>, denoted <span class="math inline">A \subseteq B</span>, if every element of <span class="math inline">A</span> is an element of <span class="math inline">B</span>.</p>
 </div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Inclusion <span class="math inline">\in</span> versus subset <span class="math inline">\subseteq</span>
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<p>Many of the sets we met in <a href="#tbl-number-sets" class="quarto-xref">Table&nbsp;<span>1.1</span></a></p>
+<div class="pitfall">
+<span class="remark-title">Inclusion <span class="math inline">\in</span> versus subset <span class="math inline">\subseteq</span></span>
 <p><span class="math inline">A \subseteq B</span> and <span class="math inline">A \in B</span> have very different meanings. <span class="math inline">A \subseteq B</span> means “every element of <span class="math inline">A</span> is also an element of <span class="math inline">B</span>”. <span class="math inline">A \in B</span> means “the set <span class="math inline">A</span> is, itself, an element of <span class="math inline">B</span>”. When you’re talking about sets, you usually mean the first of these, not the second.</p>
 <p>If you mess up and use the wrong notation, your readers will probably still ultimately figure out what you mean — but it’ll take a bit longer for them than if you’d used the right notation. So it’s in your best interest to use the right notation for much the same reason as it’s in your best interest to use proper spelling and grammar.</p>
-</div>
 </div>
 <p>You probably won’t be surprised to learn that subsets are like nesting dolls: if <span class="math inline">A</span> is a subset of <span class="math inline">B</span>, then it is also a subset of any other set that <span class="math inline">B</span> is a subset of. I’m bringing up this seemingly obvious fact mainly because it’ll give us a nice first statement about set theory to prove. Not to mention that some seemingly obvious things turn out not to be true at all — which is one of the reasons it’s important to prove our mathematical claims.</p>
 <div id="prp-subset-transitive" class="theorem proposition">

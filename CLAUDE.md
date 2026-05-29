@@ -103,6 +103,20 @@ Answer text.
 :::
 ```
 
+## Editorial asides (remark / pitfall / optional)
+
+`_filters/remark.lua` provides un-boxed blocks for the author's *voice* — study advice, notation conventions, digressions, common pitfalls. The governing rule: **boxes mean formal mathematical structure** (theorem/definition/example/exercise/proof), so the author's voice gets an *un-boxed* aside instead of a callout. These replace most Quarto callouts.
+
+- `[remark]` — `::: {.remark title="…"}` — accent left rule + a diamond-marked (◆), sentence-case Archivo title; body set in Archivo (a register shift from the Source Serif exposition) at 0.94rem, full-ink. For asides you should still read.
+- `[pitfall]` — `::: {.pitfall title="…"}` — same chassis in `$danger` red with a ▲ marker; for common confusions/errors.
+- `[optional]` — `::: {.optional title="…"}` — collapsible disclosure reusing `details.answer-block` (label defaults to "Optional"); for genuinely skippable technical material.
+
+The `title=` is parsed as Markdown, so `$math$`, `@refs`, and emphasis resolve (mirrors `answer.lua`). Use `title=`, **not** a `## heading` inside the div, so the aside stays out of the section TOC. Styling lives in `mfpa.scss` under `.remark` / `.pitfall` / `.remark-title`.
+
+**Gotcha:** `.remark` is a reserved Quarto proof-type environment (like `.proof` / `.solution`), so `remark.lua` is registered `at: pre-ast` in `_quarto.yml` to claim the div before Quarto's crossref pass rewrites it into a proof-style box.
+
+**Crossref caveat:** a `.remark` / `.pitfall` div is *not* a crossref target. A callout referenced by `@id` (e.g. a `callout-note` cited elsewhere) can't be converted without rehoming the reference.
+
 ## tikz figures (set theory chapter)
 
 `set_theory.qmd` renders Venn diagrams via the LaTeX `venndiagram` package through `tikzDevice`. The setup chunk defines `eo` for engine.opts:

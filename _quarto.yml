@@ -10,6 +10,11 @@ execute:
 filters:
   - at: pre-ast
     path: _filters/concepts.lua
+  # remark.lua must run pre-ast: `.remark` is a reserved Quarto proof-type
+  # environment, so we have to claim the div before Quarto's crossref pass
+  # rewrites it into a proof-style block.
+  - at: pre-ast
+    path: _filters/remark.lua
   - _filters/answer.lua
 
 book:
