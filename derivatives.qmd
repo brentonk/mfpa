@@ -354,7 +354,7 @@ Let $c$, $\alpha$, and $\beta$ be real numbers.
 Let $f : \mathbb{R} \to \mathbb{R}$ be a function such that $f(x) = \alpha + \beta x$ for all $x \neq c$.
 Prove that $\lim_{x \to c} f(x) = \alpha + \beta c$.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 First consider the case where $\beta \neq 0$.
 The problem is then analogous to @exm-function-limit, and our approach will be analogous.
 Consider any challenge $\epsilon > 0$.
@@ -470,7 +470,7 @@ For the step function illustrated in @fig-step-function, use @def-handed-limit t
 
 *(If you're not seeing how to work through this one, check the answer to the left-hand limit first, then use that answer as a template to prove the right-hand limit.)*
 
-:::: {.callout-note title="Answer: left-hand" collapse="true"}
+:::: {.answer title="Answer: left-hand"}
 I want to show that $\lim_{x \to 0^-} f(x) = 0$.
 To this end, consider any challenge $\epsilon > 0$.
 I claim that $\delta = 1$ is a valid response to the challenge.
@@ -478,7 +478,7 @@ For all $x \in (-1, 0)$, we have $$|f(x) - 0| = |0 - 0| = 0 < \epsilon,$$ so the
 Because $\epsilon$ was chosen arbitrarily, this proves that $\lim_{x \to 0^-} f(x) = 0$.
 ::::
 
-:::: {.callout-note title="Answer: right-hand" collapse="true"}
+:::: {.answer title="Answer: right-hand"}
 I want to show that $\lim_{x \to 0^+} f(x) = 1$.
 To this end, consider any challenge $\epsilon > 0$.
 I claim that $\delta = 1$ is a valid response to the challenge.
@@ -552,7 +552,7 @@ Let $X$ be a set of real numbers, and for each $i = 1, \ldots, N$, let $f_i : X 
 Suppose there is a point $c \in X$ such that $\lim_{x \to c} f_i(x)$ exists for all $i = 1, \ldots, N$.
 Use a proof by induction (see @sec-proof-by-induction) to prove that $$\lim_{x \to c} \left[\sum_{i=1}^N f_i(x)\right] = \sum_{i=1}^N \lim_{x \to c} f_i(x).$$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 To prove the base step, we must prove that the claim is true when $N = 1$.
 To this end, observe that $$\lim_{x \to c} \left[\sum_{i=1}^1 f_i(x)\right] = \lim_{x \to c} f_1(x) = \sum_{i=1}^1 \lim_{x \to c} f_i(x).$$
 
@@ -576,7 +576,7 @@ which proves the induction step.
 Consider the function that maps the lottery guess into expected winnings in our motivating example, $$W(g) = \frac{1}{N} \sum_{i=1}^N [10000 - (x_i - g)^2].$$
 Using @prp-function-limit-properties and the claims proved in @exr-limit-linear and @exr-sum-of-function-limits, prove that $$\lim_{h \to 0} W(g + h) = W(g).$$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 By part 1 of @prp-function-limit-properties, we have
 $$
 \begin{aligned}
@@ -621,7 +621,7 @@ We conclude that $\lim_{h \to 0} W(g + h) = W(g)$, as claimed.
 ::: {#exr-limit-ratio}
 Find the value of $$\lim_{x \to -1} \frac{x^2 - 1}{x + 1},$$ or explain why it does not exist.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 This is a bit of a trick question.
 (Sorry.)
 Because the denominator approaches zero as $x \to -1$, we cannot use part 5 of @prp-function-limit-properties here.
@@ -676,7 +676,7 @@ Consequently, $\lim_{x \to c} f(x) = y$.
 ::: {#exr-function-limit-equivalence-only-if}
 Prove the "only if" direction of @prp-function-limit-equivalence.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 Suppose $$\lim_{x \to c} f(x) = y.$$
 We want to show that this implies $\lim_{h \to 0} f(c + h) = y.$
 
@@ -794,14 +794,14 @@ Compositions of continuous functions
 Consider the function that maps the lottery guess into expected winnings in our motivating example, $W : [0, 100] \to [0, 10000]$, defined by $$W(g) = \frac{1}{N} \sum_{i=1}^N [10000 - (x_i - g)^2].$$
 Prove that this function is continuous *without* explicitly taking its limits (i.e., without invoking what you found in @exr-lottery-limit).
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 The trick is to view $W(g)$ as the sum of many polynomials.
 For each $i = 1, \ldots, N$, the function $$W_i(g) = 10000 - (x_i - g)^2$$ is a polynomial and is thus continuous.
 The sum of these polynomials, $\sum_{i=1}^N W_i(g)$, is the sum of continuous functions and is thus continuous.
 As the constant multiple of a continuous function is itself continuous, we have that $$\frac{1}{N} \sum_{i=1}^N W_i(g) = \frac{1}{N} \sum_{i=1}^N [10000 - (x_i - g)^2] = W(g)$$ is continuous.
 ::::
 
-:::: {.callout-note title="Answer that uses @exr-lottery-limit" collapse="true"}
+:::: {.answer title="Answer that uses @exr-lottery-limit"}
 We proved in @exr-lottery-limit that $\lim_{h \to 0} W(g + h) = W(g)$ for all $g$.
 This is equivalent to saying that $\lim_{g' \to g} W(g') = W(g)$ for all $g$ (see @prp-function-limit-equivalence), which in turn means $W$ is continuous.
 ::::
@@ -863,7 +863,7 @@ tibble(x = seq(0, 5), y1 = 3.25 - 0.25 * x, y2 = 5 - x) |>
   )
 ```
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 The slope of $g$ is -1:
 $$
 \begin{aligned}
@@ -1047,7 +1047,7 @@ Take the other function plotted in @fig-nonlinear-function-comparison, $$h(x) = 
 Show that $$h'(x) = - \frac{2}{5} (x - 5) = 2 - \frac{2 x}{5}.$$
 Confirm that $h'(x)$ decreases as $x$ increases, then find the point in the domain at which $g$ becomes steeper than $h$.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 For any real number $c$, we have
 $$
 \begin{aligned}
@@ -1084,7 +1084,7 @@ Show that $f'(x) = 2 a x + b.$
 
 *Hint:* The calculations will be very similar to the ones from @exr-deriv-h, as the function $h(x)$ there is itself a quadratic function.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 For any real number $d$, we have
 $$
 \begin{aligned}
@@ -1135,7 +1135,7 @@ Either way, we end up in the same place, with $g'(c) = 2c / 5.$
 ::: {#exr-deriv-alt-def}
 Redo @exr-deriv-quadratic using the alternative formula for a derivative.
 
-:::: {.callout-note title="Answer"}
+:::: {.answer}
 Let $f(x) = a x^2 + b x + c,$ and consider any real number $d.$
 We have
 $$
@@ -1251,7 +1251,7 @@ Natural logarithm
 A constant function is a function of the form $f(x) = y,$ where $y$ is a constant real number.
 Without taking an explicit limit, prove that $f'(x) = 0$ for all $x.$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 A constant function is a linear function with slope 0: $f(x) = y = y + 0x.$
 Because the derivative of any linear function is its slope, we have $f'(x) = 0.$
 ::::
@@ -1318,7 +1318,7 @@ Let $\alpha \in \mathbb{R}$ and $\beta \in \mathbb{R}$ be constants.
 Define the function $h : X \to \mathbb{R}$ by $h(x) = \alpha f(x) + \beta g(x).$
 Use the constant rule and the sum rule to show that $$h'(x) = \alpha f'(x) + \beta g'(x).$$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 This is one of those cases where it's convenient to use the fractional notation for a derivative (see @tip-fractional-notation-deriv).
 We have
 $$
@@ -1339,7 +1339,7 @@ For each natural number $n \leq N,$ let $f_n : X \to \mathbb{R}$ be differentiab
 Define the function $g : X \to \mathbb{R}$ by $$g(x) = \sum_{n=1}^N f_n(x).$$
 Use the sum rule in a proof by induction (see @sec-proof-by-induction) to prove that $$g'(x) = \sum_{n=1}^N f_n'(x).$$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 Our goal is to prove the claim for all natural numbers $N.$
 For the base step, we must show that it is true for $N = 1.$
 The claim is trivial in this case, as we have $g(x) = f_1(x)$ and therefore $$g'(x) = f_1'(x) = \sum_{n=1}^1 f_n'(x).$$
@@ -1368,7 +1368,7 @@ $$
 for some natural number $k$ and real-valued coefficients $c_0, \ldots, c_k.$
 Use the constant multiple rule, the derivative of a power function, and the result of @exr-deriv-finite-sum to prove that $$f'(x) = c_1 + 2 c_2 x + \cdots + k c_k x^{k=1} = \sum_{n=0}^k n c_n x^{n-1}.$$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 Using @exr-deriv-finite-sum, we have
 $$
 \begin{aligned}
@@ -1417,8 +1417,7 @@ Differentiability of $f$ implies continuity of $f$ (per @thm-differentiable-impl
 Consequently,
 $$
 \begin{aligned}
-\MoveEqLeft
-\lim_{t \to 0} \frac{h(x + t) - h(x)}{t} \\
+& \lim_{t \to 0} \frac{h(x + t) - h(x)}{t} \\
 &= \lim_{t \to 0} \frac{f(x + t) g(x + t) - f(x) g(x)}{t} \\
 &= \lim_{t \to 0} \frac{f(x + t) g(x + t) - f(x + t) g(x) + f(x + t) g(x) - f(x) g(x)}{t} \\
 &= \lim_{t \to 0} \frac{f(x + t) [g(x + t) - g(x)]}{t} + \lim_{t \to 0} \frac{[f(x + t) - f(x)] g(x)}{t} \\
@@ -1453,7 +1452,7 @@ Find the derivatives of the following functions.
 
 4. $f(x) = e^x \cdot \log(x) \cdot x^3.$
 
-:::: {.callout-note title="Answers" collapse="true"}
+:::: {.answer title="Answers"}
 1. You could solve this one by observing that $f(x) = 2x^2 - 5x - 3,$ then applying the formula for the derivative of a polynomial (see @exr-deriv-polynomial) to yield $f'(x) = 4 x - 5.$
    We get to the same place if we instead use the product rule:
    $$
@@ -1507,7 +1506,7 @@ Let $f : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}.$
 Define the function $g : X \to \mathbb{R}$ by $g(x) = f(x)^2.$
 Using the product rule, prove that $$g'(x) = 2 f'(x) f(x).$$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 We have $g(x) = f(x) \cdot f(x),$ so the product rule implies $$g'(x) = f(x) f'(x) + f'(x) f(x) = 2 f'(x) f(x).$$
 ::::
 :::
@@ -1547,7 +1546,7 @@ The output of the function represents my probability of winning the conflict, as
    Then what's the largest value of $x$ that I'd be willing to choose?
    (The answer will depend on the values of $\alpha$ and $y.$)
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 Think of $f(x) = g(x) / h(x)$ where $g(x) = \alpha x$ and $h(x) = \alpha x + y.$
 Then, using the quotient rule, we have
 $$
@@ -1591,7 +1590,7 @@ $$
 $$
 Taking this conditional probability to be a function of the parameter $p,$ find its derivative and show that the derivative is positive for all $p \in (0, 1].$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 Defining the function $$f(p) = \frac{p^2}{2p (1 - p) + p^2} = \frac{p^2}{2p - p^2},$$ we have
 $$
 \begin{aligned}
@@ -1742,7 +1741,7 @@ Using the chain rule, show that $f'(x) = b^x \cdot \log(b).$
 
 *Hint:* Start out by using the fact that $b = e^{\log(b)}.$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 We have $$f(x) = b^x = (e^{\log(b)})^x = e^{\log(b) \cdot x}.$$
 Define the "inner" function $h(x) = \log(b) \cdot x$ (with derivative $h'(x) = \log(b)$) and the "outer" function $g(x) = e^x$ (with derivative $g'(x) = e^x$), so that we have $$f(x) = e^{\log(b) \cdot x} = e^{h(x)} = g(h(x)).$$
 Then, using the chain rule, we have
@@ -1762,7 +1761,7 @@ $$
 For all $x \geq 0,$ the cumulative distribution function of the [exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution) with rate parameter $\lambda > 0$ is $$F(x) = 1 - e^{-\lambda x}.$$
 Characterize the probability density function of this distribution by finding the derivative of the cumulative distribution function.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 Let's first just look at $e^{-\lambda x}.$
 We can think of this as a composition of the "outer" function $g(x) = e^x$ (with derivative $g'(x) = e^x$) and the "inner" function $h(x) = -\lambda x$ (with derivative $h'(x) = -\lambda$).
 Therefore, its derivative is $$g'(h(x)) \cdot h'(x) = g'(-\lambda x) \cdot h'(x) = e^{-\lambda x} \cdot -\lambda.$$
@@ -1784,7 +1783,7 @@ $$
 For all $x \in \mathbb{R},$ the cumulative distribution function of the [logistic distribution](https://en.wikipedia.org/wiki/Logistic_distribution) is $$F(x) = \frac{1}{1 + e^{-x}}.$$
 Characterize the probability density function of this distribution by finding the derivative of the cumulative distribution function.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 We have $F(x) = (1 + e^{-x})^{-1}.$
 By repeatedly applying the chain rule, we have
 $$
@@ -1805,7 +1804,7 @@ Let $f$ be a differentiable function that maps from $X \subseteq \mathbb{R}$ int
 Define the function $g(x) = \log [f(x)].$
 Prove that $$g'(x) = \frac{f'(x)}{f(x)}.$$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 $g$ is the composition of the natural logarithm and $f$.
 Therefore, by the chain rule,
 $$
@@ -1824,7 +1823,7 @@ Use the product rule and the chain rule to prove the quotient rule.
 
 *Hint:* Start with the fact that $\frac{f(x)}{g(x)} = f(x) \cdot g(x)^{-1}.$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 Define $h(x) = \frac{f(x)}{g(x)} = f(x) \cdot g(x)^{-1}.$
 By the product rule,
 $$
@@ -1975,7 +1974,7 @@ Using the second derivative, characterize the conditions under which each of the
 
 3. A logarithmic function of the form $f(x) = \log_b x,$ where $b > 0$ and $b \neq 1.$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 1. We have $f'(x) = 2 a x + b$ and thus $f''(x) = 2a.$
    So the function is concave if $a \leq 0$ and convex if $a \geq 0.$
 
@@ -2008,7 +2007,7 @@ tibble(x = seq(-3.5, 3.5, length.out = 501), y = dnorm(x)) |>
 You can see from the graph that the standard normal PDF is concave on $[-1, 1]$, while it is convex on the rest of its domain.
 Use its second derivative to prove this.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 Using the constant multiple rule and the chain rule, we have
 $$
 \begin{aligned}

@@ -110,6 +110,12 @@ h3, .h3 {
     letter-spacing: -0.006em;
     margin-top: 1.8rem;
 }
+// An h3 directly under its parent h2 (no intervening prose) shouldn't add the
+// full section gap on top of the h2's own spacing — tighten it.
+h2 + section > h3:first-child,
+h2 + h3 {
+    margin-top: 0.8rem;
+}
 .header-section-number {
     color: rgba($body-color, 0.4);
     font-weight: 600;
@@ -120,6 +126,9 @@ h3, .h3 {
 // Body text, links, lists
 // ---------------------------------------------------------------------------
 p { margin: 0 0 1.1rem; }
+// A paragraph right before a theorem/proof box: trim its bottom margin so the
+// collapsed gap above the box isn't dominated by the full paragraph spacing.
+p:has(+ .theorem), p:has(+ .proof), p:has(+ .callout) { margin-bottom: 0.6rem; }
 .lead { font-size: 1.12rem; color: #3A352D; }
 
 // Underline only prose links (paragraphs/lists/quotes); leave chrome links
@@ -285,7 +294,7 @@ aside:not(.footnotes):not(.sidebar),
     border: 2px solid $primary;
     border-radius: 10px;
     padding: 0.9rem 1.1rem 0.1rem;
-    margin: 1.8rem 0;
+    margin: 1.2rem 0;
     background-color: $mfpa-panel;
 
     .theorem-title { color: $primary; }
@@ -305,7 +314,7 @@ aside:not(.footnotes):not(.sidebar),
     border: 1px solid rgba($body-color, 0.15);
     border-radius: 10px;
     padding: 0.9rem 1.1rem 0.4rem;
-    margin: 1.4rem 0 1.8rem;
+    margin: 1.2rem 0;
     background-color: $mfpa-paper;
 
     .proof-title {
@@ -337,10 +346,10 @@ aside:not(.footnotes):not(.sidebar),
     }
 }
 
-// Callouts (collapsible "Answer" / technical notes) — light refinement so they
+// Callouts (technical notes / tips / warnings) — light refinement so they
 // harmonize with the teal palette without a full redesign.
 .callout {
-    margin: 1.4rem 0;
+    margin: 1.2rem 0;
     border-radius: 8px;
 }
 .callout .callout-title-container {
@@ -348,6 +357,83 @@ aside:not(.footnotes):not(.sidebar),
     font-weight: 600;
 }
 .callout.callout-note { border-left-color: $primary; }
+
+// ---------------------------------------------------------------------------
+// Answer blocks (_filters/answer.lua → native <details class="answer-block">).
+// A quiet editorial disclosure for exercise answers and hidden worked
+// solutions, replacing the old blue note callout. Closed: a slim teal-tinted
+// bar that reads as an invitation; open: the bar becomes a header over a
+// faintly tinted body. No JS — native <details>, with a CSS chevron + a soft
+// reveal on open.
+// ---------------------------------------------------------------------------
+details.answer-block {
+    margin: 1.2rem 0;
+    border: 1px solid rgba($primary, 0.3);
+    border-radius: 8px;
+    background-color: $mfpa-paper;
+    overflow: hidden;
+}
+
+details.answer-block > summary.answer-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.85rem;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;                 // Firefox default marker
+    font-family: $headings-font-family;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $primary;
+    background-color: rgba($primary, 0.06);
+    transition: background-color 0.15s ease;
+
+    &::-webkit-details-marker { display: none; }   // Safari/Chrome default marker
+    &:hover { background-color: rgba($primary, 0.11); }
+}
+details.answer-block[open] > summary.answer-summary {
+    border-bottom: 1px solid rgba($primary, 0.18);
+}
+
+// CSS chevron: points right (›) when closed, rotates down (⌄) when open.
+.answer-affordance {
+    flex: none;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+}
+details.answer-block[open] > summary .answer-affordance {
+    transform: rotate(135deg);
+}
+
+.answer-label { line-height: 1; transform: translateY(0.5px); }
+
+.answer-body {
+    padding: 0.85rem 1rem 0.05rem;
+    background-color: rgba($primary, 0.025);
+
+    > *:last-child { margin-bottom: 0.8rem; }
+}
+details.answer-block[open] > .answer-body {
+    animation: answer-reveal 0.18s ease;
+}
+@keyframes answer-reveal {
+    from { opacity: 0; transform: translateY(-3px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+// Nested flush inside an exercise / proof box: trim the doubled gap so the
+// disclosure sits comfortably against the box's own bottom padding.
+.theorem > details.answer-block:last-child,
+.proof > details.answer-block:last-child {
+    margin-bottom: 0.75rem;
+}
 
 // ---------------------------------------------------------------------------
 // Tables — Archivo head with a strong baseline rule; hairline row separators.
@@ -369,18 +455,31 @@ aside:not(.footnotes):not(.sidebar),
 // Blockquote
 // ---------------------------------------------------------------------------
 blockquote, .blockquote {
-    margin: 1.6rem 0;
+    margin: 0.8rem 0 1.6rem;
     padding: 0.2rem 0 0.2rem 1.2rem;
     border-left: 3px solid $primary;
     color: #3A352D;
     font-style: italic;
     font-size: 1rem;
+
+    // The whole quote is italic, so emphasis would be invisible — flip it
+    // back to upright so `*emphasis*` actually reads as emphasis.
+    em, i { font-style: normal; }
 }
 
 // ---------------------------------------------------------------------------
 // Code — light blocks on subtle warm paper (Iosevka mono); keep Quarto's light
 // syntax tokens. Inline code gets a teal-soft chip.
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// KaTeX — its default .katex size is 1.21em, which reads oversized next to the
+// Source Serif body. Pull it closer to the surrounding text (a touch larger
+// for sub/superscript legibility, not towering over it). NB: katex.min.css
+// loads *after* the theme CSS, so a bare `.katex` is overridden by source
+// order — `body .katex` outranks it on specificity without !important.
+// ---------------------------------------------------------------------------
+body .katex { font-size: 1.08em; }
+
 code, pre { font-variant-ligatures: none; }
 
 div.sourceCode {

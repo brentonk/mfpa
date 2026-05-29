@@ -172,8 +172,7 @@ You learn the most by trying on your own and then checking.
 ::: {#exr-not-p-and-not-p}
 Use a truth table to show that $\neg (P \land \neg P)$ is a tautology.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 Start by setting up the table with each combination of possible values of the underlying sentences (in this case, just $P$), then with each sequential step you need to build the final compound sentence.
 
 | $P$          | $\neg P$ | $P \land \neg P$ | $\neg (P \land \neg P)$ |
@@ -248,8 +247,7 @@ Then we break down the compound sentence and fill out the rest of the truth tabl
 ::: {#exr-two-sentence-table}
 Use a truth table to show that $(P \lor Q) \lor (\neg P \land \neg Q)$ is a tautology.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 
 Set up the rows:
 
@@ -313,8 +311,7 @@ all(P & Q) # not a tautology
 ::: {#exr-truth-table-in-r}
 Using R, confirm that the compound sentence $$[(P \lor Q) \lor (\neg R \lor \neg S)] \lor [(\neg P \land \neg Q) \land (R \land S)]$$ is a tautology.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 ```{r exr-truth-table-in-r-ans}
 grid <- expand.grid(
   P = c(TRUE, FALSE),
@@ -441,8 +438,7 @@ $[(P \to Q) \land \neg Q] \to \neg P$.
 Try to prove this yourself using a truth table, following the same lines as the proof of @thm-modus-ponens above.
 If you get stuck, check the answer below.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 
 | $P$ | $Q$ | $P \to Q$ | $\neg Q$ | $(P \to Q) \land \neg Q$ | $\neg P$ | $[(P \to Q) \land \neg Q] \to \neg P$ |
 |-----|-----|-----------|----------|--------------------------|----------|---------------------------------------|
@@ -488,8 +484,7 @@ If you're skeptical, you can use a truth table to confirm that the statement $(P
 ::: {#exr-equivalence}
 Use a truth table to confirm that the statement $(P \to Q) \land (Q \to P)$ is true exactly when the truth values of $P$ and $Q$ match.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 
 | $P$          | $Q$          | $P \to Q$    | $Q \to P$    | $(P \to Q) \land (Q \to P)$ |
 |--------------|--------------|--------------|--------------|-----------------------------|
@@ -509,8 +504,7 @@ Even more radically, as we'll see in @sec-proof-by-contradiction below, when you
 ::: {#exr-contrapositive}
 Use a truth table to confirm that $P \to Q$ is logically equivalent to $\neg Q \to \neg P$.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 
 | $P$ | $Q$ | $P \to Q$ | $\neg P$ | $\neg Q$ | $\neg Q \to \neg P$ | $(P \to Q) \leftrightarrow (\neg Q \to \neg P)$ |
 |-----|-----|-----------|----------|----------|---------------------|-------------------------------------------------|
@@ -584,8 +578,7 @@ I will prove the first law with a truth table, then leave the second one to you 
 | [false]{.ff} | [true]{.tt}  | [false]{.ff} | [true]{.tt}        | [true]{.tt}  | [false]{.ff} | [true]{.tt}          | [true]{.tt}                                             |
 | [false]{.ff} | [false]{.ff} | [false]{.ff} | [true]{.tt}        | [true]{.tt}  | [true]{.tt}  | [true]{.tt}          | [true]{.tt}                                             |
 
-:::: {.callout-note collapse="true"}
-## Proof of the second law
+:::: {.answer title="Proof of the second law"}
 
 | $P$          | $Q$          | $P \lor Q$   | $\neg (P \lor Q)$ | $\neg P$     | $\neg Q$     | $\neg P \land \neg Q$ | $\neg (P \lor Q) \leftrightarrow (\neg P \land \neg Q)$ |
 |--------------|--------------|--------------|-------------------|--------------|--------------|-----------------------|---------------------------------------------------------|
@@ -744,8 +737,7 @@ We conclude that $P \to R$.
 ::: {#exr-prove-modus-tollens}
 Write a plain language proof of the modus tollens rule (@thm-modus-tollens).
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 Your proof will of course differ from mine, but here's how I approached it.
 
 Suppose that $P \to Q$ is true and that $Q$ is false.
@@ -760,7 +752,7 @@ Assume $a$ is an integer.
 Write a plain language proof of the claim that if $a^2$ is even, then $a$ is even.
 (An integer $a$ is even if it is divisible by 2: there is some integer $n$ such that $a = 2 \times n$.)
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 I will prove the contrapositive.
 Assume $a$ is not even, so it is not a factor of 2.
 Then $a^2 = a \times a$ also is not a factor of 2 and is not even.
@@ -958,8 +950,7 @@ Following the chain of equivalences, we have $$\neg (P_1 \land \cdots \land P_k 
 ::: {#exr-induction}
 Use a proof by induction to prove that $2^n \geq n + 1$ for every counting number $n = 1, 2, \ldots$.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 For the base step, we must show that $2^1 \geq 1 + 1$.
 This holds because $2^1 = 2 = 1 + 1$.
 

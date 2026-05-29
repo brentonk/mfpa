@@ -22,8 +22,7 @@ The question is: given $p$, how many more terms would we expect the incumbent pa
 
 Our goal here is to calculate the expected value,
 \begin{align}
-\MoveEqLeft{}
-\sum_{T = 0}^\infty T \cdot \Pr(\text{term length} = T) \\
+& \sum_{T = 0}^\infty T \cdot \Pr(\text{term length} = T) \\
 &= 0 \cdot \Pr(\text{term length} = 0)
 + 1 \cdot \Pr(\text{term length} = 1) \\
 &\quad + 2 \cdot \Pr(\text{term length} = 2)
@@ -317,7 +316,7 @@ You've already got the tools you need to prove this one yourself, so I'm leaving
 Prove @prp-logarithm-ratio.
 (Hint: use both of the two previous properties of logarithms, @prp-logarithm-product and @prp-logarithm-power.)
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 The ratio $\frac{y}{z}$ is equivalent to the product $y \times z^{-1}$.
 Therefore, @prp-logarithm-product implies $$\log_b \left(\frac{y}{z}\right) = \log_b (y \times z^{-1}) = \log_b y + \log_b (z^{-1}).$$
 Furthermore, @prp-logarithm-power gives us $\log_b (z^{-1}) = - \log_b z$.
@@ -567,7 +566,7 @@ If we have a constant sequence, so that $x_n = c$ for every index $n$, then the 
 Let $c$ be a constant real number.
 Prove that if $x_n = c$ for all $n$, then $\{x_n\} \to c$.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 We must prove that for every $\epsilon > 0$, there is an index $N$ such that $c - \epsilon < x_n < c + \epsilon$.
 To this end, take an arbitrary $\epsilon > 0$.
 For all $n \geq 1$, we have $x_n = c$ and therefore $c - \epsilon < x_n < c + \epsilon$.
@@ -608,7 +607,7 @@ The next exercise asks you to think of an example.
 ::: {#exr-bounded-does-not-imply-convergent name="Bounded does not imply convergent"}
 Come up with an example of a bounded sequence that is not convergent.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 There are many examples of convergent sequences that are not bounded, but the simplest one I can think of is $0, 1, 0, 1, \ldots$, i.e., the sequence $\{x_n\}$ where each
 $$
 x_n = \begin{cases}
@@ -697,7 +696,7 @@ b. The sequence $1, 0, 3, 0, 5, 0, 7, 0, \ldots$ ($x_n = n$ if $n$ is odd, $x_n 
 
 c. The "three steps forward, one step back" sequence $1, 0, 3, 2, 5, 4, 7, 6, 9, 8, \ldots$ ($x_n = n$ if $n$ is odd, $x_n = n - 2$ if $n$ is even) has a limit of $\infty$.
 
-:::: {.callout-note title="Answers" collapse="true"}
+:::: {.answer title="Answers"}
 a. Consider any challenge $a$, and let $N$ be any integer greater than $a^2$.
    For all $n \geq N$, we have $$x_n \leq x_N = -\sqrt{N} \leq -\sqrt{a^2} \leq -|a| \leq a.$$
    Because every challenge can be met, we conclude that $\lim_{n \to \infty} -\sqrt{n} = -\infty$.
@@ -802,7 +801,7 @@ You'll apply this yourself in the next exercise.
 Use @prp-squeeze-sequence to show that $\lim_{n \to \infty} \frac{1}{n + 1} = 0$.
 (*Hint:* We've already shown that $\lim_{n \to \infty} \frac{1}{n} = 0$.)
 
-:::: {.callout-note title="Answer" collapse = "true"}
+:::: {.answer}
 The constant sequence $0, 0, 0, \ldots$ has a limit of $0$, as does the sequence $\{\frac{1}{n}\}$.
 We have $0 \leq \frac{1}{n + 1} \leq \frac{1}{n}$ for all indices $n$, so part b of @prp-squeeze-sequence implies $\{\frac{1}{n + 1}\} \to 0$ as well.
 ::::
@@ -828,7 +827,7 @@ e. If $y \neq 0$, $\{x_n / y_n\} \to x/y$.
 ::: {.proof}
 The proof is long and tedious, so I have hidden it in collapsible boxes.
 
-:::: {.callout-note title="Part (a): Constant multiple of sequence" collapse="true"}
+:::: {.answer title="Part (a): Constant multiple of sequence"}
 We need to prove that for all $\epsilon > 0$, there is an index $N$ such that $|c x_n - c x| < \epsilon$ for all $n \geq N$.
 To this end, take an arbitrary $\epsilon > 0$.
 Because $\{x_n\} \to x$, there is an $N$ such that $|x_n - x| < \epsilon / |c|$ for all $n \geq N$.
@@ -836,7 +835,7 @@ This in turn implies that $$|c x_n - c x| = |c (x_n - x)| = |c| |x_n - x| < |c| 
 We have shown that there is a valid response to any $\epsilon > 0$ challenge, and thus $\{c x_n\} \to cx$.
 ::::
 
-:::: {.callout-note title="Part (b): Sum of sequences" collapse="true"}
+:::: {.answer title="Part (b): Sum of sequences"}
 The proof here relies on the [triangle inequality](https://en.wikipedia.org/wiki/Triangle_inequality): for any real numbers $a$ and $b$, $$|a + b| \leq |a| + |b|.$$
 If you're ever having trouble proving something that involves absolute values, the triangle inequality can often help you get a foothold.
 
@@ -849,12 +848,12 @@ Then for all indices $n \geq N$, we have $$|(x_n + y_n) - (x + y)| = |(x_n - x) 
 We have shown that there is a valid response to any $\epsilon > 0$ challenge, and thus $\{x_n + y_n\} \to x + y$.
 ::::
 
-:::: {.callout-note title="Part (c): Difference of sequences" collapse="true"}
+:::: {.answer title="Part (c): Difference of sequences"}
 We have $x_n - y_n = x_n + (-1) y_n$, so the claim follows from parts (a) and (b):
 $$\lim_{n \to \infty} (x_n - y_n) = \lim_{n \to \infty} [x_n + (-1) y_n]  = \lim_{n \to \infty} x_n + (-1) \lim_{n \to \infty} y_n  = x + (-1) y = x - y.$$
 ::::
 
-:::: {.callout-note title="Part (d): Product of sequences" collapse="true"}
+:::: {.answer title="Part (d): Product of sequences"}
 We need to prove that for all $\epsilon > 0$, there is an index $N$ such that $|x_n y_n - x y| < \epsilon$ for all $n \geq N$.
 To this end, take an arbitrary $\epsilon > 0$.
 Because $\{y_n\} \to y$, there is an $N_1$ such that $y - 1 < y_n < y + 1$ for all $n \geq N_1$.
@@ -883,7 +882,7 @@ We have shown that there is a valid response to any $\epsilon > 0$ challenge, an
 However, in that case, the second term of the sum is always 0, so the conclusion that $|x_n y_n - x y| < \epsilon$ for all $n \geq N$ still holds.
 ::::
 
-:::: {.callout-note title="Part (e): Ratio of sequences" collapse="true"}
+:::: {.answer title="Part (e): Ratio of sequences"}
 Assume $y \neq 0$.
 
 We will first prove that $\{1 / y_n\} \to 1 / y$.
@@ -926,7 +925,7 @@ b. Show that $\lim_{n \to \infty} \frac{1000}{n} = 0$.
 
 c. Show that $\lim_{n \to \infty} \frac{n}{n + 1} = 1$.
 
-:::: {.callout-note title="Answers" collapse="true"}
+:::: {.answer title="Answers"}
 a. Because $\lim_{n \to \infty} \frac{1}{n} = 0$, we have $$\lim_{n \to \infty} \frac{1}{n^2} = \lim_{n \to \infty} \left(\frac{1}{n} \cdot \frac{1}{n}\right) = \left(\lim_{n \to \infty} \frac{1}{n}\right) \cdot \left(\lim_{n \to \infty} \frac{1}{n}\right) = 0 \cdot 0 = 0.$$
 
 b. Because $\lim_{n \to \infty} \frac{1}{n} = 0$, we have $$\lim_{n \to \infty} \frac{1000}{n} = \lim_{n \to \infty} \left(1000 \cdot \frac{1}{n}\right) = 1000 \cdot \lim_{n \to \infty} \frac{1}{n} = 1000 \cdot 0 = 0.$$
@@ -1159,7 +1158,7 @@ I calculated the partial sum for the $n = 3$ case above.
 Repeat my method and/or use my result to calculate the partial sums for $n = 2$ and $n = 4$.
 What patterns do you notice in the partial sums?
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 For the $n = 2$ case, I think it's easiest to just calculate the sum explicitly:
 $$
 \begin{aligned}

@@ -1,9 +1,16 @@
 project:
   type: book
 
+# Only re-execute R chunks when their own code changes (results cached in
+# _freeze/). Keeps prose/CSS-only previews from re-running Dataverse downloads
+# and tikz LaTeX compiles. _freeze/ is gitignored; CI uploads _book/ directly.
+execute:
+  freeze: auto
+
 filters:
   - at: pre-ast
     path: _filters/concepts.lua
+  - _filters/answer.lua
 
 book:
   title: "Mathematical Foundations of Political Analysis"
@@ -11,8 +18,8 @@ book:
   date: last-modified
   chapters:
     - index.qmd
-    - logic.qmd
     - set_theory.qmd
+    - logic.qmd
     - sequences_series.qmd
     - derivatives.qmd
     - optimization.qmd
@@ -33,6 +40,8 @@ format:
       - cosmo
       - mfpa.scss
     title-block-banner: false
+    # KaTeX instead of MathJax: faster client-side render, smaller payload.
+    html-math-method: katex
     monofont: 'Iosevka Web'
     linestretch: 1.6
     cap-location: top

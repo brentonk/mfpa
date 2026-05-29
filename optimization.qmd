@@ -249,7 +249,7 @@ So when you have such a function, you don't have to give up on trying to optimiz
 ::: {#exr-optimize-bad-function name="Optimization when the necessary conditions fail"}
 Come up with an example of a function $f : X \to \mathbb{R}$ that is not continuous, whose domain is unbounded, and whose domain is not closed, but which has a global minimizer and maximizer.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 There are infinitely many examples I could give, but here is a relatively simple one.
 Consider the function $f : (0, \infty) \to \mathbb{R}$ defined by
 $$
@@ -372,7 +372,7 @@ Therefore, to find the global optimizers of a differentiable function on a domai
 ::: {#exr-brute-force-optimization}
 Find the global minimizers and maximizers of $f : [-3, 3] \to \mathbb{R}$ defined by $$f(x) = 2 x^3 - 3 x^2 - 12 x + 4.$$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 First let's find the critical points.
 Using the sum rule, the constant multiple rule, and the power rule, we have
 $$
@@ -478,7 +478,7 @@ For any value $x^*$ that is a critical point of $f:$
 Consider the function from @exr-brute-force-optimization, $$f(x) = 2 x^3 - 3 x^2 - 12 x + 4.$$
 Use the second-order sufficient conditions to show that $x = -1$ is a local maximizer and that $x = 2$ is a local minimizer.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 We have the first and second derivatives
 $$
 \begin{aligned}
@@ -498,7 +498,7 @@ It could be a local maximizer, a local minimizer, or neither --- you can't tell 
 Consider the function $f : \mathbb{R} \to \mathbb{R}$ defined by $f(x) = x^4.$
 Show that $f''(0) = 0$ and that $x = 0$ is a local (and indeed global) minimizer of $f.$
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 By the power rule, we have $f'(x) = 4 x^3$ and $f''(x) = 12 x^2,$ the latter of which shows that $f''(0) = 0.$
 But we know that $x = 0$ is a local and global minimizer because $f(0) = 0,$ while for all $x \neq 0$ we have $f(x) = x^4 > 0.$
 ::::
@@ -534,7 +534,7 @@ Consider the expected winnings function from the lottery game in the previous ch
 Show that $W''(g) > 0$ for all $g \in \mathbb{R}.$
 Use that fact to argue that $g = \bar{x} = \frac{1}{N} \sum_{i=1}^N x_i$ is the unique global maximizer.
 
-:::: {.callout-note title="Answer" collapse="true"}
+:::: {.answer}
 As shown at the end of @sec-properties-of-derivatives, we have $$W'(g) = 2 (\bar{x} - g).$$
 Consequently, we have $W''(g) = -2 < 0$ for all $g \in \mathbb{R}.$
 Because $g = \bar{x}$ is a critical point of $W,$ @thm-global-optimization implies that this is the unique global maximizer of $W.$

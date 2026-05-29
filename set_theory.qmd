@@ -1,39 +1,48 @@
 # Set Theory {#sec-set-theory}
 
-## What are sets and why do we care?
+## Introduction {#sec-set-theory-intro}
 
-Seemingly every book on "higher math" --- the kind of math you encounter after the intro calculus sequence in college --- starts with a discussion of [set theory]{.concept definition="The study of sets and their properties.  A key logical foundation for much of the rest of mathematics."}.
-There are some deep mathematical reasons to begin this way, which you can read about on [Wikipedia](https://en.wikipedia.org/wiki/Set_theory) or, for the especially high-minded, the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/set-theory/).
-To summarize it very loosely: although most people think of math as being about numbers, most important mathematical statements (including those about numbers!) are ultimately actually rooted in the properties of sets.
+### Why start here? {#sec-why-sets}
 
-I'm putting set theory before our study of numbers-type math for reasons that are related, but more prosaic.
+We begin with [set theory]{.concept definition="The study of sets and their properties. A key logical foundation for all of mathematics."}, the branch of mathematics concerned with abstract collections of objects and the operations we may perform on them.
+While "abstract collections of objects" might not sound very exciting, even compared to the typical mathematical subject, there are important reasons for us to begin here.
+These reasons can get rather philosophical:
 
-#.  Set theory gives us a lot of our mathematical "language".
+> Among all mathematical disciplines, set theory occupies a special place because it plays two very different roles at the same time: on the one hand, it is an area of mathematics devoted to the study of abstract sets and their properties; on the other, *it provides mathematics with its foundation*.
+> (*The Princeton Companion to Mathematics*, pp. 615--616, emphasis added.)
 
-    #.  Many of the definitions of day-to-day tools in calculus and linear algebra are stated in terms of sets and operations on sets.
+But you're studying to be a political scientist, not a mathematician, so why do *you* need to begin with set theory?
+First, a surprising amount of mathematical language boils down to statements about sets.
+"A probability is a number between 0 and 1, inclusive" is a statement about sets, as is "The function $f(x) = x^2$ is continuous."
+<!-- You can even think of "$1 + 1 = 2$" as a set-theoretic statement, as the 20th century philosophical monograph *Principia Mathematica* famously spends more than a hundred pages establishing, though we won't be going nearly that deep here. -->
+If you want to properly read papers that present new statistical techniques or that develop theories using formal models --- and you certainly will want to read these papers, not just to succeed in our program but also to have a long career in the discipline --- you'll need to get comfortable with the basics of set-theoretic grammar.
 
-    #.  In political science research, we use mathematical notation to concisely-yet-precisely summarize quantitative concepts.
-        This notation often involves sets and operations on sets, so we need to get familiar if we want to be fluent in the "language" of math.
+Second, as you'll soon see in the stats sequence, you'll be working with sets a lot in probability theory.
+"Events" in probability are defined as sets; joint and conditional probabilities involve operations on these sets.
+To understand foundational concepts of inference like [Bayes' rule](https://en.wikipedia.org/wiki/Bayes%27_theorem), you need some set-theoretic background.
 
-#.  Set theory gives us some nice examples of mathematical statements that are relatively easy to prove, making it a convenient as we get more practice writing proofs.
+Finally, in this course you won't just be doing math in terms of performing computations.
+I want you to come away with an understanding of math as the science of *making arguments* that are backed by *logical proofs*.
+It turns out that set theory is a good starting point to build your argument-stating and proof-writing skills, as you'll see in depth in @sec-logic.
+
+### Basics of sets {#sec-set-basics}
 
 All right, so what is a set?
-Precisely because sets are so foundational, that turns out to be quite a sticky question to answer rigorously, so we will content ourselves with a non-rigorous definition.
+For our purposes,^[If you go deep into set theory, you end up arriving at questions like whether we can coherently discuss objects like [the set of all sets that don't contain themselves](https://en.wikipedia.org/wiki/Russell%27s_paradox). We will not be going that deep.]
+a set is just an unordered collection of distinct objects.
 
 ::: {#def-set}
 ## Sets and elements
-A [set]{.concept definition="Informally, a collection of objects (not necessarily numbers).  A set $S$ with elements $a$, $b$, and $c$ is written $S = \\{a, b, c\\}$."} is a collection of objects, which we call the [elements]{.concept entry="Element" definition='A member of a set.  We write $a \in A$ to mean "$a$ is an element of the set $A$."'} of the set.
-The notation $$A = \{1, 2, 4, 8\}$$ is equivalent to saying "$A$ is the set whose elements are 1, 2, 4, and 8."
+A [set]{.concept definition="Informally, a collection of objects (not necessarily numbers).  A set $S$ with elements $a$, $b$, and $c$ is written $S = \\{a, b, c\\}$."} is a collection of objects, each of which is an [element]{.concept definition='A member of a set.  We write $a \in A$ to mean "$a$ is an element of the set $A$."'} of the set.
+For example, the notation $$A = \{1, 2, 4, 8\}$$ is equivalent to saying "$A$ is the set whose elements are 1, 2, 4, and 8."
+To denote that the object $a$ is an element of the set $A,$ we write $a \in A.$
 :::
 
-When we want to say briefly that $a$ is an element of the set $A$, we write $a \in A$.
-It is typical to use capital letters to denote sets and lowercase letters to denote their elements, though sometimes it is convenient or necessary to break this convention.
+It is conventional --- not just in my notes, but in mathematical writing generally --- to use capital letters to denote sets and lowercase letters to denote their elements.
+But be aware, sometimes it is convenient or necessary to break this convention.
 
-::: {.callout-tip}
-## Sets aren't just for numbers
-A set may consist of objects besides numbers.
-It is coherent to say "let $P$ be the set of people who have been US presidents", so that $$P = \{\text{George Washington}, \text{John Adams}, \ldots, \text{Donald Trump}\}.$$
-:::
+Math is not just about numbers, and that starts with the fact that sets may contain objects that aren't numbers.
+For example, we might define $P$ as the set of people who have been US presidents, so that $\text{John Adams} \in P$ and $\text{LeBron James} \notin P$.
 
 Although sets aren't just for numbers, there are a few sets of numbers that come up so often that we have special names for them.
 These are listed in @tbl-number-sets.
@@ -59,16 +68,28 @@ Maybe there are a lot of conditions on the set you're defining, or maybe the con
 In these cases, it is common to use [set-builder notation]{.concept definition='A way to describe a set without explicitly enumerating all of its elements.  For example, $\\{a \in A \mid a > 3\\}$ means "The set of all elements of $A$ that are greater than 3."'}, for example $$A = \{x \in \mathbb{N} \mid x > 1000\}.$$
 You would read this as "$A$ is the set of natural numbers $x$ such that $x$ is greater than 1000".
 
-::: {.aside}
-I always use the vertical bar $\mid$ when writing in set-builder notation, but sometimes you will see people use the colon $:$ instead.  These are just different conventions with no differences in underlying meaning.
-:::
-
 Or what if we wanted to define $B$ as the set of values we obtain by taking a natural number and dividing it in half?
 We could write this in set-builder notation as $$B = \{x \in \mathbb{R} \mid x = \frac{n}{2} \: \text{for some $n \in \mathbb{N}$}\}.$$
 But we'll often use the following shorthand to write this a bit less cumbersomely: $$B = \{\frac{n}{2} \mid n \in \mathbb{N}\}.$$
 Again, none of these, including the verbal description of $B$ at the start of the paragraph, is the "right" way to denote the set.
 What's best is whatever gets the point across clearly to your intended audience.
 Thinking about the audience is key --- you might want to write the exact same mathematical object in a different way in your undergraduate lecture notes than in a manuscript you're submitting to *Political Analysis*.
+
+I use the vertical bar, $|$, to mean "such that" in set-builder notation.
+In other texts, you might see the colon, $:$, used instead.
+These are just different conventions, not different meanings.
+For example, $\{x \in \mathbb{R} : x > 10.7\}$ and $\{x \in \mathbb{R} \mid x > 10.7\}$ are both precisely the same set: the set of real numbers that are greater than 10.7.
+
+::: {.callout-tip title="Doing the exercises is part of reading the notes"}
+The exercises are here for a reason.
+I expect that you are working through them in the course of reading the notes.
+The best way to learn math is to *do* math --- the exercises are designed to guide you through that process.
+
+The answers to the exercises are collapsed by default for a reason too.
+You should attempt each exercise yourself before looking at the answers.
+Struggling is an important part of learning.
+So is thinking you got the right answer, only to find out you missed something.
+:::
 
 ::: {#exr-set-builder}
 Use set-builder notation to describe the following sets:
@@ -79,16 +100,18 @@ Use set-builder notation to describe the following sets:
 
 3.  Every rational number between 0 and 1, including 0 and 1 themselves.
 
-:::: {.callout-note collapse="true"}
-## Answers
+:::: {.answer title="Answers"}
 
-1.  $\{7z \mid z \in \mathbb{Z}\}$.
-    (An integer that is a multiple of 7 is just some other integer multiplied by 7.
-    For example, you can think of $-35$ as $7 \times -5$.)
+1. An integer that is a multiple of 7 is just some integer multiplied by 7.
+   For example, $-35$ fits the bill because it's $7 \times -5$.
+   So we could write $\{7 z \mid z \in \mathbb{Z}\}$.
 
-2.  $\{2n - 1 \mid n \in \mathbb{N}\}$.
+2. To make an odd number, we just subtract one from an even number.
+   And an even number is just a multiple of two.
+   Putting those together, we end up with $\{2n - 1 \mid n \in \mathbb{N}\}$.
 
-3.  $\{x \in [0, 1] \mid x \in \mathbb{Q}\}$.
+3. To write this using set-builder notation, we could write either $\{x \in [0, 1] \mid x \in \mathbb{Q}\}$ or $\{x \in \mathbb{Q} \mid x \in [0, 1]\}$.
+   Soon you'll see that this can be written even more compactly using an intersection.
 ::::
 :::
 
@@ -204,8 +227,7 @@ For this question, relevant facts would include the definition of set equality (
 ::: {#exr-equality-transitive}
 Prove @cor-equality-transitive.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 We need to show that if $A = B$ and $B = C$, then $A \subseteq C$ and $C \subseteq A$.
 By the definition of set equality, if $A = B$ and $B = C$, then $A \subseteq B$ and $B \subseteq C$.
 @Prp-subset-transitive then implies that $A \subseteq C$.
@@ -334,8 +356,7 @@ Therefore, we have the following set memberships:
 ::: {#exr-exclusive-or}
 Using the union, intersection, and the set difference, find a way to denote the set of elements that are in exactly one of $A$ and $B$, but not both.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 $(A \cup B) \setminus (A \cap B)$.
 ::::
 :::
@@ -360,8 +381,7 @@ Prove the following properties of the empty set:
 
 2. $A \cap \emptyset = \emptyset$.
 
-:::: {.callout-note collapse="true"}
-## Answers
+:::: {.answer title="Answers"}
 1.  We know from @prp-intersection-subset-union that $A \subseteq A \cup \emptyset$, so we only need to prove that $A \cup \emptyset \subseteq A$.
     To this end, take any element $x \in A \cup \emptyset$.
     By definition of the union, it must be the case that $x \in A$ or that $x \in \emptyset$.
@@ -479,8 +499,7 @@ As $x$ was chosen arbitrarily, this shows that $A^c \cap B^c \subseteq (A \cup B
 ::: {#exr-demorgan-sets}
 Prove that $(A \cap B)^c = A^c \cup B^c$.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 The steps are the same as in the proof of the first part above, so I'll be a bit briefer about them.
 
 Take any $x \in (A \cap B)^c$.
@@ -539,8 +558,7 @@ There are lots of cool things to study about relations, but I cannot say in good
 Come up with a function that maps the set of presidents, $P$, into the set of vice presidents, $Q$.
 Convince yourself that it satisfies the key requirement of a function --- that every element in $P$ is associated with one, and exactly one, element in $Q$.
 
-:::: {.callout-note collapse="true"}
-## One answer
+:::: {.answer title="One answer"}
 I propose the function $f : P \to Q$ defined so that $f(p) = \text{Joe Biden}$ for every president $p \in P$.
 This rule associates every president with a vice president, so it is a function.
 
@@ -885,8 +903,7 @@ C &= \{10, 17, 27, 42\}.
 $$
 Using the formal definition of equal cardinality, prove that $|A| \neq |B|$ and $|A| \neq |C|$.
 
-:::: {.callout-note collapse="true"}
-## Answer
+:::: {.answer}
 To prove the first claim, we must show that there is no bijection mapping $A$ into $B$ --- or vice versa (remember from @prp-inverse-bijective that if there is a bijection from $A$ into $B$, then there is also a bijection from $B$ into $A$).
 We can easily show that there is no onto function mapping $B$ into $A$.
 Consider any function $f : B \to A$ such that $f(b) = \text{Coke}$ for some $b \in B$ and $f(b') = \text{Pepsi}$ for some $b' \in B$.
