@@ -310,6 +310,34 @@ aside:not(.footnotes):not(.sidebar),
     background-color: transparent;
 }
 
+// Definitions *name* and introduce vocabulary, rather than asserting a
+// provable claim (theorem / lemma / proposition / corollary all keep the
+// default teal panel above). Instead of a box, bracket them between two teal
+// hairline rules and set the title as a small-caps eyebrow — editorial weight
+// without the boxed-claim look, flush with the reading column.
+.theorem.definition {
+    border: none;
+    border-top: 1px solid rgba($primary, 0.45);
+    border-bottom: 1px solid rgba($primary, 0.45);
+    border-radius: 0;
+    background-color: transparent;
+    padding: 0.7rem 0 0.6rem;
+    margin: 1.5rem 1.75rem;
+
+    .theorem-title {
+        color: $primary;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        margin-bottom: 0.55rem;
+    }
+
+    // Trim the trailing paragraph's own margin so the bottom rule sits close
+    // to the last line, governed only by the block's small bottom padding.
+    > *:last-child { margin-bottom: 0; }
+}
+
 .proof {
     border: 1px solid rgba($body-color, 0.15);
     border-radius: 10px;

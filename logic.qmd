@@ -1,5 +1,11 @@
 # Formal Logic and Proofs {#sec-logic}
 
+<!--
+TODO:
+- Informal introduction to predicate logic (for all statements)
+- Carry over dropped proofs from set theory section
+-->
+
 When you think about math, you probably think about numbers.
 The majority of the math classes you've taken in your life have been about how to manipulate numbers.
 But don't panic if you're the kind of person who grimaces a bit when you have to calculate a tip by hand --- your success as a political scientist will have nothing to do with your ability to add or multiply numbers in your head.

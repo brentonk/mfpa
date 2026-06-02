@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -41,10 +41,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-030575a932d71853b7da0daa632cfc21.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-01742c00818c689b465a49ca3df8d145.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -263,7 +263,7 @@ window.Quarto = {
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="sec-set-basics"><span class="header-section-number">1.1.2</span> Basics of sets</h3>
 <p>All right, so what is a set? For our purposes,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> a set is just an unordered collection of distinct objects.</p>
 <div id="def-set" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.1 (Sets and elements)</strong></span> A <span class="concept has-tip" tabindex="0">set<span class="concept-tip" role="tooltip">Informally, a collection of objects (not necessarily numbers). A set <span class="math inline">S</span> with elements <span class="math inline">a</span>, <span class="math inline">b</span>, and <span class="math inline">c</span> is written <span class="math inline">S = \{a, b, c\}</span>.</span></span> is a collection of objects, each of which is an <span class="concept has-tip" tabindex="0">element<span class="concept-tip" role="tooltip">A member of a set. We write <span class="math inline">a \in A</span> to mean “<span class="math inline">a</span> is an element of the set <span class="math inline">A</span>.”</span></span> of the set. For example, the notation <span class="math display">A = \{1, 2, 4, 8\}</span> is equivalent to saying “<span class="math inline">A</span> is the set whose elements are 1, 2, 4, and 8.” To denote that the object <span class="math inline">a</span> is an element of the set <span class="math inline">A,</span> we write <span class="math inline">a \in A.</span></p>
+<p><span class="theorem-title"><strong>Definition 1.1 (Sets and elements)</strong></span> A <span class="concept has-tip" tabindex="0">set<span class="concept-tip" role="tooltip">Informally, a collection of objects (not necessarily numbers). A set <span class="math inline">S</span> with elements <span class="math inline">a,</span> <span class="math inline">b,</span> and <span class="math inline">c</span> is written <span class="math inline">S = \{a, b, c\}</span>.</span></span> is a collection of objects, each of which is an <span class="concept has-tip" tabindex="0">element<span class="concept-tip" role="tooltip">A member of a set. We write <span class="math inline">a \in A</span> to mean “<span class="math inline">a</span> is an element of the set <span class="math inline">A</span>.”</span></span> of the set. For example, the notation <span class="math display">A = \{1, 2, 4, 8\}</span> is equivalent to saying “<span class="math inline">A</span> is the set whose elements are 1, 2, 4, and 8.” To denote that the object <span class="math inline">a</span> is an element of the set <span class="math inline">A,</span> we write <span class="math inline">a \in A.</span></p>
 </div>
 <p>It is conventional — not just in my notes, but in mathematical writing generally — to use capital letters to denote sets and lowercase letters to denote their elements. But be aware, sometimes it is convenient or necessary to break this convention.</p>
 <p>Math is not just about numbers, and that starts with the fact that sets may contain objects that aren’t numbers. For example, we might define <span class="math inline">P</span> as the set of people who have been US presidents, so that <span class="math inline">\text{John Adams} \in P</span> and <span class="math inline">\text{LeBron James} \notin P</span>.</p>
@@ -328,12 +328,12 @@ Table&nbsp;1.1: Notable sets of numbers
 <p>Or what if we wanted to define <span class="math inline">B</span> as the set of values we obtain by taking a natural number and dividing it in half? We could write this in set-builder notation as <span class="math display">B = \{x \in \mathbb{R} \mid x = \frac{n}{2} \: \text{for some $n \in \mathbb{N}$}\}.</span> But we’ll often use the following shorthand to write this a bit less cumbersomely: <span class="math display">B = \{\frac{n}{2} \mid n \in \mathbb{N}\}.</span> Again, none of these, including the verbal description of <span class="math inline">B</span> at the start of the paragraph, is the “right” way to denote the set. What’s best is whatever gets the point across clearly to your intended audience. Thinking about the audience is key — you might want to write the exact same mathematical object in a different way in your undergraduate lecture notes than in a manuscript you’re submitting to <em>Political Analysis</em>.</p>
 <p>I use the vertical bar, <span class="math inline">|</span>, to mean “such that” in set-builder notation. In other texts, you might see the colon, <span class="math inline">:</span>, used instead. These are just different conventions, not different meanings. For example, <span class="math inline">\{x \in \mathbb{R} : x &gt; 10.7\}</span> and <span class="math inline">\{x \in \mathbb{R} \mid x &gt; 10.7\}</span> are both precisely the same set: the set of real numbers that are greater than 10.7.</p>
 <div class="remark">
-<span class="remark-title">Doing the exercises is part of reading the notes</span>
-<p>The exercises are here for a reason. I expect that you are working through them in the course of reading the notes. The best way to learn math is to <em>do</em> math — the exercises are designed to guide you through that process.</p>
+<span class="remark-title">You’re not reading the notes unless you’re doing the exercises</span>
+<p>The exercises are here for a reason. I expect that you are working through them in the course of reading the notes. The best way to learn math is to <em>do</em> math — the exercises are designed to guide you through that process. (This applies to any technical text, not just this one.)</p>
 <p>The answers to the exercises are collapsed by default for a reason too. You should attempt each exercise yourself before looking at the answers. Struggling is an important part of learning. So is thinking you got the right answer, only to find out you missed something.</p>
 </div>
 <div id="exr-set-builder" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1.1</strong></span> Use set-builder notation to describe the following sets:</p>
+<p><span class="theorem-title"><strong>Exercise 1.1 (Set-builder notation)</strong></span> Use set-builder notation to describe the following sets:</p>
 <ol type="1">
 <li><p>Every integer that is a multiple of 7.</p></li>
 <li><p>Every natural number that is odd.</p></li>
@@ -359,45 +359,61 @@ Table&nbsp;1.1: Notable sets of numbers
 <div id="def-subset" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.2 (Subset)</strong></span> The set <span class="math inline">A</span> is a <span class="concept has-tip" tabindex="0">subset<span class="concept-tip" role="tooltip">When all of the elements of the set <span class="math inline">A</span> are also elements of the set <span class="math inline">B</span>, we say that <span class="math inline">A</span> is a subset of <span class="math inline">B</span>, written <span class="math inline">A \subseteq B</span>.</span></span> of the set <span class="math inline">B</span>, denoted <span class="math inline">A \subseteq B</span>, if every element of <span class="math inline">A</span> is an element of <span class="math inline">B</span>.</p>
 </div>
-<p>Many of the sets we met in <a href="#tbl-number-sets" class="quarto-xref">Table&nbsp;<span>1.1</span></a></p>
+<p>Many of the sets we met in <a href="#tbl-number-sets" class="quarto-xref">Table&nbsp;<span>1.1</span></a> are subsets of one another.</p>
+<ul>
+<li><p>Every natural number is an integer: <span class="math inline">\mathbb{N} \subseteq \mathbb{Z}</span>.</p></li>
+<li><p>Every integer is a rational number: <span class="math inline">\mathbb{Z} \subseteq \mathbb{Q}</span>.</p></li>
+<li><p>Every rational number is a real number: <span class="math inline">\mathbb{Q} \subseteq \mathbb{R}</span>.</p></li>
+<li><p>Every number in an interval is real: <span class="math inline">(a, b) \subseteq \mathbb{R}</span> and <span class="math inline">[a, b] \subseteq \mathbb{R}</span>.</p></li>
+</ul>
+<div id="exr-interval-subsets" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.2</strong></span> Explain why <span class="math inline">[0, 1] \nsubseteq (0, 1)</span>.</p>
+<details class="answer-block">
+<summary class="answer-summary"><span class="answer-affordance" aria-hidden="true"></span><span class="answer-label">Answer</span></summary>
+<div class="answer-body">
+<p>We could only say that <span class="math inline">[0, 1]</span> is a subset of <span class="math inline">(0, 1)</span> if every element of <span class="math inline">[0, 1]</span> were also an element of <span class="math inline">(0, 1)</span>. However, we have <span class="math inline">0 \in [0, 1]</span> and yet <span class="math inline">0 \notin (0, 1)</span>. This alone is enough to show that <span class="math inline">[0, 1] \nsubseteq (0, 1)</span>. It doesn’t matter that they mostly overlap — if there’s any single element of <span class="math inline">[0, 1]</span> that’s not in <span class="math inline">(0, 1)</span>, then it’s not a subset.</p>
+</div></details>
+</div>
+<div id="exr-subset-of-self" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.3</strong></span> Let <span class="math inline">A</span> be any set. Is it true or false that <span class="math inline">A \subseteq A</span>? Why?</p>
+<details class="answer-block">
+<summary class="answer-summary"><span class="answer-affordance" aria-hidden="true"></span><span class="answer-label">Answer</span></summary>
+<div class="answer-body">
+<p>It’s true. Every element of <span class="math inline">A</span> is an element of <span class="math inline">A</span>. Therefore, the formal definition (<a href="#def-subset" class="quarto-xref">Definition&nbsp;<span>1.2</span></a>) tells us that <span class="math inline">A \subseteq A.</span></p>
+<p>It may sound weird in ordinary language to say that <span class="math inline">A</span> is a subset of itself — but in math, we follow the formal definition. There is a notion of a “proper subset,” written <span class="math inline">A \subsetneq B</span>, to mean “<span class="math inline">A</span> is a subset of <span class="math inline">B</span>, and <span class="math inline">B</span> contains at least one element that is not an element of <span class="math inline">A</span>.” But the distinction comes up very rarely in practice, as it happens.</p>
+</div></details>
+</div>
 <div class="pitfall">
-<span class="remark-title">Inclusion <span class="math inline">\in</span> versus subset <span class="math inline">\subseteq</span></span>
-<p><span class="math inline">A \subseteq B</span> and <span class="math inline">A \in B</span> have very different meanings. <span class="math inline">A \subseteq B</span> means “every element of <span class="math inline">A</span> is also an element of <span class="math inline">B</span>”. <span class="math inline">A \in B</span> means “the set <span class="math inline">A</span> is, itself, an element of <span class="math inline">B</span>”. When you’re talking about sets, you usually mean the first of these, not the second.</p>
+<span class="remark-title">Don’t mix up set inclusion with subsets</span>
+<p><span class="math inline">A \subseteq B</span> and <span class="math inline">A \in B</span> look somewhat similar, but they have very different meanings.</p>
+<ul>
+<li><p><span class="math inline">A \subseteq B</span> means “<span class="math inline">A</span> is a subset of <span class="math inline">B,</span>” i.e., “every element of <span class="math inline">A</span> is also an element of <span class="math inline">B.</span>”</p></li>
+<li><p><span class="math inline">A \in B</span> means “<span class="math inline">A</span> is an element of <span class="math inline">B,</span>” i.e., “the set <span class="math inline">A</span> is, itself, one of the elements of the set <span class="math inline">B.</span>”</p></li>
+</ul>
+<p>When you’re talking about sets, you usually mean the first of these, not the second. The second isn’t <em>necessarily</em> wrong, as we do sometimes deal with sets that contain sets. (A set that contains other sets as elements is conventionally called a <span class="concept has-tip" tabindex="0">collection<span class="concept-tip" role="tooltip">A set that contains other sets, like <span class="math inline">\mathcal{A} = \{\mathbb{R}, \mathbb{Z}, \{1, 2, 7\}\}.</span></span></span>, denoted with a calligraphic capital letter like <span class="math inline">\mathcal{A}</span> or <span class="math inline">\mathcal{B}.</span>) The important thing is to be sure your notation conveys your precise meaning.</p>
 <p>If you mess up and use the wrong notation, your readers will probably still ultimately figure out what you mean — but it’ll take a bit longer for them than if you’d used the right notation. So it’s in your best interest to use the right notation for much the same reason as it’s in your best interest to use proper spelling and grammar.</p>
 </div>
-<p>You probably won’t be surprised to learn that subsets are like nesting dolls: if <span class="math inline">A</span> is a subset of <span class="math inline">B</span>, then it is also a subset of any other set that <span class="math inline">B</span> is a subset of. I’m bringing up this seemingly obvious fact mainly because it’ll give us a nice first statement about set theory to prove. Not to mention that some seemingly obvious things turn out not to be true at all — which is one of the reasons it’s important to prove our mathematical claims.</p>
+<p>Subsets are like nesting dolls. If <span class="math inline">A</span> is a subset of <span class="math inline">B</span>, then it is also a subset of any other set of which <span class="math inline">B</span> is a subset. In mathematical terms, this means that the subset relation is transitive — much in the same way that with ordinary numbers, if <span class="math inline">a \leq b</span> and <span class="math inline">b \leq c</span>, then <span class="math inline">a \leq c</span> as well.</p>
 <div id="prp-subset-transitive" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1.1 (Transitivity of subset)</strong></span> If <span class="math inline">A \subseteq B</span> and <span class="math inline">B \subseteq C</span>, then <span class="math inline">A \subseteq C</span>.</p>
+<p><span class="theorem-title"><strong>Proposition 1.1 (Transitivity of subsets)</strong></span> If <span class="math inline">A \subseteq B</span> and <span class="math inline">B \subseteq C</span>, then <span class="math inline">A \subseteq C</span>.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>We need to show that every element of <span class="math inline">A</span> is also an element of <span class="math inline">C</span>. To do that, we will take an “arbitrary” element of <span class="math inline">A</span> — a mathematical object that we know nothing about, other than that it is an element of <span class="math inline">A</span> — and show that it is an element of <span class="math inline">C</span>. To that end, let <span class="math inline">a</span> be any element of <span class="math inline">A</span>. Because <span class="math inline">a \in A</span> and <span class="math inline">A \subseteq B</span>, it follows that <span class="math inline">a \in B</span>. Because <span class="math inline">a \in B</span> and <span class="math inline">B \subseteq C</span>, it follows that <span class="math inline">a \in C</span>. Because the element <span class="math inline">a</span> was chosen arbitrarily, we have shown that every element of <span class="math inline">A</span> is an element of <span class="math inline">C</span>, and therefore <span class="math inline">A \subseteq C</span>.</p>
-</div>
-<div id="nte-proving-for-all" class="callout callout-style-default callout-note callout-titled" title="Proving a &quot;for all&quot; claim">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note&nbsp;1.1: Proving a “for all” claim
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The proof of <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a> gets into some formal logic that we didn’t explicitly cover in <a href="logic.html" class="quarto-xref"><span>Chapter 2</span></a>. The proof relies on the fact that the proposition can be stated this way:</p>
+<div class="remark">
+<span class="remark-title">Theorems, propositions, lemmas, and corollaries</span>
+<p>When I state a general mathematical result, I set it apart in its own box, <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a> being the first example. Each of these results is called a theorem, proposition, lemma, or corollary. The results are equally true regardless of what name I give them — and, starting next chapter, will usually be accompanied by a formal proof — so the name is just supposed to connote the result’s importance or its role in the logical structure of an argument.</p>
 <ul>
-<li><p><strong>Premise 1:</strong> For all <span class="math inline">a \in A</span>, <span class="math inline">a \in B</span>. (i.e., <span class="math inline">A \subseteq B</span>)</p></li>
-<li><p><strong>Premise 2:</strong> For all <span class="math inline">b \in B</span>, <span class="math inline">b \in C</span>. (i.e., <span class="math inline">B \subseteq C</span>)</p></li>
-<li><p><strong>Conclusion:</strong> For all <span class="math inline">a \in A</span>, <span class="math inline">a \in C</span>. (i.e., <span class="math inline">A \subseteq C</span>)</p></li>
+<li><p><strong>Theorem:</strong> Reserved for results that are especially big, important, fundamental, general, etc.</p></li>
+<li><p><strong>Proposition:</strong> A bread-and-butter result. Useful and important enough to care about on its own, but not earth-shaking enough to be a theorem.</p></li>
+<li><p><strong>Lemma:</strong> A result that we don’t necessarily care about on its own, but is a useful building block toward one or more propositions or theorems.</p></li>
+<li><p><strong>Corollary:</strong> A result that follows almost immediately from some earlier lemma(s), proposition(s), or theorem(s). My general heuristic for calling something a corollary is that it can be proved in two sentences or less, and the proof requires invoking an earlier lemma, proposition, or theorem.</p></li>
 </ul>
-<p>The method I used in the proof of <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a> is the standard way to prove a “for all” statement. Suppose we are trying to prove a statement of the variety “for all <span class="math inline">x \in X</span>, <span class="math inline">P(x)</span> is true,” where <span class="math inline">P(x)</span> is some sentence about <span class="math inline">x</span>. A proof like that typically starts with “Take an arbitrary <span class="math inline">x \in X</span>,” meaning we are assuming we know nothing about <span class="math inline">x</span> besides that it is a member of <span class="math inline">X</span>. From there, we use what we know about <span class="math inline">X</span> to show that <span class="math inline">P(x)</span> is indeed true.</p>
-<p>You need to be very careful with negations of “for all” statements. We can falsify the statement “for all <span class="math inline">x \in X</span>, <span class="math inline">P(x)</span> is true” by finding a single element of <span class="math inline">X</span> for which <span class="math inline">P(x)</span> is false. Hence, the negation of “for all <span class="math inline">x \in X</span>, <span class="math inline">P(x)</span> is true” is <u>not</u> “for all <span class="math inline">x \in X</span>, <span class="math inline">P(x)</span> is false.” Instead, the correct negation is “there exists an <span class="math inline">x \in X</span> for which <span class="math inline">P(x)</span> is false.”</p>
-<p>FYI, in case it comes up in other things you read, the symbol <span class="math inline">\forall</span> means “for all” and the symbol <span class="math inline">\exists</span> means “there exists.” I might write these on the whiteboard sometimes to save space, but I almost never use them in academic writing.</p>
+<p>Other technical writing in political science, economics, statistics, and mathematics typically follows these conventions for naming results.</p>
 </div>
-</div>
-<p>Intuitively, two sets are equal if they have the same elements. One of the annoying-but-ultimately-good things about math is that we have to be precise about statements like “they have the same elements”. Does <span class="math inline">\{1, 2, 3\}</span> equal <span class="math inline">\{3, 2, 1\}</span>? Does <span class="math inline">\{a, b, c\}</span> equal <span class="math inline">\{a, a, b, b, c, c\}</span>? The answer to both of these questions turns out to be “yes” — but why? It comes down to the formal definition of set equality, which we state as each set being a subset of the other.</p>
+<p>Though the subset relation between sets sometimes works similarly to the less-than-or-equal relation between numbers, the analogy is not complete. Given any two numbers <span class="math inline">a</span> and <span class="math inline">b,</span> it must be the case that <span class="math inline">a \leq b</span> or that <span class="math inline">b \leq a</span> (or both). The same is not true for sets. For example, take the sets <span class="math inline">A = \{1, 2, 3\}</span> and <span class="math inline">B = \{2, 3, 4\}.</span> <span class="math inline">A</span> is not a subset of <span class="math inline">B</span>, as <span class="math inline">1 \in A</span> yet <span class="math inline">1 \notin B</span>. But <span class="math inline">B</span> also is not a subset of <span class="math inline">A</span>, as <span class="math inline">4 \in B</span> yet <span class="math inline">4 \notin A.</span></p>
+<p>We actually use the notion of subsets to determine when two sets are <span class="concept has-tip" tabindex="0">equal<span class="concept-tip" role="tooltip">Informally, two sets are equal if they contain the same elements. Formally, <span class="math inline">A = B</span> if <span class="math inline">A \subseteq B</span> and <span class="math inline">B \subseteq A.</span></span></span>. An intuitive definition of set equality would be that <span class="math inline">A = B</span> if <span class="math inline">A</span> and <span class="math inline">B</span> contain the same elements. But what does it mean, in the obnoxiously rigorous sense of formal mathematics, to contain the same elements? Does <span class="math inline">\{1, 2, 3\}</span> equal <span class="math inline">\{3, 2, 1\}</span>? Does <span class="math inline">\{a, b, c\}</span> equal <span class="math inline">\{a, a, b, b, c, c\}</span>? The answer to both of these questions turns out to be “yes” — but why? It comes down to the formal definition of set equality, which we state as each set being a subset of the other.</p>
 <div id="def-set-equality" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.3 (Set equality)</strong></span> The sets <span class="math inline">A</span> and <span class="math inline">B</span> are <span class="concept">equal</span>, denoted <span class="math inline">A = B</span>, if <span class="math inline">A \subseteq B</span> and <span class="math inline">B \subseteq A</span>.</p>
+<p><span class="theorem-title"><strong>Definition 1.3 (Set equality)</strong></span> The sets <span class="math inline">A</span> and <span class="math inline">B</span> are <span class="concept has-tip" tabindex="0">equal<span class="concept-tip" role="tooltip">Informally, two sets are equal if they contain the same elements. Formally, <span class="math inline">A = B</span> if <span class="math inline">A \subseteq B</span> and <span class="math inline">B \subseteq A.</span></span></span>, denoted <span class="math inline">A = B</span>, if <span class="math inline">A \subseteq B</span> and <span class="math inline">B \subseteq A</span>.</p>
 </div>
-<p>We can again make an analogy to how we compare numbers. If <span class="math inline">a</span> and <span class="math inline">b</span> are numbers, then we have <span class="math inline">a = b</span> precisely when both <span class="math inline">a \leq b</span> and <span class="math inline">b \leq a</span>.</p>
+<p>If this definition seems confusing, think again about the similarity between the subset relation between sets and the less-than-or-equal relation between numbers. If <span class="math inline">a</span> and <span class="math inline">b</span> are numbers, then we have <span class="math inline">a = b</span> precisely when both <span class="math inline">a \leq b</span> and <span class="math inline">b \leq a</span>.</p>
 <p>Now let’s return to the question of whether <span class="math inline">\{1, 2, 3\} = \{3, 2, 1\}</span>. First we show that <span class="math inline">\{1, 2, 3\} \subseteq \{3, 2, 1\}</span>:</p>
 <ul>
 <li><span class="math inline">1 \in \{3, 2, 1\}</span> ✅</li>
@@ -410,27 +426,41 @@ Note&nbsp;1.1: Proving a “for all” claim
 <li><span class="math inline">2 \in \{1, 2, 3\}</span> ✅</li>
 <li><span class="math inline">1 \in \{1, 2, 3\}</span> ✅</li>
 </ul>
-<p>You can generalize the logic here to show that a set is the same no matter what order we write the elements in. I’ll also leave it to you to show that repetition of an element is immaterial to the membership of a set, so that (for example) <span class="math inline">\{a, b, c\} = \{a, a, b, b, c, c\}</span>.</p>
+<p>You can generalize the logic here to show that a set is the same no matter what order we write the elements in. I’ll also leave it to you to show that repetition of an element is immaterial to the membership of a set, so that, for example, <span class="math inline">\{a, b, c\} = \{a, a, b, b, c, c\}</span>.</p>
 <p>Just like equality of numbers, equality of sets is transitive: if one set is equal to another, which in turn is equal to some third set, then the first is equal to the third as well.</p>
 <div id="cor-equality-transitive" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1.1 (Transitivity of set equality)</strong></span> If <span class="math inline">A = B</span> and <span class="math inline">B = C</span>, then <span class="math inline">A = C</span>.</p>
+<p><span class="theorem-title"><strong>Corollary 1.1 (Transitivity of set equality)</strong></span> If <span class="math inline">A = B</span> and <span class="math inline">B = C,</span> then <span class="math inline">A = C.</span></p>
 </div>
-<p>By following the template provided by the proof of <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a>, you should be able to prove this result yourself. If you’re having trouble getting started, one good principle to keep in mind when writing a proof is to take stock of all the “knowns” that might be relevant and have already been defined or proved. For this question, relevant facts would include the definition of set equality (<a href="#def-set-equality" class="quarto-xref">Definition&nbsp;<span>1.3</span></a>) and the transitivity of the subset operation (<a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a>).</p>
-<div id="exr-equality-transitive" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1.2</strong></span> Prove <a href="#cor-equality-transitive" class="quarto-xref">Corollary&nbsp;<span>1.1</span></a>.</p>
+<p>We’re not doing formal proofs yet — we’ll get there soon — but it’s worth taking a second to see <em>precisely</em> why this statement is true. Of course, there’s an intuitive logic behind it: if <span class="math inline">A</span> has the same elements as <span class="math inline">B,</span> and <span class="math inline">B</span> has the same elements as <span class="math inline">C,</span> then it’d be pretty weird for <span class="math inline">A</span> not to have the same elements as <span class="math inline">C.</span> Mathematical language lets us translate an intuition like this into a rock-solid argument — or, when our intuition turns out to be wrong, to find the precise gap in the supposed logic.</p>
+<p>To get to the no-one-can-doubt-this logic behind <a href="#cor-equality-transitive" class="quarto-xref">Corollary&nbsp;<span>1.1</span></a>, we combine the formal definition of set equality with our earlier result about the transitivity of subsets (<a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a>). If <span class="math inline">A = B</span> and <span class="math inline">B = C,</span> then we know that all of the following statements are true:</p>
+<ol type="1">
+<li><span class="math inline">A \subseteq B.</span></li>
+<li><span class="math inline">B \subseteq A.</span></li>
+<li><span class="math inline">B \subseteq C.</span></li>
+<li><span class="math inline">C \subseteq B.</span></li>
+</ol>
+<p>We can conclude from (1) and (3) that <span class="math inline">A \subseteq C,</span> using the transitivity of subsets. By the same token, we can conclude from (2) and (4) that <span class="math inline">C \subseteq A.</span> Finally, the formal definition of set equality then tells us that <span class="math inline">A = C.</span> Hey, we just proved something!</p>
+<div id="exr-odd-integers" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.4 (The set of odd integers)</strong></span> Brad says that the set of odd integers is <span class="math inline">B = \{2n + 1 \mid n \in \mathbb{Z}\}.</span> Peter says that the set of odd integers is <span class="math inline">P = \{2n - 1 \mid n \in \mathbb{Z}\}.</span> Convince them that <span class="math inline">B = P.</span></p>
 <details class="answer-block">
 <summary class="answer-summary"><span class="answer-affordance" aria-hidden="true"></span><span class="answer-label">Answer</span></summary>
 <div class="answer-body">
-<p>We need to show that if <span class="math inline">A = B</span> and <span class="math inline">B = C</span>, then <span class="math inline">A \subseteq C</span> and <span class="math inline">C \subseteq A</span>. By the definition of set equality, if <span class="math inline">A = B</span> and <span class="math inline">B = C</span>, then <span class="math inline">A \subseteq B</span> and <span class="math inline">B \subseteq C</span>. <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a> then implies that <span class="math inline">A \subseteq C</span>.</p>
-<p>Again by the definition of set equality, if <span class="math inline">C = B</span> and <span class="math inline">B = A</span>, then <span class="math inline">C \subseteq B</span> and <span class="math inline">B \subseteq A</span>. <a href="#prp-subset-transitive" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a> then implies that <span class="math inline">C \subseteq A</span>.</p>
-<p>We have shown that if <span class="math inline">A = B</span> and <span class="math inline">B = C</span>, then <span class="math inline">A \subseteq C</span> and <span class="math inline">C \subseteq A</span>, so by definition <span class="math inline">A = C</span>.</p>
-<p>(In the second paragraph, I implicitly relied on the commutativity of set equality, i.e., that if <span class="math inline">A = B</span>, then <span class="math inline">B = A</span>. That’s another thing you can prove yourself at this point if you’re skeptical!)</p>
+<p>Ultimately we need to convince them that <span class="math inline">B \subseteq P</span> and that <span class="math inline">P \subseteq B.</span></p>
+<p>Let’s start by showing that <span class="math inline">B \subseteq P.</span> We need to show that any element of <span class="math inline">B</span> is also an element of <span class="math inline">P.</span> For any element <span class="math inline">b</span> of <span class="math inline">B,</span> there’s an integer <span class="math inline">n \in \mathbb{Z}</span> such that <span class="math inline">b = 2n + 1,</span> according to how we’ve defined the set <span class="math inline">B.</span> But another way to think about this is: <span class="math display">
+\begin{aligned}
+b &amp;= 2n + 1 \\
+&amp;= 2n + (2 - 1) \\
+&amp;= (2n + 2) - 1 \\
+&amp;= 2 (n + 1) - 1.
+\end{aligned}
+</span> Because <span class="math inline">n + 1</span> is an integer and <span class="math inline">b = 2(n + 1) - 1,</span> we conclude that <span class="math inline">b \in P.</span> As each element of <span class="math inline">B</span> is an element of <span class="math inline">P,</span> we conclude that <span class="math inline">B \subseteq P.</span></p>
+<p>To conclude the proof, now we need to show the opposite direction: <span class="math inline">P \subseteq B.</span> I’ll leave that to you — you can follow steps very close to what I did to show that <span class="math inline">B \subseteq P.</span></p>
 </div></details>
 </div>
 </section>
-<section id="the-venn-diagram-operations" class="level3 page-columns page-full" data-number="1.2.2">
+<section id="the-venn-diagram-operations" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="the-venn-diagram-operations"><span class="header-section-number">1.2.2</span> The Venn diagram operations</h3>
-<p>We want to be able to talk about combinations of sets. Once again, a bit of mathematical notation will help us quickly convey exactly what we mean. If I say “the set of presidents and vice presidents”, do I mean all of the people who have served in <em>either</em> role, or only those who have served in <em>both</em>? We know Richard Nixon and Joe Biden are in it either way, but what about Barack Obama? Mathematically speaking, we need to be sure if we are talking about the <span class="concept">union</span> or the <span class="concept">intersection</span> of the sets of presidents and vice presidents.</p>
+<p>Both here and (particularly) in the stats sequence, we’ll be combining sets in all kinds of ways. Once again, a bit of mathematical notation will help us quickly convey exactly what we mean. If I say “the set of presidents and vice presidents,” do I mean all of the people who have served in <em>either</em> role, or only those who have served in <em>both</em>? We know Richard Nixon and Joe Biden are in it either way, but what about Barack Obama? Mathematically speaking, we need to be sure if we are talking about the <span class="concept has-tip" tabindex="0">union<span class="concept-tip" role="tooltip">The union of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cup B</span>, is the set of all elements that are in at least one of <span class="math inline">A</span> or <span class="math inline">B</span>.</span></span> or the <span class="concept has-tip" tabindex="0">intersection<span class="concept-tip" role="tooltip">The intersection of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cap B</span>, is the set of all elements that are in both <span class="math inline">A</span> and <span class="math inline">B</span>.</span></span> of the sets of presidents and vice presidents.</p>
 <div id="def-union-intersection" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.4 (Union and intersection)</strong></span> The <span class="concept has-tip" tabindex="0">union<span class="concept-tip" role="tooltip">The union of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cup B</span>, is the set of all elements that are in at least one of <span class="math inline">A</span> or <span class="math inline">B</span>.</span></span> of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cup B</span>, is the set of elements that are in <span class="math inline">A</span>, in <span class="math inline">B</span>, or both: <span class="math display">A \cup B = \{x \mid x \in A \text{ or } x \in B\}.</span> The <span class="concept has-tip" tabindex="0">intersection<span class="concept-tip" role="tooltip">The intersection of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cap B</span>, is the set of all elements that are in both <span class="math inline">A</span> and <span class="math inline">B</span>.</span></span> of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cap B</span>, is the set of elements that are in both <span class="math inline">A</span> and <span class="math inline">B</span>: <span class="math display">A \cap B = \{x \mid x \in A \text{ and } x \in B\}.</span></p>
 </div>
@@ -465,21 +495,35 @@ Figure&nbsp;1.1: Union and intersection of sets.
 </div>
 </figure>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="margin-aside">
-<p>Hey, the union operator <span class="math inline">\cup</span> looks a lot like the logical “or” operator <span class="math inline">\lor</span>, and the intersection operator <span class="math inline">\cap</span> looks a lot like the logical “and” operator <span class="math inline">\land</span>. I wonder if that’s a coincidence?</p>
-</div></div><p>For example, let <span class="math inline">P</span> be the set of presidents, and <span class="math inline">Q</span> be the set of vice presidents. Because Barack Obama was president but not vice president, he belongs to the union of these sets, but not the intersection: <span class="math display">\begin{gather}
+<p>For example, let <span class="math inline">P</span> be the set of presidents, and <span class="math inline">Q</span> be the set of vice presidents. Because Barack Obama was president but not vice president, he belongs to the union of these sets, but not the intersection: <span class="math display">\begin{gather*}
 \text{Barack Obama} \in P \cup Q, \\
 \text{Barack Obama} \notin P \cap Q.
-\end{gather}</span> Naturally, more people have been president <em>or</em> vice president than have been both president <em>and</em> vice president. In mathematical terms, the intersection <span class="math inline">P \cap Q</span> is a subset of the union <span class="math inline">P \cup Q</span>. This turns out to be a general property of sets, not just of American national officeholders.</p>
+\end{gather*}</span> Naturally, more people have been president <em>or</em> vice president than have been both president <em>and</em> vice president. In mathematical terms, the intersection <span class="math inline">P \cap Q</span> is a subset of the union <span class="math inline">P \cup Q</span>. This turns out to be a general property of sets, not just of American national officeholders.</p>
 <div id="prp-intersection-subset-union" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1.2</strong></span> <span class="math inline">A \cap B \subseteq A \subseteq A \cup B</span>.</p>
+<p><span class="theorem-title"><strong>Proposition 1.2</strong></span> For any sets <span class="math inline">A</span> and <span class="math inline">B,</span></p>
+<ol type="1">
+<li><p>The intersection is a subset of each component set: <span class="math inline">A \cap B \subseteq A</span> and <span class="math inline">A \cap B \subseteq B.</span></p></li>
+<li><p>Each component set is a subset of the union: <span class="math inline">A \subseteq A \cup B</span> and <span class="math inline">B \subseteq A \cup B.</span></p></li>
+</ol>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>There are two claims to prove here. The first is that <span class="math inline">A \cap B \subseteq A</span>. To prove this, take any element <span class="math inline">x \in A \cap B</span>. By definition of the intersection, it must be the case that <span class="math inline">x \in A</span>. Therefore, <span class="math inline">A \cap B \subseteq A</span>.</p>
-<p>The second claim to prove is that <span class="math inline">A \subseteq A \cup B</span>. To prove this, take any element <span class="math inline">x \in A</span>. By definition of the union, <span class="math inline">x \in A \cup B</span>. Therefore, <span class="math inline">A \subseteq A \cup B</span>.</p>
+<div id="exr-union-intersection" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.5 (Unions and intersections)</strong></span> Consider the sets <span class="math inline">X = \{1, 2, 4, 8\}</span> and <span class="math inline">Y = \{2, 4, 6, 8\}.</span> Write out the elements of the intersection <span class="math inline">X \cap Y</span> and the union <span class="math inline">X \cup Y.</span> Then directly verify that the four claims made in <a href="#prp-intersection-subset-union" class="quarto-xref">Proposition&nbsp;<span>1.2</span></a> hold for these sets.</p>
+<details class="answer-block">
+<summary class="answer-summary"><span class="answer-affordance" aria-hidden="true"></span><span class="answer-label">Answer</span></summary>
+<div class="answer-body">
+<p><span class="math display">
+\begin{aligned}
+X \cap Y &amp;= \{2, 4, 8\}. \\
+X \cup Y &amp;= \{1, 2, 4, 6, 8\}.
+\end{aligned}
+</span></p>
+<p>Because <span class="math inline">2 \in X,</span> <span class="math inline">4 \in X,</span> and <span class="math inline">8 \in X,</span> we have <span class="math inline">X \cap Y \subseteq X.</span></p>
+<p>Because <span class="math inline">2 \in Y,</span> <span class="math inline">4 \in Y,</span> and <span class="math inline">8 \in Y,</span> we have <span class="math inline">X \cap Y \subseteq Y.</span></p>
+<p>Because <span class="math inline">1 \in X \cup Y,</span> <span class="math inline">2 \in X \cup Y,</span> <span class="math inline">4 \in X \cup Y,</span> and <span class="math inline">8 \in X \cup Y,</span> we have <span class="math inline">X \subseteq X \cup Y.</span></p>
+<p>Because <span class="math inline">2 \in X \cup Y,</span> <span class="math inline">4 \in X \cup Y,</span> <span class="math inline">6 \in X \cup Y,</span> and <span class="math inline">8 \in X \cup Y,</span> we have <span class="math inline">Y \subseteq X \cup Y.</span></p>
+</div></details>
 </div>
-<p>What if we wanted to talk about the set of people who have been president, but not vice president? We can formulate this using the <span class="concept">set difference</span>.</p>
+<p>What if we wanted to talk about the set of people who have been president, but not vice president? We can formulate this using the <span class="concept has-tip" tabindex="0">set difference<span class="concept-tip" role="tooltip">The set difference between <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \setminus B</span>, is the set of all elements that are in <span class="math inline">A</span> and are not in <span class="math inline">B</span>.</span></span>.</p>
 <div id="def-set-difference" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.5 (Set difference)</strong></span> The <span class="concept has-tip" tabindex="0">set difference<span class="concept-tip" role="tooltip">The set difference between <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \setminus B</span>, is the set of all elements that are in <span class="math inline">A</span> and are not in <span class="math inline">B</span>.</span></span> between sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \setminus B</span>, is the set of elements that are in <span class="math inline">A</span> and not in <span class="math inline">B</span>: <span class="math display">A \setminus B = \{a \in A \mid a \notin B\}.</span></p>
 </div>
@@ -514,7 +558,7 @@ Figure&nbsp;1.2: Set differences.
 </div>
 </figure>
 </div>
-<p>Joe Biden was both a vice president and a president. Barack Obama was only president, never a vice president. Aaron Burr was only vice president, never president. Therefore, we have the following set memberships:</p>
+<p>Joe Biden was both a vice president and a president. Barack Obama was only president, never a vice president. Aaron Burr was only vice president, never president. Again let <span class="math inline">P</span> be the set of presidents and <span class="math inline">Q</span> be the set of vice presidents. We have the following set memberships:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
@@ -567,33 +611,19 @@ Figure&nbsp;1.2: Set differences.
 </tbody>
 </table>
 <div id="exr-exclusive-or" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1.3</strong></span> Using the union, intersection, and the set difference, find a way to denote the set of elements that are in exactly one of <span class="math inline">A</span> and <span class="math inline">B</span>, but not both.</p>
+<p><span class="theorem-title"><strong>Exercise 1.6</strong></span> Using the union, intersection, and the set difference, find a way to denote the set of elements that are in exactly one of <span class="math inline">A</span> and <span class="math inline">B</span>, but not both.</p>
 <details class="answer-block">
 <summary class="answer-summary"><span class="answer-affordance" aria-hidden="true"></span><span class="answer-label">Answer</span></summary>
 <div class="answer-body">
 <p><span class="math inline">(A \cup B) \setminus (A \cap B)</span>.</p>
 </div></details>
 </div>
-<p>No one who has been the president of the United States has also been the prime minister of the United Kingdom. If we were to let <span class="math inline">M</span> denote the set of people who have been prime minister, then the intersection <span class="math inline">P \cap M</span> would be a set that contains … nothing? Yes, indeed, a set may contain nothing. We have a special name for the set with nothing in it — the <span class="concept">empty set</span>.</p>
+<p>No one who has been the president of the United States has also been the prime minister of the United Kingdom. If we were to let <span class="math inline">M</span> denote the set of people who have been prime minister, then the intersection <span class="math inline">P \cap M</span> would be a set that contains … nothing? Yes, indeed, a set may contain nothing. We have a special name for the set with nothing in it — the <span class="concept has-tip" tabindex="0">empty set<span class="concept-tip" role="tooltip">The set containing no elements, denoted <span class="math inline">\emptyset</span>.</span></span>.</p>
 <div id="def-empty-set" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.6 (Empty set)</strong></span> The <span class="concept has-tip" tabindex="0">empty set<span class="concept-tip" role="tooltip">The set containing no elements, denoted <span class="math inline">\emptyset</span>.</span></span> is the set containing no elements, denoted <span class="math inline">\emptyset</span>.</p>
 </div>
 <p>Using this notation, a concise way to say “no one has been both the US president and the UK prime minister” would be <span class="math inline">P \cap M = \emptyset</span>. We say two sets are <span class="concept has-tip" tabindex="0">disjoint<span class="concept-tip" role="tooltip">Two sets are disjoint if they have no elements in common, or equivalently if their intersection is the empty set.</span></span> when their intersection is empty.</p>
-<div id="exr-emptyset-properties" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1.4</strong></span> Prove the following properties of the empty set:</p>
-<ol type="1">
-<li><p><span class="math inline">A \cup \emptyset = A</span>.</p></li>
-<li><p><span class="math inline">A \cap \emptyset = \emptyset</span>.</p></li>
-</ol>
-<details class="answer-block">
-<summary class="answer-summary"><span class="answer-affordance" aria-hidden="true"></span><span class="answer-label">Answers</span></summary>
-<div class="answer-body">
-<ol type="1">
-<li><p>We know from <a href="#prp-intersection-subset-union" class="quarto-xref">Proposition&nbsp;<span>1.2</span></a> that <span class="math inline">A \subseteq A \cup \emptyset</span>, so we only need to prove that <span class="math inline">A \cup \emptyset \subseteq A</span>. To this end, take any element <span class="math inline">x \in A \cup \emptyset</span>. By definition of the union, it must be the case that <span class="math inline">x \in A</span> or that <span class="math inline">x \in \emptyset</span>. The second of these is impossible, so it must be the case that <span class="math inline">x \in A</span>. As <span class="math inline">x</span> was chosen arbitrarily, this proves that <span class="math inline">A \cup \emptyset \subseteq A</span>. Finally, because <span class="math inline">A \subseteq A \cup \emptyset</span> and <span class="math inline">A \cup \emptyset \subseteq A</span>, we have <span class="math inline">A \cup \emptyset = A</span>.</p></li>
-<li><p>We know from <a href="#prp-intersection-subset-union" class="quarto-xref">Proposition&nbsp;<span>1.2</span></a> that <span class="math inline">A \cap \emptyset \subseteq \emptyset</span>. If there were an element <span class="math inline">x \in A \cap \emptyset</span>, then it would follow from the definition of intersection that <span class="math inline">x \in \emptyset</span>. But that cannot be the case, as <span class="math inline">\emptyset</span> is the set with no elements. Therefore, there is no element <span class="math inline">x</span> included in <span class="math inline">A \cap \emptyset</span>. By definition, then <span class="math inline">A \cap \emptyset = \emptyset</span>.</p></li>
-</ol>
-</div></details>
-</div>
+<p>Disjoint sets are important in probability, as you’ll see in the stats sequence. Imagine that there’s a 30% chance that a kid is blonde, a 5% chance that they’re a redhead, and a 10% chance that they’re left-handed. Yet the probability of a blonde-or-left-handed kid is <em>not</em> necessarily 40% (i.e., 30% + 10%), because being blonde and being left-handed aren’t disjoint: one kid could be both. But because a kid cannot be both blonde and redheaded — the intersection of the set of blonde kids and the set of redheaded kids is empty — we can sum the individual probabilities to include that the probability of a blonde-or-redheaded kid is 35%. If you’re like me, you’ll come to like it when events in probability turn out to be disjoint, as then you don’t have to apply the finicky rules to avoid double-counting probabilities.</p>
 </section>
 <section id="complements-and-de-morgans-laws" class="level3 page-columns page-full" data-number="1.2.3">
 <h3 data-number="1.2.3" class="anchored" data-anchor-id="complements-and-de-morgans-laws"><span class="header-section-number">1.2.3</span> Complements and De Morgan’s laws</h3>
@@ -683,11 +713,11 @@ Figure&nbsp;1.4: De Morgan’s laws.
 <div class="no-row-height column-margin column-container"><div class="margin-aside">
 <p>Hey, these look a lot like the De Morgan’s laws for formal logic (<a href="logic.html#thm-demorgan-logic" class="quarto-xref">Theorem&nbsp;<span>2.3</span></a>)! I wonder if that’s a coincidence?</p>
 </div></div><div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>I’ll prove the first law, and leave the second to you as <a href="#exr-demorgan-sets" class="quarto-xref">Exercise&nbsp;<span>1.5</span></a>. First we have to prove that <span class="math inline">(A \cup B)^c \subseteq A^c \cap B^c</span>. To this end, take any <span class="math inline">x \in (A \cup B)^c</span>, so that <span class="math inline">x \notin A \cup B</span>. By definition of the union, this implies <span class="math inline">x \notin A</span>, hence <span class="math inline">x \in A^c</span>. By the same token, <span class="math inline">x \notin B</span>, hence <span class="math inline">x \in B^c</span>. Because <span class="math inline">x \in A^c</span> and <span class="math inline">x \in B^c</span>, we have <span class="math inline">x \in A^c \cap B^c</span>. As <span class="math inline">x</span> was chosen arbitrarily, this shows that <span class="math inline">(A \cup B)^c \subseteq A^c \cap B^c</span>.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>I’ll prove the first law, and leave the second to you as <a href="#exr-demorgan-sets" class="quarto-xref">Exercise&nbsp;<span>1.7</span></a>. First we have to prove that <span class="math inline">(A \cup B)^c \subseteq A^c \cap B^c</span>. To this end, take any <span class="math inline">x \in (A \cup B)^c</span>, so that <span class="math inline">x \notin A \cup B</span>. By definition of the union, this implies <span class="math inline">x \notin A</span>, hence <span class="math inline">x \in A^c</span>. By the same token, <span class="math inline">x \notin B</span>, hence <span class="math inline">x \in B^c</span>. Because <span class="math inline">x \in A^c</span> and <span class="math inline">x \in B^c</span>, we have <span class="math inline">x \in A^c \cap B^c</span>. As <span class="math inline">x</span> was chosen arbitrarily, this shows that <span class="math inline">(A \cup B)^c \subseteq A^c \cap B^c</span>.</p>
 <p>Next, to complete the proof of equality, we have to prove that <span class="math inline">A^c \cap B^c \subseteq (A \cup B)^c</span>. To this end, take any <span class="math inline">x \in A^c \cap B^c</span>. By definition of the intersection, <span class="math inline">x \in A^c</span>, hence <span class="math inline">x \notin A</span>. By the same token, <span class="math inline">x \in B^c</span>, hence <span class="math inline">x \notin B</span>. Because <span class="math inline">x \notin A</span> and <span class="math inline">x \notin B</span>, we have <span class="math inline">x \notin A \cup B</span> and thus <span class="math inline">x \in (A \cup B)^c</span>. As <span class="math inline">x</span> was chosen arbitrarily, this shows that <span class="math inline">A^c \cap B^c \subseteq (A \cup B)^c</span>.</p>
 </div>
 <div id="exr-demorgan-sets" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1.5</strong></span> Prove that <span class="math inline">(A \cap B)^c = A^c \cup B^c</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 1.7</strong></span> Prove that <span class="math inline">(A \cap B)^c = A^c \cup B^c</span>.</p>
 <details class="answer-block">
 <summary class="answer-summary"><span class="answer-affordance" aria-hidden="true"></span><span class="answer-label">Answer</span></summary>
 <div class="answer-body">
@@ -710,7 +740,7 @@ Figure&nbsp;1.4: De Morgan’s laws.
 </ol>
 <p>In mathematical terms, we would call the president-and-their-vice-president(s-if-any) assocation a <a href="https://en.wikipedia.org/wiki/Relation_(mathematics)">relation</a>. Any function is a relation, but many relations are not functions. There are lots of cool things to study about relations, but I cannot say in good faith that you <em>must</em> know these cool things, so that is all I will say about relations.</p>
 <div id="exr-pres-vp-functions" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1.6</strong></span> Come up with a function that maps the set of presidents, <span class="math inline">P</span>, into the set of vice presidents, <span class="math inline">Q</span>. Convince yourself that it satisfies the key requirement of a function — that every element in <span class="math inline">P</span> is associated with one, and exactly one, element in <span class="math inline">Q</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 1.8</strong></span> Come up with a function that maps the set of presidents, <span class="math inline">P</span>, into the set of vice presidents, <span class="math inline">Q</span>. Convince yourself that it satisfies the key requirement of a function — that every element in <span class="math inline">P</span> is associated with one, and exactly one, element in <span class="math inline">Q</span>.</p>
 <details class="answer-block">
 <summary class="answer-summary"><span class="answer-affordance" aria-hidden="true"></span><span class="answer-label">One answer</span></summary>
 <div class="answer-body">
@@ -720,7 +750,7 @@ Figure&nbsp;1.4: De Morgan’s laws.
 </div>
 <section id="one-to-one-and-onto-functions" class="level3" data-number="1.3.1">
 <h3 data-number="1.3.1" class="anchored" data-anchor-id="one-to-one-and-onto-functions"><span class="header-section-number">1.3.1</span> One-to-one and onto functions</h3>
-<p>As you saw in <a href="#exr-pres-vp-functions" class="quarto-xref">Exercise&nbsp;<span>1.6</span></a>, there is nothing in the definition of a function to suggest that every element of the domain must be associated with a <em>different</em> element of the codomain. Some functions do have this additional property, and we call those functions <span class="concept">one-to-one</span>.</p>
+<p>As you saw in <a href="#exr-pres-vp-functions" class="quarto-xref">Exercise&nbsp;<span>1.8</span></a>, there is nothing in the definition of a function to suggest that every element of the domain must be associated with a <em>different</em> element of the codomain. Some functions do have this additional property, and we call those functions <span class="concept">one-to-one</span>.</p>
 <div id="def-one-to-one" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.8 (One-to-one)</strong></span> A function <span class="math inline">f : A \to B</span> is <span class="concept has-tip" tabindex="0">one-to-one<span class="concept-tip" role="tooltip">A function is one-to-one if it associates each element of the domain with a distinct element of the codomain: if <span class="math inline">a \neq a'</span>, then <span class="math inline">f(a) \neq f(a')</span>.</span></span>, also called <span class="concept has-tip" tabindex="0">injective<span class="concept-tip" role="tooltip">Another name for <span class="concept">one-to-one</span>.</span></span>, if <span class="math inline">f(a) \neq f(a')</span> for all distinct elements <span class="math inline">a \in A</span> and <span class="math inline">a' \in A</span>.</p>
 </div>
@@ -739,7 +769,7 @@ Figure&nbsp;1.5: A function that is one-to-one, but not onto.
 </div>
 </div>
 <p>The function <span class="math inline">y : P \to \mathbb{N}</span> that we discussed earlier, mapping presidents into the year that they first took office, is not one-to-one. William Henry Harrison took office in March 1841, famously gave a lengthy speech in poor weather, caught cold, and died a month later. His vice president, John Tyler, took office in April 1841. In terms of the function we defined, <span class="math display">y(\text{William Henry Harrison}) = y(\text{John Tyler}) = 1841.</span> Because these are two different presidents with the same function value, <span class="math inline">y</span> is not one-to-one.</p>
-<p>You also saw in <a href="#exr-pres-vp-functions" class="quarto-xref">Exercise&nbsp;<span>1.6</span></a> that a function need not reach every element of its codomain. In fact, if the domain has fewer elements than the codomain — such as with the sets of presidents <span class="math inline">P</span> and vice presidents <span class="math inline">Q</span>, where at the time of writing there have been 45 presidents and 50 vice presidents — it would be impossible for the function to reach every element of the codomain. In the special case where a function does reach every element of the codomain, we turn a preposition into an adjective and say the function is <span class="concept">onto</span>.</p>
+<p>You also saw in <a href="#exr-pres-vp-functions" class="quarto-xref">Exercise&nbsp;<span>1.8</span></a> that a function need not reach every element of its codomain. In fact, if the domain has fewer elements than the codomain — such as with the sets of presidents <span class="math inline">P</span> and vice presidents <span class="math inline">Q</span>, where at the time of writing there have been 45 presidents and 50 vice presidents — it would be impossible for the function to reach every element of the codomain. In the special case where a function does reach every element of the codomain, we turn a preposition into an adjective and say the function is <span class="concept">onto</span>.</p>
 <div id="def-onto" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.9 (Onto)</strong></span> A function <span class="math inline">f : A \to B</span> is <span class="concept has-tip" tabindex="0">onto<span class="concept-tip" role="tooltip">A function is onto if it maps at least one element of the domain to every element of the codomain: for all <span class="math inline">b</span> in the codomain, there is a domain element <span class="math inline">a</span> such that <span class="math inline">f(a) = b</span>.</span></span>, also called <span class="concept has-tip" tabindex="0">surjective<span class="concept-tip" role="tooltip">Another name for <span class="concept">onto</span>.</span></span>, if for every element <span class="math inline">b \in B</span> there is some element <span class="math inline">a \in A</span> such that <span class="math inline">f(a) = b</span>.</p>
 </div>
@@ -825,7 +855,7 @@ f(\text{Mountain Dew}) &amp;= 27.
 </span></p>
 <p>In a way, it is easier to prove that two sets have equal cardinality than to prove that they don’t. To prove that <span class="math inline">|A| = |B|</span>, we just need to find one bijection between them. But to prove that <span class="math inline">|A| \neq |B|</span>, we need to show that <em>every</em> function between them is not a bijection.</p>
 <div id="exr-cardinality-finite" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1.7</strong></span> Consider the sets <span class="math display">
+<p><span class="theorem-title"><strong>Exercise 1.9</strong></span> Consider the sets <span class="math display">
 \begin{aligned}
 A &amp;= \{\text{Coke}, \text{Pepsi}, \text{Mountain Dew}\}, \\
 B &amp;= \{10, 17\}, \\
@@ -1010,7 +1040,7 @@ The study of sets and their properties. A key logical foundation for all of math
 </dd>
 <dt><span class="concept">Set</span></dt>
 <dd>
-Informally, a collection of objects (not necessarily numbers). A set <span class="math inline">S</span> with elements <span class="math inline">a</span>, <span class="math inline">b</span>, and <span class="math inline">c</span> is written <span class="math inline">S = \{a, b, c\}</span>.
+Informally, a collection of objects (not necessarily numbers). A set <span class="math inline">S</span> with elements <span class="math inline">a,</span> <span class="math inline">b,</span> and <span class="math inline">c</span> is written <span class="math inline">S = \{a, b, c\}</span>.
 </dd>
 <dt><span class="concept">Element</span></dt>
 <dd>
@@ -1023,6 +1053,14 @@ A way to describe a set without explicitly enumerating all of its elements. For 
 <dt><span class="concept">Subset</span></dt>
 <dd>
 When all of the elements of the set <span class="math inline">A</span> are also elements of the set <span class="math inline">B</span>, we say that <span class="math inline">A</span> is a subset of <span class="math inline">B</span>, written <span class="math inline">A \subseteq B</span>.
+</dd>
+<dt><span class="concept">Collection</span></dt>
+<dd>
+A set that contains other sets, like <span class="math inline">\mathcal{A} = \{\mathbb{R}, \mathbb{Z}, \{1, 2, 7\}\}.</span>
+</dd>
+<dt><span class="concept">Set equality</span></dt>
+<dd>
+Informally, two sets are equal if they contain the same elements. Formally, <span class="math inline">A = B</span> if <span class="math inline">A \subseteq B</span> and <span class="math inline">B \subseteq A.</span>
 </dd>
 <dt><span class="concept">Union</span></dt>
 <dd>
@@ -1112,6 +1150,10 @@ The cardinality of a set <span class="math inline">A</span>, denoted <span class
 <dd>
 The set that a function “maps into”. If <span class="math inline">f</span> is a function whose domain is <span class="math inline">A</span> and whose codomain is <span class="math inline">B</span>, then <span class="math inline">f(a)</span> is an element of <span class="math inline">B</span> for every element <span class="math inline">a \in A</span>.
 </dd>
+<dt><span class="concept">Collection</span></dt>
+<dd>
+A set that contains other sets, like <span class="math inline">\mathcal{A} = \{\mathbb{R}, \mathbb{Z}, \{1, 2, 7\}\}.</span>
+</dd>
 <dt><span class="concept">Complement</span></dt>
 <dd>
 The complement of a set <span class="math inline">A</span>, denoted <span class="math inline">A^c</span>, is the set of all elements in the relevant universe that are not elements of <span class="math inline">A</span>.
@@ -1162,11 +1204,15 @@ A function is onto if it maps at least one element of the domain to every elemen
 </dd>
 <dt><span class="concept">Set</span></dt>
 <dd>
-Informally, a collection of objects (not necessarily numbers). A set <span class="math inline">S</span> with elements <span class="math inline">a</span>, <span class="math inline">b</span>, and <span class="math inline">c</span> is written <span class="math inline">S = \{a, b, c\}</span>.
+Informally, a collection of objects (not necessarily numbers). A set <span class="math inline">S</span> with elements <span class="math inline">a,</span> <span class="math inline">b,</span> and <span class="math inline">c</span> is written <span class="math inline">S = \{a, b, c\}</span>.
 </dd>
 <dt><span class="concept">Set difference</span></dt>
 <dd>
 The set difference between <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \setminus B</span>, is the set of all elements that are in <span class="math inline">A</span> and are not in <span class="math inline">B</span>.
+</dd>
+<dt><span class="concept">Set equality</span></dt>
+<dd>
+Informally, two sets are equal if they contain the same elements. Formally, <span class="math inline">A = B</span> if <span class="math inline">A \subseteq B</span> and <span class="math inline">B \subseteq A.</span>
 </dd>
 <dt><span class="concept">Set theory</span></dt>
 <dd>

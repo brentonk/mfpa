@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -76,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-030575a932d71853b7da0daa632cfc21.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-01742c00818c689b465a49ca3df8d145.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -587,7 +587,7 @@ Figure&nbsp;3.4
 <p>It can be tricky to use the formal definition (<a href="#def-limit" class="quarto-xref">Definition&nbsp;<span>3.2</span></a>) to prove that some number is indeed the limit of a specified sequence. Even if you can “see” that some sequence is getting ever closer to its limit, how can you show that the precise formal definition is satisfied? To make the challenge-response process a bit more concrete, let’s apply it to the problem of showing that <span class="math inline">\lim_{n \to \infty} 1/n = 0</span>.</p>
 <div id="exm-limit-harmonic-seq" class="theorem example">
 <p><span class="theorem-title"><strong>Example 3.1</strong></span> We want to prove that <span class="math inline">\lim_{n \to \infty} 1/n = 0</span>. To do so, we must show that for any choice of a number <span class="math inline">\epsilon &gt; 0</span>, we can find an index <span class="math inline">N</span> such that <span class="math inline">-\epsilon &lt; 1/n &lt; \epsilon</span> for all <span class="math inline">n \geq N</span>.</p>
-<p>You can think about this as a “for all” claim: namely, that for all <span class="math inline">\epsilon &gt; 0</span>, there is an index <span class="math inline">N</span> that meets the requirement above. So to prove it, we will follow the method laid out in <a href="set_theory.html#nte-proving-for-all" class="quarto-xref">Note&nbsp;<span>1.1</span></a> in the previous chapter. That is, we will take an “arbitrary” <span class="math inline">\epsilon &gt; 0</span> — a number <span class="math inline">\epsilon</span> that we know nothing about, besides that it’s greater than 0 — and prove that we can find an index <span class="math inline">N</span> that meets the requirement.</p>
+<p>You can think about this as a “for all” claim: namely, that for all <span class="math inline">\epsilon &gt; 0</span>, there is an index <span class="math inline">N</span> that meets the requirement above. So to prove it, we will follow the method laid out in <span class="quarto-unresolved-ref">?nte-proving-for-all</span> in the previous chapter. That is, we will take an “arbitrary” <span class="math inline">\epsilon &gt; 0</span> — a number <span class="math inline">\epsilon</span> that we know nothing about, besides that it’s greater than 0 — and prove that we can find an index <span class="math inline">N</span> that meets the requirement.</p>
 <p><em>Proof:</em> Take an arbitrary <span class="math inline">\epsilon &gt; 0</span>. Because <span class="math inline">\epsilon &gt; 0</span>, the fraction <span class="math inline">1/\epsilon</span> is finite and positive (though perhaps very large). Let <span class="math inline">N</span> be any integer greater than <span class="math inline">1/\epsilon</span>. For any <span class="math inline">n \geq N</span>, we have <span class="math display">\frac{1}{n} \leq \frac{1}{N} &lt; \frac{1}{1/\epsilon} = \epsilon.</span> Combined with the fact that <span class="math inline">1/n &gt; 0 &gt; -\epsilon</span> for all <span class="math inline">n</span>, we have shown that there exists an index <span class="math inline">N</span> such that <span class="math inline">-\epsilon &lt; 1/n &lt; \epsilon</span> for all <span class="math inline">n \geq N</span>. Because <span class="math inline">\epsilon</span> was chosen arbitrarily, this completes the proof that <span class="math inline">\lim_{n \to \infty} 1/n = 0</span>.</p>
 </div>
 
