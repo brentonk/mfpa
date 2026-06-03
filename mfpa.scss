@@ -144,6 +144,16 @@ a { color: $primary; text-decoration: none; }
 ol li::marker, ul li::marker { color: $primary; }
 ol ol li { list-style-type: lower-alpha; }
 
+// Match list block spacing to paragraph rhythm, then fix the end-of-list gap.
+// Quarto lays body blocks out as grid items, so vertical margins never
+// collapse. In a loose list the final item's trailing <p> keeps its bottom
+// margin, which stacks on the list's own margin-bottom and ~doubles the space
+// before the next paragraph. Zero that one inner trailing margin so the list's
+// margin alone sets the gap (inter-item and multi-paragraph spacing untouched).
+ul, ol { margin-bottom: 1.1rem; }
+ul > li:last-child > p:last-child,
+ol > li:last-child > p:last-child { margin-bottom: 0; }
+
 // ---------------------------------------------------------------------------
 // Left sidebar (chapter navigation) — editorial Archivo, airy rhythm.
 // The light/dark toggle is gone (single light theme) so .sidebar-tools-main
@@ -289,6 +299,19 @@ aside:not(.footnotes):not(.sidebar),
     margin-bottom: 0.4rem;
 }
 .theorem-title strong { font-weight: 700; }
+
+// When a theorem's body starts with a block (e.g. a list), Quarto puts the
+// title in a placeholder paragraph — <p><span.theorem-title>…</span> &nbsp;</p>
+// — followed by the block. Because the title is display:block, the trailing
+// &nbsp; drops to its own line, opening a phantom empty line between the title
+// and the content. There's no body text to sit on that line, so keep the title
+// inline in just this case: the &nbsp; shares the title's line, no phantom line
+// forms, and the list's normal spacing sets the gap.
+.theorem > p:first-child:has(> .theorem-title:only-child) {
+    &:has(+ ul), &:has(+ ol) {
+        .theorem-title { display: inline; margin-bottom: 0; }
+    }
+}
 
 .theorem {
     border: 2px solid $primary;
