@@ -8,7 +8,6 @@ echo: false
 #| message: false
 library("tidyverse")
 library("cowplot")
-library("dataverse")
 library("gganimate")
 library("ggrepel")
 library("gifski")
@@ -16,15 +15,13 @@ library("patchwork")
 theme_set(theme_cowplot())
 ```
 
-```{r get_pres_data} 
+```{r get_pres_data}
 #| message: false
-#| cache: true
-df_pres_county <- get_dataframe_by_name(
-  filename = "countypres_2000-2024.tab",
-  dataset = "10.7910/DVN/VOQCHQ",
-  server = "dataverse.harvard.edu",
-  version = "15.0"
-)
+# Placeholder: synthetic, countypres-shaped data generated offline (see
+# data/make_synthetic_county_pres.R). These are fabricated numbers, not real
+# election returns; they stand in for a Harvard Dataverse download so the book
+# renders deterministically with no network dependency. To be reworked.
+df_pres_county <- read_csv("data/synthetic_county_pres.csv", show_col_types = FALSE)
 ```
 
 ## Motivation: A statistical guessing game {#sec-statistical-lottery}
