@@ -296,7 +296,7 @@ I'll leave that to you --- you can follow steps very close to what I did to show
 ::::
 :::
 
-### The Venn diagram operations
+### The Venn diagram operations {#sec-venn-diagram}
 
 Both here and (particularly) in the stats sequence, we'll be combining sets in all kinds of ways.
 Once again, a bit of mathematical notation will help us quickly convey exactly what we mean.
@@ -440,17 +440,18 @@ Yet the probability of a blonde-or-left-handed kid is *not* necessarily 40% (i.e
 But because a kid cannot be both blonde and redheaded --- the intersection of the set of blonde kids and the set of redheaded kids is empty --- we can sum the individual probabilities to include that the probability of a blonde-or-redheaded kid is 35%.
 If you're like me, you'll come to like it when events in probability turn out to be disjoint, as then you don't have to apply the finicky rules to avoid double-counting probabilities.
 
-### Complements and De Morgan's laws
+### Complements and De Morgan's laws {#sec-complements-de-morgans}
 
 The set difference $A \setminus B$ is the set of everything in $A$ that's not in $B$.
-But what if we simply wanted the set of *everything* that's not in $B$, whether it's in $A$ or not?
-Once we can properly define this type of set, we will call it the [complement]{.concept} of $B$.
+But what if we simply wanted the set of *everything* that's not in $B$?
+Once we can properly define this type of set, we will call it the [complement]{.concept definition="The complement of a set $A$, denoted $A^c$, is the set of all elements in the relevant universe that are not elements of $A$."} of $B$.
 
-Before we can do that, we need to be clear about what "everything" is.
-For example, again taking $P$ to be the set of people who have been the US president, it seems clear enough that $$\text{Aaron Burr} \in \{x \mid x \notin P\}.$$
+The one sticky mathematical issue is what we mean by "everything" that isn't in a set.
+For example, again taking $P$ to be the set of people who have been the US president, it seems clear enough that Aaron Burr is in the complement of $P,$ as Aaron Burr was never the president.
+So, in mathematical terms, we would like to say $$\text{Aaron Burr} \in \{x \mid x \notin P\}.$$
 But would we say that the number 3 is also an element of this set?
 What about the chemical formula H$_2$O or the human gene CNR1?
-If nothing else, it doesn't seem to be very useful to say that these are not people who have been president, true as that may be.
+It's true that these also have never been the president, but it is hard to imagine that we would ever care to make that observation.
 
 To have a useful working definition of "everything not in this set", we are going to assume there's a set $U$ that contains the [universe]{.concept definition="The set of everything that could conceivably be in the sets we're talking about.  The relevant universe is highly dependent on the specific context, and ought to be inferable from context clues if not explicitly stated."} of objects we might be interested in.
 The appropriate choice of universal set depends on the context for what we want to do.
@@ -461,7 +462,7 @@ Once we have settled on the universe of objects we care about, it's simple to de
 
 ::: {#def-complement}
 ## Complement
-The [complement]{.concept definition="The complement of a set $A$, denoted $A^c$, is the set of all elements in the relevant universe that are not elements of $A$."} of the set $A$, denoted $A^c$, is the set of all elements in the universe that are not in $A$, i.e., $A^c = U \setminus A$.
+The [complement]{.concept} of the set $A$, denoted $A^c$, is the set of all elements in the universe that are not in $A$, i.e., $A^c = U \setminus A$.
 :::
 
 ::: {#fig-complement layout-ncol=2}
@@ -477,28 +478,64 @@ The [complement]{.concept definition="The complement of a set $A$, denoted $A^c$
 \end{venndiagram2sets}
 ```
 
-Set differences.
+Complements.
 :::
 
 You don't often see the universal set explicitly specified in mathematical writing, other than textbook set theory treatments like what you're reading right now.
-I assume this is because most mathematical writers follow the same conventions I do:
+So what do you do if you see someone talk about the complement of a set, without having specified the relevant universe?
 
--   The appropriate definition of a universal set should be clear from the context.
-    For example, if all of the mathematical objects discussed are real numbers and sets of real numbers, then $U = \mathbb{R}$.
+- The appropriate "universe" should typically be clear from the context.
+  For example, if every set being discussed consists exclusively of real numbers, then the relevant universe is most likely the entire number line: $U = \mathbb{R}.$
 
--   If the context is not clear enough for there to be a natural choice of universal set (e.g., you're talking about sets of radically different types of objects), then use explicit set differences when needed rather than taking complements of sets.
+- In probability applications specifically, the "universe" is the set of all possible outcomes of the random process being considered.
+  This set is called the "sample space" and is often denoted $\Omega.$
+
+  For example, in the context of a survey of three people who are asked whether they approve of the president's job performance, the universe is the set of the eight possible combinations of responses:
+  $$
+  \Omega = \left\{
+  \begin{gathered}
+  \text{1 yes, 2 yes, 3 yes}, \quad \text{1 yes, 2 yes, 3 no}, \\
+  \text{1 yes, 2 no, 3 yes}, \quad \text{1 yes, 2 no, 3 no}, \\
+  \text{1 no, 2 yes, 3 yes}, \quad \text{1 no, 2 yes, 3 no}, \\
+  \text{1 no, 2 no, 3 yes}, \quad \text{1 no, 2 no, 3 no}
+  \end{gathered}
+  \right\}.
+  $$
+
+- If the context is not clear enough for there to be a natural choice of universal set (e.g., you're talking about sets of radically different types of objects), then use explicit set differences when needed rather than taking complements of sets.
+
+::: {#exr-complement title="Complement of a set"}
+Suppose our universe is the number line, $\mathbb{R}.$
+Let $X = \{x \in \mathbb{R} \mid x < 10\}.$
+Characterize $X^c.$
+
+:::: {.answer}
+$X^c = \{x \in \mathbb{R} \mid x \geq 10\}.$
+
+Fun fact: we usually use the shorthand $(-\infty, a)$ to denote a set of the form $\{x \in \mathbb{R} \mid x < a\}.$
+We also use the shorthand $[b, \infty)$ to denote a set of the form $\{x \in \mathbb{R} \mid x \geq b\}.$
+Using these shorthands, we have $X = (-\infty, 10)$ and $X^c = [10, \infty).$
+
+I'll leave it to you to infer what the shorthands $(-\infty, a]$ and $(b, \infty)$ stand for.
+::::
+:::
+
+You can combine the complement with other set operations.
+For example, $(A \cup B)^c$ is the complement of $A \cup B,$ i.e., everything that is not an element of $A \cup B.$
+Be careful when combining operations in this way!
+In general, it is *not* true that $(A \cup B)^c = A^c \cup B^c.$
+In fact, the complement "flips" a union into an intersection, and vice versa---a property of the complement known as [De Morgan's laws]{.concept definition="Rules for taking the complement of a union or an intersection of sets.  The complement of a union is the intersection of the individual complements, and the complement of an intersection is the union of the individual complements."}.
 
 Taking our universe as the set of all people, let's think about the complement of the union of sets of everyone who's been a president or vice president, $(P \cup Q)^c$.
 Anyone who's been a president or a vice president is an element of $P \cup Q$.
 Therefore, if someone is not an element of $P \cup Q$, that tells us that the person has never been president *and* has never been vice president.
 In other words, that person belongs to both $P^c$ and $Q^c$, and thus also to their intersection $P^c \cap Q^c$.
-This is an illustration of a very useful pair of set properties called [De Morgan's laws]{.concept definition="Rules for taking the complement of a union or an intersection of sets.  The complement of a union is the intersection of the individual complements, and the complement of an intersection is the union of the individual complements."}.
+This is an illustration of a very useful pair of set properties called
 
-::: {#thm-demorgan-sets}
-## De Morgan's laws
+::: {#thm-demorgan-sets name="De Morgan's laws"}
 1.  $(A \cup B)^c = A^c \cap B^c$.
 
-2.  $(A \cap B)^c = A^c \cup B^c$.
+2. $(A \cap B)^c = A^c \cup B^c$.
 :::
 
 ::: {#fig-demorgan-sets layout-ncol=2}
@@ -515,50 +552,6 @@ This is an illustration of a very useful pair of set properties called [De Morga
 ```
 
 De Morgan's laws.
-:::
-
-::: {.aside}
-Hey, these look a lot like the De Morgan's laws for formal logic (@thm-demorgan-logic)!
-I wonder if that's a coincidence?
-:::
-
-::: {.proof}
-I'll prove the first law, and leave the second to you as @exr-demorgan-sets.
-First we have to prove that $(A \cup B)^c \subseteq A^c \cap B^c$.
-To this end, take any $x \in (A \cup B)^c$, so that $x \notin A \cup B$.
-By definition of the union, this implies $x \notin A$, hence $x \in A^c$.
-By the same token, $x \notin B$, hence $x \in B^c$.
-Because $x \in A^c$ and $x \in B^c$, we have $x \in A^c \cap B^c$.
-As $x$ was chosen arbitrarily, this shows that $(A \cup B)^c \subseteq A^c \cap B^c$.
-
-Next, to complete the proof of equality, we have to prove that $A^c \cap B^c \subseteq (A \cup B)^c$.
-To this end, take any $x \in A^c \cap B^c$.
-By definition of the intersection, $x \in A^c$, hence $x \notin A$.
-By the same token, $x \in B^c$, hence $x \notin B$.
-Because $x \notin A$ and $x \notin B$, we have $x \notin A \cup B$ and thus $x \in (A \cup B)^c$.
-As $x$ was chosen arbitrarily, this shows that $A^c \cap B^c \subseteq (A \cup B)^c$.
-:::
-
-::: {#exr-demorgan-sets}
-Prove that $(A \cap B)^c = A^c \cup B^c$.
-
-:::: {.answer}
-The steps are the same as in the proof of the first part above, so I'll be a bit briefer about them.
-
-Take any $x \in (A \cap B)^c$.
-Because $x \notin A \cap B$, it must be the case that $x \in A^c$ or $x \in B^c$.
-If $x \in A^c$, then $x \in A^c \cup B^c$.
-Otherwise, if $x \notin A^c$, then $x \in B^c$ and thus $x \in A^c \cup B^c$.
-Either way, we have $x \in A^c \cup B^c$.
-Consequently, $(A \cap B)^c \subseteq A^c \cup B^c$.
-
-Now take any $x \in A^c \cup B^c$.
-It must be the case that $x \in A^c$ or $x \in B^c$.
-If $x \in A^c$, then $x \notin A$, hence $x \notin A \cap B$, hence $x \in (A \cap B)^c$.
-Otherwise, if $x \notin A^c$, then $x \in B^c$, hence $x \notin B$, hence $x \notin A \cap B$, hence $x \in (A \cap B)^c$.
-Either way, we have $x \in (A \cap B)^c$.
-Consequently, $A^c \cup B^c \subseteq (A \cap B)^c$.
-::::
 :::
 
 

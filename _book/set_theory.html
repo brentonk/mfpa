@@ -213,8 +213,8 @@ window.Quarto = {
   <li><a href="#sec-set-operations" id="toc-sec-set-operations" class="nav-link" data-scroll-target="#sec-set-operations"><span class="header-section-number">1.2</span> Working with sets</a>
   <ul class="collapse">
   <li><a href="#sec-subsets" id="toc-sec-subsets" class="nav-link" data-scroll-target="#sec-subsets"><span class="header-section-number">1.2.1</span> Subsets and equality</a></li>
-  <li><a href="#the-venn-diagram-operations" id="toc-the-venn-diagram-operations" class="nav-link" data-scroll-target="#the-venn-diagram-operations"><span class="header-section-number">1.2.2</span> The Venn diagram operations</a></li>
-  <li><a href="#complements-and-de-morgans-laws" id="toc-complements-and-de-morgans-laws" class="nav-link" data-scroll-target="#complements-and-de-morgans-laws"><span class="header-section-number">1.2.3</span> Complements and De Morgan’s laws</a></li>
+  <li><a href="#sec-venn-diagram" id="toc-sec-venn-diagram" class="nav-link" data-scroll-target="#sec-venn-diagram"><span class="header-section-number">1.2.2</span> The Venn diagram operations</a></li>
+  <li><a href="#sec-complements-de-morgans" id="toc-sec-complements-de-morgans" class="nav-link" data-scroll-target="#sec-complements-de-morgans"><span class="header-section-number">1.2.3</span> Complements and De Morgan’s laws</a></li>
   </ul></li>
   <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="header-section-number">1.3</span> Functions</a>
   <ul class="collapse">
@@ -351,7 +351,7 @@ Table&nbsp;1.1: Notable sets of numbers
 </div>
 </section>
 </section>
-<section id="sec-set-operations" class="level2 page-columns page-full" data-number="1.2">
+<section id="sec-set-operations" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="sec-set-operations"><span class="header-section-number">1.2</span> Working with sets</h2>
 <section id="sec-subsets" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="sec-subsets"><span class="header-section-number">1.2.1</span> Subsets and equality</h3>
@@ -458,8 +458,8 @@ b &amp;= 2n + 1 \\
 </div></details>
 </div>
 </section>
-<section id="the-venn-diagram-operations" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="the-venn-diagram-operations"><span class="header-section-number">1.2.2</span> The Venn diagram operations</h3>
+<section id="sec-venn-diagram" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="sec-venn-diagram"><span class="header-section-number">1.2.2</span> The Venn diagram operations</h3>
 <p>Both here and (particularly) in the stats sequence, we’ll be combining sets in all kinds of ways. Once again, a bit of mathematical notation will help us quickly convey exactly what we mean. If I say “the set of presidents and vice presidents,” do I mean all of the people who have served in <em>either</em> role, or only those who have served in <em>both</em>? We know Richard Nixon and Joe Biden are in it either way, but what about Barack Obama? Mathematically speaking, we need to be sure if we are talking about the <span class="concept has-tip" tabindex="0">union<span class="concept-tip" role="tooltip">The union of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cup B</span>, is the set of all elements that are in at least one of <span class="math inline">A</span> or <span class="math inline">B</span>.</span></span> or the <span class="concept has-tip" tabindex="0">intersection<span class="concept-tip" role="tooltip">The intersection of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cap B</span>, is the set of all elements that are in both <span class="math inline">A</span> and <span class="math inline">B</span>.</span></span> of the sets of presidents and vice presidents.</p>
 <div id="def-union-intersection" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.4 (Union and intersection)</strong></span> The <span class="concept has-tip" tabindex="0">union<span class="concept-tip" role="tooltip">The union of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cup B</span>, is the set of all elements that are in at least one of <span class="math inline">A</span> or <span class="math inline">B</span>.</span></span> of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cup B</span>, is the set of elements that are in <span class="math inline">A</span>, in <span class="math inline">B</span>, or both: <span class="math display">A \cup B = \{x \mid x \in A \text{ or } x \in B\}.</span> The <span class="concept has-tip" tabindex="0">intersection<span class="concept-tip" role="tooltip">The intersection of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cap B</span>, is the set of all elements that are in both <span class="math inline">A</span> and <span class="math inline">B</span>.</span></span> of the sets <span class="math inline">A</span> and <span class="math inline">B</span>, denoted <span class="math inline">A \cap B</span>, is the set of elements that are in both <span class="math inline">A</span> and <span class="math inline">B</span>: <span class="math display">A \cap B = \{x \mid x \in A \text{ and } x \in B\}.</span></p>
@@ -625,10 +625,10 @@ Figure&nbsp;1.2: Set differences.
 <p>Using this notation, a concise way to say “no one has been both the US president and the UK prime minister” would be <span class="math inline">P \cap M = \emptyset</span>. We say two sets are <span class="concept has-tip" tabindex="0">disjoint<span class="concept-tip" role="tooltip">Two sets are disjoint if they have no elements in common, or equivalently if their intersection is the empty set.</span></span> when their intersection is empty.</p>
 <p>Disjoint sets are important in probability, as you’ll see in the stats sequence. Imagine that there’s a 30% chance that a kid is blonde, a 5% chance that they’re a redhead, and a 10% chance that they’re left-handed. Yet the probability of a blonde-or-left-handed kid is <em>not</em> necessarily 40% (i.e., 30% + 10%), because being blonde and being left-handed aren’t disjoint: one kid could be both. But because a kid cannot be both blonde and redheaded — the intersection of the set of blonde kids and the set of redheaded kids is empty — we can sum the individual probabilities to include that the probability of a blonde-or-redheaded kid is 35%. If you’re like me, you’ll come to like it when events in probability turn out to be disjoint, as then you don’t have to apply the finicky rules to avoid double-counting probabilities.</p>
 </section>
-<section id="complements-and-de-morgans-laws" class="level3 page-columns page-full" data-number="1.2.3">
-<h3 data-number="1.2.3" class="anchored" data-anchor-id="complements-and-de-morgans-laws"><span class="header-section-number">1.2.3</span> Complements and De Morgan’s laws</h3>
-<p>The set difference <span class="math inline">A \setminus B</span> is the set of everything in <span class="math inline">A</span> that’s not in <span class="math inline">B</span>. But what if we simply wanted the set of <em>everything</em> that’s not in <span class="math inline">B</span>, whether it’s in <span class="math inline">A</span> or not? Once we can properly define this type of set, we will call it the <span class="concept">complement</span> of <span class="math inline">B</span>.</p>
-<p>Before we can do that, we need to be clear about what “everything” is. For example, again taking <span class="math inline">P</span> to be the set of people who have been the US president, it seems clear enough that <span class="math display">\text{Aaron Burr} \in \{x \mid x \notin P\}.</span> But would we say that the number 3 is also an element of this set? What about the chemical formula H<span class="math inline">_2</span>O or the human gene CNR1? If nothing else, it doesn’t seem to be very useful to say that these are not people who have been president, true as that may be.</p>
+<section id="sec-complements-de-morgans" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="sec-complements-de-morgans"><span class="header-section-number">1.2.3</span> Complements and De Morgan’s laws</h3>
+<p>The set difference <span class="math inline">A \setminus B</span> is the set of everything in <span class="math inline">A</span> that’s not in <span class="math inline">B</span>. But what if we simply wanted the set of <em>everything</em> that’s not in <span class="math inline">B</span>? Once we can properly define this type of set, we will call it the <span class="concept has-tip" tabindex="0">complement<span class="concept-tip" role="tooltip">The complement of a set <span class="math inline">A</span>, denoted <span class="math inline">A^c</span>, is the set of all elements in the relevant universe that are not elements of <span class="math inline">A</span>.</span></span> of <span class="math inline">B</span>.</p>
+<p>The one sticky mathematical issue is what we mean by “everything” that isn’t in a set. For example, again taking <span class="math inline">P</span> to be the set of people who have been the US president, it seems clear enough that Aaron Burr is in the complement of <span class="math inline">P,</span> as Aaron Burr was never the president. So, in mathematical terms, we would like to say <span class="math display">\text{Aaron Burr} \in \{x \mid x \notin P\}.</span> But would we say that the number 3 is also an element of this set? What about the chemical formula H<span class="math inline">_2</span>O or the human gene CNR1? It’s true that these also have never been the president, but it is hard to imagine that we would ever care to make that observation.</p>
 <p>To have a useful working definition of “everything not in this set”, we are going to assume there’s a set <span class="math inline">U</span> that contains the <span class="concept has-tip" tabindex="0">universe<span class="concept-tip" role="tooltip">The set of everything that could conceivably be in the sets we’re talking about. The relevant universe is highly dependent on the specific context, and ought to be inferable from context clues if not explicitly stated.</span></span> of objects we might be interested in. The appropriate choice of universal set depends on the context for what we want to do. Most commonly, if we are talking about numbers that lie along the typical number line, our universal set might be the real line, <span class="math inline">\mathbb{R}</span>. Or if we are talking about who has and has not held particular political positions, our universal set might be the set of all people who have ever lived.</p>
 <p>Once we have settled on the universe of objects we care about, it’s simple to define the complement of a set.</p>
 <div id="def-complement" class="theorem definition">
@@ -637,7 +637,7 @@ Figure&nbsp;1.2: Set differences.
 <div id="fig-complement" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-complement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.3: Set differences.
+Figure&nbsp;1.3: Complements.
 </figcaption>
 <div aria-describedby="fig-complement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
@@ -665,12 +665,34 @@ Figure&nbsp;1.3: Set differences.
 </div>
 </figure>
 </div>
-<p>You don’t often see the universal set explicitly specified in mathematical writing, other than textbook set theory treatments like what you’re reading right now. I assume this is because most mathematical writers follow the same conventions I do:</p>
+<p>You don’t often see the universal set explicitly specified in mathematical writing, other than textbook set theory treatments like what you’re reading right now. So what do you do if you see someone talk about the complement of a set, without having specified the relevant universe?</p>
 <ul>
-<li><p>The appropriate definition of a universal set should be clear from the context. For example, if all of the mathematical objects discussed are real numbers and sets of real numbers, then <span class="math inline">U = \mathbb{R}</span>.</p></li>
+<li><p>The appropriate “universe” should typically be clear from the context. For example, if every set being discussed consists exclusively of real numbers, then the relevant universe is most likely the entire number line: <span class="math inline">U = \mathbb{R}.</span></p></li>
+<li><p>In probability applications specifically, the “universe” is the set of all possible outcomes of the random process being considered. This set is called the “sample space” and is often denoted <span class="math inline">\Omega.</span></p>
+<p>For example, in the context of a survey of three people who are asked whether they approve of the president’s job performance, the universe is the set of the eight possible combinations of responses: <span class="math display">
+\Omega = \left\{
+\begin{gathered}
+\text{1 yes, 2 yes, 3 yes}, \quad \text{1 yes, 2 yes, 3 no}, \\
+\text{1 yes, 2 no, 3 yes}, \quad \text{1 yes, 2 no, 3 no}, \\
+\text{1 no, 2 yes, 3 yes}, \quad \text{1 no, 2 yes, 3 no}, \\
+\text{1 no, 2 no, 3 yes}, \quad \text{1 no, 2 no, 3 no}
+\end{gathered}
+\right\}.
+</span></p></li>
 <li><p>If the context is not clear enough for there to be a natural choice of universal set (e.g., you’re talking about sets of radically different types of objects), then use explicit set differences when needed rather than taking complements of sets.</p></li>
 </ul>
-<p>Taking our universe as the set of all people, let’s think about the complement of the union of sets of everyone who’s been a president or vice president, <span class="math inline">(P \cup Q)^c</span>. Anyone who’s been a president or a vice president is an element of <span class="math inline">P \cup Q</span>. Therefore, if someone is not an element of <span class="math inline">P \cup Q</span>, that tells us that the person has never been president <em>and</em> has never been vice president. In other words, that person belongs to both <span class="math inline">P^c</span> and <span class="math inline">Q^c</span>, and thus also to their intersection <span class="math inline">P^c \cap Q^c</span>. This is an illustration of a very useful pair of set properties called <span class="concept has-tip" tabindex="0">De Morgan’s laws<span class="concept-tip" role="tooltip">Rules for taking the complement of a union or an intersection of sets. The complement of a union is the intersection of the individual complements, and the complement of an intersection is the union of the individual complements.</span></span>.</p>
+<div id="exr-complement" class="theorem exercise" title="Complement of a set">
+<p><span class="theorem-title"><strong>Exercise 1.7</strong></span> Suppose our universe is the number line, <span class="math inline">\mathbb{R}.</span> Let <span class="math inline">X = \{x \in \mathbb{R} \mid x &lt; 10\}.</span> Characterize <span class="math inline">X^c.</span></p>
+<details class="answer-block">
+<summary class="answer-summary"><span class="answer-affordance" aria-hidden="true"></span><span class="answer-label">Answer</span></summary>
+<div class="answer-body">
+<p><span class="math inline">X^c = \{x \in \mathbb{R} \mid x \geq 10\}.</span></p>
+<p>Fun fact: we usually use the shorthand <span class="math inline">(-\infty, a)</span> to denote a set of the form <span class="math inline">\{x \in \mathbb{R} \mid x &lt; a\}.</span> We also use the shorthand <span class="math inline">[b, \infty)</span> to denote a set of the form <span class="math inline">\{x \in \mathbb{R} \mid x \geq b\}.</span> Using these shorthands, we have <span class="math inline">X = (-\infty, 10)</span> and <span class="math inline">X^c = [10, \infty).</span></p>
+<p>I’ll leave it to you to infer what the shorthands <span class="math inline">(-\infty, a]</span> and <span class="math inline">(b, \infty)</span> stand for.</p>
+</div></details>
+</div>
+<p>You can combine the complement with other set operations. For example, <span class="math inline">(A \cup B)^c</span> is the complement of <span class="math inline">A \cup B,</span> i.e., everything that is not an element of <span class="math inline">A \cup B.</span> Be careful when combining operations in this way! In general, it is <em>not</em> true that <span class="math inline">(A \cup B)^c = A^c \cup B^c.</span> In fact, the complement “flips” a union into an intersection, and vice versa—a property of the complement known as <span class="concept has-tip" tabindex="0">De Morgan’s laws<span class="concept-tip" role="tooltip">Rules for taking the complement of a union or an intersection of sets. The complement of a union is the intersection of the individual complements, and the complement of an intersection is the union of the individual complements.</span></span>.</p>
+<p>Taking our universe as the set of all people, let’s think about the complement of the union of sets of everyone who’s been a president or vice president, <span class="math inline">(P \cup Q)^c</span>. Anyone who’s been a president or a vice president is an element of <span class="math inline">P \cup Q</span>. Therefore, if someone is not an element of <span class="math inline">P \cup Q</span>, that tells us that the person has never been president <em>and</em> has never been vice president. In other words, that person belongs to both <span class="math inline">P^c</span> and <span class="math inline">Q^c</span>, and thus also to their intersection <span class="math inline">P^c \cap Q^c</span>. This is an illustration of a very useful pair of set properties called</p>
 <div id="thm-demorgan-sets" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.1 (De Morgan’s laws)</strong></span> &nbsp;</p>
 <ol type="1">
@@ -708,23 +730,6 @@ Figure&nbsp;1.4: De Morgan’s laws.
 </div>
 </div>
 </figure>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="margin-aside">
-<p>Hey, these look a lot like the De Morgan’s laws for formal logic (<a href="logic.html#thm-demorgan-logic" class="quarto-xref">Theorem&nbsp;<span>2.3</span></a>)! I wonder if that’s a coincidence?</p>
-</div></div><div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>I’ll prove the first law, and leave the second to you as <a href="#exr-demorgan-sets" class="quarto-xref">Exercise&nbsp;<span>1.7</span></a>. First we have to prove that <span class="math inline">(A \cup B)^c \subseteq A^c \cap B^c</span>. To this end, take any <span class="math inline">x \in (A \cup B)^c</span>, so that <span class="math inline">x \notin A \cup B</span>. By definition of the union, this implies <span class="math inline">x \notin A</span>, hence <span class="math inline">x \in A^c</span>. By the same token, <span class="math inline">x \notin B</span>, hence <span class="math inline">x \in B^c</span>. Because <span class="math inline">x \in A^c</span> and <span class="math inline">x \in B^c</span>, we have <span class="math inline">x \in A^c \cap B^c</span>. As <span class="math inline">x</span> was chosen arbitrarily, this shows that <span class="math inline">(A \cup B)^c \subseteq A^c \cap B^c</span>.</p>
-<p>Next, to complete the proof of equality, we have to prove that <span class="math inline">A^c \cap B^c \subseteq (A \cup B)^c</span>. To this end, take any <span class="math inline">x \in A^c \cap B^c</span>. By definition of the intersection, <span class="math inline">x \in A^c</span>, hence <span class="math inline">x \notin A</span>. By the same token, <span class="math inline">x \in B^c</span>, hence <span class="math inline">x \notin B</span>. Because <span class="math inline">x \notin A</span> and <span class="math inline">x \notin B</span>, we have <span class="math inline">x \notin A \cup B</span> and thus <span class="math inline">x \in (A \cup B)^c</span>. As <span class="math inline">x</span> was chosen arbitrarily, this shows that <span class="math inline">A^c \cap B^c \subseteq (A \cup B)^c</span>.</p>
-</div>
-<div id="exr-demorgan-sets" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1.7</strong></span> Prove that <span class="math inline">(A \cap B)^c = A^c \cup B^c</span>.</p>
-<details class="answer-block">
-<summary class="answer-summary"><span class="answer-affordance" aria-hidden="true"></span><span class="answer-label">Answer</span></summary>
-<div class="answer-body">
-<p>The steps are the same as in the proof of the first part above, so I’ll be a bit briefer about them.</p>
-<p>Take any <span class="math inline">x \in (A \cap B)^c</span>. Because <span class="math inline">x \notin A \cap B</span>, it must be the case that <span class="math inline">x \in A^c</span> or <span class="math inline">x \in B^c</span>. If <span class="math inline">x \in A^c</span>, then <span class="math inline">x \in A^c \cup B^c</span>. Otherwise, if <span class="math inline">x \notin A^c</span>, then <span class="math inline">x \in B^c</span> and thus <span class="math inline">x \in A^c \cup B^c</span>. Either way, we have <span class="math inline">x \in A^c \cup B^c</span>. Consequently, <span class="math inline">(A \cap B)^c \subseteq A^c \cup B^c</span>.</p>
-<p>Now take any <span class="math inline">x \in A^c \cup B^c</span>. It must be the case that <span class="math inline">x \in A^c</span> or <span class="math inline">x \in B^c</span>. If <span class="math inline">x \in A^c</span>, then <span class="math inline">x \notin A</span>, hence <span class="math inline">x \notin A \cap B</span>, hence <span class="math inline">x \in (A \cap B)^c</span>. Otherwise, if <span class="math inline">x \notin A^c</span>, then <span class="math inline">x \in B^c</span>, hence <span class="math inline">x \notin B</span>, hence <span class="math inline">x \notin A \cap B</span>, hence <span class="math inline">x \in (A \cap B)^c</span>. Either way, we have <span class="math inline">x \in (A \cap B)^c</span>. Consequently, <span class="math inline">A^c \cup B^c \subseteq (A \cap B)^c</span>.</p>
-</div></details>
 </div>
 </section>
 </section>
@@ -1082,13 +1087,13 @@ The set containing no elements, denoted <span class="math inline">\emptyset</spa
 <dd>
 Two sets are disjoint if they have no elements in common, or equivalently if their intersection is the empty set.
 </dd>
-<dt><span class="concept">Universe</span></dt>
-<dd>
-The set of everything that could conceivably be in the sets we’re talking about. The relevant universe is highly dependent on the specific context, and ought to be inferable from context clues if not explicitly stated.
-</dd>
 <dt><span class="concept">Complement</span></dt>
 <dd>
 The complement of a set <span class="math inline">A</span>, denoted <span class="math inline">A^c</span>, is the set of all elements in the relevant universe that are not elements of <span class="math inline">A</span>.
+</dd>
+<dt><span class="concept">Universe</span></dt>
+<dd>
+The set of everything that could conceivably be in the sets we’re talking about. The relevant universe is highly dependent on the specific context, and ought to be inferable from context clues if not explicitly stated.
 </dd>
 <dt><span class="concept">De Morgan’s laws</span></dt>
 <dd>
