@@ -1,6 +1,7 @@
 /.quarto/
 /_freeze/
 /_book/
+/.Renviron
 /*_cache/
 /*_files/
 tikz*.log
