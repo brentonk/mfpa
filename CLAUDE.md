@@ -16,7 +16,9 @@ quarto render            # rebuild whole book into _book/
 quarto render logic.qmd  # render one chapter
 ```
 
-**Deployment is unusual**: `.github/workflows/static.yml` uploads `_book/` directly to GitHub Pages with no `quarto render` step in CI. That means the committed `_book/` directory **is** the published site. After meaningful changes, run `quarto render` locally and commit the regenerated `_book/` along with the source.
+**Deployment is server-side**: `.github/workflows/build-deploy.yml` runs on every push to `main` — it installs the system libraries, restores the pinned R packages from `renv.lock`, runs `quarto render`, and deploys the resulting `_book/` to GitHub Pages. So `_book/` (and `_freeze/`) are **gitignored and never committed**; you don't need to render locally before pushing. `quarto preview`/`quarto render` are just for checking your work. The only generated artifacts that *are* committed are the pre-rendered figure assets (the tikz PNGs in `images/`; see the tikz section) — those are built locally on purpose to keep LaTeX off the runner.
+
+R package versions are pinned with `renv` (`renv.lock` + `renv/`). After adding or upgrading a package, run `renv::snapshot()` and commit the updated lockfile so CI installs the same set. The runner's system-dependency list in the workflow is derived from the lockfile via `pak::pkg_sysreqs(..., "ubuntu-24.04")`; regenerate it if a new package needs additional system libraries.
 
 ## Chapter inclusion
 
