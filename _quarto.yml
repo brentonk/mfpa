@@ -2,8 +2,10 @@ project:
   type: book
 
 # Only re-execute R chunks when their own code changes (results cached in
-# _freeze/). Keeps prose/CSS-only previews from re-running Dataverse downloads
-# and tikz LaTeX compiles. _freeze/ is gitignored; CI uploads _book/ directly.
+# _freeze/). Keeps prose/CSS-only previews from re-running Dataverse downloads.
+# Both _freeze/ and _book/ are gitignored: GitHub Actions renders the book from
+# source on every push to main and deploys the result (see
+# .github/workflows/build-deploy.yml).
 execute:
   freeze: auto
 

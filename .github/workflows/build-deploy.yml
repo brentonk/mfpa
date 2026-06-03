@@ -1,0 +1,72 @@
+# Render the Quarto book in CI and deploy it to GitHub Pages.
+# Replaces the old deploy-only workflow that uploaded a committed _book/.
+# The render is pure-R: tikz diagrams are pre-rendered to committed PNGs
+# (see images/tikz/), so no LaTeX is needed on the runner.
+name: Render and deploy book
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; let in-flight production deploys finish.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # System libraries for the R package stack. Exact set computed from
+      # renv.lock via pak::pkg_sysreqs(platform = "ubuntu-24.04"); the heavy
+      # ones (GDAL/GEOS/PROJ/udunits) come in through gganimate -> transformr -> sf.
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install \
+            libx11-dev libcurl4-openssl-dev libssl-dev cmake make libuv1-dev \
+            zlib1g-dev pandoc libfreetype6-dev libjpeg-dev libpng-dev libtiff-dev \
+            libwebp-dev libabsl-dev libgdal-dev gdal-bin libgeos-dev libproj-dev \
+            libsqlite3-dev libicu-dev libfontconfig1-dev libfribidi-dev \
+            libharfbuzz-dev libudunits2-dev libxml2-dev
+
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      # Restores the exact package versions from renv.lock (PPM binaries,
+      # with a cross-run cache). No execution happens here.
+      - name: Restore R packages (renv)
+        uses: r-lib/actions/setup-renv@v2
+
+      - name: Render book
+        uses: quarto-dev/quarto-actions/render@v2
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _book
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
