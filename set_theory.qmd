@@ -309,29 +309,10 @@ The [union]{.concept} of the sets $A$ and $B$, denoted $A \cup B$, is the set of
 The [intersection]{.concept} of the sets $A$ and $B$, denoted $A \cap B$, is the set of elements that are in both $A$ and $B$: $$A \cap B = \{x \mid x \in A \text{ and } x \in B\}.$$
 :::
 
-```{r}
-#| echo: false
-library("tikzDevice")
-options(tikzLatexPackages = c(
-  getOption("tikzLatexPackages"),
-  "\\usepackage{venndiagram}"
-))
-eo <- list(extra.preamble="\\usepackage{venndiagram}")
-```
-
 ::: {#fig-venn layout-ncol=2}
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="80%", fig.align="center", echo=FALSE, fig.cap="Union: $A \\cup B$"}
-\begin{venndiagram2sets}
-\fillA
-\fillB
-\end{venndiagram2sets}
-```
+![Union: $A \cup B$](images/venn-union.png){width="80%"}
 
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="80%", fig.align="center", echo=FALSE, fig.cap="Intersection: $A \\cap B$"}
-\begin{venndiagram2sets}
-  \fillACapB
-\end{venndiagram2sets}
-```
+![Intersection: $A \cap B$](images/venn-intersection.png){width="80%"}
 
 Union and intersection of sets.
 :::
@@ -385,17 +366,9 @@ The [set difference]{.concept} between sets $A$ and $B$, denoted $A \setminus B$
 :::
 
 ::: {#fig-set-diff layout-ncol=2}
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="90%", fig.align="center", echo=FALSE, fig.cap="$A \\setminus B$"}
-\begin{venndiagram2sets}
-\fillANotB
-\end{venndiagram2sets}
-```
+![$A \setminus B$](images/venn-setdiff-ab.png){width="90%"}
 
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="90%", fig.align="center", echo=FALSE, fig.cap="$B \\setminus A$"}
-\begin{venndiagram2sets}
-  \fillBNotA
-\end{venndiagram2sets}
-```
+![$B \setminus A$](images/venn-setdiff-ba.png){width="90%"}
 
 Set differences.
 :::
@@ -466,17 +439,9 @@ The [complement]{.concept} of the set $A$, denoted $A^c$, is the set of all elem
 :::
 
 ::: {#fig-complement layout-ncol=2}
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="90%", fig.align="center", echo=FALSE, fig.cap="$A^c$"}
-\begin{venndiagram2sets}
-\fillNotA
-\end{venndiagram2sets}
-```
+![$A^c$](images/venn-complement-a.png){width="90%"}
 
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="90%", fig.align="center", echo=FALSE, fig.cap="$B^c$"}
-\begin{venndiagram2sets}
-\fillNotB
-\end{venndiagram2sets}
-```
+![$B^c$](images/venn-complement-b.png){width="90%"}
 
 Complements.
 :::
@@ -539,17 +504,9 @@ This is an illustration of a very useful pair of set properties called
 :::
 
 ::: {#fig-demorgan-sets layout-ncol=2}
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="90%", fig.align="center", echo=FALSE, fig.cap="$(A \\cup B)^c = A^c \\cap B^c$"}
-\begin{venndiagram2sets}
-\fillNotAorB
-\end{venndiagram2sets}
-```
+![$(A \cup B)^c = A^c \cap B^c$](images/venn-demorgan-1.png){width="90%"}
 
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="90%", fig.align="center", echo=FALSE, fig.cap="$(A \\cap B)^c = A^c \\cup B^c$"}
-\begin{venndiagram2sets}
-\fillNotAorNotB
-\end{venndiagram2sets}
-```
+![$(A \cap B)^c = A^c \cup B^c$](images/venn-demorgan-2.png){width="90%"}
 
 De Morgan's laws.
 :::
@@ -614,55 +571,7 @@ Some functions do have this additional property, and we call those functions [on
 A function $f : A \to B$ is [one-to-one]{.concept definition="A function is one-to-one if it associates each element of the domain with a distinct element of the codomain: if $a \neq a'$, then $f(a) \neq f(a')$."}, also called [injective]{.concept definition="Another name for [one-to-one]{.concept}."}, if $f(a) \neq f(a')$ for all distinct elements $a \in A$ and $a' \in A$.
 :::
 
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="80%", fig.align="center", echo=FALSE, fig.cap="A function that is one-to-one, but not onto.", label="fig-one-to-one"}
-\begin{tikzpicture}[>=stealth, thick, font=\small]
-
-    %%% Set A
-    \begin{scope}
-        % Draw a "freeform" shape for set A
-        \draw[fill=blue!10, draw=blue!70, thick, dashed]
-             plot[smooth cycle, tension=1] coordinates {
-                (0,0) (2,0.7) (1.8,-2.5)
-             };
-        % Label A
-        \node at (1,1.2) {$A$};
-
-        % Points in A
-        \node (a1) [circle, fill=red, inner sep=1.2pt, label=above:$a_{1}$] at (0.8,0.3) {};
-        \node (a2) [circle, fill=red, inner sep=1.2pt, label=above:$a_{2}$] at (1.8,-0.4) {};
-        \node (a3) [circle, fill=red, inner sep=1.2pt, label=below:$a_{3}$] at (0.7,-1.0) {};
-        \node (a4) [circle, fill=red, inner sep=1.2pt, label=left:$a_{4}$]  at (1.7,-2) {};
-    \end{scope}
-
-    %%% Set B (shifted to the right)
-    \begin{scope}[xshift=5cm]
-        % Draw a "freeform" shape for set B
-        \draw[fill=green!10, draw=green!70, thick, dotted]
-             plot[smooth cycle, tension=1] coordinates {
-                (0,0) (2.2,0.7) (2.2,-1.6) (-0.2,-2.3)
-             };
-        % Label B
-        \node at (1,1.2) {$B$};
-
-        % Points in B
-        \node (b1) [circle, fill=red, inner sep=1.2pt, label=above:$b_{1}$] at (0.5,-0.1) {};
-        \node (b2) [circle, fill=red, inner sep=1.2pt, label=above:$b_{2}$] at (1.8,0.35) {};
-        \node (b3) [circle, fill=red, inner sep=1.2pt, label=below:$b_{3}$] at (1.1,-0.5) {};
-        \node (b4) [circle, fill=red, inner sep=1.2pt, label=below:$b_{4}$] at (1.4,-1.5) {};
-        \node (b5) [circle, fill=red, inner sep=1.2pt, label=right:$b_{5}$] at (-0.2,-2.0) {};
-    \end{scope}
-
-    %%% Label the function at the top
-    \node at (3.75,1.6) {$f: A \to B$};
-
-    %%% Draw arrows (the function)
-    \draw[->] (a1) to[bend left=10]  (b1);
-    \draw[->] (a2) to[bend left=10]  (b3);
-    \draw[->] (a3) to[bend right=10] (b4);
-    \draw[->] (a4) to[bend right=10] (b5);
-
-\end{tikzpicture}
-```
+![A function that is one-to-one, but not onto.](images/fn-one-to-one.png){#fig-one-to-one fig-align="center" width="80%"}
 
 The function $y : P \to \mathbb{N}$ that we discussed earlier, mapping presidents into the year that they first took office, is not one-to-one.
 William Henry Harrison took office in March 1841, famously gave a lengthy speech in poor weather, caught cold, and died a month later.
@@ -679,53 +588,7 @@ In the special case where a function does reach every element of the codomain, w
 A function $f : A \to B$ is [onto]{.concept definition="A function is onto if it maps at least one element of the domain to every element of the codomain: for all $b$ in the codomain, there is a domain element $a$ such that $f(a) = b$."}, also called [surjective]{.concept definition="Another name for [onto]{.concept}."}, if for every element $b \in B$ there is some element $a \in A$ such that $f(a) = b$.
 :::
 
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="80%", fig.align="center", echo=FALSE, fig.cap="A function that is onto, but not one-to-one.", label="fig-onto"}
-\begin{tikzpicture}[>=stealth, thick, font=\small]
-
-    %%% Set A
-    \begin{scope}
-        % Draw a "freeform" shape for set A
-        \draw[fill=blue!10, draw=blue!70, thick, dashed]
-             plot[smooth cycle, tension=1] coordinates {
-                (0,0) (2,0.7) (1.8,-2.5)
-             };
-        % Label A
-        \node at (1,1.2) {$A$};
-
-        % Points in A
-        \node (a1) [circle, fill=red, inner sep=1.2pt, label=above:$a_{1}$] at (0.8,0.3) {};
-        \node (a2) [circle, fill=red, inner sep=1.2pt, label=above:$a_{2}$] at (1.8,-0.4) {};
-        \node (a3) [circle, fill=red, inner sep=1.2pt, label=below:$a_{3}$] at (0.7,-1.0) {};
-        \node (a4) [circle, fill=red, inner sep=1.2pt, label=left:$a_{4}$]  at (1.7,-2) {};
-    \end{scope}
-
-    %%% Set B (shifted to the right)
-    \begin{scope}[xshift=5cm]
-        % Draw a "freeform" shape for set B
-        \draw[fill=green!10, draw=green!70, thick, dotted]
-             plot[smooth cycle, tension=1] coordinates {
-                (0,0) (2.2,0.7) (2.2,-1.6) (-0.2,-2.3)
-             };
-        % Label B
-        \node at (1,1.2) {$B$};
-
-        % Points in B
-        \node (b1) [circle, fill=red, inner sep=1.2pt, label=above:$b_{1}$] at (0.5,-0.1) {};
-        \node (b2) [circle, fill=red, inner sep=1.2pt, label=below:$b_{2}$] at (1.1,-0.5) {};
-        \node (b3) [circle, fill=red, inner sep=1.2pt, label=below:$b_{3}$] at (1.4,-1.5) {};
-    \end{scope}
-
-    %%% Label the function at the top
-    \node at (3.75,1.6) {$f: A \to B$};
-
-    %%% Draw arrows (the function)
-    \draw[->] (a1) to[bend left=10]  (b1);
-    \draw[->] (a2) to[bend left=10]  (b2);
-    \draw[->] (a3) to[bend right=10] (b3);
-    \draw[->] (a4) to[bend right=10] (b2);
-
-\end{tikzpicture}
-```
+![A function that is onto, but not one-to-one.](images/fn-onto.png){#fig-onto fig-align="center" width="80%"}
 
 We have already seen that the function that maps presidents into the first year they took office is not one-to-one.
 It is not onto either.
@@ -751,103 +614,9 @@ For every pair of elements $a \in A$ and $b \in B$, we have $f^{-1}(b) = a$ if a
 :::
 
 ::: {#fig-bijection layout-nrow="2"}
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="80%", fig.align="center", echo=FALSE, fig.cap="A bijection..."}
-\begin{tikzpicture}[>=stealth, thick, font=\small]
+![A bijection...](images/fn-bijection.png){width="80%"}
 
-    %%% Set A
-    \begin{scope}
-        % Draw a "freeform" shape for set A
-        \draw[fill=blue!10, draw=blue!70, thick, dashed]
-             plot[smooth cycle, tension=1] coordinates {
-                (0,0) (2,0.7) (1.8,-2.5)
-             };
-        % Label A
-        \node at (1,1.2) {$A$};
-
-        % Points in A
-        \node (a1) [circle, fill=red, inner sep=1.2pt, label=above:$a_{1}$] at (0.8,0.3) {};
-        \node (a2) [circle, fill=red, inner sep=1.2pt, label=above:$a_{2}$] at (1.8,-0.4) {};
-        \node (a3) [circle, fill=red, inner sep=1.2pt, label=below:$a_{3}$] at (0.7,-1.0) {};
-        \node (a4) [circle, fill=red, inner sep=1.2pt, label=left:$a_{4}$]  at (1.7,-2) {};
-    \end{scope}
-
-    %%% Set B (shifted to the right)
-    \begin{scope}[xshift=5cm]
-        % Draw a "freeform" shape for set B
-        \draw[fill=green!10, draw=green!70, thick, dotted]
-             plot[smooth cycle, tension=1] coordinates {
-                (0,0) (2.2,0.7) (2.2,-1.6) (-0.2,-2.3)
-             };
-        % Label B
-        \node at (1,1.2) {$B$};
-
-        % Points in B
-        \node (b1) [circle, fill=red, inner sep=1.2pt, label=above:$b_{1}$] at (0.5,-0.1) {};
-        \node (b2) [circle, fill=red, inner sep=1.2pt, label=below:$b_{2}$] at (1.1,-0.5) {};
-        \node (b3) [circle, fill=red, inner sep=1.2pt, label=below:$b_{3}$] at (1.4,-1.5) {};
-        \node (b4) [circle, fill=red, inner sep=1.2pt, label=right:$b_{4}$] at (-0.2,-2.0) {};
-    \end{scope}
-
-    %%% Label the function at the top
-    \node at (3.75,1.6) {$f: A \to B$};
-
-    %%% Draw arrows (the function)
-    \draw[->] (a1) to[bend left=10]  (b1);
-    \draw[->] (a2) to[bend left=10]  (b2);
-    \draw[->] (a3) to[bend right=10] (b3);
-    \draw[->] (a4) to[bend right=10] (b4);
-
-\end{tikzpicture}
-```
-
-```{r, engine="tikz", engine.opts=eo, cache=TRUE, out.width="80%", fig.align="center", echo=FALSE, fig.cap="...and its inverse."}
-\begin{tikzpicture}[>=stealth, thick, font=\small]
-
-    %%% Set A
-    \begin{scope}
-        % Draw a "freeform" shape for set A
-        \draw[fill=blue!10, draw=blue!70, thick, dashed]
-             plot[smooth cycle, tension=1] coordinates {
-                (0,0) (2,0.7) (1.8,-2.5)
-             };
-        % Label A
-        \node at (1,1.2) {$A$};
-
-        % Points in A
-        \node (a1) [circle, fill=red, inner sep=1.2pt, label=above:$a_{1}$] at (0.8,0.3) {};
-        \node (a2) [circle, fill=red, inner sep=1.2pt, label=above:$a_{2}$] at (1.8,-0.4) {};
-        \node (a3) [circle, fill=red, inner sep=1.2pt, label=below:$a_{3}$] at (0.7,-1.0) {};
-        \node (a4) [circle, fill=red, inner sep=1.2pt, label=left:$a_{4}$]  at (1.7,-2) {};
-    \end{scope}
-
-    %%% Set B (shifted to the right)
-    \begin{scope}[xshift=5cm]
-        % Draw a "freeform" shape for set B
-        \draw[fill=green!10, draw=green!70, thick, dotted]
-             plot[smooth cycle, tension=1] coordinates {
-                (0,0) (2.2,0.7) (2.2,-1.6) (-0.2,-2.3)
-             };
-        % Label B
-        \node at (1,1.2) {$B$};
-
-        % Points in B
-        \node (b1) [circle, fill=red, inner sep=1.2pt, label=above:$b_{1}$] at (0.5,-0.1) {};
-        \node (b2) [circle, fill=red, inner sep=1.2pt, label=below:$b_{2}$] at (1.1,-0.5) {};
-        \node (b3) [circle, fill=red, inner sep=1.2pt, label=below:$b_{3}$] at (1.4,-1.5) {};
-        \node (b4) [circle, fill=red, inner sep=1.2pt, label=right:$b_{4}$] at (-0.2,-2.0) {};
-    \end{scope}
-
-    %%% Label the function at the top
-    \node at (3.75,1.6) {$f^{-1}: B \to A$};
-
-    %%% Draw arrows (the function)
-    \draw[->] (b1) to[bend right=10]  (a1);
-    \draw[->] (b2) to[bend right=10]  (a2);
-    \draw[->] (b3) to[bend left=10] (a3);
-    \draw[->] (b4) to[bend left=10] (a4);
-
-\end{tikzpicture}
-```
+![...and its inverse.](images/fn-inverse.png){width="80%"}
 
 A function that is both one-to-one and onto.
 :::

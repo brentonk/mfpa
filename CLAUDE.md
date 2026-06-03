@@ -117,16 +117,17 @@ The `title=` is parsed as Markdown, so `$math$`, `@refs`, and emphasis resolve (
 
 **Crossref caveat:** a `.remark` / `.pitfall` div is *not* a crossref target. A callout referenced by `@id` (e.g. a `callout-note` cited elsewhere) can't be converted without rehoming the reference.
 
-## tikz figures (set theory chapter)
+## tikz figures (set theory chapter) — pre-rendered PNGs
 
-`set_theory.qmd` renders Venn diagrams via the LaTeX `venndiagram` package through `tikzDevice`. The setup chunk defines `eo` for engine.opts:
+`set_theory.qmd`'s Venn and function diagrams are **pre-rendered to committed PNGs**, not compiled on the fly. This keeps LaTeX out of the CI render (see the deploy section): the chapter has no R/tikz chunks at all and renders with Quarto alone.
 
-```r
-library("tikzDevice")
-eo <- list(extra.preamble="\\usepackage{venndiagram}")
+The sources live in `images/tikz/*.tex` — one standalone document per figure (`\documentclass{standalone}` + `venndiagram` or `tikz`/`arrows`). `images/tikz/build.sh` compiles each with `latexmk -pdf` and rasterizes to `images/<name>.png` (300 dpi via `pdftoppm`, falling back to ImageMagick). Run it **locally** after editing a diagram:
+
+```bash
+bash images/tikz/build.sh   # needs LaTeX with standalone+venndiagram, and pdftoppm/magick
 ```
 
-Subsequent tikz chunks pass `engine="tikz", engine.opts=eo, cache=TRUE`. A working LaTeX install with `venndiagram.sty` is required for these to render.
+The `.qmd` embeds the PNGs as ordinary figures, preserving the crossref ids — standalone figures keep their `{#fig-…}`, and Venn pairs sit in `::: {#fig-… layout-ncol=2}` panels with each image's alt text becoming the subfigure caption. When changing a diagram: edit its `.tex`, re-run `build.sh`, and commit both the `.tex` and the regenerated `.png`.
 
 ## Styling & design
 
