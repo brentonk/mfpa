@@ -368,6 +368,13 @@ aside:not(.footnotes):not(.sidebar),
     margin: 1.2rem 0;
     background-color: $mfpa-paper;
 
+    // A proof directly after the result it proves: sections containing column
+    // content are grids (.page-columns), where sibling margins don't collapse
+    // and the gap doubles to 2.4rem. Drop the proof's top margin so the pair
+    // sits 1.2rem apart everywhere — the same gap as adjacent boxes in
+    // normal-flow sections, where the margins collapse.
+    .theorem + & { margin-top: 0; }
+
     .proof-title {
         color: $mfpa-muted;
         font-weight: 600;
