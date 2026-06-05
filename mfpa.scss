@@ -235,21 +235,30 @@ ol > li:last-child > p:last-child { margin-bottom: 0; }
 #quarto-margin-sidebar { display: none !important; }
 
 @media (min-width: 992px) {
-    // Chapters (slimcontent) — reading measure ≈ 40rem, matching the mockup.
-    body.docked.slimcontent .page-columns {
+    // Chapters — reading measure 36rem (648px at the 18px root). Measured in
+    // Chromium: Source Serif 4 at 1rem fits a median 76 chars/line here, the
+    // top edge of the comfortable 60–80 editorial range; the mockup's 40rem
+    // ran a too-wide 86 CPL. Keyed off the
+    // numbered title block, NOT Quarto's `slimcontent` body class: slimcontent
+    // just means "this page has margin content", so a chapter would silently
+    // widen to the front-matter measure the moment its last aside is removed.
+    // (Scoped to the title block because the sidebar/breadcrumb reuse
+    // .chapter-number — see the eyebrow rule above.)
+    body.docked:has(#title-block-header .chapter-number) .page-columns {
         grid-template-columns:
             [screen-start] 1.5em
             [screen-start-inset page-start] minmax(50px, 100px)
             [page-start-inset] 50px
             [body-start-outset] 50px
             [body-start] minmax(1.5em, 1fr)
-            [body-content-start] minmax(0, 40rem)
+            [body-content-start] minmax(0, 36rem)
             [body-content-end] minmax(1.5em, 1fr)
             [body-end body-end-outset page-end-inset page-end] 0px
             [screen-end-inset] 1.5em
             [screen-end];
     }
-    // Front/back matter (Preface, References) — a touch wider for the cover.
+    // Front/back matter (Preface, References — no chapter number, so the
+    // :has() rule above doesn't match) — a touch wider for the cover.
     body.docked .page-columns {
         grid-template-columns:
             [screen-start] 1.5em
