@@ -469,6 +469,9 @@ So what do you do if you see someone talk about the complement of a set, without
 
 - If the context is not clear enough for there to be a natural choice of universal set (e.g., you're talking about sets of radically different types of objects), then use explicit set differences when needed rather than taking complements of sets.
 
+One brief note on notation.
+Some textbooks and writers use an overline, as in $\overline{A}$, to denote the complement of a set.
+
 ::: {#exr-complement title="Complement of a set"}
 Suppose our universe is the number line, $\mathbb{R}.$
 Let $X = \{x \in \mathbb{R} \mid x < 10\}.$
@@ -485,20 +488,35 @@ I'll leave it to you to infer what the shorthands $(-\infty, a]$ and $(b, \infty
 ::::
 :::
 
+::: {#exr-complement-repeated title="Complement of the complement"}
+Suppose our universe is the set of natural numbers from 1 to 10.
+Let $X = \{2, 4, 6, 8, 10\}.$
+Characterize $X^c$ and $(X^c)^c.$
+Confirm that $(X^c)^c = X.$
+
+**Bonus question to think about:** Is it generally true that the complement of the complement is the original set, or is that a special property of this example?
+
+:::: {.answer}
+We're working with the universe $$U = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}.$$
+This gives us the complement $$X^c = U \setminus X = \{1, 3, 5, 7, 9\}.$$
+The complement of the complement in turn is $$(X^c)^c = U \setminus X^c = \{2, 4, 6, 8, 10\},$$ which is indeed the same as the original set $X.$
+
+The equality $(X^c)^c = X$ is not special to this example---it's a general property of the complement.
+We'll see soon enough how to prove this claim formally.
+For now, it'll suffice to observe that $(X^c)^c = \{x \in U \mid x \notin X^c\}.$
+But if an element $x$ is *not* an element of the complement $X^c,$ then it must be an element of the original set $X.$
+Hence $(X^c)^c = \{x \in U \mid x \in X\} = X.$
+::::
+:::
+
 You can combine the complement with other set operations.
 For example, $(A \cup B)^c$ is the complement of $A \cup B,$ i.e., everything that is not an element of $A \cup B.$
 Be careful when combining operations in this way!
 In general, it is *not* true that $(A \cup B)^c = A^c \cup B^c.$
 In fact, the complement "flips" a union into an intersection, and vice versa---a property of the complement known as [De Morgan's laws]{.concept definition="Rules for taking the complement of a union or an intersection of sets.  The complement of a union is the intersection of the individual complements, and the complement of an intersection is the union of the individual complements."}.
 
-Taking our universe as the set of all people, let's think about the complement of the union of sets of everyone who's been a president or vice president, $(P \cup Q)^c$.
-Anyone who's been a president or a vice president is an element of $P \cup Q$.
-Therefore, if someone is not an element of $P \cup Q$, that tells us that the person has never been president *and* has never been vice president.
-In other words, that person belongs to both $P^c$ and $Q^c$, and thus also to their intersection $P^c \cap Q^c$.
-This is an illustration of a very useful pair of set properties called
-
 ::: {#thm-demorgan-sets name="De Morgan's laws"}
-1.  $(A \cup B)^c = A^c \cap B^c$.
+1. $(A \cup B)^c = A^c \cap B^c$.
 
 2. $(A \cap B)^c = A^c \cup B^c$.
 :::
@@ -511,24 +529,85 @@ This is an illustration of a very useful pair of set properties called
 De Morgan's laws.
 :::
 
+To illustrate De Morgan's laws, again let $P$ be the set of presidents and $Q$ be the set of vice presidents.
+Their union, $P \cup Q,$ is anyone who's ever been president, vice president, or both.
+The complement of the union, $(P \cup Q)^c,$ is therefore the set of people who have never been president *and* who have never been vice president.
+In order to be in the complement $(P \cup Q)^c,$ a person must be in both the never-president set, $P^c,$ and the never-vice-president set, $Q^c.$
+In other words, they must be in the intersection $P^c \cap Q^c.$
+
+To think about it another way, let's see why $(P \cup Q)^c$ is *not* the same as $P^c \cup Q^c.$
+Barack Obama was never vice president, i.e., $\text{Barack Obama} \notin Q,$ and thus $\text{Barack Obama} \in Q^c.$
+Because he's in the complement of the vice president set, he's also in the union $P^c \cup Q^c.$
+At the same time, because Barack Obama was the president, he's in the president set $P$---and thus also its union with the vice president set $P \cup Q.$
+Altogether, we've shown that both of the following are true:
+$$
+\begin{aligned}
+\text{Barack Obama} &\in P \cup Q; \\
+\text{Barack Obama} &\in P^c \cup Q^c.
+\end{aligned}
+$$
+Because these two sets have an element in common, namely Barack Obama, it cannot be the case that $P^c \cup Q^c$ is the complement of $P \cup Q.$
+
+::: {#exr-de-morgan name="De Morgan's laws"}
+Suppose our universe is the set of natural numbers from 1 to 10.
+As in @exr-union-intersection, let $X = \{1, 2, 4, 8\}$ and $Y = \{2, 4, 6, 8\}.$
+Directly confirm that both of De Morgan's laws apply to the union and intersection of these sets.
+
+:::: {.answer}
+Union and intersection (from the answer to @exr-union-intersection):
+$$
+\begin{aligned}
+X \cap Y &= \{2, 4, 8\}; \\
+X \cup Y &= \{1, 2, 4, 6, 8\}.
+\end{aligned}
+$$
+
+Complements of the individual sets:
+$$
+\begin{aligned}
+X^c &= \{3, 5, 6, 7, 9, 10\}; \\
+Y^c &= \{1, 3, 5, 7, 9, 10\}.
+\end{aligned}
+$$
+
+Confirmation of law 1:
+$$
+\begin{aligned}
+(X \cup Y)^c &= \{1, 2, 4, 6, 8\}^c \\ &= \{3, 5, 7, 9, 10\}; \\
+\end{aligned}
+$$
+
+Confirmation of law 2:
+$$
+\begin{aligned}
+(X \cap Y)^c &= \{2, 4, 8\}^c \\ &= \{1, 3, 5, 6, 7, 9, 10\}; \\
+X^c \cup Y^c &= \{3, 5, 6, 7, 9, 10\} \cup \{1, 3, 5, 7, 9, 10\} \\ &= \{1, 3, 5, 6, 7, 9, 10\}.
+\end{aligned}
+$$
+::::
+:::
 
 ## Functions {#sec-functions}
 
-Every US president took office at some recognizable point in time.
-George Washington's first term began in 1789.
-Grover Cleveland's first term began in 1893.
-Barack Obama's first term began in 2009.
-I could go on, but you get the point.
-For every president, there is exactly one year when they became president for the first time.
+We often associate elements of one set with elements of another set.
+We do this so often that it probably doesn't seem like math most of the time.
 
-What we've done here is associate each president, an element of set $P$ as we've been calling it, with a natural number, an element of $\mathbb{N}$.
-"The year that a given president took office" is what we call a [function]{.concept definition="A rule that associates each element in one set (the domain) with a single element in another set (the codomain).  We write $f : A \to B$ to denote a function $f$ with domain $A$ and codomain $B$."}, which we might say "maps" one set into another.
-The notation $f : A \to B$ is a bit of mathematical shorthand that means "$f$ is a rule that takes each element of $A$ and associates it with an element of $B$".
+- Each graduate student is assigned to an office (including the carrels).
+  You can think of this as a rule that takes each element of the set of Vanderbilt political science graduate students and associates it with an element of the set of rooms on the third floor of the Commons Center.
+
+- Every home in Davidson County belongs to one of three congressional districts.
+  You can think of this as a rule that takes each element of the set of Davidson County addresses and associates it with an element of $\{\text{TN-04}, \text{TN-06}, \text{TN-07}\}.$
+
+- Every US president took office in their first term in some year: George Washington in 1789, Grover Cleveland in 1893, Barack Obama in 2009, and so on.
+  You can think of this as a rule that takes each element of the set of US presidents and associates it with a natural number.^[This exercise is more complicated for polities that existed both before and after the common era, such as the Roman Empire.]
+
+Each of these examples is a [function]{.concept definition="A rule that associates each element in one set (the domain) with a single element in another set (the codomain).  We write $f : A \to B$ to denote a function $f$ with domain $A$ and codomain $B$."}, which we might say "maps" one set into another.
+The notation $f : A \to B$ is a bit of mathematical shorthand that means "$f$ is a rule that takes each element of $A$ and associates it with an element of $B.$"
 For any element $a \in A$, we write $f(a)$ to stand for the element of $B$ that the function associates $a$ with.
-When a function maps $A$ into $B$, we call $A$ the [domain]{.concept definition='The set that a function "acts on".  If $f$ is a function whose domain is $A$, then $f(a)$ is defined for every element $a \in A$.'} and $B$ the [codomain]{.concept definition='The set that a function "maps into".  If $f$ is a function whose domain is $A$ and whose codomain is $B$, then $f(a)$ is an element of $B$ for every element $a \in A$.'}.
+When a function maps $A$ into $B$, we call $A$ the [domain]{.concept definition='The set that a function "acts on."  If $f$ is a function whose domain is $A,$ then $f(a)$ is defined for every element $a \in A.$'} and $B$ the [codomain]{.concept definition='The set that a function "maps into."  If $f$ is a function whose domain is $A$ and whose codomain is $B,$ then $f(a)$ is an element of $B$ for every element $a \in A.$'}.
 
-To continue the example, let $y : P \to \mathbb{N}$ (verbally: "$y$ is a function that maps the set of presidents into the set of natural numbers") be the function that associates each president with the year they first took office.
-Then we have $y(\text{George Washington}) = 1789$, $y(\text{Grover Cleveland}) = 1893$, and so on.
+To continue with the last example from the list above, let $y : P \to \mathbb{N}$ (verbally: "$y$ is a function that maps the set of presidents into the set of natural numbers") be the function that associates each president with the year they first took office.
+Then we have $y(\text{George Washington}) = 1789,$ $y(\text{Grover Cleveland}) = 1893,$ and so on.
 The domain of this function is the set of presidents, $P$, and the codomain is the set of natural numbers, $\mathbb{N}$.
 
 Some associations between sets are not functions.
@@ -547,7 +626,7 @@ In mathematical terms, we would call the president-and-their-vice-president(s-if
 Any function is a relation, but many relations are not functions.
 There are lots of cool things to study about relations, but I cannot say in good faith that you *must* know these cool things, so that is all I will say about relations.
 
-::: {#exr-pres-vp-functions}
+::: {#exr-pres-vp-functions name="Creating a valid function"}
 Come up with a function that maps the set of presidents, $P$, into the set of vice presidents, $Q$.
 Convince yourself that it satisfies the key requirement of a function --- that every element in $P$ is associated with one, and exactly one, element in $Q$.
 
@@ -563,12 +642,11 @@ So if you're here in a political science PhD program because your law school dre
 
 ### One-to-one and onto functions
 
-As you saw in @exr-pres-vp-functions, there is nothing in the definition of a function to suggest that every element of the domain must be associated with a *different* element of the codomain.
-Some functions do have this additional property, and we call those functions [one-to-one]{.concept}.
+As you saw in my answer to @exr-pres-vp-functions, there is nothing in the definition of a function to suggest that every element of the domain must be associated with a *different* element of the codomain.
+Some functions do have this additional property, and we call those functions [one-to-one]{.concept entry="One-to-one (aka injective)" definition="A function is one-to-one, also called injective, if it associates each element of the domain with a distinct element of the codomain: if $a \neq a'$, then $f(a) \neq f(a')$."}.
 
-::: {#def-one-to-one}
-## One-to-one
-A function $f : A \to B$ is [one-to-one]{.concept definition="A function is one-to-one if it associates each element of the domain with a distinct element of the codomain: if $a \neq a'$, then $f(a) \neq f(a')$."}, also called [injective]{.concept definition="Another name for [one-to-one]{.concept}."}, if $f(a) \neq f(a')$ for all distinct elements $a \in A$ and $a' \in A$.
+::: {#def-one-to-one name="One-to-one function"}
+A function $f : A \to B$ is [one-to-one]{.concept entry="One-to-one (aka injective)"}, also called [injective]{.concept entry="One-to-one (aka injective)"}, if $f(a) \neq f(a')$ for all distinct elements $a \in A$ and $a' \in A.$
 :::
 
 ![A function that is one-to-one, but not onto.](images/fn-one-to-one.png){#fig-one-to-one fig-align="center" width="80%"}
@@ -581,11 +659,10 @@ Because these are two different presidents with the same function value, $y$ is 
 
 You also saw in @exr-pres-vp-functions that a function need not reach every element of its codomain.
 In fact, if the domain has fewer elements than the codomain --- such as with the sets of presidents $P$ and vice presidents $Q$, where at the time of writing there have been 45 presidents and 50 vice presidents --- it would be impossible for the function to reach every element of the codomain.
-In the special case where a function does reach every element of the codomain, we turn a preposition into an adjective and say the function is [onto]{.concept}.
+In the special case where a function does reach every element of the codomain, we turn a preposition into an adjective and say the function is [onto]{.concept entry="Onto (aka surjective)" definition="A function is onto, also called surjective, if it maps at least one element of the domain to every element of the codomain: for all $b$ in the codomain, there is a domain element $a$ such that $f(a) = b.$"}.
 
-::: {#def-onto}
-## Onto
-A function $f : A \to B$ is [onto]{.concept definition="A function is onto if it maps at least one element of the domain to every element of the codomain: for all $b$ in the codomain, there is a domain element $a$ such that $f(a) = b$."}, also called [surjective]{.concept definition="Another name for [onto]{.concept}."}, if for every element $b \in B$ there is some element $a \in A$ such that $f(a) = b$.
+::: {#def-onto name="Onto function"}
+A function $f : A \to B$ is [onto]{.concept entry="Onto (aka surjective)"}, also called [surjective]{.concept entry="Onto (aka surjective)"}, if for every element $b \in B$ there is some element $a \in A$ such that $f(a) = b.$
 :::
 
 ![A function that is onto, but not one-to-one.](images/fn-onto.png){#fig-onto fig-align="center" width="80%"}
@@ -596,8 +673,8 @@ Consider 1999, the year *The Matrix* came out and inspired legions of nerds (lik
 1999 is a natural number, or $1999 \in \mathbb{N}$ if you want to be formal about it, and yet no president took office for the first time then; Bill Clinton, who had first taken office in 1993, was the president the entire year.
 We have found a number $n \in \mathbb{N}$ such that $y(p) \neq n$ for all presidents $p \in P$, meaning $y$ is not onto.
 
-Functions that are both one-to-one and onto, which we call [bijections]{.concept}, are special.
-What makes them special is that they can be reversed, or [inverted]{.concept} in the language of mathematics.
+Functions that are both one-to-one and onto, which we call [bijections]{.concept entry="Bijection" definition="A function that is both one-to-one (injective) and onto (surjective)."}, are special.
+What makes them special is that they can be reversed, or [inverted]{.concept entry="Inverse function" definition="The reverse of a function, denoted $f^{-1}$, where $f^{-1}(b) = a$ if and only if $f(a) = b$.  Only exists for bijections."} in the language of mathematics.
 I like to think of a bijection as creating a "buddy system" between its domain and a codomain.
 Think about a bijection $f$ that maps elements of (domain) $A$ into (codomain) $B$, so we'd write $f : A \to B$.
 Then for every element $a$ of $A$, there is *exactly one* element $b$ of $B$ such that $f(a) = b$.
@@ -605,11 +682,10 @@ And for every element $b$ of $B$, there is *exactly one* element $a$ of $A$ such
 If the function weren't one-to-one, then there'd be at least one $a \in A$ with multiple matches in $B$.
 If it weren't onto, then there'd be at least one $b \in B$ with no matches in $A$.
 
-::: {#def-bijective}
-## Bijection and inverse
-A function $f : A \to B$ is a [bijection]{.concept definition="A function that is both one-to-one (injective) and onto (surjective)."} if it is both one-to-one and onto.
+::: {#def-bijective name="Bijection and inverse"}
+A function $f : A \to B$ is a [bijection]{.concept} if it is both one-to-one and onto.
 
-Every bijective function has an [inverse function]{.concept definition="The reverse of a function, denoted $f^{-1}$, where $f^{-1}(b) = a$ if and only if $f(a) = b$.  Only exists for functions that are bijective (one-to-one and onto)."}, $f^{-1} : B \to A$.
+Every bijective function has an [inverse function]{.concept}, $f^{-1} : B \to A$.
 For every pair of elements $a \in A$ and $b \in B$, we have $f^{-1}(b) = a$ if and only if $f(a) = b$.
 :::
 
@@ -626,35 +702,68 @@ Each element of $A$ has exactly one buddy in $B$, and each element of $B$ has ex
 For finite sets like the ones in the illustration, you can probably convince yourself that they'd have to have the same number of elements in order for this kind of buddy system to be viable.
 All I'll say here for infinite sets is that it gets weirder; read the optional @sec-cardinality below if you want to peek into the weirdness.
 
-We'll conclude our main discussion of functions with one more proof.
-If you look at @fig-bijection, you'll see that the inverse of $f$ is one-to-one and onto.
-This is not just an accidental feature of the illustration; it's a general feature of the inverse function of a bijection.
-If you're not convinced, here's a proof.
-(And if you are convinced---shouldn't you have asked for proof instead of just taking my word?)
+::: {#exr-function-properties name="One-to-one and onto"}
+For each of the following functions, identify whether it is one-to-one, onto, both, or neither.
+If the function is both one-to-one and onto, characterize its inverse function.
 
-::: {#prp-inverse-bijective}
-## The inverse of a bijection is a bijection
-If $f$ is a bijection, then its inverse $f^{-1}$ is a bijection.
+1. $f : \mathbb{N} \to \mathbb{N}$ defined by $f(n) = n + 1.$
+2. $g : \mathbb{Z} \to \mathbb{Z}$ defined by $g(z) = z - 1.$
+3. $h : \{8350\} \to \{8356\}$ defined by $h(8350) = 8356.$
+4. $i : \{-1, 0, 1\} \to \{-1, 0, 1\}$ defined by $i(x) = x^2.$
+
+:::: {.answer}
+1. $f$ is one-to-one, as distinct inputs always map to distinct outputs.
+   To be a bit more rigorous about this, we can show that $f(m) = f(n)$ can hold only when $m = n.$
+   To see why that's the case, notice that $f(m) = f(n)$ means $m + 1 = n + 1,$ which in turn (after subtracting 1 from both sides) means $m = n.$
+
+   $f$ is not onto.
+   In particular, we have $1 \in \mathbb{N},$ yet there is no $n$ such that $f(n) = 1.$
+   (The only input that could give us $f(n) = 1$ is $n = 0,$ but 0 is not an element of the domain we specified.)
+
+2. $g$ is one-to-one.
+   You can --- and should --- convince yourself of this by using the same logic as I used in my answer to #1.
+
+   $g$ is also onto.
+   To see why this is the case, we can take any element of the codomain and find the domain element that maps to it.
+   Specifically, for any integer $y \in \mathbb{Z},$ the number $y + 1$ is an integer too (i.e., $y + 1 \in \mathbb{Z}$) and we have $g(y + 1) = (y + 1) - 1 = y.$
+
+   The inverse function is $g^{-1} : \mathbb{Z} \to \mathbb{Z}$ defined by $g^{-1}(y) = y + 1.$
+   To confirm that this is the inverse function, we must confirm that $g(g^{-1}(y)) = y$ for any arbitrary input $y:$ $$g(g^{-1}(y)) = g^{-1}(y) - 1 = (y + 1) - 1 = y.$$
+
+3. $h$ is one-to-one.
+   How can we draw that conclusion, given that there's only one element of the domain to begin with?
+   Well, the only way for a function to *fail* to be one-to-one is for there to be two distinct elements of the domain that map to the same element of the codomain.
+   Given that, any function whose domain is a [singleton]{.concept definition="A set that contains exactly one element."} --- a set with one element --- is one-to-one.
+
+   $h$ is also onto: the only element of the codomain is 8356, and we have $h(8350) = 8356,$ so the whole codomain is covered by the function.
+
+   The inverse function is $h^{-1} : \{8356\} \to \{8350\}$ defined by $h^{-1}(8356) = 8350.$
+
+4. $i$ is not one-to-one: $i(-1) = i(1) = 1.$
+
+   $i$ is not onto: we have $i(-1) = i(1) = 1$ and $i(0) = 0,$ so there is no $x$ in the domain that gives us $i(x) = -1.$
+::::
 :::
 
-::: {.proof}
-Assume $f : A \to B$ is a bijection.
-To prove the proposition, we need to show that $f^{-1} : B \to A$ is both one-to-one and onto.
+::: {#exr-function-properties-advanced name="More one-to-one and onto"}
+Come up with an example of a function that is...
 
-To show that $f^{-1}$ is one-to-one, we need to show that $f^{-1}(b) \neq f^{-1}(b')$ for any distinct elements $b \in B$ and $b' \in B$.
-To accomplish this, take any pair of distinct $b \in B$ and $b' \in B$.
-(By distinct, we mean that $b \neq b'$.)
-Because $f$ is onto, there is an $a \in A$ such that $f(a) = b$ and an $a' \in A$ such that $f(a') = b'$.
-As $b$ and $b'$ are distinct, we must have $a \neq a'$; otherwise, we would have $f(a) = f(a')$ and thus $b = b'$.
-Meanwhile, by definition of the inverse function, $f^{-1}(b) = a$ and $f^{-1}(b') = a'$.
-Putting this together with the fact that $a \neq a'$, we have $f^{-1}(b) \neq f^{-1}(b')$.
-As $b$ and $b'$ were chosen arbitrarily, this proves that $f^{-1}(b) \neq f^{-1}(b')$ for any distinct $b \in B$ and $b' \in B$, which means $f^{-1}$ is one-to-one.
+1. ... one-to-one, but not onto.
+2. ... onto, but not one-to-one.
+3. ... both one-to-one and onto.
+4. ... neither one-to-one nor onto.
 
-To show that $f^{-1}$ is onto, we need to show that for every element $a \in A$, there is an element $b \in B$ such that $f^{-1}(b) = a$.
-To accomplish this, take any element $a \in A$.
-There is an element $b \in B$ such that $f(a) = b$.
-By definition of the inverse function, $f^{-1}(b) = a$.
-As $a$ was chosen arbitrarily, this proves that for every $a \in A$ there is some $b \in B$ such that $f^{-1}(b) = a$, which means $f^{-1}$ is onto.
+In each case, the domain and codomain of your function should both be the [unit interval]{.concept definition="The name for the set of real numbers from 0 to 1 inclusive, i.e., $[0, 1].$"}, $[0, 1].$
+
+:::: {.answer}
+There are, of course, many valid answers.
+Here are some examples.
+
+1. One-to-one but not onto: $f(x) = x/2.$
+2. Onto but not one-to-one: the "hockey stick" function defined by $$f(x) = \begin{cases} 2x & \text{if $x \leq 1/2$},\\ 1 & \text{if $x > 1/2$}.\end{cases}$$
+3. Both one-to-one and onto: $f(x) = x.$
+4. Neither one-to-one nor onto: $f(x) = 0.$
+::::
 :::
 
 ### An optional digression into cardinality and infinities {#sec-cardinality}
@@ -664,7 +773,7 @@ This section contains material that is not strictly necessary, but which I find 
 The [cardinality]{.concept definition="The cardinality of a set $A$, denoted $|A|$, is the number of elements in the set if it is finite.  It gets more complicated if the set is infinite."} of a set, loosely speaking, is the number of elements in the set.
 We write $|A|$ to denote the cardinality of a set $A$.
 For a finite set, this loose definition is exact --- the cardinality of a finite set is simply its size.
-For example, if $A = \{1.1, 2.2, 4.4\}$, then $|A| = 3$.
+For example, if $A = \{1, 10, 100\}$, then $|A| = 3$.
 
 It gets more complicated once we start dealing with infinite sets.
 You might think that $|A| = \infty$ for infinite sets.
@@ -697,31 +806,6 @@ In a way, it is easier to prove that two sets have equal cardinality than to pro
 To prove that $|A| = |B|$, we just need to find one bijection between them.
 But to prove that $|A| \neq |B|$, we need to show that *every* function between them is not a bijection.
 
-::: {#exr-cardinality-finite}
-Consider the sets
-$$
-\begin{aligned}
-A &= \{\text{Coke}, \text{Pepsi}, \text{Mountain Dew}\}, \\
-B &= \{10, 17\}, \\
-C &= \{10, 17, 27, 42\}.
-\end{aligned}
-$$
-Using the formal definition of equal cardinality, prove that $|A| \neq |B|$ and $|A| \neq |C|$.
-
-:::: {.answer}
-To prove the first claim, we must show that there is no bijection mapping $A$ into $B$ --- or vice versa (remember from @prp-inverse-bijective that if there is a bijection from $A$ into $B$, then there is also a bijection from $B$ into $A$).
-We can easily show that there is no onto function mapping $B$ into $A$.
-Consider any function $f : B \to A$ such that $f(b) = \text{Coke}$ for some $b \in B$ and $f(b') = \text{Pepsi}$ for some $b' \in B$.
-Then we must have either $b = 10$ and $b' = 17$, or else $b = 17$ and $b' = 10$.
-Either way, there is no $b'' \in B$ such that $f(b'') = \text{Mountain Dew}$.
-Therefore, there is no onto function, and thus no bijection, mapping $B$ into $A$.
-We conclude that $|A| \neq |B|$.
-
-The proof that $|A| \neq |C|$ follows almost the same steps.
-You just need to show that there is no onto function mapping $A$ into $C$.
-::::
-:::
-
 Our definition of equal cardinality operates totally intuitively with finite sets.
 It is not so intuitive with infinite sets.
 Let $\mathbb{N}_E$ stand for the set of even natural numbers, so that $$\mathbb{N}_E = \{2n \mid n \in \mathbb{N}\} = \{2, 4, 6, \ldots\}.$$
@@ -730,15 +814,16 @@ After all, every even natural number is a natural number, yet not every natural 
 In mathematical notation, $\mathbb{N}_E \subseteq \mathbb{N}$ and $\mathbb{N} \nsubseteq \mathbb{N}_E$.
 Nonetheless, these two sets turn out to have the same cardinality.
 
-::: {#exm-even-cardinality}
-## Naturals and even naturals have same cardinality
-Consider the function $f : \mathbb{N} \to \mathbb{N}_E$ defined by $f(n) = 2n$.
-To see that $f$ is one-to-one, observe that if $n \neq n'$, then $f(n) = 2n \neq 2n' = f(n')$.
-To see that $f$ is onto, take any even natural number $e \in \mathbb{N}_E$.
-By definition of an even natural number, there exists a natural number $n$ such that $2n = e$.
-Therefore, $f(n) = e$.
-As $e$ was chosen arbitrarily, this means that for every $e \in \mathbb{N}_E$ there is an $n \in \mathbb{N}$ such that $f(n) = e$, and thus $f$ is onto.
-We have shown that $f$ is a bijection, so $|\mathbb{N}| = |\mathbb{N}_E|$.
+::: {#prp-cardinality-of-evens}
+The set of even natural numbers, $\mathbb{N}_E,$ has the same cardinality as the set of all natural numbers, $\mathbb{N};$ i.e., $|\mathbb{N}_E| = |\mathbb{N}|.$
+:::
+
+::: {.proof}
+We need to find a bijection between the two sets.
+I propose the function $f : \mathbb{N} \to \mathbb{N}_E$ defined by $f(n) = 2n.$
+This function is one-to-one, because the only way to have $f(n) = f(m)$ is to have $2n = 2m,$ which in turn can be true only if $n = m.$
+This function is also onto, because every even natural number is 2 times some natural number (as is evident from the definition of $\mathbb{N}_E$ above).
+Because $f$ is a bijection, we have $|\mathbb{N}| = |\mathbb{N}_E|.$
 :::
 
 ![](https://klienbottles.wordpress.com/wp-content/uploads/2016/08/hotel1.png){fig-align="center"}
@@ -748,41 +833,34 @@ A more vivid way to describe the weirdness is the metaphor of [Hilbert's Hotel](
 Imagine a hotel with infinitely many rooms, one for each natural number.
 A traveler arrives at the hotel, only to find out every room is full.
 She starts to walk out the door, when the manager tells her, "Don't worry, we can make room."
-He tells the occupant of room 1 to move to room 2, whose occupant goes to room 3, whose occupant goes to room 4, and so on, with the guest of each room $n$ being moved to room $n + 1$.
+He tells the occupant of room 1 to move to room 2, whose occupant goes to room 3, whose occupant goes to room 4, and so on, with the guest of each room $n$ being moved to room $n + 1.$
 The new arrival can now move into room 1, even though the hotel was full when she arrived and no one has checked out.
 
 If you buy that Hilbert's Hotel can accommodate one additional guest even when it's full, then you will probably agree that it could take any finite number of new guests.
-If $m$ guests arrive, have the guest in each room $n$ move to room $n + m$.
+If $m$ guests arrive, have the guest in each room $n$ move to room $n + m.$
+
 What is more surprising is that Hilbert's Hotel can also accommodate an *infinite* number of new guests.
-The logic is an application of @exm-even-cardinality.
-For each current guest in room $n$, have them move to room $2n - 1$.
+The logic is an application of @prp-cardinality-of-evens.
+For each current guest in room $n,$ have them move to room $2n - 1.$
 Now all of the even rooms are empty, and we can put the first new guest in our infinite sequence of new arrivals into room 2, the second into room 4, and so on.
 This seems crazy.
-It is crazy.
+It is crazy.^[We can make it even crazier if we want.  Suppose an infinite number of trains arrive, each of which contains an infinite number of guests.  Because [the set of all pairs of natural numbers has the same cardinality as the set of natural numbers](https://math.stackexchange.com/q/1293854), it turns out that the ostensibly full hotel can accommodate this infinity-upon-infinity of new guests too.]
 Infinite quantities behave in strange ways, and we will go astray if we try to apply the rules of ordinary numbers to infinities.
-
-::: {.aside}
-We can make it even crazier if we want.  Suppose an infinite number of trains arrive, each of which contains an infinite number of guests.  Because [the set of all pairs of natural numbers has the same cardinality as the set of natural numbers](https://math.stackexchange.com/q/1293854), it turns out that the ostensibly full hotel can accommodate this infinity-upon-infinity of new guests too.
-:::
 
 We've seen that there are as many natural numbers as there are even natural numbers.
 This result might lead you to think that all infinite sets have the same cardinality.
 In fact, that's not the case.
 Some infinities are bigger than others.
-For example, the cardinality of the real numbers is greater than the cardinality of the natural numbers.
-
-::: {.aside}
-Is there any set whose cardinality is in between these two?  Mathematicians literally, and famously, [cannot decide](https://en.wikipedia.org/wiki/Continuum_hypothesis).
-:::
+For example, the cardinality of the real numbers is greater than the cardinality of the natural numbers.^[Is there any set whose cardinality is in between these two?  Mathematicians literally, and famously, [cannot decide](https://en.wikipedia.org/wiki/Continuum_hypothesis).]
 
 To see why there are more real numbers than natural numbers, we will sketch out [the diagonal argument](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument) from the 19th century mathematician Georg Cantor.
 (It's a sketch because there are some nagging details that we will ignore.  For example, we are ignoring the possibility of two different decimal expansions corresponding to the same number, as is the case with 0.1 and 0.099999$\cdots$.)
 Remember that two sets have equal cardinality if there is a bijection that maps one into the other.
 So to prove that the cardinalities of the natural numbers $\mathbb{N}$ and the real numbers $\mathbb{R}$ are different, we will show that no function $f : \mathbb{N} \to (0, 1)$ can be onto, and thus no bijection meeting the definition of equal cardinality may exist.
 
-Take any function $f : \mathbb{N} \to (0, 1)$.
+Take any function $f : \mathbb{N} \to (0, 1).$
 This function associates each natural number $n = 1, 2, \ldots$ with a real number between 0 and 1 (not inclusive).
-We want to show that there is a real number $x \in [0, 1]$ outside the range of $f$, i.e., $f(n) \neq x$ for all $n \in \mathbb{N}$.
+We want to show that there is a real number $x \in (0, 1)$ outside the range of $f,$ i.e., $f(n) \neq x$ for all $n \in \mathbb{N}.$
 To see how we're going to do this, let's imagine lining up each $f(n)$ and taking their decimal expansion.
 
 | $n$      | $f(n)$     | digit 1 | digit 2 | digit 3 | digit 4 | digit 5 | ... |
@@ -797,7 +875,7 @@ To see how we're going to do this, let's imagine lining up each $f(n)$ and takin
 We want to find an $x$ that is not equal to any $f(n)$.
 We can construct this by ensuring that the $n$'th decimal of $x$ differs from the $n$'th decimal of each $f(n)$.
 
-| $n$      | $f(n)$     | $n$'th digit of $f(n)$ | $n$'th digit of $x$ |
+| $n$      | $f(n)$     | n'th digit of $f(n)$ | n'th digit of $x$ |
 | -------- | ---------- | ---------------------- | ------------------- |
 | 1        | 0.04052... | 0                      | 1                   |
 | 2        | 0.65077... | 5                      | 6                   |
@@ -806,7 +884,7 @@ We can construct this by ensuring that the $n$'th decimal of $x$ differs from th
 | 5        | 0.09802... | 2                      | 3                   |
 | $\vdots$ | $\vdots$   | $\vdots$               | $\vdots$            |
 
-By constructing $x$ this way, we ensure that there is no $n$ where $f(n)$ equals $x$, because we know that it differs in at least one decimal place from every single $f(n)$.
+By constructing $x$ this way, we ensure that there is no $n$ where $f(n)$ equals $x,$ because we know that it differs in at least one decimal place from every single $f(n).$
 This means there is no onto function that maps from the natural numbers into $(0, 1)$, and therefore no onto function that maps from the natural numbers into the real numbers, and therefore these sets have different cardinalities.
 In other words, there is more than one infinity! 
 
