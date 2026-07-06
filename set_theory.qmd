@@ -21,9 +21,10 @@ Second, as you'll soon see in the stats sequence, you'll be working with sets a 
 "Events" in probability are defined as sets; joint and conditional probabilities involve operations on these sets.
 To understand foundational concepts of inference like [Bayes' rule](https://en.wikipedia.org/wiki/Bayes%27_theorem), you need some set-theoretic background.
 
-Finally, in this course you won't just be doing math in terms of performing computations.
-I want you to come away with an understanding of math as the science of *making arguments* that are backed by *logical proofs*.
-It turns out that set theory is a good starting point to build your argument-stating and proof-writing skills, as you'll see in depth in @sec-logic.
+Finally, I want you to think about "doing math" as more than just performing computations.
+Math, at its core, is the science of *making arguments* that are backed by *logical proofs*.
+For most of the course, while we work through the essential computational techniques you'll need for the stats sequence, we will only make occasional glances at mathematical proofs.
+But we'll study logic and proof writing more in depth at the end of the course, in @sec-logic, where you'll see that set-theoretic statements are a great place to start building your argument-stating and proof-writing skills.
 
 ### Basics of sets {#sec-set-basics}
 
@@ -194,7 +195,7 @@ If $A \subseteq B$ and $B \subseteq C$, then $A \subseteq C$.
 ::: {.remark title="Theorems, propositions, lemmas, and corollaries"}
 When I state a general mathematical result, I set it apart in its own box, @prp-subset-transitive being the first example.
 Each of these results is called a theorem, proposition, lemma, or corollary.
-The results are equally true regardless of what name I give them --- and, starting next chapter, will usually be accompanied by a formal proof --- so the name is just supposed to connote the result's importance or its role in the logical structure of an argument.
+The results are equally true regardless of what name I give them; the name is just supposed to connote the result's importance or its role in the logical structure of an argument.
 
 - **Theorem:** Reserved for results that are especially big, important, fundamental, general, etc.
 
@@ -251,7 +252,7 @@ Just like equality of numbers, equality of sets is transitive: if one set is equ
 If $A = B$ and $B = C,$ then $A = C.$
 :::
 
-We're not doing formal proofs yet --- we'll get there soon --- but it's worth taking a second to see *precisely* why this statement is true.
+In lieu of a fully formalized proof, it's worth taking a second to see *precisely* why this statement is true.
 Of course, there's an intuitive logic behind it: if $A$ has the same elements as $B,$ and $B$ has the same elements as $C,$ then it'd be pretty weird for $A$ not to have the same elements as $C.$
 Mathematical language lets us translate an intuition like this into a rock-solid argument --- or, when our intuition turns out to be wrong, to find the precise gap in the supposed logic.
 
@@ -409,14 +410,14 @@ We say two sets are [disjoint]{.concept entry="Disjoint sets" definition="Two se
 
 Disjoint sets are important in probability, as you'll see in the stats sequence.
 Imagine that there's a 30% chance that a kid is blonde, a 5% chance that they're a redhead, and a 10% chance that they're left-handed.
-Yet the probability of a blonde-or-left-handed kid is *not* necessarily 40% (i.e., 30% + 10%), because being blonde and being left-handed aren't disjoint: one kid could be both.
-But because a kid cannot be both blonde and redheaded --- the intersection of the set of blonde kids and the set of redheaded kids is empty --- we can sum the individual probabilities to include that the probability of a blonde-or-redheaded kid is 35%.
+The probability of a blonde-or-left-handed kid is *not* necessarily 40% (i.e., 30% + 10%), because being blonde and being left-handed aren't disjoint: one kid could be both.
+But because a kid cannot be both blonde and redheaded --- the intersection of the set of blonde kids and the set of redheaded kids is empty --- we can sum the individual probabilities to conclude that the probability of a blonde-or-redheaded kid is 35%.
 If you're like me, you'll come to like it when events in probability turn out to be disjoint, as then you don't have to apply the finicky rules to avoid double-counting probabilities.
 
 ### Complements and De Morgan's laws {#sec-complements-de-morgans}
 
-The set difference $A \setminus B$ is the set of everything in $A$ that's not in $B$.
-But what if we simply wanted the set of *everything* that's not in $B$?
+The set difference $A \setminus B$ is the set of everything in $A$ that's not in $B.$
+But what if we simply wanted the set of *everything* that's not in $B?$
 Once we can properly define this type of set, we will call it the [complement]{.concept definition="The complement of a set $A$, denoted $A^c$, is the set of all elements in the relevant universe that are not elements of $A$."} of $B$.
 
 The one sticky mathematical issue is what we mean by "everything" that isn't in a set.
@@ -455,14 +456,14 @@ So what do you do if you see someone talk about the complement of a set, without
 - In probability applications specifically, the "universe" is the set of all possible outcomes of the random process being considered.
   This set is called the "sample space" and is often denoted $\Omega.$
 
-  For example, in the context of a survey of three people who are asked whether they approve of the president's job performance, the universe is the set of the eight possible combinations of responses:
+  For example, in the context of a survey of three people (A, B, C) who are asked whether they approve of the president's job performance (yes or no), the universe is the set of the eight possible combinations of responses:
   $$
   \Omega = \left\{
   \begin{gathered}
-  \text{1 yes, 2 yes, 3 yes}, \quad \text{1 yes, 2 yes, 3 no}, \\
-  \text{1 yes, 2 no, 3 yes}, \quad \text{1 yes, 2 no, 3 no}, \\
-  \text{1 no, 2 yes, 3 yes}, \quad \text{1 no, 2 yes, 3 no}, \\
-  \text{1 no, 2 no, 3 yes}, \quad \text{1 no, 2 no, 3 no}
+  \text{A: yes, B: yes, C: yes}, \quad \text{A: yes, B: yes, C: no}, \\
+  \text{A: yes, B: no, C: yes}, \quad \text{A: yes, B: no, C: no}, \\
+  \text{A: no, B: yes, C: yes}, \quad \text{A: no, B: yes, C: no}, \\
+  \text{A: no, B: no, C: yes}, \quad \text{A: no, B: no, C: no}
   \end{gathered}
   \right\}.
   $$
@@ -766,12 +767,107 @@ Here are some examples.
 ::::
 :::
 
+### Composite functions {#sec-composite-functions}
+
+Which political party controlled the White House on April 8, 1990?
+To answer a question like this, I'd typically follow a two-step process:
+
+1. Look up who was president on the specified day.
+   (George H. W. Bush.)
+
+2. Look up what party they belonged to.
+   (Republican.)
+
+Let's think about this process a bit more ... mathematically.
+I'm constructing a function that maps from the set of days since April 30, 1789, which I'll call $D,$ into the set of all historical American political parties, which I'll call $T.$
+To do this, I'm using the set of US presidents, which I'll continue to call $P,$ as a kind of middleman.
+Specifically, I'm building the "which party held the White House on a particular day?" function out of two other functions involving the set of presidents:
+
+- The "who was president on a specific day?" function, $g : D \to P.$
+   Remember the meaning of this notation: $g$ is a function that maps $D$ (the set of days) into $P$ (the set of presidents).
+
+- The "which party did a specific president belong to?" function, $h : P \to T.$
+
+Now we can describe my two-step lookup process in a more mathematical way.
+I'm constructing the "which party controlled the White House on a specified day" function, $f : D \to T.$
+Given any day $d \in D,$ I calculate $f(d)$ by:
+
+1. Looking up who was president on the specified day.
+   In mathematical terms, I find $g(d).$
+
+2. Looking up the party that's associated with the president I found in step 1.
+   In mathematical terms, letting $p$ denote the result of the last step, so that $p = g(d),$ I find $h(p).$
+   Or, even more concisely, I find $h(g(d)).$
+
+Putting this all together, we see that $f(d)$ can be defined as $$f(d) = \overbrace{h(\underbrace{g(d)}_{\mathclap{\text{who was president on day d?}}})}^{\mathclap{\text{what party did g(d) belong to?}}}.$$
+We call this sort of nested construction a composite function, or [composition]{.concept definition="A composition, or composite function, is a function of another function.  For functions $g : A \\to B$ and $h : B \\to C$ (note that the codomain of $g$ must be the same as the domain of $h$), the composition of $h$ and $g$ is the function $f : A \\to C$ defined by $f(a) = h(g(a))$ for all $a \\in A.$"}.
+
+::: {#def-composition name="Composition of functions"}
+For any functions $g : A \to B$ and $h : B \to C,$ the [composition]{.concept} of $h$ and $g$ is the function $f : A \to C$ defined by $$f(a) = h(g(a))$$ for all $a \in A.$
+
+Notice that the codomain of the "inner" function $g$ must match the domain of the "outer" function $h.$
+
+FYI, the composition of $h$ and $g$ is sometimes denoted $h \circ g$, though we won't use that notation in this course very often.
+::: 
+
+When we get to calculus, you'll see that we can often make things easier by treating a function as a composition.
+For example, think of the function $f : \mathbb{R} \to \mathbb{R}$ defined by $$f(x) = (2x + 7)^4.$$
+You can think of $f$ as the composition of $h : \mathbb{R} \to \mathbb{R}$ and $g : \mathbb{R} \to \mathbb{R}$ defined by
+$$
+\begin{aligned}
+g(x) &= 2x + 7, \\
+h(y) &= y^4.
+\end{aligned}
+$$
+To see why, notice that for any real number $x,$
+$$
+h(g(x))
+= h(2x + 7)
+= (2x + 7)^4
+= f(x).
+$$
+It will be easier to see why this is useful when we get to the chain rule (@prp-chain-rule).
+When you come across a function whose derivative you can't tell how to take directly, it's often convenient to break it down into composite pieces whose derivative you *do* know how to take.
+
+For now, let's just get some practice recognizing composite functions and breaking them down.
+
+::: {#exr-compositions name="Composite functions"}
+Break each function $f$ listed below into a composition of $h$ and $g$.
+Make sure to specify the domain and codomain of each piece of the composition.
+
+1. $f : S \to \mathbb{N}$, where $S$ is the set of US states, where $f(s)$ represents the age of the oldest member of the state's House delegation.
+
+2. $f : \mathbb{R} \to \mathbb{R}$ defined by $f(x) = 2^{x^2 - 4x + 4}.$
+
+3. $f : \mathbb{R} \to \mathbb{R}$ defined by $f(x) = x.$  (This is not a typo.  Figure out how to think of it as a composite function.)
+
+:::: {.answer title="Answers"}
+1. This is another example of the two-step reasoning process I outlined at the start of the section.
+   Let $H$ be the set of House members, let $g : S \to H$ select the oldest House member in each state, and let $h : H \to \mathbb{N}$ give the age of each House member.
+   Then we have $f(s) = h(g(s))$ for all $s \in S.$
+
+2. Define $g : \mathbb{R} \to \mathbb{R}$ by $g(x) = x^2 - 4x + 4$ and $h : \mathbb{R} \to \mathbb{R}$ by $h(y) = 2^y.$
+   Then we have
+   $$
+   h(g(x)) = h(x^2 - 4x + 4) = 2^{x^2 - 4x + 4} = f(x).
+   $$
+
+3. There are many valid answers here.
+   One cheeky answer is to define $g : \mathbb{R} \to \mathbb{R}$ by $g(x) = x$ and $h : \mathbb{R} \to \mathbb{R}$ by $h(y) = y,$ so we have $$h(g(x)) = h(x) = x = f(x).$$
+   You could also set $g(x) = x + 10$ and $h(y) = y - 10,$ giving you $$h(g(x)) = h(x + 10) = (x + 10) - 10 = x = f(x).$$
+   Or perhaps $g(x) = c x$ and $h(y) = y / c$ for some constant $c \neq 0,$ resulting in $$h(g(x)) = h(c x) = \frac{c x}{c} = x = f(x).$$
+
+   The lesson here is that there may be numerous different ways to break a function down into a composition of other functions.
+   Make the choice that is most *convenient* for whatever you're trying to accomplish.
+::::
+::: 
+
 ### An optional digression into cardinality and infinities {#sec-cardinality}
 
 This section contains material that is not strictly necessary, but which I find edifying and hope you will too.
 
 The [cardinality]{.concept definition="The cardinality of a set $A$, denoted $|A|$, is the number of elements in the set if it is finite.  It gets more complicated if the set is infinite."} of a set, loosely speaking, is the number of elements in the set.
-We write $|A|$ to denote the cardinality of a set $A$.
+We write $|A|$ to denote the cardinality of a set $A.$
 For a finite set, this loose definition is exact --- the cardinality of a finite set is simply its size.
 For example, if $A = \{1, 10, 100\}$, then $|A| = 3$.
 
@@ -785,8 +881,7 @@ With finite sets, this is simple --- they have the same number of elements.
 To extend this to infinite sets, we will rely on bijections.
 We will say that two sets have the same cardinality if we can set up a buddy system between the two of them.
 
-::: {#def-equal-cardinality}
-## Equal cardinality
+::: {#def-equal-cardinality name="Equal cardinality"}
 The sets $A$ and $B$ have the same cardinality, denoted $|A| = |B|$, if there is a bijective function that maps $A$ into $B$.
 :::
 
