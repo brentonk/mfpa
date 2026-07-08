@@ -25,12 +25,16 @@
     toc.dataset.mfpaFolded = '1';
     li.appendChild(toc);
 
-    // Map each link to its target section for scroll tracking.
-    var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+    // Map each link to its target section for scroll tracking. Match on the
+    // anchor's .hash rather than the href attribute — Quarto's runtime JS may
+    // have already rewritten same-page hrefs to absolute URLs, which would
+    // leave an attribute-based selector matching nothing.
+    var links = Array.prototype.slice.call(toc.querySelectorAll('a[href]'))
+      .filter(function (a) { return a.hash; });
     var byId = {};
     var targets = [];
     links.forEach(function (a) {
-      var id = decodeURIComponent(a.getAttribute('href').slice(1));
+      var id = decodeURIComponent(a.hash.slice(1));
       if (!id) return;
       var el = document.getElementById(id);
       if (el) { byId[id] = a; targets.push(el); }
