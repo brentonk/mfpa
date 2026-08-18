@@ -27,17 +27,15 @@ jobs:
         uses: actions/checkout@v4
 
       # System libraries for the R package stack. Exact set computed from
-      # renv.lock via pak::pkg_sysreqs(platform = "ubuntu-24.04"); the heavy
-      # ones (GDAL/GEOS/PROJ/udunits) come in through gganimate -> transformr -> sf.
+      # renv.lock via pak::pkg_sysreqs(platform = "ubuntu-24.04").
       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get -y install \
             libx11-dev libcurl4-openssl-dev libssl-dev cmake make libuv1-dev \
             zlib1g-dev pandoc libfreetype6-dev libjpeg-dev libpng-dev libtiff-dev \
-            libwebp-dev libabsl-dev libgdal-dev gdal-bin libgeos-dev libproj-dev \
-            libsqlite3-dev libicu-dev libfontconfig1-dev libfribidi-dev \
-            libharfbuzz-dev libudunits2-dev libxml2-dev
+            libwebp-dev libicu-dev libfontconfig1-dev libfribidi-dev \
+            libharfbuzz-dev libxml2-dev
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -51,6 +49,21 @@ jobs:
       # with a cross-run cache). No execution happens here.
       - name: Restore R packages (renv)
         uses: r-lib/actions/setup-renv@v2
+
+      # data/hall_primary.csv is third-party data (Hall 2015 replication
+      # archive), so it is gitignored rather than committed. Rebuild it here,
+      # cached on the script hash so the archive is only downloaded when the
+      # script changes.
+      - name: Cache Hall primary data
+        id: hall-data
+        uses: actions/cache@v4
+        with:
+          path: data/hall_primary.csv
+          key: hall-data-${{ hashFiles('data/make_hall_primary.R') }}
+
+      - name: Build Hall primary data
+        if: steps.hall-data.outputs.cache-hit != 'true'
+        run: Rscript data/make_hall_primary.R
 
       - name: Render book
         uses: quarto-dev/quarto-actions/render@v2

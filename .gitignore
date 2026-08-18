@@ -11,4 +11,7 @@ __pycache__
 indent.log
 
 **/*.quarto_ipynb
+
+# Third-party data, not redistributable under the book's CC license.
+# CI regenerates it with data/make_hall_primary.R (cached on script hash).
 /data/hall_primary.csv
