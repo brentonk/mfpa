@@ -709,7 +709,7 @@ tibble(
 
 Indeed, the function graphed here is one whose [left-hand limit]{.concept definition="The left-hand limit of $f(x)$ as $x$ approaches $c,$ $\lim_{x \to c^-} f(x),$ also called the limit of $f(x)$ as $x$ approaches $c$ from below, is the value that $f(x)$ gets closer and closer to as $x$ takes values just below $c$ without reaching it."} and [right-hand limit]{.concept definition="The right-hand limit of $f(x)$ as $x$ approaches $c,$ $\lim_{x \to c^+} f(x),$ also called the limit of $f(x)$ as $x$ approaches $c$ from above, is the value that $f(x)$ gets closer and closer to as $x$ takes values just above $c$ without reaching it."} differ as $x$ approaches 0.
 
-::: {#def-function-limit-one-sided name="Left- and right- hand limits, informal"}
+::: {#def-function-limit-one-sided name="Left- and right-hand limits, informal"}
 Consider a function $f : X \to Y,$ where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}.$
 Let $c$ be a point in the domain of $f,$ i.e., $c \in X.$
 
@@ -737,7 +737,7 @@ Anytime the left- and right-hand limits differ at a point, the function has no o
 Conversely, if the function does have a limit at a point, the left- and right-hand limits both coincide with the overall limit.
 
 ::: {#prp-one-sided-limits name="One-sided limits and the overall limit"}
-If $\lim_{x \to c^-} f(x) = y$ and $\lim_{x \to c^+} = y,$ then $\lim_{x \to c} f(x) = y.$
+If $\lim_{x \to c^-} f(x) = y$ and $\lim_{x \to c^+} f(x) = y,$ then $\lim_{x \to c} f(x) = y.$
 
 If $\lim_{x \to c^-} f(x) \neq \lim_{x \to c^+} f(x),$ or either of these does not exist, then $\lim_{x \to c} f(x)$ does not exist.
 Equivalently, if $\lim_{x \to c} f(x) = y$, then $\lim_{x \to c^-} f(x) = \lim_{x \to c^+} f(x) = y.$
@@ -838,7 +838,8 @@ We say that a function $f : X \to Y$ is [continuous at the point]{.concept entry
 :::
 
 For most functions you'd deal with in practice, you can tell where the function is continuous and where it is not by looking at the graph.
-At any point where the left- and right-hand limits do not agree, the function is discontinuous.
+You may (or may not) remember past teachers using the heuristic: if you can draw the graph of the function without lifting your pen off the paper, it's continuous.
+More to the point, anywhere the left- and right-hand limits do not agree, the function is discontinuous.
 It is also discontinuous at any point where the limits agree but the function value itself "jumps."
 At all other points, the function is continuous.
 @fig-identify-discontinuity illustrates both types of discontinuity.
@@ -852,7 +853,7 @@ tibble(x = seq(0, 1, by = 0.001)) |>
   mutate(
     group = case_when(
       x < 0.3 ~ 1,
-      x < 0.7 ~ 2,
+      x <= 0.7 ~ 2,
       TRUE ~ 3
     ),
     y = case_when(
@@ -899,7 +900,7 @@ tibble(x = seq(0, 1, by = 0.001)) |>
 
 When a function is continuous at every point in its domain, we call it a [continuous function]{.concept entry="Continuity"}.
 
-::: {#def-continuous-function title="Continuous function"}
+::: {#def-continuous-function name="Continuous function"}
 We say that a function $f : X \to Y$ is [continuous]{.concept entry="Continuity"} if it is continuous at every point in its domain, $X.$
 :::
 
@@ -958,11 +959,54 @@ Exponential functions
 : Any function of the form $f(x) = a^x$, where $a > 0$, is continuous.
 
 Logarithmic functions
-: Any function of the form $f(x) = \log_b x$, where $b > 0$, is continuous on any domain consisting of positive numbers, $X \subseteq (0, \infty)$.
+: Any function of the form $f(x) = \log_b x$, where $b > 0$ and $b \neq 1,$ is continuous on any domain consisting of positive numbers, $X \subseteq (0, \infty)$.
+
+To the extent that it's sensible to have warm feelings about mathematical objects (don't judge), we tend to "like" continuous functions.
+Continuous functions tend to have nice properties, like ensuring the existence of solutions to certain types of problems we might want to solve.
+The phrase "If $f$ is continuous..." will come up repeatedly once we get into calculus and optimization.
+
+In the meantime, here's a simpler upshot of continuity.
+Consider a function with a domain of $X,$ and suppose that domain includes the interval $[a, b].$
+As we travel from left to right across that interval, the value of the function goes from $f(a)$ to $f(b).$
+And as you'll see if you try to draw any continuous function---keeping in mind the "it's continuous if and only if you can draw its graph without lifting the pen off the page" rule---along that path, it ends up touching *every single value* between $f(a)$ and $f(b).$
+This is a famous result called the [intermediate value theorem]{.concept definition="If $f$ is continuous and its domain includes the interval $[a, b],$ then for all values $y$ between $f(a)$ and $f(b),$ there is a point $c \in (a, b)$ such that $f(c) = y.$"}.
+
+::: {#thm-intermediate-value name="Intermediate value theorem"}
+Consider a continuous function $f : X \to Y,$ where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}.$
+Consider any interval in the domain, $[a, b] \subseteq X.$
+For any real number $y$ that satisfies $$f(a) < y < f(b) \quad \text{or} \quad f(b) < y < f(a),$$ there is a domain point $c \in (a, b)$ such that $f(c) = y.$
+:::
+
+As you saw in the discussion of non-existent limits above, one frustrating thing about "higher" math is that some problems turn out not to have a solution.
+The intermediate value theorem often proves useful to show that a problem *has* a solution, even if it doesn't tell us what that solution is.
+
+::: {#exr-ivt name="Intermediate value theorem"}
+Consider the function $f : [0, 10] \to \mathbb{R}$ defined by $$f(x) = x^4 + x^3 + x^2 + x + 1.$$
+Using the intermediate value theorem, show that there is a value $c \in [0, 10]$ for which $f(c) = 1{,}017.$
+You do not need to find the exact value of $c,$ just show that a solution exists.
+
+:::: {.answer}
+Notice that
+$$
+\begin{aligned}
+f(0) &= 0^4 + 0^3 + 0^2 + 0 + 1 \\ &= 1, \\
+f(10) &= 10^4 + 10^3 + 10^2 + 10 + 1 \\ &= 10{,}000 + 1{,}000 + 100 + 10 + 1 \\ &= 11{,}111.
+\end{aligned}
+$$
+$f$ is a polynomial and therefore is continuous.
+Because $f(0) < 1{,}017 < f(10),$ the intermediate value theorem implies that there is a $c \in (0, 10)$ that solves $f(c) = 1{,}017.$
+::::
+:::
+
+A final note on continuity.
+I already mentioned that continuity will be useful as we move into the calculus backdrop for statistics.
+But going back to @fig-hall-rdd, as you get even deeper into the stats sequence next semester, you'll see that *discontinuity* is useful to establish certain causal inferences.
+So you'll need to have your head wrapped around the mathematical meanings of continuity and discontinuity to understand the underpinnings of that technique too.
 
 ## Exponential and logarithmic functions {#sec-exponents-logarithms}
 
-A function in the form $f(x) = x^b,$ where the variable $x$ is raised to the power of some fixed constant $b,$ is a particularly simple form of a polynomial.
+A function in the form $f(x) = x^b,$ where the variable $x$ is raised to the power of some fixed constant $b,$ is probably familiar to you.
+In fact, when $b$ is a non-negative integer, a function in this form is a simple example of a polynomial.
 An [exponential function]{.concept definition="A function of the form $f(x) = b^x,$ where $b > 0$ is a constant."} has a similar form, but now with the variable as the power: $f(x) = b^x.$
 Exponential functions with bases $b > 1$ increase really quickly, hence the term "exponential growth."
 
@@ -1019,7 +1063,7 @@ Here are a few examples of logarithms in action.
 
 ::: {#exr-logarithm-basics name="Logarithms in practice"}
 Imagine an incumbent politician who faces a probability $p \in (0, 1)$ of re-election each term she serves.
-The probability that she will serve exactly $t$ terms is
+The probability that she will serve exactly $t$ more terms is
 $$
 \begin{aligned}
 \Pr(\text{win $t$ times}) \cdot \Pr(\text{lose the $t+1$'th})
@@ -1027,12 +1071,12 @@ $$
 = p^t (1 - p).
 \end{aligned}
 $$
-Suppose you wanted to calculate the longest term length that the politician would have a probability $q$ or greater of serving.
+Suppose you wanted to calculate the largest number of additional terms that the politician would have a probability $q$ or greater of serving.
 In other words, you want to find the greatest value of $t$ such that $$p^t (1 - p) \geq q.$$
 What logarithm should you calculate?
 
 :::: {.answer}
-Momentarily ignoring the fact that the term length must be a whole number, let's find the $t$ at which the probability of serving $t$ terms is *exactly* $q.$
+Momentarily ignoring the fact that the term length must be a whole number, let's find the $t$ at which the probability of serving $t$ more terms is *exactly* $q.$
 We want to solve for $t$ in $$p^t (1 - p) = q,$$ which is equivalent to solving for $t$ in $$p^t = \frac{q}{1 - p}.$$
 By the definition of a logarithm, @def-logarithm, this means $t = \log_p \frac{q}{1 - p}$.
 If $t$ happens to be a whole number, this is our answer; otherwise, we need to round down.
@@ -1042,7 +1086,7 @@ If $t$ happens to be a whole number, this is our answer; otherwise, we need to r
 
 ### Properties of exponents and logarithms {#sec-exponent-logarithm-properties}
 
-Logarithms comes up surprisingly often in mathematical writing and in statistical programming, even in contexts where we're not solving equations of the form $a^x = b$.
+Logarithms come up surprisingly often in mathematical writing and in statistical programming, even in contexts where we're not solving equations of the form $a^x = b$.
 They're useful because of their helpful properties, some of which we'll now review.
 
 **Logarithm of a product.**
@@ -1091,7 +1135,8 @@ prod(tiny_numbers)
 prod(tiny_numbers) == 0
 ```
 
-Because addition is easier for computers than multiplication, we can get a more accurate answer by converting our multiplication problem into an addition problem.
+The standard arithmetic algorithms on a computer aren't designed to represent numbers as small as the product of these 500 tiny probabilities.
+But we can still calculate a precise mathematical expression for the product---we just need to convert our probability-multiplication problem into a logarithm-addition problem.
 Using @prp-logarithm-product, we know that for any positive base $b \neq 1$,
 $$\log_b (p_1 \times p_2 \times \cdots \times p_N) = \log_b p_1 + \log_b p_2 + \cdots + \log_b p_N.$$
 Let's use a base of $b = 10$, since then we can interpret our result in terms of decimal places.
@@ -1275,7 +1320,7 @@ If you want to take a base-$e$ exponent in R, use the `exp()` function.
 If for some reason you ever need to convert a natural logarithm to a different base, you can just use the formula $$\log_b y = \frac{\log y}{\log b}.$$
 
 ::: {.pitfall title="log versus ln"}
-In other contexts, including high school math (if my early-2000s experience still holds), people use "ln" to mean the natural logarithm and "log" to mean the base-10 algorithm.
+In other contexts, including high school math (if my early-2000s experience still holds), people use "ln" to mean the natural logarithm and "log" to mean the base-10 logarithm.
 ChatGPT tells me that engineers are also fond of this usage.
 But in political science, economics, and statistics writing, as well as in the overwhelming majority of math textbooks at the college level and beyond, "log" means the natural logarithm.
 :::
@@ -1285,7 +1330,7 @@ But in political science, economics, and statistics writing, as well as in the o
 To formally define the limit of a function, mathematicians employ what I think of as a challenge-response structure.
 Suppose I have a function $f$, and I want to claim that $\lim_{x \to c} f(x) = y$, i.e., the limit of the function as $x$ approaches the point $c$ in its domain is equal to $y$.
 
-1. You **challenge** me by picking a $\epsilon > 0$.
+1. You **challenge** me by picking an $\epsilon > 0$.
 
    Think of this as you saying "I need you to show me that if we are close enough to $x = c$ on the domain of the function, then the value of $f(x)$ is within $\epsilon$ of your claimed limit, $y$."
 
