@@ -9,6 +9,16 @@ project:
 execute:
   freeze: auto
 
+# Render every figure on a transparent device background so plots inherit the
+# page's paper colour instead of sitting on a white card. (theme_cowplot()
+# already blanks the ggplot plot/panel backgrounds, so the device is the only
+# thing that paints white.) Applies to all R chunks; override per-chunk with
+# `#| dev.args: {bg: "white"}` if a solid backdrop is ever needed.
+knitr:
+  opts_chunk:
+    dev.args:
+      bg: transparent
+
 filters:
   - at: pre-ast
     path: _filters/concepts.lua
@@ -26,9 +36,7 @@ book:
   chapters:
     - index.qmd
     - set_theory.qmd
-    - sequences_series.qmd
-    - derivatives.qmd
-    - optimization.qmd
+    - limits_and_continuity.qmd
     - logic.qmd
     - references.qmd
   license: "CC BY-NC-SA 4.0"

@@ -24,7 +24,7 @@ To understand foundational concepts of inference like [Bayes' rule](https://en.w
 Finally, I want you to think about "doing math" as more than just performing computations.
 Math, at its core, is the science of *making arguments* that are backed by *logical proofs*.
 For most of the course, while we work through the essential computational techniques you'll need for the stats sequence, we will only make occasional glances at mathematical proofs.
-But we'll study logic and proof writing more in depth at the end of the course, in @sec-logic, where you'll see that set-theoretic statements are a great place to start building your argument-stating and proof-writing skills.
+But we'll study logic and proof writing more in depth at the end of the course, where you'll see that set-theoretic statements are a great place to start building your argument-stating and proof-writing skills.
 
 ### Basics of sets {#sec-set-basics}
 
@@ -826,7 +826,7 @@ h(g(x))
 = (2x + 7)^4
 = f(x).
 $$
-It will be easier to see why this is useful when we get to the chain rule (@prp-chain-rule).
+It will be easier to see why this is useful when we get to the chain rule in calculus.
 When you come across a function whose derivative you can't tell how to take directly, it's often convenient to break it down into composite pieces whose derivative you *do* know how to take.
 
 For now, let's just get some practice recognizing composite functions and breaking them down.

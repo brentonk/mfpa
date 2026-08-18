@@ -11,3 +11,4 @@ __pycache__
 indent.log
 
 **/*.quarto_ipynb
+/data/hall_primary.csv
