@@ -1252,7 +1252,7 @@ Since $2^4 = 16$, we know that $\log_2 16 = 4$.
 And since $2^3 = 8$, we know that $\log_2 8 = 3$.
 Therefore, using @prp-logarithm-base-change, we have $$\log_8 16 = \frac{\log_2 16}{\log_2 8} = \frac{4}{3}.$$
 
-In a sense, the upshot of @prp-logarithm-base-change is that it doesn't matter what base we use --- the value of the logarithm scales up or down with the value of the base, but the shape of the curve is the same regardless, as illustrated in @fig-log-scale.
+In a sense, the upshot of @prp-logarithm-base-change is that it doesn't matter what base we use---the value of the logarithm scales up or down with the value of the base, but the shape of the curve is the same regardless, as illustrated in @fig-log-scale.
 So if we're doing something like logging a variable in a linear regression, our results will be substantively the same regardless of which logarithmic base we use.
 Since the choice of base doesn't substantively affect our findings, we should choose whatever base is most convenient for interpretation.
 
@@ -1310,7 +1310,7 @@ This figure shows three common choices of base for the logarithm.
 You are probably familiar with the numbers 2 and 10.
 You might be less familiar with the number $e$, aka Euler's number, which is equal to roughly 2.718 and comes up repeatedly in high-end math.
 This number is important enough that we call the base-$e$ logarithm the [natural logarithm]{.concept definition="A logarithm whose base is Euler's number, $e$, the mathematical constant equal to roughly 2.718.  Whenever you see $\log$ without an explicit base, you can assume it means a natural logarithm."}.
-For now, I'm going to ask you to trust me that $e$ is important --- you'll be able to see the reasoning a bit better once we get to calculus.
+For now, I'm going to ask you to trust me that $e$ is important---you'll be able to see the reasoning a bit better once we get to calculus.
 
 In these notes, when I write $\log y$ without an explicit base, I mean the natural logarithm of $y$.
 Similarly, the `log()` function in R takes the natural logarithm if you don't specify a base.

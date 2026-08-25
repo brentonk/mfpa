@@ -15,7 +15,7 @@ But you're studying to be a political scientist, not a mathematician, so why do 
 First, a surprising amount of mathematical language boils down to statements about sets.
 "A probability is a number between 0 and 1, inclusive" is a statement about sets, as is "The function $f(x) = x^2$ is continuous."
 <!-- You can even think of "$1 + 1 = 2$" as a set-theoretic statement, as the 20th century philosophical monograph *Principia Mathematica* famously spends more than a hundred pages establishing, though we won't be going nearly that deep here. -->
-If you want to properly read papers that present new statistical techniques or that develop theories using formal models --- and you certainly will want to read these papers, not just to succeed in our program but also to have a long career in the discipline --- you'll need to get comfortable with the basics of set-theoretic grammar.
+If you want to properly read papers that present new statistical techniques or that develop theories using formal models---and you certainly will want to read these papers, not just to succeed in our program but also to have a long career in the discipline---you'll need to get comfortable with the basics of set-theoretic grammar.
 
 Second, as you'll soon see in the stats sequence, you'll be working with sets a lot in probability theory.
 "Events" in probability are defined as sets; joint and conditional probabilities involve operations on these sets.
@@ -38,7 +38,7 @@ For example, the notation $$A = \{1, 2, 4, 8\}$$ is equivalent to saying "$A$ is
 To denote that the object $a$ is an element of the set $A,$ we write $a \in A.$
 :::
 
-It is conventional --- not just in my notes, but in mathematical writing generally --- to use capital letters to denote sets and lowercase letters to denote their elements.
+It is conventional---not just in my notes, but in mathematical writing generally---to use capital letters to denote sets and lowercase letters to denote their elements.
 But be aware, sometimes it is convenient or necessary to break this convention.
 
 Math is not just about numbers, and that starts with the fact that sets may contain objects that aren't numbers.
@@ -59,7 +59,7 @@ These are listed in @tbl-number-sets.
 : Notable sets of numbers {#tbl-number-sets tbl-colwidths="[30, 10, 60]"}
 
 What if you wanted to define $A$ as the set of natural numbers that are greater than 1000?
-Well, you could --- and often should --- simply write, "Let $A$ be the set of natural numbers that are greater than 1000."
+Well, you could---and often should---simply write, "Let $A$ be the set of natural numbers that are greater than 1000."
 Don't fall into the trap of equating rigor with fancy notation.
 If ordinary language can clearly communicate what you mean, use it.
 
@@ -73,7 +73,7 @@ We could write this in set-builder notation as $$B = \{x \in \mathbb{R} \mid x =
 But we'll often use the following shorthand to write this a bit less cumbersomely: $$B = \{\frac{n}{2} \mid n \in \mathbb{N}\}.$$
 Again, none of these, including the verbal description of $B$ at the start of the paragraph, is the "right" way to denote the set.
 What's best is whatever gets the point across clearly to your intended audience.
-Thinking about the audience is key --- you might want to write the exact same mathematical object in a different way in your undergraduate lecture notes than in a manuscript you're submitting to *Political Analysis*.
+Thinking about the audience is key---you might want to write the exact same mathematical object in a different way in your undergraduate lecture notes than in a manuscript you're submitting to *Political Analysis*.
 
 I use the vertical bar, $|$, to mean "such that" in set-builder notation.
 In other texts, you might see the colon, $:$, used instead.
@@ -83,7 +83,7 @@ For example, $\{x \in \mathbb{R} : x > 10.7\}$ and $\{x \in \mathbb{R} \mid x > 
 ::: {.remark title="You're not reading the notes unless you're doing the exercises"}
 The exercises are here for a reason.
 I expect that you are working through them in the course of reading the notes.
-The best way to learn math is to *do* math --- the exercises are designed to guide you through that process.
+The best way to learn math is to *do* math---the exercises are designed to guide you through that process.
 (This applies to any technical text, not just this one.)
 
 The answers to the exercises are collapsed by default for a reason too.
@@ -148,7 +148,7 @@ Explain why $[0, 1] \nsubseteq (0, 1)$.
 We could only say that $[0, 1]$ is a subset of $(0, 1)$ if every element of $[0, 1]$ were also an element of $(0, 1)$.
 However, we have $0 \in [0, 1]$ and yet $0 \notin (0, 1)$.
 This alone is enough to show that $[0, 1] \nsubseteq (0, 1)$.
-It doesn't matter that they mostly overlap --- if there's any single element of $[0, 1]$ that's not in $(0, 1)$, then it's not a subset.
+It doesn't matter that they mostly overlap---if there's any single element of $[0, 1]$ that's not in $(0, 1)$, then it's not a subset.
 ::::
 :::
 
@@ -162,7 +162,7 @@ It's true.
 Every element of $A$ is an element of $A$.
 Therefore, the formal definition (@def-subset) tells us that $A \subseteq A.$
 
-It may sound weird in ordinary language to say that $A$ is a subset of itself --- but in math, we follow the formal definition.
+It may sound weird in ordinary language to say that $A$ is a subset of itself---but in math, we follow the formal definition.
 There is a notion of a "proper subset," written $A \subsetneq B$, to mean "$A$ is a subset of $B$, and $B$ contains at least one element that is not an element of $A$."
 But the distinction comes up very rarely in practice, as it happens.
 ::::
@@ -180,13 +180,13 @@ The second isn't *necessarily* wrong, as we do sometimes deal with sets that con
 (A set that contains other sets as elements is conventionally called a [collection]{.concept definition="A set that contains other sets, like $\\mathcal{A} = \\{\\mathbb{R}, \\mathbb{Z}, \\{1, 2, 7\\}\\}.$"}, denoted with a calligraphic capital letter like $\mathcal{A}$ or $\mathcal{B}.$)
 The important thing is to be sure your notation conveys your precise meaning.
 
-If you mess up and use the wrong notation, your readers will probably still ultimately figure out what you mean --- but it'll take a bit longer for them than if you'd used the right notation.
+If you mess up and use the wrong notation, your readers will probably still ultimately figure out what you mean---but it'll take a bit longer for them than if you'd used the right notation.
 So it's in your best interest to use the right notation for much the same reason as it's in your best interest to use proper spelling and grammar.
 :::
 
 Subsets are like nesting dolls.
 If $A$ is a subset of $B$, then it is also a subset of any other set of which $B$ is a subset.
-In mathematical terms, this means that the subset relation is transitive --- much in the same way that with ordinary numbers, if $a \leq b$ and $b \leq c$, then $a \leq c$ as well.
+In mathematical terms, this means that the subset relation is transitive---much in the same way that with ordinary numbers, if $a \leq b$ and $b \leq c$, then $a \leq c$ as well.
 
 ::: {#prp-subset-transitive name="Transitivity of subsets"}
 If $A \subseteq B$ and $B \subseteq C$, then $A \subseteq C$.
@@ -220,7 +220,7 @@ An intuitive definition of set equality would be that $A = B$ if $A$ and $B$ con
 But what does it mean, in the obnoxiously rigorous sense of formal mathematics, to contain the same elements?
 Does $\{1, 2, 3\}$ equal $\{3, 2, 1\}$?
 Does $\{a, b, c\}$ equal $\{a, a, b, b, c, c\}$?
-The answer to both of these questions turns out to be "yes" --- but why?
+The answer to both of these questions turns out to be "yes"---but why?
 It comes down to the formal definition of set equality, which we state as each set being a subset of the other.
 
 ::: {#def-set-equality name="Set equality"}
@@ -254,7 +254,7 @@ If $A = B$ and $B = C,$ then $A = C.$
 
 In lieu of a fully formalized proof, it's worth taking a second to see *precisely* why this statement is true.
 Of course, there's an intuitive logic behind it: if $A$ has the same elements as $B,$ and $B$ has the same elements as $C,$ then it'd be pretty weird for $A$ not to have the same elements as $C.$
-Mathematical language lets us translate an intuition like this into a rock-solid argument --- or, when our intuition turns out to be wrong, to find the precise gap in the supposed logic.
+Mathematical language lets us translate an intuition like this into a rock-solid argument---or, when our intuition turns out to be wrong, to find the precise gap in the supposed logic.
 
 To get to the no-one-can-doubt-this logic behind @cor-equality-transitive, we combine the formal definition of set equality with our earlier result about the transitivity of subsets (@prp-subset-transitive).
 If $A = B$ and $B = C,$ then we know that all of the following statements are true:
@@ -293,7 +293,7 @@ Because $n + 1$ is an integer and $b = 2(n + 1) - 1,$ we conclude that $b \in P.
 As each element of $B$ is an element of $P,$ we conclude that $B \subseteq P.$
 
 To conclude the proof, now we need to show the opposite direction: $P \subseteq B.$
-I'll leave that to you --- you can follow steps very close to what I did to show that $B \subseteq P.$
+I'll leave that to you---you can follow steps very close to what I did to show that $B \subseteq P.$
 ::::
 :::
 
@@ -399,7 +399,7 @@ $(A \cup B) \setminus (A \cap B)$.
 No one who has been the president of the United States has also been the prime minister of the United Kingdom.
 If we were to let $M$ denote the set of people who have been prime minister, then the intersection $P \cap M$ would be a set that contains ... nothing?
 Yes, indeed, a set may contain nothing.
-We have a special name for the set with nothing in it --- the [empty set]{.concept definition="The set containing no elements, denoted $\emptyset$."}.
+We have a special name for the set with nothing in it---the [empty set]{.concept definition="The set containing no elements, denoted $\emptyset$."}.
 
 ::: {#def-empty-set name="Empty set"}
 The [empty set]{.concept} is the set containing no elements, denoted $\emptyset$.
@@ -411,7 +411,7 @@ We say two sets are [disjoint]{.concept entry="Disjoint sets" definition="Two se
 Disjoint sets are important in probability, as you'll see in the stats sequence.
 Imagine that there's a 30% chance that a kid is blonde, a 5% chance that they're a redhead, and a 10% chance that they're left-handed.
 The probability of a blonde-or-left-handed kid is *not* necessarily 40% (i.e., 30% + 10%), because being blonde and being left-handed aren't disjoint: one kid could be both.
-But because a kid cannot be both blonde and redheaded --- the intersection of the set of blonde kids and the set of redheaded kids is empty --- we can sum the individual probabilities to conclude that the probability of a blonde-or-redheaded kid is 35%.
+But because a kid cannot be both blonde and redheaded---the intersection of the set of blonde kids and the set of redheaded kids is empty---we can sum the individual probabilities to conclude that the probability of a blonde-or-redheaded kid is 35%.
 If you're like me, you'll come to like it when events in probability turn out to be disjoint, as then you don't have to apply the finicky rules to avoid double-counting probabilities.
 
 ### Complements and De Morgan's laws {#sec-complements-de-morgans}
@@ -630,7 +630,7 @@ There are lots of cool things to study about relations, but I cannot say in good
 
 ::: {#exr-pres-vp-functions name="Creating a valid function"}
 Come up with a function that maps the set of presidents, $P$, into the set of vice presidents, $Q$.
-Convince yourself that it satisfies the key requirement of a function --- that every element in $P$ is associated with one, and exactly one, element in $Q$.
+Convince yourself that it satisfies the key requirement of a function---that every element in $P$ is associated with one, and exactly one, element in $Q$.
 
 :::: {.answer title="One answer"}
 I propose the function $f : P \to Q$ defined so that $f(p) = \text{Joe Biden}$ for every president $p \in P$.
@@ -660,7 +660,7 @@ In terms of the function we defined, $$y(\text{William Henry Harrison}) = y(\tex
 Because these are two different presidents with the same function value, $y$ is not one-to-one.
 
 You also saw in @exr-pres-vp-functions that a function need not reach every element of its codomain.
-In fact, if the domain has fewer elements than the codomain --- such as with the sets of presidents $P$ and vice presidents $Q$, where at the time of writing there have been 45 presidents and 50 vice presidents --- it would be impossible for the function to reach every element of the codomain.
+In fact, if the domain has fewer elements than the codomain---such as with the sets of presidents $P$ and vice presidents $Q$, where at the time of writing there have been 45 presidents and 50 vice presidents---it would be impossible for the function to reach every element of the codomain.
 In the special case where a function does reach every element of the codomain, we turn a preposition into an adjective and say the function is [onto]{.concept entry="Onto (aka surjective)" definition="A function is onto, also called surjective, if it maps at least one element of the domain to every element of the codomain: for all $b$ in the codomain, there is a domain element $a$ such that $f(a) = b.$"}.
 
 ::: {#def-onto name="Onto function"}
@@ -723,7 +723,7 @@ If the function is both one-to-one and onto, characterize its inverse function.
    (The only input that could give us $f(n) = 1$ is $n = 0,$ but 0 is not an element of the domain we specified.)
 
 2. $g$ is one-to-one.
-   You can --- and should --- convince yourself of this by using the same logic as I used in my answer to #1.
+   You can---and should---convince yourself of this by using the same logic as I used in my answer to #1.
 
    $g$ is also onto.
    To see why this is the case, we can take any element of the codomain and find the domain element that maps to it.
@@ -735,7 +735,7 @@ If the function is both one-to-one and onto, characterize its inverse function.
 3. $h$ is one-to-one.
    How can we draw that conclusion, given that there's only one element of the domain to begin with?
    Well, the only way for a function to *fail* to be one-to-one is for there to be two distinct elements of the domain that map to the same element of the codomain.
-   Given that, any function whose domain is a [singleton]{.concept definition="A set that contains exactly one element."} --- a set with one element --- is one-to-one.
+   Given that, any function whose domain is a [singleton]{.concept definition="A set that contains exactly one element."}---a set with one element---is one-to-one.
 
    $h$ is also onto: the only element of the codomain is 8356, and we have $h(8350) = 8356,$ so the whole codomain is covered by the function.
 
@@ -869,7 +869,7 @@ This section contains material that is not strictly necessary, but which I find 
 
 The [cardinality]{.concept definition="The cardinality of a set $A$, denoted $|A|$, is the number of elements in the set if it is finite.  It gets more complicated if the set is infinite."} of a set, loosely speaking, is the number of elements in the set.
 We write $|A|$ to denote the cardinality of a set $A.$
-For a finite set, this loose definition is exact --- the cardinality of a finite set is simply its size.
+For a finite set, this loose definition is exact---the cardinality of a finite set is simply its size.
 For example, if $A = \{1, 10, 100\}$, then $|A| = 3$.
 
 It gets more complicated once we start dealing with infinite sets.
@@ -878,7 +878,7 @@ But you would be wrong, because it turns out some infinities are bigger than oth
 The goal of this section is to show you why.
 
 First we need to define what it means for two sets to have the same cardinality.
-With finite sets, this is simple --- they have the same number of elements.
+With finite sets, this is simple---they have the same number of elements.
 To extend this to infinite sets, we will rely on bijections.
 We will say that two sets have the same cardinality if we can set up a buddy system between the two of them.
 
