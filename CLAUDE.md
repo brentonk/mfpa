@@ -28,13 +28,43 @@ Only chapters listed under `book.chapters` in `_quarto.yml` are part of the rend
 
 Chapters use R via `{r}` chunks for plotting (ggplot2 + cowplot, with `theme_cowplot()` set as default), tikz diagrams, and data fetching from Dataverse. There is no Python engine — the project is R-only.
 
-Standard R chunk setup at the top of a chapter:
+Standard R chunk setup at the top of a chapter — one line, sourcing the shared setup file (packages, palette, default theme; see the ggplot styling section):
 
 ```r
-library("tidyverse"); library("cowplot"); theme_set(theme_cowplot())
+source("_common.R")
 ```
 
 Heavy chunks (Dataverse downloads, gganimate, tikz figures) carry `#| cache: true` (or `cache=TRUE` in inline form). The on-disk caches (`*_cache/`, `*_files/`) and `.quarto/` are gitignored.
+
+## ggplot styling
+
+Plots should read as part of the page, not as pasted-in R output: same palette, same warm neutrals, same sans face as the site chrome. The shared setup lives in `_common.R` (packages, the `mfpa` palette list, and a `theme_set()` default); every chapter's setup chunk sources it, and figure chunks take colours from `mfpa$…` rather than hard-coding hex strings. The limits chapter is the reference implementation.
+
+**Palette** — `mfpa$<name>` mirrors the `scss:defaults` block of `mfpa.scss`; keep the two in sync if either changes:
+
+| `mfpa$` | Hex | SCSS | Use in plots |
+|---|---|---|---|
+| `teal` | `#0F6E6E` | `$primary` | the function/series of interest; default for a lone curve |
+| `red` | `#B3261E` | `$danger` | a contrasting second series |
+| `green` | `#2E7D46` | `$success` | a third series, if ever needed |
+| `ink` | `#1E1B16` | `$body-color` | axes, axis text, dashed reference lines (theme default) |
+| `muted` | `#6B645A` | `$mfpa-muted` | annotation text, de-emphasised reference lines, a low-salience third series |
+| `rule` | `#E6DFD2` | `$mfpa-rule` | grid lines (theme default) |
+| `paper` | `#FCFBF8` | `$body-bg` | fill for hollow markers, matching the page that shows through the transparent plot |
+
+**Theme.** `_common.R` sets `theme_cowplot(font_family = "Archivo")` plus: transparent plot/panel backgrounds (the graphics device is also transparent via `_quarto.yml`, so the page's paper shows through); text, axis lines, and ticks in `ink`; a major grid in `rule` — so **don't call `background_grid()`**; and ggplot2 ≥ 4.0 geom defaults (`element_geom`) so unstyled geoms — `geom_vline()`, `annotate("text", …)` — come out in `ink` and Archivo without per-call arguments.
+
+**Font.** Archivo is not a system font on the CI runner or most machines. `_common.R` fetches it from Google Fonts with `systemfonts::require_font()` into the gitignored `_fonts/` directory on the first render, reuses the cached files afterwards, and aliases the system sans to "Archivo" if offline. This only works because `_quarto.yml` sets `dev: ragg_png`: the `ragg` device resolves fonts via `systemfonts`, whereas the default cairo `png` device only sees fontconfig's system fonts and silently falls back to the system sans. Don't override `dev` per chunk.
+
+**Conventions from the limits chapter:**
+- Curves: `geom_line(colour = mfpa$teal, linewidth = 1.3)`. Piecewise functions get a `group` column so the pieces don't join across a jump.
+- Discontinuity markers: a solid point (`size = 4.5`) for the function's actual value, a hollow ring (`shape = 21, size = 4.5, stroke = 1.4, fill = mfpa$paper`) for a limit, and a dashed `geom_vline` at the point of interest.
+- Highlighted window on the x-axis: `annotate("rect", …, fill = mfpa$teal, alpha = 0.08)`.
+- Prefer direct labels (`annotate("text", …)`, coloured to match the curve) over legends; when colour is mapped, use `scale_colour_manual(values = c(… = mfpa$teal, … = mfpa$red), guide = "none")`. Math in labels and axis breaks via `expression()` / `parse = TRUE`.
+- Raw-data backdrop points in `mfpa$muted` at `alpha = 0.35`, small (`size = 0.9`); binned/summary points on top in the series colours.
+- Never use base greys, `"black"`, or `"white"` — they're cool-toned and clash with the warm paper. Reach for `ink` / `muted` / `rule` / `paper` instead.
+
+**Cache gotcha.** Figure chunks are `cache: true` and keyed on their own code, so a change to `_common.R` (palette, theme, font) does **not** re-render existing figures locally. Run `quarto render . --cache-refresh` (target first: with the flag first, Quarto forwards a trailing `.` to pandoc, which fails on a directory) or delete the chapter's `*_cache/` directory after editing it. CI has no cache and always picks the change up.
 
 ## Concept glossary pattern
 

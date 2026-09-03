@@ -6,15 +6,7 @@ echo: false
 
 ```{r setup_limits}
 #| message: false
-library("tidyverse")
-library("cowplot")
-theme_set(
-  theme_cowplot() +
-    theme(
-      plot.background = element_rect(fill = "transparent", colour = NA),
-      panel.background = element_rect(fill = "transparent", colour = NA)
-    )
-)
+source("_common.R")
 ```
 
 ## Introduction {#sec-limits-introduction}
@@ -28,7 +20,7 @@ Those operations in turn depend on [limits]{.concept entry="Limit of a function"
 
 To illustrate the key ideas before we dig into the math, take a look at @fig-hall-rdd, taken from @hall2015happens, a study of the effects of ideological extremism on candidates' eventual success in US House races.
 
-```{r fig_hall_rdd}
+```{r}
 #| label: fig-hall-rdd
 #| cache: true
 #| fig-width: 7
@@ -61,12 +53,12 @@ line_won$dv <- predict(reg_won, line_won)
 lim_lost <- unname(predict(reg_lost, tibble(rv = 0))) # left-hand limit
 lim_won <- unname(predict(reg_won, tibble(rv = 0))) # right-hand limit
 
-col_lost <- "#0F6E6E" # teal: extremist barely lost (moderate nominated)
-col_won <- "#B23A2E" # rust: extremist barely won
+col_lost <- mfpa$teal # extremist barely lost (moderate nominated)
+col_won <- mfpa$red # extremist barely won
 
 ggplot() +
   geom_vline(xintercept = 0, linetype = "dashed") +
-  geom_point(data = df_hall, aes(rv, dv), colour = "gray85", size = 0.9) +
+  geom_point(data = df_hall, aes(rv, dv), colour = mfpa$muted, alpha = 0.35, size = 0.9) +
   geom_point(
     data = bins,
     aes(bin, dv, colour = side),
@@ -84,7 +76,7 @@ ggplot() +
     size = 4.5,
     stroke = 1.4,
     colour = col_lost,
-    fill = "white"
+    fill = mfpa$paper
   ) +
   annotate(
     "point",
@@ -94,7 +86,7 @@ ggplot() +
     size = 4.5,
     stroke = 1.4,
     colour = col_won,
-    fill = "white"
+    fill = mfpa$paper
   ) +
   scale_colour_manual(values = c(lost = col_lost, won = col_won)) +
   scale_x_continuous(limits = c(-0.2, 0.2), breaks = seq(-0.2, 0.2, 0.1)) +
@@ -102,8 +94,7 @@ ggplot() +
   labs(
     x = "Extreme candidate's primary-election winning margin",
     y = "General-election vote share"
-  ) +
-  background_grid()
+  )
 ```
 
 Each of the small points in the graph represents a House race where the top two primary candidates can be sorted into an "extremist" and a "moderate" based on standard estimates of candidate ideology.
@@ -133,11 +124,11 @@ Think about the function $f : [-1, 1] \to \mathbb{R}$ depicted below in @fig-fun
 At every point in the domain besides $x = 0,$ we have $f(x) = 1 + 2x.$
 At $x = 0,$ the value of the function "jumps" up to 2.5.
 
-```{r fig_function_limit_ex}
+```{r}
 #| label: fig-function-limit-ex
 #| fig-cap: A function that "jumps" at a particular point.
 #| cache: true
-col_fn <- "#0F6E6E" # teal accent, matching @fig-hall-rdd
+col_fn <- mfpa$teal
 tibble(
   x = seq(-1, 1, by = 0.01),
   y = if_else(x == 0, 2.5, 1 + 2 * x),
@@ -157,10 +148,9 @@ tibble(
     "point",
     x = 0, y = 1,
     shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = "white"
+    colour = col_fn, fill = mfpa$paper
   ) +
-  labs(x = "x", y = "f(x)") +
-  background_grid()
+  labs(x = "x", y = "f(x)")
 ```
 
 ::: {.remark title="Reading and writing cases notation"}
@@ -242,7 +232,7 @@ Then use logic similar to the example above to convince yourself further that yo
 :::: {.answer}
 ```{r fig_limit_informal_answer}
 #| cache: true
-col_fn <- "#0F6E6E" # teal accent, matching @fig-function-limit-ex
+col_fn <- mfpa$teal
 tibble(
   x = seq(0, 4, by = 0.01),
   y = case_when(
@@ -266,11 +256,10 @@ tibble(
     "point",
     x = 2, y = 3,
     shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = "white"
+    colour = col_fn, fill = mfpa$paper
   ) +
   scale_y_continuous(breaks = seq(-1, 4, by = 1)) +
-  labs(x = "x", y = "f(x)") +
-  background_grid()
+  labs(x = "x", y = "f(x)")
 ```
 
 From the graph it looks like $$\lim_{x \to 2} f(x) = 3.$$
@@ -313,11 +302,11 @@ If there is a positive number $d > 0$ and a constant (positive, negative, or zer
 In other words, if $f(x)$ equals the same constant $m$ at every value within $d$ units of $c$ (other than, perhaps, $c$ itself) then the limit there must also equal $m.$
 @fig-limit-locally-constant illustrates a function where this rule would apply.
 
-```{r fig_limit_locally_constant}
+```{r}
 #| label: fig-limit-locally-constant
 #| fig-cap: The limit of a locally constant function.
 #| cache: true
-col_fn <- "#0F6E6E" # teal accent, matching @fig-function-limit-ex
+col_fn <- mfpa$teal
 d <- 0.75
 m <- 2
 tibble(
@@ -349,7 +338,7 @@ tibble(
     "point",
     x = 0, y = m,
     shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = "white"
+    colour = col_fn, fill = mfpa$paper
   ) +
   scale_x_continuous(
     breaks = c(-d, 0, d),
@@ -359,8 +348,7 @@ tibble(
     breaks = c(m, 3),
     labels = expression(m, f(c))
   ) +
-  labs(x = "x", y = "f(x)") +
-  background_grid()
+  labs(x = "x", y = "f(x)")
 ```
 
 Our other building block is a similar proposition, but this time about the limit of a function where $f(x) = x$ at all values close to $c.$
@@ -374,11 +362,11 @@ If there is a positive number $d > 0$ such that $$f(x) = x \quad \text{for all }
 So if the function overlaps with the 45-degree line for a certain radius around $x = c,$ then its limit as $x$ approaches $c$ is exactly $c.$
 @fig-limit-local-identity illustrates this property.
 
-```{r fig_limit_local_identity}
+```{r}
 #| label: fig-limit-local-identity
 #| fig-cap: The limit of a function that locally coincides with the 45-degree line.
 #| cache: true
-col_fn <- "#0F6E6E" # teal accent, matching @fig-function-limit-ex
+col_fn <- mfpa$teal
 c_val <- 2
 d <- 0.75
 tibble(
@@ -403,7 +391,7 @@ tibble(
     fill = col_fn, alpha = 0.08
   ) +
   # 45-degree reference line through the origin
-  geom_abline(slope = 1, intercept = 0, linetype = "dashed", colour = "gray50") +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", colour = mfpa$muted) +
   geom_vline(xintercept = c_val, linetype = "dashed") +
   geom_line(colour = col_fn, linewidth = 1.3) +
   # solid point: the function's actual value at x = c
@@ -413,7 +401,7 @@ tibble(
     "point",
     x = c_val, y = c_val,
     shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = "white"
+    colour = col_fn, fill = mfpa$paper
   ) +
   expand_limits(y = 0) +
   scale_x_continuous(
@@ -424,8 +412,7 @@ tibble(
     breaks = c(0, c_val, 3.4),
     labels = expression(0, c, f(c))
   ) +
-  labs(x = "x", y = "f(x)") +
-  background_grid()
+  labs(x = "x", y = "f(x)")
 ```
 
 It is not surprising that the limit of a constant function is the constant (@prp-limit-constant-function) or that $\lim_{x \to c} x = c$ (@prp-limit-local-identity).
@@ -480,11 +467,11 @@ $$ {#eq-linear-almost-everywhere}
 We can't use the division rule to calculate $\lim_{x \to 2} f(x),$ because $\lim_{x \to 2} [x - 2] = 0.$
 To get an idea of the limit, let's try graphing the function.
 
-```{r fig_limit_division_ex}
+```{r}
 #| label: fig-limit-division-ex
 #| cache: true
 #| fig-cap: "Graph of @eq-linear-almost-everywhere."
-col_fn <- "#0F6E6E" # teal accent, matching @fig-function-limit-ex
+col_fn <- mfpa$teal
 tibble(
   x = seq(0, 4, by = 0.01),
   y = case_when(
@@ -507,11 +494,10 @@ tibble(
     "point",
     x = 2, y = 4,
     shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = "white"
+    colour = col_fn, fill = mfpa$paper
   ) +
   scale_y_continuous(breaks = seq(0, 6, by = 1)) +
-  labs(x = "x", y = "f(x)") +
-  background_grid()
+  labs(x = "x", y = "f(x)")
 ```
 
 From the graph, it sure looks like 4 is the limit as $x$ approaches 2.
@@ -545,7 +531,7 @@ Graph the function, then use the properties of limits to calculate its limit as 
 :::: {.answer}
 ```{r fig_limit_of_fraction_answer}
 #| cache: true
-col_fn <- "#0F6E6E" # teal accent, matching @fig-function-limit-ex
+col_fn <- mfpa$teal
 tibble(
   x = seq(0, 5, by = 0.01),
   y = case_when(
@@ -568,11 +554,10 @@ tibble(
     "point",
     x = 3, y = 11,
     shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = "white"
+    colour = col_fn, fill = mfpa$paper
   ) +
   scale_y_continuous(breaks = seq(5, 15, by = 2)) +
-  labs(x = "x", y = "f(x)") +
-  background_grid()
+  labs(x = "x", y = "f(x)")
 ```
 
 As in the example in the text, we begin with some algebra on the numerator:
@@ -672,11 +657,11 @@ If you approach $c = 0$ from the left (values of $x$ just under $c = 0$), the li
 But if you approach from the right instead (values of $x$ just above $c = 0$), it appears to be 50.
 So what is the limit?
 
-```{r fig_limit_one_sided_ex}
+```{r}
 #| label: fig-limit-one-sided-ex
 #| cache: true
 #| fig-cap: "A function with differing left- and right-hand limits."
-col_fn <- "#0F6E6E" # teal accent, matching @fig-function-limit-ex
+col_fn <- mfpa$teal
 tibble(
   x = seq(-0.2, 0.2, by = 0.001),
   y = case_when(
@@ -700,11 +685,10 @@ tibble(
     "point",
     x = 0, y = c(60, 50),
     shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = "white"
+    colour = col_fn, fill = mfpa$paper
   ) +
   scale_y_continuous(limits = c(40, 80)) +
-  labs(x = "x", y = "f(x)") +
-  background_grid()
+  labs(x = "x", y = "f(x)")
 ```
 
 Indeed, the function graphed here is one whose [left-hand limit]{.concept definition="The left-hand limit of $f(x)$ as $x$ approaches $c,$ $\lim_{x \to c^-} f(x),$ also called the limit of $f(x)$ as $x$ approaches $c$ from below, is the value that $f(x)$ gets closer and closer to as $x$ takes values just below $c$ without reaching it."} and [right-hand limit]{.concept definition="The right-hand limit of $f(x)$ as $x$ approaches $c,$ $\lim_{x \to c^+} f(x),$ also called the limit of $f(x)$ as $x$ approaches $c$ from above, is the value that $f(x)$ gets closer and closer to as $x$ takes values just above $c$ without reaching it."} differ as $x$ approaches 0.
@@ -758,7 +742,7 @@ $$
 
 ```{r fig_limit_oscillation_ex}
 #| cache: true
-col_fn <- "#0F6E6E" # teal accent, matching @fig-function-limit-ex
+col_fn <- mfpa$teal
 # sample uniformly in 1/x so the ever-faster oscillations stay smooth
 tibble(
   x = 1 / seq(1, 400, by = 0.05),
@@ -769,8 +753,7 @@ tibble(
   # solid point: the function's actual value at x = 0
   annotate("point", x = 0, y = 0, colour = col_fn, size = 4.5) +
   scale_y_continuous(breaks = seq(-1, 1, by = 0.5)) +
-  labs(x = "x", y = "f(x)") +
-  background_grid()
+  labs(x = "x", y = "f(x)")
 ```
 
 As $x$ gets closer and closer to 0 from above, the function keeps oscillating between -1 and 1 at an increasingly fast rate.
@@ -844,11 +827,11 @@ It is also discontinuous at any point where the limits agree but the function va
 At all other points, the function is continuous.
 @fig-identify-discontinuity illustrates both types of discontinuity.
 
-```{r fig_identify_discontinuity}
+```{r}
 #| label: fig-identify-discontinuity
 #| fig-cap: "The function is discontinuous at $d_1$ and $d_2$, and continuous at all other points."
 #| cache: true
-col_fn <- "#0F6E6E" # teal accent, matching @fig-function-limit-ex
+col_fn <- mfpa$teal
 tibble(x = seq(0, 1, by = 0.001)) |>
   mutate(
     group = case_when(
@@ -870,7 +853,7 @@ tibble(x = seq(0, 1, by = 0.001)) |>
     "point",
     x = c(0.3, 0.7), y = c(0.15, 1),
     shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = "white"
+    colour = col_fn, fill = mfpa$paper
   ) +
   # solid points: the function's actual values there
   annotate(
@@ -882,20 +865,19 @@ tibble(x = seq(0, 1, by = 0.001)) |>
     "text",
     x = 0.32, y = 0.3,
     label = "left + right limits disagree",
-    hjust = 1.1, colour = "gray30", size = 3.6
+    hjust = 1.1, colour = mfpa$muted, size = 3.6
   ) +
   annotate(
     "text",
     x = 0.68, y = 1.28,
     label = "value jumps away from limit",
-    hjust = -0.1, colour = "gray30", size = 3.6
+    hjust = -0.1, colour = mfpa$muted, size = 3.6
   ) +
   scale_x_continuous(
     breaks = c(0.3, 0.7),
     labels = c(expression(d[1]), expression(d[2]))
   ) +
-  labs(x = "x", y = "f(x)") +
-  background_grid()
+  labs(x = "x", y = "f(x)")
 ```
 
 When a function is continuous at every point in its domain, we call it a [continuous function]{.concept entry="Continuity"}.
@@ -1010,12 +992,12 @@ In fact, when $b$ is a non-negative integer, a function in this form is a simple
 An [exponential function]{.concept definition="A function of the form $f(x) = b^x,$ where $b > 0$ is a constant."} has a similar form, but now with the variable as the power: $f(x) = b^x.$
 Exponential functions with bases $b > 1$ increase really quickly, hence the term "exponential growth."
 
-```{r fig_exponential_vs_polynomial}
+```{r}
 #| label: fig-exponential-vs-polynomial
 #| fig-cap: "The exponential function $2^x$ compared to the polynomial $x^2$."
 #| cache: true
-col_poly <- "#B23A2E" # rust, matching @fig-hall-rdd
-col_expo <- "#0F6E6E" # teal accent, matching @fig-function-limit-ex
+col_poly <- mfpa$red
+col_expo <- mfpa$teal
 tibble(x = seq(0, 8, by = 0.01)) |>
   mutate(poly = x^2, expo = 2^x) |>
   pivot_longer(c(poly, expo), names_to = "fn", values_to = "y") |>
@@ -1037,8 +1019,7 @@ tibble(x = seq(0, 8, by = 0.01)) |>
     guide = "none"
   ) +
   scale_x_continuous(breaks = seq(0, 8, by = 2)) +
-  labs(x = "x", y = "f(x)") +
-  background_grid()
+  labs(x = "x", y = "f(x)")
 ```
 
 ### Logarithms {#sec-logarithms}
@@ -1256,13 +1237,13 @@ In a sense, the upshot of @prp-logarithm-base-change is that it doesn't matter w
 So if we're doing something like logging a variable in a linear regression, our results will be substantively the same regardless of which logarithmic base we use.
 Since the choice of base doesn't substantively affect our findings, we should choose whatever base is most convenient for interpretation.
 
-```{r fig_log_scale}
+```{r}
 #| label: fig-log-scale
 #| fig-cap: "Logarithms with different bases"
 #| cache: true
-col_b2 <- "#B23A2E" # rust, matching @fig-hall-rdd
-col_be <- "#0F6E6E" # teal accent, matching @fig-function-limit-ex
-col_b10 <- "#6B645A" # muted warm gray
+col_b2 <- mfpa$red
+col_be <- mfpa$teal
+col_b10 <- mfpa$muted
 expand_grid(
   x = seq(1, 10, length.out = 501),
   base = c(2, exp(1), 10)
@@ -1302,8 +1283,7 @@ expand_grid(
     minor_breaks = 1:10,
     limits = c(1, 12)
   ) +
-  labs(x = "x", y = "logarithm of x") +
-  background_grid()
+  labs(x = "x", y = "logarithm of x")
 ```
 
 This figure shows three common choices of base for the logarithm.

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "book",
+      "runtimeExecutable": "quarto",
+      "runtimeArgs": ["preview", "--no-browser", "--no-watch-inputs", "--port", "4711"],
+      "port": 4711
+    }
+  ]
+}

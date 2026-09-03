@@ -14,8 +14,13 @@ execute:
 # already blanks the ggplot plot/panel backgrounds, so the device is the only
 # thing that paints white.) Applies to all R chunks; override per-chunk with
 # `#| dev.args: {bg: "white"}` if a solid backdrop is ever needed.
+#
+# Use the ragg device rather than the default cairo png: ragg resolves fonts
+# through systemfonts, which is how _common.R registers Archivo (the cairo
+# device only sees fontconfig's system fonts and silently falls back to sans).
 knitr:
   opts_chunk:
+    dev: ragg_png
     dev.args:
       bg: transparent
 

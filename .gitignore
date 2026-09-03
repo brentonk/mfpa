@@ -18,3 +18,6 @@ indent.log
 # Third-party data, not redistributable under the book's CC license.
 # CI regenerates it with data/make_hall_primary.R (cached on script hash).
 /data/hall_primary.csv
+
+# Fonts fetched at render time by _common.R (systemfonts::require_font).
+/_fonts/
