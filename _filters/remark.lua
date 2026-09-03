@@ -17,6 +17,18 @@ local function md_inlines(s)
   return pandoc.utils.blocks_to_inlines(pandoc.read(s, "markdown").blocks)
 end
 
+-- True for any non-HTML target (the print/lecture PDF via Typst). For print,
+-- remark/pitfall asides are dropped entirely (the website is the canonical
+-- distributed form; the PDF is a teaching copy), and `optional` blocks lose
+-- their collapsible affordance in favor of a plain bold title. HTML behaviour
+-- is unchanged.
+local function is_print()
+  if quarto and quarto.doc and quarto.doc.is_format then
+    return not quarto.doc.is_format("html")
+  end
+  return FORMAT ~= "html"
+end
+
 function Div(el)
   local is_remark   = el.classes:includes("remark")
   local is_pitfall  = el.classes:includes("pitfall")
@@ -26,6 +38,23 @@ function Div(el)
   end
 
   local title = el.attributes["title"]
+
+  if is_print() then
+    -- The lecture PDF is a teaching copy, not a distribution copy (the website
+    -- is canonical): drop the remark/pitfall asides entirely. `.optional`
+    -- blocks are actual course content, so those are kept, expanded, with a
+    -- plain bold title in place of the collapsible affordance.
+    if is_remark or is_pitfall then
+      return {}
+    end
+    local blocks = pandoc.List()
+    if title == nil or title == "" then title = "Optional" end
+    local titleline = pandoc.List()
+    titleline:extend(md_inlines(title))
+    blocks:insert(pandoc.Para({ pandoc.Strong(titleline) }))
+    blocks:extend(el.content)
+    return blocks
+  end
 
   -- Collapsible "optional / technical" disclosure: same chassis as the answer
   -- block, defaulting to the label "Optional".

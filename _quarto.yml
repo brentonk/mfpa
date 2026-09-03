@@ -27,6 +27,15 @@ filters:
   # rewrites it into a proof-style block.
   - at: pre-ast
     path: _filters/remark.lua
+  # Drops #exr-… exercise blocks — but only for non-HTML (print) targets; a
+  # no-op for the HTML website. Must run pre-ast, before Quarto's crossref pass
+  # rewrites the exercise divs out of `#exr-…` identifiers. See
+  # _filters/strip-exercises.lua.
+  - at: pre-ast
+    path: _filters/strip-exercises.lua
+  # Print-only: rewrite TeX-math macros the Typst writer can't handle. No-op for
+  # HTML. See _filters/print-math-compat.lua.
+  - _filters/print-math-compat.lua
   - _filters/answer.lua
 
 book:

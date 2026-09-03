@@ -1,0 +1,28 @@
+# Print / lecture profile.  Activate with:  quarto render --to typst --profile print
+#
+# Produces a printable, exercise-free PDF of the book via Typst (bundled with
+# Quarto — no LaTeX needed).  The HTML website is unaffected: this profile is
+# only merged in when explicitly selected, and the exercise-stripping /
+# tooltip-suppression logic in the _filters/ Lua is guarded to fire on non-HTML
+# targets only.  See print/README.md and print/build.sh.
+
+book:
+  output-file: mfpa-lecture-notes
+
+format:
+  typst:
+    # The orange-book template overrides Quarto's `papersize` (back to a4) and
+    # `fontsize` (back to its 10pt default), so both are re-forced — along with
+    # the boxed theorem styling — by print/paper-override.typ, injected at the
+    # top of the body via include-before-body. The values here are kept in sync
+    # for anything that reads them earlier in template processing.
+    papersize: us-letter
+    include-before-body:
+      - print/paper-override.typ
+    margin:
+      x: 1.15in
+      y: 1in
+    fontsize: 12pt
+    toc: true
+    number-sections: true
+    section-numbering: "1.1"

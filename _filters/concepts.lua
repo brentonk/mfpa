@@ -13,6 +13,18 @@ local function normalize(s)
   return s:lower()
 end
 
+-- True for any non-HTML target (the print/lecture PDF via Typst). The hover/tap
+-- tooltip and the tabbed glossary are HTML-only affordances: in a non-HTML
+-- writer the tooltip span would be dumped inline right after the term, and the
+-- tabset would stack both orderings. So for print we suppress the tooltip and
+-- emit a single plain definition list instead. HTML behaviour is unchanged.
+local function is_print()
+  if quarto and quarto.doc and quarto.doc.is_format then
+    return not quarto.doc.is_format("html")
+  end
+  return FORMAT ~= "html"
+end
+
 function Span(el)
   if not el.classes:includes("concept") then
     return nil
@@ -47,6 +59,12 @@ function Span(el)
     else
       key = normalize(pandoc.utils.stringify(el.content))
     end
+  end
+
+  -- Print target: no tooltips (they'd be dumped inline). Leave the term as a
+  -- plain styled span; the definition still lives in the glossary.
+  if is_print() then
+    return el
   end
 
   -- Attach a hover/tap tooltip carrying the definition. The definition is
@@ -84,6 +102,17 @@ function Div(el)
   end
   if #concepts == 0 then
     return {}
+  end
+
+  -- Print target: a tabset would render both orderings stacked, so emit just
+  -- one definition list in the order the concepts were introduced.
+  if is_print() then
+    local md = table.concat({
+      "## Concept review",
+      "",
+      emit_list(concepts),
+    }, "\n")
+    return pandoc.read(md, "markdown").blocks
   end
 
   local alphabetical = {}
