@@ -1,0 +1,274 @@
+---
+echo: false
+---
+
+# Derivatives {#sec-derivatives}
+
+```{r setup_derivatives}
+#| message: false
+source("_common.R")
+```
+
+Throughout this chapter, we will work exclusively with continuous functions that map intervals of real numbers into the real numbers.
+So unless I specify otherwise, whenever I refer to a function $f$ in this chapter, assume that:
+
+- The domain of $f$ is the real numbers $\mathbb{R},$ or an interval of reals.
+- The codomain of $f$ is the real numbers $\mathbb{R}.$
+- $f$ is continuous.
+
+
+## How steep is the function? {#sec-derivatives-steepness}
+
+The derivative of a function, loosely speaking, is a measure of how steeply the function is increasing or decreasing at a particular point along its domain.
+This idea of steepness is easiest to see with linear functions.
+
+```{r}
+#| label: fig-linear-function-slopes
+#| fig-cap: "Two linear functions---one steeper, one flatter."
+#| cache: true
+col_h <- mfpa$teal
+col_g <- mfpa$red
+tibble(x = seq(0, 5), h = 2 + 0.25 * x, g = x) |>
+  pivot_longer(c(h, g), names_to = "fn", values_to = "y") |>
+  ggplot(aes(x = x, y = y, colour = fn)) +
+  geom_line(linewidth = 1.3) +
+  # label each curve directly instead of with a legend
+  annotate(
+    "text",
+    x = 5, y = 3.25, label = "italic(h)(x)", parse = TRUE,
+    colour = col_h, size = 5, hjust = -0.2
+  ) +
+  annotate(
+    "text",
+    x = 5, y = 5.1, label = "italic(g)(x)", parse = TRUE,
+    colour = col_g, size = 5, hjust = -0.2
+  ) +
+  scale_colour_manual(values = c(h = col_h, g = col_g), guide = "none") +
+  scale_x_continuous(breaks = 0:5, limits = c(0, 5.75)) +
+  scale_y_continuous(breaks = 0:5, limits = c(0, 5.25)) +
+  labs(x = "x", y = "Function value")
+```
+
+Between the two linear functions depicted in @fig-linear-function-slopes, $g(x)$ is steeper and $h(x)$ is flatter.
+Specifically, the [slope]{.concept definition="For a linear function, $f(x) = \alpha + \beta x,$ the slope is the coefficient $\beta.$ It can be calculated using the rise-over-run formula: for any distinct points $x_1$ and $x_2$ in the domain of $f,$ $$\beta = \frac{f(x_1) - f(x_2)}{x_1 - x_2}.$$"} of $g(x)$ is greater in magnitude than that of $h(x).$
+You can calculate the slope of a linear function using the "rise over run" formula.
+Given any two distinct points along the domain, $x_1$ and $x_2,$ we calculate the slope by dividing the difference in function values (the "rise") by the difference in domain values (the "run"): $$\text{slope} = \frac{f(x_1) - f(x_2)}{x_1 - x_2}.$$ {#eq-rise-over-run}
+
+For example, for the functions we've plotted in @fig-linear-function-slopes, let's compare the function values at $x_1 = 4$ to those at $x_2 = 0.$
+For the steeper function $g$, we have $g(x_1) = g(4) = 4$ and $g(x_2) = g(0) = 0.$
+Therefore, the slope of $g$ is 1: $$\text{slope of $g$} = \frac{g(x_1) - g(x_2)}{x_1 - x_2} = \frac{g(4) - g(0)}{4} = \frac{4 - 0}{4 - 0} = 1.$$
+By contrast, the slope of the flatter function $h$ is just 1/4: $$\text{slope of $h$} = \frac{h(x_1) - h(x_2)}{x_1 - x_2} = \frac{h(4) - h(0)}{4 - 0} = \frac{3 - 2}{4} = \frac{1}{4}.$$
+
+::: {#exr-linear-slopes title="Slopes of linear functions"}
+Calculate the slope of each function depicted in the figure below.
+What are the similarities and differences with the slopes of the functions depicted in @fig-linear-function-slopes?
+
+```{r}
+#| cache: true
+col_h <- mfpa$teal
+col_g <- mfpa$red
+tibble(x = seq(0, 5), h = 3.25 - 0.25 * x, g = 5 - x) |>
+  pivot_longer(c(h, g), names_to = "fn", values_to = "y") |>
+  ggplot(aes(x = x, y = y, colour = fn)) +
+  geom_line(linewidth = 1.3) +
+  # label each curve directly instead of with a legend
+  annotate(
+    "text",
+    x = 5, y = 2, label = "italic(h)(x)", parse = TRUE,
+    colour = col_h, size = 5, hjust = -0.2
+  ) +
+  annotate(
+    "text",
+    x = 5, y = 0, label = "italic(g)(x)", parse = TRUE,
+    colour = col_g, size = 5, hjust = -0.2
+  ) +
+  scale_colour_manual(values = c(h = col_h, g = col_g), guide = "none") +
+  scale_x_continuous(breaks = 0:5, limits = c(0, 5.75)) +
+  scale_y_continuous(breaks = 0:5, limits = c(0, 5.25)) +
+  labs(x = "x", y = "Function value")
+```
+
+:::: {.answer}
+The slope of $g$ is -1:
+$$
+\begin{aligned}
+\frac{g(5) - g(4)}{5 - 4} = \frac{0 - 1}{1} = -1.
+\end{aligned}
+$$
+The slope of $h$ is -1/4:
+$$
+\begin{aligned}
+\frac{h(5) - h(1)}{5 - 1} = \frac{2 - 3}{4} = \frac{-1}{4}.
+\end{aligned}
+$$
+The major contrast with the functions from the earlier figure is that the slopes are now negative, reflecting the fact that these functions are decreasing instead of increasing.
+For decreasing functions, the "steeper" decrease is still the function whose slope is greater in [absolute value]{.underline}.
+::::
+:::
+
+Linear functions are convenient because they are equally "steep" at every point along their domain.
+Nonlinear functions, by definition, are not so convenient---their steepness varies across their domain.
+As an example, take a look at the nonlinear functions depicted in @fig-nonlinear-function-comparison:
+$$
+\begin{aligned}
+g(x) &= \frac{x^2}{5}; \\
+h(x) &= 4 - \frac{(x - 5)^2}{5}.
+\end{aligned}
+$$
+
+```{r}
+#| label: fig-nonlinear-function-comparison
+#| fig-cap: "Two increasing nonlinear functions. At lower values of $x,$ $h(x)$ is increasing more steeply than $g(x).$  The opposite is true at greater values of $x.$"
+#| cache: true
+col_h <- mfpa$teal
+col_g <- mfpa$red
+df_nonlinear_functions <- tibble(
+  x = seq(0, 10, by = 0.1),
+  g = x^2 / 5,
+  h = 4 - (x - 5)^2 / 5
+)
+df_nonlinear_functions |>
+  filter(x <= 5) |>
+  pivot_longer(c(g, h), names_to = "fn", values_to = "y") |>
+  ggplot(aes(x = x, y = y, colour = fn)) +
+  geom_line(linewidth = 1.3) +
+  # label each curve directly instead of with a legend
+  annotate(
+    "text",
+    x = 5, y = 4, label = "italic(h)(x)", parse = TRUE,
+    colour = col_h, size = 5, hjust = -0.2
+  ) +
+  annotate(
+    "text",
+    x = 5, y = 5, label = "italic(g)(x)", parse = TRUE,
+    colour = col_g, size = 5, hjust = -0.2
+  ) +
+  scale_colour_manual(values = c(h = col_h, g = col_g), guide = "none") +
+  scale_x_continuous(breaks = 0:5, limits = c(0, 5.75)) +
+  scale_y_continuous(breaks = seq(-1, 5), limits = c(-1, 5.25)) +
+  labs(x = "x", y = "Function value")
+```
+
+At the leftmost part of the figure, close to $x = 0,$ the red function $g(x)$ is nearly flat while the blue function $h(x)$ is clearly increasing.
+By contrast, at the rightmost part of the figure, close to $x = 5,$ we see that $g(x)$ is clearly increasing while $h(x)$ is nearly flat.
+We can glean that much through the eyeball test.
+But how can we quantify the "steepness" of each function at each point?
+Is there a precise way to say that a function is "nearly flat" at a particular point?
+And how can we identify the crossover point, where $g(x)$ starts to increase more steeply than $h(x)$ does?
+
+One way to calculate the steepness of a nonlinear function at a particular point would be to use the "rise over run" formula (@eq-rise-over-run).
+In other words, to gauge the steepness at some point $c$ in the domain of the function, we pick a nearby point $x$ and calculate
+$$
+\text{steepness at $c$} \approx \frac{f(x) - f(c)}{x - c}.
+$$
+The closer our chosen point $x$ is to $c$, the better this approximation will be.
+For example, let's calculate this approximation at $c = 0$ for the red function $g(x)$ plotted in @fig-nonlinear-function-comparison.
+We can tell from the graph that the function is basically flat at $c = 0$, so we should get a "steepness" calculation close to 0.
+
+You can do a few of these calculations yourself to see that the approximation gets closer to 0 as we pick approximation points closer to $c = 0$ along the $x$-axis...
+$$
+\begin{aligned}
+\frac{g(3) - g(0)}{3 - 0} = \frac{(3^2/5) - (0^2/5)}{3 - 0} = \frac{9/5}{3} = \frac{3}{5}; \\
+\frac{g(2) - g(0)}{2 - 0} = \frac{(2^2/5) - (0^2/5)}{2 - 0} = \frac{4/5}{2} = \frac{2}{5}; \\
+\frac{g(1) - g(0)}{1 - 0} = \frac{(1^2/5) - (0^2/5)}{1 - 0} = \frac{1/5}{1} = \frac{1}{5};
+\end{aligned}
+$$
+...or you can look at @fig-derivative-approximation for an animated illustration of the process.
+
+<!-- Pre-rendered GIF: source in images/anim/derivative_approximation.R (see CLAUDE.md, "Animated figures"). -->
+![Closer and closer approximations of the how steep the function is at $c = 0$.](images/derivative_approximation.gif){#fig-derivative-approximation}
+
+No matter how close of an approximation we take, there's always a closer one to take.
+You should never be satisfied with the approximation $$\text{steepness at $c$} \approx \frac{f(x) - f(c)}{x - c},$$ because you could have calculated an *even better* approximation at the midpoint between $c$ and your previously chosen approximation point $x,$ $$\text{steepness at $c$} \approx \frac{f(\frac{x + c}{2}) - f(c)}{\frac{x + c}{2} - c}.$$
+
+The only way to escape the we-could-have-gotten-even-closer complaint is to *take the limit*.
+We will formally define the derivative of a function as the limit of the rise-over-run calculation (@eq-rise-over-run) as we choose approximation points $x$ ever closer and closer to $c,$ the point at which we want to calculate the steepness of the function.
+
+::: {#def-derivative name="Derivative of a function"}
+Consider the function $f : X \to \mathbb{R},$ where $X \subseteq \mathbb{R},$ and the point $c \in X.$
+The [derivative]{.concept definition="The derivative of $f$ at the point $c,$ denoted $f'(c),$ is a measure of how steeply the function is increasing or decreasing at that point.  The formal definition of the derivative is that $$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c} = \lim_{h \to 0} \frac{f(c + h) - f(c)}{h},$$ provided that this limit exists."} of $f$ at $c,$ denoted $f'(c),$ is defined by the limit $$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c},$$ provided that this limit exists.
+When this limit exists, we say that $f$ is [differentiable at the point]{.concept entry="Differentiability" definition="A function $f : X \to \mathbb{R}$ is differentiable at a point in its domain, $c \in X,$ if the derivative $f'(c)$ exists.  We call $f$ a differentiable function if it is differentiable at every point in its domain."} $c.$
+
+If $f$ is differentiable at every point in its domain, we simply say that it is [differentiable]{.concept entry="Differentiability"}.
+:::
+
+Let's use the formal definition to calculate the derivative of $g(x)$ at $x = 0,$ as we attempted to approximate in @fig-derivative-approximation.
+Remember that $g(x) = x^2 / 5.$
+Therefore, we have
+$$
+\begin{aligned}
+g'(0)
+&= \lim_{x \to 0} \frac{g(x) - g(0)}{x - 0} \\
+&= \lim_{x \to 0} \frac{\frac{x^2}{5} - \frac{0^2}{5}}{x} \\
+&= \lim_{x \to 0} \frac{x}{5} \\
+&= 0.
+\end{aligned}
+$$
+This calculation confirms what we could see from the graph: the function $g(x)$ is essentially flat at $x = 0.$
+
+It would be rather tedious to go through this calculation for any individual point whose derivative we want to calculate.
+Luckily, we don't have to do that.
+We can plug an arbitrary point $c$ into the formula for a derivative to calculate $g'(c)$:
+$$
+\begin{aligned}
+g'(c)
+&= \lim_{x \to c} \frac{g(x) - g(c)}{x - c} \\
+&= \lim_{x \to c} \frac{\frac{x^2}{5} - \frac{c^2}{5}}{x - c} \\
+&= \lim_{x \to c} \frac{x^2 - c^2}{5 (x - c)} \\
+&= \lim_{x \to c} \frac{(x + c) (x - c)}{5 (x - c)} \\
+&= \lim_{x \to c} \frac{x + c}{5} \\
+&= \frac{2 c}{5}.
+\end{aligned}
+$$
+This formula confirms something we can see in @fig-nonlinear-function-comparison: $g(x)$ gets steeper as we go further to the right along the x-axis.
+For example, the effective "slope" of the function at $x = 1$ is $g'(x) = 2 / 5 = 0.4$, whereas the effective slope at $x = 5$ is $g'(x) = 2$.
+
+::: {.remark title="The many ways to denote derivatives"}
+You will sometimes see the derivative written in the fractional form, $$\frac{d f(x)}{d x}.$$
+I don't love this notation because it makes it hard to denote "the derivative of $f$ at the specific point $x = c$."
+You're stuck with either the ambiguous-seeming $$\frac{d f(c)}{d x}$$ or with the clunky-seeming $$\left. \frac{d f(x)}{d x} \right|_{x = c}.$$
+
+Economists are sometimes fond of using subscripts to denote derivatives, writing $f_x(c)$ to denote the derivative of $f$ at the specific point $x = c.$
+They do this more commonly for functions with multiple arguments, as we'll see when we get to multivariable calculus.
+In my scholarship I only use this convention in the most dire of notational circumstances, and I will never use it in this course.
+:::
+
+::: {#exr-deriv-h}
+Take the other function plotted in @fig-nonlinear-function-comparison, $$h(x) = 4 - \frac{(x - 5)^2}{5}.$$
+Show that $$h'(x) = - \frac{2}{5} (x - 5) = 2 - \frac{2 x}{5}.$$
+Confirm that $h'(x)$ decreases as $x$ increases, then find the point in the domain at which $g$ becomes steeper than $h$.
+
+:::: {.answer}
+For any real number $c$, we have
+$$
+\begin{aligned}
+h'(c)
+&= \lim_{x \to c} \frac{h(x) - h(c)}{x - c} \\
+&= \lim_{x \to c} \frac{[4 - \frac{(x - 5)^2}{5}] - [4 - \frac{(c - 5)^2}{5}]}{x - c} \\
+&= \lim_{x \to c} \frac{(c - 5)^2 - (x - 5)^2}{5 (x - c)} \\
+&= \lim_{x \to c} \frac{(c^2 - 10 c + 25) - (x^2 - 10 x + 25)}{5 (x - c)} \\
+&= \lim_{x \to c} \frac{c^2 - 10 c - x^2 + 10 x}{5 (x - c)} \\
+&= \lim_{x \to c} \left[\frac{10 (x - c)}{5 (x - c)} - \frac{x^2 - c^2}{5 (x - c)}\right] \\
+&= \lim_{x \to c} \left[2 - \frac{(x + c) (x - c)}{5 (x - c)}\right] \\
+&= \lim_{x \to c} \left[2 - \frac{x + c}{5}\right] \\
+&= 2 - \frac{2 c}{5}.
+\end{aligned}
+$$
+
+To confirm that $h'(x)$ decreases as $x$ increases, suppose $x < y$.
+We have
+$$
+h'(y) - h'(x) = \left[2 - \frac{2y}{5}\right] - \left[2 - \frac{2x}{5}\right] = \frac{2 (x - y)}{5} < 0
+$$
+and thus $h'(y) < h'(x)$.
+
+Finally, let's find the crossover point at which $g$ becomes steeper than $h$, i.e., at which $g'(x) > h'(x)$.
+We know that $g'(x) = \frac{2x}{5}$ and that $h'(x) = 2 - \frac{2x}{5}$.
+The statement $g'(x) > h'(x)$ is therefore equivalent to $$\frac{2x}{5} > 2 - \frac{2x}{5},$$ which in turn is equivalent to $$\frac{4x}{5} > 2.$$
+This statement in turn is equivalent to $$x > 2 \cdot \frac{5}{4} = \frac{10}{4} = 2.5,$$ so the crossover point is $x = 2.5$.
+::::
+:::
+
+
+::: {#concept-review}
+:::

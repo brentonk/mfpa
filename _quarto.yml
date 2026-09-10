@@ -51,6 +51,7 @@ book:
     - index.qmd
     - set_theory.qmd
     - limits_and_continuity.qmd
+    - derivatives.qmd
     - references.qmd
   license: "CC BY-NC-SA 4.0"
   sidebar:

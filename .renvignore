@@ -1,0 +1,3 @@
+# Pre-render scripts run locally only; keep their packages (gganimate, gifski)
+# out of renv.lock so CI does not install the sf/GDAL chain. See CLAUDE.md.
+images/anim/

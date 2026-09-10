@@ -161,6 +161,18 @@ bash images/tikz/build.sh   # needs LaTeX with standalone+venndiagram, and pdfto
 
 The `.qmd` embeds the PNGs as ordinary figures, preserving the crossref ids — standalone figures keep their `{#fig-…}`, and Venn pairs sit in `::: {#fig-… layout-ncol=2}` panels with each image's alt text becoming the subfigure caption. When changing a diagram: edit its `.tex`, re-run `build.sh`, and commit both the `.tex` and the regenerated `.png`.
 
+## Animated figures — pre-rendered GIFs
+
+Animations follow the same pattern as the tikz diagrams: **rendered locally, committed, embedded as a markdown figure**. `gganimate` imports `transformr`, which imports `sf`, which needs GDAL/GEOS/PROJ/udunits on the runner — that whole chain was deliberately dropped from `renv.lock` and the workflow's apt list, so don't put `gganimate` in a chunk.
+
+The source scripts live in `images/anim/*.R`, one per animation. Each sources `_common.R` (so the palette, theme, and Archivo apply), renders with `animate(..., device = "ragg_png", bg = mfpa$paper, renderer = gifski_renderer("images/<name>.gif"))`, and is run **from `notes/`**:
+
+```bash
+Rscript images/anim/derivative_approximation.R
+```
+
+Use a paper-coloured background rather than transparency: GIF transparency is 1-bit and leaves jagged anti-aliasing edges. The `.qmd` embeds the output as `![caption](images/<name>.gif){#fig-…}`, which keeps the crossref id. When changing an animation: edit the script, re-run it, and commit both the script and the regenerated GIF. `gganimate` and `gifski` need to be installed locally but are not tracked by `renv`.
+
 ## Styling & design
 
 `mfpa.scss` extends the `cosmo` Bootswatch theme (set in `_quarto.yml`) into an editorial light theme. The design language lives in the `scss:defaults` block:
