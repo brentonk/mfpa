@@ -12,8 +12,8 @@ source("_common.R")
 Throughout this chapter, we will work exclusively with continuous functions that map intervals of real numbers into the real numbers.
 So unless I specify otherwise, whenever I refer to a function $f$ in this chapter, assume that:
 
-- The domain of $f$ is the real numbers $\mathbb{R},$ or an interval of reals.
-- The codomain of $f$ is the real numbers $\mathbb{R}.$
+- The domain of $f$ is the real numbers $\mathbb{R}$, or an interval of reals.
+- The codomain of $f$ is the real numbers $\mathbb{R}$.
 - $f$ is continuous.
 
 
@@ -50,12 +50,12 @@ tibble(x = seq(0, 5), h = 2 + 0.25 * x, g = x) |>
 ```
 
 Between the two linear functions depicted in @fig-linear-function-slopes, $g(x)$ is steeper and $h(x)$ is flatter.
-Specifically, the [slope]{.concept definition="For a linear function, $f(x) = \alpha + \beta x,$ the slope is the coefficient $\beta.$ It can be calculated using the rise-over-run formula: for any distinct points $x_1$ and $x_2$ in the domain of $f,$ $$\beta = \frac{f(x_1) - f(x_2)}{x_1 - x_2}.$$"} of $g(x)$ is greater in magnitude than that of $h(x).$
+Specifically, the [slope]{.concept definition="For a linear function, $f(x) = \alpha + \beta x$, the slope is the coefficient $\beta$. It can be calculated using the rise-over-run formula: for any distinct points $x_1$ and $x_2$ in the domain of $f$, $$\beta = \frac{f(x_1) - f(x_2)}{x_1 - x_2}.$$"} of $g(x)$ is greater in magnitude than that of $h(x)$.
 You can calculate the slope of a linear function using the "rise over run" formula.
-Given any two distinct points along the domain, $x_1$ and $x_2,$ we calculate the slope by dividing the difference in function values (the "rise") by the difference in domain values (the "run"): $$\text{slope} = \frac{f(x_1) - f(x_2)}{x_1 - x_2}.$$ {#eq-rise-over-run}
+Given any two distinct points along the domain, $x_1$ and $x_2$, we calculate the slope by dividing the difference in function values (the "rise") by the difference in domain values (the "run"): $$\text{slope} = \frac{f(x_1) - f(x_2)}{x_1 - x_2}.$$ {#eq-rise-over-run}
 
-For example, for the functions we've plotted in @fig-linear-function-slopes, let's compare the function values at $x_1 = 4$ to those at $x_2 = 0.$
-For the steeper function $g$, we have $g(x_1) = g(4) = 4$ and $g(x_2) = g(0) = 0.$
+For example, for the functions we've plotted in @fig-linear-function-slopes, let's compare the function values at $x_1 = 4$ to those at $x_2 = 0$.
+For the steeper function $g$, we have $g(x_1) = g(4) = 4$ and $g(x_2) = g(0) = 0$.
 Therefore, the slope of $g$ is 1: $$\text{slope of $g$} = \frac{g(x_1) - g(x_2)}{x_1 - x_2} = \frac{g(4) - g(0)}{4} = \frac{4 - 0}{4 - 0} = 1.$$
 By contrast, the slope of the flatter function $h$ is just 1/4: $$\text{slope of $h$} = \frac{h(x_1) - h(x_2)}{x_1 - x_2} = \frac{h(4) - h(0)}{4 - 0} = \frac{3 - 2}{4} = \frac{1}{4}.$$
 
@@ -149,12 +149,14 @@ df_nonlinear_functions |>
   labs(x = "x", y = "Function value")
 ```
 
-At the leftmost part of the figure, close to $x = 0,$ the red function $g(x)$ is nearly flat while the blue function $h(x)$ is clearly increasing.
-By contrast, at the rightmost part of the figure, close to $x = 5,$ we see that $g(x)$ is clearly increasing while $h(x)$ is nearly flat.
+At the leftmost part of the figure, close to $x = 0$, the red function $g(x)$ is nearly flat while the blue function $h(x)$ is clearly increasing.
+By contrast, at the rightmost part of the figure, close to $x = 5$, we see that $g(x)$ is clearly increasing while $h(x)$ is nearly flat.
 We can glean that much through the eyeball test.
 But how can we quantify the "steepness" of each function at each point?
 Is there a precise way to say that a function is "nearly flat" at a particular point?
 And how can we identify the crossover point, where $g(x)$ starts to increase more steeply than $h(x)$ does?
+
+## Defining the derivative {#sec-derivatives-definition}
 
 One way to calculate the steepness of a nonlinear function at a particular point would be to use the "rise over run" formula (@eq-rise-over-run).
 In other words, to gauge the steepness at some point $c$ in the domain of the function, we pick a nearby point $x$ and calculate
@@ -179,21 +181,21 @@ $$
 ![Closer and closer approximations of the how steep the function is at $c = 0$.](images/derivative_approximation.gif){#fig-derivative-approximation}
 
 No matter how close of an approximation we take, there's always a closer one to take.
-You should never be satisfied with the approximation $$\text{steepness at $c$} \approx \frac{f(x) - f(c)}{x - c},$$ because you could have calculated an *even better* approximation at the midpoint between $c$ and your previously chosen approximation point $x,$ $$\text{steepness at $c$} \approx \frac{f(\frac{x + c}{2}) - f(c)}{\frac{x + c}{2} - c}.$$
+You should never be satisfied with the approximation $$\text{steepness at $c$} \approx \frac{f(x) - f(c)}{x - c},$$ because you could have calculated an *even better* approximation at the midpoint between $c$ and your previously chosen approximation point $x$, $$\text{steepness at $c$} \approx \frac{f(\frac{x + c}{2}) - f(c)}{\frac{x + c}{2} - c}.$$
 
 The only way to escape the we-could-have-gotten-even-closer complaint is to *take the limit*.
-We will formally define the derivative of a function as the limit of the rise-over-run calculation (@eq-rise-over-run) as we choose approximation points $x$ ever closer and closer to $c,$ the point at which we want to calculate the steepness of the function.
+We will formally define the derivative of a function as the limit of the rise-over-run calculation (@eq-rise-over-run) as we choose approximation points $x$ ever closer and closer to $c$, the point at which we want to calculate the steepness of the function.
 
 ::: {#def-derivative name="Derivative of a function"}
-Consider the function $f : X \to \mathbb{R},$ where $X \subseteq \mathbb{R},$ and the point $c \in X.$
-The [derivative]{.concept definition="The derivative of $f$ at the point $c,$ denoted $f'(c),$ is a measure of how steeply the function is increasing or decreasing at that point.  The formal definition of the derivative is that $$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c} = \lim_{h \to 0} \frac{f(c + h) - f(c)}{h},$$ provided that this limit exists."} of $f$ at $c,$ denoted $f'(c),$ is defined by the limit $$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c},$$ provided that this limit exists.
-When this limit exists, we say that $f$ is [differentiable at the point]{.concept entry="Differentiability" definition="A function $f : X \to \mathbb{R}$ is differentiable at a point in its domain, $c \in X,$ if the derivative $f'(c)$ exists.  We call $f$ a differentiable function if it is differentiable at every point in its domain."} $c.$
+Consider the function $f : X \to \mathbb{R}$, where $X \subseteq \mathbb{R}$, and the point $c \in X$.
+The [derivative]{.concept definition="The derivative of $f$ at the point $c$, denoted $f'(c)$, is a measure of how steeply the function is increasing or decreasing at that point.  The formal definition of the derivative is that $$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c} = \lim_{h \to 0} \frac{f(c + h) - f(c)}{h},$$ provided that this limit exists."} of $f$ at $c$, denoted $f'(c)$, is defined by the limit $$f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c},$$ provided that this limit exists.
+When this limit exists, we say that $f$ is [differentiable at the point]{.concept entry="Differentiability" definition="A function $f : X \to \mathbb{R}$ is differentiable at a point in its domain, $c \in X$, if the derivative $f'(c)$ exists.  We call $f$ a differentiable function if it is differentiable at every point in its domain."} $c$.
 
 If $f$ is differentiable at every point in its domain, we simply say that it is [differentiable]{.concept entry="Differentiability"}.
 :::
 
-Let's use the formal definition to calculate the derivative of $g(x)$ at $x = 0,$ as we attempted to approximate in @fig-derivative-approximation.
-Remember that $g(x) = x^2 / 5.$
+Let's use the formal definition to calculate the derivative of $g(x)$ at $x = 0$, as we attempted to approximate in @fig-derivative-approximation.
+Remember that $g(x) = x^2 / 5$.
 Therefore, we have
 $$
 \begin{aligned}
@@ -204,7 +206,7 @@ g'(0)
 &= 0.
 \end{aligned}
 $$
-This calculation confirms what we could see from the graph: the function $g(x)$ is essentially flat at $x = 0.$
+This calculation confirms what we could see from the graph: the function $g(x)$ is essentially flat at $x = 0$.
 
 It would be rather tedious to go through this calculation for any individual point whose derivative we want to calculate.
 Luckily, we don't have to do that.
@@ -222,16 +224,6 @@ g'(c)
 $$
 This formula confirms something we can see in @fig-nonlinear-function-comparison: $g(x)$ gets steeper as we go further to the right along the x-axis.
 For example, the effective "slope" of the function at $x = 1$ is $g'(x) = 2 / 5 = 0.4$, whereas the effective slope at $x = 5$ is $g'(x) = 2$.
-
-::: {.remark title="The many ways to denote derivatives"}
-You will sometimes see the derivative written in the fractional form, $$\frac{d f(x)}{d x}.$$
-I don't love this notation because it makes it hard to denote "the derivative of $f$ at the specific point $x = c$."
-You're stuck with either the ambiguous-seeming $$\frac{d f(c)}{d x}$$ or with the clunky-seeming $$\left. \frac{d f(x)}{d x} \right|_{x = c}.$$
-
-Economists are sometimes fond of using subscripts to denote derivatives, writing $f_x(c)$ to denote the derivative of $f$ at the specific point $x = c.$
-They do this more commonly for functions with multiple arguments, as we'll see when we get to multivariable calculus.
-In my scholarship I only use this convention in the most dire of notational circumstances, and I will never use it in this course.
-:::
 
 ::: {#exr-deriv-h}
 Take the other function plotted in @fig-nonlinear-function-comparison, $$h(x) = 4 - \frac{(x - 5)^2}{5}.$$
@@ -267,6 +259,156 @@ We know that $g'(x) = \frac{2x}{5}$ and that $h'(x) = 2 - \frac{2x}{5}$.
 The statement $g'(x) > h'(x)$ is therefore equivalent to $$\frac{2x}{5} > 2 - \frac{2x}{5},$$ which in turn is equivalent to $$\frac{4x}{5} > 2.$$
 This statement in turn is equivalent to $$x > 2 \cdot \frac{5}{4} = \frac{10}{4} = 2.5,$$ so the crossover point is $x = 2.5$.
 ::::
+:::
+
+::: {#exr-deriv-quadratic}
+Let $f : \mathbb{R} \to \mathbb{R}$ be a quadratic function, meaning there exist real numbers $a$, $b$, and $c$ such that $$f(x) = a x^2 + b x + c.$$
+Show that $f'(x) = 2 a x + b.$
+
+*Hint:* The calculations will be very similar to the ones from @exr-deriv-h, as the function $h(x)$ there is itself a quadratic function.
+
+:::: {.answer}
+For any real number $d$, we have
+$$
+\begin{aligned}
+f'(d)
+&= \lim_{x \to d} \frac{f(x) - f(d)}{x - d} \\
+&= \lim_{x \to d} \frac{[a x^2 + b x + c] - [a d^2 + b d + c]}{x - d} \\
+&= \lim_{x \to d} \frac{a (x^2 - d^2) + b (x - d)}{x - d} \\
+&= \lim_{x \to d} \frac{a (x + d) (x - d) + b (x - d)}{x - d} \\
+&= \lim_{x \to d} [a (x + d) + b] \\
+&= 2 a d + b.
+\end{aligned}
+$$
+::::
+:::
+
+### Alternative definition {#sec-derivatives-definition-alt}
+
+There's another way to define the derivative that is sometimes more convenient to work with.
+In this alternative definition, we define the "rise" in terms of $f(c + h) - f(c)$ and the "run" in terms of the increment $h$, which may be positive or negative.
+We then consider the limit as this increment becomes smaller and smaller in magnitude:
+$$f'(c) = \lim_{h \to 0} \frac{f(c + h) - f(c)}{h}.$$
+To be clear, both definitions will always lead you to the same answer---which one you use is ultimately a matter of which way you find easiest to solve the problem at hand.
+
+::: {#prp-deriv-alt-def name="Alternative definition of derivative"}
+Consider the function $f : X \to \mathbb{R}$, where $X \subseteq \mathbb{R}$, and the point $c \in X$.
+The derivative $f'(c)$ exists and is equal to $$\lim_{h \to 0} \frac{f(c + h) - f(c)}{h}$$ if and only if this limit exists.
+:::
+
+As an example, we can use the alternative definition to calculate the derivative of the function $g(x)$ plotted in @fig-nonlinear-function-comparison:
+$$
+\begin{aligned}
+g'(c)
+&= \lim_{h \to 0} \frac{g(c + h) - g(c)}{h} \\
+&= \lim_{h \to 0} \frac{\frac{(c + h)^2}{5} - \frac{c^2}{5}}{h} \\
+&= \lim_{h \to 0} \frac{(c + h)^2 - c^2}{5 h} \\
+&= \lim_{h \to 0} \frac{(c^2 + 2 c h + h^2) - c^2}{5h} \\
+&= \lim_{h \to 0} \frac{2 c h + h^2}{5 h} \\
+&= \lim_{h \to 0} \frac{2 c + h}{5} \\
+&= \frac{2 c}{5}.
+\end{aligned}
+$$
+I personally find this definition easier for this particular problem.
+You might find the other definition easier to work with.
+Either way, we end up in the same place, with $g'(c) = 2c / 5.$
+
+::: {#exr-deriv-alt-def}
+Redo @exr-deriv-quadratic using the alternative formula for a derivative.
+
+:::: {.answer}
+Let $f(x) = a x^2 + b x + c,$ and consider any real number $d.$
+We have
+$$
+\begin{aligned}
+f'(d)
+&= \lim_{h \to 0} \frac{f(d + h) - f(d)}{h} \\
+&= \lim_{h \to 0} \frac{[a (d + h)^2 + b (d + h) + c] - [a d^2 + b d + c]}{h} \\
+&= \lim_{h \to 0} \frac{[a d^2 + 2 a d h + a h^2 + b d + b h + c] - [a d^2 + b d + c]}{h} \\
+&= \lim_{h \to 0} \frac{2 a d h + a h^2 + b h}{h} \\
+&= \lim_{h \to 0} [2 a d + a h + b] \\
+&= 2 a d + b.
+\end{aligned}
+$$
+::::
+:::
+
+### When the derivative doesn't exist {#sec-derivatives-nonexistence}
+
+The derivative is the limit of the rise-over-run formula.
+Because the denominator of that formula approaches zero as we take the limit, its limit is not always guaranteed to exist---and in fact sometimes it does not.
+
+To begin with, you never need to bother trying to calculate the derivative of a function at a point where the function is not continuous---it won't exist.
+In logic-speak: if $f$ is not continuous at $c$, then $f'(c)$ does not exist.
+Or, equivalently (never forget the contrapositive!), if $f'(c)$ exists, then $f$ is continuous at $c$.
+
+::: {#thm-differentiable-implies-continuous name="Differentiable implies continuous"}
+Consider a function $f : X \to \mathbb{R}$, where $X \subseteq \mathbb{R}$, and the point $c \in X$.
+If $f$ is differentiable at $c$, then $f$ is continuous at $c$.
+:::
+
+::: {.proof}
+Suppose $f$ is differentiable at $c$, meaning there is a real number $y$ such that $$\lim_{x \to c} \frac{f(x) - f(c)}{x - c} = y.$$
+Using the properties of function limits (@prp-function-limit-properties), we then have
+$$
+\begin{aligned}
+\lim_{x \to c} f(x)
+&= \lim_{x \to c} [f(x) - f(c) + f(c)] \\
+&= f(c) + \lim_{x \to c} [f(x) - f(c)] \\
+&= f(c) + \lim_{x \to c} \left[\frac{f(x) - f(c)}{x - c} \cdot (x - c)\right] \\
+&= f(c) + \underbrace{\left(\lim_{x \to c} \frac{f(x) - f(c)}{x - c}\right)}_{ = y} \cdot \underbrace{\left(\lim_{x \to c} [x - c]\right)}_{= 0} \\
+&= f(c) + y \cdot 0 \\
+&= f(c),
+\end{aligned}
+$$
+so $f$ is continuous at $c.$
+:::
+
+@thm-differentiable-implies-continuous tells us that every differentiable function is continuous, but it says nothing about whether every continuous function is differentiable.
+(In terms of formal logic, the theorem is an "if" statement rather than an "if and only if.")
+In fact, there are continuous functions that are not differentiable.
+
+One example of a function that is continuous but not differentiable is the absolute value function, $f(x) = |x|$ at the point $c = 0$.
+The derivative does not exist because the relevant left- and right-hand limits do not agree:
+$$
+\begin{alignedat}{2}
+\lim_{x \to 0^-} \frac{f(x) - f(0)}{x - 0} &= \lim_{x \to 0^-} \frac{-x}{x} &&= -1; \\
+\lim_{x \to 0^+} \frac{f(x) - f(0)}{x - 0} &= \lim_{x \to 0^+} \frac{x}{x} &&= 1.
+\end{alignedat}
+$$
+
+The most common type of non-differentiability in a continuous function that you'll run into is a "kink" in the graph of the function---a point where the direction of the function appears to change sharply instead of smoothly.
+The absolute value function illustrates this type of non-differentiability.
+
+```{r}
+#| label: fig-abs-value-kink
+#| fig-cap: "Non-differentiability due to a kink."
+#| cache: true
+col_fn <- mfpa$teal
+tibble(x = seq(-1, 1, length.out = 101), y = abs(x)) |>
+  ggplot(aes(x = x, y = y)) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  geom_line(colour = col_fn, linewidth = 1.3) +
+  # solid point: the kink at x = 0, where the derivative does not exist
+  annotate("point", x = 0, y = 0, colour = col_fn, size = 4.5) +
+  annotate(
+    "text",
+    x = 0, y = -0.1, label = "'kink' at x = 0",
+    colour = col_fn, size = 5, hjust = -0.1
+  ) +
+  scale_x_continuous(breaks = seq(-1, 1, by = 0.5)) +
+  scale_y_continuous(breaks = seq(0, 1, by = 0.25), limits = c(-0.25, 1)) +
+  labs(x = "x", y = "|x|")
+```
+
+::: {.remark title="The many ways to denote derivatives"}
+You will sometimes see the derivative written in the fractional form, $$\frac{d f(x)}{d x}.$$
+I don't love this notation because it makes it hard to denote "the derivative of $f$ at the specific point $x = c$."
+You're stuck with either the ambiguous-seeming $$\frac{d f(c)}{d x}$$ or with the clunky-seeming $$\left. \frac{d f(x)}{d x} \right|_{x = c}.$$
+
+Economists are sometimes fond of using subscripts to denote derivatives, writing $f_x(c)$ to denote the derivative of $f$ at the specific point $x = c$.
+They do this more commonly for functions with multiple arguments, as we'll see when we get to multivariable calculus.
+In my scholarship I only use this convention in the most dire of notational circumstances, and I will never use it in this course.
 :::
 
 

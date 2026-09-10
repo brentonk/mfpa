@@ -1,0 +1,58 @@
+<script>
+// Companion to _filters/math-punct.lua. The filter glues inline math to its
+// adjacent punctuation with a `.math-punct` span set to `white-space: nowrap`
+// (see mfpa.scss), which also switches off KaTeX's internal break points, so a
+// glued expression sets as one unbreakable unit. That is fine wherever the
+// unit fits its line, but a long expression in a nested list on a phone would
+// spill past the edge of the column. This un-glues exactly those spans — the
+// ones wider than their containing block — so they can break between KaTeX's
+// boxes again (and, rarely, before their punctuation). Everything else keeps
+// the glue. Re-checked on resize, when web fonts finish loading (KaTeX and
+// body fonts change widths), and when a collapsed answer block is opened
+// (hidden spans measure as zero width until then).
+(function () {
+  var CLASS = "math-punct-overflow";
+
+  function blockOf(el) {
+    var b = el.parentElement;
+    while (b && getComputedStyle(b).display.indexOf("inline") === 0) {
+      b = b.parentElement;
+    }
+    return b;
+  }
+
+  function availableWidth(block) {
+    var cs = getComputedStyle(block);
+    return block.getBoundingClientRect().width
+      - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  }
+
+  function fit() {
+    var spans = document.querySelectorAll(".math-punct");
+    for (var i = 0; i < spans.length; i++) {
+      var s = spans[i];
+      s.classList.remove(CLASS);
+      var w = s.getBoundingClientRect().width;
+      if (w === 0) continue; // hidden (collapsed answer, tooltip)
+      var block = blockOf(s);
+      if (block && w > availableWidth(block) + 0.5) {
+        s.classList.add(CLASS);
+      }
+    }
+  }
+
+  var timer;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(fit, 60);
+  }
+
+  window.addEventListener("load", fit);
+  window.addEventListener("resize", schedule);
+  // `toggle` doesn't bubble; listen in the capture phase to catch every <details>.
+  document.addEventListener("toggle", schedule, true);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(fit);
+  }
+})();
+</script>

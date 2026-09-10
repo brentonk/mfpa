@@ -33,9 +33,9 @@ For our purposes,^[If you go deep into set theory, you end up arriving at questi
 a set is just an unordered collection of distinct objects.
 
 ::: {#def-set name="Sets and elements"}
-A [set]{.concept definition="Informally, a collection of objects (not necessarily numbers).  A set $S$ with elements $a,$ $b,$ and $c$ is written $S = \\{a, b, c\\}$."} is a collection of objects, each of which is an [element]{.concept definition='A member of a set.  We write $a \in A$ to mean "$a$ is an element of the set $A$."'} of the set.
+A [set]{.concept definition="Informally, a collection of objects (not necessarily numbers).  A set $S$ with elements $a$, $b$, and $c$ is written $S = \\{a, b, c\\}$."} is a collection of objects, each of which is an [element]{.concept definition='A member of a set.  We write $a \in A$ to mean "$a$ is an element of the set $A$."'} of the set.
 For example, the notation $$A = \{1, 2, 4, 8\}$$ is equivalent to saying "$A$ is the set whose elements are 1, 2, 4, and 8."
-To denote that the object $a$ is an element of the set $A,$ we write $a \in A.$
+To denote that the object $a$ is an element of the set $A$, we write $a \in A$.
 :::
 
 It is conventional---not just in my notes, but in mathematical writing generally---to use capital letters to denote sets and lowercase letters to denote their elements.
@@ -125,7 +125,7 @@ Every US senator is a politician.
 To make that a mathematical statement, let's translate it into a statement about sets.
 Let $S$ be the set of all US senators, and let $P$ be the set of all politicians.
 When we say that every senator is a politician, we are saying that every element of $S$ is an element of $P$.
-More compactly, we say that $S$ is a [subset]{.concept definition="When all of the elements of the set $A$ are also elements of the set $B$, we say that $A$ is a subset of $B$, written $A \subseteq B$."} of $P.$
+More compactly, we say that $S$ is a [subset]{.concept definition="When all of the elements of the set $A$ are also elements of the set $B$, we say that $A$ is a subset of $B$, written $A \subseteq B$."} of $P$.
 
 ::: {#def-subset name="Subset"}
 The set $A$ is a [subset]{.concept} of the set $B$, denoted $A \subseteq B$, if every element of $A$ is an element of $B$.
@@ -160,7 +160,7 @@ Why?
 :::: {.answer}
 It's true.
 Every element of $A$ is an element of $A$.
-Therefore, the formal definition (@def-subset) tells us that $A \subseteq A.$
+Therefore, the formal definition (@def-subset) tells us that $A \subseteq A$.
 
 It may sound weird in ordinary language to say that $A$ is a subset of itself---but in math, we follow the formal definition.
 There is a notion of a "proper subset," written $A \subsetneq B$, to mean "$A$ is a subset of $B$, and $B$ contains at least one element that is not an element of $A$."
@@ -171,13 +171,13 @@ But the distinction comes up very rarely in practice, as it happens.
 ::: {.pitfall title="Don't mix up set inclusion with subsets"}
 $A \subseteq B$ and $A \in B$ look somewhat similar, but they have very different meanings.
 
-- $A \subseteq B$ means "$A$ is a subset of $B,$" i.e., "every element of $A$ is also an element of $B.$"
+- $A \subseteq B$ means "$A$ is a subset of $B$," i.e., "every element of $A$ is also an element of $B$."
 
-- $A \in B$ means "$A$ is an element of $B,$" i.e., "the set $A$ is, itself, one of the elements of the set $B.$"
+- $A \in B$ means "$A$ is an element of $B$," i.e., "the set $A$ is, itself, one of the elements of the set $B$."
 
 When you're talking about sets, you usually mean the first of these, not the second.
 The second isn't *necessarily* wrong, as we do sometimes deal with sets that contain sets.
-(A set that contains other sets as elements is conventionally called a [collection]{.concept definition="A set that contains other sets, like $\\mathcal{A} = \\{\\mathbb{R}, \\mathbb{Z}, \\{1, 2, 7\\}\\}.$"}, denoted with a calligraphic capital letter like $\mathcal{A}$ or $\mathcal{B}.$)
+(A set that contains other sets as elements is conventionally called a [collection]{.concept definition="A set that contains other sets, like $\\mathcal{A} = \\{\\mathbb{R}, \\mathbb{Z}, \\{1, 2, 7\\}\\}$."}, denoted with a calligraphic capital letter like $\mathcal{A}$ or $\mathcal{B}$.)
 The important thing is to be sure your notation conveys your precise meaning.
 
 If you mess up and use the wrong notation, your readers will probably still ultimately figure out what you mean---but it'll take a bit longer for them than if you'd used the right notation.
@@ -209,13 +209,13 @@ Other technical writing in political science, economics, statistics, and mathema
 :::
 
 Though the subset relation between sets sometimes works similarly to the less-than-or-equal relation between numbers, the analogy is not complete.
-Given any two numbers $a$ and $b,$ it must be the case that $a \leq b$ or that $b \leq a$ (or both).
+Given any two numbers $a$ and $b$, it must be the case that $a \leq b$ or that $b \leq a$ (or both).
 The same is not true for sets.
-For example, take the sets $A = \{1, 2, 3\}$ and $B = \{2, 3, 4\}.$
+For example, take the sets $A = \{1, 2, 3\}$ and $B = \{2, 3, 4\}$.
 $A$ is not a subset of $B$, as $1 \in A$ yet $1 \notin B$.
-But $B$ also is not a subset of $A$, as $4 \in B$ yet $4 \notin A.$
+But $B$ also is not a subset of $A$, as $4 \in B$ yet $4 \notin A$.
 
-We actually use the notion of subsets to determine when two sets are [equal]{.concept entry="Set equality" definition="Informally, two sets are equal if they contain the same elements.  Formally, $A = B$ if $A \\subseteq B$ and $B \\subseteq A.$"}.
+We actually use the notion of subsets to determine when two sets are [equal]{.concept entry="Set equality" definition="Informally, two sets are equal if they contain the same elements.  Formally, $A = B$ if $A \\subseteq B$ and $B \\subseteq A$."}.
 An intuitive definition of set equality would be that $A = B$ if $A$ and $B$ contain the same elements.
 But what does it mean, in the obnoxiously rigorous sense of formal mathematics, to contain the same elements?
 Does $\{1, 2, 3\}$ equal $\{3, 2, 1\}$?
@@ -249,37 +249,37 @@ I'll also leave it to you to show that repetition of an element is immaterial to
 Just like equality of numbers, equality of sets is transitive: if one set is equal to another, which in turn is equal to some third set, then the first is equal to the third as well.
 
 ::: {#cor-equality-transitive name="Transitivity of set equality"}
-If $A = B$ and $B = C,$ then $A = C.$
+If $A = B$ and $B = C$, then $A = C$.
 :::
 
 In lieu of a fully formalized proof, it's worth taking a second to see *precisely* why this statement is true.
-Of course, there's an intuitive logic behind it: if $A$ has the same elements as $B,$ and $B$ has the same elements as $C,$ then it'd be pretty weird for $A$ not to have the same elements as $C.$
+Of course, there's an intuitive logic behind it: if $A$ has the same elements as $B$, and $B$ has the same elements as $C$, then it'd be pretty weird for $A$ not to have the same elements as $C$.
 Mathematical language lets us translate an intuition like this into a rock-solid argument---or, when our intuition turns out to be wrong, to find the precise gap in the supposed logic.
 
 To get to the no-one-can-doubt-this logic behind @cor-equality-transitive, we combine the formal definition of set equality with our earlier result about the transitivity of subsets (@prp-subset-transitive).
-If $A = B$ and $B = C,$ then we know that all of the following statements are true:
+If $A = B$ and $B = C$, then we know that all of the following statements are true:
 
-1. $A \subseteq B.$
-2. $B \subseteq A.$
-3. $B \subseteq C.$
-4. $C \subseteq B.$
+1. $A \subseteq B$.
+2. $B \subseteq A$.
+3. $B \subseteq C$.
+4. $C \subseteq B$.
 
-We can conclude from (1) and (3) that $A \subseteq C,$ using the transitivity of subsets.
-By the same token, we can conclude from (2) and (4) that $C \subseteq A.$
-Finally, the formal definition of set equality then tells us that $A = C.$
+We can conclude from (1) and (3) that $A \subseteq C$, using the transitivity of subsets.
+By the same token, we can conclude from (2) and (4) that $C \subseteq A$.
+Finally, the formal definition of set equality then tells us that $A = C$.
 Hey, we just proved something!
 
 ::: {#exr-odd-integers name="The set of odd integers"}
-Brad says that the set of odd integers is $B = \{2n + 1 \mid n \in \mathbb{Z}\}.$
-Peter says that the set of odd integers is $P = \{2n - 1 \mid n \in \mathbb{Z}\}.$
-Convince them that $B = P.$
+Brad says that the set of odd integers is $B = \{2n + 1 \mid n \in \mathbb{Z}\}$.
+Peter says that the set of odd integers is $P = \{2n - 1 \mid n \in \mathbb{Z}\}$.
+Convince them that $B = P$.
 
 :::: {.answer}
-Ultimately we need to convince them that $B \subseteq P$ and that $P \subseteq B.$
+Ultimately we need to convince them that $B \subseteq P$ and that $P \subseteq B$.
 
-Let's start by showing that $B \subseteq P.$
-We need to show that any element of $B$ is also an element of $P.$
-For any element $b$ of $B,$ there's an integer $n \in \mathbb{Z}$ such that $b = 2n + 1,$ according to how we've defined the set $B.$
+Let's start by showing that $B \subseteq P$.
+We need to show that any element of $B$ is also an element of $P$.
+For any element $b$ of $B$, there's an integer $n \in \mathbb{Z}$ such that $b = 2n + 1$, according to how we've defined the set $B$.
 But another way to think about this is:
 $$
 \begin{aligned}
@@ -289,11 +289,11 @@ b &= 2n + 1 \\
 &= 2 (n + 1) - 1.
 \end{aligned}
 $$
-Because $n + 1$ is an integer and $b = 2(n + 1) - 1,$ we conclude that $b \in P.$
-As each element of $B$ is an element of $P,$ we conclude that $B \subseteq P.$
+Because $n + 1$ is an integer and $b = 2(n + 1) - 1$, we conclude that $b \in P$.
+As each element of $B$ is an element of $P$, we conclude that $B \subseteq P$.
 
-To conclude the proof, now we need to show the opposite direction: $P \subseteq B.$
-I'll leave that to you---you can follow steps very close to what I did to show that $B \subseteq P.$
+To conclude the proof, now we need to show the opposite direction: $P \subseteq B$.
+I'll leave that to you---you can follow steps very close to what I did to show that $B \subseteq P$.
 ::::
 :::
 
@@ -329,16 +329,16 @@ In mathematical terms, the intersection $P \cap Q$ is a subset of the union $P \
 This turns out to be a general property of sets, not just of American national officeholders.
 
 ::: {#prp-intersection-subset-union}
-For any sets $A$ and $B,$
+For any sets $A$ and $B$,
 
-1. The intersection is a subset of each component set: $A \cap B \subseteq A$ and $A \cap B \subseteq B.$
+1. The intersection is a subset of each component set: $A \cap B \subseteq A$ and $A \cap B \subseteq B$.
 
-2. Each component set is a subset of the union: $A \subseteq A \cup B$ and $B \subseteq A \cup B.$
+2. Each component set is a subset of the union: $A \subseteq A \cup B$ and $B \subseteq A \cup B$.
 :::
 
 ::: {#exr-union-intersection name="Unions and intersections"}
-Consider the sets $X = \{1, 2, 4, 8\}$ and $Y = \{2, 4, 6, 8\}.$
-Write out the elements of the intersection $X \cap Y$ and the union $X \cup Y.$
+Consider the sets $X = \{1, 2, 4, 8\}$ and $Y = \{2, 4, 6, 8\}$.
+Write out the elements of the intersection $X \cap Y$ and the union $X \cup Y$.
 Then directly verify that the four claims made in @prp-intersection-subset-union hold for these sets.
 
 :::: {.answer}
@@ -349,13 +349,13 @@ X \cup Y &= \{1, 2, 4, 6, 8\}.
 \end{aligned}
 $$
 
-Because $2 \in X,$ $4 \in X,$ and $8 \in X,$ we have $X \cap Y \subseteq X.$
+Because $2 \in X$, $4 \in X$, and $8 \in X$, we have $X \cap Y \subseteq X$.
 
-Because $2 \in Y,$ $4 \in Y,$ and $8 \in Y,$ we have $X \cap Y \subseteq Y.$
+Because $2 \in Y$, $4 \in Y$, and $8 \in Y$, we have $X \cap Y \subseteq Y$.
 
-Because $1 \in X \cup Y,$ $2 \in X \cup Y,$ $4 \in X \cup Y,$ and $8 \in X \cup Y,$ we have $X \subseteq X \cup Y.$
+Because $1 \in X \cup Y$, $2 \in X \cup Y$, $4 \in X \cup Y$, and $8 \in X \cup Y$, we have $X \subseteq X \cup Y$.
 
-Because $2 \in X \cup Y,$ $4 \in X \cup Y,$ $6 \in X \cup Y,$ and $8 \in X \cup Y,$ we have $Y \subseteq X \cup Y.$
+Because $2 \in X \cup Y$, $4 \in X \cup Y$, $6 \in X \cup Y$, and $8 \in X \cup Y$, we have $Y \subseteq X \cup Y$.
 ::::
 :::
 
@@ -416,12 +416,12 @@ If you're like me, you'll come to like it when events in probability turn out to
 
 ### Complements and De Morgan's laws {#sec-complements-de-morgans}
 
-The set difference $A \setminus B$ is the set of everything in $A$ that's not in $B.$
-But what if we simply wanted the set of *everything* that's not in $B?$
+The set difference $A \setminus B$ is the set of everything in $A$ that's not in $B$.
+But what if we simply wanted the set of *everything* that's not in $B$?
 Once we can properly define this type of set, we will call it the [complement]{.concept definition="The complement of a set $A$, denoted $A^c$, is the set of all elements in the relevant universe that are not elements of $A$."} of $B$.
 
 The one sticky mathematical issue is what we mean by "everything" that isn't in a set.
-For example, again taking $P$ to be the set of people who have been the US president, it seems clear enough that Aaron Burr is in the complement of $P,$ as Aaron Burr was never the president.
+For example, again taking $P$ to be the set of people who have been the US president, it seems clear enough that Aaron Burr is in the complement of $P$, as Aaron Burr was never the president.
 So, in mathematical terms, we would like to say $$\text{Aaron Burr} \in \{x \mid x \notin P\}.$$
 But would we say that the number 3 is also an element of this set?
 What about the chemical formula H$_2$O or the human gene CNR1?
@@ -451,10 +451,10 @@ You don't often see the universal set explicitly specified in mathematical writi
 So what do you do if you see someone talk about the complement of a set, without having specified the relevant universe?
 
 - The appropriate "universe" should typically be clear from the context.
-  For example, if every set being discussed consists exclusively of real numbers, then the relevant universe is most likely the entire number line: $U = \mathbb{R}.$
+  For example, if every set being discussed consists exclusively of real numbers, then the relevant universe is most likely the entire number line: $U = \mathbb{R}$.
 
 - In probability applications specifically, the "universe" is the set of all possible outcomes of the random process being considered.
-  This set is called the "sample space" and is often denoted $\Omega.$
+  This set is called the "sample space" and is often denoted $\Omega$.
 
   For example, in the context of a survey of three people (A, B, C) who are asked whether they approve of the president's job performance (yes or no), the universe is the set of the eight possible combinations of responses:
   $$
@@ -474,16 +474,16 @@ One brief note on notation.
 Some textbooks and writers use an overline, as in $\overline{A}$, to denote the complement of a set.
 
 ::: {#exr-complement name="Complement of a set"}
-Suppose our universe is the number line, $\mathbb{R}.$
-Let $X = \{x \in \mathbb{R} \mid x < 10\}.$
-Characterize $X^c.$
+Suppose our universe is the number line, $\mathbb{R}$.
+Let $X = \{x \in \mathbb{R} \mid x < 10\}$.
+Characterize $X^c$.
 
 :::: {.answer}
-$X^c = \{x \in \mathbb{R} \mid x \geq 10\}.$
+$X^c = \{x \in \mathbb{R} \mid x \geq 10\}$.
 
-Fun fact: we usually use the shorthand $(-\infty, a)$ to denote a set of the form $\{x \in \mathbb{R} \mid x < a\}.$
-We also use the shorthand $[b, \infty)$ to denote a set of the form $\{x \in \mathbb{R} \mid x \geq b\}.$
-Using these shorthands, we have $X = (-\infty, 10)$ and $X^c = [10, \infty).$
+Fun fact: we usually use the shorthand $(-\infty, a)$ to denote a set of the form $\{x \in \mathbb{R} \mid x < a\}$.
+We also use the shorthand $[b, \infty)$ to denote a set of the form $\{x \in \mathbb{R} \mid x \geq b\}$.
+Using these shorthands, we have $X = (-\infty, 10)$ and $X^c = [10, \infty)$.
 
 I'll leave it to you to infer what the shorthands $(-\infty, a]$ and $(b, \infty)$ stand for.
 ::::
@@ -491,29 +491,29 @@ I'll leave it to you to infer what the shorthands $(-\infty, a]$ and $(b, \infty
 
 ::: {#exr-complement-repeated name="Complement of the complement"}
 Suppose our universe is the set of natural numbers from 1 to 10.
-Let $X = \{2, 4, 6, 8, 10\}.$
-Characterize $X^c$ and $(X^c)^c.$
-Confirm that $(X^c)^c = X.$
+Let $X = \{2, 4, 6, 8, 10\}$.
+Characterize $X^c$ and $(X^c)^c$.
+Confirm that $(X^c)^c = X$.
 
 **Bonus question to think about:** Is it generally true that the complement of the complement is the original set, or is that a special property of this example?
 
 :::: {.answer}
 We're working with the universe $$U = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}.$$
 This gives us the complement $$X^c = U \setminus X = \{1, 3, 5, 7, 9\}.$$
-The complement of the complement in turn is $$(X^c)^c = U \setminus X^c = \{2, 4, 6, 8, 10\},$$ which is indeed the same as the original set $X.$
+The complement of the complement in turn is $$(X^c)^c = U \setminus X^c = \{2, 4, 6, 8, 10\},$$ which is indeed the same as the original set $X$.
 
 The equality $(X^c)^c = X$ is not special to this example---it's a general property of the complement.
 We'll see soon enough how to prove this claim formally.
-For now, it'll suffice to observe that $(X^c)^c = \{x \in U \mid x \notin X^c\}.$
-But if an element $x$ is *not* an element of the complement $X^c,$ then it must be an element of the original set $X.$
-Hence $(X^c)^c = \{x \in U \mid x \in X\} = X.$
+For now, it'll suffice to observe that $(X^c)^c = \{x \in U \mid x \notin X^c\}$.
+But if an element $x$ is *not* an element of the complement $X^c$, then it must be an element of the original set $X$.
+Hence $(X^c)^c = \{x \in U \mid x \in X\} = X$.
 ::::
 :::
 
 You can combine the complement with other set operations.
-For example, $(A \cup B)^c$ is the complement of $A \cup B,$ i.e., everything that is not an element of $A \cup B.$
+For example, $(A \cup B)^c$ is the complement of $A \cup B$, i.e., everything that is not an element of $A \cup B$.
 Be careful when combining operations in this way!
-In general, it is *not* true that $(A \cup B)^c = A^c \cup B^c.$
+In general, it is *not* true that $(A \cup B)^c = A^c \cup B^c$.
 In fact, the complement "flips" a union into an intersection, and vice versa---a property of the complement known as [De Morgan's laws]{.concept definition="Rules for taking the complement of a union or an intersection of sets.  The complement of a union is the intersection of the individual complements, and the complement of an intersection is the union of the individual complements."}.
 
 ::: {#thm-demorgan-sets name="De Morgan's laws"}
@@ -531,15 +531,15 @@ De Morgan's laws.
 :::
 
 To illustrate De Morgan's laws, again let $P$ be the set of presidents and $Q$ be the set of vice presidents.
-Their union, $P \cup Q,$ is anyone who's ever been president, vice president, or both.
-The complement of the union, $(P \cup Q)^c,$ is therefore the set of people who have never been president *and* who have never been vice president.
-In order to be in the complement $(P \cup Q)^c,$ a person must be in both the never-president set, $P^c,$ and the never-vice-president set, $Q^c.$
-In other words, they must be in the intersection $P^c \cap Q^c.$
+Their union, $P \cup Q$, is anyone who's ever been president, vice president, or both.
+The complement of the union, $(P \cup Q)^c$, is therefore the set of people who have never been president *and* who have never been vice president.
+In order to be in the complement $(P \cup Q)^c$, a person must be in both the never-president set, $P^c$, and the never-vice-president set, $Q^c$.
+In other words, they must be in the intersection $P^c \cap Q^c$.
 
-To think about it another way, let's see why $(P \cup Q)^c$ is *not* the same as $P^c \cup Q^c.$
-Barack Obama was never vice president, i.e., $\text{Barack Obama} \notin Q,$ and thus $\text{Barack Obama} \in Q^c.$
-Because he's in the complement of the vice president set, he's also in the union $P^c \cup Q^c.$
-At the same time, because Barack Obama was the president, he's in the president set $P$---and thus also its union with the vice president set $P \cup Q.$
+To think about it another way, let's see why $(P \cup Q)^c$ is *not* the same as $P^c \cup Q^c$.
+Barack Obama was never vice president, i.e., $\text{Barack Obama} \notin Q$, and thus $\text{Barack Obama} \in Q^c$.
+Because he's in the complement of the vice president set, he's also in the union $P^c \cup Q^c$.
+At the same time, because Barack Obama was the president, he's in the president set $P$---and thus also its union with the vice president set $P \cup Q$.
 Altogether, we've shown that both of the following are true:
 $$
 \begin{aligned}
@@ -547,11 +547,11 @@ $$
 \text{Barack Obama} &\in P^c \cup Q^c.
 \end{aligned}
 $$
-Because these two sets have an element in common, namely Barack Obama, it cannot be the case that $P^c \cup Q^c$ is the complement of $P \cup Q.$
+Because these two sets have an element in common, namely Barack Obama, it cannot be the case that $P^c \cup Q^c$ is the complement of $P \cup Q$.
 
 ::: {#exr-de-morgan name="De Morgan's laws"}
 Suppose our universe is the set of natural numbers from 1 to 10.
-As in @exr-union-intersection, let $X = \{1, 2, 4, 8\}$ and $Y = \{2, 4, 6, 8\}.$
+As in @exr-union-intersection, let $X = \{1, 2, 4, 8\}$ and $Y = \{2, 4, 6, 8\}$.
 Directly confirm that both of De Morgan's laws apply to the union and intersection of these sets.
 
 :::: {.answer}
@@ -598,18 +598,18 @@ We do this so often that it probably doesn't seem like math most of the time.
   You can think of this as a rule that takes each element of the set of Vanderbilt political science graduate students and associates it with an element of the set of rooms on the third floor of the Commons Center.
 
 - Every home in Davidson County belongs to one of three congressional districts.
-  You can think of this as a rule that takes each element of the set of Davidson County addresses and associates it with an element of $\{\text{TN-04}, \text{TN-06}, \text{TN-07}\}.$
+  You can think of this as a rule that takes each element of the set of Davidson County addresses and associates it with an element of $\{\text{TN-04}, \text{TN-06}, \text{TN-07}\}$.
 
 - Every US president took office in their first term in some year: George Washington in 1789, Grover Cleveland in 1885, Barack Obama in 2009, and so on.
   You can think of this as a rule that takes each element of the set of US presidents and associates it with a natural number.^[This exercise is more complicated for polities that existed both before and after the common era, such as the Roman Empire.]
 
 Each of these examples is a [function]{.concept definition="A rule that associates each element in one set (the domain) with a single element in another set (the codomain).  We write $f : A \to B$ to denote a function $f$ with domain $A$ and codomain $B$."}, which we might say "maps" one set into another.
-The notation $f : A \to B$ is a bit of mathematical shorthand that means "$f$ is a rule that takes each element of $A$ and associates it with an element of $B.$"
+The notation $f : A \to B$ is a bit of mathematical shorthand that means "$f$ is a rule that takes each element of $A$ and associates it with an element of $B$."
 For any element $a \in A$, we write $f(a)$ to stand for the element of $B$ that the function associates $a$ with.
-When a function maps $A$ into $B$, we call $A$ the [domain]{.concept definition='The set that a function "acts on."  If $f$ is a function whose domain is $A,$ then $f(a)$ is defined for every element $a \in A.$'} and $B$ the [codomain]{.concept definition='The set that a function "maps into."  If $f$ is a function whose domain is $A$ and whose codomain is $B,$ then $f(a)$ is an element of $B$ for every element $a \in A.$'}.
+When a function maps $A$ into $B$, we call $A$ the [domain]{.concept definition='The set that a function "acts on."  If $f$ is a function whose domain is $A$, then $f(a)$ is defined for every element $a \in A$.'} and $B$ the [codomain]{.concept definition='The set that a function "maps into."  If $f$ is a function whose domain is $A$ and whose codomain is $B$, then $f(a)$ is an element of $B$ for every element $a \in A$.'}.
 
 To continue with the last example from the list above, let $y : P \to \mathbb{N}$ (verbally: "$y$ is a function that maps the set of presidents into the set of natural numbers") be the function that associates each president with the year they first took office.
-Then we have $y(\text{George Washington}) = 1789,$ $y(\text{Grover Cleveland}) = 1885,$ and so on.
+Then we have $y(\text{George Washington}) = 1789$, $y(\text{Grover Cleveland}) = 1885$, and so on.
 The domain of this function is the set of presidents, $P$, and the codomain is the set of natural numbers, $\mathbb{N}$.
 
 Some associations between sets are not functions.
@@ -648,7 +648,7 @@ As you saw in my answer to @exr-pres-vp-functions, there is nothing in the defin
 Some functions do have this additional property, and we call those functions [one-to-one]{.concept entry="One-to-one (aka injective)" definition="A function is one-to-one, also called injective, if it associates each element of the domain with a distinct element of the codomain: if $a \neq a'$, then $f(a) \neq f(a')$."}.
 
 ::: {#def-one-to-one name="One-to-one function"}
-A function $f : A \to B$ is [one-to-one]{.concept entry="One-to-one (aka injective)"}, also called [injective]{.concept entry="One-to-one (aka injective)"}, if $f(a) \neq f(a')$ for all distinct elements $a \in A$ and $a' \in A.$
+A function $f : A \to B$ is [one-to-one]{.concept entry="One-to-one (aka injective)"}, also called [injective]{.concept entry="One-to-one (aka injective)"}, if $f(a) \neq f(a')$ for all distinct elements $a \in A$ and $a' \in A$.
 :::
 
 ![A function that is one-to-one, but not onto.](images/fn-one-to-one.png){#fig-one-to-one fig-align="center" width="80%"}
@@ -661,10 +661,10 @@ Because these are two different presidents with the same function value, $y$ is 
 
 You also saw in @exr-pres-vp-functions that a function need not reach every element of its codomain.
 In fact, if the domain has fewer elements than the codomain---such as with the sets of presidents $P$ and vice presidents $Q$, where at the time of writing there have been 45 presidents and 50 vice presidents---it would be impossible for the function to reach every element of the codomain.
-In the special case where a function does reach every element of the codomain, we turn a preposition into an adjective and say the function is [onto]{.concept entry="Onto (aka surjective)" definition="A function is onto, also called surjective, if it maps at least one element of the domain to every element of the codomain: for all $b$ in the codomain, there is a domain element $a$ such that $f(a) = b.$"}.
+In the special case where a function does reach every element of the codomain, we turn a preposition into an adjective and say the function is [onto]{.concept entry="Onto (aka surjective)" definition="A function is onto, also called surjective, if it maps at least one element of the domain to every element of the codomain: for all $b$ in the codomain, there is a domain element $a$ such that $f(a) = b$."}.
 
 ::: {#def-onto name="Onto function"}
-A function $f : A \to B$ is [onto]{.concept entry="Onto (aka surjective)"}, also called [surjective]{.concept entry="Onto (aka surjective)"}, if for every element $b \in B$ there is some element $a \in A$ such that $f(a) = b.$
+A function $f : A \to B$ is [onto]{.concept entry="Onto (aka surjective)"}, also called [surjective]{.concept entry="Onto (aka surjective)"}, if for every element $b \in B$ there is some element $a \in A$ such that $f(a) = b$.
 :::
 
 ![A function that is onto, but not one-to-one.](images/fn-onto.png){#fig-onto fig-align="center" width="80%"}
@@ -681,8 +681,8 @@ I like to think of a bijection as creating a "buddy system" between its domain a
 Think about a bijection $f$ that maps elements of (domain) $A$ into (codomain) $B$, so we'd write $f : A \to B$.
 Then for every element $a$ of $A$, there is *exactly one* element $b$ of $B$ such that $f(a) = b$.
 And for every element $b$ of $B$, there is *exactly one* element $a$ of $A$ such that $f(a) = b$.
-If the function weren't one-to-one, then there'd be at least one $b \in B$ with multiple matches in $A.$
-If it weren't onto, then there'd be at least one $b \in B$ with no matches in $A.$
+If the function weren't one-to-one, then there'd be at least one $b \in B$ with multiple matches in $A$.
+If it weren't onto, then there'd be at least one $b \in B$ with no matches in $A$.
 
 ::: {#def-bijective name="Bijection and inverse"}
 A function $f : A \to B$ is a [bijection]{.concept} if it is both one-to-one and onto.
@@ -708,42 +708,42 @@ All I'll say here for infinite sets is that it gets weirder; read the optional @
 For each of the following functions, identify whether it is one-to-one, onto, both, or neither.
 If the function is both one-to-one and onto, characterize its inverse function.
 
-1. $f : \mathbb{N} \to \mathbb{N}$ defined by $f(n) = n + 1.$
-2. $g : \mathbb{Z} \to \mathbb{Z}$ defined by $g(z) = z - 1.$
-3. $h : \{8350\} \to \{8356\}$ defined by $h(8350) = 8356.$
-4. $i : \{-1, 0, 1\} \to \{-1, 0, 1\}$ defined by $i(x) = x^2.$
+1. $f : \mathbb{N} \to \mathbb{N}$ defined by $f(n) = n + 1$.
+2. $g : \mathbb{Z} \to \mathbb{Z}$ defined by $g(z) = z - 1$.
+3. $h : \{8350\} \to \{8356\}$ defined by $h(8350) = 8356$.
+4. $i : \{-1, 0, 1\} \to \{-1, 0, 1\}$ defined by $i(x) = x^2$.
 
 :::: {.answer}
 1. $f$ is one-to-one, as distinct inputs always map to distinct outputs.
-   To be a bit more rigorous about this, we can show that $f(m) = f(n)$ can hold only when $m = n.$
-   To see why that's the case, notice that $f(m) = f(n)$ means $m + 1 = n + 1,$ which in turn (after subtracting 1 from both sides) means $m = n.$
+   To be a bit more rigorous about this, we can show that $f(m) = f(n)$ can hold only when $m = n$.
+   To see why that's the case, notice that $f(m) = f(n)$ means $m + 1 = n + 1$, which in turn (after subtracting 1 from both sides) means $m = n$.
 
    $f$ is not onto.
-   In particular, we have $1 \in \mathbb{N},$ yet there is no $n$ such that $f(n) = 1.$
-   (The only input that could give us $f(n) = 1$ is $n = 0,$ but 0 is not an element of the domain we specified.)
+   In particular, we have $1 \in \mathbb{N}$, yet there is no $n$ such that $f(n) = 1$.
+   (The only input that could give us $f(n) = 1$ is $n = 0$, but 0 is not an element of the domain we specified.)
 
 2. $g$ is one-to-one.
    You can---and should---convince yourself of this by using the same logic as I used in my answer to #1.
 
    $g$ is also onto.
    To see why this is the case, we can take any element of the codomain and find the domain element that maps to it.
-   Specifically, for any integer $y \in \mathbb{Z},$ the number $y + 1$ is an integer too (i.e., $y + 1 \in \mathbb{Z}$) and we have $g(y + 1) = (y + 1) - 1 = y.$
+   Specifically, for any integer $y \in \mathbb{Z}$, the number $y + 1$ is an integer too (i.e., $y + 1 \in \mathbb{Z}$) and we have $g(y + 1) = (y + 1) - 1 = y$.
 
-   The inverse function is $g^{-1} : \mathbb{Z} \to \mathbb{Z}$ defined by $g^{-1}(y) = y + 1.$
-   To confirm that this is the inverse function, we must confirm that $g(g^{-1}(y)) = y$ for any arbitrary input $y:$ $$g(g^{-1}(y)) = g^{-1}(y) - 1 = (y + 1) - 1 = y.$$
+   The inverse function is $g^{-1} : \mathbb{Z} \to \mathbb{Z}$ defined by $g^{-1}(y) = y + 1$.
+   To confirm that this is the inverse function, we must confirm that $g(g^{-1}(y)) = y$ for any arbitrary input $y$: $$g(g^{-1}(y)) = g^{-1}(y) - 1 = (y + 1) - 1 = y.$$
 
 3. $h$ is one-to-one.
    How can we draw that conclusion, given that there's only one element of the domain to begin with?
    Well, the only way for a function to *fail* to be one-to-one is for there to be two distinct elements of the domain that map to the same element of the codomain.
    Given that, any function whose domain is a [singleton]{.concept definition="A set that contains exactly one element."}---a set with one element---is one-to-one.
 
-   $h$ is also onto: the only element of the codomain is 8356, and we have $h(8350) = 8356,$ so the whole codomain is covered by the function.
+   $h$ is also onto: the only element of the codomain is 8356, and we have $h(8350) = 8356$, so the whole codomain is covered by the function.
 
-   The inverse function is $h^{-1} : \{8356\} \to \{8350\}$ defined by $h^{-1}(8356) = 8350.$
+   The inverse function is $h^{-1} : \{8356\} \to \{8350\}$ defined by $h^{-1}(8356) = 8350$.
 
-4. $i$ is not one-to-one: $i(-1) = i(1) = 1.$
+4. $i$ is not one-to-one: $i(-1) = i(1) = 1$.
 
-   $i$ is not onto: we have $i(-1) = i(1) = 1$ and $i(0) = 0,$ so there is no $x$ in the domain that gives us $i(x) = -1.$
+   $i$ is not onto: we have $i(-1) = i(1) = 1$ and $i(0) = 0$, so there is no $x$ in the domain that gives us $i(x) = -1$.
 ::::
 :::
 
@@ -755,16 +755,16 @@ Come up with an example of a function that is...
 3. ... both one-to-one and onto.
 4. ... neither one-to-one nor onto.
 
-In each case, the domain and codomain of your function should both be the [unit interval]{.concept definition="The name for the set of real numbers from 0 to 1 inclusive, i.e., $[0, 1].$"}, $[0, 1].$
+In each case, the domain and codomain of your function should both be the [unit interval]{.concept definition="The name for the set of real numbers from 0 to 1 inclusive, i.e., $[0, 1]$."}, $[0, 1]$.
 
 :::: {.answer}
 There are, of course, many valid answers.
 Here are some examples.
 
-1. One-to-one but not onto: $f(x) = x/2.$
+1. One-to-one but not onto: $f(x) = x/2$.
 2. Onto but not one-to-one: the "hockey stick" function defined by $$f(x) = \begin{cases} 2x & \text{if $x \leq 1/2$},\\ 1 & \text{if $x > 1/2$}.\end{cases}$$
-3. Both one-to-one and onto: $f(x) = x.$
-4. Neither one-to-one nor onto: $f(x) = 0.$
+3. Both one-to-one and onto: $f(x) = x$.
+4. Neither one-to-one nor onto: $f(x) = 0$.
 ::::
 :::
 
@@ -780,33 +780,33 @@ To answer a question like this, I'd typically follow a two-step process:
    (Republican.)
 
 Let's think about this process a bit more ... mathematically.
-I'm constructing a function that maps from the set of days since April 30, 1789, which I'll call $D,$ into the set of all historical American political parties, which I'll call $T.$
-To do this, I'm using the set of US presidents, which I'll continue to call $P,$ as a kind of middleman.
+I'm constructing a function that maps from the set of days since April 30, 1789, which I'll call $D$, into the set of all historical American political parties, which I'll call $T$.
+To do this, I'm using the set of US presidents, which I'll continue to call $P$, as a kind of middleman.
 Specifically, I'm building the "which party held the White House on a particular day?" function out of two other functions involving the set of presidents:
 
-- The "who was president on a specific day?" function, $g : D \to P.$
+- The "who was president on a specific day?" function, $g : D \to P$.
    Remember the meaning of this notation: $g$ is a function that maps $D$ (the set of days) into $P$ (the set of presidents).
 
-- The "which party did a specific president belong to?" function, $h : P \to T.$
+- The "which party did a specific president belong to?" function, $h : P \to T$.
 
 Now we can describe my two-step lookup process in a more mathematical way.
-I'm constructing the "which party controlled the White House on a specified day" function, $f : D \to T.$
-Given any day $d \in D,$ I calculate $f(d)$ by:
+I'm constructing the "which party controlled the White House on a specified day" function, $f : D \to T$.
+Given any day $d \in D$, I calculate $f(d)$ by:
 
 1. Looking up who was president on the specified day.
-   In mathematical terms, I find $g(d).$
+   In mathematical terms, I find $g(d)$.
 
 2. Looking up the party that's associated with the president I found in step 1.
-   In mathematical terms, letting $p$ denote the result of the last step, so that $p = g(d),$ I find $h(p).$
-   Or, even more concisely, I find $h(g(d)).$
+   In mathematical terms, letting $p$ denote the result of the last step, so that $p = g(d)$, I find $h(p)$.
+   Or, even more concisely, I find $h(g(d))$.
 
 Putting this all together, we see that $f(d)$ can be defined as $$f(d) = \overbrace{h(\underbrace{g(d)}_{\mathclap{\text{who was president on day d?}}})}^{\mathclap{\text{what party did g(d) belong to?}}}.$$
-We call this sort of nested construction a composite function, or [composition]{.concept definition="A composition, or composite function, is a function of another function.  For functions $g : A \\to B$ and $h : B \\to C$ (note that the codomain of $g$ must be the same as the domain of $h$), the composition of $h$ and $g$ is the function $f : A \\to C$ defined by $f(a) = h(g(a))$ for all $a \\in A.$"}.
+We call this sort of nested construction a composite function, or [composition]{.concept definition="A composition, or composite function, is a function of another function.  For functions $g : A \\to B$ and $h : B \\to C$ (note that the codomain of $g$ must be the same as the domain of $h$), the composition of $h$ and $g$ is the function $f : A \\to C$ defined by $f(a) = h(g(a))$ for all $a \\in A$."}.
 
 ::: {#def-composition name="Composition of functions"}
-For any functions $g : A \to B$ and $h : B \to C,$ the [composition]{.concept} of $h$ and $g$ is the function $f : A \to C$ defined by $$f(a) = h(g(a))$$ for all $a \in A.$
+For any functions $g : A \to B$ and $h : B \to C$, the [composition]{.concept} of $h$ and $g$ is the function $f : A \to C$ defined by $$f(a) = h(g(a))$$ for all $a \in A$.
 
-Notice that the codomain of the "inner" function $g$ must match the domain of the "outer" function $h.$
+Notice that the codomain of the "inner" function $g$ must match the domain of the "outer" function $h$.
 
 FYI, the composition of $h$ and $g$ is sometimes denoted $h \circ g$, though we won't use that notation in this course very often.
 ::: 
@@ -820,7 +820,7 @@ g(x) &= 2x + 7, \\
 h(y) &= y^4.
 \end{aligned}
 $$
-To see why, notice that for any real number $x,$
+To see why, notice that for any real number $x$,
 $$
 h(g(x))
 = h(2x + 7)
@@ -838,25 +838,25 @@ Make sure to specify the domain and codomain of each piece of the composition.
 
 1. $f : S \to \mathbb{N}$, where $S$ is the set of US states and $f(s)$ represents the age of the oldest member of the state's House delegation.
 
-2. $f : \mathbb{R} \to \mathbb{R}$ defined by $f(x) = 2^{x^2 - 4x + 4}.$
+2. $f : \mathbb{R} \to \mathbb{R}$ defined by $f(x) = 2^{x^2 - 4x + 4}$.
 
-3. $f : \mathbb{R} \to \mathbb{R}$ defined by $f(x) = x.$  (This is not a typo.  Figure out how to think of it as a composite function.)
+3. $f : \mathbb{R} \to \mathbb{R}$ defined by $f(x) = x$.  (This is not a typo.  Figure out how to think of it as a composite function.)
 
 :::: {.answer title="Answers"}
 1. This is another example of the two-step reasoning process I outlined at the start of the section.
    Let $H$ be the set of House members, let $g : S \to H$ select the oldest House member in each state, and let $h : H \to \mathbb{N}$ give the age of each House member.
-   Then we have $f(s) = h(g(s))$ for all $s \in S.$
+   Then we have $f(s) = h(g(s))$ for all $s \in S$.
 
-2. Define $g : \mathbb{R} \to \mathbb{R}$ by $g(x) = x^2 - 4x + 4$ and $h : \mathbb{R} \to \mathbb{R}$ by $h(y) = 2^y.$
+2. Define $g : \mathbb{R} \to \mathbb{R}$ by $g(x) = x^2 - 4x + 4$ and $h : \mathbb{R} \to \mathbb{R}$ by $h(y) = 2^y$.
    Then we have
    $$
    h(g(x)) = h(x^2 - 4x + 4) = 2^{x^2 - 4x + 4} = f(x).
    $$
 
 3. There are many valid answers here.
-   One cheeky answer is to define $g : \mathbb{R} \to \mathbb{R}$ by $g(x) = x$ and $h : \mathbb{R} \to \mathbb{R}$ by $h(y) = y,$ so we have $$h(g(x)) = h(x) = x = f(x).$$
-   You could also set $g(x) = x + 10$ and $h(y) = y - 10,$ giving you $$h(g(x)) = h(x + 10) = (x + 10) - 10 = x = f(x).$$
-   Or perhaps $g(x) = c x$ and $h(y) = y / c$ for some constant $c \neq 0,$ resulting in $$h(g(x)) = h(c x) = \frac{c x}{c} = x = f(x).$$
+   One cheeky answer is to define $g : \mathbb{R} \to \mathbb{R}$ by $g(x) = x$ and $h : \mathbb{R} \to \mathbb{R}$ by $h(y) = y$, so we have $$h(g(x)) = h(x) = x = f(x).$$
+   You could also set $g(x) = x + 10$ and $h(y) = y - 10$, giving you $$h(g(x)) = h(x + 10) = (x + 10) - 10 = x = f(x).$$
+   Or perhaps $g(x) = c x$ and $h(y) = y / c$ for some constant $c \neq 0$, resulting in $$h(g(x)) = h(c x) = \frac{c x}{c} = x = f(x).$$
 
    The lesson here is that there may be numerous different ways to break a function down into a composition of other functions.
    Make the choice that is most *convenient* for whatever you're trying to accomplish.
@@ -868,7 +868,7 @@ Make sure to specify the domain and codomain of each piece of the composition.
 This section contains material that is not strictly necessary, but which I find edifying and hope you will too.
 
 The [cardinality]{.concept definition="The cardinality of a set $A$, denoted $|A|$, is the number of elements in the set if it is finite.  It gets more complicated if the set is infinite."} of a set, loosely speaking, is the number of elements in the set.
-We write $|A|$ to denote the cardinality of a set $A.$
+We write $|A|$ to denote the cardinality of a set $A$.
 For a finite set, this loose definition is exact---the cardinality of a finite set is simply its size.
 For example, if $A = \{1, 10, 100\}$, then $|A| = 3$.
 
@@ -911,15 +911,15 @@ In mathematical notation, $\mathbb{N}_E \subseteq \mathbb{N}$ and $\mathbb{N} \n
 Nonetheless, these two sets turn out to have the same cardinality.
 
 ::: {#prp-cardinality-of-evens}
-The set of even natural numbers, $\mathbb{N}_E,$ has the same cardinality as the set of all natural numbers, $\mathbb{N};$ i.e., $|\mathbb{N}_E| = |\mathbb{N}|.$
+The set of even natural numbers, $\mathbb{N}_E$, has the same cardinality as the set of all natural numbers, $\mathbb{N}$; i.e., $|\mathbb{N}_E| = |\mathbb{N}|$.
 :::
 
 ::: {.proof}
 We need to find a bijection between the two sets.
-I propose the function $f : \mathbb{N} \to \mathbb{N}_E$ defined by $f(n) = 2n.$
-This function is one-to-one, because the only way to have $f(n) = f(m)$ is to have $2n = 2m,$ which in turn can be true only if $n = m.$
+I propose the function $f : \mathbb{N} \to \mathbb{N}_E$ defined by $f(n) = 2n$.
+This function is one-to-one, because the only way to have $f(n) = f(m)$ is to have $2n = 2m$, which in turn can be true only if $n = m$.
 This function is also onto, because every even natural number is 2 times some natural number (as is evident from the definition of $\mathbb{N}_E$ above).
-Because $f$ is a bijection, we have $|\mathbb{N}| = |\mathbb{N}_E|.$
+Because $f$ is a bijection, we have $|\mathbb{N}| = |\mathbb{N}_E|$.
 :::
 
 This result is one hint at the weirdness of infinite sets.
@@ -927,15 +927,15 @@ A more vivid way to describe the weirdness is the metaphor of [Hilbert's Hotel](
 Imagine a hotel with infinitely many rooms, one for each natural number.
 A traveler arrives at the hotel, only to find out every room is full.
 She starts to walk out the door, when the manager tells her, "Don't worry, we can make room."
-He tells the occupant of room 1 to move to room 2, whose occupant goes to room 3, whose occupant goes to room 4, and so on, with the guest of each room $n$ being moved to room $n + 1.$
+He tells the occupant of room 1 to move to room 2, whose occupant goes to room 3, whose occupant goes to room 4, and so on, with the guest of each room $n$ being moved to room $n + 1$.
 The new arrival can now move into room 1, even though the hotel was full when she arrived and no one has checked out.
 
 If you buy that Hilbert's Hotel can accommodate one additional guest even when it's full, then you will probably agree that it could take any finite number of new guests.
-If $m$ guests arrive, have the guest in each room $n$ move to room $n + m.$
+If $m$ guests arrive, have the guest in each room $n$ move to room $n + m$.
 
 What is more surprising is that Hilbert's Hotel can also accommodate an *infinite* number of new guests.
 The logic is an application of @prp-cardinality-of-evens.
-For each current guest in room $n,$ have them move to room $2n - 1.$
+For each current guest in room $n$, have them move to room $2n - 1$.
 Now all of the even rooms are empty, and we can put the first new guest in our infinite sequence of new arrivals into room 2, the second into room 4, and so on.
 This seems crazy.
 It is crazy.^[We can make it even crazier if we want.  Suppose an infinite number of trains arrive, each of which contains an infinite number of guests.  Because [the set of all pairs of natural numbers has the same cardinality as the set of natural numbers](https://math.stackexchange.com/q/1293854), it turns out that the ostensibly full hotel can accommodate this infinity-upon-infinity of new guests too.]
@@ -952,9 +952,9 @@ To see why there are more real numbers than natural numbers, we will sketch out 
 Remember that two sets have equal cardinality if there is a bijection that maps one into the other.
 So to prove that the cardinalities of the natural numbers $\mathbb{N}$ and the real numbers $\mathbb{R}$ are different, we will show that no function $f : \mathbb{N} \to (0, 1)$ can be onto, and thus no bijection meeting the definition of equal cardinality may exist.
 
-Take any function $f : \mathbb{N} \to (0, 1).$
+Take any function $f : \mathbb{N} \to (0, 1)$.
 This function associates each natural number $n = 1, 2, \ldots$ with a real number between 0 and 1 (not inclusive).
-We want to show that there is a real number $x \in (0, 1)$ outside the range of $f,$ i.e., $f(n) \neq x$ for all $n \in \mathbb{N}.$
+We want to show that there is a real number $x \in (0, 1)$ outside the range of $f$, i.e., $f(n) \neq x$ for all $n \in \mathbb{N}$.
 To see how we're going to do this, let's imagine lining up each $f(n)$ and taking their decimal expansion.
 
 | $n$      | $f(n)$     | digit 1 | digit 2 | digit 3 | digit 4 | digit 5 | ... |
@@ -978,7 +978,7 @@ We can construct this by ensuring that the $n$'th decimal of $x$ differs from th
 | 5        | 0.09802... | 2                      | 3                   |
 | $\vdots$ | $\vdots$   | $\vdots$               | $\vdots$            |
 
-By constructing $x$ this way, we ensure that there is no $n$ where $f(n)$ equals $x,$ because we know that it differs in at least one decimal place from every single $f(n).$
+By constructing $x$ this way, we ensure that there is no $n$ where $f(n)$ equals $x$, because we know that it differs in at least one decimal place from every single $f(n)$.
 This means there is no onto function that maps from the natural numbers into $(0, 1)$, and therefore no onto function that maps from the natural numbers into the real numbers, and therefore these sets have different cardinalities.
 In other words, there is more than one infinity! 
 

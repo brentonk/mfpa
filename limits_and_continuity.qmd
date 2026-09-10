@@ -16,7 +16,7 @@ That said, you will be working with numbers a lot in your careers as political s
 So to get you where you need to go with statistical analysis, we will be narrowing our focus to the real numbers, $\mathbb{R}$, and to functions that map from and to (subsets of) the real numbers.
 
 The mathematical foundations of the most important statistical techniques involve the two core operations in calculus, derivatives and integrals.
-Those operations in turn depend on [limits]{.concept entry="Limit of a function" definition="The limit of $f(x)$ as $x$ approaches $c$, denoted $\lim_{x \to c} f(x)$, is the value that $f(x)$ gets closer and closer to as $x$ gets closer and closer to $c$ without reaching it.  A function may not have a limit at a particular point."} and [continuity]{.concept definition="A function is continuous at a point $c$ in its domain if the value of the function there is the same as its limit: $f(c) = \lim_{x \to c} f(x).$ If a function is continuous at every point in its domain, we call it a continuous function."} of functions, the core topics of this chapter.
+Those operations in turn depend on [limits]{.concept entry="Limit of a function" definition="The limit of $f(x)$ as $x$ approaches $c$, denoted $\lim_{x \to c} f(x)$, is the value that $f(x)$ gets closer and closer to as $x$ gets closer and closer to $c$ without reaching it.  A function may not have a limit at a particular point."} and [continuity]{.concept definition="A function is continuous at a point $c$ in its domain if the value of the function there is the same as its limit: $f(c) = \lim_{x \to c} f(x)$. If a function is continuous at every point in its domain, we call it a continuous function."} of functions, the core topics of this chapter.
 
 To illustrate the key ideas before we dig into the math, take a look at @fig-hall-rdd, taken from @hall2015happens, a study of the effects of ideological extremism on candidates' eventual success in US House races.
 
@@ -121,8 +121,8 @@ We'll just look at the mathematics behind these ideas, both because they are imp
 ### Definition {#sec-function-limit-def}
 
 Think about the function $f : [-1, 1] \to \mathbb{R}$ depicted below in @fig-function-limit-ex.
-At every point in the domain besides $x = 0,$ we have $f(x) = 1 + 2x.$
-At $x = 0,$ the value of the function "jumps" up to 2.5.
+At every point in the domain besides $x = 0$, we have $f(x) = 1 + 2x$.
+At $x = 0$, the value of the function "jumps" up to 2.5.
 
 ```{r}
 #| label: fig-function-limit-ex
@@ -175,7 +175,7 @@ g(x) = \begin{cases}
 $$
 This is a valid way to define $g$ as long as every domain point $x \in A$ satisfies **one, and only one** of the listed conditions.
 In other words, the listed conditions must be mutually exclusive (can't satisfy more than one) and mutually exhaustive (every domain point satisfies at least one).
-Looking back up at @eq-jump-discontinuity, these conditions hold for the domain $A = [-1, 1]$: the first line covers $x \in [-1, 0),$ the second line covers $x = 0,$ and the first line again covers $x \in (0, 1].$
+Looking back up at @eq-jump-discontinuity, these conditions hold for the domain $A = [-1, 1]$: the first line covers $x \in [-1, 0)$, the second line covers $x = 0$, and the first line again covers $x \in (0, 1]$.
 :::
 
 If we get really close to $x = 0$ on the domain but not quite there, the value of the function gets really close to 1.
@@ -184,32 +184,32 @@ In this sense, we would say the [limit of the function]{.concept entry="Limit of
 In mathematical notation, we would write $$\lim_{x \to 0} f(x) = 1.$$
 
 ::: {#def-function-limit-informal name="Limit of a function, informal"}
-Consider a function $f : X \to Y,$ where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}.$
-Let $c$ be a point in the domain of $f,$ i.e., $c \in X.$
-We say that a number $y$ is the [limit]{.concept entry="Limit of a function"} of $f(x)$ as $x$ approaches $c,$ denoted $$\lim_{x \to c} f(x) = y,$$ if $f(x)$ is very close to $y$ whenever $x$ is very close to (but not exactly equal to) $c.$
+Consider a function $f : X \to Y$, where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}$.
+Let $c$ be a point in the domain of $f$, i.e., $c \in X$.
+We say that a number $y$ is the [limit]{.concept entry="Limit of a function"} of $f(x)$ as $x$ approaches $c$, denoted $$\lim_{x \to c} f(x) = y,$$ if $f(x)$ is very close to $y$ whenever $x$ is very close to (but not exactly equal to) $c$.
 :::
 
 To see how this definition operates in practice, let's again think about the "jump"-y function pictured in @fig-function-limit-ex.
 Because we are interested in how the function behaves when $x$ is close to 0, we will use the value $0$ in place of the arbitrary constant $c$ from the definition.
-We want to validate that if $x$ is very close to $c = 0,$ though not necessarily equal to it, then the function value $f(x)$ is very close to 1.
-To convince yourself that this is the case, you can think of smaller and smaller windows of $x$ around $c = 0:$
+We want to validate that if $x$ is very close to $c = 0$, though not necessarily equal to it, then the function value $f(x)$ is very close to 1.
+To convince yourself that this is the case, you can think of smaller and smaller windows of $x$ around $c = 0$:
 
-- Consider $x$ within 0.1 of $c = 0$ but not equal to it, i.e., $x \in (-0.1, 0) \cup (0, 0.1).$
-  For all values of $x$ in this range, we have $0.8 < f(x) < 1.2.$
+- Consider $x$ within 0.1 of $c = 0$ but not equal to it, i.e., $x \in (-0.1, 0) \cup (0, 0.1)$.
+  For all values of $x$ in this range, we have $0.8 < f(x) < 1.2$.
 
 - Now consider a narrower range, $x \in (-0.01, 0) \cup (0, 0.01)$.
-  For all values of $x$ in this range, we have $0.98 < f(x) < 1.02.$
+  For all values of $x$ in this range, we have $0.98 < f(x) < 1.02$.
 
 - Go another order of magnitude smaller, and think about $x \in (-0.001, 0) \cup (0, 0.001)$.
-  For all values of $x$ in this range, we have $0.998 < f(x) < 1.002.$
+  For all values of $x$ in this range, we have $0.998 < f(x) < 1.002$.
 
-Hopefully, you see that as we shrink the band around $c = 0$ to become narrower and narrower, the band of values of $f(x)$ is also shrinking to be narrower and narrower around $f(x) = 1.$
-If you kept repeating this process indefinitely for smaller and smaller bands around $c = 0,$ you would see that the band of $f(x)$ values indefinitely became smaller and smaller as well.
+Hopefully, you see that as we shrink the band around $c = 0$ to become narrower and narrower, the band of values of $f(x)$ is also shrinking to be narrower and narrower around $f(x) = 1$.
+If you kept repeating this process indefinitely for smaller and smaller bands around $c = 0$, you would see that the band of $f(x)$ values indefinitely became smaller and smaller as well.
 
 You may wonder: where does it stop?
 How "close" is close enough?
 How small of a band around $c$ do I need to draw to be sure of the value of the limit?
-For example, by going down to $c \pm 0.001$ in the example above, we were able to narrow down to $0.998 < f(x) < 1.002,$ but how do we know that the limit is exactly 1?
+For example, by going down to $c \pm 0.001$ in the example above, we were able to narrow down to $0.998 < f(x) < 1.002$, but how do we know that the limit is exactly 1?
 
 These are hard questions that stumped philosophers and mathematicians at least as far back as [Zeno and his paradoxes](https://en.wikipedia.org/wiki/Zeno%27s_paradoxes), if not even earlier.
 Only in the 1800s did mathematicians finally settle on formal definitions that answer these questions satisfactorily [@gowers2008princeton, 122--126].
@@ -263,25 +263,25 @@ tibble(
 ```
 
 From the graph it looks like $$\lim_{x \to 2} f(x) = 3.$$
-Similar to the example from the text, let's look at increasingly narrow windows around $c = 2,$ and see if the range of $f(x)$ values gets closer and closer to 3.
+Similar to the example from the text, let's look at increasingly narrow windows around $c = 2$, and see if the range of $f(x)$ values gets closer and closer to 3.
 
-- Let's consider values of $x$ within 0.1 of $c = 2$ without reaching it exactly, i.e., $x \in (1.9, 2) \cup (2, 2.1).$
-  On the left side, for $x \in (1.9, 2),$ we have $$1.9^2 - 1 = 2.61 < f(x) < 3 = 2^2 - 1.$$
-  On the right side, for $x \in (2, 2.1),$ we have $$-2 \cdot 2 + 7 = 3 > f(x) > 2.8 = -2 \cdot 2.1 + 7.$$
+- Let's consider values of $x$ within 0.1 of $c = 2$ without reaching it exactly, i.e., $x \in (1.9, 2) \cup (2, 2.1)$.
+  On the left side, for $x \in (1.9, 2)$, we have $$1.9^2 - 1 = 2.61 < f(x) < 3 = 2^2 - 1.$$
+  On the right side, for $x \in (2, 2.1)$, we have $$-2 \cdot 2 + 7 = 3 > f(x) > 2.8 = -2 \cdot 2.1 + 7.$$
   Altogether, then, we have $2.61 < f(x) < 3$ throughout this range.
 
-- Going even closer, let's examine $x \in (1.99, 2) \cup (2, 2.01).$
+- Going even closer, let's examine $x \in (1.99, 2) \cup (2, 2.01)$.
   On the left side, we have $$1.99^2 - 1 = 2.9601 < f(x) < 3 = 2^2 - 1.$$
   On the right side, we have $$-2 \cdot 2 + 7 = 3 > f(x) > 2.98 = -2 \cdot 2.01 + 7.$$
   So we have $2.9601 < f(x) < 3$ throughout this range.
 
-- Zooming in by one more order of magnitude, look at $x \in (1.999, 2) \cup (2, 2.001).$
+- Zooming in by one more order of magnitude, look at $x \in (1.999, 2) \cup (2, 2.001)$.
   On the left side, $$1.999^2 - 1 = 2.996001 < f(x) < 3 = 2^2 - 1.$$
   On the right side, $$-2 \cdot 2 + 7 = 3 > f(x) > 2.998 = -2 \cdot 2.001 + 7.$$
   So we have $2.996001 < f(x) < 3$ throughout this range.
 
-If we were to keep repeating this process for smaller and smaller bands around $c = 2,$ we would keep ending up with $2.99\cdots < f(x) < 3,$ with the left-hand number getting ever closer and closer to 3.
-Therefore, we conclude that $\lim_{x \to 2} f(x) = 3.$
+If we were to keep repeating this process for smaller and smaller bands around $c = 2$, we would keep ending up with $2.99\cdots < f(x) < 3$, with the left-hand number getting ever closer and closer to 3.
+Therefore, we conclude that $\lim_{x \to 2} f(x) = 3$.
 ::::
 :::
 
@@ -291,15 +291,15 @@ Most of the time, when you need to calculate a limit, you'll rely on a few simpl
 
 We'll begin with a couple of statements that may seem obvious, but which give us an important toehold to start using the other properties below.
 Both of these statements can be proved to be true using the formal definition of a limit (@def-function-limit-formal in the optional section at the end of this chapter), but we'll just take them as given for our purposes.
-The first is that if a function $f(x)$ equals the same constant at all values close to $c,$ then its limit as $x$ approaches $c$ is that same constant.
+The first is that if a function $f(x)$ equals the same constant at all values close to $c$, then its limit as $x$ approaches $c$ is that same constant.
 
 ::: {#prp-limit-constant-function name="Limit of a locally constant function"}
-Consider a function $f : X \to Y,$ where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}.$
-Let $c$ be a point in the domain of $f,$ i.e., $c \in X.$
+Consider a function $f : X \to Y$, where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}$.
+Let $c$ be a point in the domain of $f$, i.e., $c \in X$.
 If there is a positive number $d > 0$ and a constant (positive, negative, or zero) $m \in \mathbb{R}$ such that $$f(x) = m \quad \text{for all } x \in (c - d, c) \cup (c, c + d),$$ then $$\lim_{x \to c} f(x) = m.$$
 :::
 
-In other words, if $f(x)$ equals the same constant $m$ at every value within $d$ units of $c$ (other than, perhaps, $c$ itself) then the limit there must also equal $m.$
+In other words, if $f(x)$ equals the same constant $m$ at every value within $d$ units of $c$ (other than, perhaps, $c$ itself) then the limit there must also equal $m$.
 @fig-limit-locally-constant illustrates a function where this rule would apply.
 
 ```{r}
@@ -351,15 +351,15 @@ tibble(
   labs(x = "x", y = "f(x)")
 ```
 
-Our other building block is a similar proposition, but this time about the limit of a function where $f(x) = x$ at all values close to $c.$
+Our other building block is a similar proposition, but this time about the limit of a function where $f(x) = x$ at all values close to $c$.
 
 ::: {#prp-limit-local-identity name="Limit of a local identity function"}
-Consider a function $f : X \to Y,$ where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}.$
-Let $c$ be a point in the domain of $f,$ i.e., $c \in X.$
+Consider a function $f : X \to Y$, where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}$.
+Let $c$ be a point in the domain of $f$, i.e., $c \in X$.
 If there is a positive number $d > 0$ such that $$f(x) = x \quad \text{for all } x \in (c - d, c) \cup (c, c + d),$$ then $$\lim_{x \to c} f(x) = c.$$
 :::
 
-So if the function overlaps with the 45-degree line for a certain radius around $x = c,$ then its limit as $x$ approaches $c$ is exactly $c.$
+So if the function overlaps with the 45-degree line for a certain radius around $x = c$, then its limit as $x$ approaches $c$ is exactly $c$.
 @fig-limit-local-identity illustrates this property.
 
 ```{r}
@@ -423,13 +423,13 @@ The use comes in when we combine them with the most important properties of limi
 Let $X$ be a set of real numbers, and let $f : X \to \mathbb{R}$ and $g : X \to \mathbb{R}$ be functions.
 Suppose there is a point $c \in X$ such that $\lim_{x \to c} f(x)$ and $\lim_{x \to c} g(x)$ both exist and are finite.
 
-1. Addition: $\lim_{x \to c} [f(x) + g(x)] = \lim_{x \to c} f(x) + \lim_{x \to c} g(x).$
+1. Addition: $\lim_{x \to c} [f(x) + g(x)] = \lim_{x \to c} f(x) + \lim_{x \to c} g(x)$.
 
-2. Subtraction: $\lim_{x \to c} [f(x) - g(x)] = \lim_{x \to c} f(x) - \lim_{x \to c} g(x).$
+2. Subtraction: $\lim_{x \to c} [f(x) - g(x)] = \lim_{x \to c} f(x) - \lim_{x \to c} g(x)$.
 
-3. Multiplication: $\lim_{x \to c} [f(x) \cdot g(x)] = \left(\lim_{x \to c} f(x)\right) \cdot \left(\lim_{x \to c} g(x)\right).$
+3. Multiplication: $\lim_{x \to c} [f(x) \cdot g(x)] = \left(\lim_{x \to c} f(x)\right) \cdot \left(\lim_{x \to c} g(x)\right)$.
 
-4. Division: If $\lim_{x \to c} g(x) \neq 0$, then $\lim_{x \to c} \frac{f(x)}{g(x)} = \frac{\lim_{x \to c} f(x)}{\lim_{x \to c} g(x)}.$
+4. Division: If $\lim_{x \to c} g(x) \neq 0$, then $\lim_{x \to c} \frac{f(x)}{g(x)} = \frac{\lim_{x \to c} f(x)}{\lim_{x \to c} g(x)}$.
 :::
 
 Let's apply these properties to the example depicted in @fig-function-limit-ex, namely the limit of the function
@@ -440,7 +440,7 @@ f(x) = \begin{cases}
 \end{cases}
 $$
 as $x$ approaches 0.
-Because there is an interval around $c = 0$ in which $f(x) = 1 + 2x$ for all $x \neq c,$ we can apply the properties above to confirm what the picture tells us:
+Because there is an interval around $c = 0$ in which $f(x) = 1 + 2x$ for all $x \neq c$, we can apply the properties above to confirm what the picture tells us:
 $$
 \begin{alignedat}{2}
 \lim_{x \to 0} f(x)
@@ -464,7 +464,7 @@ f(x) = \begin{cases}
   2.5 & \text{if $x = 2$.}
 \end{cases}
 $$ {#eq-linear-almost-everywhere}
-We can't use the division rule to calculate $\lim_{x \to 2} f(x),$ because $\lim_{x \to 2} [x - 2] = 0.$
+We can't use the division rule to calculate $\lim_{x \to 2} f(x)$, because $\lim_{x \to 2} [x - 2] = 0$.
 To get an idea of the limit, let's try graphing the function.
 
 ```{r}
@@ -502,7 +502,7 @@ tibble(
 
 From the graph, it sure looks like 4 is the limit as $x$ approaches 2.
 We can also get there with the properties from @prp-function-limit-properties.
-The "trick" to get started is a fact you might remember from algebra: $a^2 - b^2 = (a + b) (a - b)$ for any pair of real numbers $a$ and $b.$
+The "trick" to get started is a fact you might remember from algebra: $a^2 - b^2 = (a + b) (a - b)$ for any pair of real numbers $a$ and $b$.
 Applying that to the numerator of $f(x)$ (at $x \neq 2$), we have
 $$
 \begin{alignedat}{2}
@@ -526,7 +526,7 @@ f(x) = \begin{cases}
 \end{cases}
 \end{aligned}
 $$
-Graph the function, then use the properties of limits to calculate its limit as $x \to 3.$
+Graph the function, then use the properties of limits to calculate its limit as $x \to 3$.
 
 :::: {.answer}
 ```{r fig_limit_of_fraction_answer}
@@ -581,7 +581,7 @@ $$
 :::
 
 ::: {#exr-limit-linear-function name="Limit of a linear function"}
-A [linear function]{.concept definition="A function of the form $f(x) = \alpha + \beta x,$ where $\alpha$ and $\beta$ are constant real numbers."} is a function $f : X \to \mathbb{R}$ defined by $$f(x) = \alpha + \beta x,$$ where the domain $X$ consists of real numbers and where (intercept) $\alpha$ and (slope) $\beta$ are constant real numbers. Using the properties of limits, show that for any domain point $c \in X,$ $$\lim_{x \to c} [\alpha + \beta x] = \alpha + \beta c.$$
+A [linear function]{.concept definition="A function of the form $f(x) = \alpha + \beta x$, where $\alpha$ and $\beta$ are constant real numbers."} is a function $f : X \to \mathbb{R}$ defined by $$f(x) = \alpha + \beta x,$$ where the domain $X$ consists of real numbers and where (intercept) $\alpha$ and (slope) $\beta$ are constant real numbers. Using the properties of limits, show that for any domain point $c \in X$, $$\lim_{x \to c} [\alpha + \beta x] = \alpha + \beta c.$$
 
 :::: {.answer}
 $$
@@ -610,7 +610,7 @@ $$
 f(x) = \sum_{k=0}^n c_k x^k = c_0 + c_1 x + c_2 x^2 + \cdots + c_n x^n.
 \end{aligned}
 $$
-A linear function is the special case of a polynomial where $n = 1,$ $c_0$ is the intercept $\alpha,$ and $c_1$ is the slope $\beta.$
+A linear function is the special case of a polynomial where $n = 1$, $c_0$ is the intercept $\alpha$, and $c_1$ is the slope $\beta$.
 
 ::: {.remark title="Summation notation"}
 Don't remember what $\sum$ means?
@@ -629,7 +629,7 @@ For example, in the definition of a polynomial, I feel like $x^i$ looks weird in
 :::
 
 Any polynomial function $f(x)$ has the property you showed for linear functions in @exr-limit-linear-function, namely that $$\lim_{x \to d} f(x) = f(d).$$
-(I'm now using $d$ instead of $c$ to denote the point at which the limit is being taken, simply to avoid confusion with the polynomial coefficients $c_0, \ldots, c_n.$)
+(I'm now using $d$ instead of $c$ to denote the point at which the limit is being taken, simply to avoid confusion with the polynomial coefficients $c_0, \ldots, c_n$.)
 To see why, think about how each term of a polynomial is constructed.
 The $k$'th term is the product of one constant and $k$ identities, $$c_k x^k = c_k \cdot \underbrace{x \cdot x \cdots \cdot x}_{k \text{ times}},$$ so the multiplication rule, the local constant property, and the local identity property tell us that
 $$
@@ -637,7 +637,7 @@ $$
 = \left(\lim_{x \to d} c_k\right) \cdot \underbrace{\left(\lim_{x \to d} x\right) \cdot \left(\lim_{x \to d} x\right) \cdots \cdot \left(\lim_{x \to d} x\right)}_{k \text{ times}}
 = c_k d^k.
 $$
-A polynomial function is the sum of each of these pieces from $k = 0$ up to $k = n,$ so we can take the limit by using the addition rule $n$ times:
+A polynomial function is the sum of each of these pieces from $k = 0$ up to $k = n$, so we can take the limit by using the addition rule $n$ times:
 $$
 \begin{aligned}
 \lim_{x \to d} f(x)
@@ -691,15 +691,15 @@ tibble(
   labs(x = "x", y = "f(x)")
 ```
 
-Indeed, the function graphed here is one whose [left-hand limit]{.concept definition="The left-hand limit of $f(x)$ as $x$ approaches $c,$ $\lim_{x \to c^-} f(x),$ also called the limit of $f(x)$ as $x$ approaches $c$ from below, is the value that $f(x)$ gets closer and closer to as $x$ takes values just below $c$ without reaching it."} and [right-hand limit]{.concept definition="The right-hand limit of $f(x)$ as $x$ approaches $c,$ $\lim_{x \to c^+} f(x),$ also called the limit of $f(x)$ as $x$ approaches $c$ from above, is the value that $f(x)$ gets closer and closer to as $x$ takes values just above $c$ without reaching it."} differ as $x$ approaches 0.
+Indeed, the function graphed here is one whose [left-hand limit]{.concept definition="The left-hand limit of $f(x)$ as $x$ approaches $c$, $\lim_{x \to c^-} f(x)$, also called the limit of $f(x)$ as $x$ approaches $c$ from below, is the value that $f(x)$ gets closer and closer to as $x$ takes values just below $c$ without reaching it."} and [right-hand limit]{.concept definition="The right-hand limit of $f(x)$ as $x$ approaches $c$, $\lim_{x \to c^+} f(x)$, also called the limit of $f(x)$ as $x$ approaches $c$ from above, is the value that $f(x)$ gets closer and closer to as $x$ takes values just above $c$ without reaching it."} differ as $x$ approaches 0.
 
 ::: {#def-function-limit-one-sided name="Left- and right-hand limits, informal"}
-Consider a function $f : X \to Y,$ where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}.$
-Let $c$ be a point in the domain of $f,$ i.e., $c \in X.$
+Consider a function $f : X \to Y$, where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}$.
+Let $c$ be a point in the domain of $f$, i.e., $c \in X$.
 
-We say that a number $y$ is the [left-hand limit]{.concept} of $f(x)$ as $x$ approaches $c,$ denoted $$\lim_{x \to c^-} f(x) = y,$$ if $f(x)$ is very close to $y$ whenever $x$ is just below (but not exactly equal to) $c.$
+We say that a number $y$ is the [left-hand limit]{.concept} of $f(x)$ as $x$ approaches $c$, denoted $$\lim_{x \to c^-} f(x) = y,$$ if $f(x)$ is very close to $y$ whenever $x$ is just below (but not exactly equal to) $c$.
 
-Similarly, we say that $y$ is the [right-hand limit]{.concept} of $f(x)$ as $x$ approaches $c,$ denoted $$\lim_{x \to c^+} f(x) = y,$$ if $f(x)$ is very close to $y$ whenever $x$ is just above (but not exactly equal to) $c.$
+Similarly, we say that $y$ is the [right-hand limit]{.concept} of $f(x)$ as $x$ approaches $c$, denoted $$\lim_{x \to c^+} f(x) = y,$$ if $f(x)$ is very close to $y$ whenever $x$ is just above (but not exactly equal to) $c$.
 :::
 
 So for the function graphed in @fig-limit-one-sided-ex, we would say the left-hand limit as $x$ approaches 0 is 60, whereas the right-hand limit as $x$ approaches 0 is 50.
@@ -721,10 +721,10 @@ Anytime the left- and right-hand limits differ at a point, the function has no o
 Conversely, if the function does have a limit at a point, the left- and right-hand limits both coincide with the overall limit.
 
 ::: {#prp-one-sided-limits name="One-sided limits and the overall limit"}
-If $\lim_{x \to c^-} f(x) = y$ and $\lim_{x \to c^+} f(x) = y,$ then $\lim_{x \to c} f(x) = y.$
+If $\lim_{x \to c^-} f(x) = y$ and $\lim_{x \to c^+} f(x) = y$, then $\lim_{x \to c} f(x) = y$.
 
-If $\lim_{x \to c^-} f(x) \neq \lim_{x \to c^+} f(x),$ or either of these does not exist, then $\lim_{x \to c} f(x)$ does not exist.
-Equivalently, if $\lim_{x \to c} f(x) = y$, then $\lim_{x \to c^-} f(x) = \lim_{x \to c^+} f(x) = y.$
+If $\lim_{x \to c^-} f(x) \neq \lim_{x \to c^+} f(x)$, or either of these does not exist, then $\lim_{x \to c} f(x)$ does not exist.
+Equivalently, if $\lim_{x \to c} f(x) = y$, then $\lim_{x \to c^-} f(x) = \lim_{x \to c^+} f(x) = y$.
 :::
 
 You'll notice from the statement of @prp-one-sided-limits that the one-sided limits may also fail to exist.
@@ -768,8 +768,8 @@ f(x) = \begin{cases}
 1 & \text{if $x$ is rational}.
 \end{cases}
 $$
-So we have $f(3.14159) = 1,$ but $f(\pi) = 0.$
-Because any interval of real numbers, no matter how small, contains both rational and irrational numbers---a property known as [density in the reals](https://en.wikipedia.org/wiki/Dense_set)---the one-sided limits of the Dirichlet function fail to exist for *all* domain points $c \in \mathbb{R}.$
+So we have $f(3.14159) = 1$, but $f(\pi) = 0$.
+Because any interval of real numbers, no matter how small, contains both rational and irrational numbers---a property known as [density in the reals](https://en.wikipedia.org/wiki/Dense_set)---the one-sided limits of the Dirichlet function fail to exist for *all* domain points $c \in \mathbb{R}$.
 That is an interesting fact for mathematicians, but not one that you will run into very often as a political scientist.
 :::
 
@@ -777,11 +777,11 @@ One more helpful fact about one-sided limits: all of the properties listed in @s
 For example, $$\lim_{x \to c^-} [f(x) + g(x)] = \lim_{x \to c^-} f(x) + \lim_{x \to c^-} g(x),$$ provided that both of the underlying one-sided limits exist.
 
 ::: {#exr-one-sided-limits name="One-sided limits"}
-1. Find $\lim_{x \to 2^-} [x^2 - 1].$
+1. Find $\lim_{x \to 2^-} [x^2 - 1]$.
 
-2. Find $\lim_{x \to 2^+} [-2x + 7].$
+2. Find $\lim_{x \to 2^+} [-2x + 7]$.
 
-3. Letting $f(x)$ be defined as in @exr-limit-informal, confirm that $\lim_{x \to 2} f(x) = 3.$
+3. Letting $f(x)$ be defined as in @exr-limit-informal, confirm that $\lim_{x \to 2} f(x) = 3$.
 
 :::: {.answer}
 1. Applying the standard properties of limits:
@@ -883,7 +883,7 @@ tibble(x = seq(0, 1, by = 0.001)) |>
 When a function is continuous at every point in its domain, we call it a [continuous function]{.concept entry="Continuity"}.
 
 ::: {#def-continuous-function name="Continuous function"}
-We say that a function $f : X \to Y$ is [continuous]{.concept entry="Continuity"} if it is continuous at every point in its domain, $X.$
+We say that a function $f : X \to Y$ is [continuous]{.concept entry="Continuity"} if it is continuous at every point in its domain, $X$.
 :::
 
 When a function $f$ is continuous, every point close to $c$ on the domain has a function value close to $f(c)$.
@@ -916,7 +916,7 @@ Division by a continuous function
 : Any function of the form $f(x) = 1 / g(x)$, where $g$ is continuous and $g(x) \neq 0$ for all $x \in X$, is continuous.
 
 Compositions of continuous functions
-: If $g$ and $h$ are continuous, then their composition (@def-composition), $f(x) = g(h(x)),$ is continuous.
+: If $g$ and $h$ are continuous, then their composition (@def-composition), $f(x) = g(h(x))$, is continuous.
 
 ::: {#exr-continuous-functions name="Continuous functions"}
 Show that the function $f : \mathbb{R} \to \mathbb{R}$ defined by
@@ -927,9 +927,9 @@ is continuous.
 
 :::: {.answer}
 First, observe that $f$ is a composite function.
-We may write $f(x) = g(h(x)),$ where $g(x) = |x|$ and $$h(x) = \frac{-7 x^3 - 4 x^2 + x - 37}{x^2 + 10}.$$
+We may write $f(x) = g(h(x))$, where $g(x) = |x|$ and $$h(x) = \frac{-7 x^3 - 4 x^2 + x - 37}{x^2 + 10}.$$
 $g$ is the absolute value function and is therefore continuous.
-$h$ is a ratio of polynomials, and its denominator is never zero because $x^2 + 10 \geq 10 > 0.$
+$h$ is a ratio of polynomials, and its denominator is never zero because $x^2 + 10 \geq 10 > 0$.
 Therefore, $h$ is continuous as well.
 Then, because $f$ is the composition of two continuous functions, it is continuous.
 ::::
@@ -941,22 +941,22 @@ Exponential functions
 : Any function of the form $f(x) = a^x$, where $a > 0$, is continuous.
 
 Logarithmic functions
-: Any function of the form $f(x) = \log_b x$, where $b > 0$ and $b \neq 1,$ is continuous on any domain consisting of positive numbers, $X \subseteq (0, \infty)$.
+: Any function of the form $f(x) = \log_b x$, where $b > 0$ and $b \neq 1$, is continuous on any domain consisting of positive numbers, $X \subseteq (0, \infty)$.
 
 To the extent that it's sensible to have warm feelings about mathematical objects (don't judge), we tend to "like" continuous functions.
 Continuous functions tend to have nice properties, like ensuring the existence of solutions to certain types of problems we might want to solve.
 The phrase "If $f$ is continuous..." will come up repeatedly once we get into calculus and optimization.
 
 In the meantime, here's a simpler upshot of continuity.
-Consider a function with a domain of $X,$ and suppose that domain includes the interval $[a, b].$
-As we travel from left to right across that interval, the value of the function goes from $f(a)$ to $f(b).$
-And as you'll see if you try to draw any continuous function---keeping in mind the "it's continuous if and only if you can draw its graph without lifting the pen off the page" rule---along that path, it ends up touching *every single value* between $f(a)$ and $f(b).$
-This is a famous result called the [intermediate value theorem]{.concept definition="If $f$ is continuous and its domain includes the interval $[a, b],$ then for all values $y$ between $f(a)$ and $f(b),$ there is a point $c \in (a, b)$ such that $f(c) = y.$"}.
+Consider a function with a domain of $X$, and suppose that domain includes the interval $[a, b]$.
+As we travel from left to right across that interval, the value of the function goes from $f(a)$ to $f(b)$.
+And as you'll see if you try to draw any continuous function---keeping in mind the "it's continuous if and only if you can draw its graph without lifting the pen off the page" rule---along that path, it ends up touching *every single value* between $f(a)$ and $f(b)$.
+This is a famous result called the [intermediate value theorem]{.concept definition="If $f$ is continuous and its domain includes the interval $[a, b]$, then for all values $y$ between $f(a)$ and $f(b)$, there is a point $c \in (a, b)$ such that $f(c) = y$."}.
 
 ::: {#thm-intermediate-value name="Intermediate value theorem"}
-Consider a continuous function $f : X \to Y,$ where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}.$
-Consider any interval in the domain, $[a, b] \subseteq X.$
-For any real number $y$ that satisfies $$f(a) < y < f(b) \quad \text{or} \quad f(b) < y < f(a),$$ there is a domain point $c \in (a, b)$ such that $f(c) = y.$
+Consider a continuous function $f : X \to Y$, where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}$.
+Consider any interval in the domain, $[a, b] \subseteq X$.
+For any real number $y$ that satisfies $$f(a) < y < f(b) \quad \text{or} \quad f(b) < y < f(a),$$ there is a domain point $c \in (a, b)$ such that $f(c) = y$.
 :::
 
 As you saw in the discussion of non-existent limits above, one frustrating thing about "higher" math is that some problems turn out not to have a solution.
@@ -964,8 +964,8 @@ The intermediate value theorem often proves useful to show that a problem *has* 
 
 ::: {#exr-ivt name="Intermediate value theorem"}
 Consider the function $f : [0, 10] \to \mathbb{R}$ defined by $$f(x) = x^4 + x^3 + x^2 + x + 1.$$
-Using the intermediate value theorem, show that there is a value $c \in [0, 10]$ for which $f(c) = 1{,}017.$
-You do not need to find the exact value of $c,$ just show that a solution exists.
+Using the intermediate value theorem, show that there is a value $c \in [0, 10]$ for which $f(c) = 1{,}017$.
+You do not need to find the exact value of $c$, just show that a solution exists.
 
 :::: {.answer}
 Notice that
@@ -976,7 +976,7 @@ f(10) &= 10^4 + 10^3 + 10^2 + 10 + 1 \\ &= 10{,}000 + 1{,}000 + 100 + 10 + 1 \\ 
 \end{aligned}
 $$
 $f$ is a polynomial and therefore is continuous.
-Because $f(0) < 1{,}017 < f(10),$ the intermediate value theorem implies that there is a $c \in (0, 10)$ that solves $f(c) = 1{,}017.$
+Because $f(0) < 1{,}017 < f(10)$, the intermediate value theorem implies that there is a $c \in (0, 10)$ that solves $f(c) = 1{,}017$.
 ::::
 :::
 
@@ -987,9 +987,9 @@ So you'll need to have your head wrapped around the mathematical meanings of con
 
 ## Exponential and logarithmic functions {#sec-exponents-logarithms}
 
-A function in the form $f(x) = x^b,$ where the variable $x$ is raised to the power of some fixed constant $b,$ is probably familiar to you.
+A function in the form $f(x) = x^b$, where the variable $x$ is raised to the power of some fixed constant $b$, is probably familiar to you.
 In fact, when $b$ is a non-negative integer, a function in this form is a simple example of a polynomial.
-An [exponential function]{.concept definition="A function of the form $f(x) = b^x,$ where $b > 0$ is a constant."} has a similar form, but now with the variable as the power: $f(x) = b^x.$
+An [exponential function]{.concept definition="A function of the form $f(x) = b^x$, where $b > 0$ is a constant."} has a similar form, but now with the variable as the power: $f(x) = b^x$.
 Exponential functions with bases $b > 1$ increase really quickly, hence the term "exponential growth."
 
 ```{r}
@@ -1024,11 +1024,11 @@ tibble(x = seq(0, 8, by = 0.01)) |>
 
 ### Logarithms {#sec-logarithms}
 
-A [logarithm]{.concept definition="The reverse of an exponent.  In particular, for any numbers $a > 0$ and $b > 0$, if $b^x = a$, then we say that $x = \log_b a.$  In this example, $b$ is called the base of the logarithm.  For example, $\log_{10} 1000 = 3$ because $10^3 = 1000.$"} is the reverse of an exponent.
-It is how we "solve for $x$" in an equation like $b^x = a,$ where $a > 0$ and $b > 0$ are known constants.
+A [logarithm]{.concept definition="The reverse of an exponent.  In particular, for any numbers $a > 0$ and $b > 0$, if $b^x = a$, then we say that $x = \log_b a$.  In this example, $b$ is called the base of the logarithm.  For example, $\log_{10} 1000 = 3$ because $10^3 = 1000$."} is the reverse of an exponent.
+It is how we "solve for $x$" in an equation like $b^x = a$, where $a > 0$ and $b > 0$ are known constants.
 
 ::: {#def-logarithm name="Logarithm"}
-For any positive number $a$ and any positive number $b \neq 1,$ we say that $x = \log_b a$ (pronounced "$x$ is the logarithm, base $b$, of $a$") if and only if $b^x = a.$
+For any positive number $a$ and any positive number $b \neq 1$, we say that $x = \log_b a$ (pronounced "$x$ is the logarithm, base $b$, of $a$") if and only if $b^x = a$.
 :::
 
 Here are a few examples of logarithms in action.
@@ -1057,11 +1057,11 @@ In other words, you want to find the greatest value of $t$ such that $$p^t (1 - 
 What logarithm should you calculate?
 
 :::: {.answer}
-Momentarily ignoring the fact that the term length must be a whole number, let's find the $t$ at which the probability of serving $t$ more terms is *exactly* $q.$
+Momentarily ignoring the fact that the term length must be a whole number, let's find the $t$ at which the probability of serving $t$ more terms is *exactly* $q$.
 We want to solve for $t$ in $$p^t (1 - p) = q,$$ which is equivalent to solving for $t$ in $$p^t = \frac{q}{1 - p}.$$
 By the definition of a logarithm, @def-logarithm, this means $t = \log_p \frac{q}{1 - p}$.
 If $t$ happens to be a whole number, this is our answer; otherwise, we need to round down.
-(In numerical programming terms, we want to take the "floor" of $\log_p \frac{q}{1 - p}.$)
+(In numerical programming terms, we want to take the "floor" of $\log_p \frac{q}{1 - p}$.)
 ::::
 :::
 

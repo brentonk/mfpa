@@ -596,6 +596,20 @@ blockquote, .blockquote {
 // ---------------------------------------------------------------------------
 body .katex { font-size: 1.08em; }
 
+// Inline math glued to adjacent punctuation. `_filters/math-punct.lua` wraps
+// "$x$." (and "($x$", "“$x$”") in this span so the browser can't break between
+// a KaTeX inline-block and the punctuation — it otherwise treats the box edge
+// as a wrap opportunity (verified in Chromium and Firefox). The trade-off is
+// that a glued expression also loses KaTeX's internal break points (at
+// relations and operators) and sets as one unbreakable unit, so
+// `_includes/math-punct.html` adds the -overflow class to any span wider than
+// its container, handing the internal breaks back to just those. Don't try
+// to keep the internal breaks with a `white-space: normal` reset on a KaTeX
+// descendant instead: on .katex-html it re-opens the boundary break, and on
+// .katex-base it shatters the math (KaTeX sizes those boxes `min-content`).
+.math-punct { white-space: nowrap; }
+.math-punct.math-punct-overflow { white-space: normal; }
+
 code, pre { font-variant-ligatures: none; }
 
 div.sourceCode {

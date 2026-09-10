@@ -41,6 +41,9 @@ filters:
   # Print-only: rewrite TeX-math macros the Typst writer can't handle. No-op for
   # HTML. See _filters/print-math-compat.lua.
   - _filters/print-math-compat.lua
+  # HTML-only: glue trailing punctuation to inline math so the browser can't
+  # wrap between a KaTeX box and its period. See _filters/math-punct.lua.
+  - _filters/math-punct.lua
   - _filters/answer.lua
 
 book:
@@ -75,10 +78,12 @@ format:
     linestretch: 1.6
     cap-location: top
     # Custom after-body scripts: fold the right-hand TOC into the left sidebar,
-    # and wire up the concept-definition tooltips.
+    # wire up the concept-definition tooltips, and un-glue math-punctuation
+    # spans that are too wide for their container (see _filters/math-punct.lua).
     include-after-body:
       - _includes/sidebar-toc.html
       - _includes/concept-tooltip.html
+      - _includes/math-punct.html
 
   # pdf:
   #   documentclass: scrreprt
