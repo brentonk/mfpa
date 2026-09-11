@@ -38,7 +38,7 @@ Heavy chunks (Dataverse downloads, gganimate, tikz figures) carry `#| cache: tru
 
 ## ggplot styling
 
-Plots should read as part of the page, not as pasted-in R output: same palette, same warm neutrals, same sans face as the site chrome. The shared setup lives in `_common.R` (packages, the `mfpa` palette list, and a `theme_set()` default); every chapter's setup chunk sources it, and figure chunks take colours from `mfpa$…` rather than hard-coding hex strings. The limits chapter is the reference implementation.
+Plots should read as part of the page, not as pasted-in R output: same palette, same warm neutrals, same sans face as the site chrome. The shared setup lives in `_common.R` (packages, the `mfpa` palette list, a `theme_set()` default, geom defaults, and a few annotation helpers); every chapter's setup chunk sources it. **Write plots plainly and let the defaults do the styling**: a bare `geom_line()` is already a teal curve at the house linewidth, `geom_vline()` is already dashed, `annotate("text", …)` is already ink/Archivo/size 5, and a mapped `colour = fn` already gets teal/red/green with no legend. Add arguments only to depart from a default, and take any colour from `mfpa$…` rather than hard-coding a hex string. The limits chapter is the reference implementation.
 
 **Palette** — `mfpa$<name>` mirrors the `scss:defaults` block of `mfpa.scss`; keep the two in sync if either changes:
 
@@ -52,16 +52,34 @@ Plots should read as part of the page, not as pasted-in R output: same palette, 
 | `rule` | `#E6DFD2` | `$mfpa-rule` | grid lines (theme default) |
 | `paper` | `#FCFBF8` | `$body-bg` | fill for hollow markers, matching the page that shows through the transparent plot |
 
-**Theme.** `_common.R` sets `theme_cowplot(font_family = "Archivo")` plus: transparent plot/panel backgrounds (the graphics device is also transparent via `_quarto.yml`, so the page's paper shows through); text, axis lines, and ticks in `ink`; a major grid in `rule` — so **don't call `background_grid()`**; and ggplot2 ≥ 4.0 geom defaults (`element_geom`) so unstyled geoms — `geom_vline()`, `annotate("text", …)` — come out in `ink` and Archivo without per-call arguments.
+**Theme.** `_common.R` sets `theme_cowplot(font_family = "Archivo")` plus: transparent plot/panel backgrounds (the graphics device is also transparent via `_quarto.yml`, so the page's paper shows through); text, axis lines, and ticks in `ink`; a major grid in `rule` — so **don't call `background_grid()`**; `legend.position = "none"`, because every figure labels its series directly (opt back in per plot if a legend is ever the right call); and ggplot2 ≥ 4.0 geom defaults (`element_geom`) so unstyled geoms come out in `ink` and Archivo, with annotation text at size 5.
+
+**Geom defaults and scales.** Set in `_common.R` via `update_geom_defaults()` and the `ggplot2.discrete.colour` / `.fill` options; an explicit argument always wins over a default.
+
+| You write | You get |
+|---|---|
+| `geom_line()` | `teal`, `linewidth = 1.3` |
+| `geom_point()` | `teal`; size stays per call |
+| `geom_vline()` / `geom_hline()` | dashed, in `ink` |
+| `aes(colour = fn)` | `teal`, `red`, `green` in level order; no legend |
+| `annotate("text", …)` | `ink`, Archivo, size 5 |
+
+Level order decides which series is teal, so order the columns in `pivot_longer()` (or set factor levels) with the series of interest first. For a low-salience third series in `muted`, or any other departure, call `scale_colour_manual()` explicitly.
+
+**Helpers.** Also in `_common.R`; each returns a layer to add with `+`, and `x` / `y` may be vectors to draw several markers at once. All take `colour = mfpa$red` for a second series.
+
+- `mark_value(x, y)` — solid point (`size = 4.5`) for the function's actual value at a point of interest.
+- `mark_limit(x, y)` — hollow ring (`shape = 21`, `paper` fill) for a limit approached at a point.
+- `shade_window(xmin, xmax)` — highlighted band on the x-axis (`teal`, `alpha = 0.08`).
+- `label_curve(x, y, label)` — direct label coloured to match its curve, parsed as plotmath by default (`"italic(h)(x)"`, `"2^x"`); pass `parse = FALSE` for plain text; `hjust`, `vjust`, `size` pass through to `annotate()`.
 
 **Font.** Archivo is not a system font on the CI runner or most machines. `_common.R` fetches it from Google Fonts with `systemfonts::require_font()` into the gitignored `_fonts/` directory on the first render, reuses the cached files afterwards, and aliases the system sans to "Archivo" if offline. This only works because `_quarto.yml` sets `dev: ragg_png`: the `ragg` device resolves fonts via `systemfonts`, whereas the default cairo `png` device only sees fontconfig's system fonts and silently falls back to the system sans. Don't override `dev` per chunk.
 
 **Conventions from the limits chapter:**
-- Curves: `geom_line(colour = mfpa$teal, linewidth = 1.3)`. Piecewise functions get a `group` column so the pieces don't join across a jump.
-- Discontinuity markers: a solid point (`size = 4.5`) for the function's actual value, a hollow ring (`shape = 21, size = 4.5, stroke = 1.4, fill = mfpa$paper`) for a limit, and a dashed `geom_vline` at the point of interest.
-- Highlighted window on the x-axis: `annotate("rect", …, fill = mfpa$teal, alpha = 0.08)`.
-- Prefer direct labels (`annotate("text", …)`, coloured to match the curve) over legends; when colour is mapped, use `scale_colour_manual(values = c(… = mfpa$teal, … = mfpa$red), guide = "none")`. Math in labels and axis breaks via `expression()` / `parse = TRUE`.
+- Piecewise functions get a `group` column so the pieces don't join across a jump. Put a `geom_vline()` at the point of interest, with `mark_value()` for the function's value and `mark_limit()` for the limit.
+- Prefer direct labels (`label_curve()`) over legends. Math in labels and axis breaks via plotmath strings / `expression()`.
 - Raw-data backdrop points in `mfpa$muted` at `alpha = 0.35`, small (`size = 0.9`); binned/summary points on top in the series colours.
+- De-emphasised side notes: `annotate("text", …, colour = mfpa$muted, size = 3.6)`.
 - Never use base greys, `"black"`, or `"white"` — they're cool-toned and clash with the warm paper. Reach for `ink` / `muted` / `rule` / `paper` instead.
 
 **Cache gotcha.** Figure chunks are `cache: true` and keyed on their own code, so a change to `_common.R` (palette, theme, font) does **not** re-render existing figures locally. Run `quarto render . --cache-refresh` (target first: with the flag first, Quarto forwards a trailing `.` to pandoc, which fails on a directory) or delete the chapter's `*_cache/` directory after editing it. CI has no cache and always picks the change up.

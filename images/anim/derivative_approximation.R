@@ -47,8 +47,8 @@ p <- ggplot(frames) +
   ) +
   # the secant whose slope is the approximation
   geom_segment(aes(x = 0, xend = z, y = 0, yend = num), linewidth = 0.8) +
-  annotate("point", x = 0, y = 0, size = 3.5) +
-  geom_point(aes(x = z, y = num), size = 3.5) +
+  annotate("point", x = 0, y = 0, size = 3.5, colour = mfpa$ink) +
+  geom_point(aes(x = z, y = num), size = 3.5, colour = mfpa$ink) +
   # labels are centred on the secant / run leg, but clamped away from the
   # left panel edge so they stay inside the plot at small z
   geom_text(aes(x = pmax(z / 2, 1), y = pmax(num, 1.5), label = lbl), size = 5) +
