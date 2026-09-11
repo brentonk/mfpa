@@ -64,7 +64,7 @@ Plots should read as part of the page, not as pasted-in R output: same palette, 
 | `aes(colour = fn)` | `teal`, `red`, `green` in level order; no legend |
 | `annotate("text", …)` | `ink`, Archivo, size 5 |
 
-Level order decides which series is teal, so order the columns in `pivot_longer()` (or set factor levels) with the series of interest first. For a low-salience third series in `muted`, or any other departure, call `scale_colour_manual()` explicitly.
+Level order decides which series is teal. A character column (e.g. the `names_to` column from `pivot_longer()`) sorts *alphabetically*, not by appearance, so pipe through `mutate(fn = fct_inorder(fn))` and name the series of interest first in `pivot_longer()`. For a low-salience third series in `muted`, or any other departure, call `scale_colour_manual()` explicitly.
 
 **Helpers.** Also in `_common.R`; each returns a layer to add with `+`, and `x` / `y` may be vectors to draw several markers at once. All take `colour = mfpa$red` for a second series.
 

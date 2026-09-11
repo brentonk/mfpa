@@ -53,42 +53,16 @@ line_won$dv <- predict(reg_won, line_won)
 lim_lost <- unname(predict(reg_lost, tibble(rv = 0))) # left-hand limit
 lim_won <- unname(predict(reg_won, tibble(rv = 0))) # right-hand limit
 
-col_lost <- mfpa$teal # extremist barely lost (moderate nominated)
-col_won <- mfpa$red # extremist barely won
-
+# teal: extremist barely lost (moderate nominated); red: extremist barely won
 ggplot() +
-  geom_vline(xintercept = 0, linetype = "dashed") +
+  geom_vline(xintercept = 0) +
   geom_point(data = df_hall, aes(rv, dv), colour = mfpa$muted, alpha = 0.35, size = 0.9) +
-  geom_point(
-    data = bins,
-    aes(bin, dv, colour = side),
-    size = 2.4,
-    show.legend = FALSE
-  ) +
-  geom_line(data = line_lost, aes(rv, dv), colour = col_lost, linewidth = 1.3) +
-  geom_line(data = line_won, aes(rv, dv), colour = col_won, linewidth = 1.3) +
+  geom_point(data = bins, aes(bin, dv, colour = side), size = 2.4) +
+  geom_line(data = line_lost, aes(rv, dv)) +
+  geom_line(data = line_won, aes(rv, dv), colour = mfpa$red) +
   # hollow rings mark the one-sided limits exactly at the threshold
-  annotate(
-    "point",
-    x = 0,
-    y = lim_lost,
-    shape = 21,
-    size = 4.5,
-    stroke = 1.4,
-    colour = col_lost,
-    fill = mfpa$paper
-  ) +
-  annotate(
-    "point",
-    x = 0,
-    y = lim_won,
-    shape = 21,
-    size = 4.5,
-    stroke = 1.4,
-    colour = col_won,
-    fill = mfpa$paper
-  ) +
-  scale_colour_manual(values = c(lost = col_lost, won = col_won)) +
+  mark_limit(0, lim_lost) +
+  mark_limit(0, lim_won, colour = mfpa$red) +
   scale_x_continuous(limits = c(-0.2, 0.2), breaks = seq(-0.2, 0.2, 0.1)) +
   scale_y_continuous(limits = c(0.35, 0.85), breaks = seq(0.4, 0.8, 0.1)) +
   labs(
@@ -128,7 +102,6 @@ At $x = 0$, the value of the function "jumps" up to 2.5.
 #| label: fig-function-limit-ex
 #| fig-cap: A function that "jumps" at a particular point.
 #| cache: true
-col_fn <- mfpa$teal
 tibble(
   x = seq(-1, 1, by = 0.01),
   y = if_else(x == 0, 2.5, 1 + 2 * x),
@@ -139,17 +112,10 @@ tibble(
   )
 ) |>
   ggplot(aes(x = x, y = y, group = group)) +
-  geom_vline(xintercept = 0, linetype = "dashed") +
-  geom_line(colour = col_fn, linewidth = 1.3) +
-  # solid point: the function's actual value at x = 0
-  annotate("point", x = 0, y = 2.5, colour = col_fn, size = 4.5) +
-  # hollow ring: the limit approached at x = 0, styled like the limits in @fig-hall-rdd
-  annotate(
-    "point",
-    x = 0, y = 1,
-    shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = mfpa$paper
-  ) +
+  geom_vline(xintercept = 0) +
+  geom_line() +
+  mark_value(0, 2.5) +
+  mark_limit(0, 1) +
   labs(x = "x", y = "f(x)")
 ```
 
@@ -232,7 +198,6 @@ Then use logic similar to the example above to convince yourself further that yo
 :::: {.answer}
 ```{r fig_limit_informal_answer}
 #| cache: true
-col_fn <- mfpa$teal
 tibble(
   x = seq(0, 4, by = 0.01),
   y = case_when(
@@ -247,17 +212,10 @@ tibble(
   )
 ) |>
   ggplot(aes(x = x, y = y, group = group)) +
-  geom_vline(xintercept = 2, linetype = "dashed") +
-  geom_line(colour = col_fn, linewidth = 1.3) +
-  # solid point: the function's actual value at x = 2
-  annotate("point", x = 2, y = 1, colour = col_fn, size = 4.5) +
-  # hollow ring: the limit approached at x = 2
-  annotate(
-    "point",
-    x = 2, y = 3,
-    shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = mfpa$paper
-  ) +
+  geom_vline(xintercept = 2) +
+  geom_line() +
+  mark_value(2, 1) +
+  mark_limit(2, 3) +
   scale_y_continuous(breaks = seq(-1, 4, by = 1)) +
   labs(x = "x", y = "f(x)")
 ```
@@ -306,7 +264,6 @@ In other words, if $f(x)$ equals the same constant $m$ at every value within $d$
 #| label: fig-limit-locally-constant
 #| fig-cap: The limit of a locally constant function.
 #| cache: true
-col_fn <- mfpa$teal
 d <- 0.75
 m <- 2
 tibble(
@@ -323,23 +280,11 @@ tibble(
   )
 ) |>
   ggplot(aes(x = x, y = y, group = group)) +
-  # shaded band: the window (c - d, c + d) where f is constant
-  annotate(
-    "rect",
-    xmin = -d, xmax = d, ymin = -Inf, ymax = Inf,
-    fill = col_fn, alpha = 0.08
-  ) +
-  geom_vline(xintercept = 0, linetype = "dashed") +
-  geom_line(colour = col_fn, linewidth = 1.3) +
-  # solid point: the function's actual value at x = c
-  annotate("point", x = 0, y = 3, colour = col_fn, size = 4.5) +
-  # hollow ring: the limit m approached at x = c
-  annotate(
-    "point",
-    x = 0, y = m,
-    shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = mfpa$paper
-  ) +
+  shade_window(-d, d) +
+  geom_vline(xintercept = 0) +
+  geom_line() +
+  mark_value(0, 3) +
+  mark_limit(0, m) +
   scale_x_continuous(
     breaks = c(-d, 0, d),
     labels = expression(c - d, c, c + d)
@@ -366,7 +311,6 @@ So if the function overlaps with the 45-degree line for a certain radius around 
 #| label: fig-limit-local-identity
 #| fig-cap: The limit of a function that locally coincides with the 45-degree line.
 #| cache: true
-col_fn <- mfpa$teal
 c_val <- 2
 d <- 0.75
 tibble(
@@ -384,25 +328,13 @@ tibble(
   )
 ) |>
   ggplot(aes(x = x, y = y, group = group)) +
-  # shaded band: the window (c - d, c + d) where f is the identity
-  annotate(
-    "rect",
-    xmin = c_val - d, xmax = c_val + d, ymin = -Inf, ymax = Inf,
-    fill = col_fn, alpha = 0.08
-  ) +
+  shade_window(c_val - d, c_val + d) +
   # 45-degree reference line through the origin
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", colour = mfpa$muted) +
-  geom_vline(xintercept = c_val, linetype = "dashed") +
-  geom_line(colour = col_fn, linewidth = 1.3) +
-  # solid point: the function's actual value at x = c
-  annotate("point", x = c_val, y = 3.4, colour = col_fn, size = 4.5) +
-  # hollow ring: the limit c approached at x = c
-  annotate(
-    "point",
-    x = c_val, y = c_val,
-    shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = mfpa$paper
-  ) +
+  geom_vline(xintercept = c_val) +
+  geom_line() +
+  mark_value(c_val, 3.4) +
+  mark_limit(c_val, c_val) +
   expand_limits(y = 0) +
   scale_x_continuous(
     breaks = c(0, c_val - d, c_val, c_val + d),
@@ -471,7 +403,6 @@ To get an idea of the limit, let's try graphing the function.
 #| label: fig-limit-division-ex
 #| cache: true
 #| fig-cap: "Graph of @eq-linear-almost-everywhere."
-col_fn <- mfpa$teal
 tibble(
   x = seq(0, 4, by = 0.01),
   y = case_when(
@@ -485,17 +416,10 @@ tibble(
   )
 ) |>
   ggplot(aes(x = x, y = y, group = group)) +
-  geom_vline(xintercept = 2, linetype = "dashed") +
-  geom_line(colour = col_fn, linewidth = 1.3) +
-  # solid point: the function's actual value at x = 2
-  annotate("point", x = 2, y = 2.5, colour = col_fn, size = 4.5) +
-  # hollow ring: the limit approached at x = 2
-  annotate(
-    "point",
-    x = 2, y = 4,
-    shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = mfpa$paper
-  ) +
+  geom_vline(xintercept = 2) +
+  geom_line() +
+  mark_value(2, 2.5) +
+  mark_limit(2, 4) +
   scale_y_continuous(breaks = seq(0, 6, by = 1)) +
   labs(x = "x", y = "f(x)")
 ```
@@ -531,7 +455,6 @@ Graph the function, then use the properties of limits to calculate its limit as 
 :::: {.answer}
 ```{r fig_limit_of_fraction_answer}
 #| cache: true
-col_fn <- mfpa$teal
 tibble(
   x = seq(0, 5, by = 0.01),
   y = case_when(
@@ -545,17 +468,10 @@ tibble(
   )
 ) |>
   ggplot(aes(x = x, y = y, group = group)) +
-  geom_vline(xintercept = 3, linetype = "dashed") +
-  geom_line(colour = col_fn, linewidth = 1.3) +
-  # solid point: the function's actual value at x = 3
-  annotate("point", x = 3, y = 10, colour = col_fn, size = 4.5) +
-  # hollow ring: the limit approached at x = 3
-  annotate(
-    "point",
-    x = 3, y = 11,
-    shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = mfpa$paper
-  ) +
+  geom_vline(xintercept = 3) +
+  geom_line() +
+  mark_value(3, 10) +
+  mark_limit(3, 11) +
   scale_y_continuous(breaks = seq(5, 15, by = 2)) +
   labs(x = "x", y = "f(x)")
 ```
@@ -661,7 +577,6 @@ So what is the limit?
 #| label: fig-limit-one-sided-ex
 #| cache: true
 #| fig-cap: "A function with differing left- and right-hand limits."
-col_fn <- mfpa$teal
 tibble(
   x = seq(-0.2, 0.2, by = 0.001),
   y = case_when(
@@ -676,17 +591,10 @@ tibble(
   )
 ) |>
   ggplot(aes(x = x, y = y, group = group)) +
-  geom_vline(xintercept = 0, linetype = "dashed") +
-  geom_line(colour = col_fn, linewidth = 1.3) +
-  # solid point: the function's actual value at x = 0
-  annotate("point", x = 0, y = 55, colour = col_fn, size = 4.5) +
-  # hollow rings: the limits approached from the left and from the right
-  annotate(
-    "point",
-    x = 0, y = c(60, 50),
-    shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = mfpa$paper
-  ) +
+  geom_vline(xintercept = 0) +
+  geom_line() +
+  mark_value(0, 55) +
+  mark_limit(0, c(60, 50)) +
   scale_y_continuous(limits = c(40, 80)) +
   labs(x = "x", y = "f(x)")
 ```
@@ -742,16 +650,14 @@ $$
 
 ```{r fig_limit_oscillation_ex}
 #| cache: true
-col_fn <- mfpa$teal
 # sample uniformly in 1/x so the ever-faster oscillations stay smooth
 tibble(
   x = 1 / seq(1, 400, by = 0.05),
   y = sin(1 / x)
 ) |>
   ggplot(aes(x = x, y = y)) +
-  geom_line(colour = col_fn, linewidth = 0.2) +
-  # solid point: the function's actual value at x = 0
-  annotate("point", x = 0, y = 0, colour = col_fn, size = 4.5) +
+  geom_line(linewidth = 0.2) +
+  mark_value(0, 0) +
   scale_y_continuous(breaks = seq(-1, 1, by = 0.5)) +
   labs(x = "x", y = "f(x)")
 ```
@@ -831,7 +737,6 @@ At all other points, the function is continuous.
 #| label: fig-identify-discontinuity
 #| fig-cap: "The function is discontinuous at $d_1$ and $d_2$, and continuous at all other points."
 #| cache: true
-col_fn <- mfpa$teal
 tibble(x = seq(0, 1, by = 0.001)) |>
   mutate(
     group = case_when(
@@ -847,20 +752,9 @@ tibble(x = seq(0, 1, by = 0.001)) |>
   ) |>
   ggplot(aes(x = x, y = y, group = group)) +
   geom_vline(xintercept = c(0.3, 0.7), linetype = "dashed") +
-  geom_line(colour = col_fn, linewidth = 1.3) +
-  # hollow rings: the limits approached at each discontinuity
-  annotate(
-    "point",
-    x = c(0.3, 0.7), y = c(0.15, 1),
-    shape = 21, size = 4.5, stroke = 1.4,
-    colour = col_fn, fill = mfpa$paper
-  ) +
-  # solid points: the function's actual values there
-  annotate(
-    "point",
-    x = c(0.3, 0.7), y = c(0.6, 1.2),
-    colour = col_fn, size = 4.5
-  ) +
+  geom_line() +
+  mark_limit(c(0.3, 0.7), c(0.15, 1)) +
+  mark_value(c(0.3, 0.7), c(0.6, 1.2)) +
   annotate(
     "text",
     x = 0.32, y = 0.3,
@@ -996,28 +890,14 @@ Exponential functions with bases $b > 1$ increase really quickly, hence the term
 #| label: fig-exponential-vs-polynomial
 #| fig-cap: "The exponential function $2^x$ compared to the polynomial $x^2$."
 #| cache: true
-col_poly <- mfpa$red
-col_expo <- mfpa$teal
 tibble(x = seq(0, 8, by = 0.01)) |>
-  mutate(poly = x^2, expo = 2^x) |>
-  pivot_longer(c(poly, expo), names_to = "fn", values_to = "y") |>
+  mutate(expo = 2^x, poly = x^2) |>
+  pivot_longer(c(expo, poly), names_to = "fn", values_to = "y") |>
+  mutate(fn = fct_inorder(fn)) |> # expo first, so it gets teal
   ggplot(aes(x = x, y = y, colour = fn)) +
-  geom_line(linewidth = 1.3) +
-  # label each curve directly instead of with a legend
-  annotate(
-    "text",
-    x = 8, y = 2^8, label = "2^x", parse = TRUE,
-    colour = col_expo, size = 5, hjust = 1.2
-  ) +
-  annotate(
-    "text",
-    x = 8, y = 70, label = "x^2", parse = TRUE,
-    colour = col_poly, size = 5, hjust = 1.1, vjust = 0
-  ) +
-  scale_colour_manual(
-    values = c(poly = col_poly, expo = col_expo),
-    guide = "none"
-  ) +
+  geom_line() +
+  label_curve(8, 2^8, "2^x", hjust = 1.2) +
+  label_curve(8, 70, "x^2", colour = mfpa$red, hjust = 1.1, vjust = 0) +
   scale_x_continuous(breaks = seq(0, 8, by = 2)) +
   labs(x = "x", y = "f(x)")
 ```
@@ -1241,9 +1121,6 @@ Since the choice of base doesn't substantively affect our findings, we should ch
 #| label: fig-log-scale
 #| fig-cap: "Logarithms with different bases"
 #| cache: true
-col_b2 <- mfpa$red
-col_be <- mfpa$teal
-col_b10 <- mfpa$muted
 expand_grid(
   x = seq(1, 10, length.out = 501),
   base = c(2, exp(1), 10)
@@ -1257,26 +1134,14 @@ expand_grid(
     )
   ) |>
   ggplot(aes(x = x, y = y, colour = base)) +
-  geom_line(linewidth = 1.3) +
-  # label each curve at its right end instead of with a legend
-  annotate(
-    "text",
-    x = 10.2, y = log(10, base = 2), label = "base~2", parse = TRUE,
-    colour = col_b2, size = 4, hjust = 0
-  ) +
-  annotate(
-    "text",
-    x = 10.2, y = log(10), label = "base~italic(e)", parse = TRUE,
-    colour = col_be, size = 4, hjust = 0
-  ) +
-  annotate(
-    "text",
-    x = 10.2, y = 1.1, label = "base~10", parse = TRUE,
-    colour = col_b10, size = 4, hjust = 0
-  ) +
+  geom_line() +
+  # labels at the right end of each curve
+  label_curve(10.2, log(10, base = 2), "base~2", colour = mfpa$red, size = 4, hjust = 0) +
+  label_curve(10.2, log(10), "base~italic(e)", size = 4, hjust = 0) +
+  label_curve(10.2, 1.1, "base~10", colour = mfpa$muted, size = 4, hjust = 0) +
+  # base e is the series of interest; base 10 is de-emphasised
   scale_colour_manual(
-    values = c("base 2" = col_b2, "base e" = col_be, "base 10" = col_b10),
-    guide = "none"
+    values = c("base 2" = mfpa$red, "base e" = mfpa$teal, "base 10" = mfpa$muted)
   ) +
   scale_x_continuous(
     breaks = c(2, 4, 6, 8, 10),

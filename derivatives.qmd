@@ -26,24 +26,13 @@ This idea of steepness is easiest to see with linear functions.
 #| label: fig-linear-function-slopes
 #| fig-cap: "Two linear functions---one steeper, one flatter."
 #| cache: true
-col_h <- mfpa$teal
-col_g <- mfpa$red
 tibble(x = seq(0, 5), h = 2 + 0.25 * x, g = x) |>
   pivot_longer(c(h, g), names_to = "fn", values_to = "y") |>
+  mutate(fn = fct_inorder(fn)) |> # h first, so it gets teal
   ggplot(aes(x = x, y = y, colour = fn)) +
-  geom_line(linewidth = 1.3) +
-  # label each curve directly instead of with a legend
-  annotate(
-    "text",
-    x = 5, y = 3.25, label = "italic(h)(x)", parse = TRUE,
-    colour = col_h, size = 5, hjust = -0.2
-  ) +
-  annotate(
-    "text",
-    x = 5, y = 5.1, label = "italic(g)(x)", parse = TRUE,
-    colour = col_g, size = 5, hjust = -0.2
-  ) +
-  scale_colour_manual(values = c(h = col_h, g = col_g), guide = "none") +
+  geom_line() +
+  label_curve(5, 3.25, "italic(h)(x)", hjust = -0.2) +
+  label_curve(5, 5.1, "italic(g)(x)", colour = mfpa$red, hjust = -0.2) +
   scale_x_continuous(breaks = 0:5, limits = c(0, 5.75)) +
   scale_y_continuous(breaks = 0:5, limits = c(0, 5.25)) +
   labs(x = "x", y = "Function value")
@@ -65,24 +54,13 @@ What are the similarities and differences with the slopes of the functions depic
 
 ```{r}
 #| cache: true
-col_h <- mfpa$teal
-col_g <- mfpa$red
 tibble(x = seq(0, 5), h = 3.25 - 0.25 * x, g = 5 - x) |>
   pivot_longer(c(h, g), names_to = "fn", values_to = "y") |>
+  mutate(fn = fct_inorder(fn)) |> # h first, so it gets teal
   ggplot(aes(x = x, y = y, colour = fn)) +
-  geom_line(linewidth = 1.3) +
-  # label each curve directly instead of with a legend
-  annotate(
-    "text",
-    x = 5, y = 2, label = "italic(h)(x)", parse = TRUE,
-    colour = col_h, size = 5, hjust = -0.2
-  ) +
-  annotate(
-    "text",
-    x = 5, y = 0, label = "italic(g)(x)", parse = TRUE,
-    colour = col_g, size = 5, hjust = -0.2
-  ) +
-  scale_colour_manual(values = c(h = col_h, g = col_g), guide = "none") +
+  geom_line() +
+  label_curve(5, 2, "italic(h)(x)", hjust = -0.2) +
+  label_curve(5, 0, "italic(g)(x)", colour = mfpa$red, hjust = -0.2) +
   scale_x_continuous(breaks = 0:5, limits = c(0, 5.75)) +
   scale_y_continuous(breaks = 0:5, limits = c(0, 5.25)) +
   labs(x = "x", y = "Function value")
@@ -120,8 +98,6 @@ $$
 #| label: fig-nonlinear-function-comparison
 #| fig-cap: "Two increasing nonlinear functions. At lower values of $x,$ $h(x)$ is increasing more steeply than $g(x).$  The opposite is true at greater values of $x.$"
 #| cache: true
-col_h <- mfpa$teal
-col_g <- mfpa$red
 df_nonlinear_functions <- tibble(
   x = seq(0, 10, by = 0.1),
   g = x^2 / 5,
@@ -129,21 +105,12 @@ df_nonlinear_functions <- tibble(
 )
 df_nonlinear_functions |>
   filter(x <= 5) |>
-  pivot_longer(c(g, h), names_to = "fn", values_to = "y") |>
+  pivot_longer(c(h, g), names_to = "fn", values_to = "y") |>
+  mutate(fn = fct_inorder(fn)) |> # h first, so it gets teal
   ggplot(aes(x = x, y = y, colour = fn)) +
-  geom_line(linewidth = 1.3) +
-  # label each curve directly instead of with a legend
-  annotate(
-    "text",
-    x = 5, y = 4, label = "italic(h)(x)", parse = TRUE,
-    colour = col_h, size = 5, hjust = -0.2
-  ) +
-  annotate(
-    "text",
-    x = 5, y = 5, label = "italic(g)(x)", parse = TRUE,
-    colour = col_g, size = 5, hjust = -0.2
-  ) +
-  scale_colour_manual(values = c(h = col_h, g = col_g), guide = "none") +
+  geom_line() +
+  label_curve(5, 4, "italic(h)(x)", hjust = -0.2) +
+  label_curve(5, 5, "italic(g)(x)", colour = mfpa$red, hjust = -0.2) +
   scale_x_continuous(breaks = 0:5, limits = c(0, 5.75)) +
   scale_y_continuous(breaks = seq(-1, 5), limits = c(-1, 5.25)) +
   labs(x = "x", y = "Function value")
@@ -384,18 +351,12 @@ The absolute value function illustrates this type of non-differentiability.
 #| label: fig-abs-value-kink
 #| fig-cap: "Non-differentiability due to a kink."
 #| cache: true
-col_fn <- mfpa$teal
 tibble(x = seq(-1, 1, length.out = 101), y = abs(x)) |>
   ggplot(aes(x = x, y = y)) +
-  geom_vline(xintercept = 0, linetype = "dashed") +
-  geom_line(colour = col_fn, linewidth = 1.3) +
-  # solid point: the kink at x = 0, where the derivative does not exist
-  annotate("point", x = 0, y = 0, colour = col_fn, size = 4.5) +
-  annotate(
-    "text",
-    x = 0, y = -0.1, label = "'kink' at x = 0",
-    colour = col_fn, size = 5, hjust = -0.1
-  ) +
+  geom_vline(xintercept = 0) +
+  geom_line() +
+  mark_value(0, 0) +
+  label_curve(0, -0.1, "'kink' at x = 0", parse = FALSE, hjust = -0.1) +
   scale_x_continuous(breaks = seq(-1, 1, by = 0.5)) +
   scale_y_continuous(breaks = seq(0, 1, by = 0.25), limits = c(-0.25, 1)) +
   labs(x = "x", y = "|x|")
