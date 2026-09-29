@@ -71,13 +71,15 @@ Level order decides which series is teal. A character column (e.g. the `names_to
 - `mark_value(x, y)` — solid point (`size = 4.5`) for the function's actual value at a point of interest.
 - `mark_limit(x, y)` — hollow ring (`shape = 21`, `paper` fill) for a limit approached at a point.
 - `shade_window(xmin, xmax)` — highlighted band on the x-axis (`teal`, `alpha = 0.08`).
-- `label_curve(x, y, label)` — direct label coloured to match its curve, parsed as plotmath by default (`"italic(h)(x)"`, `"2^x"`); pass `parse = FALSE` for plain text; `hjust`, `vjust`, `size` pass through to `annotate()`.
+- `label_curve(x, y, label)` — direct label coloured to match its curve, parsed as plotmath by default (`'italic(h)*"(x)"'`, `"2^x"`; see "Math labels" below); pass `parse = FALSE` for plain text; `hjust`, `vjust`, `size` pass through to `annotate()`.
 
 **Font.** Archivo is not a system font on the CI runner or most machines. `_common.R` fetches it from Google Fonts with `systemfonts::require_font()` into the gitignored `_fonts/` directory on the first render, reuses the cached files afterwards, and aliases the system sans to "Archivo" if offline. This only works because `_quarto.yml` sets `dev: ragg_png`: the `ragg` device resolves fonts via `systemfonts`, whereas the default cairo `png` device only sees fontconfig's system fonts and silently falls back to the system sans. Don't override `dev` per chunk.
 
+**Math labels.** Plotmath draws Greek letters, operators (`=`, `-`, `+`), and the parentheses of call notation like `f(x)` from the device's *symbol* font, not Archivo. `_common.R` fetches Fira Sans the same way as Archivo and registers it as the symbol font, since Archivo has no Greek. The parentheses and operators still come out oversized and off-weight next to Archivo, so write labels with only italics and Greek going through plotmath and everything else as quoted strings, which render in Archivo: `'italic(f)*"(x) = "*beta*"(x − a)"'`, not `"italic(f)(x) == beta * (x - a)"`. Use a real minus sign (`−`, U+2212) in those strings. Tick labels without italics or Greek are plain character vectors (`c("c − d", "c", "c + d")`), not `expression()`.
+
 **Conventions from the limits chapter:**
 - Piecewise functions get a `group` column so the pieces don't join across a jump. Put a `geom_vline()` at the point of interest, with `mark_value()` for the function's value and `mark_limit()` for the limit.
-- Prefer direct labels (`label_curve()`) over legends. Math in labels and axis breaks via plotmath strings / `expression()`.
+- Prefer direct labels (`label_curve()`) over legends. Math in labels and axis breaks via plotmath strings / `expression()`, written as described under "Math labels".
 - Raw-data backdrop points in `mfpa$muted` at `alpha = 0.35`, small (`size = 0.9`); binned/summary points on top in the series colours.
 - De-emphasised side notes: `annotate("text", …, colour = mfpa$muted, size = 3.6)`.
 - Never use base greys, `"black"`, or `"white"` — they're cool-toned and clash with the warm paper. Reach for `ink` / `muted` / `rule` / `paper` instead.

@@ -55,6 +55,7 @@ book:
     - set_theory.qmd
     - limits_and_continuity.qmd
     - derivatives.qmd
+    - integrals.qmd
     - references.qmd
   license: "CC BY-NC-SA 4.0"
   sidebar:

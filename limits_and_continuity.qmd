@@ -287,11 +287,11 @@ tibble(
   mark_limit(0, m) +
   scale_x_continuous(
     breaks = c(-d, 0, d),
-    labels = expression(c - d, c, c + d)
+    labels = c("c − d", "c", "c + d")
   ) +
   scale_y_continuous(
     breaks = c(m, 3),
-    labels = expression(m, f(c))
+    labels = c("m", "f(c)")
   ) +
   labs(x = "x", y = "f(x)")
 ```
@@ -338,11 +338,11 @@ tibble(
   expand_limits(y = 0) +
   scale_x_continuous(
     breaks = c(0, c_val - d, c_val, c_val + d),
-    labels = expression(0, c - d, c, c + d)
+    labels = c("0", "c − d", "c", "c + d")
   ) +
   scale_y_continuous(
     breaks = c(0, c_val, 3.4),
-    labels = expression(0, c, f(c))
+    labels = c("0", "c", "f(c)")
   ) +
   labs(x = "x", y = "f(x)")
 ```

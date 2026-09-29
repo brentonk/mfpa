@@ -26,9 +26,9 @@ mfpa <- list(
 # gitignored _fonts/ directory on first render; reuse the cached files after
 # that; fall back to the system sans (aliased as "Archivo") if offline.
 dir.create("_fonts", showWarnings = FALSE)
-archivo_files <- list.files("_fonts", pattern = "^Archivo.*\\.ttf$", full.names = TRUE)
-if (length(archivo_files) > 0) {
-  systemfonts::add_fonts(archivo_files)
+font_files <- list.files("_fonts", pattern = "\\.ttf$", full.names = TRUE)
+if (length(font_files) > 0) {
+  systemfonts::add_fonts(font_files)
 }
 systemfonts::require_font(
   "Archivo",
@@ -37,6 +37,18 @@ systemfonts::require_font(
   error = FALSE,
   verbose = FALSE
 )
+
+# Plotmath draws Greek letters, operators (=, -, +), and the parentheses of
+# function-call notation like f(x) from the device's "symbol" font, which
+# otherwise resolves to a Times-style Symbol clone (and differs by machine).
+# Archivo has no Greek, so use Fira Sans for the symbol font, and write labels
+# so that only italics and Greek go through plotmath -- see CLAUDE.md.
+if (systemfonts::require_font("Fira Sans", dir = "_fonts", error = FALSE, verbose = FALSE)) {
+  systemfonts::register_font(
+    "symbol",
+    plain = systemfonts::match_fonts("Fira Sans")$path
+  )
+}
 
 # Default theme. The device background is already transparent (see _quarto.yml),
 # so plots inherit the page's paper colour; text and axes use the page's ink;
@@ -117,7 +129,7 @@ shade_window <- function(xmin, xmax, colour = mfpa$teal) {
 }
 
 # Direct label for a curve, coloured to match it, in place of a legend. The
-# label is parsed as plotmath by default (`"italic(h)(x)"`, `"2^x"`); pass
+# label is parsed as plotmath by default (`'italic(h)*"(x)"'`, `"2^x"`); pass
 # parse = FALSE for plain text. Extra arguments (hjust, vjust, size, ...) go
 # through to annotate().
 label_curve <- function(x, y, label, colour = mfpa$teal, parse = TRUE, ...) {

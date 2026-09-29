@@ -1,0 +1,383 @@
+---
+echo: false
+---
+
+# Integrals {#sec-integrals}
+
+```{r setup_integrals}
+#| message: false
+source("_common.R")
+```
+
+## Area under the curve {#sec-area-under-curve}
+
+Let's take a very simple mathematical model of polarized public opinion.
+Imagine that everyone has an "ideology," which we'll represent as a real number between $-1$ (most liberal) and $+1$ (most conservative).
+There are very many people and very many gradations of ideology, so we will represent the distribution of ideology in the public along a continuum.
+
+To make this a bit more specific, imagine that the [density](https://en.wikipedia.org/wiki/Probability_density_function) of ideology has the following bimodal shape.
+
+```{r}
+#| label: fig-ideology-density
+#| fig-cap: "A hypothetical bimodal distribution of ideology."
+#| cache: true
+x <- c(-1, seq(-1, 1, length.out = 201), 1)
+y <- x^2 + 1 / 6
+y[1] <- y[length(y)] <- 0
+tibble(x, y) |>
+  ggplot(aes(x = x, y = y)) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(-1, 1, by = 0.5)) +
+  scale_y_continuous(breaks = seq(0, 1.25, by = 0.25), limits = c(0, 1.25)) +
+  labs(x = "Ideology", y = "Density")
+```
+
+Suppose we define a center-left person as someone whose ideology lies between $-1/2$ and $0$.
+If the distribution of preferences looks like @fig-ideology-density, then what proportion of people are center left?
+To calculate that, we'd want to calculate the area that falls under the curve between $-1/2$ and $0$, and compare that to the total area under the curve.
+
+```{r}
+#| label: fig-ideology-center-left
+#| fig-cap: "The center-left slice of the ideological distribution."
+#| cache: true
+df_ideology <- tibble(
+  x = seq(-100, 100) / 100, # exact grid, so the filter below hits -1/2 and 0
+  y = x^2 + 1 / 6
+)
+df_ideology |>
+  ggplot(aes(x = x, y = y)) +
+  geom_ribbon(aes(ymin = 0, ymax = y), fill = mfpa$teal, alpha = 0.08) +
+  geom_ribbon(
+    aes(ymin = 0, ymax = y),
+    data = filter(df_ideology, x >= -1/2, x <= 0),
+    fill = mfpa$teal,
+    alpha = 0.35
+  ) +
+  geom_line() +
+  annotate("segment", x = c(-1, 1), xend = c(-1, 1), y = 0, yend = 7/6,
+           colour = mfpa$teal, linewidth = 1.3) +
+  scale_x_continuous(breaks = seq(-1, 1, by = 0.5)) +
+  scale_y_continuous(breaks = seq(0, 1.25, by = 0.25), limits = c(0, 1.25)) +
+  labs(x = "Ideology", y = "Density")
+```
+
+These area calculations are known as [integrals]{.concept entry="Integral" definition="The integral of $f$ between $a$ and $b$, denoted $\int_a^b f(x) \, dx$, is the signed area between the value of $f$ and the x-axis between $x = a$ and $x = b$. (By \"signed\" area, I mean that the value is negative when $f(x) < 0$.)"}.
+This type of calculation comes up repeatedly in probability and statistics with continuous random variables, so it is important to at least learn the basics.
+We will cover the bare minimum here, just enough for you to get started.
+The most important thing to know is a surprising fact---there is a deep connection between derivatives and these area calculations.
+
+
+## Antiderivatives {#sec-antiderivatives}
+
+It turns out that to calculate the area under a curve given by the function $f(x)$, we will need to find the function whose derivative is equal to $f$.
+We call such a function an [antiderivative]{.concept definition="A differentiable function $F(x)$ is an antiderivative of $f(x)$ if $F'(x) = f(x)$ for all $x$."} of $f$.
+
+::: {#def-antiderivative name="Antiderivative"}
+Consider functions $f : X \to \mathbb{R}$ and $F : X \to \mathbb{R}$, where $X \subseteq \mathbb{R}$.
+$F$ is an [antiderivative]{.concept} of $f$ if $F$ is differentiable and $$F'(x) = f(x)$$ for all $x \in X$.
+::: 
+
+As one example, $F(x) = x^2$ is an antiderivative of $f(x) = 2x$.
+Using the power rule (see @sec-derivatives-common), we have $$F'(x) = 2 \cdot x^1 = 2x = f(x).$$
+
+::: {#exr-confirm-antiderivative name="Confirming an antiderivative"}
+Define the functions $f$, $F$, and $G$, all mapping $\mathbb{R}$ into $\mathbb{R}$, by
+$$
+\begin{aligned}
+f(x) &= 3x^2 + 8x + 7, \\
+F(x) &= x^3 + 4x^2 + 7x, \\
+G(x) &= x^3 + 4x^2 + 7x + 3.
+\end{aligned}
+$$
+Confirm that $F$ and $G$ are both antiderivatives of $f$.
+
+:::: {.answer}
+Using what we know about the derivatives of polynomials (see @exr-deriv-polynomial), we have
+$$
+\begin{aligned}
+F'(x) &= 3x^2 + 4 \cdot 2x^1 + 7 \cdot x^0 \\
+&= 3x^2 + 8x + 7 \\
+&= f(x); \\
+G'(x) &= 3x^2 + 4 \cdot 2x^1 + 7 \cdot x^0 + 0 \\
+&= 3x^2 + 8x + 7 \\
+&= f(x).
+\end{aligned}
+$$
+::::
+::: 
+
+You saw in @exr-confirm-antiderivative that one function may have multiple antiderivatives.
+This is not specific to the particular function in the example.
+In fact, if a function has one antiderivative, then it has infinitely many antiderivatives: you can form a new one by shifting the existing one up or down by any constant.
+
+::: {#prp-infinite-antiderivatives name="Multiplicity of antiderivatives"}
+Let $F$ be an antiderivative of $f$, and let $c \in \mathbb{R}$ be any constant.
+The function $G$ defined by $$G(x) = F(x) + c$$ is also an antiderivative of $f$.
+:::
+
+::: {.proof}
+For all $x$ in the domain, we have
+$$
+\begin{aligned}
+G'(x)
+&= \frac{d}{dx} \left[F(x) + c\right] \\
+&= F'(x) + \underbrace{\left[\frac{d}{dx} c\right]}_{=0} \\
+&= f(x),
+\end{aligned}
+$$
+so $G$ is an antiderivative of $f$.
+:::
+
+It is relatively easy to find the antiderivative of a polynomial.
+To see why, let's start with the antiderivative of a power function, i.e., a function of the form $f(x) = x^a$.
+If $a \neq -1$, then any function of the form $F(x) = \frac{1}{a + 1} x^{a+1} + c$ is an antiderivative.
+To see why, use the power rule (see @sec-derivatives-common) and the constant multiple rule (@prp-deriv-constant-multiple):
+$$
+\begin{aligned}
+F'(x)
+&= \frac{d}{d x} \left[\frac{1}{a + 1} x^{a + 1} + c\right] \\
+&= \frac{1}{a + 1} \cdot \left[\frac{d}{dx} x^{a + 1}\right] + 0 \\
+&= \frac{1}{a + 1} \cdot (a + 1) \cdot x^{(a + 1) - 1} \\
+&= x^a.
+\end{aligned}
+$$
+
+Remember that a polynomial is a finite sum of power functions, each multiplied by a coefficient.
+Formally, a polynomial is a function of the form $$f(x) = c_n x^n + c_{n-1} x^{n-1} + \cdots + c_1 x + c_0 = \sum_{k=0}^n c_k x^k,$$ where each $c_k$ is a constant real number.
+Using the antiderivative of a power function, we have that any function of the form $$F(x) = \frac{c_n}{n + 1} x^{n+1} + \frac{c_{n-1}}{n} x^n + \cdots + \frac{c_1}{2} x^2 + c_0 x + c = \sum_{k=0}^n \frac{c_k}{k + 1} x^{k + 1} + c$$ is an antiderivative of $f$.
+
+::: {#exr-antiderivative-polynomial name="Antiderivatives of polynomials"}
+Find an antiderivative of each polynomial listed here.
+
+1. $f(x) = (x + 2) (x - 2)$.
+2. $f(x) = 40 x^{39} - 10 x^{17} + 27$.
+3. General constant function: $f(x) = \alpha$, where $\alpha$ is a constant.
+4. General linear function: $f(x) = \alpha + \beta x$, where $\alpha$ and $\beta$ are constants.
+5. General quadratic function: $f(x) = \alpha + \beta x + \gamma x^2$, where $\alpha$, $\beta$, and $\gamma$ are constants.
+
+:::: {.answer}
+1. We have $f(x) = x^2 - 2 x + 2 x - 4 = x^2 - 4$, so any function of the form $$F(x) = \frac{x^3}{3} - 4 x + c$$ is an antiderivative of $f$.
+
+2. Any function of the form $$F(x) = x^{40} - \frac{10 x^{18}}{18} + 27 x + c$$ is an antiderivative of $f$.
+
+3. Any function of the form $F(x) = \alpha x + c$ is an antiderivative of $f$.
+
+4. Any function of the form $$F(x) = \alpha x + \frac{\beta x^2}{2} + c$$ is an antiderivative of $f$.
+
+5. Any function of the form $$F(x) = \alpha x + \frac{\beta x^2}{2} + \frac{\gamma x^3}{3} + c$$ is an antiderivative of $f$.
+:::: 
+:::
+
+::: {#exr-antiderivative-x-negative-one name="Antiderivative of 1/x"}
+Why did I need to impose the assumption that $a \neq -1$ when claiming that $F(x) = \frac{1}{a + 1} x^{a + 1} + c$ is an antiderivative of $f(x) = x^a$?
+What in fact is the form of the antiderivative of $f(x) = x^{-1}$ for $x \in (0, \infty)$?
+
+:::: {.answer}
+We need $a \neq -1$ because otherwise $a + 1 = 0$ and thus $\frac{1}{a + 1}$ is undefined, making the ostensible expression for the antiderivative undefined as well.
+
+Remember that the natural logarithm, $\log(x)$, is defined on the domain $(0, \infty)$ and has a derivative of $\frac{1}{x}$.
+Because $\frac{1}{x} = x^{-1}$, we have that any function of the form $F(x) = \log(x) + c$ is an antiderivative of $f(x) = x^{-1}$ on $(0, \infty)$.
+::::
+:::
+
+## Calculating integrals {#sec-integral-calculation}
+
+### The second fundamental theorem {#sec-second-fundamental-theorem}
+
+Usually I like to lead you through the logic behind a mathematical result *before* telling you the result.
+But this result is sufficiently important for day-to-day mathematical life, and the logic behind it is sufficiently intricate, that I'm going to just start with the headline finding.
+
+The [second fundamental theorem of calculus]{.concept definition="If $F$ is an antiderivative of a continuous function $f$, then $\int_a^b f(x) \, dx = F(b) - F(a)$."} states that we can calculate an integral by taking the difference between antiderivatives.
+
+::: {#thm-second-fundamental name="Second fundamental theorem of calculus"}
+Let $f : X \to \mathbb{R}$ be continuous, where $X \subseteq \mathbb{R}$, and let $F : X \to \mathbb{R}$ be an antiderivative of $f$.
+For any $[a, b] \subseteq X$, we have $$\int_a^b f(x) \, dx = F(b) - F(a).$$
+:::
+
+A lot goes into understanding why this theorem "works," so I am going to put that off for @sec-explaining-second-fundamental below.
+Before that, let's go through a couple of examples where we can calculate the area separately with normal geometric techniques, and confirm that @thm-second-fundamental gives us the same answer.
+
+Let's start by calculating the area under a constant function, $f(x) = \alpha$, between $a$ and $b$.
+As you can see in the illustration below, this amounts to computing the area of a rectangle.
+
+```{r}
+#| label: fig-integral-rectangle
+#| fig-cap: "Area under a constant function."
+#| cache: true
+a <- 1
+b <- 3
+height <- 2 # alpha
+df_rect <- tibble(
+  x = seq(0, 400) / 100, # exact grid, so the filter below hits a and b
+  y = height
+)
+df_rect |>
+  ggplot(aes(x = x, y = y)) +
+  geom_ribbon(
+    aes(ymin = 0, ymax = y),
+    data = filter(df_rect, x >= a, x <= b),
+    fill = mfpa$teal,
+    alpha = 0.35
+  ) +
+  geom_line() +
+  label_curve(3.5, height + 0.05, 'italic(f)*"(x) = "*alpha', vjust = 0) +
+  scale_x_continuous(
+    breaks = c(a, b),
+    labels = c("a", "b")
+  ) +
+  scale_y_continuous(breaks = height, labels = expression(alpha)) +
+  coord_cartesian(xlim = c(0, 4), ylim = c(0, 3), expand = FALSE) +
+  labs(x = "x", y = "f(x)")
+```
+
+The width of this rectangle is $b - a$ and its height is $\alpha$, so the area under the curve is $\alpha (b - a)$.
+Let's see if the second fundamental theorem gives us the same answer.
+Our function is $f(x) = \alpha$, so the function $F(x) = \alpha x$ is an antiderivative.
+The second fundamental theorem then gives us
+$$
+\begin{aligned}
+\int_a^b f(x) \, dx
+= F(b) - F(a)
+= \alpha b - \alpha a
+= \alpha (b - a),
+\end{aligned}
+$$
+the same as our geometric area calculation.
+So far, so good!
+
+Before moving on to another example, I want to take a second to illustrate why it doesn't matter *which* antiderivative of $f(x)$ we use in the calculation.
+Above I used $F(x) = \alpha x$, but in fact any function of the form $F(x) = \alpha x + c$ is an antiderivative of the constant function $f(x) = \alpha$.
+But when we plug in another such function, the $c$'s cancel out and we get the same answer:
+$$
+F(b) - F(a) = [\alpha b + c] - [\alpha a + c] = \alpha (b - a).
+$$
+This remains true even when calculating integrals of other functions.
+So when you have to do such a calculation, just pick whichever antiderivative is easiest (almost always by setting $c = 0$).
+
+Now let's think about calculating the area under the line $f(x) = \beta (x - a)$, from where it crosses the x-axis at $x = a$ up to some other point $x = b$.
+As you can see in the illustration below, this amounts to computing the area of a triangle.
+
+```{r}
+#| label: fig-integral-triangle
+#| fig-cap: "Area under a linear function, starting from where it crosses the x-axis."
+#| cache: true
+a <- 1
+b <- 3
+slope <- 1 # beta
+df_tri <- tibble(
+  x = seq(0, 400) / 100, # exact grid, so the filter below hits a and b
+  y = slope * (x - a)
+)
+df_tri |>
+  ggplot(aes(x = x, y = y)) +
+  geom_ribbon(
+    aes(ymin = 0, ymax = y),
+    data = filter(df_tri, x >= a, x <= b),
+    fill = mfpa$teal,
+    alpha = 0.35
+  ) +
+  geom_line() +
+  label_curve(
+    3.25, 2.5, 'italic(f)*"(x) = "*beta*"(x − a)"',
+    hjust = 1
+  ) +
+  scale_x_continuous(
+    breaks = c(a, b),
+    labels = c("a", "b")
+  ) +
+  scale_y_continuous(
+    breaks = slope * (b - a),
+    labels = expression(beta * "(b − a)")
+  ) +
+  coord_cartesian(xlim = c(0, 4), ylim = c(0, 3.2), expand = FALSE) +
+  labs(x = "x", y = "f(x)")
+```
+
+The triangle has a width of $b - a$ and a height of $\beta (b - a)$, so its area is $$\frac{1}{2} \cdot (b - a) \cdot [\beta (b - a)] = \frac{\beta}{2} (b - a)^2.$$
+Let's again see if @thm-second-fundamental gives us the same answer.
+Our function is $f(x) = \beta (x - a) = \beta x - \beta a$, so $F(x) = \frac{\beta}{2} x^2 - \beta a x$ is an antiderivative.
+The second fundamental theorem then gives us
+$$
+\begin{aligned}
+\int_a^b f(x) \, dx
+&= F(b) - F(a) \\
+&= \left[\frac{\beta}{2} b^2 - \beta a b\right] - \left[\frac{\beta}{2} a^2 - \beta a^2\right] \\
+&= \frac{\beta}{2} b^2 - \beta a b - \frac{\beta}{2} a^2 + \beta a^2 \\
+&= \frac{\beta}{2} b^2 - \beta a b + \frac{\beta}{2} a^2 \\
+&= \frac{\beta}{2} \left[b^2 - 2 a b + a^2\right] \\
+&= \frac{\beta}{2} (b - a)^2.
+\end{aligned}
+$$
+The algebra to get there was a bit uglier than with the rectangle, but ultimately once again the calculus gives us the same answer as the geometry.
+
+::: {#exr-definite-integral name="Back to the motivating example"}
+Let's go back to the example illustrated in @fig-ideology-center-left, where we want to calculate the proportion of people who are "center left."
+The function plotted there is the polynomial $$f(x) = x^2 + \frac{1}{6}.$$
+
+1. Identify an antiderivative of $f$.
+2. Confirm that the total area under the curve is 1.
+3. Find the proportion of people who are center-left by calculating $\int_{-1/2}^0 f(x) \, dx$.
+
+:::: {.answer}
+1. One antiderivative is $$F(x) = \frac{x^3}{3} + \frac{x}{6}.$$
+
+2. To calculate the total area under the curve, we take the integral
+   $$
+   \begin{aligned}
+   \int_{-1}^1 f(x) \, dx
+   &= F(1) - F(-1) \\
+   &= \left[\frac{1}{3} + \frac{1}{6}\right] - \left[\frac{-1}{3} + \frac{-1}{6}\right] \\
+   &= 2 \left[\frac{1}{3} + \frac{1}{6}\right] \\
+   &= 2 \cdot \frac{3}{6} \\
+   &= 1.
+   \end{aligned}
+   $$
+
+3. The proportion of people who are center-left is
+   $$
+   \begin{aligned}
+   \int_{-1/2}^0 f(x) \, dx
+   &= F(0) - F(-1/2) \\
+   &= \left[\frac{0}{3} + \frac{0}{6}\right] - \left[\frac{-1/8}{3} + \frac{-1/2}{6}\right] \\
+   &= \frac{1}{24} + \frac{1}{12} \\
+   &= \frac{3}{24} \\
+   &= \frac{1}{8}.
+   \end{aligned}
+   $$
+::::
+:::
+
+
+### Explaining the second fundamental theorem {#sec-explaining-second-fundamental}
+
+TBA.
+
+<!--
+::: {.remark title="How deeply do you *need* to understand the second fundamental theorem?"}
+I want to admit something here.
+I have "known" the second fundamental theorem of calculus, and thus been able to calculate integrals of certain continuous functions, since taking AP Calculus in high school.
+Yet I feel like only recently---like, essentially, in the course of having to teach it to you all---have I moved toward *understanding* this theorem.
+
+Most of the things you learn in the methods sequence are things you truly ought to understand at a deep level.
+But there are a few results where, for day-to-day life as a working political scientist, it's ultimately okay to understand *that* the result works without fully wrapping your head around *why*.
+Over in stats, the [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem) is one of these results.
+Here in math, I think the second fundamental theorem of calculus is one of them.
+
+I would love for you to come away with an intuition about rectangular approximations and Riemann sums and their deep connection to the antiderivative.
+But at the end of the day, if you just know the formula to use to calculate the integral of a polynomial or other simple continuous function, that's 99% of the battle as a political scientist.
+:::
+-->
+
+## Properties of the integral {#sec-integral-properties}
+
+Constant multiple rule: $$\int_a^b c f(x) \, dx = c \int_a^b f(x) \, dx.$$
+
+Sum rule: $$\int_a^b [f(x) + g(x)] \, dx = \int_a^b f(x) \, dx + \int_a^b g(x) \, dx.$$
+
+Addition across subdomains: if $a \leq c \leq b$, $$\int_a^b f(x) \, dx = \int_a^c f(x) \, dx + \int_c^b f(x) \, dx.$$
+
+Full statements and explanations TBA.
+
+
+::: {#concept-review}
+:::
