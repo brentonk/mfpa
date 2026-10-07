@@ -417,7 +417,7 @@ Power functions
 : Any function of the form $f(x) = x^a$, where $a$ is a real number, has a derivative of $f'(x) = a x^{a - 1}$.
 
 Natural exponent
-: The function $f(x) = e^x$, where $e$ is [Euler's number](https://en.wikipedia.org/wiki/E_(mathematical_constant)) (approximately 2.718), has a derivative of $f'(x) = e^x$,  That's not a typo---the natural exponent is its own derivative.  That is one of the many reasons why Euler's number is special.
+: The function $f(x) = e^x$, where $e$ is [Euler's number](https://en.wikipedia.org/wiki/E_(mathematical_constant)) (approximately 2.718), has a derivative of $f'(x) = e^x$.  That's not a typo---the natural exponent is its own derivative.  That is one of the many reasons why Euler's number is special.
 
 Natural logarithm
 : The function $f(x) = \log x$ has a derivative of $f'(x) = 1/x$.
@@ -787,6 +787,262 @@ f'(p)
 \end{aligned}
 $$
 We have $p^2 > 0$ and $(2p - p^2)^2 > 0$ for all $p \neq 0$, and therefore $f'(p) > 0$ for all $p \in (0, 1]$.
+::::
+:::
+
+## The chain rule {#sec-chain-rule}
+
+What do we do when we run into a function that isn't obviously a sum or product or quotient of some other function whose derivative we know how to take?
+For example, think about the function $$h(x) = e^{-(x - \mu)^2},$$ a close cousin of the probability density function of the normal distribution with mean $\mu$ and variance 1.
+We know that the derivative of $e^x$ is $e^x$.
+And by observing that $$-(x - \mu)^2 = -[x^2 - 2 x \mu + \mu^2] = 2 x \mu - x^2 - \mu^2,$$ we know that its derivative is $2 (\mu - x)$.
+Is there a way we can put these together to figure out the derivative of $h(x)$?
+
+The [chain rule]{.concept definition="If $h(x) = f(g(x))$, then $h'(x) = f'(g(x)) \cdot g'(x)$."} helps us deal with situations like this one.
+Specifically, suppose we have a function of the form $$h(x) = f(g(x)),$$ aka the composition (@def-composition) of $f$ and $g$, where $f$ and $g$ are both differentiable.
+In our example, we can decompose $h$ into functions $f$ and $g$ whose derivatives we know.
+We'll decompose it using
+$$
+\begin{aligned}
+f(x) &= e^x; \\
+g(x) &= -(x - \mu)^2,
+\end{aligned}
+$$
+which we can confirm is a valid decomposition via
+$$
+f(g(x)) = e^{g(x)} = e^{-(x - \mu)^2} = h(x).
+$$
+
+::: {#prp-chain-rule name="Chain rule"}
+Let $f : Y \to \mathbb{R}$ and $g : X \to Y$ be differentiable, where $X \subseteq \mathbb{R}$ and $Y \subseteq \mathbb{R}$.
+Define the composition $h$ by $h(x) = f(g(x))$.
+For all $x \in X$, $$h'(x) = f'(g(x)) \cdot g'(x).$$
+:::
+
+Using the chain rule with our example of $h(x) = e^{-(x - \mu)^2}$, we can calculate the derivative:
+$$
+\begin{aligned}
+h'(x)
+&= f'(g(x)) \cdot g'(x) \\
+&= f'(-(x - \mu)^2) \cdot g'(x) \\
+&= e^{-(x - \mu)^2} \cdot 2 (\mu - x) \\
+&= 2 (\mu - x) e^{-(x - \mu)^2}.
+\end{aligned}
+$$
+If we look at the graph of this function, we see that it increases on $(-\infty, \mu)$ and decreases on $(\mu, \infty)$.
+
+```{r}
+#| label: fig-bell-curve
+#| fig-cap: "A function shaped like a bell curve"
+#| cache: true
+mu <- 2
+tibble(
+  x = seq(mu - 3, mu + 3, length.out = 501),
+  y = exp(-1 * (x - mu)^2)
+) |>
+  ggplot(aes(x = x, y = y)) +
+  geom_line() +
+  scale_x_continuous(
+    breaks = seq(mu - 3, mu + 3),
+    labels = c("µ − 3", "µ − 2", "µ − 1", "µ", "µ + 1", "µ + 2", "µ + 3")
+  ) +
+  labs(x = "", y = "")
+```
+
+Our expression for the derivative provides further confirmation that the function increases up to $x = \mu$ and decreases thereafter.
+The key thing to observe is that $e^z > 0$ for all real numbers $z$.
+Therefore, if $x < \mu$, then we have $$h'(x) = 2 \underbrace{(\mu - x)}_{> 0} \underbrace{e^{-(x - \mu)^2}}_{> 0} > 0.$$
+If instead $x > \mu$, then we have $$h'(x) = 2 \underbrace{(\mu - x)}_{< 0} \underbrace{e^{-(x - \mu)^2}}_{> 0} < 0.$$
+
+::: {#exr-deriv-exponent name="Derivative of an exponential function"}
+Let $b$ be a positive constant, and define the function $f(x) = b^x$.
+Using the chain rule, show that $f'(x) = b^x \cdot \log(b)$.
+
+*Hint:* Start out by using the fact that $b = e^{\log(b)}$.
+
+:::: {.answer}
+We have $$f(x) = b^x = (e^{\log(b)})^x = e^{\log(b) \cdot x}.$$
+Define the "inner" function $h(x) = \log(b) \cdot x$ (with derivative $h'(x) = \log(b)$) and the "outer" function $g(x) = e^x$ (with derivative $g'(x) = e^x$), so that we have $$f(x) = e^{\log(b) \cdot x} = e^{h(x)} = g(h(x)).$$
+Then, using the chain rule, we have
+$$
+\begin{aligned}
+f'(x)
+&= g'(h(x)) \cdot h'(x) \\
+&= g'(\log(b) \cdot x) \cdot h'(x) \\
+&= e^{\log(b) \cdot x} \cdot \log(b) \\
+&= b^x \cdot \log(b).
+\end{aligned}
+$$
+::::
+:::
+
+::: {#exr-deriv-exponential-cdf name="Derivative of the exponential CDF"}
+For all $x \geq 0$, the cumulative distribution function of the [exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution) with rate parameter $\lambda > 0$ is $$F(x) = 1 - e^{-\lambda x}.$$
+Characterize the probability density function of this distribution by finding the derivative of the cumulative distribution function.
+
+:::: {.answer}
+Let's first just look at $e^{-\lambda x}$.
+We can think of this as a composition of the "outer" function $g(x) = e^x$ (with derivative $g'(x) = e^x$) and the "inner" function $h(x) = -\lambda x$ (with derivative $h'(x) = -\lambda$).
+Therefore, its derivative is $$g'(h(x)) \cdot h'(x) = g'(-\lambda x) \cdot h'(x) = e^{-\lambda x} \cdot -\lambda.$$
+
+Returning to the full expression for the CDF and applying the sum rule, we have
+$$
+\begin{aligned}
+F'(x)
+&= \frac{d}{dx} \left[1 - e^{-\lambda x}\right] \\
+&= \left[\frac{d}{dx} (1) - \frac{d}{dx} \left(e^{-\lambda x}\right) \right] \\
+&= \left[0 - e^{-\lambda x} \cdot -\lambda\right] \\
+&= \lambda e^{-\lambda x}.
+\end{aligned}
+$$
+::::
+:::
+
+::: {#exr-deriv-logistic-cdf name="Derivative of the logistic CDF"}
+For all $x \in \mathbb{R}$, the cumulative distribution function of the [logistic distribution](https://en.wikipedia.org/wiki/Logistic_distribution) is $$F(x) = \frac{1}{1 + e^{-x}}.$$
+Characterize the probability density function of this distribution by finding the derivative of the cumulative distribution function.
+
+:::: {.answer}
+We have $F(x) = (1 + e^{-x})^{-1}$.
+By repeatedly applying the chain rule, we have
+$$
+\begin{aligned}
+F'(x)
+&= (-1) (1 + e^{-x})^{-2} \cdot \frac{d}{dx} [1 + e^{-x}] \\
+&= -(1 + e^{-x})^{-2} \cdot \frac{d}{dx} e^{-x} \\
+&= -(1 + e^{-x})^{-2} \cdot e^{-x} \cdot \frac{d}{dx} [-x] \\
+&= -(1 + e^{-x})^{-2} \cdot e^{-x} \cdot -1 \\
+&= \frac{e^{-x}}{(1 + e^{-x})^2}.
+\end{aligned}
+$$
+::::
+:::
+
+::: {#exr-deriv-log-f name="Derivative of the logarithm of a function"}
+Let $f$ be a differentiable function that maps from $X \subseteq \mathbb{R}$ into the strictly positive reals, $(0, \infty)$.
+Define the function $g(x) = \log [f(x)]$.
+Prove that $$g'(x) = \frac{f'(x)}{f(x)}.$$
+
+:::: {.answer}
+$g$ is the composition of the natural logarithm and $f$.
+Therefore, by the chain rule,
+$$
+\begin{aligned}
+g'(x)
+&= \log' [f(x)] \cdot f'(x) \\
+&= \frac{1}{f(x)} \cdot f'(x) \\
+&= \frac{f'(x)}{f(x)}.
+\end{aligned}
+$$
+::::
+:::
+
+::: {#exr-quotient-rule name="Proving the quotient rule"}
+Use the product rule and the chain rule to prove the quotient rule.
+
+*Hint:* Start with the fact that $\frac{f(x)}{g(x)} = f(x) \cdot g(x)^{-1}$.
+
+:::: {.answer}
+Define $h(x) = \frac{f(x)}{g(x)} = f(x) \cdot g(x)^{-1}$.
+By the product rule,
+$$
+\begin{aligned}
+h'(x)
+&= f(x) \cdot \frac{d}{dx} \left[g(x)^{-1}\right] + f'(x) \cdot g(x)^{-1}.
+\end{aligned}
+$$
+Using the chain rule, we have
+$$
+\begin{aligned}
+\frac{d}{dx} \left[g(x)^{-1}\right]
+&= (-1) g(x)^{-2} \cdot g'(x) \\
+&= \frac{-g'(x)}{g(x)^2}.
+\end{aligned}
+$$
+Substituting this into the product rule calculation from before, we have
+$$
+\begin{aligned}
+h'(x)
+&= f(x) \cdot \frac{d}{dx} \left[g(x)^{-1}\right] + f'(x) \cdot g(x)^{-1} \\
+&= f(x) \cdot \frac{-g'(x)}{g(x)^2} + f'(x) \cdot \frac{1}{g(x)} \\
+&= \frac{- f(x) g'(x)}{g(x)^2} + \frac{f'(x)}{g(x)} \\
+&= \frac{- f(x) g'(x)}{g(x)^2} + \frac{f'(x) g(x)}{g(x)^2} \\
+&= \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.
+\end{aligned}
+$$
+::::
+:::
+
+So why does the chain rule work?
+Here's one oversimplified way to think about it.
+Consider a function $h$ that's a composition of differentiable functions $f$ and $g$, so that $h(x) = f(g(x))$.
+Imagine starting at some value $c$ in the domain, then moving some small amount $\Delta$ to the right along the x-axis.
+What happens to the value of $h(x)$ as we move from $x = c$ to $x = c + \Delta$?
+
+First let's trace what happens to the value of the "inner" function, $g(x)$.
+If $g'(c) > 0$, so $g$ is increasing near $x = c$, then we'd expect $g(c + \Delta) > g(c)$; we'd expect the opposite if $g'(c) < 0$.
+More to the point, since we're taking $\Delta$ to be small---close to 0---we can use the derivative at $x = c$ to approximate $g(c + \Delta)$:
+$$
+\begin{aligned}
+g(c + \Delta)
+&= g(c) + g(c + \Delta) - g(c) \\
+&= g(c) + \Delta \cdot \frac{g(c + \Delta) - g(c)}{\Delta} \\
+&\approx g(c) + \Delta \cdot \lim_{d \to 0} \frac{g(c + d) - g(c)}{d} \\
+&= g(c) + \Delta g'(c).
+\end{aligned}
+$$
+
+Now let's move to the "outer" function, $f(y)$.
+In general, for a shift of size $\epsilon$ for the input to $f$, we have
+$$
+f(y + \epsilon) \approx f(y) + \epsilon f'(y),
+$$
+following the same approximation logic we just went through.
+In this case, the original input is $y = g(c)$, which is shifting by approximately $\epsilon = \Delta g'(c)$.
+Putting everything together, the value of the composition at $x = c + \Delta$ is approximately
+$$
+\begin{aligned}
+h(c + \Delta)
+&= f(g(c + \Delta)) \\
+&\approx f(g(c) + \Delta g'(c)) \\
+&\approx f(g(c)) + (\Delta g'(c)) \cdot f'(g(c)) \\
+&= h(c) + \Delta \cdot \underbrace{f'(g(c)) \cdot g'(c)}_{\text{look familiar?!}}.
+\end{aligned}
+$$
+If we plug this approximation into the definition of the derivative of the composition $h$ at $c$, we just end up with the chain rule:
+$$
+\begin{aligned}
+h'(c)
+&= \lim_{\Delta \to 0} \frac{h(c + \Delta) - h(c)}{\Delta} \\
+&\approx \lim_{\Delta \to 0} \frac{[h(c) + \Delta \cdot f'(g(c)) \cdot g'(c)] - h(c)}{\Delta} \\
+&= \lim_{\Delta \to 0} \frac{\Delta \cdot f'(g(c)) \cdot g'(c)}{\Delta} \\
+&= f'(g(c)) \cdot g'(c).
+\end{aligned}
+$$
+
+::: {#exr-chain-rule-double-decreasing name="Composition of two decreasing functions"}
+Let $f : \mathbb{R} \to \mathbb{R}$ and $g : \mathbb{R} \to \mathbb{R}$ both be differentiable functions that are strictly decreasing.
+By strictly decreasing, I mean that if $x < x'$, then $g(x) > g(x')$; and if $y < y'$, then $f(y) > f(y')$.
+
+Consider the composition $h(x) = (f \circ g)(x) = f(g(x))$.
+First, without taking any derivatives, explain why $h$ is a strictly *increasing* function of $x$.
+Then use the chain rule to confirm this.
+
+:::: {.answer}
+Consider any real numbers $a$ and $b$ where $a < b$.
+Because $g$ is strictly decreasing, we have $g(a) > g(b)$.
+Then, because $f$ is strictly decreasing, we have $f(g(a)) < f(g(b))$.
+This in turn means that $h(a) < h(b)$.
+We've shown that $a < b$ implies $h(a) < h(b)$, which means $h$ is strictly increasing.
+
+To confirm this with the chain rule, notice that $f$ strictly decreasing means $f'(y) < 0$ for all $y$, and similarly $g'(x) < 0$ for all $x$.
+Therefore, for all $x$, we have
+$$
+h'(x)
+= \underbrace{f'(g(x))}_{< 0} \cdot \underbrace{g'(x)}_{< 0}
+> 0,
+$$
+so $h$ is strictly increasing.
 ::::
 :::
 
