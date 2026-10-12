@@ -61,7 +61,7 @@ df_ideology |>
   labs(x = "Ideology", y = "Density")
 ```
 
-These area calculations are known as [integrals]{.concept entry="Integral" definition="The integral of $f$ between $a$ and $b$, denoted $\int_a^b f(x) \, dx$, is the signed area between the value of $f$ and the x-axis between $x = a$ and $x = b$. (By \"signed\" area, I mean that the value is negative when $f(x) < 0$.)"}.
+These area calculations are known as [integrals]{.concept entry="Integral" definition="The integral of $f$ between $a$ and $b$, denoted $\int_a^b f(x) dx$, is the signed area between the value of $f$ and the x-axis between $x = a$ and $x = b$. (By \"signed\" area, I mean that the value is negative when $f(x) < 0$.)"}.
 This type of calculation comes up repeatedly in probability and statistics with continuous random variables, so it is important to at least learn the basics.
 We will cover the bare minimum here, just enough for you to get started.
 The most important thing to know is a surprising fact---there is a deep connection between derivatives and these area calculations.
@@ -187,10 +187,10 @@ Because $\frac{1}{x} = x^{-1}$, we have that any function of the form $F(x) = \l
 Usually I like to lead you through the logic behind a mathematical result *before* telling you the result.
 But this result is sufficiently important for day-to-day mathematical life, and the logic behind it is sufficiently intricate, that I'm going to just start with the headline finding.
 
-The [second fundamental theorem of calculus]{.concept definition="If $F$ is an antiderivative of a continuous function $f$, then $\int_a^b f(x) \, dx = F(b) - F(a)$."} states that we can calculate an integral by taking the difference between antiderivatives.
+The [second fundamental theorem of calculus]{.concept definition="If $F$ is an antiderivative of a continuous function $f$, then $\int_a^b f(x) dx = F(b) - F(a)$."} states that we can calculate an integral by taking the difference between antiderivatives.
 
 ::: {#thm-second-fundamental name="Second fundamental theorem of calculus"}
-Let $f : X \to \mathbb{R}$ be continuous, where $X \subseteq \mathbb{R}$, and let $F : X \to \mathbb{R}$ be an antiderivative of $f$.
+Let the [integrand]{.concept definition="The function being integrated, i.e., the $f(x)$ in the integral $\int_a^b f(x) dx$."} $f : X \to \mathbb{R}$ be continuous, where $X \subseteq \mathbb{R}$, and let $F : X \to \mathbb{R}$ be an antiderivative of $f$.
 For any $[a, b] \subseteq X$, we have $$\int_a^b f(x) \, dx = F(b) - F(a).$$
 :::
 
@@ -347,6 +347,10 @@ The function plotted there is the polynomial $$f(x) = x^2 + \frac{1}{6}.$$
 ::::
 :::
 
+One last thing to clean up before we move into explanations and properties.
+If you are pedantic like me, you might be wondering, "What if the function doesn't have an antiderivative? Then does the integral even exist?"
+It turns out, via the [first fundamental theorem of calculus](https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus#First_part), that every continuous function whose domain is an interval has an antiderivative.
+Therefore, for any continuous $f : [a, b] \to \mathbb{R}$, the integral $\int_a^b f(x) \, dx$ is well-defined.
 
 ### Explaining the second fundamental theorem {#sec-explaining-second-fundamental}
 
@@ -376,7 +380,175 @@ Sum rule: $$\int_a^b [f(x) + g(x)] \, dx = \int_a^b f(x) \, dx + \int_a^b g(x) \
 
 Addition across subdomains: if $a \leq c \leq b$, $$\int_a^b f(x) \, dx = \int_a^c f(x) \, dx + \int_c^b f(x) \, dx.$$
 
+Wrong way limits: $$\int_a^b f(x) \, dx = -\int_b^a f(x) \, dx.$$
+
 Full statements and explanations TBA.
+
+
+## The chain rule in reverse: Integration by substitution
+
+It would be nice to only ever have to take integrals of polynomials, but sadly that's not the world we live in.
+Sometimes you have to integrate functions where there's no surefire algorithm to obtain an antiderivative.
+There are [many](https://en.wikipedia.org/wiki/Integration_by_parts), [many](https://en.wikipedia.org/wiki/Partial_fraction_decomposition#Application_to_symbolic_integration) methods of integrating these functions.
+We will just look at the technique that, in my experience, comes up most frequently---[integration by substitution]{.concept definition="The reverse of the chain rule for integrals: $$\int_a^b f(g(x)) g'(x) dx = \int_{g(a)}^{g(b)} f(u) du.$$"}.
+
+For example, think about computing the integral
+$$
+\int_0^1 \frac{4x}{x^2 + 7} \, dx.
+$$
+How are we supposed to have any hope of computing this integral?
+It's actually not nearly as bad as it looks.
+It turns out that we can define a new variable $u$ as $u = x^2 + 7$ and end up with
+$$
+\int_0^1 \frac{4x}{x^2 + 7} \, dx = 2 \int_7^8 \frac{1}{u} \, du = 2 [\log 8 - \log 7].
+$$
+This move is justified by integration by substitution, which in turn is justified by the chain rule for derivatives (@prp-chain-rule).
+I'll state the general result, then show how we get to the integral in the example.
+
+::: {#prp-integration-by-substitution name="Integration by substitution"}
+Let $Y \subseteq \mathbb{R}$ be an interval.
+If $g : [a, b] \to Y$ is continuously differentiable (i.e., $g$ is differentiable, and its derivative $g'$ is itself a continuous function) and $f : Y \to \mathbb{R}$ is continuous, then
+$$
+\int_a^b f(g(x)) g'(x) \, dx = \int_{g(a)}^{g(b)} f(u) \, du.
+$$
+:::
+
+::: {.proof}
+Assume $g : [a, b] \to Y$ is continuously differentiable and $f : Y \to \mathbb{R}$ is continuous, and let $F$ be an antiderivative of $f$.
+Let $h : [a, b] \to \mathbb{R}$ be defined by $$h(x) = f(g(x)) g'(x),$$ and let $H : [a, b] \to \mathbb{R}$ be defined by $$H(x) = F(g(x)).$$
+By the chain rule, $H$ is an antiderivative of $h$: $$H'(x) = F'(g(x)) \cdot g'(x) = f(g(x)) g'(x) = h(x).$$
+Therefore, by the second fundamental theorem of calculus,
+$$
+\begin{aligned}
+\int_a^b f(g(x)) g'(x) \, dx &= \int_a^b h(x) \, dx \\
+&= H(b) - H(a) \\
+&= F(g(b)) - F(g(a)).
+\end{aligned}
+$$
+Applying the second fundamental theorem again in the other direction, we have
+$$
+F(g(b)) - F(g(a))
+= \int_{g(a)}^{g(b)} f(u) \, du.
+$$
+We conclude that $$\int_a^b f(g(x)) g'(x) \, dx = \int_{g(a)}^{g(b)} f(u) \, du.$$
+:::
+
+To see this method in action, let's return to the problem of calculating
+$$
+\int_0^1 \frac{4x}{x^2 + 7} \, dx.
+$$
+The really inconvenient thing in this integral is the $x^2 + 7$ in the denominator, so let's see if we can simplify the integral with the substitution $g(x) = x^2 + 7$.
+The derivative of the substitution is $g'(x) = 2x$.
+To apply the rule, we need to isolate the substitution and its derivative:
+$$
+\begin{aligned}
+\int_0^1 \frac{4x}{x^2 + 7} \, dx
+&= \int_0^1 \left[\frac{2}{x^2 + 7} \cdot (2x)\right] \, dx \\
+&= \int_0^1 \left[\underbrace{\frac{2}{g(x)}}_{f(u) = 2/u} \cdot g'(x)\right] \, dx \\
+&= \int_{g(0)}^{g(1)} \frac{2}{u} \, du \\
+&= \int_{0^2 + 7}^{1^2 + 7} \frac{2}{u} \, du \\
+&= 2 \int_7^8 \frac{1}{u} \, du \\
+% &= 2 \left[ \log u \right]_{u=7}^8 \\
+&= 2 [\log 8 - \log 7].
+\end{aligned}
+$$
+
+A more direct way to solve the integral would be to observe that $2 \log(x^2 + 7)$ is an antiderivative of the original integrand:
+$$
+\begin{aligned}
+\frac{d}{dx} \left[2 \log(x^2 + 7)\right]
+&= 2 \frac{d}{dx} \log(x^2 + 7) \\
+&= 2 \cdot \frac{1}{x^2 + 7} \cdot \frac{d}{dx} [x^2 + 7] \\
+&= 2 \cdot \frac{1}{x^2 + 7} \cdot (2x) \\
+&= \frac{4x}{x^2 + 7}.
+\end{aligned}
+$$
+The second fundamental theorem then ultimately yields the same answer:
+$$
+\int_0^1 \frac{4x}{x^2 + 7} \, dx
+= \left[2 \log(x^2 + 7)\right]_{x=0}^1
+= 2 [\log 8 - \log 7].
+$$
+The moral of the story here---if you can look at the integrand and figure out its antiderivative, you of course remain free to calculate the integral that way.
+But if you're stuck, it can be helpful to try different substitutions to see if any of them yield an integral that you can ultimately take!
+
+::: {#exr-normal-expectation name="A pretty normal integral"}
+Given any $d > 0$, use the substitution $g(x) = x^2 / 2$ to calculate
+$$
+\int_{-d}^{d} x e^{-x^2 / 2} \, dx.
+$$
+
+:::: {.answer}
+We have $g'(x) = \frac{1}{2} \cdot 2x = x$, so integration by substitution gives us
+$$
+\begin{aligned}
+\int_{-d}^{d} x e^{-x^2 / 2} \, dx
+&= \int_{-d}^{d} e^{-g(x)} g'(x) \, dx \\
+&= \int_{g(-d)}^{g(d)} e^{-u} \, du.
+\end{aligned}
+$$
+Because $g(-d) = g(d) = \frac{d^2}{2}$, the second fundamental theorem gives us
+$$
+\int_{g(-d)}^{g(d)} e^{-u} \, du
+= \left[- e^{-u} \right]_{u=d^2/2}^{d^2/2}
+= (-e^{-d^2/2}) - (-e^{-d^2/2})
+= 0.
+$$
+::::
+:::
+
+::: {#exr-domain-shift-integral name="Shifting the domain by a constant"}
+Let $f : \mathbb{R} \to \mathbb{R}$ be a continuous function, and let $c \in \mathbb{R}$ be a constant.
+Using integration by substitution, show that
+$$
+\int_a^b f(x + c) \, dx = \int_{a + c}^{b + c} f(u) \, du.
+$$
+
+:::: {.answer}
+Define $g(x) = x + c$.
+The derivative of the substitution is $g'(x) = 1$, so integration by substitution gives us
+$$
+\begin{aligned}
+\int_a^b f(x + c) \, dx
+&= \int_a^b f(g(x)) g'(x) \, dx \\
+&= \int_{g(a)}^{g(b)} f(u) \, du \\
+&= \int_{a + c}^{b + c} f(u) \, du.
+\end{aligned}
+$$
+::::
+:::
+
+::: {#exr-normal-expectation-general name="The kind of normal integral you'd expect"}
+Let $\mu \in \mathbb{R}$ and $d > 0$ be constant.
+Show that
+$$
+\frac{\int_{\mu - d}^{\mu + d} x e^{-(x - \mu)^2 / 2} \, dx}{\int_{\mu - d}^{\mu + d} e^{-(x - \mu)^2 / 2} \, dx} = \mu.
+$$
+
+:::: {.answer}
+Via @exr-domain-shift-integral, use the substitution $g(x) = x - \mu$ to simplify both integrals:
+$$
+\frac{\int_{\mu - d}^{\mu + d} x e^{-(x - \mu)^2 / 2} \, dx}{\int_{\mu - d}^{\mu + d} e^{-(x - \mu)^2 / 2} \, dx}
+= \frac{\int_{-d}^d (v + \mu) e^{-v^2 / 2} \, dv}{\int_{-d}^d e^{-v^2 / 2} \, dv}.
+$$
+Use the addition and constant multiplication properties of the integral to simplify the numerator:
+$$
+\begin{aligned}
+\int_{-d}^d (v + \mu) e^{-v^2 / 2} \, dv
+&= \int_{-d}^d v e^{-v^2 / 2} \, dv + \int_{-d}^d \mu e^{-v^2 / 2} \, dv \\
+&= \int_{-d}^d v e^{-v^2 / 2} \, dv + \mu \int_{-d}^d e^{-v^2 / 2} \, dv.
+\end{aligned}
+$$
+We saw in @exr-normal-expectation that the first term in this sum equals 0.
+Therefore, we conclude that
+$$
+\frac{\int_{-d}^d (v + \mu) e^{-v^2 / 2} \, dv}{\int_{-d}^d e^{-v^2 / 2} \, dv}
+= \frac{\mu \int_{-d}^d e^{-v^2 / 2} \, dv}{\int_{-d}^d e^{-v^2 / 2} \, dv}
+= \mu,
+$$
+as claimed.
+::::
+:::
 
 
 ::: {#concept-review}
