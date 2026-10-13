@@ -1047,5 +1047,184 @@ so $h$ is strictly increasing.
 :::
 
 
+## Second derivatives and beyond {#sec-second-derivatives}
+
+In economics, inflation is a measure of the rate of increase in the price level.
+When prices are going up, inflation is positive.
+The quicker the prices are going up, the higher the measure of inflation is.
+In the rare event that prices are going down, we'd say we have "deflation," in which case the standard measures of inflation would be negative.
+Mathematically, you can think about the price level as a function of time, and then think of inflation as the derivative of this function.
+
+Politicians will sometimes brag that inflation is decreasing.
+But they usually don't mean that the price level is actually going down: that would mean we're having deflation, which usually occurs only in the context of Great Depression-type economic cataclysms.
+Instead, a decrease in inflation typically means that prices are increasing, but not as quickly as they were earlier.
+In other words, the rate of increase is itself decreasing.
+But now we're thinking about the rate of change in a rate of change ... or the derivative of a derivative, also known as the [second derivative]{.concept definition="The second derivative of a differentiable function $f(x)$, denoted $f''(x),$ is the derivative of the function's derivative: $$f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c}.$$"}.
+
+::: {#def-second-derivative name="Second derivative"}
+Let $f : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}$.
+For any domain point $c \in X$, the [second derivative]{.concept} of $f$ at $c$ is
+$$
+\begin{aligned}
+f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c},
+\end{aligned}
+$$
+provided that this limit exists.
+When it does, we say that $f$ is [twice differentiable at the point]{.concept entry="Twice differentiability" definition="A function $f : X \to \mathbb{R}$ is twice differentiable at a point in its domain, $c \in X,$ if the second derivative $f''(c)$ exists.  We call $f$ a twice differentiable function if it is twice differentiable at every point in its domain."} $c$.
+
+If $f$ is twice differentiable at every point in its domain, we simply say that it is [twice differentiable]{.concept}.
+:::
+
+Sometimes in formal theory papers, you'll see a function described just in terms of its first and second derivatives.
+For instance, I might write, "Let $f : [0, 1] \to [0, 1]$ be twice differentiable, with $f' > 0$ and $f'' < 0.$"
+Here's a little cheat sheet to interpret statements like that one.
+
+| Case | First derivative      | Second derivative      | Interpretation                                                                               |
+|------|-----------------------|------------------------|----------------------------------------------------------------------------------------------|
+| 1    | Positive: $f'(x) > 0$ | Positive: $f''(x) > 0$ | The function is increasing ever more steeply as we move to the right on the x axis           |
+| 2    | Positive: $f'(x) > 0$ | Negative: $f''(x) < 0$ | The function is increasing, but the rate of increase is slowing down as we move to the right |
+| 3    | Negative: $f'(x) < 0$ | Positive: $f''(x) > 0$ | The function is decreasing, but the rate of decrease is slowing down as we move to the right |
+| 4    | Negative: $f'(x) < 0$ | Negative: $f''(x) < 0$ | The function is decreasing ever more steeply as we move to the right on the x axis           |
+
+```{r}
+#| cache: true
+df_convex_concave <-
+  expand_grid(x = seq(0, 1, length.out = 501), case = 1:4) |>
+  mutate(
+    y = case_when(
+      case == 1 ~ x^4,
+      case == 2 ~ 1 - (1 - x)^4,
+      case == 3 ~ (1 - x)^4,
+      case == 4 ~ 1 - x^4
+    ),
+    case = case_when(
+      case == 1 ~ "(1) Increasing (f' > 0), convex (f'' > 0)",
+      case == 2 ~ "(2) Increasing (f' > 0), concave (f'' < 0)",
+      case == 3 ~ "(3) Decreasing (f' < 0), convex (f'' > 0)",
+      case == 4 ~ "(4) Decreasing (f' < 0), concave (f'' < 0)"
+    )
+  )
+df_convex_concave |>
+  ggplot(aes(x = x, y = y)) +
+  geom_line() +
+  facet_wrap(~ case) +
+  panel_border(colour = mfpa$rule) +
+  theme(strip.background = element_rect(fill = mfpa$rule, colour = NA))
+```
+
+If a function has a non-negative second derivative, $f''(x) \geq 0,$ we call it [convex]{.concept entry="Convex function" definition="A twice differentiable function is convex if $f''(x) \geq 0,$ and additionally is strictly convex if $f''(x) > 0.$"}.
+Additionally, if the second derivative is strictly positive, $f''(x) > 0,$ we call the function [strictly convex]{.concept}.
+A classic example of a strictly convex function is exponential growth.
+For example, let $f(t)$ be the number of mice you will have at time $t$ if you start with one boy mouse and one girl mouse at $t = 0$.
+If the number of mice doubles with each unit of time, then you'll have
+$$
+\begin{aligned}
+f(0) &= 2, \\
+f(1) &= 4, \\
+f(2) &= 8, \\
+f(3) &= 16, \\
+f(4) &= 32, \\
+\vdots
+\end{aligned}
+$$
+So not only is the function increasing, but it's increasing more quickly as time goes on.
+Because the rate of increase is itself increasing, the function is strictly convex.
+
+On the other hand, we call a function [concave]{.concept entry="Concave function" definition="A twice differentiable function is concave if $f''(x) \leq 0,$ and additionally is strictly concave if $f''(x) < 0.$"} if $f''(x) \leq 0,$ and additionally [strictly concave]{.concept} if $f''(x) < 0.$
+Concave functions often arise in economic contexts.
+In particular, we often think that concave functions are a good way to model the amount of "utility" (happiness, loosely speaking) that a person derives from consuming a quantity of a good.
+
+For instance, let $t$ be the number of tacos I've eaten and let $u(t)$ be how happy I am as a function of the number of tacos I've eaten.
+There's a big happiness boost going from 0 tacos (starving) to 1 taco (still hungry but not starving).
+There's a smaller happiness boost going from 1 taco to 2 tacos (barely full).
+The boost keeps decreasing from there, and once I'm full I would actively prefer to not eat any additional tacos.
+Altogether, then, $u(t)$ is strictly concave---each additional taco raises my happiness by a lower and lower amount.
+
+A linear function is both convex and concave.
+However, it is neither strictly convex nor strictly concave.
+All that is a long way of saying that the second derivative of a linear function is always zero.
+That's true because the derivative of a linear function is its slope, a constant, so the derivative of the derivative is zero.
+
+::: {#exr-concave-convex name="Concave and convex functions"}
+Using the second derivative, characterize the conditions under which each of the following functions is convex or concave:
+
+1. A quadratic function of the form $f(x) = a x^2 + b x + c.$
+
+2. An exponential function of the form $f(x) = b^x,$ where $b > 0.$
+
+3. A logarithmic function of the form $f(x) = \log_b x,$ where $b > 0$ and $b \neq 1.$
+
+:::: {.answer}
+1. We have $f'(x) = 2 a x + b$ and thus $f''(x) = 2a.$
+   So the function is concave if $a \leq 0$ and convex if $a \geq 0.$
+
+2. We have $f'(x) = b^x \cdot \log(b)$ and thus $f''(x) = b^x \cdot (\log(b))^2.$
+   If $b = 1,$ then we have $\log(b) = 0$ and the function is linear (both concave and convex).
+   Otherwise, we have $\log(b) \neq 0,$ hence $(\log(b))^2 > 0,$ hence $b^x \cdot (\log(b))^2 > 0,$ so the function is strictly convex.
+
+3. We have $f'(x) = \frac{1}{x \log(b)} = \frac{1}{\log(b)} \cdot x^{-1}$ and thus $$f''(x) = \frac{1}{\log(b)} \cdot \left[-1 \cdot x^{-2}\right] = \frac{-1}{x^2 \log(b)}.$$
+   The sign of the second derivative is the same as that of $\log(b)$, so the function is convex if $b \in (0, 1)$ and is concave if $b \in (1, \infty).$
+::::
+:::
+
+::: {#exr-normal-pdf-concave name="Concave portion of the normal PDF"}
+A function can be concave on part of its domain and convex on other parts.
+For example, take the probability density function of the standard normal distribution, $f(x) = \frac{1}{\sqrt{2 \pi}} e^{-x^2 / 2}.$
+
+```{r}
+#| cache: true
+tibble(x = seq(-3.5, 3.5, length.out = 501), y = dnorm(x)) |>
+  ggplot(aes(x = x, y = y)) +
+  shade_window(-1, 1) +
+  geom_line() +
+  annotate("text", x = -2.25, y = 0.435, label = "convex") +
+  annotate("text", x = 0, y = 0.435, label = "concave") +
+  annotate("text", x = 2.25, y = 0.435, label = "convex") +
+  scale_x_continuous(breaks = seq(-3, 3)) +
+  scale_y_continuous(limits = c(0, 0.45)) +
+  labs(x = "x", y = "f(x)", title = "Standard normal PDF")
+```
+
+You can see from the graph that the standard normal PDF is concave on $[-1, 1]$, while it is convex on the rest of its domain.
+Use its second derivative to prove this.
+
+:::: {.answer}
+Using the constant multiple rule and the chain rule, we have
+$$
+\begin{aligned}
+f'(x)
+&= \frac{d}{dx} \left[\frac{1}{\sqrt{2 \pi}} e^{-x^2 / 2}\right] \\
+&= \frac{1}{\sqrt{2 \pi}} \frac{d}{dx} \left[e^{-x^2/2}\right] \\
+&= \frac{1}{\sqrt{2 \pi}} \left[e^{-x^2 / 2} \cdot \frac{-2x}{2}\right] \\
+&= \frac{-1}{\sqrt{2 \pi}} \cdot x e^{-x^2/2}.
+\end{aligned}
+$$
+We can then use the constant multiple rule and the product rule to find the second derivative:
+$$
+\begin{aligned}
+f''(x)
+&= \frac{d}{dx} \left[\frac{-1}{\sqrt{2 \pi}} \cdot x e^{-x^2/2}\right] \\
+&= \frac{-1}{\sqrt{2 \pi}} \frac{d}{dx} \left[x e^{-x^2/2}\right] \\
+&= \frac{-1}{\sqrt{2 \pi}} \left[x \cdot \frac{d}{dx} \left(e^{-x^2/2}\right) + 1 \cdot e^{-x^2/2}\right] \\
+&= \frac{-1}{\sqrt{2 \pi}} \left[x \cdot \left(-x e^{-x^2/2}\right) + e^{-x^2/2}\right] \\
+&= \frac{-1}{\sqrt{2 \pi}} \left[e^{-x^2 / 2} - x^2 e^{-x^2/2}\right] \\
+&= \frac{1}{\sqrt{2 \pi}} (x^2 - 1) e^{-x^2/2}.
+\end{aligned}
+$$
+Because $\frac{1}{\sqrt{2 \pi}} > 0$ and $e^{-x^2/2} > 0$ for all $x,$ the sign of the second derivative will always be the same as that of $x^2 - 1.$
+Consequently, the second derivative is weakly negative---and thus the function is concave---if and only if $-1 \leq x \leq 1.$
+::::
+:::
+
+You can, in principle, keep taking derivatives beyond the second one.
+The third derivative $f'''$ is the derivative of the second derivative:
+$$
+f'''(c) = \lim_{x \to c} \frac{f''(x) - f''(c)}{x - c}.
+$$
+And the fourth derivative is ... well, you get the picture.
+In practice, it is very rare to have to work with a derivative beyond the first or the second.
+(And if I'm ever at a formal theory talk where the model entails an assumption on the third derivative, I will harass the authors about it, as our colleague [Peter Bils](https://www.wallis.rochester.edu/assets/pdf/conference32/judd-gleason-working-for-the-revolving-door.pdf) can attest.)
+
+
 ::: {#concept-review}
 :::
