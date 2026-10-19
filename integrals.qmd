@@ -382,6 +382,16 @@ Addition across subdomains: if $a \leq c \leq b$, $$\int_a^b f(x) \, dx = \int_a
 
 Wrong way limits: $$\int_a^b f(x) \, dx = -\int_b^a f(x) \, dx.$$
 
+::: {#prp-integral-sign name="Sign of the integral"}
+Let $f : [a, b] \to \mathbb{R}$ be continuous, where $a < b$.
+
+- If $f(x) > 0$ for all $x \in (a, b)$, then $\int_a^b f(x) \, dx > 0$.
+- If $f(x) < 0$ for all $x \in (a, b)$, then $\int_a^b f(x) \, dx < 0$.
+:::
+
+If the curve lies strictly above the x-axis everywhere between $a$ and $b$, then the region between the curve and the axis has positive area, so the integral is positive; the same logic in reverse applies when the curve lies strictly below the axis.
+It doesn't matter if the function touches the axis at the endpoints themselves---a single point has no width, so it contributes nothing to the area.
+
 Full statements and explanations TBA.
 
 
