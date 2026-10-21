@@ -1,0 +1,769 @@
+---
+echo: false
+---
+
+# Linear algebra {#sec-linear-algebra}
+
+```{r setup_linear_algebra}
+#| message: false
+source("_common.R")
+```
+
+```{r vector_helpers}
+# Shared pieces for the vector figures in this chapter. NB: the figure chunks
+# are cached on their own code, so clear linear_algebra_cache/ after editing
+# these helpers.
+
+# A vector drawn as an arrow from (x, y) to (xend, yend). head = FALSE draws a
+# plain segment, for faded construction lines.
+draw_vector <- function(xend, yend, x = 0, y = 0, colour = mfpa$teal,
+                        head = TRUE, ...) {
+  # Build the arrow argument only when wanted: annotate() treats an explicit
+  # `arrow = NULL` as a zero-length aesthetic and silently drops the layer.
+  head_arg <- if (head) list(arrow = arrow(length = unit(0.13, "inches"), type = "closed"))
+  do.call(annotate, c(
+    list(
+      "segment",
+      x = x, y = y, xend = xend, yend = yend,
+      colour = colour, linewidth = 1.1, linejoin = "mitre"
+    ),
+    head_arg,
+    list(...)
+  ))
+}
+
+# Solid, de-emphasised coordinate axes through the origin.
+origin_axes <- function() {
+  list(
+    geom_hline(yintercept = 0, linetype = "solid", colour = mfpa$muted, linewidth = 0.4),
+    geom_vline(xintercept = 0, linetype = "solid", colour = mfpa$muted, linewidth = 0.4)
+  )
+}
+
+# Side-by-side panels labelled (a), (b), ... in the house font, with a top
+# margin on each plot so the label clears the top tick label.
+panels <- function(...) {
+  plots <- lapply(list(...), \(p) p + theme(plot.margin = margin(22, 6, 6, 6)))
+  plot_grid(
+    plotlist = plots,
+    nrow = 1,
+    labels = paste0("(", letters[seq_along(plots)], ")"),
+    label_fontfamily = "Archivo",
+    label_fontface = "plain",
+    label_colour = mfpa$ink,
+    label_size = 13
+  )
+}
+```
+
+*Some material in this chapter is adapted from notes [Hye Young You](https://hyeyoungyou.com) wrote for the math boot camp for the political science PhD program at Vanderbilt.*
+
+Matrix algebra is an essential tool for understanding multivariate statistics.
+You are probably already familiar with matrices, at least informally.
+The typical data set---each row an observation, each column a variable---is formatted like a matrix.
+
+[Introduce the chapter for this course. (Dropped from the pdaps version: the "bare minimum you need ... for OLS with multiple covariates" framing, the advice to catch up on linear algebra over the summer, and the link to MIT's 18.06 course on OpenCourseWare.)]{.todo}
+
+
+## Vector operations {#sec-vector-operations}
+
+A [vector]{.concept definition="An ordered array. A vector $\mathbf{v}$ of $k$ elements is written $\mathbf{v} = (v_1, v_2, \ldots, v_k)$. If its elements are real numbers, we write $\mathbf{v} \in \mathbb{R}^k$."} is an ordered array.
+To denote a vector $\mathbf{v}$ of $k$ elements, we write $\mathbf{v} = (v_1, v_2, \ldots, v_k)$, or sometimes
+$$
+\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_k \end{pmatrix}.
+$$
+Notice the convention of using a lowercase bold letter to denote a vector.
+When I write vectors on the whiteboard, I will instead denote them with an arrow, like $\vec{v}$.
+We will usually be dealing with vectors of real numbers.
+To denote the fact that $\mathbf{v}$ is a vector of $k$ real numbers, we write $\mathbf{v} \in \mathbb{R}^k$.
+
+A vector can be multiplied by a scalar $c \in \mathbb{R}$, producing what you would expect:
+$$
+c \mathbf{v} = \begin{pmatrix} c v_1 \\ c v_2 \\ \vdots \\ c v_k \end{pmatrix}
+$$
+You can also add and subtract two vectors of the same length.
+$$
+\begin{aligned}
+\mathbf{u} + \mathbf{v} &= \begin{pmatrix}
+  u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_k + v_k
+\end{pmatrix}, \\
+\mathbf{u} - \mathbf{v} &= \begin{pmatrix}
+  u_1 - v_1 \\ u_2 - v_2 \\ \vdots \\ u_k - v_k
+\end{pmatrix}.
+\end{aligned}
+$$
+
+[Explain the geometric picture of a vector in $\mathbb{R}^2$ as an arrow from the origin, and what addition (tip to tail) and scalar multiplication (stretching, flipping) look like, to go with @fig-vector-arithmetic. Not in pdaps.]{.todo}
+
+```{r}
+#| label: fig-vector-arithmetic
+#| fig-cap: "TODO(BJK): caption. Panel (a): u = (3, 1), v = (1, 2), and u + v = (4, 3), with faded copies of u and v completing the parallelogram. Panel (b): v = (1, 2), 2v, and −v."
+#| fig-asp: 0.5
+#| cache: true
+p_add <- ggplot() +
+  origin_axes() +
+  draw_vector(4, 3, x = 3, y = 1, colour = mfpa$red, head = FALSE, alpha = 0.35) + # v, from the tip of u
+  draw_vector(4, 3, x = 1, y = 2, head = FALSE, alpha = 0.35) +       # u, from the tip of v
+  draw_vector(3, 1) +                                                # u
+  draw_vector(1, 2, colour = mfpa$red) +                             # v
+  draw_vector(4, 3, colour = mfpa$green) +                           # u + v
+  label_curve(3.15, 0.85, "bold(u)", hjust = 0) +
+  label_curve(0.9, 2.25, "bold(v)", colour = mfpa$red, hjust = 0.5) +
+  label_curve(4.1, 3.2, 'bold(u)*" + "*bold(v)', colour = mfpa$green, hjust = 0) +
+  scale_x_continuous(breaks = 0:4) +
+  scale_y_continuous(breaks = 0:3) +
+  coord_equal(xlim = c(-0.5, 5.6), ylim = c(-0.5, 3.5)) +
+  labs(x = NULL, y = NULL)
+
+p_scale <- ggplot() +
+  origin_axes() +
+  draw_vector(2, 4, colour = mfpa$red) +    # 2v, drawn first so v sits on top
+  draw_vector(1, 2) +                       # v
+  draw_vector(-1, -2, colour = mfpa$green) + # -v
+  label_curve(0.55, 1.5, "bold(v)", hjust = 1) +
+  label_curve(2.15, 4, '"2"*bold(v)', colour = mfpa$red, hjust = 0) +
+  label_curve(-1.3, -2.05, '"−"*bold(v)', colour = mfpa$green, hjust = 1) +
+  scale_x_continuous(breaks = -2:3) +
+  scale_y_continuous(breaks = seq(-2, 4, by = 2)) +
+  coord_equal(xlim = c(-2.5, 3.2), ylim = c(-2.5, 4.5)) +
+  labs(x = NULL, y = NULL)
+
+panels(p_add, p_scale)
+```
+
+A special vector is the [zero vector]{.concept definition="The vector whose entries are all zeroes. We write $\mathbf{0}_k$ for the zero vector of length $k$, or just $\mathbf{0}$ when the length is clear from the context."}, which contains---you guessed it---all zeroes.
+We write $\mathbf{0}_k$ to denote the zero vector of length $k$.
+When the length of the zero vector is clear from the context, we may just write $\mathbf{0}$.
+
+The last important vector operation is the [dot product]{.concept definition="The dot product of $\mathbf{u}$ and $\mathbf{v}$, written $\mathbf{u} \cdot \mathbf{v}$, is the sum of the products of the entries: $\mathbf{u} \cdot \mathbf{v} = u_1 v_1 + u_2 v_2 + \cdots + u_k v_k$."}.
+The dot product of $\mathbf{u}$ and $\mathbf{v}$, written $\mathbf{u} \cdot \mathbf{v}$, is the sum of the products of the entries:
+$$
+\mathbf{u} \cdot \mathbf{v}
+=
+u_1 v_1 + u_2 v_2 + \cdots + u_k v_k
+=
+\sum_{m=1}^k u_m v_m.
+$$
+
+
+## Linear independence {#sec-linear-independence}
+
+An important concept for regression analysis is the linear independence of a collection of vectors.
+
+::: {#def-linear-combination name="Linear combination"}
+Let $\mathbf{v}_1, \ldots, \mathbf{v}_J$ be a collection of $J$ vectors, each of length $k$.
+We call $\mathbf{u}$ a [linear combination]{.concept definition="The vector $\mathbf{u}$ is a linear combination of $\mathbf{v}_1, \ldots, \mathbf{v}_J$ if there are real numbers $c_1, \ldots, c_J$ such that $\mathbf{u} = c_1 \mathbf{v}_1 + \cdots + c_J \mathbf{v}_J$."} of $\mathbf{v}_1, \ldots, \mathbf{v}_J$ if we can conjure up a set of real numbers $c_1, \ldots, c_J$ to make the following statement true:
+$$
+\mathbf{u} = c_1 \mathbf{v}_1 + \cdots + c_J \mathbf{v}_J.
+$$
+:::
+
+::: {#def-linear-independence name="Linear independence"}
+A collection of vectors $\mathbf{v}_1, \ldots, \mathbf{v}_J$ is [linearly independent]{.concept entry="Linear independence" definition="The vectors $\mathbf{v}_1, \ldots, \mathbf{v}_J$ are linearly independent if the only solution to $c_1 \mathbf{v}_1 + \cdots + c_J \mathbf{v}_J = \mathbf{0}$ is $c_1 = 0, \ldots, c_J = 0$. Otherwise, they are linearly dependent."} if the only solution to
+$$
+c_1 \mathbf{v}_1 + \cdots + c_J \mathbf{v}_J = \mathbf{0}
+$$
+is $c_1 = 0, \ldots, c_J = 0$.
+Otherwise, we call the vectors [linearly dependent]{.concept entry="Linear independence"}.
+:::
+
+Some fun facts about linear independence:
+
+- If any vector in $\mathbf{v}_1, \ldots, \mathbf{v}_J$ is a linear combination of the others, then these vectors are linearly dependent.
+
+- A collection of $J$ vectors of length $k$ cannot be linearly independent if $J > k$.
+  In other words, given vectors of length $k$, the most that can be linearly independent of each other is $k$.
+
+- If any $\mathbf{v}_j = \mathbf{0}$, then $\mathbf{v}_1, \ldots, \mathbf{v}_J$ are linearly dependent.
+  (Why?)
+
+[Explain the geometric picture of linear dependence in $\mathbb{R}^2$---two vectors are linearly dependent exactly when they lie on a common line through the origin---to go with @fig-linear-independence. Not in pdaps.]{.todo}
+
+```{r}
+#| label: fig-linear-independence
+#| fig-cap: "TODO(BJK): caption. Panel (a): v₁ = (2, 1) and v₂ = (−4, −2), which lie on a common line through the origin (dashed), so are linearly dependent. Panel (b): v₁ = (2, 1) and v₂ = (1, 2), which are linearly independent."
+#| fig-asp: 0.45
+#| cache: true
+p_dependent <- ggplot() +
+  origin_axes() +
+  geom_abline(slope = 1 / 2, intercept = 0, colour = mfpa$muted) +
+  draw_vector(2, 1) +
+  draw_vector(-4, -2, colour = mfpa$red) +
+  label_curve(1.7, 1.5, "bold(v)[1]", hjust = 0.5) +
+  label_curve(-4, -1.55, "bold(v)[2]", colour = mfpa$red, hjust = 0.5) +
+  scale_x_continuous(breaks = seq(-4, 2, by = 2)) +
+  scale_y_continuous(breaks = -2:2) +
+  coord_equal(xlim = c(-4.5, 3), ylim = c(-2.5, 2.5)) +
+  labs(x = NULL, y = NULL)
+
+p_independent <- ggplot() +
+  origin_axes() +
+  draw_vector(2, 1) +
+  draw_vector(1, 2, colour = mfpa$red) +
+  label_curve(2.15, 1, "bold(v)[1]", hjust = 0) +
+  label_curve(1, 2.3, "bold(v)[2]", colour = mfpa$red, hjust = 0.5) +
+  scale_x_continuous(breaks = 0:2) +
+  scale_y_continuous(breaks = 0:2) +
+  coord_equal(xlim = c(-0.5, 2.8), ylim = c(-0.5, 2.6)) +
+  labs(x = NULL, y = NULL)
+
+panels(p_dependent, p_independent)
+```
+
+::: {#exr-linear-independence-examples name="Checking linear independence"}
+Determine whether each of the following collections of vectors is linearly independent.
+
+(a) $\mathbf{v}_1 = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}, \mathbf{v}_2 = \begin{pmatrix} 2 \\ 4 \\ 6 \end{pmatrix}$.
+
+(b) $\mathbf{v}_1 = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}, \mathbf{v}_2 = \begin{pmatrix} 1 \\ 4 \\ 9 \end{pmatrix}$.
+
+(c) $\mathbf{v}_1 = \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}, \mathbf{v}_2 = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \mathbf{v}_3 = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$.
+
+(d) $\mathbf{v}_1 = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \mathbf{v}_2 = \begin{pmatrix} 14 \\ 12 \\ 0 \end{pmatrix}, \mathbf{v}_3 = \begin{pmatrix} 0 \\ -1 \\ 0 \end{pmatrix}$.
+
+:::: {.answer}
+(a) Linearly dependent: $2 \mathbf{v}_1 - \mathbf{v}_2 = \mathbf{0}$.
+
+(b) Linearly independent:
+    $$
+    \begin{aligned}
+    & c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2
+    = \begin{pmatrix} c_1 + c_2 \\ 2 c_1 + 4 c_2 \\ 3 c_1 + 9 c_2 \end{pmatrix}
+    = \mathbf{0} \\
+    & \quad \Rightarrow \quad c_1 = -c_2 \text{ and } 2 c_2 = 0 \\
+    & \quad \Rightarrow \quad c_1 = c_2 = 0.
+    \end{aligned}
+    $$
+
+(c) Linearly independent:
+    $$
+    c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + c_3 \mathbf{v}_3
+    = \begin{pmatrix} c_1 \\ c_1 + c_2 \\ c_1 + c_3 \end{pmatrix}
+    = \mathbf{0}
+    \quad \Rightarrow \quad
+    c_1 = c_2 = c_3 = 0.
+    $$
+
+(d) Linearly dependent: $14 \mathbf{v}_1 - \mathbf{v}_2 - 12 \mathbf{v}_3 = \mathbf{0}$.
+::::
+:::
+
+
+## Matrix operations {#sec-matrix-operations}
+
+A [matrix]{.concept definition="A two-dimensional array of numbers, with entries in rows and columns. A matrix with $n$ rows and $m$ columns is an $n \times m$ matrix. We usually write $a_{ij}$ for the entry of $\mathbf{A}$ in the $i$'th row and $j$'th column."} is a two-dimensional array of numbers, with entries in rows and columns.
+We call a matrix with $n$ rows and $m$ columns an $n \times m$ matrix.
+Here's an example of a $2 \times 3$ matrix:
+$$
+\mathbf{A}
+=
+\begin{bmatrix}
+  99 & 73 & 2 \\
+  13 & 40 & 41
+\end{bmatrix}
+$$
+Notice the convention of using an uppercase bold letter to denote a matrix.
+Given a matrix $\mathbf{A}$, we usually write $a_{ij}$ to denote the entry in the $i$'th row and $j$'th column.
+In the above example, we have $a_{13} = 2$.
+
+You can think of a vector $\mathbf{v} \in \mathbb{R}^k$ as a $1 \times k$ *row matrix* or as a $k \times 1$ *column matrix*.
+Throughout this book, I will treat vectors as column matrices unless otherwise noted.
+
+Like vectors, matrices can be multiplied by a scalar $c \in \mathbb{R}$.
+$$
+c \mathbf{A} =
+\begin{bmatrix}
+  c a_{11} & c a_{12} & \cdots & c a_{1m} \\
+  c a_{21} & c a_{22} & \cdots & c a_{2m} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  c a_{n1} & c a_{n2} & \cdots & c a_{nm}
+\end{bmatrix}
+$$
+
+Matrices of the same dimension (i.e., both with the same number of rows $n$ and columns $m$) can be added ...
+$$
+\mathbf{A} + \mathbf{B} =
+\begin{bmatrix}
+  a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1m} + b_{1m} \\
+  a_{21} + b_{21} & a_{22} + b_{22} & \cdots & a_{2m} + b_{2m} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  a_{n1} + b_{n1} & a_{n2} + b_{n2} & \cdots & a_{nm} + b_{nm} \\
+\end{bmatrix}
+$$
+... and subtracted ...
+$$
+\mathbf{A} - \mathbf{B} =
+\begin{bmatrix}
+  a_{11} - b_{11} & a_{12} - b_{12} & \cdots & a_{1m} - b_{1m} \\
+  a_{21} - b_{21} & a_{22} - b_{22} & \cdots & a_{2m} - b_{2m} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  a_{n1} - b_{n1} & a_{n2} - b_{n2} & \cdots & a_{nm} - b_{nm} \\
+\end{bmatrix}
+$$
+
+Sometimes you will want to "rotate" an $n \times m$ matrix into an $m \times n$ one, so that the first row becomes the first column, the second row becomes the second column, and so on.
+This is called the [transpose]{.concept definition="The transpose of an $n \times m$ matrix $\mathbf{A}$, written $\mathbf{A}^\top$ (or $\mathbf{A}'$), is the $m \times n$ matrix whose first column is the first row of $\mathbf{A}$, whose second column is the second row of $\mathbf{A}$, and so on."}.
+I write the transpose of $\mathbf{A}$ as $\mathbf{A}^\top$, though you will often also see it written $\mathbf{A}'$.
+For example:
+$$
+\mathbf{A}
+=
+\begin{bmatrix}
+  99 & 73 & 2 \\
+  13 & 40 & 41
+\end{bmatrix}
+\qquad
+\Leftrightarrow
+\qquad
+\mathbf{A}^\top =
+\begin{bmatrix}
+  99 & 13 \\
+  73 & 40 \\
+  2 & 41
+\end{bmatrix}.
+$$
+Some of the most commonly invoked properties of the transpose are:
+$$
+\begin{aligned}
+(\mathbf{A}^\top)^\top &= \mathbf{A}, \\
+(c \mathbf{A})^\top &= c \mathbf{A}^\top, \\
+(\mathbf{A} + \mathbf{B})^\top &= \mathbf{A}^\top + \mathbf{B}^\top, \\
+(\mathbf{A} - \mathbf{B})^\top &= \mathbf{A}^\top - \mathbf{B}^\top.
+\end{aligned}
+$$
+
+
+## Special types of matrices {#sec-special-matrices}
+
+A matrix is [square]{.concept entry="Square matrix" definition="A matrix with the same number of rows as columns, i.e., an $n \times n$ matrix."} if it has the same number of rows as columns, i.e., it is $n \times n$.
+Every matrix is special, but some kinds of square matrix are *especially* special.
+
+- A [symmetric]{.concept entry="Symmetric matrix" definition="A matrix that is equal to its transpose: $\mathbf{A} = \mathbf{A}^\top$."} matrix is equal to its transpose: $\mathbf{A} = \mathbf{A}^\top$.
+  Example:
+  $$
+  \begin{bmatrix}
+    1 & 10 & 100 \\
+    10 & 2 & 0.1 \\
+    100 & 0.1 & 3
+  \end{bmatrix}
+  $$
+
+- A [diagonal]{.concept entry="Diagonal matrix" definition="A square matrix that contains zeroes everywhere except along the main diagonal: $a_{ij} = 0$ whenever $i \neq j$."} matrix contains zeroes everywhere except along the main diagonal: if $i \neq j$, then $a_{ij} = 0$.
+  A diagonal matrix is symmetric by definition.
+  Example:
+  $$
+  \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 2 & 0 \\
+    0 & 0 & 3
+  \end{bmatrix}
+  $$
+
+- The $n \times n$ [identity matrix]{.concept definition="The $n \times n$ diagonal matrix where each diagonal entry is 1, written $\mathbf{I}_n$ (or just $\mathbf{I}$ when the size is clear from context)."}, written $\mathbf{I}_n$ (or just $\mathbf{I}$ when the size is clear from context), is the $n \times n$ diagonal matrix where each diagonal entry is 1.
+  Example:
+  $$
+  \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+  \end{bmatrix}
+  $$
+
+
+## Matrix multiplication {#sec-matrix-multiplication}
+
+And last we come to [matrix multiplication]{.concept definition="If $\mathbf{A}$ is $n \times m$ and $\mathbf{B}$ is $m \times p$, then $\mathbf{A} \mathbf{B}$ is the $n \times p$ matrix whose $ij$'th element is the dot product of the $i$'th row of $\mathbf{A}$ and the $j$'th column of $\mathbf{B}$."}.
+Whereas matrix addition and subtraction are pretty intuitive, matrix multiplication is not.
+Let $\mathbf{A}$ be an $n \times m$ matrix and $\mathbf{B}$ be an $m \times p$ matrix.
+(Notice that the number of columns of $\mathbf{A}$ must match the number of rows of $\mathbf{B}$.)
+Then $\mathbf{A} \mathbf{B}$ is an $n \times p$ matrix whose $ij$'th element is the dot product of the $i$'th row of $\mathbf{A}$ and the $j$'th column of $\mathbf{B}$:
+$$
+a_{i1} b_{1j} + a_{i2} b_{2j} + \cdots + a_{im} b_{mj}.
+$$
+Some examples might make this more clear.
+
+[Say what the colours in the next display pick out: the first row of $\mathbf{A}$ (teal) and the second column of $\mathbf{B}$ (red) combine into the entry in the first row and second column of $\mathbf{A} \mathbf{B}$.]{.todo}
+
+$$
+\begin{gathered}
+\mathbf{A} = \begin{bmatrix}
+  \textcolor{#0F6E6E}{2} & \textcolor{#0F6E6E}{10} \\
+  0 & 1 \\
+  -1 & 5
+\end{bmatrix},
+\mathbf{B} = \begin{bmatrix}
+  1 & \textcolor{#B3261E}{4} \\
+  -1 & \textcolor{#B3261E}{10}
+\end{bmatrix} \\
+\mathbf{A} \mathbf{B} = \begin{bmatrix}
+  2 \cdot 1 + 10 \cdot (-1) & \textcolor{#0F6E6E}{2} \cdot \textcolor{#B3261E}{4} + \textcolor{#0F6E6E}{10} \cdot \textcolor{#B3261E}{10} \\
+  0 \cdot 1 + 1 \cdot (-1) & 0 \cdot 4 + 1 \cdot 10 \\
+  (-1) \cdot 1 + 5 \cdot (-1) & (-1) \cdot 4 + 5 \cdot 10
+\end{bmatrix}
+= \begin{bmatrix}
+  -8 & 108 \\
+  -1 & 10 \\
+  -6 & 46
+\end{bmatrix}
+\end{gathered}
+$$
+And here's one that you'll start seeing a lot of soon.
+$$
+\begin{gathered}
+\mathbf{A} = \begin{bmatrix}
+  1 & x_{11} & x_{12} \\
+  1 & x_{21} & x_{22} \\
+  & \vdots \\
+  1 & x_{N1} & x_{N2}
+\end{bmatrix},
+\mathbf{B} = \begin{bmatrix}
+  \beta_0 \\
+  \beta_1 \\
+  \beta_2
+\end{bmatrix} \\
+\mathbf{A} \mathbf{B} = \begin{bmatrix}
+  \beta_0 + \beta_1 x_{11} + \beta_2 x_{12} \\
+  \beta_0 + \beta_1 x_{21} + \beta_2 x_{22} \\
+  \vdots \\
+  \beta_0 + \beta_1 x_{N1} + \beta_2 x_{N2}
+\end{bmatrix}
+\end{gathered}
+$$
+
+
+### Properties of matrix multiplication {#sec-matmul-properties}
+
+Some important properties of matrix multiplication:
+
+- Matrix multiplication is associative: $(\mathbf{A} \mathbf{B}) \mathbf{C} = \mathbf{A} (\mathbf{B} \mathbf{C})$.
+
+- Matrix multiplication is distributive: $\mathbf{A} (\mathbf{B} + \mathbf{C}) = \mathbf{A} \mathbf{B} + \mathbf{A} \mathbf{C}$.
+
+- For any $n \times m$ matrix $\mathbf{A}$, we have $\mathbf{A} \mathbf{I}_m = \mathbf{I}_n \mathbf{A} = \mathbf{A}$.
+  In this way, the identity matrix is kind of like the matrix equivalent of the number one.
+  (More on this when we get to matrix inversion.)
+
+- Matrix multiplication is *not* commutative.
+  In other words, $\mathbf{A} \mathbf{B} \neq \mathbf{B} \mathbf{A}$ except in very special cases (e.g., both are square and one of them is the identity matrix).
+
+  This is obvious when we're dealing with non-square matrices.
+  Let $\mathbf{A}$ be $n \times m$ and $\mathbf{B}$ be $m \times p$, so that $\mathbf{A} \mathbf{B}$ exists.
+  Then $\mathbf{B} \mathbf{A}$ doesn't even exist unless $n = p$.
+  Even then, if $n \neq m$, then $\mathbf{A} \mathbf{B}$ is $n \times n$ and $\mathbf{B} \mathbf{A}$ is $m \times m$, so they can't possibly be the same.
+
+  For an example that $\mathbf{A} \mathbf{B} \neq \mathbf{B} \mathbf{A}$ even for square matrices:
+  $$
+  \begin{gathered}
+  \mathbf{A} = \begin{bmatrix}
+    1 & 0 \\
+    2 & 0
+  \end{bmatrix},
+  \mathbf{B} = \begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+  \end{bmatrix}, \\
+  \mathbf{A} \mathbf{B} = \begin{bmatrix}
+    1 & 0 \\
+    2 & 0
+  \end{bmatrix},
+  \mathbf{B} \mathbf{A} = \begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+  \end{bmatrix}.
+  \end{gathered}
+  $$
+
+- The transpose of the product is the product of the transposes ... but the other way around: $(\mathbf{A} \mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top$.
+
+  Here's the intuition behind this weird-seeming property.
+  Suppose $\mathbf{A}$ is $n \times m$ and $\mathbf{B}$ is $m \times p$.
+  Then $\mathbf{A} \mathbf{B}$ is $n \times p$, so $(\mathbf{A} \mathbf{B})^\top$ should be $p \times n$.
+  Therefore, $\mathbf{B}^\top$ must come first.
+
+
+## Matrix inversion {#sec-matrix-inversion}
+
+We've covered matrix addition, subtraction, and multiplication.
+What about division?
+
+Let's think about division of real numbers for a second.
+We know that any division problem can be rewritten as a multiplication problem,
+$$
+\frac{a}{b} = a \times \frac{1}{b} = a \times b^{-1},
+$$
+where $b^{-1}$ is the unique real number such that
+$$
+b \times b^{-1} = b^{-1} \times b = 1.
+$$
+
+::: {#def-matrix-inverse name="Matrix inverse"}
+Similarly, in matrix algebra, we say that the $n \times n$ matrix $\mathbf{C}$ is an [inverse]{.concept entry="Matrix inverse" definition="The $n \times n$ matrix $\mathbf{C}$ is an inverse of the $n \times n$ matrix $\mathbf{A}$ if $\mathbf{A} \mathbf{C} = \mathbf{C} \mathbf{A} = \mathbf{I}_n$. When it exists, the inverse is unique and is written $\mathbf{A}^{-1}$."} of the $n \times n$ matrix $\mathbf{A}$ if $\mathbf{A} \mathbf{C} = \mathbf{C} \mathbf{A} = \mathbf{I}_n$.
+:::
+
+Some basic properties of matrix inverses:
+
+- If $\mathbf{C}$ is an inverse of $\mathbf{A}$, then $\mathbf{A}$ is an inverse of $\mathbf{C}$.
+  This is immediate from the definition.
+
+- If $\mathbf{C}$ and $\mathbf{D}$ are both inverses of $\mathbf{A}$, then $\mathbf{C} = \mathbf{D}$.
+  Proof: If $\mathbf{C}$ and $\mathbf{D}$ are inverses of $\mathbf{A}$, then we have
+  $$
+  \begin{aligned}
+  \mathbf{A} \mathbf{C} = \mathbf{I}
+  &\Leftrightarrow \mathbf{D} (\mathbf{A} \mathbf{C}) = \mathbf{D} \mathbf{I} \\
+  &\Leftrightarrow (\mathbf{D} \mathbf{A}) \mathbf{C} = \mathbf{D} \\
+  &\Leftrightarrow \mathbf{I} \mathbf{C} = \mathbf{D} \\
+  &\Leftrightarrow \mathbf{C} = \mathbf{D}.
+  \end{aligned}
+  $$
+
+  As a consequence of this property, we write the inverse of $\mathbf{A}$, when it exists, as $\mathbf{A}^{-1}$.
+
+- The inverse of the inverse of $\mathbf{A}$ is $\mathbf{A}$: $(\mathbf{A}^{-1})^{-1} = \mathbf{A}$.
+
+- If the inverse of $\mathbf{A}$ exists, then the inverse of its transpose is the transpose of the inverse: $(\mathbf{A}^\top)^{-1} = (\mathbf{A}^{-1})^\top$.
+
+- Matrix inversion inverts scalar multiplication: if $c \neq 0$, then $(c \mathbf{A})^{-1} = \frac{1}{c} \mathbf{A}^{-1}$.
+
+- The identity matrix is its own inverse: $\mathbf{I}_n^{-1} = \mathbf{I}_n$.
+
+Some matrices are not [invertible]{.concept entry="Invertible matrix" definition="A square matrix $\mathbf{A}$ is invertible if its inverse $\mathbf{A}^{-1}$ exists. A square matrix is invertible if and only if its columns are linearly independent."}; i.e., their inverse does not exist.
+As a simple example, think of
+$$
+\mathbf{A} = \begin{bmatrix}
+0 & 0 \\ 0 & 0
+\end{bmatrix}.
+$$
+The inverse of $\mathbf{A}$, were it to exist, would be a $2 \times 2$ matrix $\mathbf{C}$ such that $\mathbf{A} \mathbf{C} = \mathbf{I}_2$.
+But for all $2 \times 2$ matrices $\mathbf{C}$, we have
+$$
+\mathbf{A} \mathbf{C}
+= \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
+\begin{bmatrix} c_{11} & c_{12} \\ c_{21} & c_{22} \end{bmatrix}
+= \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
+\neq \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}.
+$$
+Therefore, $\mathbf{A}$ does not have an inverse.
+
+Remember that matrix inversion is kind of like division for scalar numbers.
+In that light, the previous example is a generalization of the principle that you can't divide by zero.
+But matrices full of zeroes are not the only ones that aren't invertible.
+For instance, it may not be obvious at first glance, but the following matrix is not invertible:
+$$
+\mathbf{A} = \begin{bmatrix}
+1 & 2 \\
+2 & 4
+\end{bmatrix}.
+$$
+We know that because of the following theorem:
+
+::: {#thm-invertible-columns}
+A square matrix is invertible if and only if its columns are linearly independent.
+:::
+
+In the above example, the second column is 2 times the first column, so the columns are not linearly independent, so the matrix is not invertible.
+
+
+### Inverting a $2 \times 2$ matrix {#sec-inverse-2x2}
+
+Consider the general $2 \times 2$ matrix
+$$
+\mathbf{A} = \begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}.
+$$
+We have a simple criterion for linear independence here.
+In particular, the columns of $\mathbf{A}$ are linearly independent if and only if $ad \neq bc$, or $ad - bc \neq 0$.
+We call this the [determinant]{.concept definition="The determinant of the $2 \times 2$ matrix with first row $(a, b)$ and second row $(c, d)$ is $ad - bc$. The matrix is invertible if and only if its determinant is nonzero."} of the matrix, since it determines whether the matrix is invertible.[^determinants]
+Moreover, if $ad - bc \neq 0$ we have
+$$
+\mathbf{A}^{-1} = \frac{1}{ad - bc} \begin{bmatrix}
+d & -b \\
+-c & a
+\end{bmatrix}.
+$$ {#eq-inverse-2x2}
+
+[^determinants]: On the determinants of $3 \times 3$ and larger matrices, see your friendly local linear algebra textbook.
+    Spoiler alert: calculating the determinant of a large matrix by hand is not fun.
+
+::: {#thm-inverse-2x2}
+The $2 \times 2$ matrix $\mathbf{A}$ is invertible if and only if $ad \neq bc$, in which case its inverse is given by @eq-inverse-2x2.
+:::
+
+::: {.proof}
+[Prove the "if" direction: when $ad \neq bc$, multiplying out shows that @eq-inverse-2x2 satisfies $\mathbf{A} \mathbf{A}^{-1} = \mathbf{A}^{-1} \mathbf{A} = \mathbf{I}_2$. (pdaps left this to the reader; the 2025 scratch note says it was done in class.)]{.todo}
+
+For the "only if" direction, we will prove its contrapositive: if $ad = bc$, then $\mathbf{A}$ is not invertible.
+
+Suppose $ad = bc$.
+We want to show that this implies that there is a linear dependency in the columns of $\mathbf{A}$, making $\mathbf{A}$ non-invertible (@thm-invertible-columns).
+Remember that the definition of linear dependency is that there are real numbers $p$ and $q$, at least one of which is nonzero, such that
+$$
+p \begin{pmatrix} a \\ c \end{pmatrix} + q \begin{pmatrix} b \\ d \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+$$
+I will break the proof into a few cases, and find a pair of $p$ and $q$ values (at least one nonzero) for each case that satisfies the above equation, proving linear dependency.
+
+- The "hard" case here is when $ad = bc = 0$, as there are various subcases each requiring a slightly different combination of $p$ and $q$ to complete the proof.
+
+    - Suppose $a = c = 0$, so the first column is all zeroes.
+      Then we can set $p = 1$ and $q = 0$ to prove linear dependency:
+      $$
+      p \begin{pmatrix} a \\ c \end{pmatrix} + q \begin{pmatrix} b \\ d \end{pmatrix} = 1 \begin{pmatrix} 0 \\ 0 \end{pmatrix} + 0 \begin{pmatrix} b \\ d \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+      $$
+      Similarly, if $b = d = 0$, we can prove linear dependency by setting $p = 0$ and $q = 1$.
+
+    - Suppose $a = 0$ and $c \neq 0$.
+      Because $bc = ad = 0$, we must have $b = 0$.
+      If $d = 0$ too, then we have already seen above that there is a linear dependency.
+      Otherwise, if $d \neq 0$, then we can prove linear dependency by setting $p = 1$ and $q = (-c/d)$:
+      $$
+      p \begin{pmatrix} a \\ c \end{pmatrix} + q \begin{pmatrix} b \\ d \end{pmatrix} = 1 \begin{pmatrix} 0 \\ c \end{pmatrix} + (-c/d) \begin{pmatrix} 0 \\ d \end{pmatrix} = \begin{pmatrix} 0 \\ c - c \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+      $$
+
+    - Finally, suppose $a \neq 0$ and $c = 0$.
+      Because $ad = bc = 0$, we must have $d = 0$.
+      If $b = 0$ too, then we have already seen above that there is a linear dependency.
+      Otherwise, if $b \neq 0$, then we can prove linear dependency by setting $p = 1$ and $q = (-a/b)$:
+      $$
+      p \begin{pmatrix} a \\ c \end{pmatrix} + q \begin{pmatrix} b \\ d \end{pmatrix} = 1 \begin{pmatrix} a \\ 0 \end{pmatrix} + (-a/b) \begin{pmatrix} b \\ 0 \end{pmatrix} = \begin{pmatrix} a - a \\ 0 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+      $$
+
+- The "easy" case is when all of the entries are nonzero.
+  Then we can set $p = -d$ and $q = c$ to prove a linear dependency:
+  $$
+  p \begin{pmatrix} a \\ c \end{pmatrix} + q \begin{pmatrix} b \\ d \end{pmatrix} = (-d) \begin{pmatrix} a \\ c \end{pmatrix} + c \begin{pmatrix} b \\ d \end{pmatrix} = \begin{pmatrix} bc - ad \\ cd - cd \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+  $$
+:::
+
+For now, let's try a couple of examples.
+$$
+\begin{gathered}
+\mathbf{A} = \begin{bmatrix}
+1 & 1 \\
+0 & 1
+\end{bmatrix},
+\mathbf{A}^{-1} = \begin{bmatrix}
+1 & -1 \\
+0 & 1
+\end{bmatrix}, \\
+\mathbf{A} = \begin{bmatrix}
+4 & 6 \\
+2 & 4
+\end{bmatrix},
+\mathbf{A}^{-1} = \begin{bmatrix}
+1 & -1.5 \\
+-0.5 & 1
+\end{bmatrix}, \\
+\mathbf{A} = \begin{bmatrix}
+10 & 25 \\
+4 & 10
+\end{bmatrix},
+\text{$\mathbf{A}^{-1}$ does not exist}.
+\end{gathered}
+$$
+
+
+## Solving linear systems {#sec-linear-systems}
+
+You may remember from earlier math courses being asked to solve for $x_1$ and $x_2$ in systems of equations like the following one:
+$$
+\begin{aligned}
+2 x_1 + x_2 &= 10, \\
+2 x_1 - x_2 &= -10.
+\end{aligned}
+$$
+Matrix algebra lets us write this whole system as a single equation, $\mathbf{A} \mathbf{x} = \mathbf{b}$, where
+$$
+\begin{aligned}
+\mathbf{A} &= \begin{bmatrix}
+2 & 1 \\
+2 & -1
+\end{bmatrix}, \\
+\mathbf{x} &= \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}, \\
+\mathbf{b} &= \begin{bmatrix} 10 \\ -10 \end{bmatrix}.
+\end{aligned}
+$$
+
+This suggests a natural way to solve for $\mathbf{x}$: $$\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}.$$
+In fact, the linear system of equations $\mathbf{A} \mathbf{x} = \mathbf{b}$ has a unique solution if and only if $\mathbf{A}$ is invertible.
+Otherwise, it has either zero solutions or infinitely many solutions.
+
+Example with zero solutions:
+$$
+\begin{aligned}
+x_1 + x_2 &= 1, \\
+2 x_1 + 2 x_2 &= 10.
+\end{aligned}
+$$
+
+Example with infinitely many solutions:
+$$
+\begin{aligned}
+x_1 + x_2 &= 1, \\
+2 x_1 + 2 x_2 &= 2.
+\end{aligned}
+$$
+
+[Explain the picture of a two-equation system as two lines in the $(x_1, x_2)$ plane---one solution where they cross, none if they are parallel, infinitely many if they coincide---to go with @fig-linear-systems. Not in pdaps.]{.todo}
+
+```{r}
+#| label: fig-linear-systems
+#| fig-cap: "TODO(BJK): caption. Each equation drawn as a line in the (x₁, x₂) plane. Panel (a): the first system above, whose lines cross at the unique solution (0, 10). Panel (b): the zero-solution example, parallel lines. Panel (c): the infinitely-many-solutions example, the same line twice."
+#| fig-asp: 0.4
+#| cache: true
+plot_system <- function(f1, f2, label1, label2, label_x, label_y, hjust,
+                        ylim, same_line = FALSE) {
+  ggplot() +
+    geom_function(
+      fun = f1, colour = mfpa$teal,
+      linewidth = if (same_line) 2.6 else 1.3
+    ) +
+    geom_function(
+      fun = f2, colour = mfpa$red, linewidth = 1.3,
+      linetype = if (same_line) "dashed" else "solid"
+    ) +
+    label_curve(label_x, label_y[1], label1, hjust = hjust, size = 3.8) +
+    label_curve(label_x, label_y[2], label2, colour = mfpa$red, hjust = hjust, size = 3.8) +
+    scale_x_continuous(limits = c(-4, 4), breaks = seq(-4, 4, by = 2)) +
+    coord_cartesian(ylim = ylim) +
+    labs(x = expression(italic(x)[1]), y = expression(italic(x)[2]))
+}
+
+p_one <- plot_system(
+  \(x) 10 - 2 * x, \(x) 2 * x + 10,
+  '"2"*italic(x)[1]*" + "*italic(x)[2]*" = 10"',
+  '"2"*italic(x)[1]*" − "*italic(x)[2]*" = −10"',
+  label_x = 0, label_y = c(4.5, 2.5), hjust = 0.5, ylim = c(0, 20)
+) +
+  mark_value(0, 10, colour = mfpa$ink)
+
+p_none <- plot_system(
+  \(x) 1 - x, \(x) 5 - x,
+  'italic(x)[1]*" + "*italic(x)[2]*" = 1"',
+  '"2"*italic(x)[1]*" + 2"*italic(x)[2]*" = 10"',
+  label_x = 4, label_y = c(9.6, 8.2), hjust = 1, ylim = c(-4, 10)
+)
+
+p_many <- plot_system(
+  \(x) 1 - x, \(x) 1 - x,
+  'italic(x)[1]*" + "*italic(x)[2]*" = 1"',
+  '"2"*italic(x)[1]*" + 2"*italic(x)[2]*" = 2"',
+  label_x = 4, label_y = c(5.5, 4.4), hjust = 1, ylim = c(-4, 6),
+  same_line = TRUE
+)
+
+panels(p_one, p_none, p_many)
+```
+
+[Major gap: the syllabus gives solving linear systems two class days (Nov 10 and 12), but the pdaps material above is about a page. Likely missing pieces are listed below.]{.todo}
+
+- [Augmented matrices and Gaussian elimination / row reduction.]{.todo}
+- [Reading off whether a system has zero, one, or infinitely many solutions from the reduced form, and describing the solution set in the infinite case.]{.todo}
+- [The connection back to linear independence of the columns of $\mathbf{A}$ (@thm-invertible-columns).]{.todo}
+- [Inverting matrices larger than $2 \times 2$ (Gauss--Jordan on $[\mathbf{A} \mid \mathbf{I}]$).]{.todo}
+- [Worked examples and exercises.]{.todo}
+
+
+::: {#concept-review}
+:::

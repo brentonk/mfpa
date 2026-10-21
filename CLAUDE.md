@@ -22,7 +22,7 @@ R package versions are pinned with `renv` (`renv.lock` + `renv/`). After adding 
 
 ## Chapter inclusion
 
-Only chapters listed under `book.chapters` in `_quarto.yml` are part of the rendered book. `linear_algebra.qmd`, `summary.qmd`, and `intro.qmd` are unlisted stubs/placeholders — adding content to them does nothing until they're added to `_quarto.yml`.
+Only chapters listed under `book.chapters` in `_quarto.yml` are part of the rendered book. `summary.qmd` and `intro.qmd` are unlisted stubs/placeholders — adding content to them does nothing until they're added to `_quarto.yml`.
 
 ## R chunks
 
