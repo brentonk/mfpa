@@ -10,6 +10,13 @@
 library("tidyverse")
 library("cowplot")
 
+# cowplot::plot_grid() converts each panel to a grob on a hidden "null" device,
+# which defaults to pdf(). The pdf device can't see the systemfonts-registered
+# Archivo (below), so every text grob warns "font family 'Archivo' not found in
+# PostScript font database" -- and knitr prints those warnings into the page.
+# Use ragg instead, matching the `dev: ragg_png` set in _quarto.yml.
+set_null_device("agg")
+
 # Palette. Mirrors the scss:defaults block of mfpa.scss -- keep the two in sync.
 mfpa <- list(
   teal  = "#0F6E6E", # $primary      main series / the function of interest
