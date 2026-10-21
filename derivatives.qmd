@@ -96,7 +96,7 @@ $$
 
 ```{r}
 #| label: fig-nonlinear-function-comparison
-#| fig-cap: "Two increasing nonlinear functions. At lower values of $x,$ $h(x)$ is increasing more steeply than $g(x).$  The opposite is true at greater values of $x.$"
+#| fig-cap: "Two increasing nonlinear functions. At lower values of $x$, $h(x)$ is increasing more steeply than $g(x)$.  The opposite is true at greater values of $x$."
 #| cache: true
 df_nonlinear_functions <- tibble(
   x = seq(0, 10, by = 0.1),
@@ -230,7 +230,7 @@ This statement in turn is equivalent to $$x > 2 \cdot \frac{5}{4} = \frac{10}{4}
 
 ::: {#exr-deriv-quadratic}
 Let $f : \mathbb{R} \to \mathbb{R}$ be a quadratic function, meaning there exist real numbers $a$, $b$, and $c$ such that $$f(x) = a x^2 + b x + c.$$
-Show that $f'(x) = 2 a x + b.$
+Show that $f'(x) = 2 a x + b$.
 
 *Hint:* The calculations will be very similar to the ones from @exr-deriv-h, as the function $h(x)$ there is itself a quadratic function.
 
@@ -288,13 +288,13 @@ g'(c)
 $$
 I personally find this definition easier for this particular problem.
 You might find the other definition easier to work with.
-Either way, we end up in the same place, with $g'(c) = 2c / 5.$
+Either way, we end up in the same place, with $g'(c) = 2c / 5$.
 
 ::: {#exr-deriv-alt-def}
 Redo @exr-deriv-quadratic using the alternative formula for a derivative.
 
 :::: {.answer}
-Let $f(x) = a x^2 + b x + c,$ and consider any real number $d.$
+Let $f(x) = a x^2 + b x + c$, and consider any real number $d$.
 We have
 $$
 \begin{aligned}
@@ -338,7 +338,7 @@ $$
 &= f(c),
 \end{aligned}
 $$
-so $f$ is continuous at $c.$
+so $f$ is continuous at $c$.
 :::
 
 @thm-differentiable-implies-continuous tells us that every differentiable function is continuous, but it says nothing about whether every continuous function is differentiable.
@@ -373,8 +373,8 @@ tibble(x = seq(-1, 1, length.out = 101), y = abs(x)) |>
 ```
 
 Another source of non-differentiability is when the function is so steep that its graph approaches a vertical line.
-As an example, take the square root function, $f(x) = \sqrt{x},$ evaluated at the point $c = 0.$
-The "rise over run" limit here becomes infinitely large as $x \to 0:$
+As an example, take the square root function, $f(x) = \sqrt{x}$, evaluated at the point $c = 0$.
+The "rise over run" limit here becomes infinitely large as $x \to 0$:
 $$
 \begin{aligned}
 \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0}
@@ -448,8 +448,8 @@ A constant function is a function of the form $f(x) = y$, where $y$ is a constan
 Without taking an explicit limit, how do you know from the above rules that $f'(x) = 0$ for all $x$?
 
 :::: {.answer}
-A constant function is a linear function with slope 0: $f(x) = y = y + 0x.$
-Because the derivative of any linear function is its slope, we have $f'(x) = 0.$
+A constant function is a linear function with slope 0: $f(x) = y = y + 0x$.
+Because the derivative of any linear function is its slope, we have $f'(x) = 0$.
 ::::
 :::
 
@@ -530,7 +530,7 @@ $$
 &= a \frac{d f(x)}{d x} + b \frac{d g(x)}{d x},
 \end{aligned}
 $$
-where the first equality uses our definition of $h(x),$ the second uses the sum rule, and the third uses the constant multiple rule twice.
+where the first equality uses our definition of $h(x)$, the second uses the sum rule, and the third uses the constant multiple rule twice.
 ::::
 :::
 
@@ -541,7 +541,7 @@ $$
 f(x) = c_n x^n + c_{n-1} x^{n-1} + \cdots + c_1 x + c_0 = \sum_{k=0}^n c_k x^k
 \end{aligned}
 $$
-for some natural number $n$ and real-valued coefficients $c_0, \ldots, c_n.$
+for some natural number $n$ and real-valued coefficients $c_0, \ldots, c_n$.
 Use the constant multiple rule, the derivative of a power function, and @eq-deriv-finite-sum to prove that
 $$
 \begin{aligned}
@@ -604,7 +604,7 @@ $$
 
 ::: {.proof}
 Take any $x \in X$.
-Differentiability of $f$ implies continuity of $f$ (per @thm-differentiable-implies-continuous) and thus $\lim_{t \to 0} f(x + t) = f(x).$
+Differentiability of $f$ implies continuity of $f$ (per @thm-differentiable-implies-continuous) and thus $\lim_{t \to 0} f(x + t) = f(x)$.
 Consequently,
 $$
 \begin{aligned}
@@ -707,7 +707,7 @@ We have $g(x) = f(x) \cdot f(x)$, so the product rule implies $$g'(x) = f(x) f'(
 ::::
 :::
 
-The [quotient rule]{.concept definition="If $h(x) = f(x) / g(x),$ then $$h'(x) = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.$$"} for functions in the form $\frac{f(x)}{g(x)}$ is unfortunately a bit trickier to remember.
+The [quotient rule]{.concept definition="If $h(x) = f(x) / g(x)$, then $$h'(x) = \frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}.$$"} for functions in the form $\frac{f(x)}{g(x)}$ is unfortunately a bit trickier to remember.
 If you have to Google this one every time you use it, don't worry --- you're not alone.
 
 ::: {#prp-quotient-rule name="Quotient rule"}
@@ -1059,7 +1059,7 @@ Politicians will sometimes brag that inflation is decreasing.
 But they usually don't mean that the price level is actually going down: that would mean we're having deflation, which usually occurs only in the context of Great Depression-type economic cataclysms.
 Instead, a decrease in inflation typically means that prices are increasing, but not as quickly as they were earlier.
 In other words, the rate of increase is itself decreasing.
-But now we're thinking about the rate of change in a rate of change ... or the derivative of a derivative, also known as the [second derivative]{.concept definition="The second derivative of a differentiable function $f(x)$, denoted $f''(x),$ is the derivative of the function's derivative: $$f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c}.$$"}.
+But now we're thinking about the rate of change in a rate of change ... or the derivative of a derivative, also known as the [second derivative]{.concept definition="The second derivative of a differentiable function $f(x)$, denoted $f''(x)$, is the derivative of the function's derivative: $$f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c}.$$"}.
 
 ::: {#def-second-derivative name="Second derivative"}
 Let $f : X \to \mathbb{R}$ be differentiable, where $X \subseteq \mathbb{R}$.
@@ -1070,13 +1070,13 @@ f''(c) = \lim_{x \to c} \frac{f'(x) - f'(c)}{x - c},
 \end{aligned}
 $$
 provided that this limit exists.
-When it does, we say that $f$ is [twice differentiable at the point]{.concept entry="Twice differentiability" definition="A function $f : X \to \mathbb{R}$ is twice differentiable at a point in its domain, $c \in X,$ if the second derivative $f''(c)$ exists.  We call $f$ a twice differentiable function if it is twice differentiable at every point in its domain."} $c$.
+When it does, we say that $f$ is [twice differentiable at the point]{.concept entry="Twice differentiability" definition="A function $f : X \to \mathbb{R}$ is twice differentiable at a point in its domain, $c \in X$, if the second derivative $f''(c)$ exists.  We call $f$ a twice differentiable function if it is twice differentiable at every point in its domain."} $c$.
 
 If $f$ is twice differentiable at every point in its domain, we simply say that it is [twice differentiable]{.concept}.
 :::
 
 Sometimes in formal theory papers, you'll see a function described just in terms of its first and second derivatives.
-For instance, I might write, "Let $f : [0, 1] \to [0, 1]$ be twice differentiable, with $f' > 0$ and $f'' < 0.$"
+For instance, I might write, "Let $f : [0, 1] \to [0, 1]$ be twice differentiable, with $f' > 0$ and $f'' < 0$."
 Here's a little cheat sheet to interpret statements like that one.
 
 | Case | First derivative      | Second derivative      | Interpretation                                                                               |
@@ -1112,8 +1112,8 @@ df_convex_concave |>
   theme(strip.background = element_rect(fill = mfpa$rule, colour = NA))
 ```
 
-If a function has a non-negative second derivative, $f''(x) \geq 0,$ we call it [convex]{.concept entry="Convex function" definition="A twice differentiable function is convex if $f''(x) \geq 0,$ and additionally is strictly convex if $f''(x) > 0.$"}.
-Additionally, if the second derivative is strictly positive, $f''(x) > 0,$ we call the function [strictly convex]{.concept}.
+If a function has a non-negative second derivative, $f''(x) \geq 0$, we call it [convex]{.concept entry="Convex function" definition="A twice differentiable function is convex if $f''(x) \geq 0$, and additionally is strictly convex if $f''(x) > 0$."}.
+Additionally, if the second derivative is strictly positive, $f''(x) > 0$, we call the function [strictly convex]{.concept}.
 A classic example of a strictly convex function is exponential growth.
 For example, let $f(t)$ be the number of mice you will have at time $t$ if you start with one boy mouse and one girl mouse at $t = 0$.
 If the number of mice doubles with each unit of time, then you'll have
@@ -1130,7 +1130,7 @@ $$
 So not only is the function increasing, but it's increasing more quickly as time goes on.
 Because the rate of increase is itself increasing, the function is strictly convex.
 
-On the other hand, we call a function [concave]{.concept entry="Concave function" definition="A twice differentiable function is concave if $f''(x) \leq 0,$ and additionally is strictly concave if $f''(x) < 0.$"} if $f''(x) \leq 0,$ and additionally [strictly concave]{.concept} if $f''(x) < 0.$
+On the other hand, we call a function [concave]{.concept entry="Concave function" definition="A twice differentiable function is concave if $f''(x) \leq 0$, and additionally is strictly concave if $f''(x) < 0$."} if $f''(x) \leq 0$, and additionally [strictly concave]{.concept} if $f''(x) < 0$.
 Concave functions often arise in economic contexts.
 In particular, we often think that concave functions are a good way to model the amount of "utility" (happiness, loosely speaking) that a person derives from consuming a quantity of a good.
 
@@ -1148,28 +1148,28 @@ That's true because the derivative of a linear function is its slope, a constant
 ::: {#exr-concave-convex name="Concave and convex functions"}
 Using the second derivative, characterize the conditions under which each of the following functions is convex or concave:
 
-1. A quadratic function of the form $f(x) = a x^2 + b x + c.$
+1. A quadratic function of the form $f(x) = a x^2 + b x + c$.
 
-2. An exponential function of the form $f(x) = b^x,$ where $b > 0.$
+2. An exponential function of the form $f(x) = b^x$, where $b > 0$.
 
-3. A logarithmic function of the form $f(x) = \log_b x,$ where $b > 0$ and $b \neq 1.$
+3. A logarithmic function of the form $f(x) = \log_b x$, where $b > 0$ and $b \neq 1$.
 
 :::: {.answer}
-1. We have $f'(x) = 2 a x + b$ and thus $f''(x) = 2a.$
-   So the function is concave if $a \leq 0$ and convex if $a \geq 0.$
+1. We have $f'(x) = 2 a x + b$ and thus $f''(x) = 2a$.
+   So the function is concave if $a \leq 0$ and convex if $a \geq 0$.
 
-2. We have $f'(x) = b^x \cdot \log(b)$ and thus $f''(x) = b^x \cdot (\log(b))^2.$
-   If $b = 1,$ then we have $\log(b) = 0$ and the function is linear (both concave and convex).
-   Otherwise, we have $\log(b) \neq 0,$ hence $(\log(b))^2 > 0,$ hence $b^x \cdot (\log(b))^2 > 0,$ so the function is strictly convex.
+2. We have $f'(x) = b^x \cdot \log(b)$ and thus $f''(x) = b^x \cdot (\log(b))^2$.
+   If $b = 1$, then we have $\log(b) = 0$ and the function is linear (both concave and convex).
+   Otherwise, we have $\log(b) \neq 0$, hence $(\log(b))^2 > 0$, hence $b^x \cdot (\log(b))^2 > 0$, so the function is strictly convex.
 
 3. We have $f'(x) = \frac{1}{x \log(b)} = \frac{1}{\log(b)} \cdot x^{-1}$ and thus $$f''(x) = \frac{1}{\log(b)} \cdot \left[-1 \cdot x^{-2}\right] = \frac{-1}{x^2 \log(b)}.$$
-   The sign of the second derivative is the same as that of $\log(b)$, so the function is convex if $b \in (0, 1)$ and is concave if $b \in (1, \infty).$
+   The sign of the second derivative is the same as that of $\log(b)$, so the function is convex if $b \in (0, 1)$ and is concave if $b \in (1, \infty)$.
 ::::
 :::
 
 ::: {#exr-normal-pdf-concave name="Concave portion of the normal PDF"}
 A function can be concave on part of its domain and convex on other parts.
-For example, take the probability density function of the standard normal distribution, $f(x) = \frac{1}{\sqrt{2 \pi}} e^{-x^2 / 2}.$
+For example, take the probability density function of the standard normal distribution, $f(x) = \frac{1}{\sqrt{2 \pi}} e^{-x^2 / 2}$.
 
 ```{r}
 #| cache: true
@@ -1211,8 +1211,8 @@ f''(x)
 &= \frac{1}{\sqrt{2 \pi}} (x^2 - 1) e^{-x^2/2}.
 \end{aligned}
 $$
-Because $\frac{1}{\sqrt{2 \pi}} > 0$ and $e^{-x^2/2} > 0$ for all $x,$ the sign of the second derivative will always be the same as that of $x^2 - 1.$
-Consequently, the second derivative is weakly negative---and thus the function is concave---if and only if $-1 \leq x \leq 1.$
+Because $\frac{1}{\sqrt{2 \pi}} > 0$ and $e^{-x^2/2} > 0$ for all $x$, the sign of the second derivative will always be the same as that of $x^2 - 1$.
+Consequently, the second derivative is weakly negative---and thus the function is concave---if and only if $-1 \leq x \leq 1$.
 ::::
 :::
 
