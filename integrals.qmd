@@ -382,6 +382,10 @@ Addition across subdomains: if $a \leq c \leq b$, $$\int_a^b f(x) \, dx = \int_a
 
 Wrong way limits: $$\int_a^b f(x) \, dx = -\int_b^a f(x) \, dx.$$
 
+Comparing integrals: if $f(x) \geq (>) g(x)$ for all $x \in (a, b)$, then $$\int_a^b f(x) \, dx \geq (>) \int_a^b g(x) \, dx.$$
+
+Corollary to the comparison: if $f(x)$ is (strictly) positive on $(a, b)$, then so is $\int_a^b f(x) \, dx$.
+
 Full statements and explanations TBA.
 
 
