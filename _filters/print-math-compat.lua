@@ -7,6 +7,11 @@
 -- macro name leaves its `{…}` argument as an ordinary group — the brace/label
 -- still typesets, only the zero-width clapping is lost (labels set at natural
 -- width). HTML output is untouched.
+--
+-- Also \textcolor{<colour>}{…} (used to highlight entries in the linear
+-- algebra chapter's matrix-multiplication example). Stripping the macro and
+-- its colour argument leaves the `{…}` body as an ordinary group, so the print
+-- PDF shows the same math in plain ink.
 
 local function is_print()
   if quarto and quarto.doc and quarto.doc.is_format then
@@ -20,5 +25,6 @@ function Math(el)
     return nil
   end
   el.text = el.text:gsub("\\math[lr]?clap%s*", "")
+  el.text = el.text:gsub("\\textcolor%s*{[^}]*}", "")
   return el
 end
