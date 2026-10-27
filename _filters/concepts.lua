@@ -25,6 +25,51 @@ local function is_print()
   return FORMAT ~= "html"
 end
 
+-- Pandoc expands \newcommand macros while reading the chapter and drops the
+-- definitions from the AST, so the separate pandoc.read calls below (tooltips,
+-- glossary) never see them: a definition using \intr would show raw TeX.
+-- Recover the chapter's one-line \newcommand / \renewcommand definitions from
+-- its source file and prepend them to every snippet we parse. Multi-line
+-- definitions and macros pulled in via {{< include >}} are not picked up.
+local macro_preamble = nil
+
+local function chapter_macros()
+  if macro_preamble ~= nil then
+    return macro_preamble
+  end
+  macro_preamble = ""
+  local path = quarto and quarto.doc and quarto.doc.input_file
+  if path == nil and PANDOC_STATE and PANDOC_STATE.input_files then
+    path = PANDOC_STATE.input_files[1]
+  end
+  local f = path and io.open(path, "r")
+  if not f then
+    return macro_preamble
+  end
+  local defs = {}
+  for line in f:lines() do
+    if line:match("^%s*\\newcommand%A") or line:match("^%s*\\renewcommand%A") then
+      table.insert(defs, line)
+    end
+  end
+  f:close()
+  if #defs > 0 then
+    macro_preamble = table.concat(defs, "\n") .. "\n\n"
+  end
+  return macro_preamble
+end
+
+local function read_markdown(s)
+  local doc = pandoc.read(chapter_macros() .. s, "markdown")
+  -- The prepended definitions come back as leading raw TeX blocks; drop them
+  -- so callers see only the snippet's own blocks.
+  while #doc.blocks > 0 and doc.blocks[1].t == "RawBlock"
+      and (doc.blocks[1].format == "tex" or doc.blocks[1].format == "latex") do
+    doc.blocks:remove(1)
+  end
+  return doc
+end
+
 function Span(el)
   if not el.classes:includes("concept") then
     return nil
@@ -73,7 +118,7 @@ function Span(el)
   -- definition become interactive (.has-tip).
   local d = def_by_key[key]
   if d ~= nil then
-    local blocks = pandoc.read(d, "markdown").blocks
+    local blocks = read_markdown(d).blocks
     local tip_inlines = (blocks[1] and blocks[1].content) or pandoc.Inlines({})
     local tip = pandoc.Span(tip_inlines, pandoc.Attr("", { "concept-tip" }, { role = "tooltip" }))
     el.content:insert(tip)
@@ -112,7 +157,7 @@ function Div(el)
       "",
       emit_list(concepts),
     }, "\n")
-    return pandoc.read(md, "markdown").blocks
+    return read_markdown(md).blocks
   end
 
   local alphabetical = {}
@@ -138,5 +183,5 @@ function Div(el)
     "",
   }, "\n")
 
-  return pandoc.read(md, "markdown").blocks
+  return read_markdown(md).blocks
 end
