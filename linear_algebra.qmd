@@ -58,49 +58,105 @@ panels <- function(...) {
 
 *Some material in this chapter is adapted from notes [Hye Young You](https://hyeyoungyou.com) wrote for the math boot camp for the political science PhD program at Vanderbilt.*
 
-Matrix algebra is an essential tool for understanding multivariate statistics.
+Linear algebra is an essential tool for understanding multivariate statistics.
+My main goal here is for you to get familiar with the basics of vector and matrix notation, and the use of matrices to solve linear systems.
 You are probably already familiar with matrices, at least informally.
 The typical data set---each row an observation, each column a variable---is formatted like a matrix.
 
-[Introduce the chapter for this course. (Dropped from the pdaps version: the "bare minimum you need ... for OLS with multiple covariates" framing, the advice to catch up on linear algebra over the summer, and the link to MIT's 18.06 course on OpenCourseWare.)]{.todo}
+As with all of our topics, but perhaps to an even greater degree here, we will only cover a light introduction.
+Linear algebra goes very deep.
+If you want to learn more, I recommend starting with MIT's freely available [undergraduate course](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/).
 
 
-## Vector operations {#sec-vector-operations}
+## Vectors {#sec-vectors}
 
-A [vector]{.concept definition="An ordered array. A vector $\mathbf{v}$ of $k$ elements is written $\mathbf{v} = (v_1, v_2, \ldots, v_k)$. If its elements are real numbers, we write $\mathbf{v} \in \mathbb{R}^k$."} is an ordered array.
+A [vector]{.concept definition="An ordered array. A vector $\mathbf{v}$ of $k$ elements is written $\mathbf{v} = (v_1, v_2, \ldots, v_k)$. If its elements are real numbers, we write $\mathbf{v} \in \mathbb{R}^k$."} is an ordered list of numbers.
 To denote a vector $\mathbf{v}$ of $k$ elements, we write $\mathbf{v} = (v_1, v_2, \ldots, v_k)$, or sometimes
 $$
 \mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_k \end{pmatrix}.
 $$
+
 Notice the convention of using a lowercase bold letter to denote a vector.
 When I write vectors on the whiteboard, I will instead denote them with an arrow, like $\vec{v}$.
 We will usually be dealing with vectors of real numbers.
 To denote the fact that $\mathbf{v}$ is a vector of $k$ real numbers, we write $\mathbf{v} \in \mathbb{R}^k$.
 
-A vector can be multiplied by a scalar $c \in \mathbb{R}$, producing what you would expect:
-$$
-c \mathbf{v} = \begin{pmatrix} c v_1 \\ c v_2 \\ \vdots \\ c v_k \end{pmatrix}
-$$
-You can also add and subtract two vectors of the same length.
-$$
-\begin{aligned}
-\mathbf{u} + \mathbf{v} &= \begin{pmatrix}
-  u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_k + v_k
-\end{pmatrix}, \\
-\mathbf{u} - \mathbf{v} &= \begin{pmatrix}
-  u_1 - v_1 \\ u_2 - v_2 \\ \vdots \\ u_k - v_k
-\end{pmatrix}.
-\end{aligned}
-$$
-
-[Explain the geometric picture of a vector in $\mathbb{R}^2$ as an arrow from the origin, and what addition (tip to tail) and scalar multiplication (stretching, flipping) look like, to go with @fig-vector-arithmetic. Not in pdaps.]{.todo}
+You can think of a vector $\mathbf{v} \in \mathbb{R}^k$ as a point in $k$-dimensional space.
+More often, it's convenient---for reasons we'll see in just a second---to portray the vector as an arrow pointing from the origin to the given coordinates in $k$-dimensional space.
+I personally have a lot of trouble visualizing in more than two dimensions, so I'm going to illustrate all the concepts here with vectors in $\mathbb{R}^2$.
 
 ```{r}
-#| label: fig-vector-arithmetic
-#| fig-cap: "TODO(BJK): caption. Panel (a): u = (3, 1), v = (1, 2), and u + v = (4, 3), with faded copies of u and v completing the parallelogram. Panel (b): v = (1, 2), 2v, and −v."
-#| fig-asp: 0.5
+#| label: fig-vectors-as-arrows
+#| fig-cap: "Vectors in $\\mathbb{R}^2$ illustrated as arrows pointing out from the origin."
+#| fig-asp: 0.7
 #| cache: true
-p_add <- ggplot() +
+ggplot() +
+  origin_axes() +
+  draw_vector(2, 3) +
+  draw_vector(3, 2, colour = mfpa$red) +
+  draw_vector(-2, 3, colour = mfpa$green) +
+  draw_vector(-3, -2, colour = mfpa$muted) +
+  draw_vector(2, -1, colour = mfpa$ink) +
+  label_curve(2.1, 3.25, "(2, 3)", parse = FALSE, hjust = 0) +
+  label_curve(3.15, 2, "(3, 2)", colour = mfpa$red, parse = FALSE, hjust = 0) +
+  label_curve(-2.1, 3.25, "(−2, 3)", colour = mfpa$green, parse = FALSE, hjust = 1) +
+  label_curve(-3.15, -2, "(−3, −2)", colour = mfpa$muted, parse = FALSE, hjust = 1) +
+  label_curve(2.15, -1, "(2, −1)", colour = mfpa$ink, parse = FALSE, hjust = 0) +
+  scale_x_continuous(breaks = -3:3) +
+  scale_y_continuous(breaks = -2:3) +
+  coord_equal(xlim = c(-4.6, 4.6), ylim = c(-2.6, 3.6)) +
+  labs(x = NULL, y = NULL)
+```
+
+A vector may seem like a set, but it's not exactly.
+In a vector, unlike a set, order matters: the 2-dimensional vectors $(2, 3)$ and $(3, 2)$ are legitimately different, whereas the sets $\{2, 3\}$ and $\{3, 2\}$ are exactly the same.
+
+A vector can be multiplied by a scalar $c \in \mathbb{R}$.
+Algebraically, this works by just multiplying element-by-element:
+$$
+c \mathbf{v} = \begin{pmatrix} c v_1 \\ c v_2 \\ \vdots \\ c v_k \end{pmatrix}.
+$$
+If $c$ is positive, this looks like an expansion of the vector by a factor of $c$ (or contraction if $c < 1$).
+The logic is similar for negative $c$, except that first the vector is reflected about the origin.
+
+```{r}
+#| label: fig-vector-scaling
+#| fig-cap: "Scalar multiplication of the vector $\\mathbf{v} = (1, 2)$."
+#| fig-width: 4.5
+#| fig-asp: 1.15
+#| fig-align: center
+#| cache: true
+ggplot() +
+  origin_axes() +
+  draw_vector(2, 4, colour = mfpa$red) +    # 2v, drawn first so v sits on top
+  draw_vector(1, 2) +                       # v
+  draw_vector(-1, -2, colour = mfpa$green) + # -v
+  draw_vector(0.5, 1, colour = mfpa$ink) +  # (1/2)v, drawn last so its head shows on v's shaft
+  label_curve(0.55, 1.5, "bold(v)", hjust = 1) +
+  label_curve(0.65, 0.8, '"½"*bold(v)', colour = mfpa$ink, hjust = 0) +
+  label_curve(2.15, 4, '"2"*bold(v)', colour = mfpa$red, hjust = 0) +
+  label_curve(-1.3, -2.05, '"−"*bold(v)', colour = mfpa$green, hjust = 1) +
+  scale_x_continuous(breaks = -2:3) +
+  scale_y_continuous(breaks = seq(-2, 4, by = 2)) +
+  coord_equal(xlim = c(-2.5, 3.2), ylim = c(-2.5, 4.5)) +
+  labs(x = NULL, y = NULL)
+```
+
+Vector addition also works element-by-element:
+$$
+\mathbf{u} + \mathbf{v} = \begin{pmatrix}
+  u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_k + v_k
+\end{pmatrix}.
+$$
+This is why it's convenient to represent vectors as arrows, not just as points in space.
+If you take the vector $\mathbf{u}$ and start it at the end of $\mathbf{v}$ rather than at the origin, you end up with $\mathbf{u} + \mathbf{v}$.
+
+```{r}
+#| label: fig-vector-addition
+#| fig-cap: "Addition of the vectors $\\mathbf{v} = (1, 2)$ and $\\mathbf{u} = (3, 1)$."
+#| fig-asp: 0.7
+#| cache: true
+ggplot() +
   origin_axes() +
   draw_vector(4, 3, x = 3, y = 1, colour = mfpa$red, head = FALSE, alpha = 0.35) + # v, from the tip of u
   draw_vector(4, 3, x = 1, y = 2, head = FALSE, alpha = 0.35) +       # u, from the tip of v
@@ -114,21 +170,6 @@ p_add <- ggplot() +
   scale_y_continuous(breaks = 0:3) +
   coord_equal(xlim = c(-0.5, 5.6), ylim = c(-0.5, 3.5)) +
   labs(x = NULL, y = NULL)
-
-p_scale <- ggplot() +
-  origin_axes() +
-  draw_vector(2, 4, colour = mfpa$red) +    # 2v, drawn first so v sits on top
-  draw_vector(1, 2) +                       # v
-  draw_vector(-1, -2, colour = mfpa$green) + # -v
-  label_curve(0.55, 1.5, "bold(v)", hjust = 1) +
-  label_curve(2.15, 4, '"2"*bold(v)', colour = mfpa$red, hjust = 0) +
-  label_curve(-1.3, -2.05, '"−"*bold(v)', colour = mfpa$green, hjust = 1) +
-  scale_x_continuous(breaks = -2:3) +
-  scale_y_continuous(breaks = seq(-2, 4, by = 2)) +
-  coord_equal(xlim = c(-2.5, 3.2), ylim = c(-2.5, 4.5)) +
-  labs(x = NULL, y = NULL)
-
-panels(p_add, p_scale)
 ```
 
 A special vector is the [zero vector]{.concept definition="The vector whose entries are all zeroes. We write $\mathbf{0}_k$ for the zero vector of length $k$, or just $\mathbf{0}$ when the length is clear from the context."}, which contains---you guessed it---all zeroes.
@@ -144,19 +185,94 @@ u_1 v_1 + u_2 v_2 + \cdots + u_k v_k
 =
 \sum_{m=1}^k u_m v_m.
 $$
+The dot product of two vectors is always a [scalar]{.concept definition="A regular number, which you can think of as a 1-dimensional vector if you want to be pretentious."}, i.e., a single ordinary number.
+Since the dot product notation for vectors looks like the same notation as multiplication for scalars, you may be tempted to think that $\mathbf{u} \cdot \mathbf{v}$ will be a vector of element-by-element multiples.
+Resist the temptation.
+
+The dot product of two vectors is closely related to the angle between them.
+Being more specific than that would get us into more geometry, and soon thereafter trigonometry, than I want to do here.
+So I will just observe that a pair of vectors has a dot product of 0 exactly when they are [orthogonal]{.concept definition="The vectors $\mathbf{u}$ and $\mathbf{v}$ are orthogonal if $\mathbf{u} \cdot \mathbf{v} = 0$, which is true precisely when they are perpendicular to each other."}, meaning they are perpendicular to each other.
+
+```{r}
+#| label: fig-orthogonal-vectors
+#| fig-cap: "The vectors $(1, 4)$ and $(4, -1)$ have a dot product of 0 and are orthogonal."
+#| fig-width: 4.5
+#| fig-asp: 1
+#| fig-align: center
+#| cache: true
+# Right-angle marker: a small square in the corner between the two vectors,
+# built from their unit directions.
+u_hat <- c(1, 4) / sqrt(17)
+v_hat <- c(4, -1) / sqrt(17)
+s <- 0.4
+corner <- rbind(s * u_hat, s * (u_hat + v_hat), s * v_hat)
+
+ggplot() +
+  origin_axes() +
+  annotate("path", x = corner[, 1], y = corner[, 2], colour = mfpa$muted, linewidth = 0.7) +
+  draw_vector(1, 4) +
+  draw_vector(4, -1, colour = mfpa$red) +
+  label_curve(1.15, 4, "(1, 4)", parse = FALSE, hjust = 0) +
+  label_curve(4.15, -1, "(4, −1)", colour = mfpa$red, parse = FALSE, hjust = 0) +
+  scale_x_continuous(breaks = 0:4) +
+  scale_y_continuous(breaks = -1:4) +
+  coord_equal(xlim = c(-0.8, 5.6), ylim = c(-1.6, 4.5)) +
+  labs(x = NULL, y = NULL)
+```
+
+::: {#exr-orthogonal-vectors name="Orthogonal vectors"}
+Find two different vectors that are both orthogonal to $\mathbf{v} = (1, 3, 2)$.
+
+:::: {.answer}
+There are infinitely many answers here, but here are a couple.
+The vector $(3, -1, 0)$ is orthogonal:
+$$
+\begin{pmatrix} 1 \\ 3 \\ 2 \end{pmatrix}
+\cdot
+\begin{pmatrix} 3 \\ -1 \\ 0 \end{pmatrix}
+= 1 \cdot 3 + 3 \cdot (-1) + 2 \cdot 0
+= 0.
+$$
+So is the vector $(-3, 1, 0)$:
+$$
+\begin{pmatrix} 1 \\ 3 \\ 2 \end{pmatrix}
+\cdot
+\begin{pmatrix} -3 \\ 1 \\ 0 \end{pmatrix}
+= 1 \cdot (-3) + 3 \cdot 1 + 2 \cdot 0
+= 0.
+$$
+In fact, once we showed that $(3, -1, 0)$ was orthogonal, it turns out that *any* scalar multiple of it is also orthogonal, as covered in the exercise below.
+::::
+:::
+
+::: {#exr-scalar-multiple-dot-product name="Dot product of a scalar multiple"}
+Let $\mathbf{u}$ and $\mathbf{v}$ be vectors of the same length, and let $a$ and $b$ be scalars.
+Show that $a \mathbf{u} \cdot b \mathbf{v} = a b (\mathbf{u} \cdot \mathbf{v})$.
+Using this fact, show that if $\mathbf{u}$ and $\mathbf{v}$ are orthogonal, then so are $a \mathbf{u}$ and $b \mathbf{v}$.
+
+:::: {.answer}
+Using the definition of scalar multiplication and the dot product, we have
+$$
+\begin{aligned}
+a \mathbf{u} \cdot b \mathbf{v}
+&= \begin{pmatrix} a u_1 \\ a u_2 \\ \vdots \\ a u_k \end{pmatrix} \cdot \begin{pmatrix} b v_1 \\ b v_2 \\ \vdots \\ b v_k \end{pmatrix} \\
+&= \sum_{m=1}^k (a u_m) (b v_m) \\
+&= \sum_{m=1}^k a b u_m v_m \\
+&= a b \sum_{m=1}^k u_m v_m \\
+&= a b (\mathbf{u} \cdot \mathbf{v}).
+\end{aligned}
+$$
+If $\mathbf{u}$ and $\mathbf{v}$ are orthogonal, then we have $\mathbf{u} \cdot \mathbf{v} = 0$.
+Therefore, $a \mathbf{u} \cdot b \mathbf{v} = ab \cdot 0 = 0$, so $a \mathbf{u}$ and $b \mathbf{v}$ are orthogonal as well.
+::::
+:::
 
 
 ## Linear independence {#sec-linear-independence}
 
 An important concept for regression analysis is the linear independence of a collection of vectors.
-
-::: {#def-linear-combination name="Linear combination"}
-Let $\mathbf{v}_1, \ldots, \mathbf{v}_J$ be a collection of $J$ vectors, each of length $k$.
-We call $\mathbf{u}$ a [linear combination]{.concept definition="The vector $\mathbf{u}$ is a linear combination of $\mathbf{v}_1, \ldots, \mathbf{v}_J$ if there are real numbers $c_1, \ldots, c_J$ such that $\mathbf{u} = c_1 \mathbf{v}_1 + \cdots + c_J \mathbf{v}_J$."} of $\mathbf{v}_1, \ldots, \mathbf{v}_J$ if we can conjure up a set of real numbers $c_1, \ldots, c_J$ to make the following statement true:
-$$
-\mathbf{u} = c_1 \mathbf{v}_1 + \cdots + c_J \mathbf{v}_J.
-$$
-:::
+In essence, to run a regression on a set of variables, you need each column to carry some new information that none of the others already captures.
+Linear independence formalizes this concept.
 
 ::: {#def-linear-independence name="Linear independence"}
 A collection of vectors $\mathbf{v}_1, \ldots, \mathbf{v}_J$ is [linearly independent]{.concept entry="Linear independence" definition="The vectors $\mathbf{v}_1, \ldots, \mathbf{v}_J$ are linearly independent if the only solution to $c_1 \mathbf{v}_1 + \cdots + c_J \mathbf{v}_J = \mathbf{0}$ is $c_1 = 0, \ldots, c_J = 0$. Otherwise, they are linearly dependent."} if the only solution to
@@ -167,9 +283,45 @@ is $c_1 = 0, \ldots, c_J = 0$.
 Otherwise, we call the vectors [linearly dependent]{.concept entry="Linear independence"}.
 :::
 
+As an example, consider the pair of vectors
+$$
+\mathbf{v}_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix},
+\quad
+\mathbf{v}_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}.
+$$
+To check whether they are linearly independent, we need to find every pair of numbers $c_1$ and $c_2$ that makes $c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 = \mathbf{0}$.
+Working entry by entry:
+$$
+\begin{aligned}
+c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 = \mathbf{0}
+&\quad \Leftrightarrow \quad
+\begin{pmatrix} c_1 \cdot 1 + c_2 \cdot 0 \\ c_1 \cdot 0 + c_2 \cdot 1 \end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \end{pmatrix} \\
+&\quad \Leftrightarrow \quad
+\begin{pmatrix} c_1 \\ c_2 \end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+\end{aligned}
+$$
+The only solution is $c_1 = c_2 = 0$, so these vectors are linearly independent.
+
+As an example of two linearly *dependent* vectors, consider
+$$
+\mathbf{v}_1 = \begin{pmatrix} 1 \\ 2 \end{pmatrix},
+\quad
+\mathbf{v}_2 = \begin{pmatrix} 2 \\ 4 \end{pmatrix}.
+$$
+To show that they're linearly dependent, we just need to find any pair of coefficients to put on them that makes their sum equal $(0, 0)$.
+Since $\mathbf{v}_2 = 2 \mathbf{v}_1$, the coefficients $c_1 = 2$ and $c_2 = -1$ will work:
+$$
+2 \mathbf{v}_1 + (-1) \mathbf{v}_2
+= \begin{pmatrix} 2 \cdot 1 + (-1) \cdot 2 \\ 2 \cdot 2 + (-1) \cdot 4 \end{pmatrix}
+= \begin{pmatrix} 2 - 2 \\ 4 - 4 \end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+$$
+
 Some fun facts about linear independence:
 
-- If any vector in $\mathbf{v}_1, \ldots, \mathbf{v}_J$ is a linear combination of the others, then these vectors are linearly dependent.
+- If any vector in $\mathbf{v}_1, \ldots, \mathbf{v}_J$ is a [linear combination]{.concept definition="The vector $\mathbf{u}$ is a linear combination of $\mathbf{v}_1, \ldots, \mathbf{v}_J$ if there are real numbers $c_1, \ldots, c_J$ such that $\mathbf{u} = c_1 \mathbf{v}_1 + \cdots + c_J \mathbf{v}_J$."} of the others, meaning it can be written as a weighted sum of the others (i.e., $\mathbf{v}_j = \sum_{i \neq j} c_i \mathbf{v}_i$ for some real numbers $c_i$), then these vectors are linearly dependent.
 
 - A collection of $J$ vectors of length $k$ cannot be linearly independent if $J > k$.
   In other words, given vectors of length $k$, the most that can be linearly independent of each other is $k$.
@@ -177,11 +329,32 @@ Some fun facts about linear independence:
 - If any $\mathbf{v}_j = \mathbf{0}$, then $\mathbf{v}_1, \ldots, \mathbf{v}_J$ are linearly dependent.
   (Why?)
 
-[Explain the geometric picture of linear dependence in $\mathbb{R}^2$---two vectors are linearly dependent exactly when they lie on a common line through the origin---to go with @fig-linear-independence. Not in pdaps.]{.todo}
+::: {#exr-linear-dependence-zero-vector name="Zero vector is always linearly dependent"}
+Explain why a collection of vectors is linearly dependent if any one of them is a zero vector.
+
+:::: {.answer}
+Consider a collection $\mathbf{v}_1, \ldots, \mathbf{v}_J$ where some $\mathbf{v}_j = \mathbf{0}$.
+Set the coefficient on $\mathbf{v}_j$ to 1 and every other coefficient to 0:
+$$
+c_1 = 0, \; \ldots, \; c_{j-1} = 0, \quad c_j = 1, \quad c_{j+1} = 0, \; \ldots, \; c_J = 0.
+$$
+Then every term drops out except the $j$'th one, so
+$$
+c_1 \mathbf{v}_1 + \cdots + c_j \mathbf{v}_j + \cdots + c_J \mathbf{v}_J
+= \mathbf{v}_j
+= \mathbf{0}.
+$$
+Because $c_j = 1$ is not zero, this is a solution other than all zeroes, so the vectors are linearly dependent.
+::::
+:::
+
+For a collection of two vectors in two-dimensional space, linear dependence has a simple geometric interpretation.
+The two vectors are linearly dependent exactly when they lie on a common line through the origin, as in panel (a) of @fig-linear-independence.
+If the two vectors don't lie on a common line, as in panel (b), neither one is a scalar multiple of the other, and they are linearly independent.
 
 ```{r}
 #| label: fig-linear-independence
-#| fig-cap: "TODO(BJK): caption. Panel (a): v₁ = (2, 1) and v₂ = (−4, −2), which lie on a common line through the origin (dashed), so are linearly dependent. Panel (b): v₁ = (2, 1) and v₂ = (1, 2), which are linearly independent."
+#| fig-cap: "A linearly dependent pair of vectors in $\\mathbb{R}^2$ (a) and a linearly independent pair (b)."
 #| fig-asp: 0.45
 #| cache: true
 p_dependent <- ggplot() +
@@ -248,8 +421,35 @@ Determine whether each of the following collections of vectors is linearly indep
 ::::
 :::
 
+<!--
 
 ## Matrix operations {#sec-matrix-operations}
+
+[2025 board (Nov 18): motivated matrices with regression: $y_i = \beta_1 x_{i1} + \cdots + \beta_K x_{iK} + \varepsilon_i = \mathbf{x}_i \cdot \boldsymbol{\beta} + \varepsilon_i$, then wrote out all $N$ of these equations and asked whether they can be summarized as one equation ("yes, with matrices").]{.todo}
+
+$$
+\begin{aligned}
+y_i
+&= \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_K x_{iK} + \varepsilon_i \\
+&= \sum_{k=1}^K \beta_k x_{ik} + \varepsilon_i \\
+&= \mathbf{x}_i \cdot \boldsymbol{\beta} + \varepsilon_i
+\end{aligned}
+$$
+
+$$
+\mathbf{x}_i = (x_{i1}, x_{i2}, \ldots, x_{iK}),
+\qquad
+\boldsymbol{\beta} = (\beta_1, \beta_2, \ldots, \beta_K)
+$$
+
+$$
+\begin{aligned}
+y_1 &= \beta_1 x_{11} + \beta_2 x_{12} + \cdots + \beta_K x_{1K} + \varepsilon_1 \\
+y_2 &= \beta_1 x_{21} + \beta_2 x_{22} + \cdots + \beta_K x_{2K} + \varepsilon_2 \\
+&\;\;\vdots \\
+y_N &= \beta_1 x_{N1} + \beta_2 x_{N2} + \cdots + \beta_K x_{NK} + \varepsilon_N
+\end{aligned}
+$$
 
 A [matrix]{.concept definition="A two-dimensional array of numbers, with entries in rows and columns. A matrix with $n$ rows and $m$ columns is an $n \times m$ matrix. We usually write $a_{ij}$ for the entry of $\mathbf{A}$ in the $i$'th row and $j$'th column."} is a two-dimensional array of numbers, with entries in rows and columns.
 We call a matrix with $n$ rows and $m$ columns an $n \times m$ matrix.
@@ -348,6 +548,18 @@ Every matrix is special, but some kinds of square matrix are *especially* specia
   \end{bmatrix}
   $$
 
+  [2025 board (Nov 18): the variance--covariance matrix of $K$ random variables as the symmetric matrix that comes up in statistics.]{.todo}
+
+  $$
+  \begin{bmatrix}
+    \mathrm{V}[X_1] & \mathrm{Cov}[X_1, X_2] & \mathrm{Cov}[X_1, X_3] & \cdots & \mathrm{Cov}[X_1, X_K] \\
+    \mathrm{Cov}[X_1, X_2] & \mathrm{V}[X_2] & \mathrm{Cov}[X_2, X_3] & \cdots & \mathrm{Cov}[X_2, X_K] \\
+    \mathrm{Cov}[X_1, X_3] & \mathrm{Cov}[X_2, X_3] & \mathrm{V}[X_3] & \cdots & \mathrm{Cov}[X_3, X_K] \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    \mathrm{Cov}[X_1, X_K] & \mathrm{Cov}[X_2, X_K] & \mathrm{Cov}[X_3, X_K] & \cdots & \mathrm{V}[X_K]
+  \end{bmatrix}
+  $$
+
 - A [diagonal]{.concept entry="Diagonal matrix" definition="A square matrix that contains zeroes everywhere except along the main diagonal: $a_{ij} = 0$ whenever $i \neq j$."} matrix contains zeroes everywhere except along the main diagonal: if $i \neq j$, then $a_{ij} = 0$.
   A diagonal matrix is symmetric by definition.
   Example:
@@ -430,6 +642,30 @@ $$
 \end{gathered}
 $$
 
+[2025 board (Nov 18): the board did the general case---an $N \times (K + 1)$ matrix $\mathbf{X}$ with a column of 1s and $\boldsymbol{\beta} = (\beta_0, \ldots, \beta_K)$---and tied $\mathbf{X} \boldsymbol{\beta}$ back to the stacked regression equations from the start of the matrices section.]{.todo}
+
+$$
+\underset{N \times (K + 1)}{\mathbf{X}} = \begin{bmatrix}
+  1 & x_{11} & x_{12} & \cdots & x_{1K} \\
+  1 & x_{21} & x_{22} & \cdots & x_{2K} \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  1 & x_{N1} & x_{N2} & \cdots & x_{NK}
+\end{bmatrix},
+\qquad
+\underset{(K + 1) \times 1}{\boldsymbol{\beta}} = \begin{bmatrix}
+  \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_K
+\end{bmatrix}
+$$
+
+$$
+\underset{N \times 1}{\mathbf{X} \boldsymbol{\beta}} = \begin{bmatrix}
+  \beta_0 + \beta_1 x_{11} + \beta_2 x_{12} + \cdots + \beta_K x_{1K} \\
+  \beta_0 + \beta_1 x_{21} + \beta_2 x_{22} + \cdots + \beta_K x_{2K} \\
+  \vdots \\
+  \beta_0 + \beta_1 x_{N1} + \beta_2 x_{N2} + \cdots + \beta_K x_{NK}
+\end{bmatrix}
+$$
+
 
 ### Properties of matrix multiplication {#sec-matmul-properties}
 
@@ -437,11 +673,60 @@ Some important properties of matrix multiplication:
 
 - Matrix multiplication is associative: $(\mathbf{A} \mathbf{B}) \mathbf{C} = \mathbf{A} (\mathbf{B} \mathbf{C})$.
 
+  [2025 final review: associativity for longer products, e.g. $\mathbf{A} \mathbf{B} \mathbf{C} \mathbf{D} = (\mathbf{A} \mathbf{B})(\mathbf{C} \mathbf{D}) = (\mathbf{A} (\mathbf{B} \mathbf{C})) \mathbf{D} = \mathbf{A} ((\mathbf{B} \mathbf{C}) \mathbf{D})$.]{.todo}
+
+  $$
+  \mathbf{A} \mathbf{B} \mathbf{C} \mathbf{D}
+  = (\mathbf{A} \mathbf{B})(\mathbf{C} \mathbf{D})
+  = [\mathbf{A} (\mathbf{B} \mathbf{C})] \mathbf{D}
+  = \mathbf{A} [(\mathbf{B} \mathbf{C}) \mathbf{D}]
+  $$
+
 - Matrix multiplication is distributive: $\mathbf{A} (\mathbf{B} + \mathbf{C}) = \mathbf{A} \mathbf{B} + \mathbf{A} \mathbf{C}$.
+
+  [2025 board (Nov 20): also state right distributivity, $(\mathbf{A} + \mathbf{B}) \mathbf{C} = \mathbf{A} \mathbf{C} + \mathbf{B} \mathbf{C}$.]{.todo}
+
+  $$
+  (\mathbf{A} + \mathbf{B}) \mathbf{C} = \mathbf{A} \mathbf{C} + \mathbf{B} \mathbf{C}
+  $$
 
 - For any $n \times m$ matrix $\mathbf{A}$, we have $\mathbf{A} \mathbf{I}_m = \mathbf{I}_n \mathbf{A} = \mathbf{A}$.
   In this way, the identity matrix is kind of like the matrix equivalent of the number one.
   (More on this when we get to matrix inversion.)
+
+  [2025 board (Nov 20): "proof" by example---multiply out $\mathbf{I}_3 \mathbf{A}$ and $\mathbf{A} \mathbf{I}_2$ for a general $3 \times 2$ matrix $\mathbf{A}$ with entries $a, \ldots, f$.]{.todo}
+
+  $$
+  \mathbf{A} = \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}
+  $$
+
+  $$
+  \begin{aligned}
+  \mathbf{I}_3 \mathbf{A}
+  &= \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+     \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix} \\
+  &= \begin{bmatrix}
+       1 \cdot a + 0 \cdot c + 0 \cdot e & 1 \cdot b + 0 \cdot d + 0 \cdot f \\
+       0 \cdot a + 1 \cdot c + 0 \cdot e & 0 \cdot b + 1 \cdot d + 0 \cdot f \\
+       0 \cdot a + 0 \cdot c + 1 \cdot e & 0 \cdot b + 0 \cdot d + 1 \cdot f
+     \end{bmatrix} \\
+  &= \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}
+  \end{aligned}
+  $$
+
+  $$
+  \begin{aligned}
+  \mathbf{A} \mathbf{I}_2
+  &= \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}
+     \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \\
+  &= \begin{bmatrix}
+       a \cdot 1 + b \cdot 0 & a \cdot 0 + b \cdot 1 \\
+       c \cdot 1 + d \cdot 0 & c \cdot 0 + d \cdot 1 \\
+       e \cdot 1 + f \cdot 0 & e \cdot 0 + f \cdot 1
+     \end{bmatrix} \\
+  &= \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}
+  \end{aligned}
+  $$
 
 - Matrix multiplication is *not* commutative.
   In other words, $\mathbf{A} \mathbf{B} \neq \mathbf{B} \mathbf{A}$ except in very special cases (e.g., both are square and one of them is the identity matrix).
@@ -480,6 +765,20 @@ Some important properties of matrix multiplication:
   Then $\mathbf{A} \mathbf{B}$ is $n \times p$, so $(\mathbf{A} \mathbf{B})^\top$ should be $p \times n$.
   Therefore, $\mathbf{B}^\top$ must come first.
 
+  [2025 board (Nov 20): concrete version with $\mathbf{A}$ $4 \times 2$ and $\mathbf{B}$ $2 \times 3$, writing out $\mathbf{A}^\top$ ($2 \times 4$) and $\mathbf{B}^\top$ ($3 \times 2$) to show only $\mathbf{B}^\top \mathbf{A}^\top$ is conformable.]{.todo}
+
+  $$
+  \underset{4 \times 2}{\mathbf{A}} = \begin{bmatrix} a & b \\ c & d \\ e & f \\ g & h \end{bmatrix},
+  \qquad
+  \underset{2 \times 3}{\mathbf{B}} = \begin{bmatrix} i & j & k \\ l & m & n \end{bmatrix}
+  $$
+
+  $$
+  \underset{2 \times 4}{\mathbf{A}^\top} = \begin{bmatrix} a & c & e & g \\ b & d & f & h \end{bmatrix},
+  \qquad
+  \underset{3 \times 2}{\mathbf{B}^\top} = \begin{bmatrix} i & l \\ j & m \\ k & n \end{bmatrix}
+  $$
+
 
 ## Matrix inversion {#sec-matrix-inversion}
 
@@ -494,6 +793,35 @@ $$
 where $b^{-1}$ is the unique real number such that
 $$
 b \times b^{-1} = b^{-1} \times b = 1.
+$$
+
+[2025 board (Nov 20): motivated inversion by solving $a x = b$: if $a \neq 0$, then $x = b / a = (1 / a) b$; if $a = 0$, there are infinitely many solutions ($b = 0$) or none ($b \neq 0$). Then wrote a two-equation system as $\mathbf{A} \mathbf{x} = \mathbf{b}$ and posed three questions: how to define $\mathbf{A}^{-1}$, when it exists (the analogue of not dividing by 0), and how to calculate it (a formula for $2 \times 2$; otherwise use a computer).]{.todo}
+
+$$
+a x = b
+\quad \Rightarrow \quad
+x = \frac{b}{a} = \left( \frac{1}{a} \right) b
+\qquad (a \neq 0)
+$$
+
+$$
+\begin{aligned}
+a_1 x_1 + a_2 x_2 &= b_1 \\
+a_3 x_1 + a_4 x_2 &= b_2
+\end{aligned}
+\qquad \Leftrightarrow \qquad
+\underbrace{\begin{bmatrix} a_1 & a_2 \\ a_3 & a_4 \end{bmatrix}}_{\mathbf{A}}
+\underbrace{\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}}_{\mathbf{x}}
+=
+\underbrace{\begin{bmatrix} b_1 \\ b_2 \end{bmatrix}}_{\mathbf{b}}
+$$
+
+$$
+\mathbf{A} \mathbf{x} = \begin{bmatrix} a_1 x_1 + a_2 x_2 \\ a_3 x_1 + a_4 x_2 \end{bmatrix}
+$$
+
+$$
+\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}
 $$
 
 ::: {#def-matrix-inverse name="Matrix inverse"}
@@ -527,6 +855,84 @@ Some basic properties of matrix inverses:
 
 - The identity matrix is its own inverse: $\mathbf{I}_n^{-1} = \mathbf{I}_n$.
 
+  [2025 board (Nov 20): one-line proof, $\mathbf{I}_n \mathbf{I}_n = \mathbf{I}_n$.]{.todo}
+
+  $$
+  \mathbf{I}_n \mathbf{I}_n = \mathbf{I}_n
+  $$
+
+[2025 board (Nov 20): worked example before the non-invertible cases---$\mathbf{A}$ with rows $(1, 2)$ and $(0, 4)$ has inverse with rows $(1, -1/2)$ and $(0, 1/4)$, verified by multiplying out both $\mathbf{A} \mathbf{A}^{-1}$ and $\mathbf{A}^{-1} \mathbf{A}$.]{.todo}
+
+$$
+\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 0 & 4 \end{bmatrix},
+\qquad
+\mathbf{A}^{-1} = \begin{bmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{4} \end{bmatrix}
+$$
+
+$$
+\mathbf{A} \mathbf{A}^{-1}
+= \begin{bmatrix}
+    1 \cdot 1 + 2 \cdot 0 & 1 \cdot (-\frac{1}{2}) + 2 \cdot \frac{1}{4} \\
+    0 \cdot 1 + 4 \cdot 0 & 0 \cdot (-\frac{1}{2}) + 4 \cdot \frac{1}{4}
+  \end{bmatrix}
+= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+= \mathbf{I}_2
+$$
+
+$$
+\mathbf{A}^{-1} \mathbf{A}
+= \begin{bmatrix}
+    1 \cdot 1 + (-\frac{1}{2}) \cdot 0 & 1 \cdot 2 + (-\frac{1}{2}) \cdot 4 \\
+    0 \cdot 1 + \frac{1}{4} \cdot 0 & 0 \cdot 2 + \frac{1}{4} \cdot 4
+  \end{bmatrix}
+= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+= \mathbf{I}_2
+$$
+
+[2025 final review: inversion does not distribute over addition. Two matrices with no inverse can sum to $\mathbf{I}_2$ (rows $(1, 0), (0, 0)$ plus rows $(0, 0), (0, 1)$), and $\mathbf{I}_2 + (-\mathbf{I}_2) = \mathbf{0}$ has no inverse. (This is Claude's reading of an unlabelled board sketch.)]{.todo}
+
+$$
+\begin{aligned}
+\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}
++ \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+&= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \\
+\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
++ \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix}
+&= \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{aligned}
+$$
+
+[2025 final review: practice tracking dimensions in OLS expressions with $N$ observations and $K$ predictors. In $\mathbf{y} = \mathbf{X} \hat{\boldsymbol{\beta}} + \mathbf{u}$, the product $(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}$ is $K \times 1$ and $\mathbf{y}^\top \mathbf{X} \hat{\boldsymbol{\beta}}$ is $1 \times 1$, and $\hat{\boldsymbol{\beta}}^\top \mathbf{X}^\top \mathbf{y} = (\mathbf{y}^\top \mathbf{X} \hat{\boldsymbol{\beta}})^\top$. Possibly as an exercise.]{.todo}
+
+$$
+\underbrace{\mathbf{y}}_{N \times 1}
+=
+\underbrace{\underbrace{\mathbf{X}}_{N \times K} \, \underbrace{\hat{\boldsymbol{\beta}}}_{K \times 1}}_{N \times 1}
++
+\underbrace{\mathbf{u}}_{N \times 1}
+$$
+
+$$
+\underbrace{
+  \underbrace{(\underbrace{\mathbf{X}^\top}_{K \times N} \underbrace{\mathbf{X}}_{N \times K})^{-1}}_{K \times K}
+  \,
+  \underbrace{\underbrace{\mathbf{X}^\top}_{K \times N} \underbrace{\mathbf{y}}_{N \times 1}}_{K \times 1}
+}_{K \times 1}
+$$
+
+$$
+\underbrace{
+  \underbrace{\mathbf{y}^\top}_{1 \times N}
+  \underbrace{\mathbf{X}}_{N \times K}
+  \underbrace{\hat{\boldsymbol{\beta}}}_{K \times 1}
+}_{1 \times 1}
+$$
+
+$$
+\underbrace{\hat{\boldsymbol{\beta}}^\top \mathbf{X}^\top \mathbf{y}}_{1 \times 1}
+= (\mathbf{y}^\top \mathbf{X} \hat{\boldsymbol{\beta}})^\top
+$$
+
 Some matrices are not [invertible]{.concept entry="Invertible matrix" definition="A square matrix $\mathbf{A}$ is invertible if its inverse $\mathbf{A}^{-1}$ exists. A square matrix is invertible if and only if its columns are linearly independent."}; i.e., their inverse does not exist.
 As a simple example, think of
 $$
@@ -555,6 +961,38 @@ $$
 2 & 4
 \end{bmatrix}.
 $$
+
+[2025 board (Dec 2): before the theorem, prove a second matrix non-invertible directly ("the hard way"). The board used rows $(1, -1)$ and $(1, -1)$: suppose it has an inverse with entries $b, c, d, e$; the first column of the product gives $b - d = 1$ and $b - d = 0$, a contradiction. Then pointed out that the second column is $-1$ times the first.]{.todo}
+
+$$
+\mathbf{A} = \begin{bmatrix} 1 & -1 \\ 1 & -1 \end{bmatrix},
+\qquad
+\mathbf{A}^{-1} = \begin{bmatrix} b & c \\ d & e \end{bmatrix}
+$$
+
+$$
+\begin{bmatrix} 1 & -1 \\ 1 & -1 \end{bmatrix}
+\begin{bmatrix} b & c \\ d & e \end{bmatrix}
+= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+\quad \Rightarrow \quad
+\begin{aligned}
+1 \cdot b + (-1) \cdot d &= 1 \\
+1 \cdot b + (-1) \cdot d &= 0
+\end{aligned}
+\quad \Rightarrow \quad
+1 = 0
+$$
+
+$$
+\mathbf{a}_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix},
+\quad
+\mathbf{a}_2 = \begin{pmatrix} -1 \\ -1 \end{pmatrix} = -1 \mathbf{a}_1,
+\quad
+\mathbf{a}_1 + \mathbf{a}_2
+= \begin{pmatrix} 1 - 1 \\ 1 - 1 \end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+$$
+
 We know that because of the following theorem:
 
 ::: {#thm-invertible-columns}
@@ -593,6 +1031,36 @@ The $2 \times 2$ matrix $\mathbf{A}$ is invertible if and only if $ad \neq bc$, 
 
 ::: {.proof}
 [Prove the "if" direction: when $ad \neq bc$, multiplying out shows that @eq-inverse-2x2 satisfies $\mathbf{A} \mathbf{A}^{-1} = \mathbf{A}^{-1} \mathbf{A} = \mathbf{I}_2$. (pdaps left this to the reader; the 2025 scratch note says it was done in class.)]{.todo}
+
+$$
+\begin{aligned}
+\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+\begin{bmatrix}
+  \frac{d}{ad - bc} & \frac{-b}{ad - bc} \\
+  \frac{-c}{ad - bc} & \frac{a}{ad - bc}
+\end{bmatrix}
+&= \begin{bmatrix}
+  \frac{a \cdot d + b \cdot (-c)}{ad - bc} & \frac{a \cdot (-b) + b \cdot a}{ad - bc} \\
+  \frac{c \cdot d + d \cdot (-c)}{ad - bc} & \frac{c \cdot (-b) + d \cdot a}{ad - bc}
+\end{bmatrix} \\
+&= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\begin{bmatrix}
+  \frac{d}{ad - bc} & \frac{-b}{ad - bc} \\
+  \frac{-c}{ad - bc} & \frac{a}{ad - bc}
+\end{bmatrix}
+\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+&= \begin{bmatrix}
+  \frac{d \cdot a + (-b) \cdot c}{ad - bc} & \frac{d \cdot b + (-b) \cdot d}{ad - bc} \\
+  \frac{(-c) \cdot a + a \cdot c}{ad - bc} & \frac{(-c) \cdot b + a \cdot d}{ad - bc}
+\end{bmatrix} \\
+&= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+\end{aligned}
+$$
 
 For the "only if" direction, we will prove its contrapositive: if $ad = bc$, then $\mathbf{A}$ is not invertible.
 
@@ -637,6 +1105,31 @@ I will break the proof into a few cases, and find a pair of $p$ and $q$ values (
 :::
 
 For now, let's try a couple of examples.
+
+[2025 board (Dec 2): one worked example step by step---$\mathbf{A}$ with rows $(1, 0)$ and $(2, 4)$, so $\det \mathbf{A} = 4$; apply @eq-inverse-2x2 to get rows $(1, 0)$ and $(-1/2, 1/4)$; double-check that $\mathbf{A} \mathbf{A}^{-1} = \mathbf{I}_2$.]{.todo}
+
+$$
+\mathbf{A} = \begin{bmatrix} 1 & 0 \\ 2 & 4 \end{bmatrix},
+\qquad
+\det(\mathbf{A}) = 1 \cdot 4 - 0 \cdot 2 = 4
+$$
+
+$$
+\mathbf{A}^{-1}
+= \frac{1}{4} \begin{bmatrix} 4 & 0 \\ -2 & 1 \end{bmatrix}
+= \begin{bmatrix} 1 & 0 \\ -\frac{1}{2} & \frac{1}{4} \end{bmatrix}
+$$
+
+$$
+\mathbf{A} \mathbf{A}^{-1}
+= \begin{bmatrix} 1 & 0 \\ 2 & 4 \end{bmatrix}
+  \begin{bmatrix} 1 & 0 \\ -\frac{1}{2} & \frac{1}{4} \end{bmatrix}
+= \begin{bmatrix}
+    1 \cdot 1 + 0 \cdot (-\frac{1}{2}) & 1 \cdot 0 + 0 \cdot \frac{1}{4} \\
+    2 \cdot 1 + 4 \cdot (-\frac{1}{2}) & 2 \cdot 0 + 4 \cdot \frac{1}{4}
+  \end{bmatrix}
+= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+$$
 $$
 \begin{gathered}
 \mathbf{A} = \begin{bmatrix}
@@ -686,6 +1179,50 @@ $$
 $$
 
 This suggests a natural way to solve for $\mathbf{x}$: $$\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}.$$
+
+[2025 final review: derive this one step at a time---premultiply both sides of $\mathbf{A} \mathbf{x} = \mathbf{b}$ by $\mathbf{A}^{-1}$, regroup by associativity, use $\mathbf{A}^{-1} \mathbf{A} = \mathbf{I}$, then $\mathbf{I} \mathbf{x} = \mathbf{x}$.]{.todo}
+
+$$
+\begin{aligned}
+\mathbf{A} \mathbf{x} &= \mathbf{b} \\
+\mathbf{A}^{-1} (\mathbf{A} \mathbf{x}) &= \mathbf{A}^{-1} \mathbf{b} \\
+(\mathbf{A}^{-1} \mathbf{A}) \mathbf{x} &= \mathbf{A}^{-1} \mathbf{b} \\
+\mathbf{I} \mathbf{x} &= \mathbf{A}^{-1} \mathbf{b} \\
+\mathbf{x} &= \mathbf{A}^{-1} \mathbf{b}
+\end{aligned}
+$$
+
+[2025 final review: step-by-step method. (1) Separate knowns from unknowns. (2) Write the system as $\mathbf{A} \mathbf{x} = \mathbf{b}$, with $\mathbf{A}$ $n \times n$ ($n$ equations in $n$ unknowns). (3) Check whether $\mathbf{A}$ is invertible. (4) If so, compute $\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}$. (5) Plug the solution back into the original equations to check it.]{.todo}
+
+$$
+\underset{n \times n}{\mathbf{A}} \; \underset{n \times 1}{\mathbf{x}} = \underset{n \times 1}{\mathbf{b}}
+$$
+
+[2025 final review: examples for step (1), including one where the coefficients are Greek letters ($\beta_1 x_1 + \beta_2 x_2 = \delta_1$, $\alpha_1 x_1 + \alpha_2 x_2 = \delta_2$) so students must work out which symbols are known; also $3 x + 4 y = 7$, $-2 x + 8 y = 2$.]{.todo}
+
+$$
+\begin{aligned}
+3 x + 4 y &= 7 \\
+-2 x + 8 y &= 2
+\end{aligned}
+\qquad \Leftrightarrow \qquad
+\begin{bmatrix} 3 & 4 \\ -2 & 8 \end{bmatrix}
+\begin{bmatrix} x \\ y \end{bmatrix}
+=
+\begin{bmatrix} 7 \\ 2 \end{bmatrix}
+$$
+
+$$
+\begin{aligned}
+\beta_1 x_1 + \beta_2 x_2 &= \delta_1 \\
+\alpha_1 x_1 + \alpha_2 x_2 &= \delta_2
+\end{aligned}
+\qquad \Leftrightarrow \qquad
+\begin{bmatrix} \beta_1 & \beta_2 \\ \alpha_1 & \alpha_2 \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+=
+\begin{bmatrix} \delta_1 \\ \delta_2 \end{bmatrix}
+$$
 In fact, the linear system of equations $\mathbf{A} \mathbf{x} = \mathbf{b}$ has a unique solution if and only if $\mathbf{A}$ is invertible.
 Otherwise, it has either zero solutions or infinitely many solutions.
 
@@ -756,6 +1293,8 @@ p_many <- plot_system(
 panels(p_one, p_none, p_many)
 ```
 
+[2025 comparison: last year's coverage of linear systems was only the general $2 \times 2$ system solved with $\mathbf{A}^{-1}$ (Dec 2) and the step-by-step method above (final review), with "use a computer" for inverting anything bigger than $2 \times 2$. None of the row-reduction items in the list below were covered in 2025; they come from an earlier Claude pass, not from last year's boards.]{.todo}
+
 [Major gap: the syllabus gives solving linear systems two class days (Nov 10 and 12), but the pdaps material above is about a page. Likely missing pieces are listed below.]{.todo}
 
 - [Augmented matrices and Gaussian elimination / row reduction.]{.todo}
@@ -763,6 +1302,8 @@ panels(p_one, p_none, p_many)
 - [The connection back to linear independence of the columns of $\mathbf{A}$ (@thm-invertible-columns).]{.todo}
 - [Inverting matrices larger than $2 \times 2$ (Gauss--Jordan on $[\mathbf{A} \mid \mathbf{I}]$).]{.todo}
 - [Worked examples and exercises.]{.todo}
+
+-->
 
 
 ::: {#concept-review}
