@@ -72,6 +72,8 @@ Level order decides which series is teal. A character column (e.g. the `names_to
 - `mark_limit(x, y)` — hollow ring (`shape = 21`, `paper` fill) for a limit approached at a point.
 - `shade_window(xmin, xmax)` — highlighted band on the x-axis (`teal`, `alpha = 0.08`).
 - `label_curve(x, y, label)` — direct label coloured to match its curve, parsed as plotmath by default (`'italic(h)*"(x)"'`, `"2^x"`; see "Math labels" below); pass `parse = FALSE` for plain text; `hjust`, `vjust`, `size` pass through to `annotate()`.
+- `draw_vector(xend, yend, x = 0, y = 0)` — a vector as an arrow (`linewidth = 1.1`, closed head), from the origin unless `x`/`y` are given; `head = FALSE` gives a plain segment for faded construction lines (pass `alpha = 0.35`). Takes `colour` but not vectors of coordinates.
+- `origin_axes()` — solid `muted` coordinate axes through the origin, for vector figures.
 
 **Font.** Archivo is not a system font on the CI runner or most machines. `_common.R` fetches it from Google Fonts with `systemfonts::require_font()` into the gitignored `_fonts/` directory on the first render, reuses the cached files afterwards, and aliases the system sans to "Archivo" if offline. This only works because `_quarto.yml` sets `dev: ragg_png`: the `ragg` device resolves fonts via `systemfonts`, whereas the default cairo `png` device only sees fontconfig's system fonts and silently falls back to the system sans. Don't override `dev` per chunk.
 

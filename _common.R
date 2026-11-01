@@ -142,3 +142,29 @@ shade_window <- function(xmin, xmax, colour = mfpa$teal) {
 label_curve <- function(x, y, label, colour = mfpa$teal, parse = TRUE, ...) {
   annotate("text", x = x, y = y, label = label, colour = colour, parse = parse, ...)
 }
+
+# A vector drawn as an arrow from (x, y) to (xend, yend). head = FALSE draws a
+# plain segment, for faded construction lines.
+draw_vector <- function(xend, yend, x = 0, y = 0, colour = mfpa$teal,
+                        head = TRUE, ...) {
+  # Build the arrow argument only when wanted: annotate() treats an explicit
+  # `arrow = NULL` as a zero-length aesthetic and silently drops the layer.
+  head_arg <- if (head) list(arrow = arrow(length = unit(0.13, "inches"), type = "closed"))
+  do.call(annotate, c(
+    list(
+      "segment",
+      x = x, y = y, xend = xend, yend = yend,
+      colour = colour, linewidth = 1.1, linejoin = "mitre"
+    ),
+    head_arg,
+    list(...)
+  ))
+}
+
+# Solid, de-emphasised coordinate axes through the origin.
+origin_axes <- function() {
+  list(
+    geom_hline(yintercept = 0, linetype = "solid", colour = mfpa$muted, linewidth = 0.4),
+    geom_vline(xintercept = 0, linetype = "solid", colour = mfpa$muted, linewidth = 0.4)
+  )
+}

@@ -58,6 +58,7 @@ book:
     - integrals.qmd
     - optimization.qmd
     - linear_algebra.qmd
+    - multivariable_calculus.qmd
     - references.qmd
   license: "CC BY-NC-SA 4.0"
   sidebar:
