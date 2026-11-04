@@ -145,7 +145,7 @@ $$
 ...or you can look at @fig-derivative-approximation for an animated illustration of the process.
 
 <!-- Pre-rendered GIF: source in images/anim/derivative_approximation.R (see CLAUDE.md, "Animated figures"). -->
-![Closer and closer approximations of the how steep the function is at $c = 0$.](images/derivative_approximation.gif){#fig-derivative-approximation}
+![Closer and closer approximations of how steep the function is at $c = 0$.](images/derivative_approximation.gif){#fig-derivative-approximation}
 
 No matter how close of an approximation we take, there's always a closer one to take.
 You should never be satisfied with the approximation $$\text{steepness at $c$} \approx \frac{f(x) - f(c)}{x - c},$$ because you could have calculated an *even better* approximation at the midpoint between $c$ and your previously chosen approximation point $x$, $$\text{steepness at $c$} \approx \frac{f(\frac{x + c}{2}) - f(c)}{\frac{x + c}{2} - c}.$$

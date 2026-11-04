@@ -1,0 +1,22 @@
+\documentclass[border=2pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{matrix, shapes.geometric, shapes.misc, calc}
+% Entry (1, 2): first row of A (teal) dotted with second column of B (red).
+% Entry (1, 1) stays filled in from the previous step (matrix-product-11).
+% Unfilled entries default to placeholder dots (see matrix-product.tikz).
+\newcommand{\ra}[1]{\textcolor{mfpateal}{#1}}
+\newcommand{\cb}[1]{\textcolor{mfpared}{#1}}
+\newcommand{\sAA}{-9}
+\newcommand{\sAB}{\ra{2} \cdot \cb{4} + \ra{10} \cdot \cb{10} + \ra{0} \cdot \cb{2} + \ra{1} \cdot \cb{5}}
+\newcommand{\pAA}{-9}
+\newcommand{\pAB}{113}
+\newcommand{\punct}{.}
+\begin{document}
+\begin{tikzpicture}
+\input{matrix-product.tikz}
+\ringrun{mfpateal}{a-1-1}{a-1-4}
+\ringrun{mfpared}{b-1-2}{b-4-2}
+\node[entry ring=mfpaink] at (c-1-2) {};
+\end{tikzpicture}
+\end{document}

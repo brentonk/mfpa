@@ -1,0 +1,23 @@
+\documentclass[border=0pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{matrix, shapes.geometric, calc}
+\begin{document}
+\begin{tikzpicture}
+\input{symmetric-matrix.tikz}
+% Each off-diagonal entry ringed; mirrored pairs share a colour and a link.
+\node[entry ring=mfpateal]  (r12) at (m-1-2) {};
+\node[entry ring=mfpateal]  (r21) at (m-2-1) {};
+\node[entry ring=mfpared]   (r13) at (m-1-3) {};
+\node[entry ring=mfpared]   (r31) at (m-3-1) {};
+\node[entry ring=mfpagreen] (r23) at (m-2-3) {};
+\node[entry ring=mfpagreen] (r32) at (m-3-2) {};
+\draw[mirror link=mfpateal]  (r12) -- (r21);
+\draw[mirror link=mfpagreen] (r23) -- (r32);
+% The 100s' link is straight like the others (each pair meets when the matrix
+% is folded along the diagonal), so it runs through the 2; break it there.
+% With uniform row and column spacing, m-2-2 is the midpoint of the link.
+\draw[mirror link=mfpared] (r13) -- ($(m-2-2)!0.55em!(m-1-3)$);
+\draw[mirror link=mfpared] ($(m-2-2)!0.55em!(m-3-1)$) -- (r31);
+\end{tikzpicture}
+\end{document}

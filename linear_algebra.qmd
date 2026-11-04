@@ -395,38 +395,39 @@ Determine whether each of the following collections of vectors is linearly indep
 ::::
 :::
 
-<!--
+## Matrices {#sec-matrices}
 
-## Matrix operations {#sec-matrix-operations}
+You may not have known it, but vectors have given us a compact way to write regression-style equations.
+Think of a linear model, where we model an outcome $y_i$ as a linear function of $k$ variables $x_{i1}, x_{i2}, \ldots, x_{ik}$, in addition to an error term $\varepsilon_i$.
+You can write down the model using the ambiguous, imprecise "dot-dot-dot" notation
+$$
+y_i = \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_k x_{ik} + \varepsilon_i.
+$$
+You can upgrade that to the cumbersome-but-more-pedagogically-correct summation notation
+$$
+y_i = \sum_{m=1}^k \beta_m x_{im} + \varepsilon_i.
+$$
+But hey, that summation looks a lot like a dot product.
+And indeed, we can write the linear model for a single observation even more compactly using the vector notation
+$$
+y_i = \mathbf{x}_i \cdot \boldsymbol{\beta} + \varepsilon_i,
+$$
+where $\mathbf{x}_i \in \mathbb{R}^k$ is the vector of variables and $\boldsymbol{\beta} \in \mathbb{R}^k$ is the vector of coefficients.
 
-[2025 board (Nov 18): motivated matrices with regression: $y_i = \beta_1 x_{i1} + \cdots + \beta_K x_{iK} + \varepsilon_i = \mathbf{x}_i \cdot \boldsymbol{\beta} + \varepsilon_i$, then wrote out all $N$ of these equations and asked whether they can be summarized as one equation ("yes, with matrices").]{.todo}
-
+The vector notation just gives us a way to write the model for a single observation.
+When we expand out to matrices, we'll be able to go even further---to write a single equation to stand for the model of all the data.
+In other words, if we think of there being $n$ observations, we'll be able to write a single equation that collects all of the observation-by-observation models
 $$
 \begin{aligned}
-y_i
-&= \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_K x_{iK} + \varepsilon_i \\
-&= \sum_{k=1}^K \beta_k x_{ik} + \varepsilon_i \\
-&= \mathbf{x}_i \cdot \boldsymbol{\beta} + \varepsilon_i
-\end{aligned}
-$$
-
-$$
-\mathbf{x}_i = (x_{i1}, x_{i2}, \ldots, x_{iK}),
-\qquad
-\boldsymbol{\beta} = (\beta_1, \beta_2, \ldots, \beta_K)
-$$
-
-$$
-\begin{aligned}
-y_1 &= \beta_1 x_{11} + \beta_2 x_{12} + \cdots + \beta_K x_{1K} + \varepsilon_1 \\
-y_2 &= \beta_1 x_{21} + \beta_2 x_{22} + \cdots + \beta_K x_{2K} + \varepsilon_2 \\
+y_1 &= \beta_1 x_{11} + \beta_2 x_{12} + \cdots + \beta_k x_{1k} + \varepsilon_1; \\
+y_2 &= \beta_1 x_{21} + \beta_2 x_{22} + \cdots + \beta_k x_{2k} + \varepsilon_2; \\
 &\;\;\vdots \\
-y_N &= \beta_1 x_{N1} + \beta_2 x_{N2} + \cdots + \beta_K x_{NK} + \varepsilon_N
+y_n &= \beta_1 x_{n1} + \beta_2 x_{n2} + \cdots + \beta_k x_{nk} + \varepsilon_n.
 \end{aligned}
 $$
 
-A [matrix]{.concept definition="A two-dimensional array of numbers, with entries in rows and columns. A matrix with $n$ rows and $m$ columns is an $n \times m$ matrix. We usually write $a_{ij}$ for the entry of $\mathbf{A}$ in the $i$'th row and $j$'th column."} is a two-dimensional array of numbers, with entries in rows and columns.
-We call a matrix with $n$ rows and $m$ columns an $n \times m$ matrix.
+A [matrix]{.concept definition="A two-dimensional array of numbers, with entries in rows and columns. A matrix with $n$ rows and $k$ columns is an $n \times k$ matrix. We write $\mathbf{A} \in \mathbb{R}^{n \times k}$ to denote that $\mathbf{A}$ is an $n \times k$ matrix. We usually write $a_{ij}$ for the entry of $\mathbf{A}$ in the $i$'th row and $j$'th column."} is a two-dimensional array of numbers, with entries in rows and columns.
+We call a matrix with $n$ rows and $k$ columns an $n \times k$ matrix.
 Here's an example of a $2 \times 3$ matrix:
 $$
 \mathbf{A}
@@ -440,43 +441,42 @@ Notice the convention of using an uppercase bold letter to denote a matrix.
 Given a matrix $\mathbf{A}$, we usually write $a_{ij}$ to denote the entry in the $i$'th row and $j$'th column.
 In the above example, we have $a_{13} = 2$.
 
-You can think of a vector $\mathbf{v} \in \mathbb{R}^k$ as a $1 \times k$ *row matrix* or as a $k \times 1$ *column matrix*.
-Throughout this book, I will treat vectors as column matrices unless otherwise noted.
+Additionally, mirroring our $\mathbb{R}^k$ notation for the set of length-$k$ vectors, we write $\mathbb{R}^{n \times k}$ to denote the set of $n \times k$ matrices.
+So for example, with the $2 \times 3$ example matrix $\mathbf{A}$ above, we would write $\mathbf{A} \in \mathbb{R}^{2 \times 3}$.
 
-Like vectors, matrices can be multiplied by a scalar $c \in \mathbb{R}$.
+You can think of a vector $\mathbf{v} \in \mathbb{R}^k$ as a $1 \times k$ [row vector]{.concept entry="Row and column vectors" definition="A $k$-dimensional vector $\mathbf{v} \in \mathbb{R}^k$ may be treated as a $1 \times k$ matrix, in which case we call it a row vector, or as a $k \times 1$ matrix, in which case we call it a column vector. I personally default to treating vectors as column vectors."} or as a $k \times 1$ [column vector]{.concept entry="Row and column vectors"}.
+Whenever I use a vector alongside matrices, you can assume I am treating it as a column vector, unless I specifically say otherwise.
+
+### Basic matrix operations {#sec-matrix-operations}
+
+Like vectors, matrices can be multiplied by scalars.
+Given a scalar $c \in \mathbb{R}$ and a matrix $\mathbf{A} \in \mathbb{R}^{n \times k}$, we have
 $$
 c \mathbf{A} =
 \begin{bmatrix}
-  c a_{11} & c a_{12} & \cdots & c a_{1m} \\
-  c a_{21} & c a_{22} & \cdots & c a_{2m} \\
+  c a_{11} & c a_{12} & \cdots & c a_{1k} \\
+  c a_{21} & c a_{22} & \cdots & c a_{2k} \\
   \vdots & \vdots & \ddots & \vdots \\
-  c a_{n1} & c a_{n2} & \cdots & c a_{nm}
+  c a_{n1} & c a_{n2} & \cdots & c a_{nk}
 \end{bmatrix}
 $$
 
-Matrices of the same dimension (i.e., both with the same number of rows $n$ and columns $m$) can be added ...
+Matrix addition also works just like vector addition.
+Given two matrices of the same dimensions, $\mathbf{A} \in \mathbb{R}^{n \times k}$ and $\mathbf{B} \in \mathbb{R}^{n \times k}$, we have
 $$
 \mathbf{A} + \mathbf{B} =
 \begin{bmatrix}
-  a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1m} + b_{1m} \\
-  a_{21} + b_{21} & a_{22} + b_{22} & \cdots & a_{2m} + b_{2m} \\
+  a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1k} + b_{1k} \\
+  a_{21} + b_{21} & a_{22} + b_{22} & \cdots & a_{2k} + b_{2k} \\
   \vdots & \vdots & \ddots & \vdots \\
-  a_{n1} + b_{n1} & a_{n2} + b_{n2} & \cdots & a_{nm} + b_{nm} \\
+  a_{n1} + b_{n1} & a_{n2} + b_{n2} & \cdots & a_{nk} + b_{nk} \\
 \end{bmatrix}
 $$
-... and subtracted ...
-$$
-\mathbf{A} - \mathbf{B} =
-\begin{bmatrix}
-  a_{11} - b_{11} & a_{12} - b_{12} & \cdots & a_{1m} - b_{1m} \\
-  a_{21} - b_{21} & a_{22} - b_{22} & \cdots & a_{2m} - b_{2m} \\
-  \vdots & \vdots & \ddots & \vdots \\
-  a_{n1} - b_{n1} & a_{n2} - b_{n2} & \cdots & a_{nm} - b_{nm} \\
-\end{bmatrix}
-$$
+Addition of matrices of different dimensions is not well-defined.
+In other words, if you have $\mathbf{A} \in \mathbb{R}^{n \times k}$ and $\mathbf{B} \in \mathbb{R}^{m \times \ell}$, where $n \neq m$ or $k \neq \ell$ (or both), then you're just talking mathematical nonsense if you write $\mathbf{A} + \mathbf{B}$.
 
-Sometimes you will want to "rotate" an $n \times m$ matrix into an $m \times n$ one, so that the first row becomes the first column, the second row becomes the second column, and so on.
-This is called the [transpose]{.concept definition="The transpose of an $n \times m$ matrix $\mathbf{A}$, written $\mathbf{A}^\top$ (or $\mathbf{A}'$), is the $m \times n$ matrix whose first column is the first row of $\mathbf{A}$, whose second column is the second row of $\mathbf{A}$, and so on."}.
+Sometimes you will want to "rotate" an $n \times k$ matrix into a $k \times n$ one, so that the first row becomes the first column, the second row becomes the second column, and so on.
+This is called the [transpose]{.concept definition="The transpose of an $n \times k$ matrix $\mathbf{A}$, written $\mathbf{A}^\top$ (or $\mathbf{A}'$), is the $k \times n$ matrix whose first column is the first row of $\mathbf{A}$, whose second column is the second row of $\mathbf{A}$, and so on."}.
 I write the transpose of $\mathbf{A}$ as $\mathbf{A}^\top$, though you will often also see it written $\mathbf{A}'$.
 For example:
 $$
@@ -501,259 +501,443 @@ $$
 \begin{aligned}
 (\mathbf{A}^\top)^\top &= \mathbf{A}, \\
 (c \mathbf{A})^\top &= c \mathbf{A}^\top, \\
-(\mathbf{A} + \mathbf{B})^\top &= \mathbf{A}^\top + \mathbf{B}^\top, \\
-(\mathbf{A} - \mathbf{B})^\top &= \mathbf{A}^\top - \mathbf{B}^\top.
+(\mathbf{A} + \mathbf{B})^\top &= \mathbf{A}^\top + \mathbf{B}^\top.
 \end{aligned}
 $$
 
+### Special matrices {#sec-special-matrices}
 
-## Special types of matrices {#sec-special-matrices}
+There are some categories of matrix that come up often enough that we have special names for them.
+We will end up spending a lot of time working with matrices where the number of rows matches the number of columns.
+These are called [square matrices]{.concept entry="Square matrix" definition="A matrix with the same number of rows as columns, i.e., an $n \times n$ matrix."}.
 
-A matrix is [square]{.concept entry="Square matrix" definition="A matrix with the same number of rows as columns, i.e., an $n \times n$ matrix."} if it has the same number of rows as columns, i.e., it is $n \times n$.
-Every matrix is special, but some kinds of square matrix are *especially* special.
+::: {#def-square-matrix name="Square matrix"}
+A matrix is [square]{.concept entry="Square matrix"} if it has the same number of rows as columns: $\mathbf{A} \in \mathbb{R}^{n \times n}$ for some natural number $n$.
+:::
 
-- A [symmetric]{.concept entry="Symmetric matrix" definition="A matrix that is equal to its transpose: $\mathbf{A} = \mathbf{A}^\top$."} matrix is equal to its transpose: $\mathbf{A} = \mathbf{A}^\top$.
-  Example:
-  $$
-  \begin{bmatrix}
-    1 & 10 & 100 \\
-    10 & 2 & 0.1 \\
-    100 & 0.1 & 3
-  \end{bmatrix}
-  $$
-
-  [2025 board (Nov 18): the variance--covariance matrix of $K$ random variables as the symmetric matrix that comes up in statistics.]{.todo}
-
-  $$
-  \begin{bmatrix}
-    \mathrm{V}[X_1] & \mathrm{Cov}[X_1, X_2] & \mathrm{Cov}[X_1, X_3] & \cdots & \mathrm{Cov}[X_1, X_K] \\
-    \mathrm{Cov}[X_1, X_2] & \mathrm{V}[X_2] & \mathrm{Cov}[X_2, X_3] & \cdots & \mathrm{Cov}[X_2, X_K] \\
-    \mathrm{Cov}[X_1, X_3] & \mathrm{Cov}[X_2, X_3] & \mathrm{V}[X_3] & \cdots & \mathrm{Cov}[X_3, X_K] \\
-    \vdots & \vdots & \vdots & \ddots & \vdots \\
-    \mathrm{Cov}[X_1, X_K] & \mathrm{Cov}[X_2, X_K] & \mathrm{Cov}[X_3, X_K] & \cdots & \mathrm{V}[X_K]
-  \end{bmatrix}
-  $$
-
-- A [diagonal]{.concept entry="Diagonal matrix" definition="A square matrix that contains zeroes everywhere except along the main diagonal: $a_{ij} = 0$ whenever $i \neq j$."} matrix contains zeroes everywhere except along the main diagonal: if $i \neq j$, then $a_{ij} = 0$.
-  A diagonal matrix is symmetric by definition.
-  Example:
-  $$
-  \begin{bmatrix}
-    1 & 0 & 0 \\
-    0 & 2 & 0 \\
-    0 & 0 & 3
-  \end{bmatrix}
-  $$
-
-- The $n \times n$ [identity matrix]{.concept definition="The $n \times n$ diagonal matrix where each diagonal entry is 1, written $\mathbf{I}_n$ (or just $\mathbf{I}$ when the size is clear from context)."}, written $\mathbf{I}_n$ (or just $\mathbf{I}$ when the size is clear from context), is the $n \times n$ diagonal matrix where each diagonal entry is 1.
-  Example:
-  $$
-  \begin{bmatrix}
-    1 & 0 & 0 \\
-    0 & 1 & 0 \\
-    0 & 0 & 1
-  \end{bmatrix}
-  $$
-
-
-## Matrix multiplication {#sec-matrix-multiplication}
-
-And last we come to [matrix multiplication]{.concept definition="If $\mathbf{A}$ is $n \times m$ and $\mathbf{B}$ is $m \times p$, then $\mathbf{A} \mathbf{B}$ is the $n \times p$ matrix whose $ij$'th element is the dot product of the $i$'th row of $\mathbf{A}$ and the $j$'th column of $\mathbf{B}$."}.
-Whereas matrix addition and subtraction are pretty intuitive, matrix multiplication is not.
-Let $\mathbf{A}$ be an $n \times m$ matrix and $\mathbf{B}$ be an $m \times p$ matrix.
-(Notice that the number of columns of $\mathbf{A}$ must match the number of rows of $\mathbf{B}$.)
-Then $\mathbf{A} \mathbf{B}$ is an $n \times p$ matrix whose $ij$'th element is the dot product of the $i$'th row of $\mathbf{A}$ and the $j$'th column of $\mathbf{B}$:
+Square matrices get their names because, well, they often look like squares.
+For example, the $3 \times 3$ matrix
 $$
-a_{i1} b_{1j} + a_{i2} b_{2j} + \cdots + a_{im} b_{mj}.
-$$
-Some examples might make this more clear.
-
-[Say what the colours in the next display pick out: the first row of $\mathbf{A}$ (teal) and the second column of $\mathbf{B}$ (red) combine into the entry in the first row and second column of $\mathbf{A} \mathbf{B}$.]{.todo}
-
-$$
-\begin{gathered}
 \mathbf{A} = \begin{bmatrix}
-  \textcolor{#0F6E6E}{2} & \textcolor{#0F6E6E}{10} \\
-  0 & 1 \\
-  -1 & 5
-\end{bmatrix},
+10 & 20 & 40 \\
+30 & 60 & 70 \\
+40 & 20 & 90
+\end{bmatrix}
+$$
+Of course, what really matters is that the number of rows match the number of columns, not that the written-out matrix look like a square.
+The $2 \times 2$ matrix
+$$
 \mathbf{B} = \begin{bmatrix}
-  1 & \textcolor{#B3261E}{4} \\
-  -1 & \textcolor{#B3261E}{10}
-\end{bmatrix} \\
-\mathbf{A} \mathbf{B} = \begin{bmatrix}
-  2 \cdot 1 + 10 \cdot (-1) & \textcolor{#0F6E6E}{2} \cdot \textcolor{#B3261E}{4} + \textcolor{#0F6E6E}{10} \cdot \textcolor{#B3261E}{10} \\
-  0 \cdot 1 + 1 \cdot (-1) & 0 \cdot 4 + 1 \cdot 10 \\
-  (-1) \cdot 1 + 5 \cdot (-1) & (-1) \cdot 4 + 5 \cdot 10
+0.123456789012345678901234 & 1.2345678901234567890123456 \\
+2.345678901234567890123456 & 5.6789012345678901234567890
 \end{bmatrix}
-= \begin{bmatrix}
-  -8 & 108 \\
-  -1 & 10 \\
-  -6 & 46
-\end{bmatrix}
-\end{gathered}
 $$
-And here's one that you'll start seeing a lot of soon.
-$$
-\begin{gathered}
-\mathbf{A} = \begin{bmatrix}
-  1 & x_{11} & x_{12} \\
-  1 & x_{21} & x_{22} \\
-  & \vdots \\
-  1 & x_{N1} & x_{N2}
-\end{bmatrix},
-\mathbf{B} = \begin{bmatrix}
-  \beta_0 \\
-  \beta_1 \\
-  \beta_2
-\end{bmatrix} \\
-\mathbf{A} \mathbf{B} = \begin{bmatrix}
-  \beta_0 + \beta_1 x_{11} + \beta_2 x_{12} \\
-  \beta_0 + \beta_1 x_{21} + \beta_2 x_{22} \\
-  \vdots \\
-  \beta_0 + \beta_1 x_{N1} + \beta_2 x_{N2}
-\end{bmatrix}
-\end{gathered}
-$$
+may "look" like a rectangle, but I assure you that it is square.
 
-[2025 board (Nov 18): the board did the general case---an $N \times (K + 1)$ matrix $\mathbf{X}$ with a column of 1s and $\boldsymbol{\beta} = (\beta_0, \ldots, \beta_K)$---and tied $\mathbf{X} \boldsymbol{\beta}$ back to the stacked regression equations from the start of the matrices section.]{.todo}
+We'll also often be interested in the subcategory of square matrices that are [symmetric]{.concept entry="Symmetric matrix" definition="A matrix that is equal to its transpose: $\mathbf{A} = \mathbf{A}^\top$."}.
+The distinguishing feature of a symmetric matrix is that the entry in row $i$, column $j$ always matches the entry in row $j$, column $i$.
+Or, to say that even more concisely, a symmetric matrix is a square matrix that is equal to its transpose.
 
+::: {#def-symmetric-matrix name="Symmetric matrix"}
+A square matrix $\mathbf{A}$ is [symmetric]{.concept entry="Symmetric matrix"} if it is the same as its transpose: $\mathbf{A} = \mathbf{A}^\top$.
+:::
+
+As an example, take the symmetric matrix
+
+![](images/symmetric-matrix.png){width="14em" fig-align="center" fig-alt="A symmetric matrix."}
+
+First notice the entries along the [main diagonal]{.concept definition="The main diagonal of a square matrix consists of the entries whose row index matches the column index. You can see the main diagonal by starting at the first entry in the matrix, then moving diagonally down and to the right."}, the entries whose row number and column number match.
+Symmetry places no restrictions on these, and indeed here you see no particular relationship between any diagonal entry and any other entry:
+
+![](images/symmetric-matrix-diagonal.png){width="14em" fig-align="center" fig-alt="A symmetric matrix with its main diagonal highlighted."}
+
+The "symmetry" comes in the relationship between the off-diagonal entries.
+As an example, take the entry in the first row, second column: $c_{12} = 10$.
+Symmetry requires that the second row, first column be the same, as indeed it is: $c_{21} = 10$.
+More generally, each off-diagonal entry matches the one it would touch if you folded the matrix into a triangle along the main diagonal:
+
+![](images/symmetric-matrix-offdiagonal.png){width="14em" fig-align="center" fig-alt="A symmetric matrix with its off-diagonal entries highlighted."}
+
+Over in statistics, one of the most common symmetric matrices you'll run into is the variance-covariance matrix of a vector-valued random variable.
+Letting $\mathbf{X} = (X_1, \ldots, X_k)$, the variance-covariance matrix of $\mathbf{X}$ is the symmetric $k \times k$ matrix
 $$
-\underset{N \times (K + 1)}{\mathbf{X}} = \begin{bmatrix}
-  1 & x_{11} & x_{12} & \cdots & x_{1K} \\
-  1 & x_{21} & x_{22} & \cdots & x_{2K} \\
+\begin{bmatrix}
+  \mathrm{V}[X_1] & \mathrm{Cov}[X_1, X_2] & \mathrm{Cov}[X_1, X_3] & \cdots & \mathrm{Cov}[X_1, X_k] \\
+  \mathrm{Cov}[X_1, X_2] & \mathrm{V}[X_2] & \mathrm{Cov}[X_2, X_3] & \cdots & \mathrm{Cov}[X_2, X_k] \\
+  \mathrm{Cov}[X_1, X_3] & \mathrm{Cov}[X_2, X_3] & \mathrm{V}[X_3] & \cdots & \mathrm{Cov}[X_3, X_k] \\
   \vdots & \vdots & \vdots & \ddots & \vdots \\
-  1 & x_{N1} & x_{N2} & \cdots & x_{NK}
-\end{bmatrix},
+  \mathrm{Cov}[X_1, X_k] & \mathrm{Cov}[X_2, X_k] & \mathrm{Cov}[X_3, X_k] & \cdots & \mathrm{V}[X_k]
+\end{bmatrix}.
+$$
+
+An even more special case of a square matrix is one where all of the off-diagonal entries are zero, such as in
+$$
+\mathbf{D} =
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 2 & 0 \\
+  0 & 0 & 3
+\end{bmatrix}
+$$
+We call these matrices [diagonal]{.concept entry="Diagonal matrix" definition="A square matrix that contains zeroes everywhere except along the main diagonal: $a_{ij} = 0$ whenever $i \neq j$."}.
+
+::: {#def-diagonal-matrix name="Diagonal matrix"}
+A square matrix $\mathbf{A}$ is [diagonal]{.concept entry="Diagonal matrix"} if all of its off-diagonal entries are zero: $a_{ij} = 0$ whenever $i \neq j$.
+:::
+
+Every diagonal matrix is symmetric: every off-diagonal entry has to match its mirror counterpart, as all these entries are zero.
+
+Briefly back to the stats application.
+If I tell you that $\mathbf{X}$ is a vector-valued random variable whose variance-covariance matrix is diagonal, what I've just told you is that the components of $\mathbf{X}$ are uncorrelated with each other: $$x_{ij} = \mathrm{Cov}[X_i, X_j] = 0 \quad \text{for all $i \neq j$}.$$
+
+Our last, most special matrix is the special case of a diagonal matrix whose diagonal entries are all equal to 1.
+We call this the [identity matrix]{.concept definition="The $n \times n$ diagonal matrix where each diagonal entry is 1, written $\mathbf{I}_n$ (or just $\mathbf{I}$ when the size is clear from context)."}.
+
+::: {#def-identity-matrix name="Identity matrix"}
+The $n \times n$ [identity matrix]{.concept}, written $\mathbf{I}_n$ (or just $\mathbf{I}$ when the size is clear from context), is the $n \times n$ diagonal matrix where each diagonal entry is 1.
+:::
+
+As an illustration, the $3 \times 3$ identity matrix $\mathbf{I}_3$ looks like this:
+$$
+\mathbf{I}_3 = \begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 1
+\end{bmatrix}.
+$$
+
+Here's an example of a situation where you don't need to specify the subscript on the identity matrix.
+Suppose you've specified that $\mathbf{B}$ is a $7 \times 7$ matrix, and then you write the expression $(\mathbf{I} - \mathbf{B})^\top$.
+We can only add and subtract matrices of the same dimension, so I can infer from the possibility that you must mean $\mathbf{I}_7$, the $7 \times 7$ identity.
+
+The name "identity matrix" comes from the relationship between the identity matrix and the number 1, which is the multiplicative identity in ordinary arithmetic (i.e., $1 \cdot a = a \cdot 1 = a$ for any $a \in \mathbb{R}$).
+We'll see why momentarily, when we get to matrix multiplication.
+
+::: {#exr-special-matrices name="Properties of the special matrices"}
+Suppose $\mathbf{A} \in \mathbb{R}^{k \times k}$ and $\mathbf{B} \in \mathbb{R}^{k \times k}$ as well, i.e., $\mathbf{A}$ and $\mathbf{B}$ are both $k \times k$ square matrices.
+Let $c \in \mathbb{R}$ and $d \in \mathbb{R}$ be constants.
+
+a) Show that if $\mathbf{A}$ and $\mathbf{B}$ are both symmetric, then so is $c \mathbf{A} + d \mathbf{B}$.
+
+b) Show that if $\mathbf{A}$ and $\mathbf{B}$ are both diagonal, then so is $c \mathbf{A} + d \mathbf{B}$.
+
+c) Show that if $\mathbf{A}$ and $\mathbf{B}$ are both identity matrices, then $c \mathbf{A} + d \mathbf{B} = (c + d) \mathbf{I}_k$.
+
+:::: {.answer}
+a) Let $\mathbf{S} = c \mathbf{A} + d \mathbf{B}$.
+   For any row $i$ and column $j$, symmetry of $\mathbf{A}$ implies $a_{ij} = a_{ji}$, and symmetry of $\mathbf{B}$ implies $b_{ij} = b_{ji}$.
+   Therefore,
+   $$
+   \begin{aligned}
+   s_{ij}
+   &= c a_{ij} + d b_{ij} \quad \text{(scalar multiplication; matrix addition)} \\
+   &= c a_{ji} + d b_{ji} \quad \text{(symmetry of $\mathbf{A}$ and $\mathbf{B}$)} \\
+   &= s_{ji},
+   \end{aligned}
+   $$
+   so $\mathbf{S}$ is symmetric as well.
+
+b) Again let $\mathbf{S} = c \mathbf{A} + d \mathbf{B}$.
+   For any row $i$ and column $j$ where $i \neq j$, we have $a_{ij} = b_{ij} = 0$ by diagonality of $\mathbf{A}$ and $\mathbf{B}$.
+   Therefore,
+   $$
+   \begin{aligned}
+   s_{ij} = c a_{ij} + d b_{ij} = c \cdot 0 + d \cdot 0 = 0,
+   \end{aligned}
+   $$
+   so $\mathbf{S}$ is diagonal as well.
+
+c) Yet again let $\mathbf{S} = c \mathbf{A} + d \mathbf{B}$.
+   Because the identity matrix is diagonal, we know from the last part that $\mathbf{S}$ is diagonal.
+   All that remains to show is that every entry along the main diagonal equals $c + d$.
+   For any $i \in \{1, \ldots, k\}$, we have
+   $$
+   s_{ii} = c a_{ii} + d b_{ii} = c \cdot 1 + d \cdot 1 = c + d,
+   $$
+   and therefore $\mathbf{S} = (c + d) \mathbf{I}_k$.
+::::
+:::
+
+### Introduction to matrix multiplication {#sec-matrix-multiplication}
+
+We've multiplied matrices by scalars, and we've added and subtracted matrices, but we haven't multiplied matrices yet.
+It is time for the surprisingly complicated topic of [matrix multiplication]{.concept definition="If $\mathbf{A}$ is $n \times k$ and $\mathbf{B}$ is $k \times p$, then $\mathbf{A} \mathbf{B}$ is the $n \times p$ matrix whose $ij$'th element is the dot product of the $i$'th row of $\mathbf{A}$ and the $j$'th column of $\mathbf{B}$."}.
+Whereas matrix addition and subtraction are pretty intuitive, matrix multiplication is not.
+
+::: {#def-matrix-multiplication name="Matrix multiplication"}
+Consider matrices $\mathbf{A} \in \mathbb{R}^{n \times k}$ and $\mathbf{B} \in \mathbb{R}^{k \times p}$.
+The [matrix product]{.concept entry="Matrix multiplication"} of $\mathbf{A}$ and $\mathbf{B}$ is the matrix $\mathbf{C} \in \mathbb{R}^{n \times p}$ defined by
+$$
+c_{ij} = \sum_{m=1}^k a_{im} b_{mj},
+$$
+the dot product of the $i$'th row of $\mathbf{A}$ with the $j$'th column of $\mathbf{B}$.
+We write $\mathbf{A} \mathbf{B}$ to denote the matrix product of $\mathbf{A}$ and $\mathbf{B}$.
+:::
+
+One thing you might notice right away: in order for us to calculate the product $\mathbf{A} \mathbf{B}$, the number of columns of $\mathbf{A}$ must line up with the number of rows of $\mathbf{B}$.
+
+To illustrate the mechanics of matrix multiplication, let's work with the matrices
+$$
+\mathbf{A} = \begin{bmatrix}
+  2 & 10 & 0 & 1 \\
+  0 & 1 & 0 & 4 \\
+  -1 & 5 & 3 & 0
+\end{bmatrix}; \quad
+\mathbf{B} = \begin{bmatrix}
+  1 & 4 \\
+  -1 & 10 \\
+  1 & 2 \\
+  -1 & 5
+\end{bmatrix}.
+$$
+$\mathbf{A}$ is $3 \times 4$ and $\mathbf{B}$ is $4 \times 2$.
+Since the number of columns of $\mathbf{A}$ lines up with the number of rows of $\mathbf{B}$, we can compute their product.
+The product $\mathbf{A} \mathbf{B}$ will end up being $3 \times 2$, as it'll have the same number of rows as $\mathbf{A}$ and columns as $\mathbf{B}$.
+
+To compute the first row, first column of $\mathbf{A} \mathbf{B}$, we take the dot product of the first row of $\mathbf{A}$ and the first column of $\mathbf{B}$.
+The left-matrix-columns-must-match-right-matrix-rows rule ensures that the two vectors in question have the same number of elements, so that we can indeed take their dot product.
+
+![](images/matrix-product-11.png){width="25.8em" fig-align="center" fig-alt="The product of A and B, with the first row of A and the first column of B highlighted, then their dot product written out in the first row and first column of AB, then its value, −9."}
+
+When I'm multiplying a matrix with pen and paper, I find it helpful to circle the row and column that I'm working with, as in the illustration above, just so I don't lose track.
+But you don't have to do that.
+
+To obtain the first row, second column of $\mathbf{A} \mathbf{B}$, we stick with the same row of $\mathbf{A}$, but slide over one column in $\mathbf{B}$.
+
+![](images/matrix-product-12.png){width="25.4em" fig-align="center" fig-alt="The product of A and B, with the first row of A and the second column of B highlighted, then their dot product written out in the first row and second column of AB next to the −9 already computed, then its value, 113."}
+
+We repeat this process for the next two rows of $\mathbf{A}$ to reach the final result,
+$$
+\begin{aligned}
+\mathbf{A} \mathbf{B}
+% &= \begin{bmatrix}
+%   2 \cdot 1 + 10 \cdot (-1) + 0 \cdot 1 + 1 \cdot (-1) & 2 \cdot 4 + 10 \cdot 10 + 0 \cdot 2 + 1 \cdot 5 \\
+%   0 \cdot 1 + 1 \cdot (-1) + 0 \cdot 1 + 4 \cdot (-1) & 0 \cdot 4 + 1 \cdot 10 + 0 \cdot 2 + 4 \cdot 5 \\
+%   (-1) \cdot 1 + 5 \cdot (-1) + 3 \cdot 1 + 0 \cdot (-1) & (-1) \cdot 4 + 5 \cdot 10 + 3 \cdot 2 + 0 \cdot 5
+% \end{bmatrix} \\
+&= \begin{bmatrix}
+  -9 & 113 \\
+  -5 & 30 \\
+  -3 & 52
+\end{bmatrix}.
+\end{aligned}
+$$
+
+Matrix multiplication is for when we want to take lots of dot products at once.
+But why would we ever want to take lots of dot products at once?
+Well, let's go back to our motivating example of finding a single equation to express the linear model for an entire dataset,
+$$
+\begin{aligned}
+y_1 &= \beta_1 x_{11} + \beta_2 x_{12} + \cdots + \beta_k x_{1k} + \varepsilon_1; \\
+y_2 &= \beta_1 x_{21} + \beta_2 x_{22} + \cdots + \beta_k x_{2k} + \varepsilon_2; \\
+&\;\;\vdots \\
+y_n &= \beta_1 x_{n1} + \beta_2 x_{n2} + \cdots + \beta_k x_{nk} + \varepsilon_n.
+\end{aligned}
+$$
+Each of the $n$ lines here involves a dot product---namely, the dot product of the given row's covariate vector $\mathbf{x}_i$ with the coefficient vector $\boldsymbol{\beta}$.
+
+::: {#exr-regression-prediction-matrix name="Multiplying the design matrix by the coefficient vector"}
+Following the example in the text, let $\mathbf{X}$ be the $n \times k$ matrix where each row is the vector of covariates for the corresponding observation:
+$$
+\mathbf{X} = \begin{bmatrix}
+x_{11} & x_{12} & \cdots & x_{1k} \\
+x_{21} & x_{22} & \cdots & x_{2k} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{n1} & x_{n2} & \cdots & x_{nk}
+\end{bmatrix}.
+$$
+Let $\boldsymbol{\beta}$ be the $k \times 1$ (column) vector of coefficients.
+Confirm that the product $\mathbf{X} \boldsymbol{\beta}$ can be calculated, identify the number of rows and columns it will have, and show that each of its entries is a regression prediction.
+
+:::: {.answer}
+The number of columns in $\mathbf{X}$ is $k$, which matches the number of rows in $\boldsymbol{\beta}$, so we can take their product.
+Because $\mathbf{X}$ has $n$ rows and $\boldsymbol{\beta}$ has one column, the product $\mathbf{X} \boldsymbol{\beta}$ will be $n \times 1$.
+Given any row $i$, the entry in the $i$'th row and sole column is the dot product
+$$
+\mathbf{x}_i \cdot \boldsymbol{\beta}
+= \begin{pmatrix}x_{i1} \\ x_{i2} \\ \vdots \\ x_{ik}\end{pmatrix} \cdot \begin{pmatrix}\beta_1 \\ \beta_2 \\ \vdots \\ \beta_k\end{pmatrix}
+= \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_k x_{ik}.
+$$
+::::
+:::
+
+With the result of @exr-regression-prediction-matrix in hand, we are now almost all the way to having a single equation to describe our entire data model.
+Let's define one column vector to hold the dependent variable, and another to hold the error term:
+$$
+\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix};
 \qquad
-\underset{(K + 1) \times 1}{\boldsymbol{\beta}} = \begin{bmatrix}
-  \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_K
-\end{bmatrix}
+\boldsymbol{\varepsilon} = \begin{pmatrix} \varepsilon_1 \\ \varepsilon_2 \\ \vdots \\ \varepsilon_n \end{pmatrix}.
 $$
+Then our linear model becomes
+$$
+\mathbf{y} = \mathbf{X} \boldsymbol{\beta} + \boldsymbol{\varepsilon}.
+$$ {#eq-linear-model-matrix-notation}
 
-$$
-\underset{N \times 1}{\mathbf{X} \boldsymbol{\beta}} = \begin{bmatrix}
-  \beta_0 + \beta_1 x_{11} + \beta_2 x_{12} + \cdots + \beta_K x_{1K} \\
-  \beta_0 + \beta_1 x_{21} + \beta_2 x_{22} + \cdots + \beta_K x_{2K} \\
-  \vdots \\
-  \beta_0 + \beta_1 x_{N1} + \beta_2 x_{N2} + \cdots + \beta_K x_{NK}
-\end{bmatrix}
-$$
+When multiplying and adding matrices and vectors, you need to be careful that all of the dimensions line up.
 
+- Whenever you have $\mathbf{A} + \mathbf{B}$ (or $\mathbf{A} - \mathbf{B}$), you need to be sure that $\mathbf{A}$ and $\mathbf{B}$ have the exact same dimensions.
+- Whenever you have $\mathbf{A} \mathbf{B}$, you need to be sure that the column count of $\mathbf{A}$ matches the row count of $\mathbf{B}$.
+
+To make sure I haven't screwed anything up in an equation like @eq-linear-model-matrix-notation, my personal trick is to write the dimensions under each individual matrix/vector and make sure everything lines up:
+$$
+\underbrace{\mathbf{y}}_{n \times 1}
+=
+\underbrace{\underbrace{\mathbf{X}}_{n \times k} \, \underbrace{\boldsymbol{\beta}}_{k \times 1}}_{n \times 1}
++
+\underbrace{\boldsymbol{\varepsilon}}_{n \times 1}.
+$$
 
 ### Properties of matrix multiplication {#sec-matmul-properties}
 
-Some important properties of matrix multiplication:
+In some ways, matrix multiplication works like "regular" multiplication of ordinary numbers.
+In other ways, it differs significantly.
 
-- Matrix multiplication is associative: $(\mathbf{A} \mathbf{B}) \mathbf{C} = \mathbf{A} (\mathbf{B} \mathbf{C})$.
+Like ordinary multiplication, matrix multiplication has an associative property: if you're multiplying three matrices together you get the same result whether you do the "left" multiplication or the "right" one first.
 
-  [2025 final review: associativity for longer products, e.g. $\mathbf{A} \mathbf{B} \mathbf{C} \mathbf{D} = (\mathbf{A} \mathbf{B})(\mathbf{C} \mathbf{D}) = (\mathbf{A} (\mathbf{B} \mathbf{C})) \mathbf{D} = \mathbf{A} ((\mathbf{B} \mathbf{C}) \mathbf{D})$.]{.todo}
+::: {#prp-matrix-multiplication-associative name="Associative property of matrix multiplication"}
+For any matrices $\mathbf{A} \in \mathbb{R}^{n \times k}$, $\mathbf{B} \in \mathbb{R}^{k \times p}$, and $\mathbf{C} \in \mathbb{R}^{p \times \ell}$, we have
+$$
+(\mathbf{A} \mathbf{B}) \mathbf{C} = \mathbf{A} (\mathbf{B} \mathbf{C}).
+$$
+Consequently, we may write $\mathbf{A} \mathbf{B} \mathbf{C}$ as shorthand for either of these matrix products.
+:::
 
-  $$
-  \mathbf{A} \mathbf{B} \mathbf{C} \mathbf{D}
-  = (\mathbf{A} \mathbf{B})(\mathbf{C} \mathbf{D})
-  = [\mathbf{A} (\mathbf{B} \mathbf{C})] \mathbf{D}
-  = \mathbf{A} [(\mathbf{B} \mathbf{C}) \mathbf{D}]
-  $$
+Another familiar property from ordinary arithmetic that carries over to matrix multiplication is the distributive property.
 
-- Matrix multiplication is distributive: $\mathbf{A} (\mathbf{B} + \mathbf{C}) = \mathbf{A} \mathbf{B} + \mathbf{A} \mathbf{C}$.
+::: {#prp-matrix-multiplication-distributive name="Distributive property of matrix multiplication"}
+For any matrices $\mathbf{A} \in \mathbb{R}^{n \times k}$, $\mathbf{B} \in \mathbb{R}^{n \times k}$, $\mathbf{C} \in \mathbb{R}^{m \times n}$, and $\mathbf{D} \in \mathbb{R}^{k \times p}$, we have
+$$
+\mathbf{C} (\mathbf{A} + \mathbf{B}) = \mathbf{C} \mathbf{A} + \mathbf{C} \mathbf{B}
+$$
+and
+$$
+(\mathbf{A} + \mathbf{B}) \mathbf{D} = \mathbf{A} \mathbf{D} + \mathbf{B} \mathbf{D}.
+$$
+:::
 
-  [2025 board (Nov 20): also state right distributivity, $(\mathbf{A} + \mathbf{B}) \mathbf{C} = \mathbf{A} \mathbf{C} + \mathbf{B} \mathbf{C}$.]{.todo}
+Another result that might not be quite as obvious at first: the identity matrix $\mathbf{I}$ functions just like the number 1 does in ordinary multiplication.
+Specifically, if we multiply any matrix by the corresponding identity matrix, we get back our original matrix---just like when we multiply any ordinary number by 1.
 
-  $$
-  (\mathbf{A} + \mathbf{B}) \mathbf{C} = \mathbf{A} \mathbf{C} + \mathbf{B} \mathbf{C}
-  $$
+::: {#prp-matrix-multiplication-identity name="Multiplicative identities for matrices"}
+For any matrix $\mathbf{A} \in \mathbb{R}^{n \times k}$,
+$$
+\mathbf{A} \mathbf{I}_k = \mathbf{A}
+\quad\text{and}\quad
+\mathbf{I}_n \mathbf{A} = \mathbf{A}.
+$$
+:::
 
-- For any $n \times m$ matrix $\mathbf{A}$, we have $\mathbf{A} \mathbf{I}_m = \mathbf{I}_n \mathbf{A} = \mathbf{A}$.
-  In this way, the identity matrix is kind of like the matrix equivalent of the number one.
-  (More on this when we get to matrix inversion.)
+To see why this works in practice, let's take an arbitrary $3 \times 2$ matrix, $\mathbf{A} \in \mathbb{R}^{3 \times 2}$ as an example:
+$$
+\mathbf{A} = \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}
+$$
+First let's confirm that if we multiply $\mathbf{A}$ with the $2 \times 2$ identity matrix on the right, we get back our original $\mathbf{A}$:
+$$
+\begin{aligned}
+\mathbf{I}_3 \mathbf{A}
+&= \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+   \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix} \\
+&= \begin{bmatrix}
+     1 \cdot a + 0 \cdot c + 0 \cdot e & 1 \cdot b + 0 \cdot d + 0 \cdot f \\
+     0 \cdot a + 1 \cdot c + 0 \cdot e & 0 \cdot b + 1 \cdot d + 0 \cdot f \\
+     0 \cdot a + 0 \cdot c + 1 \cdot e & 0 \cdot b + 0 \cdot d + 1 \cdot f
+   \end{bmatrix} \\
+&= \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}.
+\end{aligned}
+$$
+Same if we multiply it with the $3 \times 3$ identity matrix on the left:
+$$
+\begin{aligned}
+\mathbf{A} \mathbf{I}_2
+&= \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}
+   \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \\
+&= \begin{bmatrix}
+     a \cdot 1 + b \cdot 0 & a \cdot 0 + b \cdot 1 \\
+     c \cdot 1 + d \cdot 0 & c \cdot 0 + d \cdot 1 \\
+     e \cdot 1 + f \cdot 0 & e \cdot 0 + f \cdot 1
+   \end{bmatrix} \\
+&= \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}.
+\end{aligned}
+$$
 
-  [2025 board (Nov 20): "proof" by example---multiply out $\mathbf{I}_3 \mathbf{A}$ and $\mathbf{A} \mathbf{I}_2$ for a general $3 \times 2$ matrix $\mathbf{A}$ with entries $a, \ldots, f$.]{.todo}
+Matrix multiplication interacts with the transpose a bit oddly.
+Here's the issue.
+Imagine you've got a $4 \times 2$ matrix $\mathbf{A}$ and a $2 \times 3$ matrix $\mathbf{B}$.
+Since the column count of $\mathbf{A}$ matches the row count of $\mathbf{B}$, you can take the product $\mathbf{A} \mathbf{B}$, no problem---you'll end up with a $4 \times 3$ matrix.
 
-  $$
-  \mathbf{A} = \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}
-  $$
+Now imagine taking (deep breath) the transpose of the product of $\mathbf{A}$ and $\mathbf{B}$, namely $(\mathbf{A} \mathbf{B})^\top$.
+Since the product $\mathbf{A} \mathbf{B}$ is $4 \times 3$, its transpose $(\mathbf{A} \mathbf{B})^\top$ must be $3 \times 4$.
+Now you might be tempted to think that you could have just taken the transposes of the individual matrices first, calculating the product $\mathbf{A}^\top \mathbf{B}^\top$.
+But I can already tell you two reasons why you couldn't do that:
 
-  $$
-  \begin{aligned}
-  \mathbf{I}_3 \mathbf{A}
-  &= \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
-     \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix} \\
-  &= \begin{bmatrix}
-       1 \cdot a + 0 \cdot c + 0 \cdot e & 1 \cdot b + 0 \cdot d + 0 \cdot f \\
-       0 \cdot a + 1 \cdot c + 0 \cdot e & 0 \cdot b + 1 \cdot d + 0 \cdot f \\
-       0 \cdot a + 0 \cdot c + 1 \cdot e & 0 \cdot b + 0 \cdot d + 1 \cdot f
-     \end{bmatrix} \\
-  &= \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}
-  \end{aligned}
-  $$
+1. $\mathbf{A}^\top$ is $2 \times 4$ and $\mathbf{B}^\top$ is $3 \times 2$.
+   The column count of $\mathbf{A}^\top$ doesn't match the row count of $\mathbf{B}^\top$, so you can't multiply $\mathbf{A}^\top$ with $\mathbf{B}^\top$.
 
-  $$
-  \begin{aligned}
-  \mathbf{A} \mathbf{I}_2
-  &= \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}
-     \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \\
-  &= \begin{bmatrix}
-       a \cdot 1 + b \cdot 0 & a \cdot 0 + b \cdot 1 \\
-       c \cdot 1 + d \cdot 0 & c \cdot 0 + d \cdot 1 \\
-       e \cdot 1 + f \cdot 0 & e \cdot 0 + f \cdot 1
-     \end{bmatrix} \\
-  &= \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}
-  \end{aligned}
-  $$
+2. Even if you *could* multiply $\mathbf{A}^\top$ and $\mathbf{B}^\top$ (which you can't, but bear with me), then the result would have the row count of $\mathbf{A}^\top$ and the column count of $\mathbf{B}^\top$, making it $2 \times 2$.
+   But in fact we've seen that $(\mathbf{A} \mathbf{B})^\top$ must be $3 \times 4$.
 
-- Matrix multiplication is *not* commutative.
-  In other words, $\mathbf{A} \mathbf{B} \neq \mathbf{B} \mathbf{A}$ except in very special cases (e.g., both are square and one of them is the identity matrix).
+All that said, you *can* do the transposing first and the multiplication second---you just have to reverse the order of the matrices you're multiplying.
 
-  This is obvious when we're dealing with non-square matrices.
-  Let $\mathbf{A}$ be $n \times m$ and $\mathbf{B}$ be $m \times p$, so that $\mathbf{A} \mathbf{B}$ exists.
-  Then $\mathbf{B} \mathbf{A}$ doesn't even exist unless $n = p$.
-  Even then, if $n \neq m$, then $\mathbf{A} \mathbf{B}$ is $n \times n$ and $\mathbf{B} \mathbf{A}$ is $m \times m$, so they can't possibly be the same.
+::: {#prp-matrix-multiplication-transpose name="Transpose of a matrix product"}
+For any matrices $\mathbf{A} \in \mathbb{R}^{n \times k}$ and $\mathbf{B} \in \mathbb{R}^{k \times p}$, we have
+$$
+(\mathbf{A} \mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top.
+$$
+:::
 
-  For an example that $\mathbf{A} \mathbf{B} \neq \mathbf{B} \mathbf{A}$ even for square matrices:
-  $$
-  \begin{gathered}
-  \mathbf{A} = \begin{bmatrix}
-    1 & 0 \\
-    2 & 0
-  \end{bmatrix},
-  \mathbf{B} = \begin{bmatrix}
-    1 & 0 \\
-    0 & 0
-  \end{bmatrix}, \\
-  \mathbf{A} \mathbf{B} = \begin{bmatrix}
-    1 & 0 \\
-    2 & 0
-  \end{bmatrix},
-  \mathbf{B} \mathbf{A} = \begin{bmatrix}
-    1 & 0 \\
-    0 & 0
-  \end{bmatrix}.
-  \end{gathered}
-  $$
+One final non-property of matrix multiplication: ***matrix multiplication is not commutative***.
+Given some valid matrix product $\mathbf{A} \mathbf{B}$, the "opposite" product $\mathbf{B} \mathbf{A}$ may not even be well-defined (namely if the number of rows of $\mathbf{A}$ differs from the number of columns of $\mathbf{B}$).
+Even in the special cases where $\mathbf{A} \mathbf{B}$ and $\mathbf{B} \mathbf{A}$ are both valid calculations, they may not have the same dimensions, let alone be equal.
+I'm emphasizing this because it's a lot different than multiplication of ordinary numbers, where $ab = ba$.
 
-- The transpose of the product is the product of the transposes ... but the other way around: $(\mathbf{A} \mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top$.
+::: {#exr-matrix-multiplication-not-commutative name="Even in the best-case scenario, matrix multiplication does not commute"}
+Consider the $2 \times 2$ matrices
+$$
+\mathbf{A} = \begin{bmatrix}
+  1 & 0 \\
+  2 & 0
+\end{bmatrix}
+\quad\text{and}\quad
+\mathbf{B} = \begin{bmatrix}
+  1 & 0 \\
+  0 & 0
+\end{bmatrix}.
+$$
+Show that $\mathbf{A} \mathbf{B}$ and $\mathbf{B} \mathbf{A}$ can both be calculated, but are unequal.
 
-  Here's the intuition behind this weird-seeming property.
-  Suppose $\mathbf{A}$ is $n \times m$ and $\mathbf{B}$ is $m \times p$.
-  Then $\mathbf{A} \mathbf{B}$ is $n \times p$, so $(\mathbf{A} \mathbf{B})^\top$ should be $p \times n$.
-  Therefore, $\mathbf{B}^\top$ must come first.
-
-  [2025 board (Nov 20): concrete version with $\mathbf{A}$ $4 \times 2$ and $\mathbf{B}$ $2 \times 3$, writing out $\mathbf{A}^\top$ ($2 \times 4$) and $\mathbf{B}^\top$ ($3 \times 2$) to show only $\mathbf{B}^\top \mathbf{A}^\top$ is conformable.]{.todo}
-
-  $$
-  \underset{4 \times 2}{\mathbf{A}} = \begin{bmatrix} a & b \\ c & d \\ e & f \\ g & h \end{bmatrix},
-  \qquad
-  \underset{2 \times 3}{\mathbf{B}} = \begin{bmatrix} i & j & k \\ l & m & n \end{bmatrix}
-  $$
-
-  $$
-  \underset{2 \times 4}{\mathbf{A}^\top} = \begin{bmatrix} a & c & e & g \\ b & d & f & h \end{bmatrix},
-  \qquad
-  \underset{3 \times 2}{\mathbf{B}^\top} = \begin{bmatrix} i & l \\ j & m \\ k & n \end{bmatrix}
-  $$
+:::: {.answer}
+Both matrices are $2 \times 2$, so the column count of each matches the row count of the other, and both products can be calculated.
+Each product is $2 \times 2$ as well.
+We have
+$$
+\mathbf{A} \mathbf{B}
+= \begin{bmatrix}
+  1 \cdot 1 + 0 \cdot 0 & 1 \cdot 0 + 0 \cdot 0 \\
+  2 \cdot 1 + 0 \cdot 0 & 2 \cdot 0 + 0 \cdot 0
+\end{bmatrix}
+= \begin{bmatrix}
+  1 & 0 \\
+  2 & 0
+\end{bmatrix}
+$$
+and
+$$
+\mathbf{B} \mathbf{A}
+= \begin{bmatrix}
+  1 \cdot 1 + 0 \cdot 2 & 1 \cdot 0 + 0 \cdot 0 \\
+  0 \cdot 1 + 0 \cdot 2 & 0 \cdot 0 + 0 \cdot 0
+\end{bmatrix}
+= \begin{bmatrix}
+  1 & 0 \\
+  0 & 0
+\end{bmatrix}.
+$$
+The two matrices differ in the second row, first column, and therefore are unequal.
+::::
+:::
 
 
+<!--
 ## Matrix inversion {#sec-matrix-inversion}
 
 We've covered matrix addition, subtraction, and multiplication.

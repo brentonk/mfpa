@@ -1,0 +1,19 @@
+\documentclass[border=2pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{matrix, shapes.geometric, shapes.misc, calc}
+% Entry (1, 1): first row of A (teal) dotted with first column of B (red).
+% Unfilled entries default to placeholder dots (see matrix-product.tikz).
+\newcommand{\ra}[1]{\textcolor{mfpateal}{#1}}
+\newcommand{\cb}[1]{\textcolor{mfpared}{#1}}
+\newcommand{\sAA}{\ra{2} \cdot \cb{1} + \ra{10} \cdot (\cb{-1}) + \ra{0} \cdot \cb{1} + \ra{1} \cdot (\cb{-1})}
+\newcommand{\pAA}{-9}
+\newcommand{\punct}{.}
+\begin{document}
+\begin{tikzpicture}
+\input{matrix-product.tikz}
+\ringrun{mfpateal}{a-1-1}{a-1-4}
+\ringrun{mfpared}{b-1-1}{b-4-1}
+\node[entry ring=mfpaink] at (c-1-1) {};
+\end{tikzpicture}
+\end{document}

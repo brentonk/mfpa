@@ -1,0 +1,16 @@
+\documentclass[border=0pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{matrix, shapes.geometric, calc}
+\begin{document}
+\begin{tikzpicture}
+\input{symmetric-matrix.tikz}
+% One long ellipse around the whole main diagonal.
+\path let \p1 = ($(m-3-3) - (m-1-1)$),
+          \n1 = {atan2(\y1, \x1)},
+          \n2 = {veclen(\x1, \y1)} in
+  node[draw=mfpateal, ellipse, line width=1.1pt, rotate=\n1,
+       minimum width=\n2 + 2.8em, minimum height=1.95em, inner sep=0pt]
+  at (m-2-2) {};
+\end{tikzpicture}
+\end{document}
