@@ -937,8 +937,9 @@ The two matrices differ in the second row, first column, and therefore are unequ
 :::
 
 
-<!--
 ## Matrix inversion {#sec-matrix-inversion}
+
+### Definition and properties {#sec-matrix-inversion-definition}
 
 We've covered matrix addition, subtraction, and multiplication.
 What about division?
@@ -946,152 +947,125 @@ What about division?
 Let's think about division of real numbers for a second.
 We know that any division problem can be rewritten as a multiplication problem,
 $$
-\frac{a}{b} = a \times \frac{1}{b} = a \times b^{-1},
+\frac{b}{a} = b \times \frac{1}{a} = b \times a^{-1},
 $$
-where $b^{-1}$ is the unique real number such that
+where $a^{-1}$ is the unique real number such that
 $$
-b \times b^{-1} = b^{-1} \times b = 1.
+a \times a^{-1} = a^{-1} \times a = 1.
 $$
+You might remember that $1/a$, aka $a^{-1}$, is called the "multiplicative inverse" of $a$.
 
-[2025 board (Nov 20): motivated inversion by solving $a x = b$: if $a \neq 0$, then $x = b / a = (1 / a) b$; if $a = 0$, there are infinitely many solutions ($b = 0$) or none ($b \neq 0$). Then wrote a two-equation system as $\mathbf{A} \mathbf{x} = \mathbf{b}$ and posed three questions: how to define $\mathbf{A}^{-1}$, when it exists (the analogue of not dividing by 0), and how to calculate it (a formula for $2 \times 2$; otherwise use a computer).]{.todo}
-
-$$
-a x = b
-\quad \Rightarrow \quad
-x = \frac{b}{a} = \left( \frac{1}{a} \right) b
-\qquad (a \neq 0)
-$$
-
-$$
-\begin{aligned}
-a_1 x_1 + a_2 x_2 &= b_1 \\
-a_3 x_1 + a_4 x_2 &= b_2
-\end{aligned}
-\qquad \Leftrightarrow \qquad
-\underbrace{\begin{bmatrix} a_1 & a_2 \\ a_3 & a_4 \end{bmatrix}}_{\mathbf{A}}
-\underbrace{\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}}_{\mathbf{x}}
-=
-\underbrace{\begin{bmatrix} b_1 \\ b_2 \end{bmatrix}}_{\mathbf{b}}
-$$
-
-$$
-\mathbf{A} \mathbf{x} = \begin{bmatrix} a_1 x_1 + a_2 x_2 \\ a_3 x_1 + a_4 x_2 \end{bmatrix}
-$$
-
-$$
-\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}
-$$
+We have a notion of "division" for square matrices that is defined analogously.
+Consider an $n \times n$ matrix $\mathbf{A}$.
+Remember that the $n \times n$ analogue of the number 1 is the $n \times n$ identity matrix, $\mathbf{I}_n$.
+Our notion of an [inverse]{.concept entry="Matrix inverse" definition="The $n \times n$ matrix $\mathbf{C}$ is an inverse of the $n \times n$ matrix $\mathbf{A}$ if $\mathbf{A} \mathbf{C} = \mathbf{C} \mathbf{A} = \mathbf{I}_n$. When it exists, the inverse is unique and is written $\mathbf{A}^{-1}$."}, following the idea of the multiplicative inverse for scalars, is an $n \times n$ matrix that, when multiplied with $\mathbf{A}$, gives us the identity matrix.
 
 ::: {#def-matrix-inverse name="Matrix inverse"}
-Similarly, in matrix algebra, we say that the $n \times n$ matrix $\mathbf{C}$ is an [inverse]{.concept entry="Matrix inverse" definition="The $n \times n$ matrix $\mathbf{C}$ is an inverse of the $n \times n$ matrix $\mathbf{A}$ if $\mathbf{A} \mathbf{C} = \mathbf{C} \mathbf{A} = \mathbf{I}_n$. When it exists, the inverse is unique and is written $\mathbf{A}^{-1}$."} of the $n \times n$ matrix $\mathbf{A}$ if $\mathbf{A} \mathbf{C} = \mathbf{C} \mathbf{A} = \mathbf{I}_n$.
+A matrix $\mathbf{C} \in \mathbb{R}^{n \times n}$ is an [inverse]{.concept entry="Matrix inverse"} of $\mathbf{A} \in \mathbb{R}^{n \times n}$ if
+$$
+\mathbf{A} \mathbf{C} = \mathbf{C} \mathbf{A} = \mathbf{I}_n.
+$$
 :::
 
-Some basic properties of matrix inverses:
+As a simple example, take the $2 \times 2$ matrix
+$$
+\mathbf{A} = \begin{bmatrix}
+  2 & 3 \\
+  2 & 4
+\end{bmatrix}.
+$$
+Its inverse is
+$$
+\mathbf{C} = \begin{bmatrix}
+  2 & -\frac{3}{2} \\
+  -1 & 1
+\end{bmatrix},
+$$
+which you can confirm by calculating
+$$
+\mathbf{A} \mathbf{C}
+= \begin{bmatrix}
+  2 \cdot 2 + 3 \cdot (-1) & 2 \cdot \left(-\frac{3}{2}\right) + 3 \cdot 1 \\
+  2 \cdot 2 + 4 \cdot (-1) & 2 \cdot \left(-\frac{3}{2}\right) + 4 \cdot 1
+\end{bmatrix}
+= \begin{bmatrix}
+  1 & 0 \\
+  0 & 1
+\end{bmatrix}
+$$
+as well as
+$$
+\mathbf{C} \mathbf{A}
+= \begin{bmatrix}
+  2 \cdot 2 + \left(-\frac{3}{2}\right) \cdot 2 & 2 \cdot 3 + \left(-\frac{3}{2}\right) \cdot 4 \\
+  (-1) \cdot 2 + 1 \cdot 2 & (-1) \cdot 3 + 1 \cdot 4
+\end{bmatrix}
+= \begin{bmatrix}
+  1 & 0 \\
+  0 & 1
+\end{bmatrix}.
+$$
 
-- If $\mathbf{C}$ is an inverse of $\mathbf{A}$, then $\mathbf{A}$ is an inverse of $\mathbf{C}$.
-  This is immediate from the definition.
+As a brief exercise, confirm that the analogy I drew to the multiplicative inverse of an ordinary scalar holds up---i.e., that if you think of the scalar as a $1 \times 1$ matrix, the matrix consisting of its multiplicative inverse is its matrix inverse as well.
 
-- If $\mathbf{C}$ and $\mathbf{D}$ are both inverses of $\mathbf{A}$, then $\mathbf{C} = \mathbf{D}$.
-  Proof: If $\mathbf{C}$ and $\mathbf{D}$ are inverses of $\mathbf{A}$, then we have
-  $$
-  \begin{aligned}
-  \mathbf{A} \mathbf{C} = \mathbf{I}
-  &\Leftrightarrow \mathbf{D} (\mathbf{A} \mathbf{C}) = \mathbf{D} \mathbf{I} \\
-  &\Leftrightarrow (\mathbf{D} \mathbf{A}) \mathbf{C} = \mathbf{D} \\
-  &\Leftrightarrow \mathbf{I} \mathbf{C} = \mathbf{D} \\
-  &\Leftrightarrow \mathbf{C} = \mathbf{D}.
-  \end{aligned}
-  $$
+::: {#exr-inverse-1x1 name="Inverse of a $1 \times 1$ matrix"}
+Consider the $1 \times 1$ matrix $$\mathbf{A} = \begin{bmatrix}a\end{bmatrix}.$$
+Show that:
 
-  As a consequence of this property, we write the inverse of $\mathbf{A}$, when it exists, as $\mathbf{A}^{-1}$.
+a) If $a \neq 0$, the $1 \times 1$ matrix $$\mathbf{C} = \begin{bmatrix}1/a\end{bmatrix}$$ is an inverse of $\mathbf{A}$.
+b) If $a \neq 0$, no other matrix is an inverse of $\mathbf{A}$.
+c) If $a = 0$, there is no inverse of $\mathbf{A}$.
 
-- The inverse of the inverse of $\mathbf{A}$ is $\mathbf{A}$: $(\mathbf{A}^{-1})^{-1} = \mathbf{A}$.
+:::: {.answer}
+a) We have $$\mathbf{A} \mathbf{C} = \begin{bmatrix}a \cdot (1/a)\end{bmatrix} = \begin{bmatrix}1\end{bmatrix} = \mathbf{I}_1$$ and $$\mathbf{C} \mathbf{A} = \begin{bmatrix}(1/a) \cdot a\end{bmatrix} = \begin{bmatrix}1\end{bmatrix} = \mathbf{I}_1,$$ so by definition $\mathbf{C}$ is an inverse of $\mathbf{A}$.
 
-- If the inverse of $\mathbf{A}$ exists, then the inverse of its transpose is the transpose of the inverse: $(\mathbf{A}^\top)^{-1} = (\mathbf{A}^{-1})^\top$.
+b) Because $a \neq 0$, for any number $c \neq 1/a$, we have $a c \neq 1$.
+   So for any $c \neq 1/a$ and the corresponding $1 \times 1$ matrix $\mathbf{C} = \begin{bmatrix}c\end{bmatrix}$ we have $$\mathbf{A} \mathbf{C} = \begin{bmatrix}ac\end{bmatrix} \neq \begin{bmatrix}1\end{bmatrix},$$ meaning $\mathbf{C}$ is not an inverse of $\mathbf{A}$.
+
+c) Suppose $a = 0$.
+   Then for any $1 \times 1$ matrix $\mathbf{C} = \begin{bmatrix}c\end{bmatrix}$ we have $$\mathbf{A} \mathbf{C} = \begin{bmatrix}0 \cdot c\end{bmatrix} = \begin{bmatrix}0\end{bmatrix} \neq \begin{bmatrix}1\end{bmatrix},$$ meaning $\mathbf{C}$ is not an inverse of $\mathbf{A}$.
+::::
+:::
+
+One of the things you saw in the exercise is that some matrices don't have inverses.
+More on that soon.
+
+An important property is that the inverse of a matrix, if it exists, is unique.
+In other words, there cannot be two distinct matrices that are both inverses of the same matrix.
+
+::: {#prp-matrix-inverse-unique name="Uniqueness of the matrix inverse"}
+The inverse of a matrix, if it exists, is unique.
+In particular, if $\mathbf{C}$ is an inverse of $\mathbf{A}$, then any other matrix $\mathbf{D} \neq \mathbf{C}$ is not an inverse of $\mathbf{A}$.
+:::
+
+::: {.proof}
+To prove the uniqueness property, we will show that if the matrices $\mathbf{C}$ and $\mathbf{D}$ are both inverses of $\mathbf{A}$, then it must be the case that $\mathbf{C} = \mathbf{D}$.
+
+To this end, suppose $\mathbf{C}$ and $\mathbf{D}$ are both inverses of $\mathbf{A}$.
+By definition of an inverse, we have $$\mathbf{A} \mathbf{C} = \mathbf{I},$$ which in turn implies $$\mathbf{D} (\mathbf{A} \mathbf{C}) = \mathbf{D} \mathbf{I}.$$
+Using the associative property of matrix multiplication (@prp-matrix-multiplication-associative) and the multiplicative identity (@prp-matrix-multiplication-identity), we then have $$(\mathbf{D} \mathbf{A}) \mathbf{C} = \mathbf{D} (\mathbf{A} \mathbf{C}) = \mathbf{D} \mathbf{I} = \mathbf{D}.$$
+Finally, because $\mathbf{D}$ is an inverse of $\mathbf{A}$, we have $\mathbf{D} \mathbf{A} = \mathbf{I}$, so another use of the multiplicative identity gives us
+$$
+\mathbf{C} = \mathbf{I} \mathbf{C} = (\mathbf{D} \mathbf{A}) \mathbf{C} = \mathbf{D}.
+$$
+::: 
+
+Because of this uniqueness property, we may speak properly about "the" inverse of a matrix.
+We denote the inverse of $\mathbf{A}$, when it exists, as $\mathbf{A}^{-1}$.
+
+Here are some more matrix inversion properties that are helpful to know:
+
+- The inverse of $\mathbf{A}^{-1}$ is $\mathbf{A}$: $(\mathbf{A}^{-1})^{-1} = \mathbf{A}$.
+
+- The inverse of the transpose is the transpose of the inverse: $(\mathbf{A}^\top)^{-1} = (\mathbf{A}^{-1})^\top$.
 
 - Matrix inversion inverts scalar multiplication: if $c \neq 0$, then $(c \mathbf{A})^{-1} = \frac{1}{c} \mathbf{A}^{-1}$.
 
 - The identity matrix is its own inverse: $\mathbf{I}_n^{-1} = \mathbf{I}_n$.
 
-  [2025 board (Nov 20): one-line proof, $\mathbf{I}_n \mathbf{I}_n = \mathbf{I}_n$.]{.todo}
+### Determining invertibility {#sec-matrix-invertibility}
 
-  $$
-  \mathbf{I}_n \mathbf{I}_n = \mathbf{I}_n
-  $$
-
-[2025 board (Nov 20): worked example before the non-invertible cases---$\mathbf{A}$ with rows $(1, 2)$ and $(0, 4)$ has inverse with rows $(1, -1/2)$ and $(0, 1/4)$, verified by multiplying out both $\mathbf{A} \mathbf{A}^{-1}$ and $\mathbf{A}^{-1} \mathbf{A}$.]{.todo}
-
-$$
-\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 0 & 4 \end{bmatrix},
-\qquad
-\mathbf{A}^{-1} = \begin{bmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{4} \end{bmatrix}
-$$
-
-$$
-\mathbf{A} \mathbf{A}^{-1}
-= \begin{bmatrix}
-    1 \cdot 1 + 2 \cdot 0 & 1 \cdot (-\frac{1}{2}) + 2 \cdot \frac{1}{4} \\
-    0 \cdot 1 + 4 \cdot 0 & 0 \cdot (-\frac{1}{2}) + 4 \cdot \frac{1}{4}
-  \end{bmatrix}
-= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
-= \mathbf{I}_2
-$$
-
-$$
-\mathbf{A}^{-1} \mathbf{A}
-= \begin{bmatrix}
-    1 \cdot 1 + (-\frac{1}{2}) \cdot 0 & 1 \cdot 2 + (-\frac{1}{2}) \cdot 4 \\
-    0 \cdot 1 + \frac{1}{4} \cdot 0 & 0 \cdot 2 + \frac{1}{4} \cdot 4
-  \end{bmatrix}
-= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
-= \mathbf{I}_2
-$$
-
-[2025 final review: inversion does not distribute over addition. Two matrices with no inverse can sum to $\mathbf{I}_2$ (rows $(1, 0), (0, 0)$ plus rows $(0, 0), (0, 1)$), and $\mathbf{I}_2 + (-\mathbf{I}_2) = \mathbf{0}$ has no inverse. (This is Claude's reading of an unlabelled board sketch.)]{.todo}
-
-$$
-\begin{aligned}
-\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}
-+ \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
-&= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \\
-\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
-+ \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix}
-&= \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
-\end{aligned}
-$$
-
-[2025 final review: practice tracking dimensions in OLS expressions with $N$ observations and $K$ predictors. In $\mathbf{y} = \mathbf{X} \hat{\boldsymbol{\beta}} + \mathbf{u}$, the product $(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}$ is $K \times 1$ and $\mathbf{y}^\top \mathbf{X} \hat{\boldsymbol{\beta}}$ is $1 \times 1$, and $\hat{\boldsymbol{\beta}}^\top \mathbf{X}^\top \mathbf{y} = (\mathbf{y}^\top \mathbf{X} \hat{\boldsymbol{\beta}})^\top$. Possibly as an exercise.]{.todo}
-
-$$
-\underbrace{\mathbf{y}}_{N \times 1}
-=
-\underbrace{\underbrace{\mathbf{X}}_{N \times K} \, \underbrace{\hat{\boldsymbol{\beta}}}_{K \times 1}}_{N \times 1}
-+
-\underbrace{\mathbf{u}}_{N \times 1}
-$$
-
-$$
-\underbrace{
-  \underbrace{(\underbrace{\mathbf{X}^\top}_{K \times N} \underbrace{\mathbf{X}}_{N \times K})^{-1}}_{K \times K}
-  \,
-  \underbrace{\underbrace{\mathbf{X}^\top}_{K \times N} \underbrace{\mathbf{y}}_{N \times 1}}_{K \times 1}
-}_{K \times 1}
-$$
-
-$$
-\underbrace{
-  \underbrace{\mathbf{y}^\top}_{1 \times N}
-  \underbrace{\mathbf{X}}_{N \times K}
-  \underbrace{\hat{\boldsymbol{\beta}}}_{K \times 1}
-}_{1 \times 1}
-$$
-
-$$
-\underbrace{\hat{\boldsymbol{\beta}}^\top \mathbf{X}^\top \mathbf{y}}_{1 \times 1}
-= (\mathbf{y}^\top \mathbf{X} \hat{\boldsymbol{\beta}})^\top
-$$
-
-Some matrices are not [invertible]{.concept entry="Invertible matrix" definition="A square matrix $\mathbf{A}$ is invertible if its inverse $\mathbf{A}^{-1}$ exists. A square matrix is invertible if and only if its columns are linearly independent."}; i.e., their inverse does not exist.
+As you already saw in @exr-inverse-1x1, some matrices are not [invertible]{.concept entry="Invertible matrix" definition="A square matrix $\mathbf{A}$ is invertible if its inverse $\mathbf{A}^{-1}$ exists. A square matrix is invertible if and only if its columns are linearly independent."}; i.e., their inverse does not exist.
 As a simple example, think of
 $$
 \mathbf{A} = \begin{bmatrix}
@@ -1102,8 +1076,7 @@ The inverse of $\mathbf{A}$, were it to exist, would be a $2 \times 2$ matrix $\
 But for all $2 \times 2$ matrices $\mathbf{C}$, we have
 $$
 \mathbf{A} \mathbf{C}
-= \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
-\begin{bmatrix} c_{11} & c_{12} \\ c_{21} & c_{22} \end{bmatrix}
+= \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} c_{11} & c_{12} \\ c_{21} & c_{22} \end{bmatrix}
 = \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
 \neq \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}.
 $$
@@ -1119,45 +1092,89 @@ $$
 2 & 4
 \end{bmatrix}.
 $$
-
-[2025 board (Dec 2): before the theorem, prove a second matrix non-invertible directly ("the hard way"). The board used rows $(1, -1)$ and $(1, -1)$: suppose it has an inverse with entries $b, c, d, e$; the first column of the product gives $b - d = 1$ and $b - d = 0$, a contradiction. Then pointed out that the second column is $-1$ times the first.]{.todo}
-
+To show---somewhat tediously---that this matrix has no inverse, we'll show that it's impossible to multiply it with any $2 \times 2$ matrix and end up with the identity matrix.
+Given an arbitrary $\mathbf{C} \in \mathbb{R}^{2 \times 2}$, we have
 $$
-\mathbf{A} = \begin{bmatrix} 1 & -1 \\ 1 & -1 \end{bmatrix},
-\qquad
-\mathbf{A}^{-1} = \begin{bmatrix} b & c \\ d & e \end{bmatrix}
-$$
-
-$$
-\begin{bmatrix} 1 & -1 \\ 1 & -1 \end{bmatrix}
-\begin{bmatrix} b & c \\ d & e \end{bmatrix}
-= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
-\quad \Rightarrow \quad
 \begin{aligned}
-1 \cdot b + (-1) \cdot d &= 1 \\
-1 \cdot b + (-1) \cdot d &= 0
+\mathbf{A} \mathbf{C}
+&= \begin{bmatrix}
+1 & 2 \\
+2 & 4
+\end{bmatrix} \begin{bmatrix}
+c_{11} & c_{12} \\
+c_{21} & c_{22}
+\end{bmatrix} \\
+&= \begin{bmatrix}
+c_{11} + 2 c_{21} & c_{12} + 2 c_{22} \\
+2 c_{11} + 4 c_{21} & 2 c_{12} + 4 c_{22}
+\end{bmatrix} \\
+&= \begin{bmatrix}
+c_{11} + 2 c_{21} & c_{12} + 2 c_{22} \\
+2 (c_{11} + 2 c_{21}) & 2 (c_{12} + 2 c_{22})
+\end{bmatrix}.
 \end{aligned}
-\quad \Rightarrow \quad
-1 = 0
 $$
+If you look closely here, you see that the second row of $\mathbf{A} \mathbf{C}$ is just double the values in the first row.
+Therefore, $\mathbf{A} \mathbf{C}$ cannot equal the identity matrix.
+If the first row were $(1, 0)$, the first row of the $2 \times 2$ identity matrix, then the second row would have to be $(2, 0)$, instead of the required $(0, 1)$.
 
+::: {#exr-non-invertible-2x2 name="More non-invertible $2 \times 2$ matrices"}
+Let $x$, $y$, and $z$ be constant real numbers, and consider the matrix
 $$
-\mathbf{a}_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix},
-\quad
-\mathbf{a}_2 = \begin{pmatrix} -1 \\ -1 \end{pmatrix} = -1 \mathbf{a}_1,
-\quad
-\mathbf{a}_1 + \mathbf{a}_2
-= \begin{pmatrix} 1 - 1 \\ 1 - 1 \end{pmatrix}
-= \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+\mathbf{A} = \begin{bmatrix}
+x & y \\
+z x & z y
+\end{bmatrix}.
 $$
+Using similar reasoning to the example in the text above, show that $\mathbf{A}$ is not invertible.
 
-We know that because of the following theorem:
+:::: {.answer}
+Given an arbitrary $\mathbf{C} \in \mathbb{R}^{2 \times 2}$, we have
+$$
+\begin{aligned}
+\mathbf{A} \mathbf{C}
+&= \begin{bmatrix}
+x & y \\
+z x & z y
+\end{bmatrix} \begin{bmatrix}
+c_{11} & c_{12} \\
+c_{21} & c_{22}
+\end{bmatrix} \\
+&= \begin{bmatrix}
+x c_{11} + y c_{21} & x c_{12} + y c_{22} \\
+z x c_{11} + z y c_{21} & z x c_{12} + z y c_{22}
+\end{bmatrix} \\
+&= \begin{bmatrix}
+x c_{11} + y c_{21} & x c_{12} + y c_{22} \\
+z (x c_{11} + y c_{21}) & z (x c_{12} + y c_{22})
+\end{bmatrix}.
+\end{aligned}
+$$
+The second row of $\mathbf{A} \mathbf{C}$ is $z$ times the first row.
+If the first row were $(1, 0)$, then the second row would have to be $(z, 0)$, which cannot equal the $(0, 1)$ that constitutes the second row of the $2 \times 2$ identity matrix.
+Therefore, $\mathbf{A}$ is not invertible.
+::::
+:::
 
-::: {#thm-invertible-columns}
+In both of the examples above, one column of the non-invertible matrix is a scalar multiple of the other.
+Consequently, the columns are linearly dependent.
+This is not an accident.
+It turns out that linear independence of the columns is the key to whether a matrix has an inverse.
+
+::: {#thm-invertible-columns name="Invertibility and linear independence"}
 A square matrix is invertible if and only if its columns are linearly independent.
 :::
 
-In the above example, the second column is 2 times the first column, so the columns are not linearly independent, so the matrix is not invertible.
+Remember that an "if and only if" statement is a logical equivalence, working in all directions.
+In other words, all of the following statements follow from @thm-invertible-columns:
+
+- If a square matrix is invertible, its columns are linearly independent.
+
+- If a square matrix is not invertible, its columns are linearly dependent.
+
+- If the columns of a square matrix are linearly independent, it is invertible.
+
+- If the columns of a square matrix are linearly dependent, it is not invertible.
 
 
 ### Inverting a $2 \times 2$ matrix {#sec-inverse-2x2}
@@ -1180,16 +1197,13 @@ d & -b \\
 \end{bmatrix}.
 $$ {#eq-inverse-2x2}
 
-[^determinants]: On the determinants of $3 \times 3$ and larger matrices, see your friendly local linear algebra textbook.
-    Spoiler alert: calculating the determinant of a large matrix by hand is not fun.
+[^determinants]: On the determinants of $3 \times 3$ and larger matrices, see your friendly local linear algebra textbook. Spoiler alert: calculating the determinant of a large matrix by hand is not fun.
 
-::: {#thm-inverse-2x2}
+::: {#prp-inverse-2x2}
 The $2 \times 2$ matrix $\mathbf{A}$ is invertible if and only if $ad \neq bc$, in which case its inverse is given by @eq-inverse-2x2.
 :::
 
-::: {.proof}
-[Prove the "if" direction: when $ad \neq bc$, multiplying out shows that @eq-inverse-2x2 satisfies $\mathbf{A} \mathbf{A}^{-1} = \mathbf{A}^{-1} \mathbf{A} = \mathbf{I}_2$. (pdaps left this to the reader; the 2025 scratch note says it was done in class.)]{.todo}
-
+You can explicitly verify that $\mathbf{A} \mathbf{A}^{-1} = \mathbf{I}$:
 $$
 \begin{aligned}
 \begin{bmatrix} a & b \\ c & d \end{bmatrix}
@@ -1204,7 +1218,12 @@ $$
 &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
 \end{aligned}
 $$
+The requirement that $ad \neq bc$ ensures that the proposed inverse is well-defined; i.e., there's no division by 0 happening.
 
+::: {#exr-inverse-2x2-left name="Left-multiple of the inverse"}
+For a $2 \times 2$ matrix $\mathbf{A}$ and the inverse defined by @eq-inverse-2x2, verify that $\mathbf{A}^{-1} \mathbf{A} = \mathbf{I}_2$.
+
+:::: {.answer}
 $$
 \begin{aligned}
 \begin{bmatrix}
@@ -1216,106 +1235,30 @@ $$
   \frac{d \cdot a + (-b) \cdot c}{ad - bc} & \frac{d \cdot b + (-b) \cdot d}{ad - bc} \\
   \frac{(-c) \cdot a + a \cdot c}{ad - bc} & \frac{(-c) \cdot b + a \cdot d}{ad - bc}
 \end{bmatrix} \\
-&= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+&= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}.
 \end{aligned}
 $$
-
-For the "only if" direction, we will prove its contrapositive: if $ad = bc$, then $\mathbf{A}$ is not invertible.
-
-Suppose $ad = bc$.
-We want to show that this implies that there is a linear dependency in the columns of $\mathbf{A}$, making $\mathbf{A}$ non-invertible (@thm-invertible-columns).
-Remember that the definition of linear dependency is that there are real numbers $p$ and $q$, at least one of which is nonzero, such that
-$$
-p \begin{pmatrix} a \\ c \end{pmatrix} + q \begin{pmatrix} b \\ d \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
-$$
-I will break the proof into a few cases, and find a pair of $p$ and $q$ values (at least one nonzero) for each case that satisfies the above equation, proving linear dependency.
-
-- The "hard" case here is when $ad = bc = 0$, as there are various subcases each requiring a slightly different combination of $p$ and $q$ to complete the proof.
-
-    - Suppose $a = c = 0$, so the first column is all zeroes.
-      Then we can set $p = 1$ and $q = 0$ to prove linear dependency:
-      $$
-      p \begin{pmatrix} a \\ c \end{pmatrix} + q \begin{pmatrix} b \\ d \end{pmatrix} = 1 \begin{pmatrix} 0 \\ 0 \end{pmatrix} + 0 \begin{pmatrix} b \\ d \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
-      $$
-      Similarly, if $b = d = 0$, we can prove linear dependency by setting $p = 0$ and $q = 1$.
-
-    - Suppose $a = 0$ and $c \neq 0$.
-      Because $bc = ad = 0$, we must have $b = 0$.
-      If $d = 0$ too, then we have already seen above that there is a linear dependency.
-      Otherwise, if $d \neq 0$, then we can prove linear dependency by setting $p = 1$ and $q = (-c/d)$:
-      $$
-      p \begin{pmatrix} a \\ c \end{pmatrix} + q \begin{pmatrix} b \\ d \end{pmatrix} = 1 \begin{pmatrix} 0 \\ c \end{pmatrix} + (-c/d) \begin{pmatrix} 0 \\ d \end{pmatrix} = \begin{pmatrix} 0 \\ c - c \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
-      $$
-
-    - Finally, suppose $a \neq 0$ and $c = 0$.
-      Because $ad = bc = 0$, we must have $d = 0$.
-      If $b = 0$ too, then we have already seen above that there is a linear dependency.
-      Otherwise, if $b \neq 0$, then we can prove linear dependency by setting $p = 1$ and $q = (-a/b)$:
-      $$
-      p \begin{pmatrix} a \\ c \end{pmatrix} + q \begin{pmatrix} b \\ d \end{pmatrix} = 1 \begin{pmatrix} a \\ 0 \end{pmatrix} + (-a/b) \begin{pmatrix} b \\ 0 \end{pmatrix} = \begin{pmatrix} a - a \\ 0 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
-      $$
-
-- The "easy" case is when all of the entries are nonzero.
-  Then we can set $p = -d$ and $q = c$ to prove a linear dependency:
-  $$
-  p \begin{pmatrix} a \\ c \end{pmatrix} + q \begin{pmatrix} b \\ d \end{pmatrix} = (-d) \begin{pmatrix} a \\ c \end{pmatrix} + c \begin{pmatrix} b \\ d \end{pmatrix} = \begin{pmatrix} bc - ad \\ cd - cd \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
-  $$
+::::
 :::
 
-For now, let's try a couple of examples.
+::: {#exr-inverse-identity-2x2 name="Inverse of the $2 \times 2$ identity"}
+You already know that $\mathbf{I}_2^{-1} = \mathbf{I}_2$.
+Show that this is what @eq-inverse-2x2 gives you as the inverse.
 
-[2025 board (Dec 2): one worked example step by step---$\mathbf{A}$ with rows $(1, 0)$ and $(2, 4)$, so $\det \mathbf{A} = 4$; apply @eq-inverse-2x2 to get rows $(1, 0)$ and $(-1/2, 1/4)$; double-check that $\mathbf{A} \mathbf{A}^{-1} = \mathbf{I}_2$.]{.todo}
-
+:::: {.answer}
 $$
-\mathbf{A} = \begin{bmatrix} 1 & 0 \\ 2 & 4 \end{bmatrix},
-\qquad
-\det(\mathbf{A}) = 1 \cdot 4 - 0 \cdot 2 = 4
-$$
-
-$$
-\mathbf{A}^{-1}
-= \frac{1}{4} \begin{bmatrix} 4 & 0 \\ -2 & 1 \end{bmatrix}
-= \begin{bmatrix} 1 & 0 \\ -\frac{1}{2} & \frac{1}{4} \end{bmatrix}
-$$
-
-$$
-\mathbf{A} \mathbf{A}^{-1}
-= \begin{bmatrix} 1 & 0 \\ 2 & 4 \end{bmatrix}
-  \begin{bmatrix} 1 & 0 \\ -\frac{1}{2} & \frac{1}{4} \end{bmatrix}
-= \begin{bmatrix}
-    1 \cdot 1 + 0 \cdot (-\frac{1}{2}) & 1 \cdot 0 + 0 \cdot \frac{1}{4} \\
-    2 \cdot 1 + 4 \cdot (-\frac{1}{2}) & 2 \cdot 0 + 4 \cdot \frac{1}{4}
-  \end{bmatrix}
+\mathbf{I}_2^{-1}
+= \frac{1}{1 \cdot 1 - 0 \cdot 0} \begin{bmatrix}
+1 & -0 \\
+-0 & 1
+\end{bmatrix}
 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+= \mathbf{I}_2.
 $$
-$$
-\begin{gathered}
-\mathbf{A} = \begin{bmatrix}
-1 & 1 \\
-0 & 1
-\end{bmatrix},
-\mathbf{A}^{-1} = \begin{bmatrix}
-1 & -1 \\
-0 & 1
-\end{bmatrix}, \\
-\mathbf{A} = \begin{bmatrix}
-4 & 6 \\
-2 & 4
-\end{bmatrix},
-\mathbf{A}^{-1} = \begin{bmatrix}
-1 & -1.5 \\
--0.5 & 1
-\end{bmatrix}, \\
-\mathbf{A} = \begin{bmatrix}
-10 & 25 \\
-4 & 10
-\end{bmatrix},
-\text{$\mathbf{A}^{-1}$ does not exist}.
-\end{gathered}
-$$
+::::
+:::
 
-
-## Solving linear systems {#sec-linear-systems}
+### Solving linear systems {#sec-linear-systems}
 
 You may remember from earlier math courses being asked to solve for $x_1$ and $x_2$ in systems of equations like the following one:
 $$
@@ -1324,7 +1267,7 @@ $$
 2 x_1 - x_2 &= -10.
 \end{aligned}
 $$
-Matrix algebra lets us write this whole system as a single equation, $\mathbf{A} \mathbf{x} = \mathbf{b}$, where
+Matrix notation lets us write this whole system as a single equation, $\mathbf{A} \mathbf{x} = \mathbf{b}$, where
 $$
 \begin{aligned}
 \mathbf{A} &= \begin{bmatrix}
@@ -1336,75 +1279,85 @@ $$
 \end{aligned}
 $$
 
-This suggests a natural way to solve for $\mathbf{x}$: $$\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}.$$
+Let's think about how we'd solve for $x$ in the analogous scalar equation---ordinary algebra, without matrices.
+If we started with $$ax = b,$$ where $a \neq 0$, then we could divide each side by $a$ to get $$x = \frac{b}{a}.$$
+Or, another way to write the same equation that makes the point particularly well for us here: $$x = \frac{1}{a} \cdot b.$$
+We solve for $x$ by taking $1/a$, the multiplicative inverse of $a$, and multiplying it by $b$.
 
-[2025 final review: derive this one step at a time---premultiply both sides of $\mathbf{A} \mathbf{x} = \mathbf{b}$ by $\mathbf{A}^{-1}$, regroup by associativity, use $\mathbf{A}^{-1} \mathbf{A} = \mathbf{I}$, then $\mathbf{I} \mathbf{x} = \mathbf{x}$.]{.todo}
+The linear algebra equivalent of that process is analogous.
+Suppose we begin with an equation of the form $$\mathbf{A} \mathbf{x} = \mathbf{b},$$ where $\mathbf{A}$ is a known $n \times n$ matrix, $\mathbf{b}$ is a known $n \times 1$ vector, and $\mathbf{x}$ is the unknown $n \times 1$ vector we are trying to solve for.
+If $\mathbf{A}$ is invertible, then we can multiply both sides by $\mathbf{A}^{-1}$:
+$$\mathbf{A}^{-1} (\mathbf{A} \mathbf{x}) = \mathbf{A}^{-1} \mathbf{b}.$$
+Using the associative property of matrix multiplication, we have
+$$\mathbf{A}^{-1} (\mathbf{A} \mathbf{x}) = (\mathbf{A}^{-1} \mathbf{A}) \mathbf{x}.$$
+Using the definition of a matrix inverse, we have
+$$(\mathbf{A}^{-1} \mathbf{A}) \mathbf{x} = \mathbf{I}_n \mathbf{x}.$$
+And finally, using the identity property of matrix multiplication, we have
+$$\mathbf{I}_n \mathbf{x} = \mathbf{x}.$$
+Putting all this together, we conclude that $$\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}.$$
 
+::: {#exr-linear-system-2x2 name="Solving a system of two linear equations"}
+Use a matrix inverse to solve for $x_1$ and $x_2$ in the system of equations
 $$
 \begin{aligned}
-\mathbf{A} \mathbf{x} &= \mathbf{b} \\
-\mathbf{A}^{-1} (\mathbf{A} \mathbf{x}) &= \mathbf{A}^{-1} \mathbf{b} \\
-(\mathbf{A}^{-1} \mathbf{A}) \mathbf{x} &= \mathbf{A}^{-1} \mathbf{b} \\
-\mathbf{I} \mathbf{x} &= \mathbf{A}^{-1} \mathbf{b} \\
-\mathbf{x} &= \mathbf{A}^{-1} \mathbf{b}
+2 x_1 + x_2 &= 10, \\
+2 x_1 - x_2 &= -10.
 \end{aligned}
 $$
 
-[2025 final review: step-by-step method. (1) Separate knowns from unknowns. (2) Write the system as $\mathbf{A} \mathbf{x} = \mathbf{b}$, with $\mathbf{A}$ $n \times n$ ($n$ equations in $n$ unknowns). (3) Check whether $\mathbf{A}$ is invertible. (4) If so, compute $\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}$. (5) Plug the solution back into the original equations to check it.]{.todo}
-
+:::: {.answer}
+We begin by inverting the matrix of coefficients:
 $$
-\underset{n \times n}{\mathbf{A}} \; \underset{n \times 1}{\mathbf{x}} = \underset{n \times 1}{\mathbf{b}}
+\mathbf{A}^{-1}
+= \frac{1}{2 \cdot (-1) - 1 \cdot 2} \begin{bmatrix}
+-1 & -1 \\
+-2 & 2
+\end{bmatrix}
+= \begin{bmatrix}
+\frac{1}{4} & \frac{1}{4} \\
+\frac{1}{2} & -\frac{1}{2}
+\end{bmatrix}.
 $$
-
-[2025 final review: examples for step (1), including one where the coefficients are Greek letters ($\beta_1 x_1 + \beta_2 x_2 = \delta_1$, $\alpha_1 x_1 + \alpha_2 x_2 = \delta_2$) so students must work out which symbols are known; also $3 x + 4 y = 7$, $-2 x + 8 y = 2$.]{.todo}
-
-$$
-\begin{aligned}
-3 x + 4 y &= 7 \\
--2 x + 8 y &= 2
-\end{aligned}
-\qquad \Leftrightarrow \qquad
-\begin{bmatrix} 3 & 4 \\ -2 & 8 \end{bmatrix}
-\begin{bmatrix} x \\ y \end{bmatrix}
-=
-\begin{bmatrix} 7 \\ 2 \end{bmatrix}
-$$
-
+Then we use $\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}$:
 $$
 \begin{aligned}
-\beta_1 x_1 + \beta_2 x_2 &= \delta_1 \\
-\alpha_1 x_1 + \alpha_2 x_2 &= \delta_2
+\mathbf{x}
+= \mathbf{A}^{-1} \mathbf{b}
+&= \begin{bmatrix}
+\frac{1}{4} & \frac{1}{4} \\
+\frac{1}{2} & -\frac{1}{2}
+\end{bmatrix}
+\begin{bmatrix} 10 \\ -10 \end{bmatrix} \\
+&= \begin{bmatrix}
+\frac{1}{4} \cdot 10 + \frac{1}{4} \cdot (-10) \\
+\frac{1}{2} \cdot 10 + \left(-\frac{1}{2}\right) \cdot (-10)
+\end{bmatrix} \\
+&= \begin{bmatrix} 0 \\ 10 \end{bmatrix}.
 \end{aligned}
-\qquad \Leftrightarrow \qquad
-\begin{bmatrix} \beta_1 & \beta_2 \\ \alpha_1 & \alpha_2 \end{bmatrix}
-\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
-=
-\begin{bmatrix} \delta_1 \\ \delta_2 \end{bmatrix}
 $$
-In fact, the linear system of equations $\mathbf{A} \mathbf{x} = \mathbf{b}$ has a unique solution if and only if $\mathbf{A}$ is invertible.
-Otherwise, it has either zero solutions or infinitely many solutions.
-
-Example with zero solutions:
+Double checking that $x_1 = 0$ and $x_2 = 10$ solves the original system of equations:
 $$
 \begin{aligned}
-x_1 + x_2 &= 1, \\
-2 x_1 + 2 x_2 &= 10.
+2 \cdot 0 + 10 &= 10; \quad \checkmark \\
+2 \cdot 0 - 10 &= -10. \quad \checkmark
 \end{aligned}
 $$
+::::
+:::
 
-Example with infinitely many solutions:
-$$
-\begin{aligned}
-x_1 + x_2 &= 1, \\
-2 x_1 + 2 x_2 &= 2.
-\end{aligned}
-$$
+Going back to regular algebra for a moment, we can only solve $ax = b$ by dividing by $a$ as long as $a \neq 0$.
+In fact, the equation only has a solution if $a \neq 0$.
+If $a = 0$, then there are either infinitely many solutions, as in $$0x = 0,$$ or there are no solutions, as in $$0x = 7.$$
+The whole problem of "solve for $x$" is only well-defined if the coefficient on $x$ is nonzero.
 
-[Explain the picture of a two-equation system as two lines in the $(x_1, x_2)$ plane---one solution where they cross, none if they are parallel, infinitely many if they coincide---to go with @fig-linear-systems. Not in pdaps.]{.todo}
+The linear algebra equivalent of "you can't divide by 0" is that the coefficient matrix must be invertible.
+The columns of the matrix $\mathbf{A}$ in the equation $$\mathbf{A} \mathbf{x} = \mathbf{b}$$ must be linearly independent.
+Otherwise, there are either infinitely many vectors $\mathbf{x}$ that solve the equation, or else there are none that do.
+The equation has a single, unique solution precisely when $\mathbf{A}$ is invertible.
 
 ```{r}
 #| label: fig-linear-systems
-#| fig-cap: "TODO(BJK): caption. Each equation drawn as a line in the (x₁, x₂) plane. Panel (a): the first system above, whose lines cross at the unique solution (0, 10). Panel (b): the zero-solution example, parallel lines. Panel (c): the infinitely-many-solutions example, the same line twice."
+#| fig-cap: "Two-variable linear systems with one, zero, and infinitely many solutions."
 #| fig-asp: 0.4
 #| cache: true
 plot_system <- function(f1, f2, label1, label2, label_x, label_y, hjust,
@@ -1450,19 +1403,6 @@ p_many <- plot_system(
 
 panels(p_one, p_none, p_many)
 ```
-
-[2025 comparison: last year's coverage of linear systems was only the general $2 \times 2$ system solved with $\mathbf{A}^{-1}$ (Dec 2) and the step-by-step method above (final review), with "use a computer" for inverting anything bigger than $2 \times 2$. None of the row-reduction items in the list below were covered in 2025; they come from an earlier Claude pass, not from last year's boards.]{.todo}
-
-[Major gap: the syllabus gives solving linear systems two class days (Nov 10 and 12), but the pdaps material above is about a page. Likely missing pieces are listed below.]{.todo}
-
-- [Augmented matrices and Gaussian elimination / row reduction.]{.todo}
-- [Reading off whether a system has zero, one, or infinitely many solutions from the reduced form, and describing the solution set in the infinite case.]{.todo}
-- [The connection back to linear independence of the columns of $\mathbf{A}$ (@thm-invertible-columns).]{.todo}
-- [Inverting matrices larger than $2 \times 2$ (Gauss--Jordan on $[\mathbf{A} \mid \mathbf{I}]$).]{.todo}
-- [Worked examples and exercises.]{.todo}
-
--->
-
 
 ::: {#concept-review}
 :::

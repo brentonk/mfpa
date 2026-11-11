@@ -4,9 +4,17 @@
 --   With slippage:   [intersections]{.concept entry="Intersection" definition="..."}
 --   Later mentions:  [intersection]{.concept}
 --   Glossary slot:   ::: {#concept-review} :::
+--
+-- Each #concept-review lists only the concepts defined in its own chapter. On
+-- the website every chapter is a separate Pandoc run, but the print build
+-- merges the whole book into one document, so we walk it in order and start a
+-- new chapter at every level-1 header.
 
+-- Per-chapter glossary entries, in order of first definition:
+-- concepts[chapter] = { { entry = ..., definition = ... }, ... }
 local concepts = {}
 local seen = {}
+-- Definitions by normalized key, across the whole document (for tooltips).
 local def_by_key = {}
 
 local function normalize(s)
@@ -28,31 +36,57 @@ end
 -- Pandoc expands \newcommand macros while reading the chapter and drops the
 -- definitions from the AST, so the separate pandoc.read calls below (tooltips,
 -- glossary) never see them: a definition using \intr would show raw TeX.
--- Recover the chapter's one-line \newcommand / \renewcommand definitions from
--- its source file and prepend them to every snippet we parse. Multi-line
--- definitions and macros pulled in via {{< include >}} are not picked up.
+-- Recover the one-line \newcommand / \renewcommand definitions from the source
+-- and prepend them to every snippet we parse. On the website that's the
+-- chapter's own file; the print build is one merged document, so there we scan
+-- every .qmd in the project directory. Multi-line definitions and macros pulled
+-- in via {{< include >}} are not picked up.
 local macro_preamble = nil
+
+local function source_files()
+  if is_print() then
+    local dir = quarto and quarto.project and quarto.project.directory
+    if dir ~= nil then
+      local ok, entries = pcall(pandoc.system.list_directory, dir)
+      if ok then
+        local files = {}
+        for _, name in ipairs(entries) do
+          if name:match("%.qmd$") then
+            table.insert(files, pandoc.path.join({ dir, name }))
+          end
+        end
+        table.sort(files)
+        return files
+      end
+    end
+  end
+  local path = quarto and quarto.doc and quarto.doc.input_file
+  if path == nil and PANDOC_STATE and PANDOC_STATE.input_files then
+    path = PANDOC_STATE.input_files[1]
+  end
+  return { path }
+end
 
 local function chapter_macros()
   if macro_preamble ~= nil then
     return macro_preamble
   end
   macro_preamble = ""
-  local path = quarto and quarto.doc and quarto.doc.input_file
-  if path == nil and PANDOC_STATE and PANDOC_STATE.input_files then
-    path = PANDOC_STATE.input_files[1]
-  end
-  local f = path and io.open(path, "r")
-  if not f then
-    return macro_preamble
-  end
   local defs = {}
-  for line in f:lines() do
-    if line:match("^%s*\\newcommand%A") or line:match("^%s*\\renewcommand%A") then
-      table.insert(defs, line)
+  local have = {}
+  for _, path in ipairs(source_files()) do
+    local f = io.open(path, "r")
+    if f then
+      for line in f:lines() do
+        if (line:match("^%s*\\newcommand%A") or line:match("^%s*\\renewcommand%A"))
+            and not have[line] then
+          have[line] = true
+          table.insert(defs, line)
+        end
+      end
+      f:close()
     end
   end
-  f:close()
   if #defs > 0 then
     macro_preamble = table.concat(defs, "\n") .. "\n\n"
   end
@@ -70,7 +104,7 @@ local function read_markdown(s)
   return doc
 end
 
-function Span(el)
+local function concept_span(el, chapter)
   if not el.classes:includes("concept") then
     return nil
   end
@@ -88,9 +122,11 @@ function Span(el)
       entry = entry:sub(1, 1):upper() .. entry:sub(2)
     end
     key = normalize(entry)
-    if not seen[key] then
-      seen[key] = true
-      table.insert(concepts, { entry = entry, definition = def })
+    concepts[chapter] = concepts[chapter] or {}
+    seen[chapter] = seen[chapter] or {}
+    if not seen[chapter][key] then
+      seen[chapter][key] = true
+      table.insert(concepts[chapter], { entry = entry, definition = def })
     end
     def_by_key[key] = def
     el.attributes["definition"] = nil
@@ -141,11 +177,8 @@ local function emit_list(items)
   return table.concat(lines, "\n")
 end
 
-function Div(el)
-  if el.identifier ~= "concept-review" then
-    return nil
-  end
-  if #concepts == 0 then
+local function concept_review(concepts)
+  if concepts == nil or #concepts == 0 then
     return {}
   end
 
@@ -184,4 +217,40 @@ function Div(el)
   }, "\n")
 
   return read_markdown(md).blocks
+end
+
+function Pandoc(doc)
+  -- Pass 1, in document order: process concept spans, filing each definition
+  -- under the current chapter, and tag each glossary slot with its chapter.
+  local chapter = 0
+  doc = doc:walk({
+    traverse = "topdown",
+    Header = function(el)
+      if el.level == 1 then
+        chapter = chapter + 1
+      end
+    end,
+    Span = function(el)
+      local out = concept_span(el, chapter)
+      if out ~= nil then
+        -- Don't descend into the tooltip we just attached.
+        return out, false
+      end
+    end,
+    Div = function(el)
+      if el.identifier == "concept-review" then
+        el.attributes["concept-chapter"] = tostring(chapter)
+        return el, false
+      end
+    end,
+  })
+
+  -- Pass 2: fill each glossary slot with its own chapter's concepts.
+  return doc:walk({
+    Div = function(el)
+      if el.identifier == "concept-review" then
+        return concept_review(concepts[tonumber(el.attributes["concept-chapter"])])
+      end
+    end,
+  })
 end

@@ -9,15 +9,51 @@
 
 // --- Base font size --------------------------------------------------------
 // Quarto's `fontsize` suffers the same fate: book.with() re-sets text to the
-// template's font-size default (10pt). Re-force the lecture-notes size here.
-#set text(size: 12pt)
+// template's font-size default (10pt). Re-force the book's size here.
+#set text(size: 11pt)
 
 // --- Line spacing ----------------------------------------------------------
-// ~1.5 spacing for consulting on the fly while teaching (the template sets a
-// tight leading of 0.5em). Typst's `leading` is the gap between lines, not the
-// baseline-to-baseline multiple: 1em leading at 12pt lands near LaTeX's
-// onehalfspacing. Paragraph spacing is bumped to keep breaks distinguishable.
-#set par(leading: 1em, spacing: 1.4em)
+// Ordinary book spacing, a little looser than the template's tight 0.5em
+// leading. Typst's `leading` is the gap between lines, not the baseline-to-
+// baseline multiple: 0.75em at 11pt gives roughly 1.3x line height. Paragraph
+// spacing is a bit larger so breaks stay distinguishable.
+#set par(leading: 0.75em, spacing: 1.2em)
+
+// --- House colours (mirror mfpa.scss / _common.R) -------------------------
+#let mfpa-teal = rgb("#0F6E6E")
+#let mfpa-red = rgb("#B3261E")
+#let mfpa-muted = rgb("#6B645A")
+
+// --- Remark / pitfall asides -----------------------------------------------
+// Emitted by _filters/remark.lua as `#mfpa-aside("remark")[ … ]`. Un-boxed, as
+// on the website: a coloured left rule, with a marker + title line set by
+// mfpa-aside-title.
+#let mfpa-aside-color(kind) = if kind == "pitfall" { mfpa-red } else { mfpa-teal }
+#let mfpa-aside(kind, body) = block(
+  width: 100%,
+  breakable: true,
+  stroke: (left: 1.5pt + mfpa-aside-color(kind)),
+  inset: (left: 12pt, y: 3pt),
+  spacing: 1.2em,
+  {
+    set text(size: 0.95em)
+    body
+  },
+)
+#let mfpa-aside-title(kind, body) = text(
+  weight: "bold",
+  fill: mfpa-aside-color(kind),
+)[#(if kind == "pitfall" { "▲" } else { "◆" }) #body]
+
+// --- Exercise answers ------------------------------------------------------
+// _filters/print-answers.lua moves each exercise's answer to the answers
+// section at the back, marks it with `#metadata(..) <ans-exr-…>`, and leaves a
+// pointer at the end of the exercise: `#mfpa-answer-pointer(label("ans-exr-…"))`.
+#let mfpa-answer-pointer(target) = context {
+  let loc = locate(target)
+  align(right, text(size: 0.9em, fill: mfpa-muted,
+    link(loc)[Answer: p. #counter(page).at(loc).first()]))
+}
 
 // --- Theorem-type environments: left-aligned boxes -------------------------
 // Quarto renders definition/theorem/etc. via theorion frames, which are Typst

@@ -17,11 +17,11 @@ local function md_inlines(s)
   return pandoc.utils.blocks_to_inlines(pandoc.read(s, "markdown").blocks)
 end
 
--- True for any non-HTML target (the print/lecture PDF via Typst). For print,
--- remark/pitfall asides are dropped entirely (the website is the canonical
--- distributed form; the PDF is a teaching copy), and `optional` blocks lose
--- their collapsible affordance in favor of a plain bold title. HTML behaviour
--- is unchanged.
+-- True for any non-HTML target (the print PDF via Typst). For print,
+-- remark/pitfall asides become a Typst `mfpa-aside` block (left rule + coloured
+-- title; defined in print/paper-override.typ), and `optional` blocks lose their
+-- collapsible affordance in favor of a plain bold title. HTML behaviour is
+-- unchanged.
 local function is_print()
   if quarto and quarto.doc and quarto.doc.is_format then
     return not quarto.doc.is_format("html")
@@ -40,13 +40,26 @@ function Div(el)
   local title = el.attributes["title"]
 
   if is_print() then
-    -- The lecture PDF is a teaching copy, not a distribution copy (the website
-    -- is canonical): drop the remark/pitfall asides entirely. `.optional`
-    -- blocks are actual course content, so those are kept, expanded, with a
-    -- plain bold title in place of the collapsible affordance.
+    -- Remark / pitfall: wrap the content in a Typst content block passed to
+    -- mfpa-aside, with the marker + title as its first line. The raw opening
+    -- and closing brackets enclose whatever Typst Pandoc writes for the body.
     if is_remark or is_pitfall then
-      return {}
+      local kind = is_pitfall and "pitfall" or "remark"
+      local blocks = pandoc.List()
+      blocks:insert(pandoc.RawBlock("typst", '#mfpa-aside("' .. kind .. '")['))
+      if title ~= nil and title ~= "" then
+        local titleline = pandoc.List()
+        titleline:insert(pandoc.RawInline("typst", '#mfpa-aside-title("' .. kind .. '")['))
+        titleline:extend(md_inlines(title))
+        titleline:insert(pandoc.RawInline("typst", ']'))
+        blocks:insert(pandoc.Para(titleline))
+      end
+      blocks:extend(el.content)
+      blocks:insert(pandoc.RawBlock("typst", ']'))
+      return blocks
     end
+    -- `.optional` blocks are kept, expanded, with a plain bold title in place
+    -- of the collapsible affordance.
     local blocks = pandoc.List()
     if title == nil or title == "" then title = "Optional" end
     local titleline = pandoc.List()

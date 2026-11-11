@@ -1,13 +1,16 @@
-# Print / lecture profile.  Activate with:  quarto render --to typst --profile print
+# Print profile.  Activate with:  quarto render --to typst --profile print
 #
-# Produces a printable, exercise-free PDF of the book via Typst (bundled with
-# Quarto — no LaTeX needed).  The HTML website is unaffected: this profile is
-# only merged in when explicitly selected, and the exercise-stripping /
-# tooltip-suppression logic in the _filters/ Lua is guarded to fire on non-HTML
-# targets only.  See print/README.md and print/build.sh.
+# Produces a printable PDF of the book via Typst (bundled with Quarto — no LaTeX
+# needed), with exercise answers collected at the back.  The HTML website is
+# unaffected: this profile is only merged in when explicitly selected, and the
+# print logic in the _filters/ Lua is guarded to fire on non-HTML targets only.
+# See print/README.md and print/build.sh.
 
 book:
   output-file: mfpa-lecture-notes
+
+# Heading for the answers section at the back (_filters/print-answers.lua).
+exercise-answers-title: "TODO(BJK): title for the answers appendix"
 
 format:
   typst:
@@ -22,7 +25,12 @@ format:
     margin:
       x: 1.15in
       y: 1in
-    fontsize: 12pt
+    fontsize: 11pt
+    # Print-resolution R figures (Quarto's default is 96 dpi, which looks soft
+    # on paper). Only reaches figures when a chapter actually re-executes: the
+    # freeze cache keeps each chapter's Typst figures until its source changes.
+    # After changing this, clear them with `print/build.sh --refresh-figures`.
+    fig-dpi: 300
     toc: true
     number-sections: true
     section-numbering: "1.1"
